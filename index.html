@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
+  <title>芽芽 WebApp V3</title>
+  <link rel="stylesheet" href="./styles.css?v=20260513a" />
+  <link rel="stylesheet" href="./final-system.css?v=20260513a" />
+</head>
+<body>
+  <div class="space-bg"></div>
+  <div class="device-frame">
+    <div class="device-shell">
+      <div class="device-screen">
+        <div class="app" id="app">
+    <main class="content">
+      <!-- 首页 -->
+      <section class="page active" id="page-home">
+        <div class="hero entrance-delay-1">
+          <div>
+            <div class="pill yellow">跃迁计划进行中</div>
+            <h2>北北，今天先拿下 <span>分数乘整数</span></h2>
+            <p>1 个新知识点 + 1 次补弱</p>
+          </div>
+          <div class="hero-ring">
+            <div class="ring-core"><strong>78%</strong><span>掌握度</span></div>
+          </div>
+        </div>
+
+        <div class="grid-two entrance-delay-2">
+          <button type="button" class="feature-card" data-tab="knowledge">
+            <div class="feature-icon">🌌</div><div class="feature-title">知识树</div><div class="feature-desc">4600+ 知识图谱</div>
+          </button>
+          <button type="button" class="feature-card" data-tab="practice">
+            <div class="feature-icon">⚡</div><div class="feature-title">开始练习</div><div class="feature-desc">AI 动态出题</div>
+          </button>
+        </div>
+
+        <div class="section-title entrance-delay-3"><span>今日任务</span></div>
+        <div class="task-list entrance-delay-3">
+          <div class="task-card">
+            <div><strong>学习任务</strong><p>《分数的意义》AI 讲解</p></div>
+            <span class="task-tag green">进行中</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- 知识树页 -->
+      <section class="page" id="page-knowledge">
+        <div class="filter-card glass">
+          <div class="filter-row"><label>年级</label><div class="chip-group" id="gradeChips"></div></div>
+          <div class="filter-row"><label>学科</label><div class="chip-group" id="subjectChips"></div></div>
+          <div class="filter-row"><label>教材</label><div class="chip-group" id="semesterChips"></div></div>
+        </div>
+        <div class="chapter-wrap" id="chapterWrap" style="padding-bottom: 100px;"></div>
+      </section>
+
+      <!-- 其它占位页 -->
+      <section class="page" id="page-practice"><div class="practice-wrap" id="practiceWrap"><div class="card glass">练习模块正在连接宇宙信号...</div></div></section>
+      <section class="page" id="page-board"><div class="board-wrap" id="boardWrap"><div class="card glass">看板模块正在同步卫星数据...</div></div></section>
+      <section class="page" id="page-leaderboard"><div class="leaderboard-wrap" id="leaderboardWrap"><div class="card glass">榜单正在更新中...</div></div></section>
+      <section class="page" id="page-classroom"><div class="classroom-wrap" id="classroomWrap"><div class="card glass">课堂引擎正在加载...</div></div></section>
+      <section class="page" id="page-admin"><div class="card glass">后台管理已锁定</div></section>
+    </main>
+
+    <nav class="bottom-nav glass">
+      <button type="button" class="nav-item active" data-tab="home"><span>🏠</span><em>首页</em></button>
+      <button type="button" class="nav-item" data-tab="knowledge"><span>🌌</span><em>知识树</em></button>
+      <button type="button" class="nav-item" data-tab="board"><span>🛰️</span><em>看板</em></button>
+      <button type="button" class="nav-item" data-tab="leaderboard"><span>🏆</span><em>榜单</em></button>
+      <button type="button" class="nav-item" data-tab="classroom"><span>🏫</span><em>课堂</em></button>
+    </nav>
+  </div>
+
+  <!-- 浮动对话框 -->
+  <div class="ai-assistant-fab" id="aiFab">芽</div>
+
+  <div class="chat-modal" id="chatModal">
+    <div class="chat-modal-inner">
+      <div class="chat-header">
+        <div>
+          <div class="topbar-sub">芽芽 AI 随身助教</div>
+          <h2 id="chatTopic">点击知识点发起提问</h2>
+        </div>
+        <button class="text-btn" id="closeChat" style="font-size: 16px;">收起</button>
+      </div>
+      <div class="chat-body" id="chatBody">
+        <div class="chat-msg msg-ai">嗨！我是芽芽。如果你对某个知识点有疑问，比如"为什么我明白了但一做题就错？"，可以直接问我哦！</div>
+      </div>
+      <div class="chat-input-area">
+        <input type="text" class="chat-input" id="chatInput" placeholder="在此输入你的困惑..." />
+        <button type="button" class="chat-send-btn" id="sendMsg">发送</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+  <script src="./app.js?v=20260513a"></script>
+</body>
+</html>

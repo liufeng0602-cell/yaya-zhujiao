@@ -1,0 +1,1763 @@
+{
+  "schema": "yaya.adaptive_engine.coverage_gate.v1",
+  "scope": "primary_math_g5_g6_pep",
+  "status": "phase2_coverage_check",
+  "generatedAt": "2026-05-13T22:16:50.435364",
+  "totalKnowledgePoints": 189,
+  "summary": {
+    "passed": 189,
+    "blocked": 0,
+    "warnings": 143,
+    "coverageRate": 1.0,
+    "note": "Phase 2 可检查项全部通过。warnings 全部为 Phase 3 待补字段（验证动作/题目/家长摘要）。"
+  },
+  "blockers": [],
+  "warnings": [
+    {
+      "knowledgeCode": "M5S1-0",
+      "name": "小数乘整数的计算意义",
+      "level": "A",
+      "missing": [
+        "prerequisites",
+        "validationAction",
+        "basicQuestions",
+        "variantQuestions",
+        "errorVerificationQuestions",
+        "parentSummaryTemplate"
+      ],
+      "severity": "warning"
+    },
+    {
+      "knowledgeCode": "M5S1-1",
+      "name": "小数乘整数笔算方法",
+      "level": "A",
+      "missing": [
+        "validationAction",
+        "basicQuestions",
+        "variantQuestions",
+        "errorVerificationQuestions",
+        "parentSummaryTemplate"
+      ],
+      "severity": "warning"
+    },
+    {
+      "knowledgeCode": "M5S1-15",
+      "name": "列、行定义（先列后行）",
+      "level": "B",
+      "missing": [
+        "prerequisites"
+      ],
+      "severity": "warning"
+    },
+    {
+      "knowledgeCode": "M5S1-19",
+      "name": "数对平移变化规律",
+      "level": "B",
+      "missing": [
+        "next"
+      ],
+      "severity": "warning"
+    },
+    {
+      "knowledgeCode": "M5S1-2",
+      "name": "积末尾有0的化简规则",
+      "level": "A",
+      "missing": [
+        "validationAction",
+        "basicQuestions",
+        "variantQuestions",
+        "errorVerificationQuestions",
+        "parentSummaryTemplate"
+      ],
+      "severity": "warning"
+    },
+    {
+      "knowledgeCode": "M5S1-20",
+      "name": "商的小数点对齐被除数小数点",
+      "level": "A",
+      "missing": [
+        "prerequisites",
+        "validationAction",
+        "basicQuestions",
+        "variantQuestions",
+        "errorVerificationQuestions",
+        "parentSummaryTemplate"
+      ],
+      "severity": "warning"
+    },
+    {
+      "knowledgeCode": "M5S1-21",
+      "name": "整数部分不够除补0",
+      "level": "A",
+      "missing": [
+        "validationAction",
+        "basicQuestions",
+        "variantQuestions",
+        "errorVerificationQuestions",
+        "parentSummaryTemplate"
+      ],
+      "severity": "warning"
+    },
+    {
+      "knowledgeCode": "M5S1-22",
+      "name": "除不尽末尾补0继续除",
+      "level": "A",
+      "missing": [
+        "validationAction",
+        "basicQuestions",
+        "variantQuestions",
+        "errorVerificationQuestions",
+        "parentSummaryTemplate"
+      ],
+      "severity": "warning"
+    },
+    {
+      "knowledgeCode": "M5S1-23",
+      "name": "利用商不变性质转化除数为整数",
+      "level": "A",
+      "missing": [
+        "validationAction",
+        "basicQuestions",
+        "variantQuestions",
+        "errorVerificationQuestions",
+        "parentSummaryTemplate"
+      ],
+      "severity": "warning"
+    },
+    {
+      "knowledgeCode": "M5S1-24",
+      "name": "被除数位数不足补0",
+      "level": "A",
+      "missing": [
+        "validationAction",
+        "basicQuestions",
+        "variantQuestions",
+        "errorVerificationQuestions",
+        "parentSummaryTemplate"
+      ],
+      "severity": "warning"
+    },
+    {
+      "knowledgeCode": "M5S1-25",
+      "name": "多算一位再四舍五入",
+      "level": "A",
+      "missing": [
+        "validationAction",
+        "basicQuestions",
+        "variantQuestions",
+        "errorVerificationQuestions",
+        "parentSummaryTemplate"
+      ],
+      "severity": "warning"
+    },
+    {
+      "knowledgeCode": "M5S1-26",
+      "name": "生活场景保留位数规则",
+      "level": "A",
+      "missing": [
+        "validationAction",
+        "basicQuestions",
+        "variantQuestions",
+        "errorVerificationQuestions",
+        "parentSummaryTemplate"
+      ],
+      "severity": "warning"
+    },
+    {
+      "knowledgeCode": "M5S1-27",
+      "name": "循环小数定义、循环节",
+      "level": "A",
+      "missing": [
+        "validationAction",
+        "basicQuestions",
+        "variantQuestions",
+        "errorVerificationQuestions",
+        "parentSummaryTemplate"
+      ],
+      "severity": "warning"
+    },
+    {
+      "knowledgeCode": "M5S1-28",
+      "name": "循环小数简写方式",
+      "level": "A",
+      "missing": [
+        "validationAction",
+        "basicQuestions",
+        "variantQuestions",
+        "errorVerificationQuestions",
+        "parentSummaryTemplate"
+      ],
+      "severity": "warning"
+    },
+    {
+      "knowledgeCode": "M5S1-29",
+      "name": "有限小数、无限小数区分",
+      "level": "A",
+      "missing": [
+        "validationAction",
+        "basicQuestions",
+        "variantQuestions",
+        "errorVerificationQuestions",
+        "parentSummaryTemplate"
+      ],
+      "severity": "warning"
+    },
+    {
+      "knowledgeCode": "M5S1-3",
+      "name": "小数乘小数算理（转化整数乘法）",
+      "level": "A",
+      "missing": [
+        "validationAction",
+        "basicQuestions",
+        "variantQuestions",
+        "errorVerificationQuestions",
+        "parentSummaryTemplate"
+      ],
+      "severity": "warning"
+    },
+    {
+      "knowledgeCode": "M5S1-30",
+      "name": "小数除法规律观察归纳",
+      "level": "A",
+      "missing": [
+        "validationAction",
+        "basicQuestions",
+        "variantQuestions",
+        "errorVerificationQuestions",
+        "parentSummaryTemplate"
+      ],
+      "severity": "warning"
+    },
+    {
+      "knowledgeCode": "M5S1-31",
+      "name": "进一法（装桶、装箱）",
+      "level": "A",
+      "missing": [
+        "validationAction",
+        "basicQuestions",
+        "variantQuestions",
+        "errorVerificationQuestions",
+        "parentSummaryTemplate"
+      ],
+      "severity": "warning"
+    },
+    {
+      "knowledgeCode": "M5S1-32",
+      "name": "去尾法（做衣服、购买物品）",
+      "level": "A",
+      "missing": [
+        "validationAction",
+        "basicQuestions",
+        "variantQuestions",
+        "errorVerificationQuestions",
+        "parentSummaryTemplate"
+      ],
+      "severity": "warning"
+    },
+    {
+      "knowledgeCode": "M5S1-33",
+      "name": "小数乘除法对比辨析",
+      "level": "A",
+      "missing": [
+        "next",
+        "validationAction",
+        "basicQuestions",
+        "variantQuestions",
+        "errorVerificationQuestions",
+        "parentSummaryTemplate"
+      ],
+      "severity": "warning"
+    },
+    {
+      "knowledgeCode": "M5S1-34",
+      "name": "确定事件（一定、不可能）",
+      "level": "B",
+      "missing": [
+        "prerequisites"
+      ],
+      "severity": "warning"
+    },
+    {
+      "knowledgeCode": "M5S1-37",
+      "name": "掷骰子概率实验分析",
+      "level": "C",
+      "missing": [
+        "next"
+      ],
+      "severity": "warning"
+    },
+    {
+      "knowledgeCode": "M5S1-38",
+      "name": "字母表示任意数、数量关系",
+      "level": "A",
+      "missing": [
+        "prerequisites",
+        "validationAction",
+        "basicQuestions",
+        "variantQuestions",
+        "errorVerificationQuestions",
+        "parentSummaryTemplate"
+      ],
+      "severity": "warning"
+    },
+    {
+      "knowledgeCode": "M5S1-39",
+      "name": "字母乘法简写规则",
+      "level": "A",
+      "missing": [
+        "validationAction",
+        "basicQuestions",
+        "variantQuestions",
+        "errorVerificationQuestions",
+        "parentSummaryTemplate"
+      ],
+      "severity": "warning"
+    },
+    {
+      "knowledgeCode": "M5S1-4",
+      "name": "小数点位置确定规则",
+      "level": "A",
+      "missing": [
+        "validationAction",
+        "basicQuestions",
+        "variantQuestions",
+        "errorVerificationQuestions",
+        "parentSummaryTemplate"
+      ],
+      "severity": "warning"
+    },
+    {
+      "knowledgeCode": "M5S1-40",
+      "name": "代入求值计算",
+      "level": "A",
+      "missing": [
+        "validationAction",
+        "basicQuestions",
+        "variantQuestions",
+        "errorVerificationQuestions",
+        "parentSummaryTemplate"
+      ],
+      "severity": "warning"
+    },
+    {
+      "knowledgeCode": "M5S1-41",
+      "name": "方程的定义（含有未知数的等式）",
+      "level": "A",
+      "missing": [
+        "validationAction",
+        "basicQuestions",
+        "variantQuestions",
+        "errorVerificationQuestions",
+        "parentSummaryTemplate"
+      ],
+      "severity": "warning"
+    },
+    {
+      "knowledgeCode": "M5S1-42",
+      "name": "等式的两条基本性质",
+      "level": "A",
+      "missing": [
+        "validationAction",
+        "basicQuestions",
+        "variantQuestions",
+        "errorVerificationQuestions",
+        "parentSummaryTemplate"
+      ],
+      "severity": "warning"
+    },
+    {
+      "knowledgeCode": "M5S1-43",
+      "name": "一步、两步方程解法",
+      "level": "A",
+      "missing": [
+        "validationAction",
+        "basicQuestions",
+        "variantQuestions",
+        "errorVerificationQuestions",
+        "parentSummaryTemplate"
+      ],
+      "severity": "warning"
+    },
+    {
+      "knowledgeCode": "M5S1-44",
+      "name": "方程检验格式",
+      "level": "A",
+      "missing": [
+        "validationAction",
+        "basicQuestions",
+        "variantQuestions",
+        "errorVerificationQuestions",
+        "parentSummaryTemplate"
+      ],
+      "severity": "warning"
+    },
+    {
+      "knowledgeCode": "M5S1-45",
+      "name": "找等量关系列方程",
+      "level": "A",
+      "missing": [
+        "validationAction",
+        "basicQuestions",
+        "variantQuestions",
+        "errorVerificationQuestions",
+        "parentSummaryTemplate"
+      ],
+      "severity": "warning"
+    },
+    {
+      "knowledgeCode": "M5S1-46",
+      "name": "几倍多/少应用题",
+      "level": "A",
+      "missing": [
+        "validationAction",
+        "basicQuestions",
+        "variantQuestions",
+        "errorVerificationQuestions",
+        "parentSummaryTemplate"
+      ],
+      "severity": "warning"
+    },
+    {
+      "knowledgeCode": "M5S1-47",
+      "name": "相遇问题、和差问题",
+      "level": "A",
+      "missing": [
+        "validationAction",
+        "basicQuestions",
+        "variantQuestions",
+        "errorVerificationQuestions",
+        "parentSummaryTemplate"
+      ],
+      "severity": "warning"
+    },
+    {
+      "knowledgeCode": "M5S1-48",
+      "name": "含两个未知数应用题",
+      "level": "A",
+      "missing": [
+        "validationAction",
+        "basicQuestions",
+        "variantQuestions",
+        "errorVerificationQuestions",
+        "parentSummaryTemplate"
+      ],
+      "severity": "warning"
+    },
+    {
+      "knowledgeCode": "M5S1-49",
+      "name": "算术法与方程法区别",
+      "level": "A",
+      "missing": [
+        "next",
+        "validationAction",
+        "basicQuestions",
+        "variantQuestions",
+        "errorVerificationQuestions",
+        "parentSummaryTemplate"
+      ],
+      "severity": "warning"
+    },
+    {
+      "knowledgeCode": "M5S1-5",
+      "name": "积位数不足补0占位",
+      "level": "A",
+      "missing": [
+        "validationAction",
+        "basicQuestions",
+        "variantQuestions",
+        "errorVerificationQuestions",
+        "parentSummaryTemplate"
+      ],
+      "severity": "warning"
+    },
+    {
+      "knowledgeCode": "M5S1-50",
+      "name": "割补转化思想",
+      "level": "C",
+      "missing": [
+        "prerequisites"
+      ],
+      "severity": "warning"
+    },
+    {
+      "knowledgeCode": "M5S1-51",
+      "name": "面积公式 S=ah",
+      "level": "A",
+      "missing": [
+        "validationAction",
+        "basicQuestions",
+        "variantQuestions",
+        "errorVerificationQuestions",
+        "parentSummaryTemplate"
+      ],
+      "severity": "warning"
+    },
+    {
+      "knowledgeCode": "M5S1-53",
+      "name": "面积公式 S=ah÷2",
+      "level": "A",
+      "missing": [
+        "validationAction",
+        "basicQuestions",
+        "variantQuestions",
+        "errorVerificationQuestions",
+        "parentSummaryTemplate"
+      ],
+      "severity": "warning"
+    },
+    {
+      "knowledgeCode": "M5S1-56",
+      "name": "面积公式 S=(a+b)h÷2",
+      "level": "A",
+      "missing": [
+        "validationAction",
+        "basicQuestions",
+        "variantQuestions",
+        "errorVerificationQuestions",
+        "parentSummaryTemplate"
+      ],
+      "severity": "warning"
+    },
+    {
+      "knowledgeCode": "M5S1-6",
+      "name": "因数与积大小变化规律",
+      "level": "A",
+      "missing": [
+        "validationAction",
+        "basicQuestions",
+        "variantQuestions",
+        "errorVerificationQuestions",
+        "parentSummaryTemplate"
+      ],
+      "severity": "warning"
+    },
+    {
+      "knowledgeCode": "M5S1-60",
+      "name": "公顷、平方千米单位换算",
+      "level": "B",
+      "missing": [
+        "next"
+      ],
+      "severity": "warning"
+    },
+    {
+      "knowledgeCode": "M5S1-61",
+      "name": "两端都栽：棵数=间隔数+1",
+      "level": "B",
+      "missing": [
+        "prerequisites"
+      ],
+      "severity": "warning"
+    },
+    {
+      "knowledgeCode": "M5S1-63",
+      "name": "封闭图形：棵数=间隔数",
+      "level": "B",
+      "missing": [
+        "next"
+      ],
+      "severity": "warning"
+    },
+    {
+      "knowledgeCode": "M5S1-64",
+      "name": "小数乘除法综合计算",
+      "level": "C",
+      "missing": [
+        "prerequisites"
+      ],
+      "severity": "warning"
+    },
+    {
+      "knowledgeCode": "M5S1-69",
+      "name": "植树问题模型总结",
+      "level": "C",
+      "missing": [
+        "next"
+      ],
+      "severity": "warning"
+    },
+    {
+      "knowledgeCode": "M5S1-9",
+      "name": "乘法交换律、结合律、分配律",
+      "level": "B",
+      "missing": [
+        "next"
+      ],
+      "severity": "warning"
+    },
+    {
+      "knowledgeCode": "M5S2-0",
+      "name": "根据多个方向的视图还原物体",
+      "level": "B",
+      "missing": [
+        "prerequisites",
+        "next"
+      ],
+      "severity": "warning"
+    },
+    {
+      "knowledgeCode": "M5S2-1",
+      "name": "因数和倍数的意义",
+      "level": "A",
+      "missing": [
+        "prerequisites",
+        "validationAction",
+        "basicQuestions",
+        "variantQuestions",
+        "errorVerificationQuestions",
+        "parentSummaryTemplate"
+      ],
+      "severity": "warning"
+    },
+    {
+      "knowledgeCode": "M5S2-10",
+      "name": "实际生活中的表面积应用",
+      "level": "A",
+      "missing": [
+        "prerequisites",
+        "validationAction",
+        "basicQuestions",
+        "variantQuestions",
+        "errorVerificationQuestions",
+        "parentSummaryTemplate"
+      ],
+      "severity": "warning"
+    },
+    {
+      "knowledgeCode": "M5S2-11",
+      "name": "体积的概念和单位",
+      "level": "A",
+      "missing": [
+        "validationAction",
+        "basicQuestions",
+        "variantQuestions",
+        "errorVerificationQuestions",
+        "parentSummaryTemplate"
+      ],
+      "severity": "warning"
+    },
+    {
+      "knowledgeCode": "M5S2-12",
+      "name": "长方体正方体体积公式",
+      "level": "A",
+      "missing": [
+        "validationAction",
+        "basicQuestions",
+        "variantQuestions",
+        "errorVerificationQuestions",
+        "parentSummaryTemplate"
+      ],
+      "severity": "warning"
+    },
+    {
+      "knowledgeCode": "M5S2-13",
+      "name": "容积的概念",
+      "level": "A",
+      "missing": [
+        "validationAction",
+        "basicQuestions",
+        "variantQuestions",
+        "errorVerificationQuestions",
+        "parentSummaryTemplate"
+      ],
+      "severity": "warning"
+    },
+    {
+      "knowledgeCode": "M5S2-14",
+      "name": "综合应用题",
+      "level": "A",
+      "missing": [
+        "validationAction",
+        "basicQuestions",
+        "variantQuestions",
+        "errorVerificationQuestions",
+        "parentSummaryTemplate"
+      ],
+      "severity": "warning"
+    },
+    {
+      "knowledgeCode": "M5S2-15",
+      "name": "分数的产生与意义",
+      "level": "A",
+      "missing": [
+        "prerequisites",
+        "validationAction",
+        "basicQuestions",
+        "variantQuestions",
+        "errorVerificationQuestions",
+        "parentSummaryTemplate"
+      ],
+      "severity": "warning"
+    },
+    {
+      "knowledgeCode": "M5S2-16",
+      "name": "真假分数的区分",
+      "level": "A",
+      "missing": [
+        "validationAction",
+        "basicQuestions",
+        "variantQuestions",
+        "errorVerificationQuestions",
+        "parentSummaryTemplate"
+      ],
+      "severity": "warning"
+    },
+    {
+      "knowledgeCode": "M5S2-17",
+      "name": "分数的基本性质",
+      "level": "A",
+      "missing": [
+        "validationAction",
+        "basicQuestions",
+        "variantQuestions",
+        "errorVerificationQuestions",
+        "parentSummaryTemplate"
+      ],
+      "severity": "warning"
+    },
+    {
+      "knowledgeCode": "M5S2-18",
+      "name": "最大公因数和约分",
+      "level": "A",
+      "missing": [
+        "validationAction",
+        "basicQuestions",
+        "variantQuestions",
+        "errorVerificationQuestions",
+        "parentSummaryTemplate"
+      ],
+      "severity": "warning"
+    },
+    {
+      "knowledgeCode": "M5S2-19",
+      "name": "最小公倍数和通分",
+      "level": "A",
+      "missing": [
+        "validationAction",
+        "basicQuestions",
+        "variantQuestions",
+        "errorVerificationQuestions",
+        "parentSummaryTemplate"
+      ],
+      "severity": "warning"
+    },
+    {
+      "knowledgeCode": "M5S2-2",
+      "name": "求一个数的因数",
+      "level": "A",
+      "missing": [
+        "validationAction",
+        "basicQuestions",
+        "variantQuestions",
+        "errorVerificationQuestions",
+        "parentSummaryTemplate"
+      ],
+      "severity": "warning"
+    },
+    {
+      "knowledgeCode": "M5S2-20",
+      "name": "分数与小数互化方法",
+      "level": "A",
+      "missing": [
+        "validationAction",
+        "basicQuestions",
+        "variantQuestions",
+        "errorVerificationQuestions",
+        "parentSummaryTemplate"
+      ],
+      "severity": "warning"
+    },
+    {
+      "knowledgeCode": "M5S2-21",
+      "name": "图形的旋转",
+      "level": "B",
+      "missing": [
+        "prerequisites"
+      ],
+      "severity": "warning"
+    },
+    {
+      "knowledgeCode": "M5S2-22",
+      "name": "同分母分数加减计算",
+      "level": "A",
+      "missing": [
+        "prerequisites",
+        "validationAction",
+        "basicQuestions",
+        "variantQuestions",
+        "errorVerificationQuestions",
+        "parentSummaryTemplate"
+      ],
+      "severity": "warning"
+    },
+    {
+      "knowledgeCode": "M5S2-23",
+      "name": "异分母分数加减(先通分)",
+      "level": "A",
+      "missing": [
+        "validationAction",
+        "basicQuestions",
+        "variantQuestions",
+        "errorVerificationQuestions",
+        "parentSummaryTemplate"
+      ],
+      "severity": "warning"
+    },
+    {
+      "knowledgeCode": "M5S2-24",
+      "name": "分数加减混合运算",
+      "level": "A",
+      "missing": [
+        "validationAction",
+        "basicQuestions",
+        "variantQuestions",
+        "errorVerificationQuestions",
+        "parentSummaryTemplate"
+      ],
+      "severity": "warning"
+    },
+    {
+      "knowledgeCode": "M5S2-25",
+      "name": "单式折线统计图的认识",
+      "level": "B",
+      "missing": [
+        "prerequisites"
+      ],
+      "severity": "warning"
+    },
+    {
+      "knowledgeCode": "M5S2-26",
+      "name": "复式折线统计图比较",
+      "level": "B",
+      "missing": [
+        "next"
+      ],
+      "severity": "warning"
+    },
+    {
+      "knowledgeCode": "M5S2-27",
+      "name": "用天平找次品的最少次数",
+      "level": "B",
+      "missing": [
+        "prerequisites",
+        "next"
+      ],
+      "severity": "warning"
+    },
+    {
+      "knowledgeCode": "M5S2-29",
+      "name": "体积单位间的进率",
+      "level": "A",
+      "missing": [
+        "validationAction",
+        "basicQuestions",
+        "variantQuestions",
+        "errorVerificationQuestions",
+        "parentSummaryTemplate"
+      ],
+      "severity": "warning"
+    },
+    {
+      "knowledgeCode": "M5S2-3",
+      "name": "求一个数的倍数",
+      "level": "A",
+      "missing": [
+        "validationAction",
+        "basicQuestions",
+        "variantQuestions",
+        "errorVerificationQuestions",
+        "parentSummaryTemplate"
+      ],
+      "severity": "warning"
+    },
+    {
+      "knowledgeCode": "M5S2-31",
+      "name": "分数与除法的关系",
+      "level": "A",
+      "missing": [
+        "next",
+        "validationAction",
+        "basicQuestions",
+        "variantQuestions",
+        "errorVerificationQuestions",
+        "parentSummaryTemplate"
+      ],
+      "severity": "warning"
+    },
+    {
+      "knowledgeCode": "M5S2-32",
+      "name": "用旋转解决实际问题",
+      "level": "C",
+      "missing": [
+        "next"
+      ],
+      "severity": "warning"
+    },
+    {
+      "knowledgeCode": "M5S2-33",
+      "name": "分数加减法应用题",
+      "level": "B",
+      "missing": [
+        "next"
+      ],
+      "severity": "warning"
+    },
+    {
+      "knowledgeCode": "M5S2-4",
+      "name": "2和5的倍数特征",
+      "level": "A",
+      "missing": [
+        "validationAction",
+        "basicQuestions",
+        "variantQuestions",
+        "errorVerificationQuestions",
+        "parentSummaryTemplate"
+      ],
+      "severity": "warning"
+    },
+    {
+      "knowledgeCode": "M5S2-5",
+      "name": "3的倍数特征",
+      "level": "A",
+      "missing": [
+        "validationAction",
+        "basicQuestions",
+        "variantQuestions",
+        "errorVerificationQuestions",
+        "parentSummaryTemplate"
+      ],
+      "severity": "warning"
+    },
+    {
+      "knowledgeCode": "M5S2-6",
+      "name": "质数和合数",
+      "level": "A",
+      "missing": [
+        "next",
+        "validationAction",
+        "basicQuestions",
+        "variantQuestions",
+        "errorVerificationQuestions",
+        "parentSummaryTemplate"
+      ],
+      "severity": "warning"
+    },
+    {
+      "knowledgeCode": "M5S2-7",
+      "name": "长方体的特征",
+      "level": "A",
+      "missing": [
+        "validationAction",
+        "basicQuestions",
+        "variantQuestions",
+        "errorVerificationQuestions",
+        "parentSummaryTemplate"
+      ],
+      "severity": "warning"
+    },
+    {
+      "knowledgeCode": "M5S2-8",
+      "name": "正方体的特征及与长方体关系",
+      "level": "A",
+      "missing": [
+        "validationAction",
+        "basicQuestions",
+        "variantQuestions",
+        "errorVerificationQuestions",
+        "parentSummaryTemplate"
+      ],
+      "severity": "warning"
+    },
+    {
+      "knowledgeCode": "M5S2-9",
+      "name": "长方体表面积计算",
+      "level": "A",
+      "missing": [
+        "next",
+        "validationAction",
+        "basicQuestions",
+        "variantQuestions",
+        "errorVerificationQuestions",
+        "parentSummaryTemplate"
+      ],
+      "severity": "warning"
+    },
+    {
+      "knowledgeCode": "M6S1-0",
+      "name": "分数乘整数的意义",
+      "level": "A",
+      "missing": [
+        "prerequisites",
+        "validationAction",
+        "basicQuestions",
+        "variantQuestions",
+        "errorVerificationQuestions",
+        "parentSummaryTemplate"
+      ],
+      "severity": "warning"
+    },
+    {
+      "knowledgeCode": "M6S1-1",
+      "name": "分数乘整数计算法则",
+      "level": "A",
+      "missing": [
+        "validationAction",
+        "basicQuestions",
+        "variantQuestions",
+        "errorVerificationQuestions",
+        "parentSummaryTemplate"
+      ],
+      "severity": "warning"
+    },
+    {
+      "knowledgeCode": "M6S1-10",
+      "name": "用方向和距离描述位置",
+      "level": "B",
+      "missing": [
+        "prerequisites"
+      ],
+      "severity": "warning"
+    },
+    {
+      "knowledgeCode": "M6S1-11",
+      "name": "根据描述绘制简单路线图",
+      "level": "B",
+      "missing": [
+        "next"
+      ],
+      "severity": "warning"
+    },
+    {
+      "knowledgeCode": "M6S1-12",
+      "name": "倒数的意义和判定",
+      "level": "A",
+      "missing": [
+        "prerequisites",
+        "validationAction",
+        "basicQuestions",
+        "variantQuestions",
+        "errorVerificationQuestions",
+        "parentSummaryTemplate"
+      ],
+      "severity": "warning"
+    },
+    {
+      "knowledgeCode": "M6S1-13",
+      "name": "求一个数的倒数",
+      "level": "A",
+      "missing": [
+        "validationAction",
+        "basicQuestions",
+        "variantQuestions",
+        "errorVerificationQuestions",
+        "parentSummaryTemplate"
+      ],
+      "severity": "warning"
+    },
+    {
+      "knowledgeCode": "M6S1-14",
+      "name": "分数除以整数的算法",
+      "level": "A",
+      "missing": [
+        "validationAction",
+        "basicQuestions",
+        "variantQuestions",
+        "errorVerificationQuestions",
+        "parentSummaryTemplate"
+      ],
+      "severity": "warning"
+    },
+    {
+      "knowledgeCode": "M6S1-15",
+      "name": "一个数除以分数的算法",
+      "level": "A",
+      "missing": [
+        "validationAction",
+        "basicQuestions",
+        "variantQuestions",
+        "errorVerificationQuestions",
+        "parentSummaryTemplate"
+      ],
+      "severity": "warning"
+    },
+    {
+      "knowledgeCode": "M6S1-16",
+      "name": "分数除法的统一计算法则",
+      "level": "A",
+      "missing": [
+        "validationAction",
+        "basicQuestions",
+        "variantQuestions",
+        "errorVerificationQuestions",
+        "parentSummaryTemplate"
+      ],
+      "severity": "warning"
+    },
+    {
+      "knowledgeCode": "M6S1-17",
+      "name": "分数四则混合运算",
+      "level": "A",
+      "missing": [
+        "validationAction",
+        "basicQuestions",
+        "variantQuestions",
+        "errorVerificationQuestions",
+        "parentSummaryTemplate"
+      ],
+      "severity": "warning"
+    },
+    {
+      "knowledgeCode": "M6S1-18",
+      "name": "已知一个数的几分之几是多少求这个数",
+      "level": "A",
+      "missing": [
+        "validationAction",
+        "basicQuestions",
+        "variantQuestions",
+        "errorVerificationQuestions",
+        "parentSummaryTemplate"
+      ],
+      "severity": "warning"
+    },
+    {
+      "knowledgeCode": "M6S1-19",
+      "name": "工程问题",
+      "level": "A",
+      "missing": [
+        "next",
+        "validationAction",
+        "basicQuestions",
+        "variantQuestions",
+        "errorVerificationQuestions",
+        "parentSummaryTemplate"
+      ],
+      "severity": "warning"
+    },
+    {
+      "knowledgeCode": "M6S1-2",
+      "name": "分数乘分数的算理",
+      "level": "A",
+      "missing": [
+        "validationAction",
+        "basicQuestions",
+        "variantQuestions",
+        "errorVerificationQuestions",
+        "parentSummaryTemplate"
+      ],
+      "severity": "warning"
+    },
+    {
+      "knowledgeCode": "M6S1-20",
+      "name": "比的定义与各部分名称",
+      "level": "A",
+      "missing": [
+        "prerequisites",
+        "validationAction",
+        "basicQuestions",
+        "variantQuestions",
+        "errorVerificationQuestions",
+        "parentSummaryTemplate"
+      ],
+      "severity": "warning"
+    },
+    {
+      "knowledgeCode": "M6S1-21",
+      "name": "比与除法、分数的关系",
+      "level": "A",
+      "missing": [
+        "validationAction",
+        "basicQuestions",
+        "variantQuestions",
+        "errorVerificationQuestions",
+        "parentSummaryTemplate"
+      ],
+      "severity": "warning"
+    },
+    {
+      "knowledgeCode": "M6S1-22",
+      "name": "比的基本性质",
+      "level": "A",
+      "missing": [
+        "validationAction",
+        "basicQuestions",
+        "variantQuestions",
+        "errorVerificationQuestions",
+        "parentSummaryTemplate"
+      ],
+      "severity": "warning"
+    },
+    {
+      "knowledgeCode": "M6S1-23",
+      "name": "化简比",
+      "level": "A",
+      "missing": [
+        "validationAction",
+        "basicQuestions",
+        "variantQuestions",
+        "errorVerificationQuestions",
+        "parentSummaryTemplate"
+      ],
+      "severity": "warning"
+    },
+    {
+      "knowledgeCode": "M6S1-24",
+      "name": "按比分配问题",
+      "level": "B",
+      "missing": [
+        "next"
+      ],
+      "severity": "warning"
+    },
+    {
+      "knowledgeCode": "M6S1-25",
+      "name": "圆心、半径、直径的概念",
+      "level": "C",
+      "missing": [
+        "prerequisites"
+      ],
+      "severity": "warning"
+    },
+    {
+      "knowledgeCode": "M6S1-27",
+      "name": "圆周率π的认识",
+      "level": "A",
+      "missing": [
+        "validationAction",
+        "basicQuestions",
+        "variantQuestions",
+        "errorVerificationQuestions",
+        "parentSummaryTemplate"
+      ],
+      "severity": "warning"
+    },
+    {
+      "knowledgeCode": "M6S1-28",
+      "name": "圆的周长公式 C=2πr 或 C=πd",
+      "level": "A",
+      "missing": [
+        "validationAction",
+        "basicQuestions",
+        "variantQuestions",
+        "errorVerificationQuestions",
+        "parentSummaryTemplate"
+      ],
+      "severity": "warning"
+    },
+    {
+      "knowledgeCode": "M6S1-29",
+      "name": "圆面积公式推导",
+      "level": "A",
+      "missing": [
+        "validationAction",
+        "basicQuestions",
+        "variantQuestions",
+        "errorVerificationQuestions",
+        "parentSummaryTemplate"
+      ],
+      "severity": "warning"
+    },
+    {
+      "knowledgeCode": "M6S1-3",
+      "name": "分数乘分数计算法则",
+      "level": "A",
+      "missing": [
+        "validationAction",
+        "basicQuestions",
+        "variantQuestions",
+        "errorVerificationQuestions",
+        "parentSummaryTemplate"
+      ],
+      "severity": "warning"
+    },
+    {
+      "knowledgeCode": "M6S1-30",
+      "name": "圆面积公式 S=πr²",
+      "level": "A",
+      "missing": [
+        "validationAction",
+        "basicQuestions",
+        "variantQuestions",
+        "errorVerificationQuestions",
+        "parentSummaryTemplate"
+      ],
+      "severity": "warning"
+    },
+    {
+      "knowledgeCode": "M6S1-33",
+      "name": "圆与正方形的关系",
+      "level": "C",
+      "missing": [
+        "next"
+      ],
+      "severity": "warning"
+    },
+    {
+      "knowledgeCode": "M6S1-34",
+      "name": "百分数的概念",
+      "level": "A",
+      "missing": [
+        "prerequisites",
+        "validationAction",
+        "basicQuestions",
+        "variantQuestions",
+        "errorVerificationQuestions",
+        "parentSummaryTemplate"
+      ],
+      "severity": "warning"
+    },
+    {
+      "knowledgeCode": "M6S1-35",
+      "name": "百分数与分数互化",
+      "level": "A",
+      "missing": [
+        "validationAction",
+        "basicQuestions",
+        "variantQuestions",
+        "errorVerificationQuestions",
+        "parentSummaryTemplate"
+      ],
+      "severity": "warning"
+    },
+    {
+      "knowledgeCode": "M6S1-36",
+      "name": "百分数与小数互化",
+      "level": "A",
+      "missing": [
+        "validationAction",
+        "basicQuestions",
+        "variantQuestions",
+        "errorVerificationQuestions",
+        "parentSummaryTemplate"
+      ],
+      "severity": "warning"
+    },
+    {
+      "knowledgeCode": "M6S1-37",
+      "name": "求一个数是另一个数的百分之几",
+      "level": "A",
+      "missing": [
+        "validationAction",
+        "basicQuestions",
+        "variantQuestions",
+        "errorVerificationQuestions",
+        "parentSummaryTemplate"
+      ],
+      "severity": "warning"
+    },
+    {
+      "knowledgeCode": "M6S1-38",
+      "name": "求一个数的百分之几是多少",
+      "level": "A",
+      "missing": [
+        "validationAction",
+        "basicQuestions",
+        "variantQuestions",
+        "errorVerificationQuestions",
+        "parentSummaryTemplate"
+      ],
+      "severity": "warning"
+    },
+    {
+      "knowledgeCode": "M6S1-39",
+      "name": "已知一个数的百分之几求这个数",
+      "level": "A",
+      "missing": [
+        "next",
+        "validationAction",
+        "basicQuestions",
+        "variantQuestions",
+        "errorVerificationQuestions",
+        "parentSummaryTemplate"
+      ],
+      "severity": "warning"
+    },
+    {
+      "knowledgeCode": "M6S1-4",
+      "name": "计算时先约分再相乘",
+      "level": "A",
+      "missing": [
+        "validationAction",
+        "basicQuestions",
+        "variantQuestions",
+        "errorVerificationQuestions",
+        "parentSummaryTemplate"
+      ],
+      "severity": "warning"
+    },
+    {
+      "knowledgeCode": "M6S1-40",
+      "name": "扇形统计图的特点",
+      "level": "B",
+      "missing": [
+        "prerequisites"
+      ],
+      "severity": "warning"
+    },
+    {
+      "knowledgeCode": "M6S1-41",
+      "name": "条形、折线、扇形统计图选用",
+      "level": "B",
+      "missing": [
+        "next"
+      ],
+      "severity": "warning"
+    },
+    {
+      "knowledgeCode": "M6S1-42",
+      "name": "数形结合解决数学问题",
+      "level": "B",
+      "missing": [
+        "prerequisites",
+        "next"
+      ],
+      "severity": "warning"
+    },
+    {
+      "knowledgeCode": "M6S1-43",
+      "name": "分数乘除法综合",
+      "level": "C",
+      "missing": [
+        "prerequisites"
+      ],
+      "severity": "warning"
+    },
+    {
+      "knowledgeCode": "M6S1-46",
+      "name": "统计图综合判读",
+      "level": "C",
+      "missing": [
+        "next"
+      ],
+      "severity": "warning"
+    },
+    {
+      "knowledgeCode": "M6S1-9",
+      "name": "连续求一个数的几分之几",
+      "level": "B",
+      "missing": [
+        "next"
+      ],
+      "severity": "warning"
+    },
+    {
+      "knowledgeCode": "M6S2-0",
+      "name": "负数的意义",
+      "level": "A",
+      "missing": [
+        "prerequisites",
+        "validationAction",
+        "basicQuestions",
+        "variantQuestions",
+        "errorVerificationQuestions",
+        "parentSummaryTemplate"
+      ],
+      "severity": "warning"
+    },
+    {
+      "knowledgeCode": "M6S2-10",
+      "name": "圆柱侧面积公式 S侧=πd×h",
+      "level": "A",
+      "missing": [
+        "prerequisites",
+        "validationAction",
+        "basicQuestions",
+        "variantQuestions",
+        "errorVerificationQuestions",
+        "parentSummaryTemplate"
+      ],
+      "severity": "warning"
+    },
+    {
+      "knowledgeCode": "M6S2-11",
+      "name": "圆柱表面积公式 S=2πr²+2πrh",
+      "level": "A",
+      "missing": [
+        "validationAction",
+        "basicQuestions",
+        "variantQuestions",
+        "errorVerificationQuestions",
+        "parentSummaryTemplate"
+      ],
+      "severity": "warning"
+    },
+    {
+      "knowledgeCode": "M6S2-12",
+      "name": "圆柱体积公式 V=πr²h",
+      "level": "A",
+      "missing": [
+        "validationAction",
+        "basicQuestions",
+        "variantQuestions",
+        "errorVerificationQuestions",
+        "parentSummaryTemplate"
+      ],
+      "severity": "warning"
+    },
+    {
+      "knowledgeCode": "M6S2-14",
+      "name": "圆锥体积公式 V=⅓πr²h",
+      "level": "A",
+      "missing": [
+        "validationAction",
+        "basicQuestions",
+        "variantQuestions",
+        "errorVerificationQuestions",
+        "parentSummaryTemplate"
+      ],
+      "severity": "warning"
+    },
+    {
+      "knowledgeCode": "M6S2-16",
+      "name": "比例的定义",
+      "level": "A",
+      "missing": [
+        "prerequisites",
+        "validationAction",
+        "basicQuestions",
+        "variantQuestions",
+        "errorVerificationQuestions",
+        "parentSummaryTemplate"
+      ],
+      "severity": "warning"
+    },
+    {
+      "knowledgeCode": "M6S2-17",
+      "name": "比例的项与外项内项",
+      "level": "A",
+      "missing": [
+        "validationAction",
+        "basicQuestions",
+        "variantQuestions",
+        "errorVerificationQuestions",
+        "parentSummaryTemplate"
+      ],
+      "severity": "warning"
+    },
+    {
+      "knowledgeCode": "M6S2-18",
+      "name": "外项积等于内项积",
+      "level": "A",
+      "missing": [
+        "validationAction",
+        "basicQuestions",
+        "variantQuestions",
+        "errorVerificationQuestions",
+        "parentSummaryTemplate"
+      ],
+      "severity": "warning"
+    },
+    {
+      "knowledgeCode": "M6S2-19",
+      "name": "解比例的方法",
+      "level": "A",
+      "missing": [
+        "validationAction",
+        "basicQuestions",
+        "variantQuestions",
+        "errorVerificationQuestions",
+        "parentSummaryTemplate"
+      ],
+      "severity": "warning"
+    },
+    {
+      "knowledgeCode": "M6S2-20",
+      "name": "正比例的意义",
+      "level": "A",
+      "missing": [
+        "validationAction",
+        "basicQuestions",
+        "variantQuestions",
+        "errorVerificationQuestions",
+        "parentSummaryTemplate"
+      ],
+      "severity": "warning"
+    },
+    {
+      "knowledgeCode": "M6S2-21",
+      "name": "正比例图像",
+      "level": "A",
+      "missing": [
+        "validationAction",
+        "basicQuestions",
+        "variantQuestions",
+        "errorVerificationQuestions",
+        "parentSummaryTemplate"
+      ],
+      "severity": "warning"
+    },
+    {
+      "knowledgeCode": "M6S2-22",
+      "name": "反比例的意义",
+      "level": "A",
+      "missing": [
+        "validationAction",
+        "basicQuestions",
+        "variantQuestions",
+        "errorVerificationQuestions",
+        "parentSummaryTemplate"
+      ],
+      "severity": "warning"
+    },
+    {
+      "knowledgeCode": "M6S2-23",
+      "name": "比例尺的认识",
+      "level": "A",
+      "missing": [
+        "validationAction",
+        "basicQuestions",
+        "variantQuestions",
+        "errorVerificationQuestions",
+        "parentSummaryTemplate"
+      ],
+      "severity": "warning"
+    },
+    {
+      "knowledgeCode": "M6S2-24",
+      "name": "图形的放大与缩小",
+      "level": "A",
+      "missing": [
+        "validationAction",
+        "basicQuestions",
+        "variantQuestions",
+        "errorVerificationQuestions",
+        "parentSummaryTemplate"
+      ],
+      "severity": "warning"
+    },
+    {
+      "knowledgeCode": "M6S2-25",
+      "name": "用比例解决实际问题",
+      "level": "A",
+      "missing": [
+        "next",
+        "validationAction",
+        "basicQuestions",
+        "variantQuestions",
+        "errorVerificationQuestions",
+        "parentSummaryTemplate"
+      ],
+      "severity": "warning"
+    },
+    {
+      "knowledgeCode": "M6S2-26",
+      "name": "鸽巢原理的初步认识",
+      "level": "B",
+      "missing": [
+        "prerequisites"
+      ],
+      "severity": "warning"
+    },
+    {
+      "knowledgeCode": "M6S2-27",
+      "name": "鸽巢原理的应用",
+      "level": "B",
+      "missing": [
+        "next"
+      ],
+      "severity": "warning"
+    },
+    {
+      "knowledgeCode": "M6S2-28",
+      "name": "整数小数分数综合复习",
+      "level": "C",
+      "missing": [
+        "prerequisites"
+      ],
+      "severity": "warning"
+    },
+    {
+      "knowledgeCode": "M6S2-3",
+      "name": "比较正负数大小",
+      "level": "C",
+      "missing": [
+        "next"
+      ],
+      "severity": "warning"
+    },
+    {
+      "knowledgeCode": "M6S2-37",
+      "name": "生活中的数学综合应用",
+      "level": "C",
+      "missing": [
+        "next"
+      ],
+      "severity": "warning"
+    },
+    {
+      "knowledgeCode": "M6S2-4",
+      "name": "折扣的意义与计算",
+      "level": "A",
+      "missing": [
+        "prerequisites",
+        "validationAction",
+        "basicQuestions",
+        "variantQuestions",
+        "errorVerificationQuestions",
+        "parentSummaryTemplate"
+      ],
+      "severity": "warning"
+    },
+    {
+      "knowledgeCode": "M6S2-5",
+      "name": "成数的意义",
+      "level": "A",
+      "missing": [
+        "validationAction",
+        "basicQuestions",
+        "variantQuestions",
+        "errorVerificationQuestions",
+        "parentSummaryTemplate"
+      ],
+      "severity": "warning"
+    },
+    {
+      "knowledgeCode": "M6S2-6",
+      "name": "税率与应纳税额计算",
+      "level": "A",
+      "missing": [
+        "validationAction",
+        "basicQuestions",
+        "variantQuestions",
+        "errorVerificationQuestions",
+        "parentSummaryTemplate"
+      ],
+      "severity": "warning"
+    },
+    {
+      "knowledgeCode": "M6S2-7",
+      "name": "利率与利息计算",
+      "level": "A",
+      "missing": [
+        "validationAction",
+        "basicQuestions",
+        "variantQuestions",
+        "errorVerificationQuestions",
+        "parentSummaryTemplate"
+      ],
+      "severity": "warning"
+    },
+    {
+      "knowledgeCode": "M6S2-8",
+      "name": "百分数综合应用题",
+      "level": "A",
+      "missing": [
+        "next",
+        "validationAction",
+        "basicQuestions",
+        "variantQuestions",
+        "errorVerificationQuestions",
+        "parentSummaryTemplate"
+      ],
+      "severity": "warning"
+    },
+    {
+      "knowledgeCode": "M6S2-9",
+      "name": "圆柱的特征",
+      "level": "B",
+      "missing": [
+        "next"
+      ],
+      "severity": "warning"
+    }
+  ]
+}

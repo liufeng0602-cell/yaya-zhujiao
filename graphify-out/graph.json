@@ -1,0 +1,2975 @@
+{
+  "directed": false,
+  "multigraph": false,
+  "graph": {},
+  "nodes": [
+    {
+      "label": "app.js",
+      "file_type": "code",
+      "source_file": "app.js",
+      "source_location": "L1",
+      "community": 0,
+      "norm_label": "app.js",
+      "id": "app_js"
+    },
+    {
+      "label": "explainState",
+      "file_type": "code",
+      "source_file": "app.js",
+      "source_location": "L26",
+      "community": 0,
+      "norm_label": "explainstate",
+      "id": "yaya_browser_v3_app_explainstate"
+    },
+    {
+      "label": "_noopText",
+      "file_type": "code",
+      "source_file": "app.js",
+      "source_location": "L39",
+      "community": 0,
+      "norm_label": "_nooptext",
+      "id": "yaya_browser_v3_app_nooptext"
+    },
+    {
+      "label": "playUiSound()",
+      "file_type": "code",
+      "source_file": "app.js",
+      "source_location": "L47",
+      "community": 0,
+      "norm_label": "playuisound()",
+      "id": "yaya_browser_v3_app_playuisound"
+    },
+    {
+      "label": "refreshBackendStatus()",
+      "file_type": "code",
+      "source_file": "app.js",
+      "source_location": "L87",
+      "community": 5,
+      "norm_label": "refreshbackendstatus()",
+      "id": "yaya_browser_v3_app_refreshbackendstatus"
+    },
+    {
+      "label": "onlyChinese()",
+      "file_type": "code",
+      "source_file": "app.js",
+      "source_location": "L115",
+      "community": 10,
+      "norm_label": "onlychinese()",
+      "id": "yaya_browser_v3_app_onlychinese"
+    },
+    {
+      "label": "formatKnowledgeContent()",
+      "file_type": "code",
+      "source_file": "app.js",
+      "source_location": "L120",
+      "community": 10,
+      "norm_label": "formatknowledgecontent()",
+      "id": "yaya_browser_v3_app_formatknowledgecontent"
+    },
+    {
+      "label": "normalizeKnowledgeLevel()",
+      "file_type": "code",
+      "source_file": "app.js",
+      "source_location": "L142",
+      "community": 0,
+      "norm_label": "normalizeknowledgelevel()",
+      "id": "yaya_browser_v3_app_normalizeknowledgelevel"
+    },
+    {
+      "label": "normalizeClassroomScenes()",
+      "file_type": "code",
+      "source_file": "app.js",
+      "source_location": "L149",
+      "community": 4,
+      "norm_label": "normalizeclassroomscenes()",
+      "id": "yaya_browser_v3_app_normalizeclassroomscenes"
+    },
+    {
+      "label": "getPreferredClassroomLesson()",
+      "file_type": "code",
+      "source_file": "app.js",
+      "source_location": "L156",
+      "community": 2,
+      "norm_label": "getpreferredclassroomlesson()",
+      "id": "yaya_browser_v3_app_getpreferredclassroomlesson"
+    },
+    {
+      "label": "renderChapters()",
+      "file_type": "code",
+      "source_file": "app.js",
+      "source_location": "L178",
+      "community": 3,
+      "norm_label": "renderchapters()",
+      "id": "yaya_browser_v3_app_renderchapters"
+    },
+    {
+      "label": "sleep()",
+      "file_type": "code",
+      "source_file": "app.js",
+      "source_location": "L304",
+      "community": 6,
+      "norm_label": "sleep()",
+      "id": "yaya_browser_v3_app_sleep"
+    },
+    {
+      "label": "explainVoice",
+      "file_type": "code",
+      "source_file": "app.js",
+      "source_location": "L306",
+      "community": 0,
+      "norm_label": "explainvoice",
+      "id": "yaya_browser_v3_app_explainvoice"
+    },
+    {
+      "label": "splitForSpeech()",
+      "file_type": "code",
+      "source_file": "app.js",
+      "source_location": "L318",
+      "community": 0,
+      "norm_label": "splitforspeech()",
+      "id": "yaya_browser_v3_app_splitforspeech"
+    },
+    {
+      "label": "TTS_VOICE_MAP",
+      "file_type": "code",
+      "source_file": "app.js",
+      "source_location": "L327",
+      "community": 0,
+      "norm_label": "tts_voice_map",
+      "id": "yaya_browser_v3_app_tts_voice_map"
+    },
+    {
+      "label": "getVoicePresets()",
+      "file_type": "code",
+      "source_file": "app.js",
+      "source_location": "L336",
+      "community": 6,
+      "norm_label": "getvoicepresets()",
+      "id": "yaya_browser_v3_app_getvoicepresets"
+    },
+    {
+      "label": "stopSpeech()",
+      "file_type": "code",
+      "source_file": "app.js",
+      "source_location": "L340",
+      "community": 6,
+      "norm_label": "stopspeech()",
+      "id": "yaya_browser_v3_app_stopspeech"
+    },
+    {
+      "label": "pauseSpeech()",
+      "file_type": "code",
+      "source_file": "app.js",
+      "source_location": "L355",
+      "community": 0,
+      "norm_label": "pausespeech()",
+      "id": "yaya_browser_v3_app_pausespeech"
+    },
+    {
+      "label": "resumeSpeech()",
+      "file_type": "code",
+      "source_file": "app.js",
+      "source_location": "L363",
+      "community": 0,
+      "norm_label": "resumespeech()",
+      "id": "yaya_browser_v3_app_resumespeech"
+    },
+    {
+      "label": "isMostlyChinese()",
+      "file_type": "code",
+      "source_file": "app.js",
+      "source_location": "L371",
+      "community": 6,
+      "norm_label": "ismostlychinese()",
+      "id": "yaya_browser_v3_app_ismostlychinese"
+    },
+    {
+      "label": "speakText()",
+      "file_type": "code",
+      "source_file": "app.js",
+      "source_location": "L376",
+      "community": 6,
+      "norm_label": "speaktext()",
+      "id": "yaya_browser_v3_app_speaktext"
+    },
+    {
+      "label": "renderExplainSections()",
+      "file_type": "code",
+      "source_file": "app.js",
+      "source_location": "L440",
+      "community": 6,
+      "norm_label": "renderexplainsections()",
+      "id": "yaya_browser_v3_app_renderexplainsections"
+    },
+    {
+      "label": "animateSectionText()",
+      "file_type": "code",
+      "source_file": "app.js",
+      "source_location": "L452",
+      "community": 6,
+      "norm_label": "animatesectiontext()",
+      "id": "yaya_browser_v3_app_animatesectiontext"
+    },
+    {
+      "label": "renderExplainCard()",
+      "file_type": "code",
+      "source_file": "app.js",
+      "source_location": "L466",
+      "community": 6,
+      "norm_label": "renderexplaincard()",
+      "id": "yaya_browser_v3_app_renderexplaincard"
+    },
+    {
+      "label": "streamExplainRequest()",
+      "file_type": "code",
+      "source_file": "app.js",
+      "source_location": "L597",
+      "community": 0,
+      "norm_label": "streamexplainrequest()",
+      "id": "yaya_browser_v3_app_streamexplainrequest"
+    },
+    {
+      "label": "loadLeaderboardPanel()",
+      "file_type": "code",
+      "source_file": "app.js",
+      "source_location": "L628",
+      "community": 3,
+      "norm_label": "loadleaderboardpanel()",
+      "id": "yaya_browser_v3_app_loadleaderboardpanel"
+    },
+    {
+      "label": "loadBoardPanel()",
+      "file_type": "code",
+      "source_file": "app.js",
+      "source_location": "L639",
+      "community": 3,
+      "norm_label": "loadboardpanel()",
+      "id": "yaya_browser_v3_app_loadboardpanel"
+    },
+    {
+      "label": "loadPracticePanel()",
+      "file_type": "code",
+      "source_file": "app.js",
+      "source_location": "L713",
+      "community": 3,
+      "norm_label": "loadpracticepanel()",
+      "id": "yaya_browser_v3_app_loadpracticepanel"
+    },
+    {
+      "label": "buildKnowledgeGraphic()",
+      "file_type": "code",
+      "source_file": "app.js",
+      "source_location": "L819",
+      "community": 2,
+      "norm_label": "buildknowledgegraphic()",
+      "id": "yaya_browser_v3_app_buildknowledgegraphic"
+    },
+    {
+      "label": "renderKnowledgeMiniQuiz()",
+      "file_type": "code",
+      "source_file": "app.js",
+      "source_location": "L875",
+      "community": 2,
+      "norm_label": "renderknowledgeminiquiz()",
+      "id": "yaya_browser_v3_app_renderknowledgeminiquiz"
+    },
+    {
+      "label": "renderSelfCheckInteractive()",
+      "file_type": "code",
+      "source_file": "app.js",
+      "source_location": "L919",
+      "community": 2,
+      "norm_label": "renderselfcheckinteractive()",
+      "id": "yaya_browser_v3_app_renderselfcheckinteractive"
+    },
+    {
+      "label": "playExplainAnimation()",
+      "file_type": "code",
+      "source_file": "app.js",
+      "source_location": "L940",
+      "community": 2,
+      "norm_label": "playexplainanimation()",
+      "id": "yaya_browser_v3_app_playexplainanimation"
+    },
+    {
+      "label": "openAssistantView()",
+      "file_type": "code",
+      "source_file": "app.js",
+      "source_location": "L1101",
+      "community": 2,
+      "norm_label": "openassistantview()",
+      "id": "yaya_browser_v3_app_openassistantview"
+    },
+    {
+      "label": "showTextbookMaterials()",
+      "file_type": "code",
+      "source_file": "app.js",
+      "source_location": "L1112",
+      "community": 2,
+      "norm_label": "showtextbookmaterials()",
+      "id": "yaya_browser_v3_app_showtextbookmaterials"
+    },
+    {
+      "label": "showPastExamMaterials()",
+      "file_type": "code",
+      "source_file": "app.js",
+      "source_location": "L1157",
+      "community": 2,
+      "norm_label": "showpastexammaterials()",
+      "id": "yaya_browser_v3_app_showpastexammaterials"
+    },
+    {
+      "label": "openKnowledgeDetail()",
+      "file_type": "code",
+      "source_file": "app.js",
+      "source_location": "L1201",
+      "community": 2,
+      "norm_label": "openknowledgedetail()",
+      "id": "yaya_browser_v3_app_openknowledgedetail"
+    },
+    {
+      "label": "setupCommonHandlers()",
+      "file_type": "code",
+      "source_file": "app.js",
+      "source_location": "L1362",
+      "community": 5,
+      "norm_label": "setupcommonhandlers()",
+      "id": "yaya_browser_v3_app_setupcommonhandlers"
+    },
+    {
+      "label": "initDefaultVoice()",
+      "file_type": "code",
+      "source_file": "app.js",
+      "source_location": "L1635",
+      "community": 5,
+      "norm_label": "initdefaultvoice()",
+      "id": "yaya_browser_v3_app_initdefaultvoice"
+    },
+    {
+      "label": "demoClassroomLesson",
+      "file_type": "code",
+      "source_file": "app.js",
+      "source_location": "L1654",
+      "community": 0,
+      "norm_label": "democlassroomlesson",
+      "id": "yaya_browser_v3_app_democlassroomlesson"
+    },
+    {
+      "label": "classroomState",
+      "file_type": "code",
+      "source_file": "app.js",
+      "source_location": "L1736",
+      "community": 0,
+      "norm_label": "classroomstate",
+      "id": "yaya_browser_v3_app_classroomstate"
+    },
+    {
+      "label": "normalizeClassroomQuiz()",
+      "file_type": "code",
+      "source_file": "app.js",
+      "source_location": "L1755",
+      "community": 4,
+      "norm_label": "normalizeclassroomquiz()",
+      "id": "yaya_browser_v3_app_normalizeclassroomquiz"
+    },
+    {
+      "label": "defaultClassmatesForScene()",
+      "file_type": "code",
+      "source_file": "app.js",
+      "source_location": "L1763",
+      "community": 4,
+      "norm_label": "defaultclassmatesforscene()",
+      "id": "yaya_browser_v3_app_defaultclassmatesforscene"
+    },
+    {
+      "label": "loadClassroomTtsAudio()",
+      "file_type": "code",
+      "source_file": "app.js",
+      "source_location": "L1770",
+      "community": 2,
+      "norm_label": "loadclassroomttsaudio()",
+      "id": "yaya_browser_v3_app_loadclassroomttsaudio"
+    },
+    {
+      "label": "playClassroomAudio()",
+      "file_type": "code",
+      "source_file": "app.js",
+      "source_location": "L1782",
+      "community": 4,
+      "norm_label": "playclassroomaudio()",
+      "id": "yaya_browser_v3_app_playclassroomaudio"
+    },
+    {
+      "label": "runClassroomScene()",
+      "file_type": "code",
+      "source_file": "app.js",
+      "source_location": "L1791",
+      "community": 4,
+      "norm_label": "runclassroomscene()",
+      "id": "yaya_browser_v3_app_runclassroomscene"
+    },
+    {
+      "label": "renderClassroomVisualSpec()",
+      "file_type": "code",
+      "source_file": "app.js",
+      "source_location": "L1824",
+      "community": 4,
+      "norm_label": "renderclassroomvisualspec()",
+      "id": "yaya_browser_v3_app_renderclassroomvisualspec"
+    },
+    {
+      "label": "fitClassroomCanvas()",
+      "file_type": "code",
+      "source_file": "app.js",
+      "source_location": "L1861",
+      "community": 4,
+      "norm_label": "fitclassroomcanvas()",
+      "id": "yaya_browser_v3_app_fitclassroomcanvas"
+    },
+    {
+      "label": "renderClassroomPlayer()",
+      "file_type": "code",
+      "source_file": "app.js",
+      "source_location": "L1877",
+      "community": 4,
+      "norm_label": "renderclassroomplayer()",
+      "id": "yaya_browser_v3_app_renderclassroomplayer"
+    },
+    {
+      "label": "data_quality_gate.py",
+      "file_type": "code",
+      "source_file": "acceptance-artifacts/data_quality_gate.py",
+      "source_location": "L1",
+      "community": 3,
+      "norm_label": "data_quality_gate.py",
+      "id": "acceptance_artifacts_data_quality_gate_py"
+    },
+    {
+      "label": "load()",
+      "file_type": "code",
+      "source_file": "acceptance-artifacts/data_quality_gate.py",
+      "source_location": "L14",
+      "community": 3,
+      "norm_label": "load()",
+      "id": "acceptance_artifacts_data_quality_gate_load"
+    },
+    {
+      "label": "fail()",
+      "file_type": "code",
+      "source_file": "acceptance-artifacts/data_quality_gate.py",
+      "source_location": "L18",
+      "community": 3,
+      "norm_label": "fail()",
+      "id": "acceptance_artifacts_data_quality_gate_fail"
+    },
+    {
+      "label": "ok()",
+      "file_type": "code",
+      "source_file": "acceptance-artifacts/data_quality_gate.py",
+      "source_location": "L23",
+      "community": 3,
+      "norm_label": "ok()",
+      "id": "acceptance_artifacts_data_quality_gate_ok"
+    },
+    {
+      "label": "warn()",
+      "file_type": "code",
+      "source_file": "acceptance-artifacts/data_quality_gate.py",
+      "source_location": "L26",
+      "community": 3,
+      "norm_label": "warn()",
+      "id": "acceptance_artifacts_data_quality_gate_warn"
+    },
+    {
+      "label": "appState",
+      "file_type": "code",
+      "source_file": "src/app.js",
+      "source_location": "L11",
+      "community": 0,
+      "norm_label": "appstate",
+      "id": "src_app_appstate"
+    },
+    {
+      "label": "pageInits",
+      "file_type": "code",
+      "source_file": "src/app.js",
+      "source_location": "L19",
+      "community": 0,
+      "norm_label": "pageinits",
+      "id": "src_app_pageinits"
+    },
+    {
+      "label": "pages",
+      "file_type": "code",
+      "source_file": "src/app.js",
+      "source_location": "L28",
+      "community": 0,
+      "norm_label": "pages",
+      "id": "src_app_pages"
+    },
+    {
+      "label": "navItems",
+      "file_type": "code",
+      "source_file": "src/app.js",
+      "source_location": "L29",
+      "community": 0,
+      "norm_label": "navitems",
+      "id": "src_app_navitems"
+    },
+    {
+      "label": "navIndicator",
+      "file_type": "code",
+      "source_file": "src/app.js",
+      "source_location": "L30",
+      "community": 0,
+      "norm_label": "navindicator",
+      "id": "src_app_navindicator"
+    },
+    {
+      "label": "topbarTitle",
+      "file_type": "code",
+      "source_file": "src/app.js",
+      "source_location": "L31",
+      "community": 0,
+      "norm_label": "topbartitle",
+      "id": "src_app_topbartitle"
+    },
+    {
+      "label": "topbarSub",
+      "file_type": "code",
+      "source_file": "src/app.js",
+      "source_location": "L32",
+      "community": 0,
+      "norm_label": "topbarsub",
+      "id": "src_app_topbarsub"
+    },
+    {
+      "label": "topbarBadge",
+      "file_type": "code",
+      "source_file": "src/app.js",
+      "source_location": "L33",
+      "community": 0,
+      "norm_label": "topbarbadge",
+      "id": "src_app_topbarbadge"
+    },
+    {
+      "label": "toastEl",
+      "file_type": "code",
+      "source_file": "src/app.js",
+      "source_location": "L34",
+      "community": 0,
+      "norm_label": "toastel",
+      "id": "src_app_toastel"
+    },
+    {
+      "label": "topbarMap",
+      "file_type": "code",
+      "source_file": "src/app.js",
+      "source_location": "L36",
+      "community": 0,
+      "norm_label": "topbarmap",
+      "id": "src_app_topbarmap"
+    },
+    {
+      "label": "showToast()",
+      "file_type": "code",
+      "source_file": "src/app.js",
+      "source_location": "L46",
+      "community": 2,
+      "norm_label": "showtoast()",
+      "id": "src_app_showtoast"
+    },
+    {
+      "label": "switchTab()",
+      "file_type": "code",
+      "source_file": "src/app.js",
+      "source_location": "L53",
+      "community": 3,
+      "norm_label": "switchtab()",
+      "id": "src_app_switchtab"
+    },
+    {
+      "label": "bindNav()",
+      "file_type": "code",
+      "source_file": "src/app.js",
+      "source_location": "L66",
+      "community": 5,
+      "norm_label": "bindnav()",
+      "id": "src_app_bindnav"
+    },
+    {
+      "label": "bootstrap()",
+      "file_type": "code",
+      "source_file": "src/app.js",
+      "source_location": "L71",
+      "community": 5,
+      "norm_label": "bootstrap()",
+      "id": "src_app_bootstrap"
+    },
+    {
+      "label": "loading.js",
+      "file_type": "code",
+      "source_file": "src/components/loading.js",
+      "source_location": "L1",
+      "community": 5,
+      "norm_label": "loading.js",
+      "id": "src_components_loading_js"
+    },
+    {
+      "label": "setLoading()",
+      "file_type": "code",
+      "source_file": "src/components/loading.js",
+      "source_location": "L1",
+      "community": 5,
+      "norm_label": "setloading()",
+      "id": "components_loading_setloading"
+    },
+    {
+      "label": "setPageLoading()",
+      "file_type": "code",
+      "source_file": "src/components/loading.js",
+      "source_location": "L16",
+      "community": 5,
+      "norm_label": "setpageloading()",
+      "id": "components_loading_setpageloading"
+    },
+    {
+      "label": "toast.js",
+      "file_type": "code",
+      "source_file": "src/components/toast.js",
+      "source_location": "L1",
+      "community": 12,
+      "norm_label": "toast.js",
+      "id": "src_components_toast_js"
+    },
+    {
+      "label": "toast()",
+      "file_type": "code",
+      "source_file": "src/components/toast.js",
+      "source_location": "L2",
+      "community": 12,
+      "norm_label": "toast()",
+      "id": "components_toast_toast"
+    },
+    {
+      "label": "client.js",
+      "file_type": "code",
+      "source_file": "src/api/client.js",
+      "source_location": "L1",
+      "community": 2,
+      "norm_label": "client.js",
+      "id": "src_api_client_js"
+    },
+    {
+      "label": "request()",
+      "file_type": "code",
+      "source_file": "src/api/client.js",
+      "source_location": "L3",
+      "community": 2,
+      "norm_label": "request()",
+      "id": "api_client_request"
+    },
+    {
+      "label": "api",
+      "file_type": "code",
+      "source_file": "src/api/client.js",
+      "source_location": "L20",
+      "community": 2,
+      "norm_label": "api",
+      "id": "api_client_api"
+    },
+    {
+      "label": "index.js",
+      "file_type": "code",
+      "source_file": "src/pages/home/index.js",
+      "source_location": "L1",
+      "community": 1,
+      "norm_label": "index.js",
+      "id": "src_pages_home_index_js"
+    },
+    {
+      "label": "syllabus",
+      "file_type": "code",
+      "source_file": "src/pages/home/index.js",
+      "source_location": "L1",
+      "community": 1,
+      "norm_label": "syllabus",
+      "id": "home_index_syllabus"
+    },
+    {
+      "label": "initHomePage()",
+      "file_type": "code",
+      "source_file": "src/pages/home/index.js",
+      "source_location": "L18",
+      "community": 1,
+      "norm_label": "inithomepage()",
+      "id": "home_index_inithomepage"
+    },
+    {
+      "label": "statusLabel()",
+      "file_type": "code",
+      "source_file": "src/pages/home/index.js",
+      "source_location": "L93",
+      "community": 1,
+      "norm_label": "statuslabel()",
+      "id": "home_index_statuslabel"
+    },
+    {
+      "label": "initBoardPage()",
+      "file_type": "code",
+      "source_file": "src/pages/board/index.js",
+      "source_location": "L1",
+      "community": 1,
+      "norm_label": "initboardpage()",
+      "id": "board_index_initboardpage"
+    },
+    {
+      "label": "initAdminPage()",
+      "file_type": "code",
+      "source_file": "src/pages/admin/index.js",
+      "source_location": "L6",
+      "community": 7,
+      "norm_label": "initadminpage()",
+      "id": "admin_index_initadminpage"
+    },
+    {
+      "label": "collectForm()",
+      "file_type": "code",
+      "source_file": "src/pages/admin/index.js",
+      "source_location": "L126",
+      "community": 9,
+      "norm_label": "collectform()",
+      "id": "admin_index_collectform"
+    },
+    {
+      "label": "safeJson()",
+      "file_type": "code",
+      "source_file": "src/pages/admin/index.js",
+      "source_location": "L130",
+      "community": 1,
+      "norm_label": "safejson()",
+      "id": "admin_index_safejson"
+    },
+    {
+      "label": "readAiPayload()",
+      "file_type": "code",
+      "source_file": "src/pages/admin/index.js",
+      "source_location": "L134",
+      "community": 9,
+      "norm_label": "readaipayload()",
+      "id": "admin_index_readaipayload"
+    },
+    {
+      "label": "readAiQuestionPayload()",
+      "file_type": "code",
+      "source_file": "src/pages/admin/index.js",
+      "source_location": "L146",
+      "community": 9,
+      "norm_label": "readaiquestionpayload()",
+      "id": "admin_index_readaiquestionpayload"
+    },
+    {
+      "label": "loadAdminData()",
+      "file_type": "code",
+      "source_file": "src/pages/admin/index.js",
+      "source_location": "L160",
+      "community": 7,
+      "norm_label": "loadadmindata()",
+      "id": "admin_index_loadadmindata"
+    },
+    {
+      "label": "renderLists()",
+      "file_type": "code",
+      "source_file": "src/pages/admin/index.js",
+      "source_location": "L197",
+      "community": 7,
+      "norm_label": "renderlists()",
+      "id": "admin_index_renderlists"
+    },
+    {
+      "label": "renderClassroomPanel()",
+      "file_type": "code",
+      "source_file": "src/pages/admin/index.js",
+      "source_location": "L209",
+      "community": 7,
+      "norm_label": "renderclassroompanel()",
+      "id": "admin_index_renderclassroompanel"
+    },
+    {
+      "label": "renderClassroomDetail()",
+      "file_type": "code",
+      "source_file": "src/pages/admin/index.js",
+      "source_location": "L263",
+      "community": 1,
+      "norm_label": "renderclassroomdetail()",
+      "id": "admin_index_renderclassroomdetail"
+    },
+    {
+      "label": "itemCard()",
+      "file_type": "code",
+      "source_file": "src/pages/admin/index.js",
+      "source_location": "L284",
+      "community": 1,
+      "norm_label": "itemcard()",
+      "id": "admin_index_itemcard"
+    },
+    {
+      "label": "renderMiniSummary()",
+      "file_type": "code",
+      "source_file": "src/pages/admin/index.js",
+      "source_location": "L285",
+      "community": 1,
+      "norm_label": "renderminisummary()",
+      "id": "admin_index_renderminisummary"
+    },
+    {
+      "label": "emptyCard()",
+      "file_type": "code",
+      "source_file": "src/pages/admin/index.js",
+      "source_location": "L293",
+      "community": 7,
+      "norm_label": "emptycard()",
+      "id": "admin_index_emptycard"
+    },
+    {
+      "label": "import-results.js",
+      "file_type": "code",
+      "source_file": "src/pages/admin/import-results.js",
+      "source_location": "L1",
+      "community": 13,
+      "norm_label": "import-results.js",
+      "id": "src_pages_admin_import_results_js"
+    },
+    {
+      "label": "renderImportResults()",
+      "file_type": "code",
+      "source_file": "src/pages/admin/import-results.js",
+      "source_location": "L1",
+      "community": 13,
+      "norm_label": "renderimportresults()",
+      "id": "admin_import_results_renderimportresults"
+    },
+    {
+      "label": "esc()",
+      "file_type": "code",
+      "source_file": "src/pages/classroom/index.js",
+      "source_location": "L3",
+      "community": 11,
+      "norm_label": "esc()",
+      "id": "classroom_index_esc"
+    },
+    {
+      "label": "normalizeScenes()",
+      "file_type": "code",
+      "source_file": "src/pages/classroom/index.js",
+      "source_location": "L12",
+      "community": 1,
+      "norm_label": "normalizescenes()",
+      "id": "classroom_index_normalizescenes"
+    },
+    {
+      "label": "normalizeQuiz()",
+      "file_type": "code",
+      "source_file": "src/pages/classroom/index.js",
+      "source_location": "L24",
+      "community": 1,
+      "norm_label": "normalizequiz()",
+      "id": "classroom_index_normalizequiz"
+    },
+    {
+      "label": "defaultClassmates()",
+      "file_type": "code",
+      "source_file": "src/pages/classroom/index.js",
+      "source_location": "L32",
+      "community": 1,
+      "norm_label": "defaultclassmates()",
+      "id": "classroom_index_defaultclassmates"
+    },
+    {
+      "label": "loadTtsAudio()",
+      "file_type": "code",
+      "source_file": "src/pages/classroom/index.js",
+      "source_location": "L40",
+      "community": 1,
+      "norm_label": "loadttsaudio()",
+      "id": "classroom_index_loadttsaudio"
+    },
+    {
+      "label": "playAudio()",
+      "file_type": "code",
+      "source_file": "src/pages/classroom/index.js",
+      "source_location": "L50",
+      "community": 1,
+      "norm_label": "playaudio()",
+      "id": "classroom_index_playaudio"
+    },
+    {
+      "label": "buildSceneVisual()",
+      "file_type": "code",
+      "source_file": "src/pages/classroom/index.js",
+      "source_location": "L60",
+      "community": 11,
+      "norm_label": "buildscenevisual()",
+      "id": "classroom_index_buildscenevisual"
+    },
+    {
+      "label": "initClassroomPage()",
+      "file_type": "code",
+      "source_file": "src/pages/classroom/index.js",
+      "source_location": "L69",
+      "community": 3,
+      "norm_label": "initclassroompage()",
+      "id": "classroom_index_initclassroompage"
+    },
+    {
+      "label": "leaderboardData",
+      "file_type": "code",
+      "source_file": "src/pages/leaderboard/index.js",
+      "source_location": "L1",
+      "community": 1,
+      "norm_label": "leaderboarddata",
+      "id": "leaderboard_index_leaderboarddata"
+    },
+    {
+      "label": "initLeaderboardPage()",
+      "file_type": "code",
+      "source_file": "src/pages/leaderboard/index.js",
+      "source_location": "L30",
+      "community": 1,
+      "norm_label": "initleaderboardpage()",
+      "id": "leaderboard_index_initleaderboardpage"
+    },
+    {
+      "label": "getNodeLabel()",
+      "file_type": "code",
+      "source_file": "src/pages/knowledge/index.js",
+      "source_location": "L12",
+      "community": 1,
+      "norm_label": "getnodelabel()",
+      "id": "knowledge_index_getnodelabel"
+    },
+    {
+      "label": "initKnowledgePage()",
+      "file_type": "code",
+      "source_file": "src/pages/knowledge/index.js",
+      "source_location": "L16",
+      "community": 1,
+      "norm_label": "initknowledgepage()",
+      "id": "knowledge_index_initknowledgepage"
+    },
+    {
+      "label": "questions",
+      "file_type": "code",
+      "source_file": "src/pages/practice/index.js",
+      "source_location": "L1",
+      "community": 1,
+      "norm_label": "questions",
+      "id": "practice_index_questions"
+    },
+    {
+      "label": "initPracticePage()",
+      "file_type": "code",
+      "source_file": "src/pages/practice/index.js",
+      "source_location": "L7",
+      "community": 1,
+      "norm_label": "initpracticepage()",
+      "id": "practice_index_initpracticepage"
+    },
+    {
+      "label": "Human Readable Name",
+      "file_type": "concept",
+      "source_file": "relative/path",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "community": 14,
+      "norm_label": "human readable name",
+      "id": "stem_entity"
+    },
+    {
+      "label": "Strategy Engine",
+      "file_type": "code",
+      "source_file": "acceptance-artifacts/12_STRATEGY_ENGINE.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "community": 8,
+      "norm_label": "strategy engine",
+      "id": "strategy_engine"
+    },
+    {
+      "label": "Diagnosis Engine",
+      "file_type": "code",
+      "source_file": "acceptance-artifacts/11_DIAGNOSIS_ENGINE.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "community": 8,
+      "norm_label": "diagnosis engine",
+      "id": "diagnosis_engine"
+    },
+    {
+      "label": "Coverage Gate",
+      "file_type": "code",
+      "source_file": "acceptance-artifacts/05_COVERAGE_GATE.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "community": 8,
+      "norm_label": "coverage gate",
+      "id": "coverage_gate"
+    }
+  ],
+  "links": [
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app.js",
+      "source_location": "L36",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "app_js",
+      "target": "src_app_topbarmap"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app.js",
+      "source_location": "L11",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "app_js",
+      "target": "src_app_appstate"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app.js",
+      "source_location": "L26",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "app_js",
+      "target": "yaya_browser_v3_app_explainstate"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app.js",
+      "source_location": "L28",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "app_js",
+      "target": "src_app_pages"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app.js",
+      "source_location": "L29",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "app_js",
+      "target": "src_app_navitems"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app.js",
+      "source_location": "L30",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "app_js",
+      "target": "src_app_navindicator"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app.js",
+      "source_location": "L31",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "app_js",
+      "target": "src_app_topbartitle"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app.js",
+      "source_location": "L32",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "app_js",
+      "target": "src_app_topbarsub"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app.js",
+      "source_location": "L33",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "app_js",
+      "target": "src_app_topbarbadge"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app.js",
+      "source_location": "L39",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "app_js",
+      "target": "yaya_browser_v3_app_nooptext"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app.js",
+      "source_location": "L43",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "app_js",
+      "target": "components_toast_toast"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app.js",
+      "source_location": "L46",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "app_js",
+      "target": "src_app_showtoast"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app.js",
+      "source_location": "L47",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "app_js",
+      "target": "yaya_browser_v3_app_playuisound"
+    },
+    {
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app.js",
+      "source_location": "L1",
+      "weight": 1.0,
+      "context": "import",
+      "confidence_score": 1.0,
+      "source": "app_js",
+      "target": "api_client_api"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app.js",
+      "source_location": "L87",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "app_js",
+      "target": "yaya_browser_v3_app_refreshbackendstatus"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app.js",
+      "source_location": "L53",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "app_js",
+      "target": "src_app_switchtab"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app.js",
+      "source_location": "L115",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "app_js",
+      "target": "yaya_browser_v3_app_onlychinese"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app.js",
+      "source_location": "L120",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "app_js",
+      "target": "yaya_browser_v3_app_formatknowledgecontent"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app.js",
+      "source_location": "L142",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "app_js",
+      "target": "yaya_browser_v3_app_normalizeknowledgelevel"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app.js",
+      "source_location": "L1745",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "app_js",
+      "target": "yaya_browser_v3_app_normalizeclassroomscenes"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app.js",
+      "source_location": "L156",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "app_js",
+      "target": "yaya_browser_v3_app_getpreferredclassroomlesson"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app.js",
+      "source_location": "L178",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "app_js",
+      "target": "yaya_browser_v3_app_renderchapters"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app.js",
+      "source_location": "L304",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "app_js",
+      "target": "yaya_browser_v3_app_sleep"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app.js",
+      "source_location": "L306",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "app_js",
+      "target": "yaya_browser_v3_app_explainvoice"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app.js",
+      "source_location": "L318",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "app_js",
+      "target": "yaya_browser_v3_app_splitforspeech"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app.js",
+      "source_location": "L327",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "app_js",
+      "target": "yaya_browser_v3_app_tts_voice_map"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app.js",
+      "source_location": "L336",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "app_js",
+      "target": "yaya_browser_v3_app_getvoicepresets"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app.js",
+      "source_location": "L340",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "app_js",
+      "target": "yaya_browser_v3_app_stopspeech"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app.js",
+      "source_location": "L355",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "app_js",
+      "target": "yaya_browser_v3_app_pausespeech"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app.js",
+      "source_location": "L363",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "app_js",
+      "target": "yaya_browser_v3_app_resumespeech"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app.js",
+      "source_location": "L371",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "app_js",
+      "target": "yaya_browser_v3_app_ismostlychinese"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app.js",
+      "source_location": "L376",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "app_js",
+      "target": "yaya_browser_v3_app_speaktext"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app.js",
+      "source_location": "L440",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "app_js",
+      "target": "yaya_browser_v3_app_renderexplainsections"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app.js",
+      "source_location": "L452",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "app_js",
+      "target": "yaya_browser_v3_app_animatesectiontext"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app.js",
+      "source_location": "L466",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "app_js",
+      "target": "yaya_browser_v3_app_renderexplaincard"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app.js",
+      "source_location": "L597",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "app_js",
+      "target": "yaya_browser_v3_app_streamexplainrequest"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app.js",
+      "source_location": "L628",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "app_js",
+      "target": "yaya_browser_v3_app_loadleaderboardpanel"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app.js",
+      "source_location": "L639",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "app_js",
+      "target": "yaya_browser_v3_app_loadboardpanel"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app.js",
+      "source_location": "L713",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "app_js",
+      "target": "yaya_browser_v3_app_loadpracticepanel"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app.js",
+      "source_location": "L819",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "app_js",
+      "target": "yaya_browser_v3_app_buildknowledgegraphic"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app.js",
+      "source_location": "L875",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "app_js",
+      "target": "yaya_browser_v3_app_renderknowledgeminiquiz"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app.js",
+      "source_location": "L919",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "app_js",
+      "target": "yaya_browser_v3_app_renderselfcheckinteractive"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app.js",
+      "source_location": "L940",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "app_js",
+      "target": "yaya_browser_v3_app_playexplainanimation"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app.js",
+      "source_location": "L1101",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "app_js",
+      "target": "yaya_browser_v3_app_openassistantview"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app.js",
+      "source_location": "L1112",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "app_js",
+      "target": "yaya_browser_v3_app_showtextbookmaterials"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app.js",
+      "source_location": "L1157",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "app_js",
+      "target": "yaya_browser_v3_app_showpastexammaterials"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app.js",
+      "source_location": "L1201",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "app_js",
+      "target": "yaya_browser_v3_app_openknowledgedetail"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app.js",
+      "source_location": "L1362",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "app_js",
+      "target": "yaya_browser_v3_app_setupcommonhandlers"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app.js",
+      "source_location": "L1635",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "app_js",
+      "target": "yaya_browser_v3_app_initdefaultvoice"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app.js",
+      "source_location": "L71",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "app_js",
+      "target": "src_app_bootstrap"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app.js",
+      "source_location": "L1654",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "app_js",
+      "target": "yaya_browser_v3_app_democlassroomlesson"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app.js",
+      "source_location": "L1736",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "app_js",
+      "target": "yaya_browser_v3_app_classroomstate"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app.js",
+      "source_location": "L1755",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "app_js",
+      "target": "yaya_browser_v3_app_normalizeclassroomquiz"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app.js",
+      "source_location": "L1763",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "app_js",
+      "target": "yaya_browser_v3_app_defaultclassmatesforscene"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app.js",
+      "source_location": "L1770",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "app_js",
+      "target": "yaya_browser_v3_app_loadclassroomttsaudio"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app.js",
+      "source_location": "L1782",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "app_js",
+      "target": "yaya_browser_v3_app_playclassroomaudio"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app.js",
+      "source_location": "L1791",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "app_js",
+      "target": "yaya_browser_v3_app_runclassroomscene"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app.js",
+      "source_location": "L1824",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "app_js",
+      "target": "yaya_browser_v3_app_renderclassroomvisualspec"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app.js",
+      "source_location": "L1861",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "app_js",
+      "target": "yaya_browser_v3_app_fitclassroomcanvas"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app.js",
+      "source_location": "L1877",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "app_js",
+      "target": "yaya_browser_v3_app_renderclassroomplayer"
+    },
+    {
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app.js",
+      "source_location": "L8",
+      "weight": 1.0,
+      "context": "import",
+      "confidence_score": 1.0,
+      "source": "app_js",
+      "target": "classroom_index_initclassroompage"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app.js",
+      "source_location": "L1",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "app_js",
+      "target": "src_api_client_js"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app.js",
+      "source_location": "L8",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "app_js",
+      "target": "src_pages_home_index_js"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app.js",
+      "source_location": "L2",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "app_js",
+      "target": "admin_index_initadminpage"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app.js",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "app_js",
+      "target": "home_index_inithomepage"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app.js",
+      "source_location": "L4",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "app_js",
+      "target": "knowledge_index_initknowledgepage"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app.js",
+      "source_location": "L5",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "app_js",
+      "target": "practice_index_initpracticepage"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app.js",
+      "source_location": "L6",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "app_js",
+      "target": "board_index_initboardpage"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app.js",
+      "source_location": "L7",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "app_js",
+      "target": "leaderboard_index_initleaderboardpage"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app.js",
+      "source_location": "L9",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "app_js",
+      "target": "src_components_loading_js"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app.js",
+      "source_location": "L9",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "app_js",
+      "target": "components_loading_setpageloading"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app.js",
+      "source_location": "L19",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "app_js",
+      "target": "src_app_pageinits"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app.js",
+      "source_location": "L34",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "app_js",
+      "target": "src_app_toastel"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app.js",
+      "source_location": "L66",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "app_js",
+      "target": "src_app_bindnav"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "app.js",
+      "source_location": "L89",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yaya_browser_v3_app_refreshbackendstatus",
+      "target": "api_client_api"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "app.js",
+      "source_location": "L1644",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_app_bootstrap",
+      "target": "yaya_browser_v3_app_refreshbackendstatus"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "app.js",
+      "source_location": "L125",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yaya_browser_v3_app_formatknowledgecontent",
+      "target": "yaya_browser_v3_app_onlychinese"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "app.js",
+      "source_location": "L1793",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yaya_browser_v3_app_runclassroomscene",
+      "target": "yaya_browser_v3_app_normalizeclassroomscenes"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "app.js",
+      "source_location": "L1881",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yaya_browser_v3_app_renderclassroomplayer",
+      "target": "yaya_browser_v3_app_normalizeclassroomscenes"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "app.js",
+      "source_location": "L160",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yaya_browser_v3_app_getpreferredclassroomlesson",
+      "target": "api_client_api"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "app.js",
+      "source_location": "L108",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_app_switchtab",
+      "target": "yaya_browser_v3_app_renderchapters"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "app.js",
+      "source_location": "L198",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yaya_browser_v3_app_renderchapters",
+      "target": "api_client_api"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "app.js",
+      "source_location": "L460",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yaya_browser_v3_app_animatesectiontext",
+      "target": "yaya_browser_v3_app_sleep"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "app.js",
+      "source_location": "L531",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yaya_browser_v3_app_renderexplaincard",
+      "target": "yaya_browser_v3_app_sleep"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "app.js",
+      "source_location": "L474",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yaya_browser_v3_app_renderexplaincard",
+      "target": "yaya_browser_v3_app_getvoicepresets"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "app.js",
+      "source_location": "L389",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yaya_browser_v3_app_speaktext",
+      "target": "yaya_browser_v3_app_stopspeech"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "app.js",
+      "source_location": "L469",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yaya_browser_v3_app_renderexplaincard",
+      "target": "yaya_browser_v3_app_stopspeech"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "app.js",
+      "source_location": "L383",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yaya_browser_v3_app_speaktext",
+      "target": "yaya_browser_v3_app_ismostlychinese"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "app.js",
+      "source_location": "L384",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yaya_browser_v3_app_speaktext",
+      "target": "src_app_showtoast"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "app.js",
+      "source_location": "L470",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yaya_browser_v3_app_renderexplaincard",
+      "target": "yaya_browser_v3_app_renderexplainsections"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "app.js",
+      "source_location": "L552",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yaya_browser_v3_app_renderexplaincard",
+      "target": "yaya_browser_v3_app_animatesectiontext"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "app.js",
+      "source_location": "L111",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_app_switchtab",
+      "target": "yaya_browser_v3_app_loadleaderboardpanel"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "app.js",
+      "source_location": "L110",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_app_switchtab",
+      "target": "yaya_browser_v3_app_loadboardpanel"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "app.js",
+      "source_location": "L710",
+      "weight": 1.0,
+      "source": "yaya_browser_v3_app_loadboardpanel",
+      "target": "acceptance_artifacts_data_quality_gate_load"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "app.js",
+      "source_location": "L109",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_app_switchtab",
+      "target": "yaya_browser_v3_app_loadpracticepanel"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "app.js",
+      "source_location": "L1244",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yaya_browser_v3_app_openknowledgedetail",
+      "target": "yaya_browser_v3_app_buildknowledgegraphic"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "app.js",
+      "source_location": "L1264",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yaya_browser_v3_app_openknowledgedetail",
+      "target": "yaya_browser_v3_app_renderknowledgeminiquiz"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "app.js",
+      "source_location": "L1265",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yaya_browser_v3_app_openknowledgedetail",
+      "target": "yaya_browser_v3_app_renderselfcheckinteractive"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "app.js",
+      "source_location": "L953",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yaya_browser_v3_app_playexplainanimation",
+      "target": "api_client_api"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "app.js",
+      "source_location": "L1095",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yaya_browser_v3_app_playexplainanimation",
+      "target": "src_app_showtoast"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "app.js",
+      "source_location": "L1145",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yaya_browser_v3_app_showtextbookmaterials",
+      "target": "yaya_browser_v3_app_openassistantview"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "app.js",
+      "source_location": "L1188",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yaya_browser_v3_app_showpastexammaterials",
+      "target": "yaya_browser_v3_app_openassistantview"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "app.js",
+      "source_location": "L1294",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yaya_browser_v3_app_openknowledgedetail",
+      "target": "yaya_browser_v3_app_openassistantview"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "app.js",
+      "source_location": "L1123",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yaya_browser_v3_app_showtextbookmaterials",
+      "target": "api_client_api"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "app.js",
+      "source_location": "L1153",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yaya_browser_v3_app_showtextbookmaterials",
+      "target": "src_app_showtoast"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "app.js",
+      "source_location": "L1167",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yaya_browser_v3_app_showpastexammaterials",
+      "target": "api_client_api"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "app.js",
+      "source_location": "L1196",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yaya_browser_v3_app_showpastexammaterials",
+      "target": "src_app_showtoast"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "app.js",
+      "source_location": "L1205",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yaya_browser_v3_app_openknowledgedetail",
+      "target": "api_client_api"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "app.js",
+      "source_location": "L1358",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yaya_browser_v3_app_openknowledgedetail",
+      "target": "src_app_showtoast"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "app.js",
+      "source_location": "L1643",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_app_bootstrap",
+      "target": "yaya_browser_v3_app_setupcommonhandlers"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "app.js",
+      "source_location": "L1642",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_app_bootstrap",
+      "target": "yaya_browser_v3_app_initdefaultvoice"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "app.js",
+      "source_location": "L1882",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yaya_browser_v3_app_renderclassroomplayer",
+      "target": "yaya_browser_v3_app_normalizeclassroomquiz"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "app.js",
+      "source_location": "L1803",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yaya_browser_v3_app_runclassroomscene",
+      "target": "yaya_browser_v3_app_defaultclassmatesforscene"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "app.js",
+      "source_location": "L1886",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yaya_browser_v3_app_renderclassroomplayer",
+      "target": "yaya_browser_v3_app_defaultclassmatesforscene"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "app.js",
+      "source_location": "L1772",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yaya_browser_v3_app_loadclassroomttsaudio",
+      "target": "api_client_api"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "app.js",
+      "source_location": "L1799",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yaya_browser_v3_app_runclassroomscene",
+      "target": "yaya_browser_v3_app_loadclassroomttsaudio"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "app.js",
+      "source_location": "L1800",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yaya_browser_v3_app_runclassroomscene",
+      "target": "yaya_browser_v3_app_playclassroomaudio"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "app.js",
+      "source_location": "L1815",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yaya_browser_v3_app_runclassroomscene",
+      "target": "yaya_browser_v3_app_renderclassroomplayer"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "app.js",
+      "source_location": "L1935",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yaya_browser_v3_app_renderclassroomplayer",
+      "target": "yaya_browser_v3_app_renderclassroomvisualspec"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "app.js",
+      "source_location": "L1984",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yaya_browser_v3_app_renderclassroomplayer",
+      "target": "yaya_browser_v3_app_fitclassroomcanvas"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "app.js",
+      "source_location": "L2054",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "classroom_index_initclassroompage",
+      "target": "yaya_browser_v3_app_renderclassroomplayer"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "acceptance-artifacts/data_quality_gate.py",
+      "source_location": "L14",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "acceptance_artifacts_data_quality_gate_py",
+      "target": "acceptance_artifacts_data_quality_gate_load"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "acceptance-artifacts/data_quality_gate.py",
+      "source_location": "L18",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "acceptance_artifacts_data_quality_gate_py",
+      "target": "acceptance_artifacts_data_quality_gate_fail"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "acceptance-artifacts/data_quality_gate.py",
+      "source_location": "L23",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "acceptance_artifacts_data_quality_gate_py",
+      "target": "acceptance_artifacts_data_quality_gate_ok"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "acceptance-artifacts/data_quality_gate.py",
+      "source_location": "L26",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "acceptance_artifacts_data_quality_gate_py",
+      "target": "acceptance_artifacts_data_quality_gate_warn"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app.js",
+      "source_location": "L81",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_app_bootstrap",
+      "target": "src_app_showtoast"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "app.js",
+      "source_location": "L112",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_app_switchtab",
+      "target": "classroom_index_initclassroompage"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app.js",
+      "source_location": "L85",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_app_bootstrap",
+      "target": "src_app_switchtab"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app.js",
+      "source_location": "L72",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_app_bootstrap",
+      "target": "src_app_bindnav"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/app.js",
+      "source_location": "L74",
+      "weight": 1.0,
+      "source": "src_app_bootstrap",
+      "target": "components_loading_setpageloading"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/loading.js",
+      "source_location": "L1",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_loading_js",
+      "target": "components_loading_setloading"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/loading.js",
+      "source_location": "L16",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_loading_js",
+      "target": "components_loading_setpageloading"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/admin/index.js",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_pages_home_index_js",
+      "target": "src_components_loading_js"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/admin/index.js",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_pages_home_index_js",
+      "target": "components_loading_setloading"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/admin/index.js",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_pages_home_index_js",
+      "target": "components_loading_setpageloading"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/toast.js",
+      "source_location": "L2",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_toast_js",
+      "target": "components_toast_toast"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/admin/index.js",
+      "source_location": "L4",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_pages_home_index_js",
+      "target": "src_components_toast_js"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/admin/index.js",
+      "source_location": "L4",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_pages_home_index_js",
+      "target": "components_toast_toast"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/api/client.js",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_api_client_js",
+      "target": "api_client_request"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/api/client.js",
+      "source_location": "L20",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_api_client_js",
+      "target": "api_client_api"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/knowledge/index.js",
+      "source_location": "L1",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_pages_home_index_js",
+      "target": "src_api_client_js"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/knowledge/index.js",
+      "source_location": "L1",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_pages_home_index_js",
+      "target": "api_client_api"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/home/index.js",
+      "source_location": "L1",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_pages_home_index_js",
+      "target": "home_index_syllabus"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/home/index.js",
+      "source_location": "L18",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_pages_home_index_js",
+      "target": "home_index_inithomepage"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/home/index.js",
+      "source_location": "L93",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_pages_home_index_js",
+      "target": "home_index_statuslabel"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/board/index.js",
+      "source_location": "L1",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_pages_home_index_js",
+      "target": "board_index_initboardpage"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/admin/index.js",
+      "source_location": "L2",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_pages_home_index_js",
+      "target": "src_pages_admin_import_results_js"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/admin/index.js",
+      "source_location": "L2",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_pages_home_index_js",
+      "target": "admin_import_results_renderimportresults"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/admin/index.js",
+      "source_location": "L6",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_pages_home_index_js",
+      "target": "admin_index_initadminpage"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/admin/index.js",
+      "source_location": "L126",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_pages_home_index_js",
+      "target": "admin_index_collectform"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/admin/index.js",
+      "source_location": "L130",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_pages_home_index_js",
+      "target": "admin_index_safejson"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/admin/index.js",
+      "source_location": "L134",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_pages_home_index_js",
+      "target": "admin_index_readaipayload"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/admin/index.js",
+      "source_location": "L146",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_pages_home_index_js",
+      "target": "admin_index_readaiquestionpayload"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/admin/index.js",
+      "source_location": "L160",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_pages_home_index_js",
+      "target": "admin_index_loadadmindata"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/admin/index.js",
+      "source_location": "L197",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_pages_home_index_js",
+      "target": "admin_index_renderlists"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/admin/index.js",
+      "source_location": "L209",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_pages_home_index_js",
+      "target": "admin_index_renderclassroompanel"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/admin/index.js",
+      "source_location": "L263",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_pages_home_index_js",
+      "target": "admin_index_renderclassroomdetail"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/admin/index.js",
+      "source_location": "L284",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_pages_home_index_js",
+      "target": "admin_index_itemcard"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/admin/index.js",
+      "source_location": "L285",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_pages_home_index_js",
+      "target": "admin_index_renderminisummary"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/admin/index.js",
+      "source_location": "L293",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_pages_home_index_js",
+      "target": "admin_index_emptycard"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/knowledge/index.js",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_pages_home_index_js",
+      "target": "classroom_index_esc"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/classroom/index.js",
+      "source_location": "L12",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_pages_home_index_js",
+      "target": "classroom_index_normalizescenes"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/classroom/index.js",
+      "source_location": "L24",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_pages_home_index_js",
+      "target": "classroom_index_normalizequiz"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/classroom/index.js",
+      "source_location": "L32",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_pages_home_index_js",
+      "target": "classroom_index_defaultclassmates"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/classroom/index.js",
+      "source_location": "L40",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_pages_home_index_js",
+      "target": "classroom_index_loadttsaudio"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/classroom/index.js",
+      "source_location": "L50",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_pages_home_index_js",
+      "target": "classroom_index_playaudio"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/classroom/index.js",
+      "source_location": "L60",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_pages_home_index_js",
+      "target": "classroom_index_buildscenevisual"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/classroom/index.js",
+      "source_location": "L69",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_pages_home_index_js",
+      "target": "classroom_index_initclassroompage"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/leaderboard/index.js",
+      "source_location": "L1",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_pages_home_index_js",
+      "target": "leaderboard_index_leaderboarddata"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/leaderboard/index.js",
+      "source_location": "L30",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_pages_home_index_js",
+      "target": "leaderboard_index_initleaderboardpage"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/knowledge/index.js",
+      "source_location": "L12",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_pages_home_index_js",
+      "target": "knowledge_index_getnodelabel"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/knowledge/index.js",
+      "source_location": "L16",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_pages_home_index_js",
+      "target": "knowledge_index_initknowledgepage"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/practice/index.js",
+      "source_location": "L1",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_pages_home_index_js",
+      "target": "practice_index_questions"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/practice/index.js",
+      "source_location": "L7",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_pages_home_index_js",
+      "target": "practice_index_initpracticepage"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/admin/index.js",
+      "source_location": "L123",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "admin_index_initadminpage",
+      "target": "admin_index_loadadmindata"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/admin/index.js",
+      "source_location": "L135",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "admin_index_readaipayload",
+      "target": "admin_index_collectform"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/admin/index.js",
+      "source_location": "L147",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "admin_index_readaiquestionpayload",
+      "target": "admin_index_collectform"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/admin/index.js",
+      "source_location": "L183",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "admin_index_loadadmindata",
+      "target": "admin_index_renderlists"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/admin/index.js",
+      "source_location": "L189",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "admin_index_loadadmindata",
+      "target": "admin_index_renderclassroompanel"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/admin/index.js",
+      "source_location": "L202",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "admin_index_renderlists",
+      "target": "admin_index_emptycard"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/admin/index.js",
+      "source_location": "L226",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "admin_index_renderclassroompanel",
+      "target": "admin_index_emptycard"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/admin/import-results.js",
+      "source_location": "L1",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_pages_admin_import_results_js",
+      "target": "admin_import_results_renderimportresults"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/classroom/index.js",
+      "source_location": "L62",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "classroom_index_buildscenevisual",
+      "target": "classroom_index_esc"
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "acceptance-artifacts/12_STRATEGY_ENGINE.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "strategy_engine",
+      "target": "diagnosis_engine"
+    },
+    {
+      "relation": "cites",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "acceptance-artifacts/05_COVERAGE_GATE.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "coverage_gate",
+      "target": "strategy_engine"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "acceptance-artifacts/11_DIAGNOSIS_ENGINE.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "diagnosis_engine",
+      "target": "coverage_gate"
+    }
+  ],
+  "hyperedges": []
+}

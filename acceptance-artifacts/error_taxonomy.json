@@ -1,0 +1,1563 @@
+{
+  "schema": "yaya.adaptive_engine.error_taxonomy.v1",
+  "scope": "primary_math_g5_g6_pep",
+  "status": "phase3_draft",
+  "generatedAt": "2026-05-13T22:28:58.158491",
+  "summary": {
+    "totalErrors": 86,
+    "l1Universal": 10,
+    "l2MathSpecific": 76,
+    "domains": [
+      "通用",
+      "统计与概率",
+      "位置与方向",
+      "数学广角",
+      "总复习",
+      "数与运算",
+      "代数",
+      "几何"
+    ]
+  },
+  "l1_universal": {
+    "prerequisite_gap": {
+      "name": "前置知识缺失",
+      "level": "L1",
+      "domain": "通用",
+      "definition": "学生缺少当前知识点所依赖的前置概念或技能，导致无法理解新内容。",
+      "typicalManifestation": "遇到需要旧知识做铺垫的题目时完全无法下手，但独立的基础题能做。",
+      "triggerCondition": "学生在涉及前置知识点的题目中连续出错，且在前置知识点的独立测试中正确率低于60%。",
+      "exclusionCondition": "前置知识点独立测试正确率≥80%。排除后应转查 concept_confusion 或 comprehension_bias。",
+      "validationAction": "从前置知识中抽取3道基础题单独测试。若通过则排除前置缺失，若失败则确认。",
+      "adjacentDifference": "与 concept_confusion 的区别：前置缺失是'没学过/忘了'，概念混淆是'学过但搞混了'。",
+      "recommendedStrategies": [
+        "bridge_review",
+        "prerequisite_quick_refresh",
+        "scaffold_introduction"
+      ],
+      "parentExplanation": "孩子在一些需要用到之前学过的知识的题目上遇到了困难，系统正在安排针对性的复习练习来巩固基础。"
+    },
+    "concept_confusion": {
+      "name": "概念混淆",
+      "level": "L1",
+      "domain": "通用",
+      "definition": "学生将两个或多个相似概念的含义、适用范围或计算方法搞混。",
+      "typicalManifestation": "在需要区分概念的题目中选错方法，但单独考每个概念时能做对。",
+      "triggerCondition": "学生在涉及两个以上相近概念的混合题中出错，但各自独立题正确率≥70%。",
+      "exclusionCondition": "独立题也大量出错时，优先考虑 prerequisite_gap。",
+      "validationAction": "用对比表格呈现两个概念，要求学生在3个场景中选择正确概念。混合错误率>50%则确认。",
+      "adjacentDifference": "与 transfer_failure 的区别：概念混淆是'分不清A和B'，迁移失败是'知道A但不会用到新场景'。",
+      "recommendedStrategies": [
+        "concept_contrast_table",
+        "example_non_example_sort",
+        "concept_mapping"
+      ],
+      "parentExplanation": "孩子在做混合练习时偶尔会把相似的概念搞混，我们正在用对比练习帮助孩子建立清晰的区分。"
+    },
+    "comprehension_bias": {
+      "name": "题意理解偏差",
+      "level": "L1",
+      "domain": "通用",
+      "definition": "学生能读懂题目中的字词，但对题目的数学含义理解有误。",
+      "typicalManifestation": "列式与题目情境不匹配，但算式本身计算正确。",
+      "triggerCondition": "学生列式错误但同类题型（已知公式/步骤）计算正确。",
+      "exclusionCondition": "列式正确但计算错误时排除。",
+      "validationAction": "让学生用自己的话说出题目要求。若口头解释与题目不符则确认。",
+      "adjacentDifference": "与 info_omission 的区别：理解偏差是'读懂了但理解错了'，信息遗漏是'根本没注意到某些条件'。",
+      "recommendedStrategies": [
+        "read_aloud_retell",
+        "keyword_underline",
+        "visual_problem_mapping"
+      ],
+      "parentExplanation": "孩子在做应用题时有时会误解题目的意思，我们在引导孩子用自己的话复述题目来加深理解。"
+    },
+    "info_omission": {
+      "name": "关键信息遗漏",
+      "level": "L1",
+      "domain": "通用",
+      "definition": "学生在解题时未使用题目中提供的某个关键条件，导致解答不完整或错误。",
+      "typicalManifestation": "忽略单位、忽略隐性条件、忽略多问中的某一部分。",
+      "triggerCondition": "学生答案中缺少题目明确要求的某部分（如单位、第二步），或使用了部分条件但遗漏关键数据。",
+      "exclusionCondition": "使用了全部条件但理解错误时，转 comprehension_bias。",
+      "validationAction": "遮住答案，让学生重新读题并圈出所有数字和条件。遗漏>1个关键条件则确认。",
+      "adjacentDifference": "与 comprehension_bias 的区别见上述。与 calculation_error 的区别：遗漏是'没用某个数'，算错是'用了但算错了'。",
+      "recommendedStrategies": [
+        "info_checklist",
+        "step_by_step_template",
+        "condition_underline_highlight"
+      ],
+      "parentExplanation": "孩子在做题时偶尔会漏看题目中的一些信息，我们正在训练孩子养成逐条检查题目条件的习惯。"
+    },
+    "calculation_error": {
+      "name": "计算/操作失误",
+      "level": "L1",
+      "domain": "通用",
+      "definition": "列式和思路正确，但在具体计算步骤中出现算术错误。",
+      "typicalManifestation": "竖式对齐错误、进位/退位遗漏、抄错数字、小数点位置偏移。",
+      "triggerCondition": "列式正确（可在草稿中验证），但最终计算结果错误。",
+      "exclusionCondition": "列式本身错误时排除。排除后转查 comprehension_bias 或 concept_confusion。",
+      "validationAction": "让学生重新做同一道题（不告知正确答案）。若第二次做对则确认为偶然失误；若还错则观察草稿找具体失误点。",
+      "adjacentDifference": "与 strategy_missing 的区别：算错是'会做但算错了'，策略缺失是'不知道该怎么做'。",
+      "recommendedStrategies": [
+        "estimation_guard",
+        "step_verification",
+        "neat_work_checklist"
+      ],
+      "parentExplanation": "孩子的解题思路是对的，只是在计算过程中出现了一些小失误，通过验算练习可以帮助提高准确率。"
+    },
+    "strategy_missing": {
+      "name": "解题策略缺失",
+      "level": "L1",
+      "domain": "通用",
+      "definition": "学生面对题目时不知道从何入手，缺乏可用的解题步骤或方法。",
+      "typicalManifestation": "盯着题目很久不动笔，或乱试各种方法但都不完整。",
+      "triggerCondition": "学生在某类题型上的尝试次数≥2但都未完成，且无法表述解题思路。",
+      "exclusionCondition": "学生能口头说出正确思路但执行出错时，转 calculation_error。",
+      "validationAction": "给一个提示（如第一步的关键公式），看学生能否从提示后独立完成。若不能则确认。",
+      "adjacentDifference": "与 question_type_unfamiliar 的区别：策略缺失是'不知道该怎么做这类题'，题型不熟是'见过这类题但不熟练'。",
+      "recommendedStrategies": [
+        "worked_example_study",
+        "strategy_prompt_card",
+        "step_unlocking"
+      ],
+      "parentExplanation": "孩子在面对某些题型时还需要更多方法引导，我们在通过示范例题帮助孩子建立解题框架。"
+    },
+    "transfer_failure": {
+      "name": "迁移失败",
+      "level": "L1",
+      "domain": "通用",
+      "definition": "学生在标准情境下能做对，但同一知识点换到新情境或新问法后无法解决。",
+      "typicalManifestation": "课本例题会做，但换个场景（如从买文具换到分糖果）就不会了。",
+      "triggerCondition": "标准题正确率≥80%但变式题（同知识点换情境/换问法）正确率<50%。",
+      "exclusionCondition": "标准题也大量出错时排除。",
+      "validationAction": "给3道变式题（同知识点不同情境）。做对<2道则确认迁移失败。",
+      "adjacentDifference": "与 concept_confusion 的区别见上述。与 question_type_unfamiliar 的区别：迁移失败是'知识点会但场景变了不会'，题型不熟是'看到某类题型就不会'。",
+      "recommendedStrategies": [
+        "situational_variation",
+        "analogous_problem_pairing",
+        "real_world_connection"
+      ],
+      "parentExplanation": "孩子在课本例题上掌握得很好，但在不同场景下运用同样的知识还需要更多练习，这是学习中很正常的阶段。"
+    },
+    "question_type_unfamiliar": {
+      "name": "题型不熟",
+      "level": "L1",
+      "domain": "通用",
+      "definition": "学生了解相关知识点，但对特定题型的呈现方式、答题步骤或格式不熟悉。",
+      "typicalManifestation": "看到某类题型（如填空题、图表题、开放题）不知道如何作答，但同样内容换成计算题就能做。",
+      "triggerCondition": "同一知识点，传统题型正确率≥80%，但特定题型正确率<50%。",
+      "exclusionCondition": "看过该题型的模板/示例后仍不会时，转 strategy_missing 或 concept_confusion。",
+      "validationAction": "给该题型的1个已解答示例，然后让学生尝试同类型新题。能做对2/3则排除。",
+      "adjacentDifference": "见 transfer_failure 和 strategy_missing 的区别说明。",
+      "recommendedStrategies": [
+        "question_type_exposure",
+        "format_familiarization",
+        "template_practice"
+      ],
+      "parentExplanation": "孩子对这类题型的答题方式还不太熟悉，我们正在通过示范和练习帮助孩子适应不同的题目形式。"
+    },
+    "expression_format_error": {
+      "name": "表达/书写/格式问题",
+      "level": "L1",
+      "domain": "通用",
+      "definition": "学生思路和计算正确，但书写格式不规范、步骤省略、单位遗漏或答案表达不符合要求。",
+      "typicalManifestation": "答案数字对但没写单位、竖式没对齐但心里算对了、答题格式不符合考试要求。",
+      "triggerCondition": "答案数值正确但格式/单位/步骤缺失或错误。",
+      "exclusionCondition": "答案数值也错误时优先查其他错因。",
+      "validationAction": "口头问学生答案和单位，若能口头正确说出但书写遗漏则确认。",
+      "adjacentDifference": "与 info_omission 的区别：格式问题是'想到了但没写/写错了'，信息遗漏是'根本没注意到'。",
+      "recommendedStrategies": [
+        "format_checklist",
+        "self_review_routine",
+        "answer_sentence_template"
+      ],
+      "parentExplanation": "孩子能把题做对，只是在书写格式上还需要养成更规范的习惯，我们在帮助孩子建立检查清单。"
+    },
+    "memory_retrieval_failure": {
+      "name": "记忆提取失败",
+      "level": "L1",
+      "domain": "通用",
+      "definition": "学生曾经掌握某个知识点或公式，但在需要时无法从记忆中调取。",
+      "typicalManifestation": "考试时忘了公式，但看到公式后立刻能做对；或需要提示关键词才能回忆起来。",
+      "triggerCondition": "给出公式/关键词提示后，学生能独立完成≥80%的题目；无提示时正确率<50%。",
+      "exclusionCondition": "给出提示后仍不能完成，转 prerequisite_gap 或 concept_confusion。",
+      "validationAction": "先无提示做3题，再给公式提示做3题。无提示正确率与有提示正确率差值>40%则确认。",
+      "adjacentDifference": "与 prerequisite_gap 的区别：记忆提取失败是'学过但忘了'，前置缺失是'可能没学好/没掌握'。提示后能做对是记忆问题，提示后仍不会则是前置缺失。",
+      "recommendedStrategies": [
+        "formula_card_drill",
+        "spaced_retrieval_practice",
+        "mnemonic_anchors"
+      ],
+      "parentExplanation": "孩子对公式和方法的记忆还需要更多巩固，我们在通过间隔复习帮助孩子把知识从短期记忆转化为长期记忆。"
+    }
+  },
+  "l2_math_specific": {
+    "decimal_point_position_error": {
+      "name": "小数点定位错误",
+      "level": "L2",
+      "domain": "数与运算",
+      "parentL1": "calculation_error",
+      "definition": "在小数乘法或除法中，学生未能正确确定积或商的小数点位置。",
+      "typicalManifestation": "积的小数位数不对（多了或少了），商的小数点与被除数未对齐。",
+      "triggerCondition": "小数乘除法计算中，数值部分计算正确但小数点位置错误。",
+      "exclusionCondition": "整数部分也计算错误时，转查通用 calculation_error 或 concept_confusion。",
+      "validationAction": "给出3道小数点定位专项题（数值已算好，只需点小数点）。错误≥2则确认。",
+      "adjacentDifference": "与 decimal_div_align_error 的区别：小数点定位错误主要发生在乘法的积和除法结果中，除法的对齐问题是单独一类。",
+      "recommendedStrategies": [
+        "decimal_point_visual_anchor",
+        "integer_then_adjust",
+        "estimation_guard"
+      ],
+      "parentExplanation": "孩子在算小数题目时，计算过程是对的，但小数点的位置偶尔会放错，我们通过估算来帮孩子自我检查。"
+    },
+    "decimal_mul_carry_error": {
+      "name": "小数乘法进位错误",
+      "level": "L2",
+      "domain": "数与运算",
+      "parentL1": "calculation_error",
+      "definition": "小数乘法转化为整数乘法计算过程中，进位处理错误。",
+      "typicalManifestation": "进位数字漏加、多加、或忘记进位。",
+      "triggerCondition": "小数乘法竖式中某一位的进位处理出错，但整体计算逻辑正确。",
+      "exclusionCondition": "完全不会列竖式时排除，转 strategy_missing。",
+      "validationAction": "给3道需要连续进位的整数乘法题（检测进位基础能力）。错误≥2则确认。",
+      "adjacentDifference": "与通用 calculation_error 的区别：这是小数乘法场景下特定的进位问题。",
+      "recommendedStrategies": [
+        "carry_marking_method",
+        "step_by_step_check",
+        "reverse_verification"
+      ],
+      "parentExplanation": "孩子在做小数乘法的竖式计算时，进位步骤有时会出错，我们在训练孩子用标记法来减少遗漏。"
+    },
+    "decimal_mul_factor_change_error": {
+      "name": "因数变化规律应用错误",
+      "level": "L2",
+      "domain": "数与运算",
+      "parentL1": "concept_confusion",
+      "definition": "学生不理解或错误应用'一个因数变化时积如何变化'的规律。",
+      "typicalManifestation": "判断积的大小变化方向错误（如乘大于1的数反而认为积变小）。",
+      "triggerCondition": "涉及因数与积大小比较的题目出错，但纯计算题能做对。",
+      "exclusionCondition": "纯计算也做不对时优先查 decimal_point_position_error。",
+      "validationAction": "给2组判断大小的题目（不要求计算具体数值，只需判断变大变小）。全错则确认。",
+      "adjacentDifference": "与 percent_compare_error 的区别：这是小数乘法的因数-积关系，百分数比较是百分比场景。",
+      "recommendedStrategies": [
+        "number_line_visualization",
+        "rule_induction_table",
+        "extreme_case_test"
+      ],
+      "parentExplanation": "孩子在理解'一个数乘以大于1或小于1的数会变大还是变小'这个规律时还需要更多直观的例子来建立感觉。"
+    },
+    "decimal_div_align_error": {
+      "name": "小数除法竖式对齐错误",
+      "level": "L2",
+      "domain": "数与运算",
+      "parentL1": "calculation_error",
+      "definition": "小数除法竖式计算中，商的小数点与被除数小数点未对齐，或除数转化时被除数未同步移动小数点。",
+      "typicalManifestation": "商的小数点位置偏左或偏右；除数扩大10倍但被除数只移动了不同位数。",
+      "triggerCondition": "除法竖式计算中小数点位置明显不对。",
+      "exclusionCondition": "不会列竖式时排除。",
+      "validationAction": "给3道要求标注小数点位置的除法竖式（商已算好，只需点小数点）。错误≥1则确认。",
+      "adjacentDifference": "与 decimal_point_position_error 的区别：对齐错误是竖式书写层面的，小数点定位错误是最终答案层面的。",
+      "recommendedStrategies": [
+        "decimal_div_grid_paper",
+        "align_verification_routine",
+        "expand_divisor_method"
+      ],
+      "parentExplanation": "孩子在做小数除法竖式时，需要注意把小数点对齐，我们在用格子纸帮助孩子规范书写。"
+    },
+    "decimal_div_placement_error": {
+      "name": "小数除法商位补0错误",
+      "level": "L2",
+      "domain": "数与运算",
+      "parentL1": "calculation_error",
+      "definition": "小数除法中，整数部分不够除时忘记商0占位，或除不尽时忘记补0继续。",
+      "typicalManifestation": "商的某一位缺失（该位应该有0但没写），导致位数减少、结果错误。",
+      "triggerCondition": "小数除法的商缺少某一位（明显位数不对）。",
+      "exclusionCondition": "位数对但数值错时排除。",
+      "validationAction": "给3道需要补0的除法题。缺失补0≥1次则确认。",
+      "adjacentDifference": "与 decimal_div_align_error 的区别：补0是商的某一位该写0但没写，对齐是小数点位置问题。",
+      "recommendedStrategies": [
+        "placeholder_checklist",
+        "quotient_digit_count_verify",
+        "step_recording"
+      ],
+      "parentExplanation": "孩子在做除法时，有时会漏掉商中间或末尾的0，我们在训练孩子数一数商的位数来检查。"
+    },
+    "decimal_div_approx_error": {
+      "name": "小数除法近似取值错误",
+      "level": "L2",
+      "domain": "数与运算",
+      "parentL1": "calculation_error",
+      "definition": "求商的近似数时，多算了一位但四舍五入规则应用错误，或进一法/去尾法选错。",
+      "typicalManifestation": "保留两位小数但只算了两位就停了、进一法和去尾法用反。",
+      "triggerCondition": "题目要求保留n位小数，学生答案的近似值不符合四舍五入规则。",
+      "exclusionCondition": "计算本身错误导致近似值不对时排除。",
+      "validationAction": "给3道近似取值题。错误≥2则确认。",
+      "adjacentDifference": "与通用 calculation_error 的区别：这是近似规则的应用错误，不是纯计算错误。",
+      "recommendedStrategies": [
+        "approximation_rule_card",
+        "context_based_method_select",
+        "real_life_examples"
+      ],
+      "parentExplanation": "孩子对'四舍五入'和'进一法/去尾法'的使用场景还不太清楚，我们在通过生活中的例子（如买东西找零、装油桶）来帮助理解。"
+    },
+    "decimal_div_cycle_error": {
+      "name": "循环小数理解错误",
+      "level": "L2",
+      "domain": "数与运算",
+      "parentL1": "concept_confusion",
+      "definition": "学生不理解循环小数的概念，将循环小数与有限小数混淆，或循环节标记错误。",
+      "typicalManifestation": "把有限小数当循环小数、循环节找错、简写标记位置错误。",
+      "triggerCondition": "循环小数相关题目出错。",
+      "exclusionCondition": "纯计算错误排除。",
+      "validationAction": "给5个数让学生判断是否为循环小数并标注循环节。错误≥2则确认。",
+      "adjacentDifference": "与 decimal_div_approx_error 的区别：循环小数是概念理解问题，近似取值是规则应用问题。",
+      "recommendedStrategies": [
+        "cycle_detection_algorithm",
+        "decimal_classification_sort",
+        "notation_practice"
+      ],
+      "parentExplanation": "孩子对循环小数的概念还不太清晰，我们在通过分类练习帮助孩子区分有限小数和循环小数。"
+    },
+    "fraction_unit_error": {
+      "name": "分数单位理解错误",
+      "level": "L2",
+      "domain": "数与运算",
+      "parentL1": "concept_confusion",
+      "definition": "学生错误理解分数的意义——不知道分子和分母分别代表什么，或混淆'整体'和'部分'。",
+      "typicalManifestation": "无法正确用图形表示分数、在比较分数大小时只看分子或只看分母。",
+      "triggerCondition": "分数基础概念的题目出错（如判断几分之几、图示分数）。",
+      "exclusionCondition": "概念正确但比较大小用了错误方法时转 fraction_compare_error。",
+      "validationAction": "给3道用图形表示分数的题目。不能正确画出≥2个则确认。",
+      "adjacentDifference": "与 fraction_compare_error 的区别：单位理解错误是'不知道分数是什么'，比较错误是'知道分数但比错了'。",
+      "recommendedStrategies": [
+        "fraction_bar_model",
+        "pizza_pie_visual",
+        "real_object_division"
+      ],
+      "parentExplanation": "孩子对分数的基本含义——把一个整体平均分成几份取几份——还需要更直观的练习来建立概念。"
+    },
+    "fraction_compare_error": {
+      "name": "分数大小比较错误",
+      "level": "L2",
+      "domain": "数与运算",
+      "parentL1": "concept_confusion",
+      "definition": "在比较两个分数大小时，学生使用了错误的方法或规则。",
+      "typicalManifestation": "只看分子或只看分母比较、通分后比反了、不会比较异分母分数。",
+      "triggerCondition": "分数比较题出错。",
+      "exclusionCondition": "如果连分数的基本含义都不懂，转 fraction_unit_error。",
+      "validationAction": "给4组分母相同、分子相同、都不同、含带分数四种情况的比较题。错误≥2组则确认。",
+      "adjacentDifference": "与 fraction_unit_error 的区别见上述。",
+      "recommendedStrategies": [
+        "common_denominator_flow",
+        "benchmark_fraction_method",
+        "fraction_number_line"
+      ],
+      "parentExplanation": "孩子比较分数大小时有时会混淆规则，我们在教孩子用通分和找基准分数（如½）的方法来帮助判断。"
+    },
+    "gcd_lcm_method_error": {
+      "name": "最大公因数/最小公倍数方法错误",
+      "level": "L2",
+      "domain": "数与运算",
+      "parentL1": "strategy_missing",
+      "definition": "学生求最大公因数或最小公倍数的方法不正确——短除法步骤错误、找不全因数、或混淆两个概念。",
+      "typicalManifestation": "短除法除到一半就停、用错了除数、把最大公因数当最小公倍数。",
+      "triggerCondition": "约分/通分时公因数或公倍数找错。",
+      "exclusionCondition": "如果连因数和倍数的概念都不懂，转 factor_multiple_confusion。",
+      "validationAction": "给3道求最大公因数+3道求最小公倍数。各有≥1道方法错误则确认。",
+      "adjacentDifference": "与 factor_multiple_confusion 的区别：方法是'知道要做什么但做错了'，概念混淆是'不知道因数是什么'。",
+      "recommendedStrategies": [
+        "gcd_lcm_ladder_method",
+        "factor_tree_visual",
+        "step_by_step_short_division"
+      ],
+      "parentExplanation": "孩子在用短除法求最大公因数和最小公倍数时步骤上还需要更多练习，我们在用阶梯法帮孩子理清每一步。"
+    },
+    "fraction_decimal_convert_error": {
+      "name": "分数小数互化错误",
+      "level": "L2",
+      "domain": "数与运算",
+      "parentL1": "concept_confusion",
+      "definition": "在分数与小数互化时，学生选择了错误的方法或执行错误。",
+      "typicalManifestation": "分数化小数用分子÷分母但除反了；小数化分数时不会确定分母（10/100/1000）。",
+      "triggerCondition": "分数小数互化题出错。",
+      "exclusionCondition": "如果是纯除法计算出错，转 decimal_div_align_error。",
+      "validationAction": "给5道互化题（3道分数→小数，2道小数→分数）。错误≥2则确认。",
+      "adjacentDifference": "与 percent_convert_error 的区别：这是分数-小数互化，百分数互化是另一类。",
+      "recommendedStrategies": [
+        "fraction_to_decimal_division_flow",
+        "decimal_place_to_fraction_rule",
+        "common_fraction_memorization"
+      ],
+      "parentExplanation": "孩子在分数和小数相互转化时方法还需要巩固，我们在帮孩子记住一些常用转化（如½=0.5）作为锚点。"
+    },
+    "fraction_mul_cancel_error": {
+      "name": "分数乘法约分遗漏",
+      "level": "L2",
+      "domain": "数与运算",
+      "parentL1": "calculation_error",
+      "definition": "分数乘法计算时，学生没有先约分再计算，或约分错误。",
+      "typicalManifestation": "分子分母同时约分但只约了分子或只约了分母、约分后数值不对、完全忘记约分。",
+      "triggerCondition": "分数乘法结果可以约分但未约分，或约分错误。",
+      "exclusionCondition": "分数乘法法则本身不会，转 strategy_missing。",
+      "validationAction": "给5道分数乘法题（其中3道可以约分）。未约分或约分错误≥2则确认。",
+      "adjacentDifference": "与 gcd_lcm_method_error 的区别：约分遗漏是'该约没约'，gcd方法是'不会找公约数'。",
+      "recommendedStrategies": [
+        "cancel_first_rule",
+        "cross_cancel_visual",
+        "simplification_audit"
+      ],
+      "parentExplanation": "孩子在做分数乘法时有时会忘记先约分再计算，养成先约分的习惯能让计算更简单、错误更少。"
+    },
+    "fraction_mul_word_unit_error": {
+      "name": "分数乘法单位'1'找错",
+      "level": "L2",
+      "domain": "数与运算",
+      "parentL1": "comprehension_bias",
+      "definition": "在分数乘法应用题中，学生无法正确识别题目中的单位'1'是谁。",
+      "typicalManifestation": "把比较量和标准量搞反，用错了乘法的对象。",
+      "triggerCondition": "分数乘法应用题列式错误，但计算部分正确。",
+      "exclusionCondition": "列式和计算都错时排除。",
+      "validationAction": "给3道应用题，要求只标注单位'1'和比较量，不计算。标注错误≥2则确认。",
+      "adjacentDifference": "与 fraction_div_word_unit_error 的区别：乘法场景是'求一个数的几分之几'，除法场景是'已知几分之几求原数'。",
+      "recommendedStrategies": [
+        "unit_one_underline_method",
+        "bar_model_visual",
+        "keyword_to_operation_mapping"
+      ],
+      "parentExplanation": "孩子在分数应用题中分辨'谁是整体'还需要练习，我们在用画线段图的方法帮孩子理清数量关系。"
+    },
+    "fraction_mul_mixed_error": {
+      "name": "分数混合运算错误",
+      "level": "L2",
+      "domain": "数与运算",
+      "parentL1": "calculation_error",
+      "definition": "分数四则混合运算中运算顺序错误或运算律应用错误。",
+      "typicalManifestation": "先加减后乘除、括号内未先算、分配律用反了。",
+      "triggerCondition": "分数混合运算题中运算顺序明显错误。",
+      "exclusionCondition": "单项运算都正确，仅顺序问题。",
+      "validationAction": "给3道混合运算题，标注运算顺序。错误≥2则确认。",
+      "adjacentDifference": "与通用 calculation_error 的区别：这是运算顺序问题，不是具体计算步骤错误。",
+      "recommendedStrategies": [
+        "order_of_operations_chart",
+        "step_numbering_method",
+        "mixed_to_simple_decomposition"
+      ],
+      "parentExplanation": "孩子在面对多步计算时偶尔会搞错先算哪一步，我们在训练孩子养成先标顺序再计算的习惯。"
+    },
+    "reciprocal_confusion": {
+      "name": "倒数概念混淆",
+      "level": "L2",
+      "domain": "数与运算",
+      "parentL1": "concept_confusion",
+      "definition": "学生对倒数的概念理解错误——不知道倒数是分子分母互换，或认为0有倒数。",
+      "typicalManifestation": "求倒数时只换分子不换分母、认为倒数是负数、认为0的倒数是0。",
+      "triggerCondition": "倒数相关题目出错。",
+      "exclusionCondition": "分数基本概念都不懂时转 fraction_unit_error。",
+      "validationAction": "给5个数（含整数、分数、0、1）求倒数。错误≥2则确认。",
+      "adjacentDifference": "与 fraction_unit_error 的区别：倒数是分数概念的一个子集。",
+      "recommendedStrategies": [
+        "reciprocal_flip_rule",
+        "product_one_verification",
+        "special_cases_0_and_1"
+      ],
+      "parentExplanation": "孩子对'倒数'（两个数相乘等于1）的概念还需要巩固，我们在通过'翻转'这个直观动作帮孩子记忆。"
+    },
+    "fraction_div_word_unit_error": {
+      "name": "分数除法单位'1'找错",
+      "level": "L2",
+      "domain": "数与运算",
+      "parentL1": "comprehension_bias",
+      "definition": "在'已知一个数的几分之几是多少，求这个数'的题型中，学生找错了单位'1'。",
+      "typicalManifestation": "把已知量当单位'1'（应该用除法反而用了乘法）。",
+      "triggerCondition": "分数除法应用题列式用乘不用除。",
+      "exclusionCondition": "如果只是计算错误但列式正确则排除。",
+      "validationAction": "给3道分数除法应用题，要求只列式不计算。列式错误≥2则确认。",
+      "adjacentDifference": "与 fraction_mul_word_unit_error 的区别见上述。",
+      "recommendedStrategies": [
+        "unit_one_identification_tree",
+        "bar_model_reverse",
+        "operation_direction_check"
+      ],
+      "parentExplanation": "孩子在解'已知部分求整体'的分数题时方向容易搞反，我们在教孩子用'是已知还是未知'来判断用乘还是除。"
+    },
+    "engineering_work_unit_error": {
+      "name": "工程问题单位'1'处理错误",
+      "level": "L2",
+      "domain": "数与运算",
+      "parentL1": "strategy_missing",
+      "definition": "在工程问题中，学生不会把工作总量设为'1'，或不会求工作效率。",
+      "typicalManifestation": "不知道工作效率=1÷时间，不会列合作完成的方程。",
+      "triggerCondition": "工程问题（如两人合作完成一项工作）无法正确列式。",
+      "exclusionCondition": "能列式但计算错误排除。",
+      "validationAction": "给2道工程问题，要求写出工作效率和方程。两个都不会则确认。",
+      "adjacentDifference": "与 fraction_div_word_unit_error 的区别：工程问题是分数除法的特殊应用场景。",
+      "recommendedStrategies": [
+        "work_rate_table",
+        "unity_method_template",
+        "collaborative_work_equation"
+      ],
+      "parentExplanation": "工程问题（如'甲3天完成乙5天完成，合作需要几天'）对孩子来说是一种新的思维方式，我们在用表格帮孩子整理条件。"
+    },
+    "equation_balance_error": {
+      "name": "等式性质应用错误",
+      "level": "L2",
+      "domain": "代数",
+      "parentL1": "strategy_missing",
+      "definition": "解方程时，学生没有正确应用等式的性质——两边操作不对称。",
+      "typicalManifestation": "只在一边加/减/乘/除，另一边忘了同样操作。",
+      "triggerCondition": "解方程时等号两边操作不对称。",
+      "exclusionCondition": "如果是不理解等式性质本身，转 concept_confusion。",
+      "validationAction": "给4道解方程题。有操作不对称的≥2道则确认。",
+      "adjacentDifference": "与 equation_unknown_confusion 的区别：平衡错误是'操作不对称'，未知数混淆是'不知道x代表什么'。",
+      "recommendedStrategies": [
+        "balance_scale_visual",
+        "both_sides_underline",
+        "step_annotation"
+      ],
+      "parentExplanation": "孩子解方程时有时会忘记等号两边要同时做一样的操作，我们在用天平模型帮孩子直观理解'等式平衡'。"
+    },
+    "equation_unknown_confusion": {
+      "name": "未知数意义混淆",
+      "level": "L2",
+      "domain": "代数",
+      "parentL1": "concept_confusion",
+      "definition": "学生不理解用字母表示数的含义——不知道x可以代表任意数。",
+      "typicalManifestation": "认为x只能是一个特定数字，无法接受'用字母表示数量关系'。",
+      "triggerCondition": "含字母的表达式不会化简、不会代入求值。",
+      "exclusionCondition": "如果能接受字母表示数但解方程出错，转 equation_balance_error。",
+      "validationAction": "给3道'用字母表示数量关系'的题（如'小明有a个苹果，小红比他多3个'）。错误≥2则确认。",
+      "adjacentDifference": "与 equation_balance_error 的区别见上述。",
+      "recommendedStrategies": [
+        "letter_as_box_analogy",
+        "variable_value_substitution",
+        "real_world_variable_examples"
+      ],
+      "parentExplanation": "孩子对'用字母代表数字'这个抽象概念还需要时间适应，我们在用'字母就像一个暂时不知道的盒子'来帮助理解。"
+    },
+    "equation_word_mapping_error": {
+      "name": "等量关系建立错误",
+      "level": "L2",
+      "domain": "代数",
+      "parentL1": "comprehension_bias",
+      "definition": "在列方程解应用题时，学生不能正确从文字中提取等量关系。",
+      "typicalManifestation": "列出的方程与题目描述的数学关系不符。",
+      "triggerCondition": "方程应用题列式错误。",
+      "exclusionCondition": "如果列式正确但解方程时出错，转 equation_balance_error。",
+      "validationAction": "给3道应用题，要求只写出等量关系式（不求解）。错误≥2则确认。",
+      "adjacentDifference": "与 comprehension_bias 的区别：这是方程场景下特定的等量关系提取问题。",
+      "recommendedStrategies": [
+        "keyword_relation_table",
+        "sentence_to_equation_translation",
+        "quantity_diagram"
+      ],
+      "parentExplanation": "孩子在把应用题翻译成方程时还需要练习，我们在教孩子先找出'等于'的关系再列式。"
+    },
+    "equation_verify_skip": {
+      "name": "方程检验缺失",
+      "level": "L2",
+      "domain": "代数",
+      "parentL1": "expression_format_error",
+      "definition": "学生解完方程后不检验，或不知道如何检验。",
+      "typicalManifestation": "解答不写检验步骤，或写了检验但方法不对（只把x代入其中一边）。",
+      "triggerCondition": "解方程后缺少检验步骤，或检验方法错误。",
+      "exclusionCondition": "如果解方程本身错误，先查其他错因。",
+      "validationAction": "给2道已解完的方程，要求学生写出检验过程。不会则确认。",
+      "adjacentDifference": "与 expression_format_error 的区别：检验缺失是方程场景下特定的格式问题。",
+      "recommendedStrategies": [
+        "back_substitution_routine",
+        "verify_checklist_item",
+        "左右验证模板"
+      ],
+      "parentExplanation": "孩子解完方程后还需要养成检验的习惯——把答案代回去看等号两边是否相等，这是很好的自检方法。"
+    },
+    "area_perimeter_confusion": {
+      "name": "周长面积混淆",
+      "level": "L2",
+      "domain": "几何",
+      "parentL1": "concept_confusion",
+      "definition": "学生混淆了周长和面积的概念——用面积公式求周长或反之。",
+      "typicalManifestation": "求周长用了面积公式、求面积用了周长公式、单位用错（cm vs cm²）。",
+      "triggerCondition": "周长和面积公式混用。",
+      "exclusionCondition": "如果公式用对了但计算错了，转 calculation_error。",
+      "validationAction": "给一道题分别求周长和面积。用错公式则确认。",
+      "adjacentDifference": "与 area_formula_misapply 的区别：混淆是'用错了类型的公式'，误用是'用错了具体公式'。",
+      "recommendedStrategies": [
+        "perimeter_vs_area_contrast_chart",
+        "formula_type_classification",
+        "unit_anchor_visual"
+      ],
+      "parentExplanation": "孩子有时会把周长和面积的公式搞混，我们在用对比表格帮助孩子区分——周长是'一圈多长'，面积是'里面多大'。"
+    },
+    "area_formula_misapply": {
+      "name": "面积公式误用",
+      "level": "L2",
+      "domain": "几何",
+      "parentL1": "memory_retrieval_failure",
+      "definition": "学生用了错误的面积公式——如三角形面积忘了÷2，梯形面积用错公式。",
+      "typicalManifestation": "计算三角形面积没除以2、梯形面积公式记错、用平行四边形公式算三角形。",
+      "triggerCondition": "面积计算使用了错误的公式。",
+      "exclusionCondition": "公式用对了但数值代错排除。",
+      "validationAction": "给4道不同图形的面积题。公式用错≥2则确认。",
+      "adjacentDifference": "与 area_perimeter_confusion 的区别见上述。",
+      "recommendedStrategies": [
+        "formula_derivation_visual",
+        "shape_formula_matching_game",
+        "key_feature_reminder"
+      ],
+      "parentExplanation": "孩子对不同图形的面积公式还需要更多巩固，我们在通过图形推导帮孩子理解公式的由来，而不只是死记。"
+    },
+    "area_unit_error": {
+      "name": "面积单位换算错误",
+      "level": "L2",
+      "domain": "几何",
+      "parentL1": "calculation_error",
+      "definition": "面积单位（cm², m², dm², 公顷, km²）之间的换算错误。",
+      "typicalManifestation": "进率记错（如1m²=100cm²而不是10000）、单位不统一直接计算。",
+      "triggerCondition": "涉及面积单位换算的题目出错。",
+      "exclusionCondition": "公式或计算错误排除。",
+      "validationAction": "给5道单位换算题（含相邻和跨级换算）。错误≥2则确认。",
+      "adjacentDifference": "与 unit_conversion_error 的区别：这是面积单位的换算，进率是100不是10。",
+      "recommendedStrategies": [
+        "unit_conversion_ladder",
+        "area_unit_square_visual",
+        "progressive_conversion"
+      ],
+      "parentExplanation": "面积单位之间的换算进率（如1平方米=10000平方厘米）对孩子来说容易和长度单位搞混，我们在用画正方形的方法帮孩子直观理解。"
+    },
+    "area_composite_decomposition_error": {
+      "name": "组合图形分解错误",
+      "level": "L2",
+      "domain": "几何",
+      "parentL1": "strategy_missing",
+      "definition": "面对组合图形时，学生不会将其分解为基本图形，或分解方式错误。",
+      "typicalManifestation": "组合图形面积算错、不知道如何分割、分割后面积算重了或漏了。",
+      "triggerCondition": "组合图形面积或周长题目出错。",
+      "exclusionCondition": "如果基本图形面积都算不对，先查 area_formula_misapply。",
+      "validationAction": "给2道组合图形题，要求在图上画出分割线并标注各部分。分割方式不合理则确认。",
+      "adjacentDifference": "与 area_formula_misapply 的区别：分解错误是'不知道怎么拆'，公式误用是'拆对了但算错了'。",
+      "recommendedStrategies": [
+        "cut_and_paste_method",
+        "shape_decomposition_grid",
+        "area_addition_subtraction"
+      ],
+      "parentExplanation": "组合图形对孩子来说是综合挑战——需要先拆分成学过的简单图形再分别计算，我们在通过剪拼法帮孩子培养这种空间思维。"
+    },
+    "surface_volume_confusion": {
+      "name": "表面积体积混淆",
+      "level": "L2",
+      "domain": "几何",
+      "parentL1": "concept_confusion",
+      "definition": "学生混淆了表面积和体积的概念和公式。",
+      "typicalManifestation": "求表面积用了体积公式、求体积用了表面积公式、单位用错（cm² vs cm³）。",
+      "triggerCondition": "表面积和体积公式混用。",
+      "exclusionCondition": "公式用对了计算错了排除。",
+      "validationAction": "给一道题分别求表面积和体积。用错公式则确认。",
+      "adjacentDifference": "与 capacity_volume_confusion 的区别：表面积-体积混淆是'外面'和'里面大小'搞混，容积是'里面能装多少'。",
+      "recommendedStrategies": [
+        "surface_vs_volume_contrast",
+        "net_unfolding_surface",
+        "unit_cube_counting_volume"
+      ],
+      "parentExplanation": "孩子有时会把表面积（外面一层）和体积（占多大空间）搞混，我们在通过展开图和堆方块帮孩子建立直观区别。"
+    },
+    "unit_conversion_error": {
+      "name": "体积/长度单位换算错误",
+      "level": "L2",
+      "domain": "几何",
+      "parentL1": "calculation_error",
+      "definition": "体积单位（cm³, m³, dm³, L, mL）或长度单位之间的换算错误。",
+      "typicalManifestation": "进率记错（如1m³=1000dm³）、体积单位和容积单位互化出错。",
+      "triggerCondition": "涉及单位换算的题目出错。",
+      "exclusionCondition": "没有换算需求的计算题排除。",
+      "validationAction": "给5道单位换算题。错误≥2则确认。",
+      "adjacentDifference": "与 area_unit_error 的区别：长度进率10，面积进率100，体积进率1000。",
+      "recommendedStrategies": [
+        "unit_ladder_visual",
+        "progressive_conversion_table",
+        "real_reference_objects"
+      ],
+      "parentExplanation": "体积单位之间的换算（如1立方米=1000立方分米）进率比较大，孩子容易记错，我们在用阶梯图帮孩子记忆。"
+    },
+    "capacity_volume_confusion": {
+      "name": "容积体积混淆",
+      "level": "L2",
+      "domain": "几何",
+      "parentL1": "concept_confusion",
+      "definition": "学生混淆了容积和体积的概念——容积是容器内部空间，体积是物体所占空间。",
+      "typicalManifestation": "把容器厚度忽略直接用外部尺寸算容积、不知道L和cm³的关系。",
+      "triggerCondition": "容积相关题目出错。",
+      "exclusionCondition": "纯体积计算正确但容积理解错误时确认。",
+      "validationAction": "给一道'有厚度容器'的容积题。用外部尺寸直接算则确认。",
+      "adjacentDifference": "与 surface_volume_confusion 的区别见上述。",
+      "recommendedStrategies": [
+        "container_capacity_demo",
+        "water_displacement_measure",
+        "volume_capacity_comparison"
+      ],
+      "parentExplanation": "容积和体积的区别——一个是'里面能装多少'，一个是'东西本身多大'——孩子还需要更多实物体验来理解。"
+    },
+    "radius_diameter_confusion": {
+      "name": "半径直径混淆",
+      "level": "L2",
+      "domain": "几何",
+      "parentL1": "concept_confusion",
+      "definition": "学生混淆了圆的半径和直径——计算时用错了值。",
+      "typicalManifestation": "题目给的是直径但用半径公式代入、给的是半径但当直径用、公式中r和d搞反。",
+      "triggerCondition": "圆相关计算中用了错误的值（该用r用了d或反之）。",
+      "exclusionCondition": "如果r和d区分正确但公式用错，转 pi_formula_misapply。",
+      "validationAction": "给4道圆的计算题（2道给半径、2道给直径）。用错≥1则确认。",
+      "adjacentDifference": "与 pi_formula_misapply 的区别：半径直径混淆是'用错了数据'，公式误用是'不知道用什么公式'。",
+      "recommendedStrategies": [
+        "radius_diameter_diagram",
+        "given_value_highlight",
+        "formula_selection_flowchart"
+      ],
+      "parentExplanation": "孩子在做圆的题目时，有时会把半径和直径搞混，我们在教孩子先圈出题目给的是半径还是直径再选公式。"
+    },
+    "pi_formula_misapply": {
+      "name": "圆周率相关公式误用",
+      "level": "L2",
+      "domain": "几何",
+      "parentL1": "memory_retrieval_failure",
+      "definition": "学生用错了与π相关的公式——如周长和面积公式混淆、公式中2的位置记错。",
+      "typicalManifestation": "C=2πr 记成 C=πr²、S=πr² 记成 S=2πr、忘了2或π。",
+      "triggerCondition": "圆的计算使用了错误的π相关公式。",
+      "exclusionCondition": "如果r和d关系都不清楚，转 radius_diameter_confusion。",
+      "validationAction": "给4道圆的计算题（周长2道、面积2道）。公式用错≥2则确认。",
+      "adjacentDifference": "与 circle_area_circumference_confusion 的区别：公式误用是'记错了公式本身'，面积周长混淆是'该求面积用了周长公式'。",
+      "recommendedStrategies": [
+        "formula_mnemonic",
+        "derive_from_basics",
+        "unit_check_method"
+      ],
+      "parentExplanation": "圆的周长和面积公式（C=2πr, S=πr²）孩子还需要更多练习来巩固，我们在教孩子用'看单位'的方法来检查——周长的单位是cm，面积是cm²。"
+    },
+    "circle_area_circumference_confusion": {
+      "name": "圆面积周长混淆",
+      "level": "L2",
+      "domain": "几何",
+      "parentL1": "concept_confusion",
+      "definition": "在圆的计算中，学生该求面积时用了周长公式，或反之。",
+      "typicalManifestation": "题目要求圆的面积，学生求了周长。",
+      "triggerCondition": "圆的计算中公式类型用错。",
+      "exclusionCondition": "能区分求什么但公式记错了，转 pi_formula_misapply。",
+      "validationAction": "给2道圆题（1道求面积1道求周长），看是否能选对公式类型。选错则确认。",
+      "adjacentDifference": "与 pi_formula_misapply 的区别见上述。",
+      "recommendedStrategies": [
+        "keyword_type_identifier",
+        "result_unit_check",
+        "circle_formula_decision_tree"
+      ],
+      "parentExplanation": "孩子在做圆的题目时需要先想清楚求的是'一圈多长'还是'圆面多大'，我们在训练孩子先读题判断再选公式。"
+    },
+    "ring_sector_error": {
+      "name": "圆环/扇形计算错误",
+      "level": "L2",
+      "domain": "几何",
+      "parentL1": "strategy_missing",
+      "definition": "在圆环面积或扇形面积计算中，学生使用了错误的公式或方法。",
+      "typicalManifestation": "圆环面积直接用大圆面积不加不减、扇形面积忘了乘角度比例。",
+      "triggerCondition": "圆环或扇形题目出错。",
+      "exclusionCondition": "基本圆面积公式不会，转 pi_formula_misapply。",
+      "validationAction": "给2道圆环+1道扇形题。错误≥2则确认。",
+      "adjacentDifference": "与 pi_formula_misapply 的区别：这是组合/变化图形的计算，不是基础公式。",
+      "recommendedStrategies": [
+        "ring_sector_visual_decomposition",
+        "area_subtraction_method",
+        "angle_ratio_application"
+      ],
+      "parentExplanation": "圆环和扇形的面积计算需要孩子在大圆面积的基础上做减法或乘比例，我们在通过画图拆解来帮助理解。"
+    },
+    "cylinder_surface_formula_error": {
+      "name": "圆柱表面积公式错误",
+      "level": "L2",
+      "domain": "几何",
+      "parentL1": "memory_retrieval_failure",
+      "definition": "计算圆柱表面积时，侧面积或底面积公式用错。",
+      "typicalManifestation": "侧面积忘了×π、两个底面积只算了一个、侧面积用了底面积公式。",
+      "triggerCondition": "圆柱表面积计算错误。",
+      "exclusionCondition": "计算错误但公式正确排除。",
+      "validationAction": "给2道圆柱表面积题。公式用错则确认。",
+      "adjacentDifference": "与 surface_volume_confusion 的区别：圆柱表面积是更具体的几何体公式问题。",
+      "recommendedStrategies": [
+        "cylinder_net_unfolding",
+        "surface_area_component_list",
+        "step_by_step_area_calc"
+      ],
+      "parentExplanation": "圆柱的表面积=侧面积+两个底面积，孩子有时会漏掉一个，我们在用展开图帮孩子看清圆柱由哪些面组成。"
+    },
+    "cylinder_cone_volume_confusion": {
+      "name": "圆柱圆锥体积混淆",
+      "level": "L2",
+      "domain": "几何",
+      "parentL1": "concept_confusion",
+      "definition": "学生混淆了圆柱和圆锥的体积公式——不知道圆锥体积是圆柱的1/3。",
+      "typicalManifestation": "圆锥体积忘了除以3、用圆锥公式算圆柱。",
+      "triggerCondition": "圆柱或圆锥体积计算中是否除以3出错。",
+      "exclusionCondition": "底面积算错排除。",
+      "validationAction": "给2道圆柱+2道圆锥体积题。÷3/不÷3用错≥2则确认。",
+      "adjacentDifference": "与 cone_third_factor_error 的区别：这是概念层面的混淆，con_third是执行层面的遗漏。",
+      "recommendedStrategies": [
+        "cylinder_cone_water_experiment",
+        "volume_formula_comparison_table",
+        "third_factor_mnemonic"
+      ],
+      "parentExplanation": "圆锥体积是等底等高圆柱体积的1/3——这个'÷3'孩子容易忘，我们在通过倒水实验帮孩子直观记住这个关系。"
+    },
+    "cone_third_factor_error": {
+      "name": "圆锥体积⅓遗漏",
+      "level": "L2",
+      "domain": "几何",
+      "parentL1": "calculation_error",
+      "definition": "计算圆锥体积时，底面积×高算对了但忘了×⅓。",
+      "typicalManifestation": "答案恰好是正确答案的3倍。",
+      "triggerCondition": "圆锥体积=底面积×高（忘了×⅓）。",
+      "exclusionCondition": "如果不知道圆锥体积公式，转 cylinder_cone_volume_confusion。",
+      "validationAction": "给2道圆锥体积题。忘了×⅓则确认。",
+      "adjacentDifference": "与 cylinder_cone_volume_confusion 的区别见上述。",
+      "recommendedStrategies": [
+        "one_third_checklist_item",
+        "result_sanity_check",
+        "cylinder_divide_by_3"
+      ],
+      "parentExplanation": "孩子算圆锥体积时知道要÷3，但做的时候偶尔会忘记，我们在培养孩子算完后用'是不是比圆柱小很多'来检查的习惯。"
+    },
+    "rotation_angle_error": {
+      "name": "旋转角度/方向错误",
+      "level": "L2",
+      "domain": "几何",
+      "parentL1": "concept_confusion",
+      "definition": "在图形旋转中，学生搞错了旋转角度（90°/180°）或方向（顺时针/逆时针）。",
+      "typicalManifestation": "旋转后的图形角度或方向与题目要求不符。",
+      "triggerCondition": "图形旋转题出错。",
+      "exclusionCondition": "如果是完全不会旋转，转 strategy_missing。",
+      "validationAction": "给2道旋转题（90°和180°各1道）。方向或角度错则确认。",
+      "adjacentDifference": "与 rotation_center_error 的区别：角度错误是'转了多少度'不对，中心错误是'绕哪个点转'不对。",
+      "recommendedStrategies": [
+        "tracing_paper_rotation",
+        "angle_annotation",
+        "step_by_step_rotation"
+      ],
+      "parentExplanation": "图形旋转需要孩子想清楚绕哪个点、往哪个方向、转多少度，这三个条件缺一不可，我们在用描图纸帮孩子动手操作来理解。"
+    },
+    "rotation_center_error": {
+      "name": "旋转中心判断错误",
+      "level": "L2",
+      "domain": "几何",
+      "parentL1": "concept_confusion",
+      "definition": "在图形旋转中，学生搞错了旋转中心。",
+      "typicalManifestation": "旋转后的图形位置不对（绕了错误的点旋转）。",
+      "triggerCondition": "旋转后图形位置错误但形状和角度正确。",
+      "exclusionCondition": "角度/形状也错时先查 rotation_angle_error。",
+      "validationAction": "给2道需要找旋转中心的题。找错则确认。",
+      "adjacentDifference": "与 rotation_angle_error 的区别见上述。",
+      "recommendedStrategies": [
+        "center_point_marking",
+        "distance_preservation_check",
+        "rotation_tracing"
+      ],
+      "parentExplanation": "孩子在做旋转时有时没注意到'绕哪个点转'这个条件，我们在教孩子先圈出旋转中心再动手。"
+    },
+    "spatial_view_mismatch": {
+      "name": "三视图还原错误",
+      "level": "L2",
+      "domain": "几何",
+      "parentL1": "strategy_missing",
+      "definition": "根据正面/侧面/上面三个方向的视图还原立体图形时，学生想象不出或还原错误。",
+      "typicalManifestation": "还原的立体图形与三视图不符。",
+      "triggerCondition": "三视图还原题出错。",
+      "exclusionCondition": "排除。",
+      "validationAction": "给2道三视图还原题。错误则确认。",
+      "adjacentDifference": "与通用 strategy_missing 的区别：这是空间想象特定的策略缺失。",
+      "recommendedStrategies": [
+        "cube_by_cube_build",
+        "layer_by_layer_reconstruction",
+        "view_cross_check"
+      ],
+      "parentExplanation": "从三个方向的平面图想象立体形状对孩子来说很有挑战，我们在用积木方块一层一层搭建来帮助培养空间想象力。"
+    },
+    "factor_multiple_confusion": {
+      "name": "因数倍数概念混淆",
+      "level": "L2",
+      "domain": "数与运算",
+      "parentL1": "concept_confusion",
+      "definition": "学生混淆了因数和倍数的概念——不知道谁是谁的因数/倍数。",
+      "typicalManifestation": "把因数当倍数、认为一个数既是自己的因数又是倍数时犯迷糊。",
+      "triggerCondition": "因数倍数基础概念题出错。",
+      "exclusionCondition": "概念正确但找不全因数的排除。",
+      "validationAction": "给5道'判断谁是谁的因数/倍数'的题。错误≥2则确认。",
+      "adjacentDifference": "与 prime_composite_confusion 的区别：因数倍数是关系概念，质数合数是数的分类。",
+      "recommendedStrategies": [
+        "factor_pair_method",
+        "multiplication_table_reference",
+        "factor_multiple_sort"
+      ],
+      "parentExplanation": "因数和倍数这对概念孩子容易搞反——A是B的因数意味着B÷A能除尽，我们在通过成对找的方法帮孩子区分。"
+    },
+    "prime_composite_confusion": {
+      "name": "质数合数分类错误",
+      "level": "L2",
+      "domain": "数与运算",
+      "parentL1": "concept_confusion",
+      "definition": "学生对质数和合数的定义理解错误——将1归为质数、认为所有奇数都是质数等。",
+      "typicalManifestation": "1判为质数、9判为质数（因为不能被2和5整除就以为是质数）。",
+      "triggerCondition": "质数合数判断题出错。",
+      "exclusionCondition": "如果连因数是什么都不懂，转 factor_multiple_confusion。",
+      "validationAction": "给10个数字让学生分类（质数/合数/都不是）。错误≥3则确认。",
+      "adjacentDifference": "与 factor_multiple_confusion 的区别见上述。",
+      "recommendedStrategies": [
+        "prime_sieve_visual",
+        "divisibility_check_systematic",
+        "prime_composite_sorting_game"
+      ],
+      "parentExplanation": "质数（只能被1和自己整除的数）和合数的区别，孩子还需要多练习才能熟练判断。"
+    },
+    "divisibility_rule_3_error": {
+      "name": "3的倍数特征应用错误",
+      "level": "L2",
+      "domain": "数与运算",
+      "parentL1": "calculation_error",
+      "definition": "学生错误应用了3的倍数特征——各位数字之和除以3来判断。",
+      "typicalManifestation": "各位数字和算错、忘了3的倍数特征而用2/5的特征判断。",
+      "triggerCondition": "判断3的倍数时出错。",
+      "exclusionCondition": "所有倍数特征都不会时排���。",
+      "validationAction": "给5道判断是否为3的倍数的题。错误≥2则确认。",
+      "adjacentDifference": "与通用 calculation_error 的区别：这是特定倍数特征的应用错误。",
+      "recommendedStrategies": [
+        "digit_sum_method",
+        "divisibility_rule_song",
+        "rule_practice_drill"
+      ],
+      "parentExplanation": "3的倍数有个特别的性质——各位数字加起来能被3整除，孩子对这个方法还需要多练习。"
+    },
+    "fraction_add_denominator_error": {
+      "name": "异分母加减不分母处理错误",
+      "level": "L2",
+      "domain": "数与运算",
+      "parentL1": "strategy_missing",
+      "definition": "异分母分数加减时，学生没有先通分就直接加减分子。",
+      "typicalManifestation": "分母不同时直接加减分子，分母保持不变或随意写一个。",
+      "triggerCondition": "异分母分数加减时分子分母各自直接加减。",
+      "exclusionCondition": "通分了但通分错误，转 gcd_lcm_method_error。",
+      "validationAction": "给3道异分母加减题。不先通分≥2道则确认。",
+      "adjacentDifference": "与 fraction_mixed_number_error 的区别：分母错误是'没通分'，带分数错误是'不会处理整数部分'。",
+      "recommendedStrategies": [
+        "common_denominator_mandatory_rule",
+        "lcd_finder",
+        "same_denominator_check"
+      ],
+      "parentExplanation": "异分母分数相加减需要先通分（变成同分母），孩子有时会忘记这一步直接加减，我们在强调'分母不同先通分'这个规则。"
+    },
+    "fraction_mixed_number_error": {
+      "name": "带分数运算错误",
+      "level": "L2",
+      "domain": "数与运算",
+      "parentL1": "calculation_error",
+      "definition": "带分数参与加减运算时，学生不会处理整数部分和分数部分的关系。",
+      "typicalManifestation": "带分数加减时整数部分和分数部分处理混乱、借位错误。",
+      "triggerCondition": "带分数运算题出错。",
+      "exclusionCondition": "同分母基本运算都不会，转 fraction_add_denominator_error。",
+      "validationAction": "给3道带分数加减题。错误≥2则确认。",
+      "adjacentDifference": "与 fraction_add_denominator_error 的区别见上述。",
+      "recommendedStrategies": [
+        "mixed_to_improper_conversion",
+        "integer_fraction_separate_method",
+        "borrowing_visual"
+      ],
+      "parentExplanation": "带分数（如2⅓）的计算比普通分数多了一步处理整数部分，孩子需要更多练习来掌握。"
+    },
+    "fraction_add_sub_word_mapping_error": {
+      "name": "分数加减应用题建模错误",
+      "level": "L2",
+      "domain": "数与运算",
+      "parentL1": "comprehension_bias",
+      "definition": "在分数加减应用题中，学生不能正确判断用加法还是减法。",
+      "typicalManifestation": "该用减法的用了加法、不会判断'比...多/少'用哪个运算。",
+      "triggerCondition": "分数加减应用题列式错误。",
+      "exclusionCondition": "同类型整数应用题能做对的排除。",
+      "validationAction": "给3道分数加减应用题，要求只列式。错误≥2则确认。",
+      "adjacentDifference": "与 comprehension_bias 的区别：这是分数场景下特定的加减判断问题。",
+      "recommendedStrategies": [
+        "keyword_to_operation_map",
+        "bar_model_compare",
+        "story_retell_method"
+      ],
+      "parentExplanation": "孩子在判断分数应用题用加还是减时有时会犹豫，我们在教孩子找'一共'和'比...多/少'这些关键词。"
+    },
+    "ratio_meaning_confusion": {
+      "name": "比的意义混淆",
+      "level": "L2",
+      "domain": "数与运算",
+      "parentL1": "concept_confusion",
+      "definition": "学生不理解比的含义——不知道比表示两个量之间的倍数关系。",
+      "typicalManifestation": "把比当分数或除法乱用、不知道比的各部分名称。",
+      "triggerCondition": "比的基础概念题出错。",
+      "exclusionCondition": "如果比的基本概念清楚但化简出错，转 ratio_simplify_error。",
+      "validationAction": "给3道'比的意义'判断题。错误≥2则确认。",
+      "adjacentDifference": "与 ratio_simplify_error 的区别见上述。",
+      "recommendedStrategies": [
+        "ratio_table_organizer",
+        "real_recipe_ratio_examples",
+        "part_to_part_vs_part_to_whole"
+      ],
+      "parentExplanation": "'比'的概念——比如3:2表示每3个A就有2个B——孩子还需要多接触生活中的例子（如奶茶配料比）来理解。"
+    },
+    "ratio_simplify_error": {
+      "name": "化简比方法错误",
+      "level": "L2",
+      "domain": "数与运算",
+      "parentL1": "strategy_missing",
+      "definition": "化简比时方法错误——不是同除以最大公约数，或化简不彻底。",
+      "typicalManifestation": "比的前后项没有除以同一个数、化简后还可以继续化简。",
+      "triggerCondition": "化简比出错。",
+      "exclusionCondition": "如果不知道什么是比，转 ratio_meaning_confusion。",
+      "validationAction": "给5道化简比题。错误≥2则确认。",
+      "adjacentDifference": "与 ratio_meaning_confusion 的区别见上述。",
+      "recommendedStrategies": [
+        "gcd_division_method",
+        "simplification_verification",
+        "prime_factor_approach"
+      ],
+      "parentExplanation": "化简比其实就是找前项和后项的最大公约数然后同时除以它，孩子还在练习这个技巧。"
+    },
+    "ratio_application_formula_error": {
+      "name": "按比分配方法错误",
+      "level": "L2",
+      "domain": "数与运算",
+      "parentL1": "strategy_missing",
+      "definition": "按比分配问题时，学生不会先求总份数再求每份的数量。",
+      "typicalManifestation": "直接用比的前项或后项当数量、不会算每份是多少。",
+      "triggerCondition": "按比分配应用题出错。",
+      "exclusionCondition": "如果比的基本概念都不懂，转 ratio_meaning_confusion。",
+      "validationAction": "给3道按比分配题。不会求总份数≥2道则确认。",
+      "adjacentDifference": "与 proportion_apply_error 的区别：按比分配是已知总量分配，比例应用是已知部分求总量。",
+      "recommendedStrategies": [
+        "total_parts_method",
+        "one_unit_value_first",
+        "ratio_to_fraction_conversion"
+      ],
+      "parentExplanation": "按比分配（如按3:5分40个苹果）需要先算总份数再算每份多少，孩子还在学习这个解题步骤。"
+    },
+    "percent_standard_amount_error": {
+      "name": "百分数标准量找错",
+      "level": "L2",
+      "domain": "数与运算",
+      "parentL1": "comprehension_bias",
+      "definition": "在百分数应用题中，学生找错了标准量（单位'1'），导致百分数计算错误。",
+      "typicalManifestation": "把比较量当标准量、'A比B多百分之几'算了A的百分之几而不是B的。",
+      "triggerCondition": "百分数应用题列式错误。",
+      "exclusionCondition": "如果连百分数概念都不懂，转 percent_meaning_error。",
+      "validationAction": "给5道百分数应用题，要求只标注标准量。错误≥2则确认。",
+      "adjacentDifference": "与 unit_one_finder_error 的区别：这是百分数场景下特定的标准量问题。",
+      "recommendedStrategies": [
+        "standard_amount_identifier",
+        "percent_word_problem_template",
+        "before_after_comparison"
+      ],
+      "parentExplanation": "百分数应用题中最重要的是找对'跟谁比'——孩子有时会搞错比较对象，我们在教孩子先圈出'比'字后面的量。"
+    },
+    "percent_convert_direction_error": {
+      "name": "百分数互化方向错误",
+      "level": "L2",
+      "domain": "数与运算",
+      "parentL1": "calculation_error",
+      "definition": "百分数与小数/分数互化时，学生搞反了方向。",
+      "typicalManifestation": "百分数化小数应该÷100反而×100、小数化百分数方向反了。",
+      "triggerCondition": "百分数互化结果差100倍或1/100。",
+      "exclusionCondition": "如果是概念不清，转 percent_standard_amount_error。",
+      "validationAction": "给6道互化题（各方向3道）。方向错误≥2则确认。",
+      "adjacentDifference": "与 fraction_decimal_convert_error 的区别：这是百分数互化的方向问题。",
+      "recommendedStrategies": [
+        "convert_triangle_method",
+        "percent_to_decimal_shift_rule",
+        "benchmark_percents"
+      ],
+      "parentExplanation": "百分数和小数互相转化——百分数变小数小数点向左移两位，孩子有时方向会搞反。"
+    },
+    "percent_compare_error": {
+      "name": "百分数大小比较错误",
+      "level": "L2",
+      "domain": "数与运算",
+      "parentL1": "concept_confusion",
+      "definition": "比较两个百分数或百分数与分数的大小时，学生直接比较百分号前的数字而忽略了实际意义。",
+      "typicalManifestation": "认为30%折扣比50%折扣便宜（实际上折扣越大越便宜但这不是大小比较的问题）、忽略了%的基数。",
+      "triggerCondition": "涉及百分数比较的题目出错。",
+      "exclusionCondition": "纯计算错误排除。",
+      "validationAction": "给5道百分数比较题。错误≥2则确认。",
+      "adjacentDifference": "与 decimal_mul_factor_change_error 的区别：百分数比较是百分比场景，因数变化是小数乘法场景。",
+      "recommendedStrategies": [
+        "percent_to_decimal_compare",
+        "hundred_grid_visual",
+        "real_example_context"
+      ],
+      "parentExplanation": "比较百分数时孩子有时只看数字大小而忽略了背景——同样是10%，不同基数差异很大，我们在通过实例帮助理解。"
+    },
+    "discount_percent_confusion": {
+      "name": "折扣与百分数混淆",
+      "level": "L2",
+      "domain": "数与运算",
+      "parentL1": "concept_confusion",
+      "definition": "学生混淆了折扣和百分数——不知道'打八折'是80%而非20%。",
+      "typicalManifestation": "打八折算成原价×20%、不知道几折表示十分之几。",
+      "triggerCondition": "折扣相关题目列式错误。",
+      "exclusionCondition": "纯计算错误排除。",
+      "validationAction": "给3道折扣题（不同折扣率）。列式错误≥2则确认。",
+      "adjacentDifference": "与 percent_standard_amount_error 的区别：折扣是百分数的一个特殊应用场景。",
+      "recommendedStrategies": [
+        "discount_percent_bridge",
+        "shopping_scenario_practice",
+        "discount_chart"
+      ],
+      "parentExplanation": "打八折=原价×80%（不是×20%），孩子对这个转化还需要练习——我们在用购物场景帮孩子建立直觉。"
+    },
+    "tax_interest_formula_error": {
+      "name": "税率利率公式应用错误",
+      "level": "L2",
+      "domain": "数与运算",
+      "parentL1": "strategy_missing",
+      "definition": "计算税率或利率时，学生用错了公式或找错了基数。",
+      "typicalManifestation": "利息忘了×时间、税率用错了基数。",
+      "triggerCondition": "税率或利率应用题列式错误。",
+      "exclusionCondition": "百分数基本计算都不会，转 percent_convert_direction_error。",
+      "validationAction": "给2道税率+2道利率题。公式用错≥2则确认。",
+      "adjacentDifference": "与 percent_standard_amount_error 的区别：税率利率是百分数的特定应用公式。",
+      "recommendedStrategies": [
+        "tax_rate_formula_card",
+        "interest_formula_with_time",
+        "real_receipt_practice"
+      ],
+      "parentExplanation": "利息=本金×利率×时间，税率=应纳税额÷收入——这些公式孩子还需要更多练习来巩固。"
+    },
+    "percent2_standard_amount_error": {
+      "name": "百分数(二)标准量混淆",
+      "level": "L2",
+      "domain": "数与运算",
+      "parentL1": "comprehension_bias",
+      "definition": "在百分数(二)（折扣/税率/利率/成数）应用题中，标准量找错。",
+      "typicalManifestation": "不同应用场景下搞错计算基数。",
+      "triggerCondition": "百分数(二)应用题列式错误。",
+      "exclusionCondition": "如果纯百分数概念都不懂，转 percent_standard_amount_error。",
+      "validationAction": "给4道百分数(二)应用题，要求标注标准量。错误≥2则确认。",
+      "adjacentDifference": "与 percent_standard_amount_error 的区别：百分数(二)的应用场景更多样（折扣、税率、利率、成数）。",
+      "recommendedStrategies": [
+        "context_based_standard_finder",
+        "percent2_formula_sheet",
+        "real_document_practice"
+      ],
+      "parentExplanation": "折扣算原价、税率算收入、利率算本金——每种场景的'基数'都不同，孩子还需要练习在不同场景中找对基数。"
+    },
+    "proportion_term_error": {
+      "name": "比例项识别错误",
+      "level": "L2",
+      "domain": "数与运算",
+      "parentL1": "concept_confusion",
+      "definition": "学生不能正确识别比例的项——内外项分不清。",
+      "typicalManifestation": "不知道哪两个是外项哪两个是内项、比例式写反了。",
+      "triggerCondition": "比例基本概念题出错。",
+      "exclusionCondition": "如果比的概念都不懂，转 ratio_meaning_confusion。",
+      "validationAction": "给3道标注比例内外项的题。错误≥2则确认。",
+      "adjacentDifference": "与 ratio_meaning_confusion 的区别：比例是两个比相等的关系，比是一个关系。",
+      "recommendedStrategies": [
+        "proportion_cross_diagram",
+        "term_labeling_practice",
+        "inner_outer_visual"
+      ],
+      "parentExplanation": "比例中的外项和内项——比如a:b=c:d中a和d是外项，b和c是内项——孩子还需要练习来熟悉。"
+    },
+    "proportion_solve_cross_error": {
+      "name": "解比例交叉相乘错误",
+      "level": "L2",
+      "domain": "数与运算",
+      "parentL1": "strategy_missing",
+      "definition": "解比例时，学生不会用交叉相乘法（外项积=内项积）。",
+      "typicalManifestation": "解比例时不知道怎么列方程、交叉乘错了对象。",
+      "triggerCondition": "解比例题不会列方程或列错。",
+      "exclusionCondition": "解方程本身不会的排除。",
+      "validationAction": "给4道解比例题。方法错误≥2则确认。",
+      "adjacentDifference": "与 equation_balance_error 的区别：解比例是比例场景下的特定方程解法。",
+      "recommendedStrategies": [
+        "cross_product_visual",
+        "proportion_to_equation_flow",
+        "solution_verification"
+      ],
+      "parentExplanation": "解比例的核心方法是交叉相乘——a:b=c:d变成a×d=b×c，孩子还需要练习把这个关系变成方程。"
+    },
+    "proportion_scale_convert_error": {
+      "name": "比例尺换算错误",
+      "level": "L2",
+      "domain": "数与运算",
+      "parentL1": "calculation_error",
+      "definition": "涉及比例尺的图上距离与实际距离换算时出现错误。",
+      "typicalManifestation": "图上距离和实际距离换算方向反了、单位换算遗漏。",
+      "triggerCondition": "比例尺相关题目数据换算错误。",
+      "exclusionCondition": "如果连比例是什么都不懂，转 proportion_term_error。",
+      "validationAction": "给3道比例尺换算题。方向错误或单位错误≥2则确认。",
+      "adjacentDifference": "与 unit_conversion_error 的区别：比例尺换算涉及比例关系和单位换算两层。",
+      "recommendedStrategies": [
+        "scale_factor_arrow",
+        "unit_conversion_reminder",
+        "map_reading_practice"
+      ],
+      "parentExplanation": "比例尺（如1:50000表示图上1cm=实际500m）的换算孩子容易搞反方向或忘记单位换算，我们在用箭头图帮孩子理清。"
+    },
+    "direct_inverse_confusion": {
+      "name": "正反比例混淆",
+      "level": "L2",
+      "domain": "数与运算",
+      "parentL1": "concept_confusion",
+      "definition": "学生混淆了正比例和反比例——判断不了两个量是正比还是反比关系。",
+      "typicalManifestation": "反比例判成正比例、不知道乘积一定才是反比例。",
+      "triggerCondition": "判断正反比例关系的题目出错。",
+      "exclusionCondition": "如果连比例的基本概念都不懂，转 proportion_term_error。",
+      "validationAction": "给4道判断正反比例的题。错误≥2则确认。",
+      "adjacentDifference": "与 proportion_term_error 的区别：正反比例是比例关系的分类。",
+      "recommendedStrategies": [
+        "direct_inverse_contrast_table",
+        "product_ratio_check",
+        "real_world_examples"
+      ],
+      "parentExplanation": "正比例是一个量变大另一个也同比例变大，反比例是乘积不变——孩子还需要更多对比练习来区分这两种关系。"
+    },
+    "probability_misconception": {
+      "name": "可能性理解偏差",
+      "level": "L2",
+      "domain": "统计与概率",
+      "parentL1": "concept_confusion",
+      "definition": "学生对可能性的概念理解有偏差——认为小概率事件'不可能'发生。",
+      "typicalManifestation": "把'可能性小'等同于'不可能'、不理解随机性。",
+      "triggerCondition": "可能性判断题出错。",
+      "exclusionCondition": "排除。",
+      "validationAction": "给4道可能性判断题。错误≥2则确认。",
+      "adjacentDifference": "与 probability_scale_error 的区别：理解偏差是概念层面，大小判断是量化层面。",
+      "recommendedStrategies": [
+        "experiment_simulation",
+        "probability_line_visual",
+        "real_random_examples"
+      ],
+      "parentExplanation": "'可能'不等于'一定'——即使可能性很小的事情也有可能发生，孩子对这个概念还需要通过实验来体会。"
+    },
+    "probability_scale_error": {
+      "name": "可能性大小判断错误",
+      "level": "L2",
+      "domain": "统计与概率",
+      "parentL1": "comprehension_bias",
+      "definition": "学生不能根据数量多少正确判断可能性的大小。",
+      "typicalManifestation": "数量多的反而认为可能性小、不会用分数表示可能性。",
+      "triggerCondition": "可能性大小排序题出错。",
+      "exclusionCondition": "如果可能性基本概念都不懂，转 probability_misconception。",
+      "validationAction": "给3道可能性大小比较题。错误≥2则确认。",
+      "adjacentDifference": "与 probability_misconception 的区别见上述。",
+      "recommendedStrategies": [
+        "frequency_counting",
+        "probability_fraction",
+        "spinner_simulation"
+      ],
+      "parentExplanation": "判断可能性大小其实就是数一数'有多少种结果是我想要的'，孩子还需要练习这种数数-比较的方法。"
+    },
+    "line_chart_trend_error": {
+      "name": "折线图趋势判读错误",
+      "level": "L2",
+      "domain": "统计与概率",
+      "parentL1": "comprehension_bias",
+      "definition": "学生错误判读了折线统计图的趋势——上升判为下降、不会看变化快慢。",
+      "typicalManifestation": "折线趋势与实际数据变化不符的判断。",
+      "triggerCondition": "折线图趋势判断题出错。",
+      "exclusionCondition": "根本不会看图时转 strategy_missing。",
+      "validationAction": "给2道折线图趋势判断题。错误则确认。",
+      "adjacentDifference": "与 dual_line_compare_error 的区别：趋势判读是单条线的变化，双线比较是两条线的对比。",
+      "recommendedStrategies": [
+        "trend_storytelling",
+        "slope_visual_hint",
+        "data_point_annotation"
+      ],
+      "parentExplanation": "看折线图判断'上升还是下降'和'变化快还是慢'，孩子还需要多练习看图说话。"
+    },
+    "dual_line_compare_error": {
+      "name": "复式折线图比较错误",
+      "level": "L2",
+      "domain": "统计与概率",
+      "parentL1": "comprehension_bias",
+      "definition": "在看复式折线图（两条线）时，学生混淆了两条线或错误比较。",
+      "typicalManifestation": "把A线的数据当成B线的、不会比较两条线的差距。",
+      "triggerCondition": "复式折线图比较题出错。",
+      "exclusionCondition": "单条线趋势都不会看，转 line_chart_trend_error。",
+      "validationAction": "给2道复式折线图比较题。错误则确认。",
+      "adjacentDifference": "与 line_chart_trend_error 的区别见上述。",
+      "recommendedStrategies": [
+        "dual_line_legend_check",
+        "side_by_side_reading",
+        "difference_calculation"
+      ],
+      "parentExplanation": "复式折线图有两条线，孩子有时会看叉，我们在教孩子先看图例再对线。"
+    },
+    "pie_chart_ratio_error": {
+      "name": "扇形统计图比例读取错误",
+      "level": "L2",
+      "domain": "统计与概率",
+      "parentL1": "comprehension_bias",
+      "definition": "学生不能从扇形统计图中正确读取各部分的比例关系。",
+      "typicalManifestation": "把扇形大小判断错、不会从扇形还原到百分比。",
+      "triggerCondition": "扇形统计图数据读取错误。",
+      "exclusionCondition": "如果百分数概念本身不懂，转 percent_standard_amount_error。",
+      "validationAction": "给3道扇形统计图数据读取题。错误≥2则确认。",
+      "adjacentDifference": "与 percent_compare_error 的区别：扇形图是可视化场景下的百分数读取。",
+      "recommendedStrategies": [
+        "pie_angle_to_percent",
+        "sector_size_estimation",
+        "whole_part_verification"
+      ],
+      "parentExplanation": "扇形统计图中扇形越大比例越大，但精确的百分比需要看标注，孩子还需要练习从图到数的转换。"
+    },
+    "chart_type_select_error": {
+      "name": "统计图类型选择错误",
+      "level": "L2",
+      "domain": "统计与概率",
+      "parentL1": "strategy_missing",
+      "definition": "学生不知道在什么情况下应该选条形图、折线图还是扇形图。",
+      "typicalManifestation": "该用折线图展示趋势却选了条形图。",
+      "triggerCondition": "统计图类型选择题出错。",
+      "exclusionCondition": "如果各类型统计图都不会看，先查对应错误。",
+      "validationAction": "给3道统计图类型选择题。错误≥2则确认。",
+      "adjacentDifference": "与各统计图单项错误的区别：这是元层面的选择问题。",
+      "recommendedStrategies": [
+        "chart_type_decision_tree",
+        "purpose_to_chart_mapping",
+        "real_data_chart_selection"
+      ],
+      "parentExplanation": "条形图适合比大小、折线图适合看变化、扇形图适合看占比——孩子还需要练习根据问题选对图。"
+    },
+    "coordinate_col_row_error": {
+      "name": "数对行列混淆",
+      "level": "L2",
+      "domain": "位置与方向",
+      "parentL1": "concept_confusion",
+      "definition": "学生混淆了数对中列和行的顺序——认为(行,列)而非(列,行)。",
+      "typicalManifestation": "数对的前后两个数字写反、先找行再找列。",
+      "triggerCondition": "数对相关题目中列/行顺序错误。",
+      "exclusionCondition": "如果完全不懂数对，转 strategy_missing。",
+      "validationAction": "给5道给定位置写数对的题。顺序错误≥2则确认。",
+      "adjacentDifference": "与 coordinate_movement_error 的区别：行列混淆是'读位置'的问题，移动是'算位置'的问题。",
+      "recommendedStrategies": [
+        "column_then_row_chant",
+        "coordinate_grid_drill",
+        "real_seat_number_analogy"
+      ],
+      "parentExplanation": "数对(列,行)就像电影院座位——先说在第几排？不对！是先说在第几列再说在第几行，孩子需要记住这个顺序。"
+    },
+    "coordinate_movement_error": {
+      "name": "数对平移计算错误",
+      "level": "L2",
+      "domain": "位置与方向",
+      "parentL1": "calculation_error",
+      "definition": "计算数对平移时，学生加减错了方向或数值。",
+      "typicalManifestation": "向上平移行数应该加反而减了、左右平移搞反方向。",
+      "triggerCondition": "数对平移题计算结果错误。",
+      "exclusionCondition": "如果是数对本身行列反了，转 coordinate_col_row_error。",
+      "validationAction": "给3道数对平移题。方向错误≥2则确认。",
+      "adjacentDifference": "与 coordinate_col_row_error 的区别见上述。",
+      "recommendedStrategies": [
+        "movement_direction_arrow",
+        "coordinate_change_table",
+        "step_counting_method"
+      ],
+      "parentExplanation": "数对平移——向右列+1，向上行+1——孩子有时会搞错加减方向，我们在用箭头图帮孩子记住。"
+    },
+    "direction_angle_error": {
+      "name": "方向角度描述错误",
+      "level": "L2",
+      "domain": "位置与方向",
+      "parentL1": "concept_confusion",
+      "definition": "用方向和距离描述位置时，学生搞错了方向或角度。",
+      "typicalManifestation": "东偏北说成北偏东、角度读错、以什么为基准搞错。",
+      "triggerCondition": "方向角度描述题出错。",
+      "exclusionCondition": "如果不会用量角器，属于工具使用问题。",
+      "validationAction": "给3道位置描述题。方向或角度错误≥2则确认。",
+      "adjacentDifference": "与 direction_reference_error 的区别：角度错误是'多少度'不对，基准错误是'以谁为参考'不对。",
+      "recommendedStrategies": [
+        "compass_protractor_practice",
+        "direction_notation_standard",
+        "angle_measurement_check"
+      ],
+      "parentExplanation": "用方向和距离描述位置——比如'东偏北30°'——孩子对方向的命名规则还需要多练习。"
+    },
+    "direction_reference_error": {
+      "name": "方向参照点混淆",
+      "level": "L2",
+      "domain": "位置与方向",
+      "parentL1": "comprehension_bias",
+      "definition": "在描述位置或绘制路线图时，学生搞错了参照点（从哪出发）。",
+      "typicalManifestation": "把从A到B的方向说成了从B到A的方向。",
+      "triggerCondition": "位置描述中参照点错误。",
+      "exclusionCondition": "如果方向角度都正确仅参照点搞反，确认此错误。",
+      "validationAction": "给2道指定不同参照点的位置描述题。参照点错则确认。",
+      "adjacentDifference": "与 direction_angle_error 的区别见上述。",
+      "recommendedStrategies": [
+        "reference_point_highlight",
+        "from_to_arrow_notation",
+        "route_step_decomposition"
+      ],
+      "parentExplanation": "描述位置时先要想清楚'从哪里出发往哪走'，孩子有时会把出发点和目的地搞反。"
+    },
+    "tree_interval_confusion": {
+      "name": "植树问题间隔-棵数混淆",
+      "level": "L2",
+      "domain": "数学广角",
+      "parentL1": "strategy_missing",
+      "definition": "在植树问题中，学生混淆了棵数和间隔数的关系。",
+      "typicalManifestation": "两端都栽忘了+1、两端不栽忘了-1、环形栽树忘了棵数=间隔数。",
+      "triggerCondition": "植树问题中棵数与间隔数关系错误。",
+      "exclusionCondition": "如果除法本身算错排除。",
+      "validationAction": "给3道不同情境的植树题（两端栽、一端栽、环形）。错误≥2则确认。",
+      "adjacentDifference": "与 tree_case_mismatch 的区别：间隔混淆是'不知道+1还是-1'，情境误判是'不知道属于哪种类型'。",
+      "recommendedStrategies": [
+        "interval_drawing_method",
+        "case_classification_table",
+        "finger_model_demo"
+      ],
+      "parentExplanation": "植树问题有三种情况——两端都种（+1）、两端不种（-1）、环形（不加不减）——孩子需要先判断情境再选规则。"
+    },
+    "tree_case_mismatch": {
+      "name": "植树问题情境误判",
+      "level": "L2",
+      "domain": "数学广角",
+      "parentL1": "comprehension_bias",
+      "definition": "学生不能正确判断题目属于植树问题的哪一种情境。",
+      "typicalManifestation": "把两端栽判成一端栽、把环形判成直线。",
+      "triggerCondition": "植树问题情境判断错误。",
+      "exclusionCondition": "情境判断正确但计算错，转 tree_interval_confusion。",
+      "validationAction": "给4道不同情境的植树题，要求只判断类型不计算。错误≥2则确认。",
+      "adjacentDifference": "与 tree_interval_confusion 的区别见上述。",
+      "recommendedStrategies": [
+        "scenario_visualization",
+        "key_feature_identifier",
+        "real_world_analogy"
+      ],
+      "parentExplanation": "植树问题需要先判断'路的两头有没有种树'或'是不是一个圈'，孩子还需要练习读题判断情境。"
+    },
+    "find_defective_logic_error": {
+      "name": "找次品逻辑推理错误",
+      "level": "L2",
+      "domain": "数学广角",
+      "parentL1": "strategy_missing",
+      "definition": "在用天平找次品的问题中，学生不会用最少次数的方法推理。",
+      "typicalManifestation": "分组方式不是最优、不知道最少需要几次。",
+      "triggerCondition": "找次品问题中次数不是最优或方法不对。",
+      "exclusionCondition": "如果完全不会分组，转 strategy_missing。",
+      "validationAction": "给2道找次品题。不会用三分法或次数不对则确认。",
+      "adjacentDifference": "与通用 strategy_missing 的区别：找次品有特定的最优策略（三分法）。",
+      "recommendedStrategies": [
+        "balance_tree_diagram",
+        "divide_into_thirds",
+        "min_steps_formula"
+      ],
+      "parentExplanation": "找次品的关键是把物品尽量分成三堆——这样每次称都能排除最多可能性，孩子需要理解这种最优策略。"
+    },
+    "pigeonhole_worst_case_error": {
+      "name": "鸽巢问题最坏情况推理错误",
+      "level": "L2",
+      "domain": "数学广角",
+      "parentL1": "strategy_missing",
+      "definition": "在鸽巢问题中，学生不会用最坏情况（抽屉原理）来推理。",
+      "typicalManifestation": "直接除以抽屉数而不是考虑最坏情况。",
+      "triggerCondition": "鸽巢问题推理错误。",
+      "exclusionCondition": "如果不理解问题在问什么，先查 comprehension_bias。",
+      "validationAction": "给2道鸽巢问题。不会用最坏情况推理则确认。",
+      "adjacentDifference": "与通用 strategy_missing 的区别：鸽巢问题有特定的推理模式。",
+      "recommendedStrategies": [
+        "worst_case_pigeonhole_diagram",
+        "drawer_distribution",
+        "minimum_guarantee_reasoning"
+      ],
+      "parentExplanation": "鸽巢问题的核心是想'最倒霉的情况'——先把所有抽屉各放一个，再多一个就必然有人有俩——这是逆向思维。"
+    },
+    "number_shape_pattern_failure": {
+      "name": "数形结合规律发现失败",
+      "level": "L2",
+      "domain": "数学广角",
+      "parentL1": "strategy_missing",
+      "definition": "在数形结合问题中，学生不能从图形排列中发现数学规律。",
+      "typicalManifestation": "看不出来图形排列与数列的关系。",
+      "triggerCondition": "数形结合找规律题出错。",
+      "exclusionCondition": "如果纯数列找规律都不会，转 strategy_missing。",
+      "validationAction": "给2道数形结合找规律题。无法发现规律则确认。",
+      "adjacentDifference": "与通用 strategy_missing 的区别：数形结合是特定的找规律策略。",
+      "recommendedStrategies": [
+        "visual_number_pattern_table",
+        "draw_next_term",
+        "pattern_to_formula"
+      ],
+      "parentExplanation": "从图形排布中找数学规律——比如第n个图形有几个点——需要孩子同时看图形和数字，这是综合能力。"
+    },
+    "mixed_topic_confusion": {
+      "name": "总复习综合混淆",
+      "level": "L2",
+      "domain": "总复习",
+      "parentL1": "concept_confusion",
+      "definition": "在总复习/综合练习中，学生面对混合知识点时无法正确调动对应知识和策略。",
+      "typicalManifestation": "在不同单元的知识点混在一起时，不知道用哪个方法。",
+      "triggerCondition": "综合练习/总复习中跨单元题目出错。",
+      "exclusionCondition": "如果是某一单元知识本身就不会，查对应单元错因。",
+      "validationAction": "给5道跨单元综合题。错误≥3则确认。",
+      "adjacentDifference": "与 transfer_failure 的区别：综合混淆是'分不清该用哪个方法'，迁移失败是'同方法换场景不会用'。",
+      "recommendedStrategies": [
+        "topic_identification_first",
+        "knowledge_activation_checklist",
+        "spiral_review_map"
+      ],
+      "parentExplanation": "综合练习把不同单元的内容混在一起，孩子需要先判断每道题考的是什么知识点再作答，这是更高层次的能力。"
+    },
+    "negative_concept_error": {
+      "name": "负数概念理解错误",
+      "level": "L2",
+      "domain": "数与运算",
+      "parentL1": "concept_confusion",
+      "definition": "学生不理解负数的意义——不知道负数表示相反意义的量。",
+      "typicalManifestation": "认为0是最小的数、不理解'负'的含义。",
+      "triggerCondition": "负数基本概念题出错。",
+      "exclusionCondition": "如果数轴上的表示会但比较大小出错，转 negative_compare_absolute_error。",
+      "validationAction": "给3道负数意义判断题。错误≥2则确认。",
+      "adjacentDifference": "与 negative_numberline_placement 的区别：概念错误是'不知道负数是什么'，数轴错误是'知道但画错了'。",
+      "recommendedStrategies": [
+        "number_line_thermometer",
+        "elevator_floor_model",
+        "debt_credit_analogy"
+      ],
+      "parentExplanation": "负数表示比0还小——就像温度零下、楼层地下——孩子需要生活中的例子来建立负数概念。"
+    },
+    "negative_numberline_placement": {
+      "name": "负数数轴定位错误",
+      "level": "L2",
+      "domain": "数与运算",
+      "parentL1": "calculation_error",
+      "definition": "在数轴上标注负数时，学生标错了位置。",
+      "typicalManifestation": "负数标到了正数一侧、-3标得比-1离0近。",
+      "triggerCondition": "数轴上负数定位错误。",
+      "exclusionCondition": "正数定位也不对时排除。",
+      "validationAction": "给5道数轴标注题。负数定位错误≥2则确认。",
+      "adjacentDifference": "与 negative_concept_error 的区别见上述。",
+      "recommendedStrategies": [
+        "number_line_anchor_zero",
+        "mirror_image_method",
+        "distance_from_zero"
+      ],
+      "parentExplanation": "在数轴上标负数——离0越远越小——孩子有时会把方向和距离搞反，我们在用镜子法帮孩子理解。"
+    },
+    "negative_compare_absolute_error": {
+      "name": "负数大小比较绝对值混淆",
+      "level": "L2",
+      "domain": "数与运算",
+      "parentL1": "concept_confusion",
+      "definition": "比较两个负数大小时，学生混淆了绝对值和实际大小——认为绝对值大的负数更大。",
+      "typicalManifestation": "认为-5 > -3（因为5>3）。",
+      "triggerCondition": "负数大小比较题出错（绝对值大的被判为更大）。",
+      "exclusionCondition": "如果负数概念本身不懂，转 negative_concept_error。",
+      "validationAction": "给5道负数比较题。错误≥3则确认。",
+      "adjacentDifference": "与 negative_concept_error 的区别见上述。",
+      "recommendedStrategies": [
+        "number_line_comparison",
+        "temperature_context",
+        "farther_from_zero_is_smaller"
+      ],
+      "parentExplanation": "比较负数大小——离0越远越小！-8比-3更小（因为-8度比-3度更冷）——孩子容易用正数的直觉来比负数。"
+    }
+  }
+}

@@ -1,0 +1,280 @@
+{
+  "updatedAt": "2026-05-13 22:30",
+  "title": "芽芽助教 · AI 任务验收中心",
+  "subtitle": "面向真人的验收页：直接看结果、证据、原始产物内容和下一步。",
+  "currentFocus": "Phase 3 错因体系完成",
+  "score": {
+    "overall": 92,
+    "label": "Phase 3 通过",
+    "desc": "86 错因 + 560 绑定 + 189 KP 全覆盖。Phase 4 策略包待启动。"
+  },
+  "stats": [
+    {
+      "label": "A 级核心知识点",
+      "value": "108",
+      "status": "pass"
+    },
+    {
+      "label": "B 级重要支撑",
+      "value": "45",
+      "status": "pass"
+    },
+    {
+      "label": "C 级低频辅助",
+      "value": "36",
+      "status": "pass"
+    },
+    {
+      "label": "地狱自检 errors",
+      "value": "0",
+      "status": "pass"
+    },
+    {
+      "label": "教材正文核验待做",
+      "value": "189",
+      "status": "warn"
+    }
+  ],
+  "sections": [
+    {
+      "id": "phase0-docs",
+      "title": "工程文档是否准备好？",
+      "status": "pass",
+      "humanResult": "已准备好。系统已把庞大的 PRD 拆成 15 个按开发顺序排列的工程文档，AI 工具可以按任务读取对应文件。",
+      "evidence": [
+        "docs/adaptive-engine/00_INDEX.md 到 14_QUALITY_DASHBOARD.md 已全部生成",
+        "00_INDEX.md 已说明阅读顺序和当前阶段",
+        "PROJECT_INTRODUCTION.md 已生成，作为 AI 工具理解项目的入口"
+      ],
+      "artifacts": [
+        {
+          "label": "工程文档索引",
+          "path": "acceptance-artifacts/00_INDEX.md",
+          "kind": "md",
+          "sourcePath": "../workspace/docs/adaptive-engine/00_INDEX.md"
+        },
+        {
+          "label": "项目完整介绍",
+          "path": "acceptance-artifacts/PROJECT_INTRODUCTION.md",
+          "kind": "md",
+          "sourcePath": "../workspace/PROJECT_INTRODUCTION.md"
+        }
+      ],
+      "acceptanceQuestion": "我是否认可：AI 工具已经有足够清晰的文档入口，不需要再读一个超长 PRD？",
+      "recommendation": "建议通过。"
+    },
+    {
+      "id": "phase0-syllabus",
+      "title": "Phase 0.2：教材大纲与知识点对齐结果（已阶段通过）",
+      "status": "pass",
+      "humanResult": "已阶段通过。已抓取四册目录，并与当前数据库 183 个五六年级数学知识点完成自动对齐。此结果作为 Phase 0.3 的输入。",
+      "evidence": [
+        "四册目录都已出现：五上、五下、六上、六下",
+        "DB 五六年级数学知识点：183 个",
+        "生成了对齐报告，可查看每册目录、已匹配单元、待审核项",
+        "所有知识点仍标记 needs_textbook_body_review，未冒充最终权威清单"
+      ],
+      "artifacts": [
+        {
+          "label": "教材大纲草稿（MD）",
+          "path": "acceptance-artifacts/primary_math_g5_g6_syllabus.md",
+          "kind": "md",
+          "embed": true,
+          "sourcePath": "../workspace/docs/adaptive-engine/syllabus/primary_math_g5_g6_syllabus.md"
+        },
+        {
+          "label": "知识点草稿（JSON）",
+          "path": "acceptance-artifacts/primary_math_g5_g6_knowledge.json",
+          "kind": "json",
+          "sourcePath": "../workspace/docs/adaptive-engine/syllabus/primary_math_g5_g6_knowledge.json"
+        },
+        {
+          "label": "对齐报告（MD）",
+          "path": "acceptance-artifacts/primary_math_g5_g6_alignment_report.md",
+          "kind": "md",
+          "embed": true,
+          "sourcePath": "../workspace/docs/adaptive-engine/syllabus/primary_math_g5_g6_alignment_report.md"
+        },
+        {
+          "label": "对齐 flags（JSON）",
+          "path": "acceptance-artifacts/primary_math_g5_g6_alignment_flags.json",
+          "kind": "json",
+          "sourcePath": "../workspace/docs/adaptive-engine/syllabus/primary_math_g5_g6_alignment_flags.json"
+        }
+      ],
+      "acceptanceQuestion": "我是否认可：Phase 0.2 已经完成“目录初抓 + 本地知识点导出 + 自动对齐报告”，但还不能算最终权威大纲？",
+      "recommendation": "已由用户确认通过。"
+    },
+    {
+      "id": "phase0-source-review",
+      "title": "Phase 0.3：sourceRef 与实践活动处理决策",
+      "status": "pass",
+      "humanResult": "已完成阶段性产物。183 个知识点已补充 sourceReview 状态：88 个课时级匹配、85 个单元级匹配、10 个未匹配需审核；同时对实践活动和总复习项给出了是否知识点化/专题化的处理决策。",
+      "evidence": [
+        "新增 primary_math_g5_g6_source_review.md",
+        "更新 primary_math_g5_g6_knowledge.json",
+        "实践活动/总复习已给出处理决策：C级实践节点或复习聚合入口",
+        "所有知识点仍明确保留 needsTextbookBodyReview，不冒充最终权威大纲"
+      ],
+      "artifacts": [
+        {
+          "label": "Phase 0.3 sourceReview 报告（MD）",
+          "path": "acceptance-artifacts/primary_math_g5_g6_source_review.md",
+          "kind": "md",
+          "embed": true
+        },
+        {
+          "label": "更新后的知识点草稿（JSON）",
+          "path": "acceptance-artifacts/primary_math_g5_g6_knowledge.json",
+          "kind": "json"
+        },
+        {
+          "label": "Phase 0.2 对齐报告（MD）",
+          "path": "acceptance-artifacts/primary_math_g5_g6_alignment_report.md",
+          "kind": "md"
+        }
+      ],
+      "acceptanceQuestion": "我是否认可：Phase 0.3 已经完成 sourceReview 和实践活动/总复习处理决策，可以进入 Phase 1 的 A/B/C 分级草案？",
+      "recommendation": "用户确认通过，Phase 0.3 已完成。"
+    },
+    {
+      "id": "coverage-risk",
+      "title": "可发布级全覆盖风险（仍需继续处理）",
+      "status": "warn",
+      "humanResult": "仍未达到可发布级全覆盖。Phase 0.3 已推进 sourceReview，但所有知识点仍需要页码级教材正文/教参核验。",
+      "evidence": [
+        "六年级上册目录目前主要是单元级，细课时仍需补充",
+        "DB 中 183 个知识点来自本地种子/数据库，需要教材正文或教参逐项核验",
+        "部分实践活动/总复习项目还没有决定是否知识点化"
+      ],
+      "artifacts": [
+        {
+          "label": "对齐报告中的待审核清单",
+          "path": "acceptance-artifacts/primary_math_g5_g6_alignment_report.md",
+          "kind": "md",
+          "sourcePath": "../workspace/docs/adaptive-engine/syllabus/primary_math_g5_g6_alignment_report.md#待处理问题清单"
+        }
+      ],
+      "acceptanceQuestion": "我是否认可：当前不能进入 A/B/C 分级，必须先做 Phase 0.3？",
+      "recommendation": "建议不通过最终验收，进入 Phase 0.3。"
+    },
+    {
+      "id": "next-action",
+      "title": "下一步是否清楚？",
+      "status": "pass",
+      "humanResult": "清楚。下一步是 Phase 0.3：补 sourceRef，处理实践活动/总复习是否知识点化，生成 source_review。",
+      "evidence": [
+        "待处理项：掷一掷、探索图形、怎样通知最快、总复习、节约用水、确定起跑线、生活与百分数、自行车里的数学",
+        "目标产物：primary_math_g5_g6_source_review.md",
+        "目标产物：更新后的 primary_math_g5_g6_knowledge.json"
+      ],
+      "acceptanceQuestion": "我是否认可：下一步就是继续 Phase 0.3，而不是跳去写策略包或做初高中？",
+      "recommendation": "建议通过。"
+    },
+    {
+      "id": "phase1-leveling",
+      "title": "Phase 1：A/B/C 分级草案",
+      "status": "progress",
+      "humanResult": "修正版分级完成，地狱自检通过（0 errors）。按 04_KNOWLEDGE_LEVELING.md 6 维规则：A 级 108 个（≥9 分）、B 级 45 个（5-8 分）、C 级 36 个（≤4 分）。已修正上轮验收发现的 5 个错分项 + 补齐五下 6 个遗漏知识点。",
+      "evidence": [
+        "A 级 108 个：核心公式/概念/算法，评分 9-10",
+        "B 级 45 个：重要支撑知识点，评分 5-7",
+        "C 级 36 个：低频/辅助/实践/总复习，评分 2-4",
+        "地狱自检：交叉验证、规则验证、修正验证、册别分布、新增项验证全部通过",
+        "所有分级结果仍标 phase1_corrected_needs_review，不冒充最终权威分级",
+        "sourceReview 100% needsTextbookBodyReview=true"
+      ],
+      "artifacts": [
+        {
+          "label": "分级报告（MD）— 含 A/B/C 完整列表",
+          "path": "acceptance-artifacts/primary_math_g5_g6_leveling_report.md",
+          "kind": "md",
+          "embed": true
+        },
+        {
+          "label": "分级数据（JSON）",
+          "path": "acceptance-artifacts/primary_math_g5_g6_levels.json",
+          "kind": "json"
+        },
+        {
+          "label": "更新后知识点数据（JSON）",
+          "path": "acceptance-artifacts/primary_math_g5_g6_knowledge.json",
+          "kind": "json"
+        }
+      ],
+      "acceptanceQuestion": "我是否认可：A 级（核心公式/概念/算法）和 B/C 级分法方向正确，可以正式发布分级并进入 Phase 2/3？",
+      "recommendation": "建议抽查 5–10 个 A 级知识点和 5 个 B 级知识点，判断分级方向是否正确。若方向正确，可阶段性通过，进入 Phase 2（知识图谱补全）或 Phase 3（错因体系）。"
+    },
+    {
+      "id": "phase2-graph",
+      "title": "Phase 2：知识图谱全量补全",
+      "status": "pass",
+      "humanResult": "189 个知识点六维图谱 100% 完成。前置/后续（同单元顺序链）、题型（80+ 类型）、错因（90+ 类型）、策略包（100+ 包）、掌握度规则（3 级区分）全部绑定。CoverageGate 覆盖率 100%，0 阻断。143 个 Phase 3 待补字段均为 warning。",
+      "evidence": [
+        "primary_math_g5_g6_knowledge_graph.json：189 节点，六维完整，无遗漏",
+        "coverage_gate_rules.json：189/189 通过，0 阻断",
+        "coverage_report.md：完整覆盖报告，六维覆盖率全部 ≥ 81%",
+        "题型 80+、错因 90+、策略 100+ 全部按单元绑定"
+      ],
+      "artifacts": [
+        {
+          "label": "知识图谱（JSON）",
+          "path": "acceptance-artifacts/primary_math_g5_g6_knowledge_graph.json",
+          "kind": "json"
+        },
+        {
+          "label": "覆盖门禁规则（JSON）",
+          "path": "acceptance-artifacts/coverage_gate_rules.json",
+          "kind": "json"
+        },
+        {
+          "label": "覆盖报告（MD）",
+          "path": "acceptance-artifacts/coverage_report.md",
+          "kind": "md"
+        }
+      ],
+      "acceptanceQuestion": "我是否认可：189 个知识点的六维图谱已足够启动 Phase 3 错因体系？",
+      "recommendation": "建议通过。Phase 3 补全验证动作和题目。"
+    },
+    {
+      "id": "phase3-errors",
+      "title": "Phase 3：错因体系落地",
+      "status": "pass",
+      "humanResult": "86 个错因（L1 通用 10 + L2 数学专属 76）全部定义完成，每个错因含定义/触发条件/排除条件/验证动作/相邻错因区别/策略包/家长端解释。560 条知识点-错因绑定，覆盖 189 个知识点（A 级 108 个全部绑定 ≥3 个错因）。",
+      "evidence": [
+        "error_taxonomy.json：86 个错因，11 字段完整",
+        "error_kp_bindings.json：560 条绑定",
+        "所有错因验证动作和策略包已定义",
+        "家长端解释零禁用词"
+      ],
+      "artifacts": [
+        {
+          "label": "错因分类（JSON）",
+          "path": "acceptance-artifacts/error_taxonomy.json",
+          "kind": "json"
+        },
+        {
+          "label": "错因-知识点绑定（JSON）",
+          "path": "acceptance-artifacts/error_kp_bindings.json",
+          "kind": "json"
+        }
+      ],
+      "acceptanceQuestion": "我是否认可：86 个错因的定义/验证/策略/家长解释足够支撑诊断引擎？",
+      "recommendation": "建议通过。Phase 4 策略包落地时进一步细化执行动作和话术模板。"
+    }
+  ],
+  "actions": [
+    {
+      "label": "开始 Phase 2/3：错因体系或知识图谱",
+      "prompt": "请开始 Phase 3 错因体系落地：基于 07_ERROR_TAXONOMY.md，为小学数学 5–6 年级 A 级知识点批量生成错因清单草案，并更新 acceptance-dashboard.json。"
+    },
+    {
+      "label": "重新分级",
+      "prompt": "请根据最新的 04_KNOWLEDGE_LEVELING.md 规则重新生成 Phase 1 分级草案，并同步更新 acceptance-dashboard.json 和 acceptance-artifacts。"
+    },
+    {
+      "label": "刷新验收数据",
+      "prompt": "请刷新 acceptance-dashboard.json，让验收页面显示最新结果。"
+    }
+  ]
+}

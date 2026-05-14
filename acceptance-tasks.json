@@ -1,0 +1,155 @@
+{
+  "updatedAt": "2026-05-13 19:02",
+  "project": "芽芽助教",
+  "currentPhase": "Phase 0.2",
+  "summary": {
+    "total": 5,
+    "done": 2,
+    "inProgress": 1,
+    "pending": 2,
+    "blocked": 0
+  },
+  "tasks": [
+    {
+      "id": "AE-P0-001",
+      "phase": "Phase 0",
+      "title": "拆分自我进化教学适配引擎工程文档",
+      "status": "done",
+      "executor": "OpenClaw / ChatGPT",
+      "startedAt": "2026-05-13 18:19",
+      "finishedAt": "2026-05-13 18:20",
+      "outputs": [
+        "docs/adaptive-engine/00_INDEX.md",
+        "docs/adaptive-engine/01_PRODUCT_VISION.md",
+        "docs/adaptive-engine/02_DEVELOPMENT_ROADMAP.md",
+        "docs/adaptive-engine/03_SYLLABUS_SOURCE_RULES.md",
+        "docs/adaptive-engine/04_KNOWLEDGE_LEVELING.md",
+        "docs/adaptive-engine/05_COVERAGE_GATE.md",
+        "docs/adaptive-engine/06_KNOWLEDGE_GRAPH.md",
+        "docs/adaptive-engine/07_ERROR_TAXONOMY.md",
+        "docs/adaptive-engine/08_STRATEGY_PACKS.md",
+        "docs/adaptive-engine/09_EVENT_PROTOCOL.md",
+        "docs/adaptive-engine/10_DATA_MODEL.md",
+        "docs/adaptive-engine/11_DIAGNOSIS_ENGINE.md",
+        "docs/adaptive-engine/12_STRATEGY_ENGINE.md",
+        "docs/adaptive-engine/13_PARENT_SUMMARY_RULES.md",
+        "docs/adaptive-engine/14_QUALITY_DASHBOARD.md"
+      ],
+      "acceptanceCriteria": [
+        "docs/adaptive-engine 目录存在",
+        "15 个 md 文件全部生成",
+        "00_INDEX.md 能说明阅读顺序和当前阶段"
+      ],
+      "howToAccept": [
+        "打开 docs/adaptive-engine/00_INDEX.md",
+        "确认文档目录完整",
+        "确认当前阶段指向小学数学 5–6 大纲整理"
+      ],
+      "result": "已完成文档拆分，可作为 AI 工具开发入口。",
+      "risk": "无"
+    },
+    {
+      "id": "AE-P0-002",
+      "phase": "Phase 0",
+      "title": "创建项目完整介绍文档",
+      "status": "done",
+      "executor": "OpenClaw / ChatGPT",
+      "startedAt": "2026-05-13 18:22",
+      "finishedAt": "2026-05-13 18:25",
+      "outputs": [
+        "PROJECT_INTRODUCTION.md"
+      ],
+      "acceptanceCriteria": [
+        "PROJECT_INTRODUCTION.md 存在",
+        "能说明项目定位、当前状态、技术架构、下一步任务",
+        "能作为 AI 工具理解项目入口"
+      ],
+      "howToAccept": [
+        "打开 PROJECT_INTRODUCTION.md",
+        "确认其中包含前端、后端、真课堂、adaptive-engine、Hermes 工作流说明"
+      ],
+      "result": "已生成项目总介绍文档。",
+      "risk": "无"
+    },
+    {
+      "id": "AE-P0-003",
+      "phase": "Phase 0",
+      "title": "整理人教版小学数学 5–6 年级教材大纲 Phase 0 初稿",
+      "status": "in_progress",
+      "executor": "OpenClaw / ChatGPT",
+      "startedAt": "2026-05-13 18:53",
+      "finishedAt": null,
+      "outputs": [
+        "docs/adaptive-engine/syllabus/primary_math_g5_g6_syllabus.md",
+        "docs/adaptive-engine/syllabus/primary_math_g5_g6_knowledge.json",
+        "docs/adaptive-engine/syllabus/primary_math_g5_g6_alignment_report.md",
+        "docs/adaptive-engine/syllabus/primary_math_g5_g6_alignment_flags.json"
+      ],
+      "acceptanceCriteria": [
+        "四册目录均已出现：五上、五下、六上、六下",
+        "本地 DB 五六年级数学知识点已导出",
+        "对齐报告能列出已匹配和待审核项",
+        "所有未核验知识点必须标记 needs_textbook_body_review"
+      ],
+      "howToAccept": [
+        "打开 primary_math_g5_g6_syllabus.md，确认四册目录存在",
+        "打开 primary_math_g5_g6_alignment_report.md，查看总体结论和待处理问题",
+        "确认五上、五下、六上、六下都有 DB 知识点统计",
+        "确认待审核项已列出，没有冒充最终权威清单"
+      ],
+      "result": "已完成目录初抓、本地知识点导出和自动对齐；仍需 Phase 0.3 补 sourceRef 与教材正文核验。",
+      "risk": "六年级上册细课时仍需教材正文/教参核验；当前 183 个知识点来自本地 DB/种子，不能直接视为最终权威。"
+    },
+    {
+      "id": "AE-P0-004",
+      "phase": "Phase 0.3",
+      "title": "补充 sourceRef 与实践活动/总复习处理决策",
+      "status": "pending",
+      "executor": "未开始",
+      "startedAt": null,
+      "finishedAt": null,
+      "outputs": [
+        "docs/adaptive-engine/syllabus/primary_math_g5_g6_source_review.md",
+        "docs/adaptive-engine/syllabus/primary_math_g5_g6_knowledge.json"
+      ],
+      "acceptanceCriteria": [
+        "每个知识点至少有教材章节级 sourceRef",
+        "实践活动项有处理决策：知识点化/专题化/暂不入图谱",
+        "总复习项有处理决策",
+        "低置信度项进入待审核列表"
+      ],
+      "howToAccept": [
+        "查看 source_review.md",
+        "确认掷一掷、探索图形、怎样通知最快、总复习、节约用水、确定起跑线、生活与百分数、自行车里的数学都有处理决策"
+      ],
+      "result": "未开始",
+      "risk": "如果不做此步，后续 A/B/C 分级可能基于不稳定来源。"
+    },
+    {
+      "id": "AE-P1-001",
+      "phase": "Phase 1",
+      "title": "小学数学 5–6 知识点 A/B/C 分级",
+      "status": "pending",
+      "executor": "未开始",
+      "startedAt": null,
+      "finishedAt": null,
+      "outputs": [
+        "docs/adaptive-engine/syllabus/primary_math_g5_g6_levels.json",
+        "docs/adaptive-engine/syllabus/primary_math_g5_g6_leveling_report.md"
+      ],
+      "acceptanceCriteria": [
+        "每个知识点都有 A/B/C 分级",
+        "分级依据符合 04_KNOWLEDGE_LEVELING.md",
+        "A 级核心点有明确原因",
+        "分级不影响 100% 覆盖"
+      ],
+      "howToAccept": [
+        "查看 leveling_report.md",
+        "抽查 A 级知识点是否确实是主干/高频/强前置",
+        "确认没有知识点因为 C 级而被删除"
+      ],
+      "result": "未开始",
+      "risk": "必须在 Phase 0.3 之后进行。"
+    }
+  ]
+}

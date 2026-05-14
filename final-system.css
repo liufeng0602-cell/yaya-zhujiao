@@ -1,0 +1,398 @@
+/* ============================================================
+   yaya v3 final system overrides (v3)
+   - 手机壳：iPhone 14 比例 (390 x 844)
+   - 课堂页：控件卡 + 课件黑板 完全分离
+   - 课件黑板：教学区 170 + 字幕浮层 30 = 总高 200（教学区不被挤）
+   - 课件内容由 visualSpec 渲染：动画为主，文字老师讲
+   ============================================================ */
+
+:root{
+  --phone-w: 390px;
+  --phone-h: 844px;
+
+  /* 课件画布尺寸（必须与后端 prompt 同步） */
+  --board-w: 360px;
+  --board-content-h: 170px;
+  --board-subtitle-h: 50px;
+  --board-total-h: calc(var(--board-content-h) + var(--board-subtitle-h));
+}
+
+/* ---------- 容器 ---------- */
+.device-frame{
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 18px;
+  background: radial-gradient(circle at top, #0c1824, #04070d 60%);
+}
+.device-shell{
+  width: var(--phone-w);
+  height: var(--phone-h);
+  max-width: 100vw;
+  max-height: calc(100vh - 36px);
+  border-radius: 42px;
+  padding: 10px;
+  background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.04));
+  box-shadow: 0 28px 90px rgba(0,0,0,.5), 0 0 0 1px rgba(255,255,255,.08);
+}
+.device-screen{
+  width: 100%;
+  height: 100%;
+  border-radius: 32px;
+  overflow: hidden;
+  background: #050c17;
+  position: relative;
+}
+.app{
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 14px 14px 96px;
+  overflow-y: auto;
+  position: relative;
+}
+
+/* ---------- 顶栏（已删除模块，保留 fallback 占位） ---------- */
+.topbar{ display: none !important; }
+
+/* ---------- 底导航 ---------- */
+.bottom-nav{
+  position: absolute !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 12px !important;
+  width: calc(100% - 24px) !important;
+  margin: 0 auto !important;
+  transform: none !important;
+  display: grid !important;
+  grid-template-columns: repeat(5, 1fr) !important;
+  padding: 8px !important;
+  border-radius: 24px;
+  z-index: 100;
+}
+.nav-item{ font-size: 10px; gap: 2px; padding: 4px 0; }
+.nav-item span{ font-size: 18px; }
+
+/* ---------- 通用排版 ---------- */
+.glass.card{ border-radius: 16px; }
+.feature-card{ padding: 14px; border-radius: 16px; }
+.feature-title{ font-size: 14px; }
+.feature-desc{ font-size: 12px; }
+.section-title span{ font-size: 15px; }
+.hero{ padding: 14px; border-radius: 18px; }
+.hero h2{ font-size: 20px; margin: 8px 0 4px; }
+.hero p{ font-size: 12px; }
+.task-card{ padding: 12px 14px; border-radius: 16px; }
+.task-card strong{ font-size: 13px; }
+.task-card p{ font-size: 12px; }
+.filter-card{ padding: 10px 12px; top: 60px; border-radius: 14px; margin-bottom: 10px; }
+.filter-row{ margin-bottom: 8px; }
+.filter-row label{ font-size: 11px; min-width: 28px; }
+.chip{ padding: 5px 10px; font-size: 12px; }
+
+/* ============================================================
+   课堂页
+   ============================================================ */
+.classroom-wrap{ width: 100%; padding: 0 0 12px; overflow: visible; }
+.classroom-shell{ width: 100%; }
+.classroom-stage{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transform: none !important;
+}
+
+/* 控件卡 */
+.classroom-control-card{
+  padding: 10px 12px !important;
+  border-radius: 16px !important;
+  background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02)) !important;
+}
+.classroom-control-head{ display: flex; flex-direction: column; gap: 2px; margin-bottom: 8px; }
+.classroom-control-title{
+  font-size: 14px; font-weight: 900; color: #edf6ff; line-height: 1.2;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.classroom-control-sub{
+  font-size: 10px; color: #94b5d8;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.classroom-metrics{
+  display: grid !important;
+  grid-template-columns: repeat(4, 1fr) !important;
+  gap: 6px !important;
+  margin-bottom: 8px;
+}
+.classroom-metric{
+  border: 1px solid rgba(255,255,255,.1);
+  background: rgba(255,255,255,.05);
+  color: #edf6ff;
+  border-radius: 8px;
+  padding: 5px 4px;
+  font-size: 10px;
+  line-height: 1.1;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  text-align: center;
+}
+.classroom-progress-row{ display: flex; flex-direction: column; gap: 4px; margin-bottom: 8px; }
+.classroom-dots{ display: flex; justify-content: center; gap: 4px; }
+.classroom-dots .dot{
+  width: 6px; height: 6px; border-radius: 3px;
+  background: rgba(255,255,255,.18); transition: all .2s;
+}
+.classroom-dots .dot.active{ width: 18px; background: #55efff; }
+.classroom-progress-bar{
+  height: 3px; border-radius: 999px;
+  background: rgba(255,255,255,.08); overflow: hidden;
+}
+.classroom-progress-bar > div{
+  height: 100%;
+  background: linear-gradient(90deg, #55efff, #5aa5ff);
+  transition: width .35s ease;
+}
+.classroom-progress-text{ font-size: 10px; color: #94b5d8; text-align: center; }
+.classroom-controls{ display: grid !important; grid-template-columns: repeat(5, 1fr) !important; gap: 6px !important; }
+.ctrl-btn{
+  border: 1px solid rgba(255,255,255,.12);
+  background: rgba(255,255,255,.05);
+  color: #edf6ff;
+  border-radius: 10px;
+  padding: 8px 0;
+  font-size: 14px; font-weight: 800; text-align: center; cursor: pointer;
+}
+.ctrl-btn.primary{
+  background: linear-gradient(180deg, #55efff, #5aa5ff);
+  color: #051121; border-color: transparent;
+}
+.ctrl-btn.warn{ color: #ff8aa3; }
+
+/* ============================================================
+   课件黑板（独立模块）
+   总高 = 教学区 + 字幕浮层
+   教学区高度始终为 var(--board-content-h)，不被字幕挤
+   ============================================================ */
+.classroom-board{
+  width: 100% !important;
+  height: auto !important;
+  aspect-ratio: auto !important;
+  border: 8px solid #8a6238 !important;
+  border-radius: 14px !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  background:
+    radial-gradient(circle at 50% 25%, rgba(255,255,255,.04), transparent 45%),
+    linear-gradient(180deg, #224434, #19311f) !important;
+  margin: 0 !important;
+}
+.classroom-board .board-inner{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  color: #f7f7f1;
+}
+
+/* 教学内容区：固定高度，不被字幕挤 */
+.classroom-board .board-content{
+  position: relative;
+  width: 100%;
+  height: var(--board-content-h);
+  overflow: hidden;
+  padding: 8px 10px 4px;
+  box-sizing: border-box;
+}
+.classroom-board .board-head{
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+  margin: 0 0 4px;
+}
+.classroom-board .scene-index{
+  font-size: 9px; color: #cfe9d7;
+  background: rgba(255,255,255,.06);
+  border-radius: 999px;
+  padding: 1px 6px;
+  flex: 0 0 auto;
+}
+.classroom-board .scene-title{
+  font-size: 13px !important;
+  font-weight: 900;
+  line-height: 1.1 !important;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  margin: 0 !important;
+  flex: 1; min-width: 0;
+}
+
+/* 课件画布 / fallback */
+.classroom-board .board-canvas{
+  position: relative;
+  width: 100%;
+  height: calc(var(--board-content-h) - 24px);
+  overflow: hidden;
+}
+.classroom-board .board-fallback{
+  position: relative;
+  width: 100%;
+  height: calc(var(--board-content-h) - 24px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+.classroom-board .fb-emoji{ font-size: 40px; line-height: 1; }
+.classroom-board .fb-key{
+  font-size: 12px; font-weight: 800;
+  color: #f3de9f;
+  background: rgba(255,255,255,.06);
+  border-radius: 999px;
+  padding: 2px 8px;
+}
+
+/* 单个动画元素 */
+.classroom-board .bb-el{
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  font-weight: 800;
+}
+.classroom-board .bb-emoji{ font-weight: 400; }
+.classroom-board .bb-text,
+.classroom-board .bb-formula{ color: #f7f7f1; }
+.classroom-board .bb-shape{ background: transparent; border: 1px solid rgba(255,255,255,.4); border-radius: 8px; }
+.classroom-board .bb-arrow{ color: #89d7ff; font-weight: 900; text-align: center; }
+.classroom-board .chalk-chalk-white,  .classroom-board .chalk-white  { color: #f7f7f1 !important; }
+.classroom-board .chalk-chalk-yellow, .classroom-board .chalk-yellow { color: #f3de9f !important; }
+.classroom-board .chalk-chalk-blue,   .classroom-board .chalk-blue   { color: #89d7ff !important; }
+
+/* 老师字幕浮层（额外加在教学区下方，30px） */
+.classroom-board .board-subtitle-bar{
+  width: 100%;
+  height: var(--board-subtitle-h);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(4,8,12,.55);
+  border-top: 1px solid rgba(255,255,255,.08);
+  padding: 0 8px;
+  box-sizing: border-box;
+}
+.classroom-board .board-avatar{
+  width: 22px; height: 22px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #9fe4ff, #fff);
+  color: #06131f;
+  font-size: 12px;
+  display: flex; align-items: center; justify-content: center;
+  flex: 0 0 auto;
+}
+.classroom-board .board-subtitle-text{
+  font-size: 10px; line-height: 1.2; color: #f7f7f1; flex: 1;
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
+  overflow: hidden; text-overflow: ellipsis;
+}
+.classroom-board .board-subtitle-text b{ color: #89d7ff; font-weight: 800; }
+
+/* ---------- 下方两列：总结 + 老师 ---------- */
+.classroom-stage .classroom-bottom-grid{
+  display: grid !important;
+  grid-template-columns: 1fr 1fr !important;
+  gap: 8px !important;
+  margin: 0 !important;
+}
+.classroom-stage .classroom-bottom-grid .glass.card{
+  padding: 10px !important;
+  min-height: 0 !important;
+  border-radius: 14px;
+}
+.classroom-stage .detail-title{
+  font-size: 12px !important;
+  font-weight: 800;
+  margin-bottom: 4px !important;
+}
+.classroom-stage .classroom-bottom-grid .glass.card > div:not(.detail-title){
+  font-size: 11px !important; line-height: 1.4 !important;
+}
+
+/* ---------- AI 同学 ---------- */
+.classroom-stage > .glass.card{ border-radius: 14px; }
+.classroom-stage div[style*="border-radius:14px"][style*="padding:10px 14px"]{
+  padding: 8px 10px !important;
+  font-size: 11px !important;
+}
+.classroom-stage div[style*="line-height:1.75"]{
+  line-height: 1.35 !important;
+  font-size: 11px !important;
+}
+.classroom-stage div[style*="min-width:36px"][style*="height:36px"]{
+  min-width: 28px !important;
+  height: 28px !important;
+  font-size: 14px !important;
+}
+
+/* ---------- 互动题 ---------- */
+.classroom-stage #cr_quizPanel{ padding: 10px !important; }
+.classroom-stage #cr_quizPanel > div[style*="line-height:1.8"]{
+  font-size: 12px !important;
+  line-height: 1.4 !important;
+}
+.classroom-stage #cr_quizPanel button[data-qidx]{
+  padding: 8px 10px !important;
+  font-size: 11px !important;
+  line-height: 1.3 !important;
+  white-space: normal !important;
+  border-radius: 10px !important;
+}
+.classroom-stage #cr_quizFeedback{ font-size: 11px !important; }
+
+/* ============================================================
+   动画 keyframes
+   ============================================================ */
+@keyframes bb-fade-in{ from{opacity:0; transform: translateY(4px);} to{opacity:1; transform: translateY(0);} }
+@keyframes bb-bounce-in{ 0%{opacity:0; transform: scale(.6);} 70%{opacity:1; transform: scale(1.1);} 100%{transform: scale(1);} }
+@keyframes bb-slide-in-left{ from{opacity:0; transform: translateX(-16px);} to{opacity:1; transform: translateX(0);} }
+@keyframes bb-slide-in-right{ from{opacity:0; transform: translateX(16px);} to{opacity:1; transform: translateX(0);} }
+@keyframes bb-pop{ 0%{opacity:0; transform: scale(.3);} 60%{opacity:1; transform: scale(1.05);} 100%{transform: scale(1);} }
+@keyframes bb-draw{ from{opacity:0; clip-path: inset(0 100% 0 0);} to{opacity:1; clip-path: inset(0 0 0 0);} }
+@keyframes bb-pulse{ 0%,100%{transform: scale(1);} 50%{transform: scale(1.05);} }
+
+/* ============================================================
+   适配
+   ============================================================ */
+@media (max-width: 480px){
+  .device-frame{ padding: 0; }
+  .device-shell{
+    width: 100vw; height: 100vh; max-height: 100vh;
+    border-radius: 0; padding: 0; box-shadow: none;
+  }
+  .device-screen{ border-radius: 0; }
+}
+@media (orientation: landscape) and (min-width: 800px){
+  .device-shell{ width: 390px; height: 844px; }
+}
+ height: 100vh; max-height: 100vh;
+    border-radius: 0; padding: 0; box-shadow: none;
+  }
+  .device-screen{ border-radius: 0; }
+}
+@media (orientation: landscape) and (min-width: 800px){
+  .device-shell{ width: 390px; height: 844px; }
+}
+
+.classroom-board .board-canvas-wrap{
+  position: relative;
+  width: 100%;
+  height: calc(var(--board-content-h) - 24px);
+  overflow: hidden;
+}
+.classroom-board .board-canvas-wrap .board-canvas{
+  position: absolute;
+  left: 0;
+  top: 0;
+}

@@ -1,0 +1,174 @@
+[
+  [
+    "INFO",
+    "KG 6-dim: 0 issues / 189 nodes"
+  ],
+  [
+    "WARN",
+    "KG 'prerequisites': 31 empty (['M5S1-0', 'M5S1-15', 'M5S1-20', 'M5S1-34', 'M5S1-38']...)"
+  ],
+  [
+    "WARN",
+    "KG 'next': 31 empty (['M5S1-19', 'M5S1-33', 'M5S1-37', 'M5S1-49', 'M5S1-60']...)"
+  ],
+  [
+    "BLOCK",
+    "levelScore != sum(dims): 135/183 mismatches, 133 would change level"
+  ],
+  [
+    "INFO",
+    "  M5S1-1: ls=9 sum=6 dims=[0, 0, 1, 2, 1, 2] level=A"
+  ],
+  [
+    "INFO",
+    "  M5S1-2: ls=9 sum=4 dims=[0, 0, 1, 1, 1, 1] level=A"
+  ],
+  [
+    "INFO",
+    "  M5S1-3: ls=9 sum=7 dims=[2, 0, 1, 1, 1, 2] level=A"
+  ],
+  [
+    "INFO",
+    "  M5S1-4: ls=9 sum=8 dims=[0, 2, 1, 2, 1, 2] level=A"
+  ],
+  [
+    "INFO",
+    "  M5S1-5: ls=9 sum=4 dims=[0, 0, 1, 1, 1, 1] level=A"
+  ],
+  [
+    "INFO",
+    "  M5S1-6: ls=9 sum=5 dims=[0, 1, 1, 1, 1, 1] level=A"
+  ],
+  [
+    "INFO",
+    "  M5S1-9: ls=5 sum=4 dims=[0, 0, 1, 1, 1, 1] level=B"
+  ],
+  [
+    "INFO",
+    "  M5S1-15: ls=5 sum=4 dims=[2, 0, 0, 1, 1, 0] level=B"
+  ],
+  [
+    "BLOCK",
+    "KP M5S2-28: missing ['verifiedBy', 'confidence', 'status', 'teachingGoal', 'keyPoints', 'commonMistakes', 'tags', 'level', 'levelScore', 'levelDims']"
+  ],
+  [
+    "BLOCK",
+    "KP M5S2-29: missing ['verifiedBy', 'confidence', 'status', 'teachingGoal', 'keyPoints', 'commonMistakes', 'tags', 'level', 'levelScore', 'levelDims']"
+  ],
+  [
+    "BLOCK",
+    "KP M5S2-30: missing ['verifiedBy', 'confidence', 'status', 'teachingGoal', 'keyPoints', 'commonMistakes', 'tags', 'level', 'levelScore', 'levelDims']"
+  ],
+  [
+    "BLOCK",
+    "KP M5S2-31: missing ['verifiedBy', 'confidence', 'status', 'teachingGoal', 'keyPoints', 'commonMistakes', 'tags', 'level', 'levelScore', 'levelDims']"
+  ],
+  [
+    "BLOCK",
+    "KP M5S2-32: missing ['verifiedBy', 'confidence', 'status', 'teachingGoal', 'keyPoints', 'commonMistakes', 'tags', 'level', 'levelScore', 'levelDims']"
+  ],
+  [
+    "BLOCK",
+    "KP M5S2-33: missing ['verifiedBy', 'confidence', 'status', 'teachingGoal', 'keyPoints', 'commonMistakes', 'tags', 'level', 'levelScore', 'levelDims']"
+  ],
+  [
+    "INFO",
+    "Status: {'needs_textbook_body_review': 183, '?': 6}"
+  ],
+  [
+    "BLOCK",
+    "Tax err codes not in bindings: ['calculation_error', 'comprehension_bias', 'concept_confusion', 'expression_format_error', 'info_omission', 'memory_retrieval_failure', 'prerequisite_gap', 'question_type_unfamiliar', 'strategy_missing', 'transfer_failure']"
+  ],
+  [
+    "WARN",
+    "Tax err codes not in any KG node: 10 (['calculation_error', 'comprehension_bias', 'concept_confusion', 'expression_format_error', 'info_omission', 'memory_retrieval_failure', 'prerequisite_gap', 'question_type_unfamiliar', 'strategy_missing', 'transfer_failure']...)"
+  ],
+  [
+    "INFO",
+    "Error codes: KG=76 Tax=86 Bind=76"
+  ],
+  [
+    "INFO",
+    "All 86 errors have all 11 fields populated"
+  ],
+  [
+    "INFO",
+    "Binding coverage: 189/189"
+  ],
+  [
+    "INFO",
+    "A-level bindings: min=3, avg=3.5"
+  ],
+  [
+    "INFO",
+    "levels.json ↔ knowledge: perfect match (189)"
+  ],
+  [
+    "BLOCK",
+    "Level mismatch [A]: knowledge.level != A: ['M5S2-31', 'M5S1-51', 'M5S1-53', 'M5S1-56', 'M6S2-0', 'M5S2-29']"
+  ],
+  [
+    "BLOCK",
+    "Level mismatch [B]: knowledge.level != B: ['M5S2-30', 'M6S2-9', 'M5S2-33']"
+  ],
+  [
+    "BLOCK",
+    "Level mismatch [C]: knowledge.level != C: ['M5S2-28', 'M5S2-32']"
+  ],
+  [
+    "INFO",
+    "KG ↔ knowledge: perfect match (189)"
+  ],
+  [
+    "BLOCK",
+    "M5S2-28: missing ['level', 'levelScore', 'levelDims', 'status']"
+  ],
+  [
+    "BLOCK",
+    "M5S2-29: missing ['level', 'levelScore', 'levelDims', 'status']"
+  ],
+  [
+    "BLOCK",
+    "M5S2-30: missing ['level', 'levelScore', 'levelDims', 'status']"
+  ],
+  [
+    "BLOCK",
+    "M5S2-31: missing ['level', 'levelScore', 'levelDims', 'status']"
+  ],
+  [
+    "BLOCK",
+    "M5S2-32: missing ['level', 'levelScore', 'levelDims', 'status']"
+  ],
+  [
+    "BLOCK",
+    "M5S2-33: missing ['level', 'levelScore', 'levelDims', 'status']"
+  ],
+  [
+    "INFO",
+    "Score dist: {9: 101, 5: 36, 6: 5, 7: 4, 2: 5, 4: 23, 10: 1, 3: 8, 'None': 6}"
+  ],
+  [
+    "INFO",
+    "DIM textbookWeight: [0,2] avg=0.4"
+  ],
+  [
+    "INFO",
+    "DIM cognitiveDepth: [0,2] avg=0.1"
+  ],
+  [
+    "INFO",
+    "DIM prerequisiteChain: [0,2] avg=0.9"
+  ],
+  [
+    "INFO",
+    "DIM examFrequency: [1,2] avg=1.1"
+  ],
+  [
+    "INFO",
+    "DIM errorProneness: [1,2] avg=1.2"
+  ],
+  [
+    "INFO",
+    "DIM transferability: [0,2] avg=1.0"
+  ]
+]

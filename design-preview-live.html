@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>直播课式课堂预览</title>
+<link rel="stylesheet" href="./design-preview-core.css" />
+<style>
+  .board{min-height:0}
+</style>
+</head>
+<body>
+  <div class="page-shell">
+    <div class="screen full">
+      <div class="topbar">
+        <div>
+          <div class="title">小数乘整数：几个相同的小数加起来</div>
+          <div class="sub">直播课式课堂 · 黑板 + 字幕 + 老师头像 + AI 同学 + 互动题</div>
+        </div>
+        <div class="badge">横屏铺满预览</div>
+      </div>
+
+      <div class="layout">
+        <div class="board inner">
+          <div class="board-head">
+            <div>
+              <h1 class="board-title">小数乘整数</h1>
+              <div class="board-subtitle">几个相同的小数加起来</div>
+            </div>
+            <div class="board-meta">场景 4 / 4<br/>直播课堂进度 100%</div>
+          </div>
+
+          <div class="board-stage">
+            <div class="chalk-row">
+              <span class="chalk-pill"><strong>导入</strong> 买 3 支棒棒糖</span>
+              <span class="chalk-pill"><strong>理解</strong> 0.5 × 3</span>
+              <span class="chalk-pill"><strong>结论</strong> 3 个 0.5 相加</span>
+            </div>
+            <div class="scene-emoji">🍭</div>
+            <div class="scene-title">0.5 × 3 表示什么？</div>
+            <div class="scene-subtitle">3 个 0.5 相加</div>
+            <div class="scene-text">0.5 + 0.5 + 0.5 = 1.5</div>
+            <div class="board-progress"><div style="width:100%"></div></div>
+          </div>
+
+          <div class="subtitle-float">
+            <div class="teacher-bar">
+              <div class="teacher-avatar">👩‍🏫</div>
+              <div>
+                <div class="teacher-name">芽芽老师</div>
+                <div class="teacher-copy">0.5 × 3，表示 3 个 0.5 相加。</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="sidebar">
+          <div class="panel">
+            <h3>老师头像与状态</h3>
+            <div class="desc">老师在讲课时，黑板底部显示头像与字幕，明确是谁在说话。</div>
+          </div>
+
+          <div class="panel">
+            <h3>AI 同学陪读</h3>
+            <div class="classmates">
+              <div class="mate"><div class="icon">🧒</div><div><div class="mate-name">小认真</div><div class="mate-text">我来总结：0.5 × 3 就是 3 个 0.5 相加。</div></div></div>
+              <div class="mate"><div class="icon alt">👧</div><div><div class="mate-name">小好奇</div><div class="mate-text">原来乘法就是把重复加法写简洁一点！</div></div></div>
+            </div>
+          </div>
+
+          <div class="panel">
+            <h3>互动题</h3>
+            <button class="quiz-btn">A. 1.2 + 4</button>
+            <button class="quiz-btn correct">B. 4 个 1.2 相加</button>
+            <button class="quiz-btn">C. 1.2 乘 4 再加 1</button>
+            <button class="quiz-btn">D. 4 个 2 相加</button>
+            <div class="quiz-feedback">答对后会出现绿色高亮反馈。</div>
+          </div>
+
+          <div class="panel">
+            <h3>课堂总结</h3>
+            <div class="summary-box">
+              <div class="summary-line">小数乘整数，就是几个相同小数相加。</div>
+              <div class="small">先想意思，再写算式，再算结果。</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="controls">
+        <button class="control-btn">⏮ 上一页</button>
+        <button class="control-btn primary">▶ 播放 / 暂停</button>
+        <div class="compact-progress">
+          <div class="bar"><div style="width:100%"></div></div>
+          <div class="progress-info">4 / 4</div>
+        </div>
+        <button class="control-btn">下一页 ⏭</button>
+        <button class="control-btn warn">✅ 结束课堂</button>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
