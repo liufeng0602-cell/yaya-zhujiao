@@ -673,12 +673,7 @@
       "keyPoints": [
         "了解数一数、实物对应数数方法"
       ],
-      "commonMistakes": [
-        "概念混淆",
-        "表达/书写/格式问题",
-        "前置知识缺失",
-        "解题策略缺失"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#数与代数",
         "#10 以内数的认识与运算",
@@ -698,14 +693,14 @@
         "needsPageRef": true,
         "reviewNote": "新课标了解层级，需教材正文核验。"
       },
-      "level": "A",
-      "levelScore": 3,
+      "level": "C",
+      "levelScore": 2,
       "levelDims": [
-        1,
-        1,
-        1,
         0,
         0,
+        0,
+        1,
+        1,
         0
       ],
       "levelNote": "AI草案分级，新课标了解+六维启发，需人工核验。",
@@ -730,10 +725,7 @@
       "keyPoints": [
         "理解同样多、多、少的含义"
       ],
-      "commonMistakes": [
-        "概念混淆",
-        "前置知识缺失"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#数与代数",
         "#10 以内数的认识与运算",
@@ -785,11 +777,7 @@
       "keyPoints": [
         "掌握一一对应比较多少的方法"
       ],
-      "commonMistakes": [
-        "概念混淆",
-        "前置知识缺失",
-        "解题策略缺失"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#数与代数",
         "#10 以内数的认识与运算",
@@ -809,14 +797,14 @@
         "needsPageRef": true,
         "reviewNote": "新课标掌握层级，需教材正文核验。"
       },
-      "level": "C",
-      "levelScore": 9,
+      "level": "B",
+      "levelScore": 6,
       "levelDims": [
         1,
-        2,
-        2,
         1,
-        2,
+        1,
+        1,
+        1,
         1
       ],
       "levelNote": "AI草案分级，新课标掌握+六维启发，需人工核验。",
@@ -841,12 +829,7 @@
       "keyPoints": [
         "理解 1-5 各数的含义、读写与顺序"
       ],
-      "commonMistakes": [
-        "概念混淆",
-        "表达/书写/格式问题",
-        "前置知识缺失",
-        "题型不熟"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#数与代数",
         "#10 以内数的认识与运算",
@@ -898,11 +881,7 @@
       "keyPoints": [
         "掌握 1-5 数的分与合"
       ],
-      "commonMistakes": [
-        "题意理解偏差",
-        "前置知识缺失",
-        "解题策略缺失"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#数与代数",
         "#10 以内数的认识与运算",
@@ -922,14 +901,14 @@
         "needsPageRef": true,
         "reviewNote": "新课标掌握层级，需教材正文核验。"
       },
-      "level": "C",
-      "levelScore": 9,
+      "level": "B",
+      "levelScore": 6,
       "levelDims": [
         1,
-        2,
-        2,
         1,
-        2,
+        1,
+        1,
+        1,
         1
       ],
       "levelNote": "AI草案分级，新课标掌握+六维启发，需人工核验。",
@@ -954,14 +933,7 @@
       "keyPoints": [
         "理解加减法的实际含义"
       ],
-      "commonMistakes": [
-        "计算/操作失误",
-        "题意理解偏差",
-        "概念混淆",
-        "关键信息遗漏",
-        "前置知识缺失",
-        "迁移失败"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#数与代数",
         "#10 以内数的认识与运算",
@@ -981,15 +953,15 @@
         "needsPageRef": true,
         "reviewNote": "新课标理解层级，需教材正文核验。"
       },
-      "level": "B",
-      "levelScore": 6,
+      "level": "A",
+      "levelScore": 11,
       "levelDims": [
         1,
-        1,
-        1,
-        1,
-        1,
-        1
+        2,
+        2,
+        2,
+        2,
+        2
       ],
       "levelNote": "AI草案分级，新课标理解+六维启发，需人工核验。",
       "curriculumLevelLabel": "理解——知道为什么"
@@ -1013,11 +985,7 @@
       "keyPoints": [
         "掌握 1-5 以内加减法口算"
       ],
-      "commonMistakes": [
-        "计算/操作失误",
-        "前置知识缺失",
-        "解题策略缺失"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#数与代数",
         "#10 以内数的认识与运算",
@@ -1037,15 +1005,15 @@
         "needsPageRef": true,
         "reviewNote": "新课标掌握层级，需教材正文核验。"
       },
-      "level": "C",
-      "levelScore": 9,
+      "level": "A",
+      "levelScore": 12,
       "levelDims": [
-        1,
         2,
         2,
-        1,
         2,
-        1
+        2,
+        2,
+        2
       ],
       "levelNote": "AI草案分级，新课标掌握+六维启发，需人工核验。",
       "curriculumLevelLabel": "掌握——能够独立做"
@@ -1069,13 +1037,7 @@
       "keyPoints": [
         "了解 0 的两种实际含义"
       ],
-      "commonMistakes": [
-        "题意理解偏差",
-        "概念混淆",
-        "关键信息遗漏",
-        "前置知识缺失",
-        "迁移失败"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#数与代数",
         "#10 以内数的认识与运算",
@@ -1095,14 +1057,14 @@
         "needsPageRef": true,
         "reviewNote": "新课标了解层级，需教材正文核验。"
       },
-      "level": "A",
-      "levelScore": 3,
+      "level": "B",
+      "levelScore": 6,
       "levelDims": [
-        1,
-        1,
-        1,
         0,
         0,
+        2,
+        2,
+        2,
         0
       ],
       "levelNote": "AI草案分级，新课标了解+六维启发，需人工核验。",
@@ -1127,13 +1089,7 @@
       "keyPoints": [
         "掌握 0 的读写与有关 0 的加减法"
       ],
-      "commonMistakes": [
-        "计算/操作失误",
-        "表达/书写/格式问题",
-        "前置知识缺失",
-        "题型不熟",
-        "解题策略缺失"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#数与代数",
         "#10 以内数的认识与运算",
@@ -1153,15 +1109,15 @@
         "needsPageRef": true,
         "reviewNote": "新课标掌握层级，需教材正文核验。"
       },
-      "level": "C",
-      "levelScore": 9,
+      "level": "A",
+      "levelScore": 12,
       "levelDims": [
-        1,
         2,
         2,
-        1,
         2,
-        1
+        2,
+        2,
+        2
       ],
       "levelNote": "AI草案分级，新课标掌握+六维启发，需人工核验。",
       "curriculumLevelLabel": "掌握——能够独立做"
@@ -1185,12 +1141,7 @@
       "keyPoints": [
         "理解凑十法算理"
       ],
-      "commonMistakes": [
-        "计算/操作失误",
-        "概念混淆",
-        "前置知识缺失",
-        "解题策略缺失"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#数与代数",
         "#20 以内进位加法",
@@ -1242,11 +1193,7 @@
       "keyPoints": [
         "掌握 9、8、7、6 加几进位口算"
       ],
-      "commonMistakes": [
-        "计算/操作失误",
-        "前置知识缺失",
-        "解题策略缺失"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#数与代数",
         "#20 以内进位加法",
@@ -1266,15 +1213,15 @@
         "needsPageRef": true,
         "reviewNote": "新课标掌握层级，需教材正文核验。"
       },
-      "level": "C",
-      "levelScore": 9,
+      "level": "A",
+      "levelScore": 12,
       "levelDims": [
-        1,
         2,
         2,
-        1,
         2,
-        1
+        2,
+        2,
+        2
       ],
       "levelNote": "AI草案分级，新课标掌握+六维启发，需人工核验。",
       "curriculumLevelLabel": "掌握——能够独立做"
@@ -1298,11 +1245,7 @@
       "keyPoints": [
         "掌握 5、4、3、2 加几口算技巧"
       ],
-      "commonMistakes": [
-        "计算/操作失误",
-        "前置知识缺失",
-        "解题策略缺失"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#数与代数",
         "#20 以内进位加法",
@@ -1322,15 +1265,15 @@
         "needsPageRef": true,
         "reviewNote": "新课标掌握层级，需教材正文核验。"
       },
-      "level": "C",
-      "levelScore": 9,
+      "level": "A",
+      "levelScore": 12,
       "levelDims": [
-        1,
         2,
         2,
-        1,
         2,
-        1
+        2,
+        2,
+        2
       ],
       "levelNote": "AI草案分级，新课标掌握+六维启发，需人工核验。",
       "curriculumLevelLabel": "掌握——能够独立做"
@@ -1354,13 +1297,7 @@
       "keyPoints": [
         "运用进位加法解决生活简单问题"
       ],
-      "commonMistakes": [
-        "计算/操作失误",
-        "题意理解偏差",
-        "关键信息遗漏",
-        "前置知识缺失",
-        "迁移失败"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#数与代数",
         "#20 以内进位加法",
@@ -1380,7 +1317,7 @@
         "needsPageRef": true,
         "reviewNote": "新课标运用层级，需教材正文核验。"
       },
-      "level": "D",
+      "level": "A",
       "levelScore": 12,
       "levelDims": [
         2,
@@ -1412,11 +1349,7 @@
       "keyPoints": [
         "了解长方体、正方体、圆柱、球的外形特征"
       ],
-      "commonMistakes": [
-        "概念混淆",
-        "记忆提取失败",
-        "前置知识缺失"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#图形与几何",
         "#立体图形认识",
@@ -1436,14 +1369,14 @@
         "needsPageRef": true,
         "reviewNote": "新课标了解层级，需教材正文核验。"
       },
-      "level": "A",
-      "levelScore": 3,
+      "level": "C",
+      "levelScore": 2,
       "levelDims": [
-        1,
-        1,
-        1,
         0,
         0,
+        0,
+        1,
+        1,
         0
       ],
       "levelNote": "AI草案分级，新课标了解+六维启发，需人工核验。",
@@ -1468,11 +1401,7 @@
       "keyPoints": [
         "能直观辨认、分类常见立体图形"
       ],
-      "commonMistakes": [
-        "题意理解偏差",
-        "概念混淆",
-        "前置知识缺失"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#图形与几何",
         "#立体图形认识",
@@ -1492,14 +1421,14 @@
         "needsPageRef": true,
         "reviewNote": "新课标掌握层级，需教材正文核验。"
       },
-      "level": "C",
-      "levelScore": 9,
+      "level": "B",
+      "levelScore": 6,
       "levelDims": [
         1,
-        2,
-        2,
         1,
-        2,
+        1,
+        1,
+        1,
         1
       ],
       "levelNote": "AI草案分级，新课标掌握+六维启发，需人工核验。",
@@ -1524,11 +1453,7 @@
       "keyPoints": [
         "了解钟面时针、分针"
       ],
-      "commonMistakes": [
-        "题意理解偏差",
-        "概念混淆",
-        "前置知识缺失"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#常见的量",
         "#时间认知",
@@ -1548,14 +1473,14 @@
         "needsPageRef": true,
         "reviewNote": "新课标了解层级，需教材正文核验。"
       },
-      "level": "A",
-      "levelScore": 3,
+      "level": "C",
+      "levelScore": 2,
       "levelDims": [
-        1,
-        1,
-        1,
         0,
         0,
+        0,
+        1,
+        1,
         0
       ],
       "levelNote": "AI草案分级，新课标了解+六维启发，需人工核验。",
@@ -1580,11 +1505,7 @@
       "keyPoints": [
         "掌握认读整时的方法"
       ],
-      "commonMistakes": [
-        "概念混淆",
-        "前置知识缺失",
-        "解题策略缺失"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#常见的量",
         "#时间认知",
@@ -1604,14 +1525,14 @@
         "needsPageRef": true,
         "reviewNote": "新课标掌握层级，需教材正文核验。"
       },
-      "level": "C",
-      "levelScore": 9,
+      "level": "B",
+      "levelScore": 6,
       "levelDims": [
         1,
-        2,
-        2,
         1,
-        2,
+        1,
+        1,
+        1,
         1
       ],
       "levelNote": "AI草案分级，新课标掌握+六维启发，需人工核验。",
@@ -1636,11 +1557,7 @@
       "keyPoints": [
         "会用两种形式记录整时"
       ],
-      "commonMistakes": [
-        "表达/书写/格式问题",
-        "前置知识缺失",
-        "题型不熟"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#常见的量",
         "#时间认知",
@@ -1660,14 +1577,14 @@
         "needsPageRef": true,
         "reviewNote": "新课标掌握层级，需教材正文核验。"
       },
-      "level": "C",
-      "levelScore": 9,
+      "level": "B",
+      "levelScore": 6,
       "levelDims": [
         1,
-        2,
-        2,
         1,
-        2,
+        1,
+        1,
+        1,
         1
       ],
       "levelNote": "AI草案分级，新课标掌握+六维启发，需人工核验。",
@@ -1692,11 +1609,7 @@
       "keyPoints": [
         "发现简单图形、数字排列规律"
       ],
-      "commonMistakes": [
-        "记忆提取失败",
-        "数形结合规律发现失败",
-        "前置知识缺失"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#综合与实践",
         "#简单规律",
@@ -1716,14 +1629,14 @@
         "needsPageRef": true,
         "reviewNote": "新课标了解层级，需教材正文核验。"
       },
-      "level": "A",
-      "levelScore": 3,
+      "level": "C",
+      "levelScore": 2,
       "levelDims": [
-        1,
-        1,
-        1,
         0,
         0,
+        0,
+        1,
+        1,
         0
       ],
       "levelNote": "AI草案分级，新课标了解+六维启发，需人工核验。",
@@ -1748,11 +1661,7 @@
       "keyPoints": [
         "能按规律补全序列"
       ],
-      "commonMistakes": [
-        "记忆提取失败",
-        "数形结合规律发现失败",
-        "前置知识缺失"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#综合与实践",
         "#简单规律",
@@ -1773,14 +1682,14 @@
         "reviewNote": "新课标掌握层级，需教材正文核验。"
       },
       "level": "C",
-      "levelScore": 9,
+      "levelScore": 2,
       "levelDims": [
         1,
-        2,
-        2,
+        0,
+        0,
         1,
-        2,
-        1
+        0,
+        0
       ],
       "levelNote": "AI草案分级，新课标掌握+六维启发，需人工核验。",
       "curriculumLevelLabel": "掌握——能够独立做"
@@ -1804,12 +1713,7 @@
       "keyPoints": [
         "理解破十法、想加算减算理"
       ],
-      "commonMistakes": [
-        "计算/操作失误",
-        "概念混淆",
-        "前置知识缺失",
-        "解题策略缺失"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#数与代数",
         "#20 以内退位减法",
@@ -1830,12 +1734,12 @@
         "reviewNote": "新课标理解层级，需教材正文核验。"
       },
       "level": "B",
-      "levelScore": 6,
+      "levelScore": 8,
       "levelDims": [
         1,
+        2,
         1,
-        1,
-        1,
+        2,
         1,
         1
       ],
@@ -1861,11 +1765,7 @@
       "keyPoints": [
         "熟练掌握 20 以内退位减法口算"
       ],
-      "commonMistakes": [
-        "计算/操作失误",
-        "前置知识缺失",
-        "解题策略缺失"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#数与代数",
         "#20 以内退位减法",
@@ -1885,15 +1785,15 @@
         "needsPageRef": true,
         "reviewNote": "新课标掌握层级，需教材正文核验。"
       },
-      "level": "C",
-      "levelScore": 9,
+      "level": "A",
+      "levelScore": 12,
       "levelDims": [
-        1,
         2,
         2,
-        1,
         2,
-        1
+        2,
+        2,
+        2
       ],
       "levelNote": "AI草案分级，新课标掌握+六维启发，需人工核验。",
       "curriculumLevelLabel": "掌握——能够独立做"
@@ -1917,13 +1817,7 @@
       "keyPoints": [
         "运用退位减法解决求总数、求部分问题"
       ],
-      "commonMistakes": [
-        "计算/操作失误",
-        "题意理解偏差",
-        "关键信息遗漏",
-        "前置知识缺失",
-        "迁移失败"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#数与代数",
         "#20 以内退位减法",
@@ -1943,7 +1837,7 @@
         "needsPageRef": true,
         "reviewNote": "新课标运用层级，需教材正文核验。"
       },
-      "level": "D",
+      "level": "A",
       "levelScore": 12,
       "levelDims": [
         2,
@@ -1975,10 +1869,7 @@
       "keyPoints": [
         "理解个位、十位的数位意义"
       ],
-      "commonMistakes": [
-        "概念混淆",
-        "前置知识缺失"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#数与代数",
         "#100 以内数的认识",
@@ -2030,12 +1921,7 @@
       "keyPoints": [
         "掌握 100 以内数的数数、读写、组成"
       ],
-      "commonMistakes": [
-        "表达/书写/格式问题",
-        "前置知识缺失",
-        "题型不熟",
-        "解题策略缺失"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#数与代数",
         "#100 以内数的认识",
@@ -2055,14 +1941,14 @@
         "needsPageRef": true,
         "reviewNote": "新课标掌握层级，需教材正文核验。"
       },
-      "level": "C",
-      "levelScore": 9,
+      "level": "B",
+      "levelScore": 6,
       "levelDims": [
         1,
-        2,
-        2,
         1,
-        2,
+        1,
+        1,
+        1,
         1
       ],
       "levelNote": "AI草案分级，新课标掌握+六维启发，需人工核验。",
@@ -2087,11 +1973,7 @@
       "keyPoints": [
         "掌握 100 以内数的大小比较"
       ],
-      "commonMistakes": [
-        "概念混淆",
-        "前置知识缺失",
-        "解题策略缺失"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#数与代数",
         "#100 以内数的认识",
@@ -2111,14 +1993,14 @@
         "needsPageRef": true,
         "reviewNote": "新课标掌握层级，需教材正文核验。"
       },
-      "level": "C",
-      "levelScore": 9,
+      "level": "B",
+      "levelScore": 6,
       "levelDims": [
         1,
-        2,
-        2,
         1,
-        2,
+        1,
+        1,
+        1,
         1
       ],
       "levelNote": "AI草案分级，新课标掌握+六维启发，需人工核验。",
@@ -2143,11 +2025,7 @@
       "keyPoints": [
         "掌握整十数加、减整十数口算"
       ],
-      "commonMistakes": [
-        "计算/操作失误",
-        "前置知识缺失",
-        "解题策略缺失"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#数与代数",
         "#100 以内加减法",
@@ -2167,15 +2045,15 @@
         "needsPageRef": true,
         "reviewNote": "新课标掌握层级，需教材正文核验。"
       },
-      "level": "C",
-      "levelScore": 9,
+      "level": "A",
+      "levelScore": 12,
       "levelDims": [
-        1,
         2,
         2,
-        1,
         2,
-        1
+        2,
+        2,
+        2
       ],
       "levelNote": "AI草案分级，新课标掌握+六维启发，需人工核验。",
       "curriculumLevelLabel": "掌握——能够独立做"
@@ -2199,11 +2077,7 @@
       "keyPoints": [
         "掌握两位数加减一位数、整十数口算"
       ],
-      "commonMistakes": [
-        "计算/操作失误",
-        "前置知识缺失",
-        "解题策略缺失"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#数与代数",
         "#100 以内加减法",
@@ -2223,15 +2097,15 @@
         "needsPageRef": true,
         "reviewNote": "新课标掌握层级，需教材正文核验。"
       },
-      "level": "C",
-      "levelScore": 9,
+      "level": "A",
+      "levelScore": 12,
       "levelDims": [
-        1,
         2,
         2,
-        1,
         2,
-        1
+        2,
+        2,
+        2
       ],
       "levelNote": "AI草案分级，新课标掌握+六维启发，需人工核验。",
       "curriculumLevelLabel": "掌握——能够独立做"
@@ -2255,11 +2129,7 @@
       "keyPoints": [
         "直观认识长方形、正方形、三角形、平行四边形、圆"
       ],
-      "commonMistakes": [
-        "题意理解偏差",
-        "概念混淆",
-        "前置知识缺失"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#图形与几何",
         "#平面图形与位置",
@@ -2279,14 +2149,14 @@
         "needsPageRef": true,
         "reviewNote": "新课标了解层级，需教材正文核验。"
       },
-      "level": "A",
-      "levelScore": 3,
+      "level": "C",
+      "levelScore": 2,
       "levelDims": [
-        1,
-        1,
-        1,
         0,
         0,
+        0,
+        1,
+        1,
         0
       ],
       "levelNote": "AI草案分级，新课标了解+六维启发，需人工核验。",
@@ -2311,10 +2181,7 @@
       "keyPoints": [
         "能辨别、拼组简单平面图形"
       ],
-      "commonMistakes": [
-        "概念混淆",
-        "前置知识缺失"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#图形与几何",
         "#平面图形与位置",
@@ -2334,14 +2201,14 @@
         "needsPageRef": true,
         "reviewNote": "新课标掌握层级，需教材正文核验。"
       },
-      "level": "C",
-      "levelScore": 9,
+      "level": "B",
+      "levelScore": 6,
       "levelDims": [
         1,
-        2,
-        2,
         1,
-        2,
+        1,
+        1,
+        1,
         1
       ],
       "levelNote": "AI草案分级，新课标掌握+六维启发，需人工核验。",
@@ -2366,11 +2233,7 @@
       "keyPoints": [
         "理解上下、前后、左右相对位置关系"
       ],
-      "commonMistakes": [
-        "概念混淆",
-        "记忆提取失败",
-        "前置知识缺失"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#图形与几何",
         "#平面图形与位置",
@@ -2422,11 +2285,7 @@
       "keyPoints": [
         "会用方位词描述物体位置"
       ],
-      "commonMistakes": [
-        "概念混淆",
-        "方向参照点混淆",
-        "前置知识缺失"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#图形与几何",
         "#平面图形与位置",
@@ -2446,14 +2305,14 @@
         "needsPageRef": true,
         "reviewNote": "新课标掌握层级，需教材正文核验。"
       },
-      "level": "C",
-      "levelScore": 9,
+      "level": "B",
+      "levelScore": 6,
       "levelDims": [
         1,
-        2,
-        2,
         1,
-        2,
+        1,
+        1,
+        1,
         1
       ],
       "levelNote": "AI草案分级，新课标掌握+六维启发，需人工核验。",
@@ -2478,11 +2337,7 @@
       "keyPoints": [
         "了解元、角、分面值"
       ],
-      "commonMistakes": [
-        "题意理解偏差",
-        "概念混淆",
-        "前置知识缺失"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#常见的量",
         "#人民币",
@@ -2502,14 +2357,14 @@
         "needsPageRef": true,
         "reviewNote": "新课标了解层级，需教材正文核验。"
       },
-      "level": "A",
-      "levelScore": 3,
+      "level": "C",
+      "levelScore": 2,
       "levelDims": [
-        1,
-        1,
-        1,
         0,
         0,
+        0,
+        1,
+        1,
         0
       ],
       "levelNote": "AI草案分级，新课标了解+六维启发，需人工核验。",
@@ -2534,13 +2389,7 @@
       "keyPoints": [
         "理解元、角、分之间进率"
       ],
-      "commonMistakes": [
-        "题意理解偏差",
-        "概念混淆",
-        "记忆提取失败",
-        "前置知识缺失",
-        "体积/长度单位换算错误"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#常见的量",
         "#人民币",
@@ -2592,11 +2441,7 @@
       "keyPoints": [
         "掌握简单人民币兑换与购物计算"
       ],
-      "commonMistakes": [
-        "计算/操作失误",
-        "前置知识缺失",
-        "解题策略缺失"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#常见的量",
         "#人民币",
@@ -2616,15 +2461,15 @@
         "needsPageRef": true,
         "reviewNote": "新课标掌握层级，需教材正文核验。"
       },
-      "level": "C",
-      "levelScore": 9,
+      "level": "A",
+      "levelScore": 12,
       "levelDims": [
-        1,
         2,
         2,
-        1,
         2,
-        1
+        2,
+        2,
+        2
       ],
       "levelNote": "AI草案分级，新课标掌握+六维启发，需人工核验。",
       "curriculumLevelLabel": "掌握——能够独立做"
@@ -2648,12 +2493,7 @@
       "keyPoints": [
         "了解按单一标准分类的方法"
       ],
-      "commonMistakes": [
-        "题意理解偏差",
-        "概念混淆",
-        "前置知识缺失",
-        "解题策略缺失"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#统计与概率",
         "#分类整理",
@@ -2673,14 +2513,14 @@
         "needsPageRef": true,
         "reviewNote": "新课标了解层级，需教材正文核验。"
       },
-      "level": "A",
-      "levelScore": 3,
+      "level": "C",
+      "levelScore": 2,
       "levelDims": [
-        1,
-        1,
-        1,
         0,
         0,
+        0,
+        1,
+        1,
         0
       ],
       "levelNote": "AI草案分级，新课标了解+六维启发，需人工核验。",
@@ -2705,11 +2545,7 @@
       "keyPoints": [
         "能分类并完成简单象形统计表"
       ],
-      "commonMistakes": [
-        "题意理解偏差",
-        "前置知识缺失",
-        "题型不熟"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#统计与概率",
         "#分类整理",
@@ -2729,14 +2565,14 @@
         "needsPageRef": true,
         "reviewNote": "新课标掌握层级，需教材正文核验。"
       },
-      "level": "C",
-      "levelScore": 9,
+      "level": "B",
+      "levelScore": 6,
       "levelDims": [
         1,
-        2,
-        2,
         1,
-        2,
+        1,
+        1,
+        1,
         1
       ],
       "levelNote": "AI草案分级，新课标掌握+六维启发，需人工核验。",
@@ -2761,12 +2597,7 @@
       "keyPoints": [
         "理解两位数加减两位数笔算算理"
       ],
-      "commonMistakes": [
-        "计算/操作失误",
-        "概念混淆",
-        "前置知识缺失",
-        "解题策略缺失"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#数与代数",
         "#100 以内笔算加减法",
@@ -2787,12 +2618,12 @@
         "reviewNote": "新课标理解层级，需教材正文核验。"
       },
       "level": "B",
-      "levelScore": 6,
+      "levelScore": 8,
       "levelDims": [
         1,
+        2,
         1,
-        1,
-        1,
+        2,
         1,
         1
       ],
@@ -2818,11 +2649,7 @@
       "keyPoints": [
         "掌握不进位、进位加法笔算"
       ],
-      "commonMistakes": [
-        "计算/操作失误",
-        "前置知识缺失",
-        "解题策略缺失"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#数与代数",
         "#100 以内笔算加减法",
@@ -2842,15 +2669,15 @@
         "needsPageRef": true,
         "reviewNote": "新课标掌握层级，需教材正文核验。"
       },
-      "level": "C",
-      "levelScore": 9,
+      "level": "A",
+      "levelScore": 12,
       "levelDims": [
-        1,
         2,
         2,
-        1,
         2,
-        1
+        2,
+        2,
+        2
       ],
       "levelNote": "AI草案分级，新课标掌握+六维启发，需人工核验。",
       "curriculumLevelLabel": "掌握——能够独立做"
@@ -2874,11 +2701,7 @@
       "keyPoints": [
         "掌握不退位、退位减法笔算"
       ],
-      "commonMistakes": [
-        "计算/操作失误",
-        "前置知识缺失",
-        "解题策略缺失"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#数与代数",
         "#100 以内笔算加减法",
@@ -2898,15 +2721,15 @@
         "needsPageRef": true,
         "reviewNote": "新课标掌握层级，需教材正文核验。"
       },
-      "level": "C",
-      "levelScore": 9,
+      "level": "A",
+      "levelScore": 12,
       "levelDims": [
-        1,
         2,
         2,
-        1,
         2,
-        1
+        2,
+        2,
+        2
       ],
       "levelNote": "AI草案分级，新课标掌握+六维启发，需人工核验。",
       "curriculumLevelLabel": "掌握——能够独立做"
@@ -2930,11 +2753,7 @@
       "keyPoints": [
         "掌握加减法估算思路与方法"
       ],
-      "commonMistakes": [
-        "计算/操作失误",
-        "前置知识缺失",
-        "解题策略缺失"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#数与代数",
         "#100 以内笔算加减法",
@@ -2954,15 +2773,15 @@
         "needsPageRef": true,
         "reviewNote": "新课标掌握层级，需教材正文核验。"
       },
-      "level": "C",
-      "levelScore": 9,
+      "level": "A",
+      "levelScore": 12,
       "levelDims": [
-        1,
         2,
         2,
-        1,
         2,
-        1
+        2,
+        2,
+        2
       ],
       "levelNote": "AI草案分级，新课标掌握+六维启发，需人工核验。",
       "curriculumLevelLabel": "掌握——能够独立做"
@@ -2986,13 +2805,7 @@
       "keyPoints": [
         "运用加减法解决两步实际问题"
       ],
-      "commonMistakes": [
-        "计算/操作失误",
-        "题意理解偏差",
-        "关键信息遗漏",
-        "前置知识缺失",
-        "迁移失败"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#数与代数",
         "#100 以内笔算加减法",
@@ -3012,7 +2825,7 @@
         "needsPageRef": true,
         "reviewNote": "新课标运用层级，需教材正文核验。"
       },
-      "level": "D",
+      "level": "A",
       "levelScore": 12,
       "levelDims": [
         2,
@@ -3044,11 +2857,7 @@
       "keyPoints": [
         "理解乘法的意义与乘号含义"
       ],
-      "commonMistakes": [
-        "计算/操作失误",
-        "概念混淆",
-        "前置知识缺失"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#数与代数",
         "#表内乘法",
@@ -3068,15 +2877,15 @@
         "needsPageRef": true,
         "reviewNote": "新课标理解层级，需教材正文核验。"
       },
-      "level": "B",
-      "levelScore": 6,
+      "level": "A",
+      "levelScore": 9,
       "levelDims": [
         1,
+        2,
         1,
+        2,
         1,
-        1,
-        1,
-        1
+        2
       ],
       "levelNote": "AI草案分级，新课标理解+六维启发，需人工核验。",
       "curriculumLevelLabel": "理解——知道为什么"
@@ -3100,15 +2909,7 @@
       "keyPoints": [
         "熟记并运用 2～6 的乘法口诀"
       ],
-      "commonMistakes": [
-        "计算/操作失误",
-        "题意理解偏差",
-        "概念混淆",
-        "关键信息遗漏",
-        "记忆提取失败",
-        "前置知识缺失",
-        "迁移失败"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#数与代数",
         "#表内乘法",
@@ -3128,15 +2929,15 @@
         "needsPageRef": true,
         "reviewNote": "新课标掌握层级，需教材正文核验。"
       },
-      "level": "C",
-      "levelScore": 9,
+      "level": "A",
+      "levelScore": 12,
       "levelDims": [
-        1,
         2,
         2,
-        1,
         2,
-        1
+        2,
+        2,
+        2
       ],
       "levelNote": "AI草案分级，新课标掌握+六维启发，需人工核验。",
       "curriculumLevelLabel": "掌握——能够独立做"
@@ -3160,11 +2961,7 @@
       "keyPoints": [
         "掌握乘加、乘减算式计算"
       ],
-      "commonMistakes": [
-        "计算/操作失误",
-        "前置知识缺失",
-        "解题策略缺失"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#数与代数",
         "#表内乘法",
@@ -3184,15 +2981,15 @@
         "needsPageRef": true,
         "reviewNote": "新课标掌握层级，需教材正文核验。"
       },
-      "level": "C",
-      "levelScore": 9,
+      "level": "A",
+      "levelScore": 12,
       "levelDims": [
-        1,
         2,
         2,
-        1,
         2,
-        1
+        2,
+        2,
+        2
       ],
       "levelNote": "AI草案分级，新课标掌握+六维启发，需人工核验。",
       "curriculumLevelLabel": "掌握——能够独立做"
@@ -3216,12 +3013,7 @@
       "keyPoints": [
         "熟记 7～9 的乘法口诀、完整乘法口诀表"
       ],
-      "commonMistakes": [
-        "计算/操作失误",
-        "概念混淆",
-        "记忆提取失败",
-        "前置知识缺失"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#数与代数",
         "#表内乘法",
@@ -3241,15 +3033,15 @@
         "needsPageRef": true,
         "reviewNote": "新课标掌握层级，需教材正文核验。"
       },
-      "level": "C",
-      "levelScore": 9,
+      "level": "A",
+      "levelScore": 12,
       "levelDims": [
-        1,
         2,
         2,
-        1,
         2,
-        1
+        2,
+        2,
+        2
       ],
       "levelNote": "AI草案分级，新课标掌握+六维启发，需人工核验。",
       "curriculumLevelLabel": "掌握——能够独立做"
@@ -3273,15 +3065,7 @@
       "keyPoints": [
         "运用乘法口诀解决求几个几的实际问题"
       ],
-      "commonMistakes": [
-        "计算/操作失误",
-        "题意理解偏差",
-        "概念混淆",
-        "关键信息遗漏",
-        "记忆提取失败",
-        "前置知识缺失",
-        "迁移失败"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#数与代数",
         "#表内乘法",
@@ -3301,7 +3085,7 @@
         "needsPageRef": true,
         "reviewNote": "新课标运用层级，需教材正文核验。"
       },
-      "level": "D",
+      "level": "A",
       "levelScore": 12,
       "levelDims": [
         2,
@@ -3333,13 +3117,7 @@
       "keyPoints": [
         "认识厘米、米长度单位"
       ],
-      "commonMistakes": [
-        "题意理解偏差",
-        "概念混淆",
-        "表达/书写/格式问题",
-        "前置知识缺失",
-        "体积/长度单位换算错误"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#图形与几何",
         "#长度与角",
@@ -3359,14 +3137,14 @@
         "needsPageRef": true,
         "reviewNote": "新课标了解层级，需教材正文核验。"
       },
-      "level": "A",
-      "levelScore": 3,
+      "level": "C",
+      "levelScore": 2,
       "levelDims": [
-        1,
-        1,
-        1,
         0,
         0,
+        0,
+        1,
+        1,
         0
       ],
       "levelNote": "AI草案分级，新课标了解+六维启发，需人工核验。",
@@ -3391,13 +3169,7 @@
       "keyPoints": [
         "理解 1 米 = 100 厘米进率关系"
       ],
-      "commonMistakes": [
-        "题意理解偏差",
-        "概念混淆",
-        "记忆提取失败",
-        "前置知识缺失",
-        "体积/长度单位换算错误"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#图形与几何",
         "#长度与角",
@@ -3449,12 +3221,7 @@
       "keyPoints": [
         "掌握用直尺测量、画线段方法"
       ],
-      "commonMistakes": [
-        "题意理解偏差",
-        "概念混淆",
-        "前置知识缺失",
-        "解题策略缺失"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#图形与几何",
         "#长度与角",
@@ -3474,14 +3241,14 @@
         "needsPageRef": true,
         "reviewNote": "新课标掌握层级，需教材正文核验。"
       },
-      "level": "C",
-      "levelScore": 9,
+      "level": "B",
+      "levelScore": 6,
       "levelDims": [
         1,
-        2,
-        2,
         1,
-        2,
+        1,
+        1,
+        1,
         1
       ],
       "levelNote": "AI草案分级，新课标掌握+六维启发，需人工核验。",
@@ -3506,11 +3273,7 @@
       "keyPoints": [
         "了解角的各部分名称"
       ],
-      "commonMistakes": [
-        "题意理解偏差",
-        "概念混淆",
-        "前置知识缺失"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#图形与几何",
         "#长度与角",
@@ -3530,14 +3293,14 @@
         "needsPageRef": true,
         "reviewNote": "新课标了解层级，需教材正文核验。"
       },
-      "level": "A",
-      "levelScore": 3,
+      "level": "C",
+      "levelScore": 2,
       "levelDims": [
-        1,
-        1,
-        1,
         0,
         0,
+        0,
+        1,
+        1,
         0
       ],
       "levelNote": "AI草案分级，新课标了解+六维启发，需人工核验。",
@@ -3562,11 +3325,7 @@
       "keyPoints": [
         "直观认识直角、锐角、钝角"
       ],
-      "commonMistakes": [
-        "题意理解偏差",
-        "概念混淆",
-        "前置知识缺失"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#图形与几何",
         "#长度与角",
@@ -3618,10 +3377,7 @@
       "keyPoints": [
         "会用三角板判断、画直角"
       ],
-      "commonMistakes": [
-        "题意理解偏差",
-        "前置知识缺失"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#图形与几何",
         "#长度与角",
@@ -3641,14 +3397,14 @@
         "needsPageRef": true,
         "reviewNote": "新课标掌握层级，需教材正文核验。"
       },
-      "level": "C",
-      "levelScore": 9,
+      "level": "B",
+      "levelScore": 6,
       "levelDims": [
         1,
-        2,
-        2,
         1,
-        2,
+        1,
+        1,
+        1,
         1
       ],
       "levelNote": "AI草案分级，新课标掌握+六维启发，需人工核验。",
@@ -3673,11 +3429,7 @@
       "keyPoints": [
         "能从前后左右不同方向辨认物体形状"
       ],
-      "commonMistakes": [
-        "概念混淆",
-        "方向角度描述错误",
-        "前置知识缺失"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#图形与几何",
         "#观察物体",
@@ -3697,14 +3449,14 @@
         "needsPageRef": true,
         "reviewNote": "新课标掌握层级，需教材正文核验。"
       },
-      "level": "C",
-      "levelScore": 9,
+      "level": "B",
+      "levelScore": 6,
       "levelDims": [
         1,
-        2,
-        2,
         1,
-        2,
+        1,
+        1,
+        1,
         1
       ],
       "levelNote": "AI草案分级，新课标掌握+六维启发，需人工核验。",
@@ -3729,11 +3481,7 @@
       "keyPoints": [
         "理解几时几分、几时半的含义"
       ],
-      "commonMistakes": [
-        "题意理解偏差",
-        "概念混淆",
-        "前置知识缺失"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#常见的量",
         "#时间",
@@ -3785,12 +3533,7 @@
       "keyPoints": [
         "掌握 5 分 5 分数认读时刻的方法"
       ],
-      "commonMistakes": [
-        "题意理解偏差",
-        "概念混淆",
-        "前置知识缺失",
-        "解题策略缺失"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#常见的量",
         "#时间",
@@ -3810,15 +3553,15 @@
         "needsPageRef": true,
         "reviewNote": "新课标掌握层级，需教材正文核验。"
       },
-      "level": "C",
-      "levelScore": 9,
+      "level": "B",
+      "levelScore": 7,
       "levelDims": [
         1,
-        2,
-        2,
         1,
-        2,
-        1
+        1,
+        1,
+        1,
+        2
       ],
       "levelNote": "AI草案分级，新课标掌握+六维启发，需人工核验。",
       "curriculumLevelLabel": "掌握——能够独立做"
@@ -3842,11 +3585,7 @@
       "keyPoints": [
         "理解简单排列、组合搭配逻辑"
       ],
-      "commonMistakes": [
-        "概念混淆",
-        "数形结合规律发现失败",
-        "前置知识缺失"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#综合与实践",
         "#搭配问题",
@@ -3866,15 +3605,15 @@
         "needsPageRef": true,
         "reviewNote": "新课标理解层级，需教材正文核验。"
       },
-      "level": "B",
-      "levelScore": 6,
+      "level": "C",
+      "levelScore": 2,
       "levelDims": [
         1,
+        0,
+        0,
         1,
-        1,
-        1,
-        1,
-        1
+        0,
+        0
       ],
       "levelNote": "AI草案分级，新课标理解+六维启发，需人工核验。",
       "curriculumLevelLabel": "理解——知道为什么"
@@ -3898,10 +3637,7 @@
       "keyPoints": [
         "掌握简单事物搭配计数方法"
       ],
-      "commonMistakes": [
-        "前置知识缺失",
-        "解题策略缺失"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#综合与实践",
         "#搭配问题",
@@ -3922,14 +3658,14 @@
         "reviewNote": "新课标掌握层级，需教材正文核验。"
       },
       "level": "C",
-      "levelScore": 9,
+      "levelScore": 2,
       "levelDims": [
         1,
-        2,
-        2,
+        0,
+        0,
         1,
-        2,
-        1
+        0,
+        0
       ],
       "levelNote": "AI草案分级，新课标掌握+六维启发，需人工核验。",
       "curriculumLevelLabel": "掌握——能够独立做"
@@ -3953,12 +3689,7 @@
       "keyPoints": [
         "理解平均分的含义与两种分法"
       ],
-      "commonMistakes": [
-        "题意理解偏差",
-        "概念混淆",
-        "前置知识缺失",
-        "解题策略缺失"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#数与代数",
         "#表内除法",
@@ -4010,13 +3741,7 @@
       "keyPoints": [
         "理解除法算式各部分名称与意义"
       ],
-      "commonMistakes": [
-        "计算/操作失误",
-        "题意理解偏差",
-        "概念混淆",
-        "前置知识缺失",
-        "解题策略缺失"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#数与代数",
         "#表内除法",
@@ -4036,15 +3761,15 @@
         "needsPageRef": true,
         "reviewNote": "新课标理解层级，需教材正文核验。"
       },
-      "level": "B",
-      "levelScore": 6,
+      "level": "A",
+      "levelScore": 9,
       "levelDims": [
         1,
+        2,
         1,
+        2,
         1,
-        1,
-        1,
-        1
+        2
       ],
       "levelNote": "AI草案分级，新课标理解+六维启发，需人工核验。",
       "curriculumLevelLabel": "理解——知道为什么"
@@ -4068,13 +3793,7 @@
       "keyPoints": [
         "掌握用 2～6 乘法口诀求商"
       ],
-      "commonMistakes": [
-        "计算/操作失误",
-        "概念混淆",
-        "记忆提取失败",
-        "前置知识缺失",
-        "解题策略缺失"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#数与代数",
         "#表内除法",
@@ -4094,15 +3813,15 @@
         "needsPageRef": true,
         "reviewNote": "新课标掌握层级，需教材正文核验。"
       },
-      "level": "C",
-      "levelScore": 9,
+      "level": "A",
+      "levelScore": 12,
       "levelDims": [
-        1,
         2,
         2,
-        1,
         2,
-        1
+        2,
+        2,
+        2
       ],
       "levelNote": "AI草案分级，新课标掌握+六维启发，需人工核验。",
       "curriculumLevelLabel": "掌握——能够独立做"
@@ -4126,13 +3845,7 @@
       "keyPoints": [
         "掌握用 7～9 乘法口诀求商"
       ],
-      "commonMistakes": [
-        "计算/操作失误",
-        "概念混淆",
-        "记忆提取失败",
-        "前置知识缺失",
-        "解题策略缺失"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#数与代数",
         "#表内除法",
@@ -4152,15 +3865,15 @@
         "needsPageRef": true,
         "reviewNote": "新课标掌握层级，需教材正文核验。"
       },
-      "level": "C",
-      "levelScore": 9,
+      "level": "A",
+      "levelScore": 12,
       "levelDims": [
-        1,
         2,
         2,
-        1,
         2,
-        1
+        2,
+        2,
+        2
       ],
       "levelNote": "AI草案分级，新课标掌握+六维启发，需人工核验。",
       "curriculumLevelLabel": "掌握——能够独立做"
@@ -4184,14 +3897,7 @@
       "keyPoints": [
         "运用除法解决平均分实际问题"
       ],
-      "commonMistakes": [
-        "计算/操作失误",
-        "题意理解偏差",
-        "关键信息遗漏",
-        "前置知识缺失",
-        "解题策略缺失",
-        "迁移失败"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#数与代数",
         "#表内除法",
@@ -4211,7 +3917,7 @@
         "needsPageRef": true,
         "reviewNote": "新课标运用层级，需教材正文核验。"
       },
-      "level": "D",
+      "level": "A",
       "levelScore": 12,
       "levelDims": [
         2,
@@ -4243,12 +3949,7 @@
       "keyPoints": [
         "理解余数的产生和有余数除法含义"
       ],
-      "commonMistakes": [
-        "计算/操作失误",
-        "概念混淆",
-        "前置知识缺失",
-        "解题策略缺失"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#数与代数",
         "#有余数除法与混合运算",
@@ -4268,15 +3969,15 @@
         "needsPageRef": true,
         "reviewNote": "新课标理解层级，需教材正文核验。"
       },
-      "level": "B",
-      "levelScore": 6,
+      "level": "A",
+      "levelScore": 9,
       "levelDims": [
         1,
+        2,
         1,
+        2,
         1,
-        1,
-        1,
-        1
+        2
       ],
       "levelNote": "AI草案分级，新课标理解+六维启发，需人工核验。",
       "curriculumLevelLabel": "理解——知道为什么"
@@ -4300,12 +4001,7 @@
       "keyPoints": [
         "掌握余数小于除数的规律"
       ],
-      "commonMistakes": [
-        "记忆提取失败",
-        "数形结合规律发现失败",
-        "前置知识缺失",
-        "解题策略缺失"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#数与代数",
         "#有余数除法与混合运算",
@@ -4325,15 +4021,15 @@
         "needsPageRef": true,
         "reviewNote": "新课标掌握层级，需教材正文核验。"
       },
-      "level": "C",
-      "levelScore": 9,
+      "level": "A",
+      "levelScore": 12,
       "levelDims": [
-        1,
         2,
         2,
-        1,
         2,
-        1
+        2,
+        2,
+        2
       ],
       "levelNote": "AI草案分级，新课标掌握+六维启发，需人工核验。",
       "curriculumLevelLabel": "掌握——能够独立做"
@@ -4357,12 +4053,7 @@
       "keyPoints": [
         "掌握有余数除法竖式计算"
       ],
-      "commonMistakes": [
-        "计算/操作失误",
-        "表达/书写/格式问题",
-        "前置知识缺失",
-        "解题策略缺失"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#数与代数",
         "#有余数除法与混合运算",
@@ -4382,15 +4073,15 @@
         "needsPageRef": true,
         "reviewNote": "新课标掌握层级，需教材正文核验。"
       },
-      "level": "C",
-      "levelScore": 9,
+      "level": "A",
+      "levelScore": 12,
       "levelDims": [
-        1,
         2,
         2,
-        1,
         2,
-        1
+        2,
+        2,
+        2
       ],
       "levelNote": "AI草案分级，新课标掌握+六维启发，需人工核验。",
       "curriculumLevelLabel": "掌握——能够独立做"
@@ -4414,14 +4105,7 @@
       "keyPoints": [
         "运用有余数除法解决周期、分配问题"
       ],
-      "commonMistakes": [
-        "计算/操作失误",
-        "题意理解偏差",
-        "关键信息遗漏",
-        "前置知识缺失",
-        "解题策略缺失",
-        "迁移失败"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#数与代数",
         "#有余数除法与混合运算",
@@ -4441,7 +4125,7 @@
         "needsPageRef": true,
         "reviewNote": "新课标运用层级，需教材正文核验。"
       },
-      "level": "D",
+      "level": "A",
       "levelScore": 12,
       "levelDims": [
         2,
@@ -4473,11 +4157,7 @@
       "keyPoints": [
         "理解同级、两级运算顺序"
       ],
-      "commonMistakes": [
-        "计算/操作失误",
-        "概念混淆",
-        "前置知识缺失"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#数与代数",
         "#有余数除法与混合运算",
@@ -4498,12 +4178,12 @@
         "reviewNote": "新课标理解层级，需教材正文核验。"
       },
       "level": "B",
-      "levelScore": 6,
+      "levelScore": 8,
       "levelDims": [
         1,
+        2,
         1,
-        1,
-        1,
+        2,
         1,
         1
       ],
@@ -4529,12 +4209,7 @@
       "keyPoints": [
         "掌握带小括号的混合运算顺序"
       ],
-      "commonMistakes": [
-        "计算/操作失误",
-        "总复习综合混淆",
-        "前置知识缺失",
-        "解题策略缺失"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#数与代数",
         "#有余数除法与混合运算",
@@ -4554,15 +4229,15 @@
         "needsPageRef": true,
         "reviewNote": "新课标掌握层级，需教材正文核验。"
       },
-      "level": "C",
-      "levelScore": 9,
+      "level": "A",
+      "levelScore": 12,
       "levelDims": [
-        1,
         2,
         2,
-        1,
         2,
-        1
+        2,
+        2,
+        2
       ],
       "levelNote": "AI草案分级，新课标掌握+六维启发，需人工核验。",
       "curriculumLevelLabel": "掌握——能够独立做"
@@ -4586,13 +4261,7 @@
       "keyPoints": [
         "会列综合算式解决两步问题"
       ],
-      "commonMistakes": [
-        "题意理解偏差",
-        "关键信息遗漏",
-        "总复习综合混淆",
-        "前置知识缺失",
-        "迁移失败"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#数与代数",
         "#有余数除法与混合运算",
@@ -4612,13 +4281,13 @@
         "needsPageRef": true,
         "reviewNote": "新课标掌握层级，需教材正文核验。"
       },
-      "level": "C",
+      "level": "A",
       "levelScore": 9,
       "levelDims": [
         1,
-        2,
-        2,
         1,
+        2,
+        2,
         2,
         1
       ],
@@ -4644,11 +4313,7 @@
       "keyPoints": [
         "认识千、万数位，理解数位顺序"
       ],
-      "commonMistakes": [
-        "概念混淆",
-        "表达/书写/格式问题",
-        "前置知识缺失"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#数与代数",
         "#万以内数的认识",
@@ -4700,13 +4365,7 @@
       "keyPoints": [
         "掌握万以内数的读写、组成、大小比较"
       ],
-      "commonMistakes": [
-        "概念混淆",
-        "表达/书写/格式问题",
-        "前置知识缺失",
-        "题型不熟",
-        "解题策略缺失"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#数与代数",
         "#万以内数的认识",
@@ -4726,14 +4385,14 @@
         "needsPageRef": true,
         "reviewNote": "新课标掌握层级，需教材正文核验。"
       },
-      "level": "C",
-      "levelScore": 9,
+      "level": "B",
+      "levelScore": 6,
       "levelDims": [
         1,
-        2,
-        2,
         1,
-        2,
+        1,
+        1,
+        1,
         1
       ],
       "levelNote": "AI草案分级，新课标掌握+六维启发，需人工核验。",
@@ -4758,14 +4417,7 @@
       "keyPoints": [
         "了解近似数的含义与应用"
       ],
-      "commonMistakes": [
-        "题意理解偏差",
-        "概念混淆",
-        "关键信息遗漏",
-        "前置知识缺失",
-        "解题策略缺失",
-        "迁移失败"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#数与代数",
         "#万以内数的认识",
@@ -4785,14 +4437,14 @@
         "needsPageRef": true,
         "reviewNote": "新课标了解层级，需教材正文核验。"
       },
-      "level": "A",
-      "levelScore": 3,
+      "level": "B",
+      "levelScore": 6,
       "levelDims": [
-        1,
-        1,
-        1,
         0,
         0,
+        2,
+        2,
+        2,
         0
       ],
       "levelNote": "AI草案分级，新课标了解+六维启发，需人工核验。",
@@ -4817,10 +4469,7 @@
       "keyPoints": [
         "直观认识轴对称、平移、旋转现象"
       ],
-      "commonMistakes": [
-        "概念混淆",
-        "前置知识缺失"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#图形与几何",
         "#图形的运动",
@@ -4840,14 +4489,14 @@
         "needsPageRef": true,
         "reviewNote": "新课标了解层级，需教材正文核验。"
       },
-      "level": "A",
-      "levelScore": 3,
+      "level": "C",
+      "levelScore": 2,
       "levelDims": [
-        1,
-        1,
-        1,
         0,
         0,
+        0,
+        1,
+        1,
         0
       ],
       "levelNote": "AI草案分级，新课标了解+六维启发，需人工核验。",
@@ -4872,11 +4521,7 @@
       "keyPoints": [
         "能辨别生活中的平移、旋转、轴对称图形"
       ],
-      "commonMistakes": [
-        "概念混淆",
-        "前置知识缺失",
-        "解题策略缺失"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#图形与几何",
         "#图形的运动",
@@ -4896,14 +4541,14 @@
         "needsPageRef": true,
         "reviewNote": "新课标掌握层级，需教材正文核验。"
       },
-      "level": "C",
-      "levelScore": 9,
+      "level": "B",
+      "levelScore": 6,
       "levelDims": [
         1,
-        2,
-        2,
         1,
-        2,
+        1,
+        1,
+        1,
         1
       ],
       "levelNote": "AI草案分级，新课标掌握+六维启发，需人工核验。",
@@ -4928,14 +4573,7 @@
       "keyPoints": [
         "了解简单调查、记录数据的方法"
       ],
-      "commonMistakes": [
-        "计算/操作失误",
-        "概念混淆",
-        "表达/书写/格式问题",
-        "前置知识缺失",
-        "题型不熟",
-        "解题策略缺失"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#统计与概率",
         "#数据收集",
@@ -4955,14 +4593,14 @@
         "needsPageRef": true,
         "reviewNote": "新课标了解层级，需教材正文核验。"
       },
-      "level": "A",
-      "levelScore": 3,
+      "level": "C",
+      "levelScore": 2,
       "levelDims": [
-        1,
-        1,
-        1,
         0,
         0,
+        0,
+        1,
+        1,
         0
       ],
       "levelNote": "AI草案分级，新课标了解+六维启发，需人工核验。",
@@ -4987,11 +4625,7 @@
       "keyPoints": [
         "能整理数据、填写简单统计表并分析"
       ],
-      "commonMistakes": [
-        "题意理解偏差",
-        "前置知识缺失",
-        "题型不熟"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#统计与概率",
         "#数据收集",
@@ -5011,14 +4645,14 @@
         "needsPageRef": true,
         "reviewNote": "新课标掌握层级，需教材正文核验。"
       },
-      "level": "C",
-      "levelScore": 9,
+      "level": "B",
+      "levelScore": 6,
       "levelDims": [
         1,
-        2,
-        2,
         1,
-        2,
+        1,
+        1,
+        1,
         1
       ],
       "levelNote": "AI草案分级，新课标掌握+六维启发，需人工核验。",
@@ -5043,11 +4677,7 @@
       "keyPoints": [
         "发现图形、数列周期排列规律"
       ],
-      "commonMistakes": [
-        "记忆提取失败",
-        "数形结合规律发现失败",
-        "前置知识缺失"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#综合与实践",
         "#周期规律",
@@ -5067,15 +4697,15 @@
         "needsPageRef": true,
         "reviewNote": "新课标理解层级，需教材正文核验。"
       },
-      "level": "B",
-      "levelScore": 6,
+      "level": "C",
+      "levelScore": 2,
       "levelDims": [
         1,
+        0,
+        0,
         1,
-        1,
-        1,
-        1,
-        1
+        0,
+        0
       ],
       "levelNote": "AI草案分级，新课标理解+六维启发，需人工核验。",
       "curriculumLevelLabel": "理解——知道为什么"
@@ -5099,14 +4729,7 @@
       "keyPoints": [
         "运用周期规律推理后续排列"
       ],
-      "commonMistakes": [
-        "题意理解偏差",
-        "关键信息遗漏",
-        "记忆提取失败",
-        "数形结合规律发现失败",
-        "前置知识缺失",
-        "迁移失败"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#综合与实践",
         "#周期规律",
@@ -5126,15 +4749,15 @@
         "needsPageRef": true,
         "reviewNote": "新课标掌握层级，需教材正文核验。"
       },
-      "level": "C",
-      "levelScore": 9,
+      "level": "B",
+      "levelScore": 7,
       "levelDims": [
         1,
+        0,
         2,
         2,
-        1,
         2,
-        1
+        0
       ],
       "levelNote": "AI草案分级，新课标掌握+六维启发，需人工核验。",
       "curriculumLevelLabel": "掌握——能够独立做"
@@ -5158,13 +4781,7 @@
       "keyPoints": [
         "了解时间单位秒的意义"
       ],
-      "commonMistakes": [
-        "题意理解偏差",
-        "概念混淆",
-        "表达/书写/格式问题",
-        "前置知识缺失",
-        "体积/长度单位换算错误"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#数与代数",
         "#万以内加减法",
@@ -5184,14 +4801,14 @@
         "needsPageRef": true,
         "reviewNote": "新课标了解层级，需教材正文核验。"
       },
-      "level": "A",
-      "levelScore": 3,
+      "level": "C",
+      "levelScore": 2,
       "levelDims": [
-        1,
-        1,
-        1,
         0,
         0,
+        0,
+        1,
+        1,
         0
       ],
       "levelNote": "AI草案分级，新课标了解+六维启发，需人工核验。",
@@ -5216,13 +4833,7 @@
       "keyPoints": [
         "理解 1 分 = 60 秒的进率关系"
       ],
-      "commonMistakes": [
-        "题意理解偏差",
-        "概念混淆",
-        "记忆提取失败",
-        "前置知识缺失",
-        "体积/长度单位换算错误"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#数与代数",
         "#万以内加减法",
@@ -5274,13 +4885,7 @@
       "keyPoints": [
         "掌握认读时刻、计算经过时间的方法"
       ],
-      "commonMistakes": [
-        "计算/操作失误",
-        "概念混淆",
-        "前置知识缺失",
-        "解题策略缺失",
-        "体积/长度单位换算错误"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#数与代数",
         "#万以内加减法",
@@ -5300,15 +4905,15 @@
         "needsPageRef": true,
         "reviewNote": "新课标掌握层级，需教材正文核验。"
       },
-      "level": "C",
-      "levelScore": 9,
+      "level": "A",
+      "levelScore": 12,
       "levelDims": [
-        1,
         2,
         2,
-        1,
         2,
-        1
+        2,
+        2,
+        2
       ],
       "levelNote": "AI草案分级，新课标掌握+六维启发，需人工核验。",
       "curriculumLevelLabel": "掌握——能够独立做"
@@ -5332,11 +4937,7 @@
       "keyPoints": [
         "掌握两位数加减两位数口算"
       ],
-      "commonMistakes": [
-        "计算/操作失误",
-        "前置知识缺失",
-        "解题策略缺失"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#数与代数",
         "#万以内加减法",
@@ -5356,15 +4957,15 @@
         "needsPageRef": true,
         "reviewNote": "新课标掌握层级，需教材正文核验。"
       },
-      "level": "C",
-      "levelScore": 9,
+      "level": "A",
+      "levelScore": 12,
       "levelDims": [
-        1,
         2,
         2,
-        1,
         2,
-        1
+        2,
+        2,
+        2
       ],
       "levelNote": "AI草案分级，新课标掌握+六维启发，需人工核验。",
       "curriculumLevelLabel": "掌握——能够独立做"
@@ -5388,11 +4989,7 @@
       "keyPoints": [
         "掌握几百几十加减几百几十笔算"
       ],
-      "commonMistakes": [
-        "计算/操作失误",
-        "前置知识缺失",
-        "解题策略缺失"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#数与代数",
         "#万以内加减法",
@@ -5412,15 +5009,15 @@
         "needsPageRef": true,
         "reviewNote": "新课标掌握层级，需教材正文核验。"
       },
-      "level": "C",
-      "levelScore": 9,
+      "level": "A",
+      "levelScore": 12,
       "levelDims": [
-        1,
         2,
         2,
-        1,
         2,
-        1
+        2,
+        2,
+        2
       ],
       "levelNote": "AI草案分级，新课标掌握+六维启发，需人工核验。",
       "curriculumLevelLabel": "掌握——能够独立做"
@@ -5444,14 +5041,7 @@
       "keyPoints": [
         "理解加减法估算的实际意义"
       ],
-      "commonMistakes": [
-        "计算/操作失误",
-        "题意理解偏差",
-        "概念混淆",
-        "关键信息遗漏",
-        "前置知识缺失",
-        "迁移失败"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#数与代数",
         "#万以内加减法",
@@ -5471,15 +5061,15 @@
         "needsPageRef": true,
         "reviewNote": "新课标理解层级，需教材正文核验。"
       },
-      "level": "B",
-      "levelScore": 6,
+      "level": "A",
+      "levelScore": 11,
       "levelDims": [
         1,
-        1,
-        1,
-        1,
-        1,
-        1
+        2,
+        2,
+        2,
+        2,
+        2
       ],
       "levelNote": "AI草案分级，新课标理解+六维启发，需人工核验。",
       "curriculumLevelLabel": "理解——知道为什么"
@@ -5503,13 +5093,7 @@
       "keyPoints": [
         "运用估算解决实际问题"
       ],
-      "commonMistakes": [
-        "计算/操作失误",
-        "题意理解偏差",
-        "关键信息遗漏",
-        "前置知识缺失",
-        "迁移失败"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#数与代数",
         "#万以内加减法",
@@ -5529,15 +5113,15 @@
         "needsPageRef": true,
         "reviewNote": "新课标运用层级，需教材正文核验。"
       },
-      "level": "D",
-      "levelScore": 12,
+      "level": "A",
+      "levelScore": 10,
       "levelDims": [
         2,
+        1,
         2,
         2,
         2,
-        2,
-        2
+        1
       ],
       "levelNote": "AI草案分级，新课标运用+六维启发，需人工核验。",
       "curriculumLevelLabel": "运用——能够迁移创新"
@@ -5561,12 +5145,7 @@
       "keyPoints": [
         "理解三位数加、减法笔算算理"
       ],
-      "commonMistakes": [
-        "计算/操作失误",
-        "概念混淆",
-        "前置知识缺失",
-        "解题策略缺失"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#数与代数",
         "#万以内加减法",
@@ -5587,12 +5166,12 @@
         "reviewNote": "新课标理解层级，需教材正文核验。"
       },
       "level": "B",
-      "levelScore": 6,
+      "levelScore": 8,
       "levelDims": [
         1,
+        2,
         1,
-        1,
-        1,
+        2,
         1,
         1
       ],
@@ -5618,11 +5197,7 @@
       "keyPoints": [
         "掌握三位数进位加法笔算"
       ],
-      "commonMistakes": [
-        "计算/操作失误",
-        "前置知识缺失",
-        "解题策略缺失"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#数与代数",
         "#万以内加减法",
@@ -5642,15 +5217,15 @@
         "needsPageRef": true,
         "reviewNote": "新课标掌握层级，需教材正文核验。"
       },
-      "level": "C",
-      "levelScore": 9,
+      "level": "A",
+      "levelScore": 12,
       "levelDims": [
-        1,
         2,
         2,
-        1,
         2,
-        1
+        2,
+        2,
+        2
       ],
       "levelNote": "AI草案分级，新课标掌握+六维启发，需人工核验。",
       "curriculumLevelLabel": "掌握——能够独立做"
@@ -5674,11 +5249,7 @@
       "keyPoints": [
         "掌握三位数退位减法笔算"
       ],
-      "commonMistakes": [
-        "计算/操作失误",
-        "前置知识缺失",
-        "解题策略缺失"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#数与代数",
         "#万以内加减法",
@@ -5698,15 +5269,15 @@
         "needsPageRef": true,
         "reviewNote": "新课标掌握层级，需教材正文核验。"
       },
-      "level": "C",
-      "levelScore": 9,
+      "level": "A",
+      "levelScore": 12,
       "levelDims": [
-        1,
         2,
         2,
-        1,
         2,
-        1
+        2,
+        2,
+        2
       ],
       "levelNote": "AI草案分级，新课标掌握+六维启发，需人工核验。",
       "curriculumLevelLabel": "掌握——能够独立做"
@@ -5730,11 +5301,7 @@
       "keyPoints": [
         "掌握加减法验算方法"
       ],
-      "commonMistakes": [
-        "计算/操作失误",
-        "前置知识缺失",
-        "解题策略缺失"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#数与代数",
         "#万以内加减法",
@@ -5754,15 +5321,15 @@
         "needsPageRef": true,
         "reviewNote": "新课标掌握层级，需教材正文核验。"
       },
-      "level": "C",
-      "levelScore": 9,
+      "level": "A",
+      "levelScore": 12,
       "levelDims": [
-        1,
         2,
         2,
-        1,
         2,
-        1
+        2,
+        2,
+        2
       ],
       "levelNote": "AI草案分级，新课标掌握+六维启发，需人工核验。",
       "curriculumLevelLabel": "掌握——能够独立做"
@@ -5786,13 +5353,7 @@
       "keyPoints": [
         "运用三位数加减法解决生活问题"
       ],
-      "commonMistakes": [
-        "计算/操作失误",
-        "题意理解偏差",
-        "关键信息遗漏",
-        "前置知识缺失",
-        "迁移失败"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#数与代数",
         "#万以内加减法",
@@ -5812,7 +5373,7 @@
         "needsPageRef": true,
         "reviewNote": "新课标运用层级，需教材正文核验。"
       },
-      "level": "D",
+      "level": "A",
       "levelScore": 12,
       "levelDims": [
         2,
@@ -5844,11 +5405,7 @@
       "keyPoints": [
         "掌握整十、整百数乘一位数口算"
       ],
-      "commonMistakes": [
-        "计算/操作失误",
-        "前置知识缺失",
-        "解题策略缺失"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#数与代数",
         "#乘法运算",
@@ -5868,15 +5425,15 @@
         "needsPageRef": true,
         "reviewNote": "新课标掌握层级，需教材正文核验。"
       },
-      "level": "C",
-      "levelScore": 9,
+      "level": "A",
+      "levelScore": 12,
       "levelDims": [
-        1,
         2,
         2,
-        1,
         2,
-        1
+        2,
+        2,
+        2
       ],
       "levelNote": "AI草案分级，新课标掌握+六维启发，需人工核验。",
       "curriculumLevelLabel": "掌握——能够独立做"
@@ -5900,11 +5457,7 @@
       "keyPoints": [
         "理解多位数乘一位数算理"
       ],
-      "commonMistakes": [
-        "概念混淆",
-        "前置知识缺失",
-        "解题策略缺失"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#数与代数",
         "#乘法运算",
@@ -5925,12 +5478,12 @@
         "reviewNote": "新课标理解层级，需教材正文核验。"
       },
       "level": "B",
-      "levelScore": 6,
+      "levelScore": 8,
       "levelDims": [
         1,
+        2,
         1,
-        1,
-        1,
+        2,
         1,
         1
       ],
@@ -5956,11 +5509,7 @@
       "keyPoints": [
         "掌握多位数乘一位数不进位、进位笔算"
       ],
-      "commonMistakes": [
-        "计算/操作失误",
-        "前置知识缺失",
-        "解题策略缺失"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#数与代数",
         "#乘法运算",
@@ -5980,15 +5529,15 @@
         "needsPageRef": true,
         "reviewNote": "新课标掌握层级，需教材正文核验。"
       },
-      "level": "C",
-      "levelScore": 9,
+      "level": "A",
+      "levelScore": 12,
       "levelDims": [
-        1,
         2,
         2,
-        1,
         2,
-        1
+        2,
+        2,
+        2
       ],
       "levelNote": "AI草案分级，新课标掌握+六维启发，需人工核验。",
       "curriculumLevelLabel": "掌握——能够独立做"
@@ -6012,11 +5561,7 @@
       "keyPoints": [
         "掌握有关 0 的乘法计算"
       ],
-      "commonMistakes": [
-        "计算/操作失误",
-        "前置知识缺失",
-        "解题策略缺失"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#数与代数",
         "#乘法运算",
@@ -6036,15 +5581,15 @@
         "needsPageRef": true,
         "reviewNote": "新课标掌握层级，需教材正文核验。"
       },
-      "level": "C",
-      "levelScore": 9,
+      "level": "A",
+      "levelScore": 12,
       "levelDims": [
-        1,
         2,
         2,
-        1,
         2,
-        1
+        2,
+        2,
+        2
       ],
       "levelNote": "AI草案分级，新课标掌握+六维启发，需人工核验。",
       "curriculumLevelLabel": "掌握——能够独立做"
@@ -6068,11 +5613,7 @@
       "keyPoints": [
         "掌握乘法估算方法"
       ],
-      "commonMistakes": [
-        "计算/操作失误",
-        "前置知识缺失",
-        "解题策略缺失"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#数与代数",
         "#乘法运算",
@@ -6092,15 +5633,15 @@
         "needsPageRef": true,
         "reviewNote": "新课标掌握层级，需教材正文核验。"
       },
-      "level": "C",
-      "levelScore": 9,
+      "level": "A",
+      "levelScore": 12,
       "levelDims": [
-        1,
         2,
         2,
-        1,
         2,
-        1
+        2,
+        2,
+        2
       ],
       "levelNote": "AI草案分级，新课标掌握+六维启发，需人工核验。",
       "curriculumLevelLabel": "掌握——能够独立做"
@@ -6124,13 +5665,7 @@
       "keyPoints": [
         "运用乘法解决归一、归总类实际问题"
       ],
-      "commonMistakes": [
-        "计算/操作失误",
-        "题意理解偏差",
-        "关键信息遗漏",
-        "前置知识缺失",
-        "迁移失败"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#数与代数",
         "#乘法运算",
@@ -6150,7 +5685,7 @@
         "needsPageRef": true,
         "reviewNote": "新课标运用层级，需教材正文核验。"
       },
-      "level": "D",
+      "level": "A",
       "levelScore": 12,
       "levelDims": [
         2,
@@ -6182,13 +5717,7 @@
       "keyPoints": [
         "理解平均分是分数产生的前提"
       ],
-      "commonMistakes": [
-        "题意理解偏差",
-        "概念混淆",
-        "分数单位理解错误",
-        "前置知识缺失",
-        "解题策略缺失"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#数与代数",
         "#分数初步",
@@ -6209,14 +5738,14 @@
         "reviewNote": "新课标理解层级，需教材正文核验。"
       },
       "level": "B",
-      "levelScore": 6,
+      "levelScore": 7,
       "levelDims": [
         1,
         1,
         1,
         1,
         1,
-        1
+        2
       ],
       "levelNote": "AI草案分级，新课标理解+六维启发，需人工核验。",
       "curriculumLevelLabel": "理解——知道为什么"
@@ -6240,12 +5769,7 @@
       "keyPoints": [
         "认识几分之一、几分之几"
       ],
-      "commonMistakes": [
-        "题意理解偏差",
-        "概念混淆",
-        "分数单位理解错误",
-        "前置知识缺失"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#数与代数",
         "#分数初步",
@@ -6265,14 +5789,14 @@
         "needsPageRef": true,
         "reviewNote": "新课标了解层级，需教材正文核验。"
       },
-      "level": "A",
-      "levelScore": 3,
+      "level": "C",
+      "levelScore": 2,
       "levelDims": [
-        1,
-        1,
-        1,
         0,
         0,
+        0,
+        1,
+        1,
         0
       ],
       "levelNote": "AI草案分级，新课标了解+六维启发，需人工核验。",
@@ -6297,13 +5821,7 @@
       "keyPoints": [
         "掌握同分母、同分子分数大小比较"
       ],
-      "commonMistakes": [
-        "题意理解偏差",
-        "概念混淆",
-        "分数大小比较错误",
-        "前置知识缺失",
-        "解题策略缺失"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#数与代数",
         "#分数初步",
@@ -6323,15 +5841,15 @@
         "needsPageRef": true,
         "reviewNote": "新课标掌握层级，需教材正文核验。"
       },
-      "level": "C",
-      "levelScore": 9,
+      "level": "B",
+      "levelScore": 7,
       "levelDims": [
         1,
-        2,
-        2,
         1,
-        2,
-        1
+        1,
+        1,
+        1,
+        2
       ],
       "levelNote": "AI草案分级，新课标掌握+六维启发，需人工核验。",
       "curriculumLevelLabel": "掌握——能够独立做"
@@ -6355,14 +5873,7 @@
       "keyPoints": [
         "掌握简单同分母分数加减法"
       ],
-      "commonMistakes": [
-        "计算/操作失误",
-        "题意理解偏差",
-        "异分母加减不分母处理错误",
-        "分数加减应用题建模错误",
-        "前置知识缺失",
-        "解题策略缺失"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#数与代数",
         "#分数初步",
@@ -6382,15 +5893,15 @@
         "needsPageRef": true,
         "reviewNote": "新课标掌握层级，需教材正文核验。"
       },
-      "level": "C",
-      "levelScore": 9,
+      "level": "A",
+      "levelScore": 12,
       "levelDims": [
-        1,
         2,
         2,
-        1,
         2,
-        1
+        2,
+        2,
+        2
       ],
       "levelNote": "AI草案分级，新课标掌握+六维启发，需人工核验。",
       "curriculumLevelLabel": "掌握——能够独立做"
@@ -6414,11 +5925,7 @@
       "keyPoints": [
         "认识毫米、分米、千米、吨"
       ],
-      "commonMistakes": [
-        "题意理解偏差",
-        "概念混淆",
-        "前置知识缺失"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#图形与几何",
         "#测量",
@@ -6438,14 +5945,14 @@
         "needsPageRef": true,
         "reviewNote": "新课标了解层级，需教材正文核验。"
       },
-      "level": "A",
-      "levelScore": 3,
+      "level": "C",
+      "levelScore": 2,
       "levelDims": [
-        1,
-        1,
-        1,
         0,
         0,
+        0,
+        1,
+        1,
         0
       ],
       "levelNote": "AI草案分级，新课标了解+六维启发，需人工核验。",
@@ -6470,14 +5977,7 @@
       "keyPoints": [
         "理解长度、质量单位之间进率"
       ],
-      "commonMistakes": [
-        "题意理解偏差",
-        "概念混淆",
-        "表达/书写/格式问题",
-        "记忆提取失败",
-        "前置知识缺失",
-        "体积/长度单位换算错误"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#图形与几何",
         "#测量",
@@ -6529,13 +6029,7 @@
       "keyPoints": [
         "掌握长度、质量单位换算"
       ],
-      "commonMistakes": [
-        "题意理解偏差",
-        "表达/书写/格式问题",
-        "前置知识缺失",
-        "解题策略缺失",
-        "体积/长度单位换算错误"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#图形与几何",
         "#测量",
@@ -6555,14 +6049,14 @@
         "needsPageRef": true,
         "reviewNote": "新课标掌握层级，需教材正文核验。"
       },
-      "level": "C",
-      "levelScore": 9,
+      "level": "B",
+      "levelScore": 6,
       "levelDims": [
         1,
-        2,
-        2,
         1,
-        2,
+        1,
+        1,
+        1,
         1
       ],
       "levelNote": "AI草案分级，新课标掌握+六维启发，需人工核验。",
@@ -6587,10 +6081,7 @@
       "keyPoints": [
         "能估测物体长度和质量"
       ],
-      "commonMistakes": [
-        "概念混淆",
-        "前置知识缺失"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#图形与几何",
         "#测量",
@@ -6610,14 +6101,14 @@
         "needsPageRef": true,
         "reviewNote": "新课标掌握层级，需教材正文核验。"
       },
-      "level": "C",
-      "levelScore": 9,
+      "level": "B",
+      "levelScore": 6,
       "levelDims": [
         1,
-        2,
-        2,
         1,
-        2,
+        1,
+        1,
+        1,
         1
       ],
       "levelNote": "AI草案分级，新课标掌握+六维启发，需人工核验。",
@@ -6642,12 +6133,7 @@
       "keyPoints": [
         "认识长方形、正方形边和角的特征"
       ],
-      "commonMistakes": [
-        "题意理解偏差",
-        "概念混淆",
-        "记忆提取失败",
-        "前置知识缺失"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#图形与几何",
         "#平面图形周长",
@@ -6667,14 +6153,14 @@
         "needsPageRef": true,
         "reviewNote": "新课标了解层级，需教材正文核验。"
       },
-      "level": "A",
-      "levelScore": 3,
+      "level": "C",
+      "levelScore": 2,
       "levelDims": [
-        1,
-        1,
-        1,
         0,
         0,
+        0,
+        1,
+        1,
         0
       ],
       "levelNote": "AI草案分级，新课标了解+六维启发，需人工核验。",
@@ -6699,11 +6185,7 @@
       "keyPoints": [
         "理解周长的含义"
       ],
-      "commonMistakes": [
-        "周长面积混淆",
-        "概念混淆",
-        "前置知识缺失"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#图形与几何",
         "#平面图形周长",
@@ -6724,14 +6206,14 @@
         "reviewNote": "新课标理解层级，需教材正文核验。"
       },
       "level": "B",
-      "levelScore": 6,
+      "levelScore": 7,
       "levelDims": [
         1,
         1,
         1,
         1,
         1,
-        1
+        2
       ],
       "levelNote": "AI草案分级，新课标理解+六维启发，需人工核验。",
       "curriculumLevelLabel": "理解——知道为什么"
@@ -6755,15 +6237,7 @@
       "keyPoints": [
         "掌握长方形、正方形周长计算公式"
       ],
-      "commonMistakes": [
-        "面积公式误用",
-        "周长面积混淆",
-        "计算/操作失误",
-        "概念混淆",
-        "记忆提取失败",
-        "前置知识缺失",
-        "解题策略缺失"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#图形与几何",
         "#平面图形周长",
@@ -6783,15 +6257,15 @@
         "needsPageRef": true,
         "reviewNote": "新课标掌握层级，需教材正文核验。"
       },
-      "level": "C",
-      "levelScore": 9,
+      "level": "A",
+      "levelScore": 12,
       "levelDims": [
-        1,
         2,
         2,
-        1,
         2,
-        1
+        2,
+        2,
+        2
       ],
       "levelNote": "AI草案分级，新课标掌握+六维启发，需人工核验。",
       "curriculumLevelLabel": "掌握——能够独立做"
@@ -6815,17 +6289,7 @@
       "keyPoints": [
         "运用周长公式解决实际围边问题"
       ],
-      "commonMistakes": [
-        "面积公式误用",
-        "周长面积混淆",
-        "题意理解偏差",
-        "概念混淆",
-        "关键信息遗漏",
-        "记忆提取失败",
-        "前置知识缺失",
-        "解题策略缺失",
-        "迁移失败"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#图形与几何",
         "#平面图形周长",
@@ -6845,11 +6309,11 @@
         "needsPageRef": true,
         "reviewNote": "新课标运用层级，需教材正文核验。"
       },
-      "level": "D",
-      "levelScore": 12,
+      "level": "A",
+      "levelScore": 11,
       "levelDims": [
         2,
-        2,
+        1,
         2,
         2,
         2,
@@ -6877,10 +6341,7 @@
       "keyPoints": [
         "理解 \"倍\" 的概念含义"
       ],
-      "commonMistakes": [
-        "概念混淆",
-        "前置知识缺失"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#数量关系",
         "#倍数关系",
@@ -6932,11 +6393,7 @@
       "keyPoints": [
         "掌握求一个数是另一个数的几倍"
       ],
-      "commonMistakes": [
-        "概念混淆",
-        "前置知识缺失",
-        "解题策略缺失"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#数量关系",
         "#倍数关系",
@@ -6956,14 +6413,14 @@
         "needsPageRef": true,
         "reviewNote": "新课标掌握层级，需教材正文核验。"
       },
-      "level": "C",
-      "levelScore": 9,
+      "level": "B",
+      "levelScore": 6,
       "levelDims": [
         1,
-        2,
-        2,
         1,
-        2,
+        1,
+        1,
+        1,
         1
       ],
       "levelNote": "AI草案分级，新课标掌握+六维启发，需人工核验。",
@@ -6988,11 +6445,7 @@
       "keyPoints": [
         "掌握求一个数的几倍是多少"
       ],
-      "commonMistakes": [
-        "概念混淆",
-        "前置知识缺失",
-        "解题策略缺失"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#数量关系",
         "#倍数关系",
@@ -7012,14 +6465,14 @@
         "needsPageRef": true,
         "reviewNote": "新课标掌握层级，需教材正文核验。"
       },
-      "level": "C",
-      "levelScore": 9,
+      "level": "B",
+      "levelScore": 6,
       "levelDims": [
         1,
-        2,
-        2,
         1,
-        2,
+        1,
+        1,
+        1,
         1
       ],
       "levelNote": "AI草案分级，新课标掌握+六维启发，需人工核验。",
@@ -7044,15 +6497,7 @@
       "keyPoints": [
         "运用倍数关系解决综合应用题"
       ],
-      "commonMistakes": [
-        "题意理解偏差",
-        "概念混淆",
-        "关键信息遗漏",
-        "记忆提取失败",
-        "总复习综合混淆",
-        "前置知识缺失",
-        "迁移失败"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#数量关系",
         "#倍数关系",
@@ -7072,15 +6517,15 @@
         "needsPageRef": true,
         "reviewNote": "新课标运用层级，需教材正文核验。"
       },
-      "level": "D",
-      "levelScore": 12,
+      "level": "A",
+      "levelScore": 10,
       "levelDims": [
         2,
+        1,
         2,
         2,
         2,
-        2,
-        2
+        1
       ],
       "levelNote": "AI草案分级，新课标运用+六维启发，需人工核验。",
       "curriculumLevelLabel": "运用——能够迁移创新"
@@ -7104,12 +6549,7 @@
       "keyPoints": [
         "理解集合重叠部分的含义"
       ],
-      "commonMistakes": [
-        "题意理解偏差",
-        "概念混淆",
-        "前置知识缺失",
-        "解题策略缺失"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#综合与实践",
         "#数学广角",
@@ -7161,14 +6601,7 @@
       "keyPoints": [
         "掌握简单重叠问题的解题方法"
       ],
-      "commonMistakes": [
-        "题意理解偏差",
-        "概念混淆",
-        "关键信息遗漏",
-        "前置知识缺失",
-        "解题策略缺失",
-        "迁移失败"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#综合与实践",
         "#数学广角",
@@ -7188,13 +6621,13 @@
         "needsPageRef": true,
         "reviewNote": "新课标掌握层级，需教材正文核验。"
       },
-      "level": "C",
+      "level": "A",
       "levelScore": 9,
       "levelDims": [
         1,
-        2,
-        2,
         1,
+        2,
+        2,
         2,
         1
       ],
@@ -7220,11 +6653,7 @@
       "keyPoints": [
         "掌握整十、整百数除以一位数口算"
       ],
-      "commonMistakes": [
-        "计算/操作失误",
-        "前置知识缺失",
-        "解题策略缺失"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#数与代数",
         "#除法运算",
@@ -7244,15 +6673,15 @@
         "needsPageRef": true,
         "reviewNote": "新课标掌握层级，需教材正文核验。"
       },
-      "level": "C",
-      "levelScore": 9,
+      "level": "A",
+      "levelScore": 12,
       "levelDims": [
-        1,
         2,
         2,
-        1,
         2,
-        1
+        2,
+        2,
+        2
       ],
       "levelNote": "AI草案分级，新课标掌握+六维启发，需人工核验。",
       "curriculumLevelLabel": "掌握——能够独立做"
@@ -7276,11 +6705,7 @@
       "keyPoints": [
         "理解两位数、三位数除以一位数算理"
       ],
-      "commonMistakes": [
-        "概念混淆",
-        "前置知识缺失",
-        "解题策略缺失"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#数与代数",
         "#除法运算",
@@ -7301,12 +6726,12 @@
         "reviewNote": "新课标理解层级，需教材正文核验。"
       },
       "level": "B",
-      "levelScore": 6,
+      "levelScore": 8,
       "levelDims": [
         1,
+        2,
         1,
-        1,
-        1,
+        2,
         1,
         1
       ],
@@ -7332,11 +6757,7 @@
       "keyPoints": [
         "掌握首位够除、首位不够除笔算"
       ],
-      "commonMistakes": [
-        "计算/操作失误",
-        "前置知识缺失",
-        "解题策略缺失"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#数与代数",
         "#除法运算",
@@ -7356,15 +6777,15 @@
         "needsPageRef": true,
         "reviewNote": "新课标掌握层级，需教材正文核验。"
       },
-      "level": "C",
-      "levelScore": 9,
+      "level": "A",
+      "levelScore": 12,
       "levelDims": [
-        1,
         2,
         2,
-        1,
         2,
-        1
+        2,
+        2,
+        2
       ],
       "levelNote": "AI草案分级，新课标掌握+六维启发，需人工核验。",
       "curriculumLevelLabel": "掌握——能够独立做"
@@ -7388,11 +6809,7 @@
       "keyPoints": [
         "掌握除法验算方法"
       ],
-      "commonMistakes": [
-        "计算/操作失误",
-        "前置知识缺失",
-        "解题策略缺失"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#数与代数",
         "#除法运算",
@@ -7412,15 +6829,15 @@
         "needsPageRef": true,
         "reviewNote": "新课标掌握层级，需教材正文核验。"
       },
-      "level": "C",
-      "levelScore": 9,
+      "level": "A",
+      "levelScore": 12,
       "levelDims": [
-        1,
         2,
         2,
-        1,
         2,
-        1
+        2,
+        2,
+        2
       ],
       "levelNote": "AI草案分级，新课标掌握+六维启发，需人工核验。",
       "curriculumLevelLabel": "掌握——能够独立做"
@@ -7444,11 +6861,7 @@
       "keyPoints": [
         "掌握除法估算策略"
       ],
-      "commonMistakes": [
-        "计算/操作失误",
-        "前置知识缺失",
-        "解题策略缺失"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#数与代数",
         "#除法运算",
@@ -7468,15 +6881,15 @@
         "needsPageRef": true,
         "reviewNote": "新课标掌握层级，需教材正文核验。"
       },
-      "level": "C",
-      "levelScore": 9,
+      "level": "A",
+      "levelScore": 12,
       "levelDims": [
-        1,
         2,
         2,
-        1,
         2,
-        1
+        2,
+        2,
+        2
       ],
       "levelNote": "AI草案分级，新课标掌握+六维启发，需人工核验。",
       "curriculumLevelLabel": "掌握——能够独立做"
@@ -7500,14 +6913,7 @@
       "keyPoints": [
         "运用除法解决平均分、归一问题"
       ],
-      "commonMistakes": [
-        "计算/操作失误",
-        "题意理解偏差",
-        "关键信息遗漏",
-        "前置知识缺失",
-        "解题策略缺失",
-        "迁移失败"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#数与代数",
         "#除法运算",
@@ -7527,7 +6933,7 @@
         "needsPageRef": true,
         "reviewNote": "新课标运用层级，需教材正文核验。"
       },
-      "level": "D",
+      "level": "A",
       "levelScore": 12,
       "levelDims": [
         2,
@@ -7559,11 +6965,7 @@
       "keyPoints": [
         "掌握整十数乘整十数口算"
       ],
-      "commonMistakes": [
-        "计算/操作失误",
-        "前置知识缺失",
-        "解题策略缺失"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#数与代数",
         "#两位数乘法",
@@ -7583,15 +6985,15 @@
         "needsPageRef": true,
         "reviewNote": "新课标掌握层级，需教材正文核验。"
       },
-      "level": "C",
-      "levelScore": 9,
+      "level": "A",
+      "levelScore": 12,
       "levelDims": [
-        1,
         2,
         2,
-        1,
         2,
-        1
+        2,
+        2,
+        2
       ],
       "levelNote": "AI草案分级，新课标掌握+六维启发，需人工核验。",
       "curriculumLevelLabel": "掌握——能够独立做"
@@ -7615,12 +7017,7 @@
       "keyPoints": [
         "理解两位数乘两位数笔算算理"
       ],
-      "commonMistakes": [
-        "计算/操作失误",
-        "概念混淆",
-        "前置知识缺失",
-        "解题策略缺失"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#数与代数",
         "#两位数乘法",
@@ -7641,12 +7038,12 @@
         "reviewNote": "新课标理解层级，需教材正文核验。"
       },
       "level": "B",
-      "levelScore": 6,
+      "levelScore": 8,
       "levelDims": [
         1,
+        2,
         1,
-        1,
-        1,
+        2,
         1,
         1
       ],
@@ -7672,11 +7069,7 @@
       "keyPoints": [
         "掌握两位数乘两位数不进位、进位笔算"
       ],
-      "commonMistakes": [
-        "计算/操作失误",
-        "前置知识缺失",
-        "解题策略缺失"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#数与代数",
         "#两位数乘法",
@@ -7696,15 +7089,15 @@
         "needsPageRef": true,
         "reviewNote": "新课标掌握层级，需教材正文核验。"
       },
-      "level": "C",
-      "levelScore": 9,
+      "level": "A",
+      "levelScore": 12,
       "levelDims": [
-        1,
         2,
         2,
-        1,
         2,
-        1
+        2,
+        2,
+        2
       ],
       "levelNote": "AI草案分级，新课标掌握+六维启发，需人工核验。",
       "curriculumLevelLabel": "掌握——能够独立做"
@@ -7728,13 +7121,7 @@
       "keyPoints": [
         "运用乘法解决连乘实际问题"
       ],
-      "commonMistakes": [
-        "计算/操作失误",
-        "题意理解偏差",
-        "关键信息遗漏",
-        "前置知识缺失",
-        "迁移失败"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#数与代数",
         "#两位数乘法",
@@ -7754,7 +7141,7 @@
         "needsPageRef": true,
         "reviewNote": "新课标运用层级，需教材正文核验。"
       },
-      "level": "D",
+      "level": "A",
       "levelScore": 12,
       "levelDims": [
         2,
@@ -7786,13 +7173,7 @@
       "keyPoints": [
         "了解小数的读写及各部分名称"
       ],
-      "commonMistakes": [
-        "题意理解偏差",
-        "概念混淆",
-        "表达/书写/格式问题",
-        "前置知识缺失",
-        "题型不熟"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#数与代数",
         "#小数初步",
@@ -7812,15 +7193,15 @@
         "needsPageRef": true,
         "reviewNote": "新课标了解层级，需教材正文核验。"
       },
-      "level": "A",
-      "levelScore": 3,
+      "level": "C",
+      "levelScore": 2,
       "levelDims": [
-        1,
-        1,
-        1,
         0,
         0,
-        0
+        0,
+        0,
+        0,
+        2
       ],
       "levelNote": "AI草案分级，新课标了解+六维启发，需人工核验。",
       "curriculumLevelLabel": "了解——知道是什么"
@@ -7844,15 +7225,7 @@
       "keyPoints": [
         "理解以元、米为单位的小数实际含义"
       ],
-      "commonMistakes": [
-        "题意理解偏差",
-        "概念混淆",
-        "表达/书写/格式问题",
-        "关键信息遗漏",
-        "前置知识缺失",
-        "迁移失败",
-        "体积/长度单位换算错误"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#数与代数",
         "#小数初步",
@@ -7872,15 +7245,15 @@
         "needsPageRef": true,
         "reviewNote": "新课标理解层级，需教材正文核验。"
       },
-      "level": "B",
-      "levelScore": 6,
+      "level": "A",
+      "levelScore": 10,
       "levelDims": [
         1,
         1,
-        1,
-        1,
-        1,
-        1
+        2,
+        2,
+        2,
+        2
       ],
       "levelNote": "AI草案分级，新课标理解+六维启发，需人工核验。",
       "curriculumLevelLabel": "理解——知道为什么"
@@ -7904,11 +7277,7 @@
       "keyPoints": [
         "掌握一位小数大小比较方法"
       ],
-      "commonMistakes": [
-        "概念混淆",
-        "前置知识缺失",
-        "解题策略缺失"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#数与代数",
         "#小数初步",
@@ -7928,15 +7297,15 @@
         "needsPageRef": true,
         "reviewNote": "新课标掌握层级，需教材正文核验。"
       },
-      "level": "C",
-      "levelScore": 9,
+      "level": "B",
+      "levelScore": 7,
       "levelDims": [
         1,
-        2,
-        2,
         1,
-        2,
-        1
+        1,
+        1,
+        1,
+        2
       ],
       "levelNote": "AI草案分级，新课标掌握+六维启发，需人工核验。",
       "curriculumLevelLabel": "掌握——能够独立做"
@@ -7960,11 +7329,7 @@
       "keyPoints": [
         "掌握一位小数简单加减法计算"
       ],
-      "commonMistakes": [
-        "计算/操作失误",
-        "前置知识缺失",
-        "解题策略缺失"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#数与代数",
         "#小数初步",
@@ -7984,15 +7349,15 @@
         "needsPageRef": true,
         "reviewNote": "新课标掌握层级，需教材正文核验。"
       },
-      "level": "C",
-      "levelScore": 9,
+      "level": "A",
+      "levelScore": 12,
       "levelDims": [
-        1,
         2,
         2,
-        1,
         2,
-        1
+        2,
+        2,
+        2
       ],
       "levelNote": "AI草案分级，新课标掌握+六维启发，需人工核验。",
       "curriculumLevelLabel": "掌握——能够独立做"
@@ -8016,11 +7381,7 @@
       "keyPoints": [
         "认识东、南、西、北四个基本方向"
       ],
-      "commonMistakes": [
-        "概念混淆",
-        "方向角度描述错误",
-        "前置知识缺失"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#图形与几何",
         "#位置方向",
@@ -8040,14 +7401,14 @@
         "needsPageRef": true,
         "reviewNote": "新课标了解层级，需教材正文核验。"
       },
-      "level": "A",
-      "levelScore": 3,
+      "level": "C",
+      "levelScore": 2,
       "levelDims": [
-        1,
-        1,
-        1,
         0,
         0,
+        0,
+        1,
+        1,
         0
       ],
       "levelNote": "AI草案分级，新课标了解+六维启发，需人工核验。",
@@ -8072,11 +7433,7 @@
       "keyPoints": [
         "认识东北、东南、西北、西南四个方向"
       ],
-      "commonMistakes": [
-        "概念混淆",
-        "方向角度描述错误",
-        "前置知识缺失"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#图形与几何",
         "#位置方向",
@@ -8096,14 +7453,14 @@
         "needsPageRef": true,
         "reviewNote": "新课标了解层级，需教材正文核验。"
       },
-      "level": "A",
-      "levelScore": 3,
+      "level": "C",
+      "levelScore": 2,
       "levelDims": [
-        1,
-        1,
-        1,
         0,
         0,
+        0,
+        1,
+        1,
         0
       ],
       "levelNote": "AI草案分级，新课标了解+六维启发，需人工核验。",
@@ -8128,12 +7485,7 @@
       "keyPoints": [
         "掌握根据给定方向辨别其余方位"
       ],
-      "commonMistakes": [
-        "概念混淆",
-        "方向角度描述错误",
-        "前置知识缺失",
-        "解题策略缺失"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#图形与几何",
         "#位置方向",
@@ -8153,14 +7505,14 @@
         "needsPageRef": true,
         "reviewNote": "新课标掌握层级，需教材正文核验。"
       },
-      "level": "C",
-      "levelScore": 9,
+      "level": "B",
+      "levelScore": 6,
       "levelDims": [
         1,
-        2,
-        2,
         1,
-        2,
+        1,
+        1,
+        1,
         1
       ],
       "levelNote": "AI草案分级，新课标掌握+六维启发，需人工核验。",
@@ -8185,10 +7537,7 @@
       "keyPoints": [
         "能描述简单行走路线"
       ],
-      "commonMistakes": [
-        "方向参照点混淆",
-        "前置知识缺失"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#图形与几何",
         "#位置方向",
@@ -8208,14 +7557,14 @@
         "needsPageRef": true,
         "reviewNote": "新课标掌握层级，需教材正文核验。"
       },
-      "level": "C",
-      "levelScore": 9,
+      "level": "B",
+      "levelScore": 6,
       "levelDims": [
         1,
-        2,
-        2,
         1,
-        2,
+        1,
+        1,
+        1,
         1
       ],
       "levelNote": "AI草案分级，新课标掌握+六维启发，需人工核验。",
@@ -8240,12 +7589,7 @@
       "keyPoints": [
         "理解面积的含义，区分周长与面积"
       ],
-      "commonMistakes": [
-        "周长面积混淆",
-        "题意理解偏差",
-        "概念混淆",
-        "前置知识缺失"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#图形与几何",
         "#面积",
@@ -8266,14 +7610,14 @@
         "reviewNote": "新课标理解层级，需教材正文核验。"
       },
       "level": "B",
-      "levelScore": 6,
+      "levelScore": 7,
       "levelDims": [
         1,
         1,
         1,
         1,
         1,
-        1
+        2
       ],
       "levelNote": "AI草案分级，新课标理解+六维启发，需人工核验。",
       "curriculumLevelLabel": "理解——知道为什么"
@@ -8297,14 +7641,7 @@
       "keyPoints": [
         "认识常用面积单位：平方厘米、平方分米、平方米"
       ],
-      "commonMistakes": [
-        "面积单位换算错误",
-        "题意理解偏差",
-        "概念混淆",
-        "表达/书写/格式问题",
-        "前置知识缺失",
-        "体积/长度单位换算错误"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#图形与几何",
         "#面积",
@@ -8324,15 +7661,15 @@
         "needsPageRef": true,
         "reviewNote": "新课标了解层级，需教材正文核验。"
       },
-      "level": "A",
-      "levelScore": 3,
+      "level": "C",
+      "levelScore": 2,
       "levelDims": [
-        1,
-        1,
-        1,
         0,
         0,
-        0
+        0,
+        0,
+        0,
+        2
       ],
       "levelNote": "AI草案分级，新课标了解+六维启发，需人工核验。",
       "curriculumLevelLabel": "了解——知道是什么"
@@ -8356,15 +7693,7 @@
       "keyPoints": [
         "理解面积单位间进率关系"
       ],
-      "commonMistakes": [
-        "面积单位换算错误",
-        "题意理解偏差",
-        "概念混淆",
-        "表达/书写/格式问题",
-        "记忆提取失败",
-        "前置知识缺失",
-        "体积/长度单位换算错误"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#图形与几何",
         "#面积",
@@ -8385,14 +7714,14 @@
         "reviewNote": "新课标理解层级，需教材正文核验。"
       },
       "level": "B",
-      "levelScore": 6,
+      "levelScore": 7,
       "levelDims": [
         1,
         1,
         1,
         1,
         1,
-        1
+        2
       ],
       "levelNote": "AI草案分级，新课标理解+六维启发，需人工核验。",
       "curriculumLevelLabel": "理解——知道为什么"
@@ -8416,14 +7745,7 @@
       "keyPoints": [
         "掌握面积单位换算"
       ],
-      "commonMistakes": [
-        "面积单位换算错误",
-        "题意理解偏差",
-        "表达/书写/格式问题",
-        "前置知识缺失",
-        "解题策略缺失",
-        "体积/长度单位换算错误"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#图形与几何",
         "#面积",
@@ -8443,15 +7765,15 @@
         "needsPageRef": true,
         "reviewNote": "新课标掌握层级，需教材正文核验。"
       },
-      "level": "C",
-      "levelScore": 9,
+      "level": "B",
+      "levelScore": 7,
       "levelDims": [
         1,
-        2,
-        2,
         1,
-        2,
-        1
+        1,
+        1,
+        1,
+        2
       ],
       "levelNote": "AI草案分级，新课标掌握+六维启发，需人工核验。",
       "curriculumLevelLabel": "掌握——能够独立做"
@@ -8475,14 +7797,7 @@
       "keyPoints": [
         "掌握长方形、正方形面积计算公式"
       ],
-      "commonMistakes": [
-        "面积公式误用",
-        "计算/操作失误",
-        "概念混淆",
-        "记忆提取失败",
-        "前置知识缺失",
-        "解题策略缺失"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#图形与几何",
         "#面积",
@@ -8502,15 +7817,15 @@
         "needsPageRef": true,
         "reviewNote": "新课标掌握层级，需教材正文核验。"
       },
-      "level": "C",
-      "levelScore": 9,
+      "level": "A",
+      "levelScore": 12,
       "levelDims": [
-        1,
         2,
         2,
-        1,
         2,
-        1
+        2,
+        2,
+        2
       ],
       "levelNote": "AI草案分级，新课标掌握+六维启发，需人工核验。",
       "curriculumLevelLabel": "掌握——能够独立做"
@@ -8534,17 +7849,7 @@
       "keyPoints": [
         "运用面积公式计算、解决铺地类实际问题"
       ],
-      "commonMistakes": [
-        "面积公式误用",
-        "计算/操作失误",
-        "题意理解偏差",
-        "概念混淆",
-        "关键信息遗漏",
-        "记忆提取失败",
-        "前置知识缺失",
-        "解题策略缺失",
-        "迁移失败"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#图形与几何",
         "#面积",
@@ -8564,7 +7869,7 @@
         "needsPageRef": true,
         "reviewNote": "新课标运用层级，需教材正文核验。"
       },
-      "level": "D",
+      "level": "A",
       "levelScore": 12,
       "levelDims": [
         2,
@@ -8596,10 +7901,7 @@
       "keyPoints": [
         "了解年、月、日基本常识"
       ],
-      "commonMistakes": [
-        "概念混淆",
-        "前置知识缺失"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#常见的量",
         "#年月日",
@@ -8619,14 +7921,14 @@
         "needsPageRef": true,
         "reviewNote": "新课标了解层级，需教材正文核验。"
       },
-      "level": "A",
-      "levelScore": 3,
+      "level": "C",
+      "levelScore": 2,
       "levelDims": [
-        1,
-        1,
-        1,
         0,
         0,
+        0,
+        1,
+        1,
         0
       ],
       "levelNote": "AI草案分级，新课标了解+六维启发，需人工核验。",
@@ -8651,10 +7953,7 @@
       "keyPoints": [
         "掌握大月、小月、2 月判断方法"
       ],
-      "commonMistakes": [
-        "前置知识缺失",
-        "解题策略缺失"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#常见的量",
         "#年月日",
@@ -8674,14 +7973,14 @@
         "needsPageRef": true,
         "reviewNote": "新课标掌握层级，需教材正文核验。"
       },
-      "level": "C",
-      "levelScore": 9,
+      "level": "B",
+      "levelScore": 6,
       "levelDims": [
         1,
-        2,
-        2,
         1,
-        2,
+        1,
+        1,
+        1,
         1
       ],
       "levelNote": "AI草案分级，新课标掌握+六维启发，需人工核验。",
@@ -8706,10 +8005,7 @@
       "keyPoints": [
         "理解平年、闰年的判定规则"
       ],
-      "commonMistakes": [
-        "概念混淆",
-        "前置知识缺失"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#常见的量",
         "#年月日",
@@ -8761,10 +8057,7 @@
       "keyPoints": [
         "掌握 24 时计时法与普通计时法互化"
       ],
-      "commonMistakes": [
-        "前置知识缺失",
-        "解题策略缺失"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#常见的量",
         "#年月日",
@@ -8784,14 +8077,14 @@
         "needsPageRef": true,
         "reviewNote": "新课标掌握层级，需教材正文核验。"
       },
-      "level": "C",
-      "levelScore": 9,
+      "level": "B",
+      "levelScore": 6,
       "levelDims": [
         1,
-        2,
-        2,
         1,
-        2,
+        1,
+        1,
+        1,
         1
       ],
       "levelNote": "AI草案分级，新课标掌握+六维启发，需人工核验。",
@@ -8816,12 +8109,7 @@
       "keyPoints": [
         "掌握跨时段经过时间计算"
       ],
-      "commonMistakes": [
-        "计算/操作失误",
-        "前置知识缺失",
-        "解题策略缺失",
-        "体积/长度单位换算错误"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#常见的量",
         "#年月日",
@@ -8841,15 +8129,15 @@
         "needsPageRef": true,
         "reviewNote": "新课标掌握层级，需教材正文核验。"
       },
-      "level": "C",
-      "levelScore": 9,
+      "level": "A",
+      "levelScore": 12,
       "levelDims": [
-        1,
         2,
         2,
-        1,
         2,
-        1
+        2,
+        2,
+        2
       ],
       "levelNote": "AI草案分级，新课标掌握+六维启发，需人工核验。",
       "curriculumLevelLabel": "掌握——能够独立做"
@@ -8873,11 +8161,7 @@
       "keyPoints": [
         "了解复式统计表结构特点"
       ],
-      "commonMistakes": [
-        "概念混淆",
-        "前置知识缺失",
-        "题型不熟"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#统计与概率",
         "#统计",
@@ -8897,14 +8181,14 @@
         "needsPageRef": true,
         "reviewNote": "新课标了解层级，需教材正文核验。"
       },
-      "level": "A",
-      "levelScore": 3,
+      "level": "C",
+      "levelScore": 2,
       "levelDims": [
-        1,
-        1,
-        1,
         0,
         0,
+        0,
+        1,
+        1,
         0
       ],
       "levelNote": "AI草案分级，新课标了解+六维启发，需人工核验。",
@@ -8929,10 +8213,7 @@
       "keyPoints": [
         "能读懂、填写复式统计表"
       ],
-      "commonMistakes": [
-        "前置知识缺失",
-        "题型不熟"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#统计与概率",
         "#统计",
@@ -8952,14 +8233,14 @@
         "needsPageRef": true,
         "reviewNote": "新课标掌握层级，需教材正文核验。"
       },
-      "level": "C",
-      "levelScore": 9,
+      "level": "B",
+      "levelScore": 6,
       "levelDims": [
         1,
-        2,
-        2,
         1,
-        2,
+        1,
+        1,
+        1,
         1
       ],
       "levelNote": "AI草案分级，新课标掌握+六维启发，需人工核验。",
@@ -8984,10 +8265,7 @@
       "keyPoints": [
         "能根据表中数据对比分析"
       ],
-      "commonMistakes": [
-        "题意理解偏差",
-        "前置知识缺失"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#统计与概率",
         "#统计",
@@ -9007,14 +8285,14 @@
         "needsPageRef": true,
         "reviewNote": "新课标掌握层级，需教材正文核验。"
       },
-      "level": "C",
-      "levelScore": 9,
+      "level": "B",
+      "levelScore": 6,
       "levelDims": [
         1,
-        2,
-        2,
         1,
-        2,
+        1,
+        1,
+        1,
         1
       ],
       "levelNote": "AI草案分级，新课标掌握+六维启发，需人工核验。",
@@ -9039,11 +8317,7 @@
       "keyPoints": [
         "认识亿以内、亿以上数的数位顺序"
       ],
-      "commonMistakes": [
-        "概念混淆",
-        "表达/书写/格式问题",
-        "前置知识缺失"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#数与代数",
         "#大数认识",
@@ -9063,14 +8337,14 @@
         "needsPageRef": true,
         "reviewNote": "新课标了解层级，需教材正文核验。"
       },
-      "level": "A",
-      "levelScore": 3,
+      "level": "C",
+      "levelScore": 2,
       "levelDims": [
-        1,
-        1,
-        1,
         0,
         0,
+        0,
+        1,
+        1,
         0
       ],
       "levelNote": "AI草案分级，新课标了解+六维启发，需人工核验。",
@@ -9095,10 +8369,7 @@
       "keyPoints": [
         "理解十进制计数法含义"
       ],
-      "commonMistakes": [
-        "概念混淆",
-        "前置知识缺失"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#数与代数",
         "#大数认识",
@@ -9150,13 +8421,7 @@
       "keyPoints": [
         "掌握大数分级读写方法"
       ],
-      "commonMistakes": [
-        "题意理解偏差",
-        "表达/书写/格式问题",
-        "前置知识缺失",
-        "题型不熟",
-        "解题策略缺失"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#数与代数",
         "#大数认识",
@@ -9176,14 +8441,14 @@
         "needsPageRef": true,
         "reviewNote": "新课标掌握层级，需教材正文核验。"
       },
-      "level": "C",
-      "levelScore": 9,
+      "level": "B",
+      "levelScore": 6,
       "levelDims": [
         1,
-        2,
-        2,
         1,
-        2,
+        1,
+        1,
+        1,
         1
       ],
       "levelNote": "AI草案分级，新课标掌握+六维启发，需人工核验。",
@@ -9208,11 +8473,7 @@
       "keyPoints": [
         "掌握大数大小比较、整万整亿数改写"
       ],
-      "commonMistakes": [
-        "概念混淆",
-        "前置知识缺失",
-        "解题策略缺失"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#数与代数",
         "#大数认识",
@@ -9232,14 +8493,14 @@
         "needsPageRef": true,
         "reviewNote": "新课标掌握层级，需教材正文核验。"
       },
-      "level": "C",
-      "levelScore": 9,
+      "level": "B",
+      "levelScore": 6,
       "levelDims": [
         1,
-        2,
-        2,
         1,
-        2,
+        1,
+        1,
+        1,
         1
       ],
       "levelNote": "AI草案分级，新课标掌握+六维启发，需人工核验。",
@@ -9264,10 +8525,7 @@
       "keyPoints": [
         "掌握用四舍五入求大数近似数"
       ],
-      "commonMistakes": [
-        "前置知识缺失",
-        "解题策略缺失"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#数与代数",
         "#大数认识",
@@ -9287,14 +8545,14 @@
         "needsPageRef": true,
         "reviewNote": "新课标掌握层级，需教材正文核验。"
       },
-      "level": "C",
-      "levelScore": 9,
+      "level": "B",
+      "levelScore": 6,
       "levelDims": [
         1,
-        2,
-        2,
         1,
-        2,
+        1,
+        1,
+        1,
         1
       ],
       "levelNote": "AI草案分级，新课标掌握+六维启发，需人工核验。",
@@ -9319,11 +8577,7 @@
       "keyPoints": [
         "了解算盘、计算器基本使用"
       ],
-      "commonMistakes": [
-        "计算/操作失误",
-        "概念混淆",
-        "前置知识缺失"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#数与代数",
         "#大数认识",
@@ -9343,13 +8597,13 @@
         "needsPageRef": true,
         "reviewNote": "新课标了解层级，需教材正文核验。"
       },
-      "level": "A",
-      "levelScore": 3,
+      "level": "C",
+      "levelScore": 4,
       "levelDims": [
-        1,
-        1,
-        1,
         0,
+        2,
+        0,
+        2,
         0,
         0
       ],
@@ -9375,11 +8629,7 @@
       "keyPoints": [
         "掌握三位数乘两位数笔算方法"
       ],
-      "commonMistakes": [
-        "计算/操作失误",
-        "前置知识缺失",
-        "解题策略缺失"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#数与代数",
         "#乘除运算",
@@ -9399,15 +8649,15 @@
         "needsPageRef": true,
         "reviewNote": "新课标掌握层级，需教材正文核验。"
       },
-      "level": "C",
-      "levelScore": 9,
+      "level": "A",
+      "levelScore": 12,
       "levelDims": [
-        1,
         2,
         2,
-        1,
         2,
-        1
+        2,
+        2,
+        2
       ],
       "levelNote": "AI草案分级，新课标掌握+六维启发，需人工核验。",
       "curriculumLevelLabel": "掌握——能够独立做"
@@ -9431,12 +8681,7 @@
       "keyPoints": [
         "理解积的变化规律"
       ],
-      "commonMistakes": [
-        "概念混淆",
-        "记忆提取失败",
-        "数形结合规律发现失败",
-        "前置知识缺失"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#数与代数",
         "#乘除运算",
@@ -9488,11 +8733,7 @@
       "keyPoints": [
         "掌握常见数量关系：路程、速度、时间"
       ],
-      "commonMistakes": [
-        "记忆提取失败",
-        "前置知识缺失",
-        "解题策略缺失"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#数与代数",
         "#乘除运算",
@@ -9512,14 +8753,14 @@
         "needsPageRef": true,
         "reviewNote": "新课标掌握层级，需教材正文核验。"
       },
-      "level": "C",
-      "levelScore": 9,
+      "level": "B",
+      "levelScore": 6,
       "levelDims": [
         1,
-        2,
-        2,
         1,
-        2,
+        1,
+        1,
+        1,
         1
       ],
       "levelNote": "AI草案分级，新课标掌握+六维启发，需人工核验。",
@@ -9544,11 +8785,7 @@
       "keyPoints": [
         "掌握单价、数量、总价数量关系"
       ],
-      "commonMistakes": [
-        "记忆提取失败",
-        "前置知识缺失",
-        "解题策略缺失"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#数与代数",
         "#乘除运算",
@@ -9568,14 +8805,14 @@
         "needsPageRef": true,
         "reviewNote": "新课标掌握层级，需教材正文核验。"
       },
-      "level": "C",
-      "levelScore": 9,
+      "level": "B",
+      "levelScore": 6,
       "levelDims": [
         1,
-        2,
-        2,
         1,
-        2,
+        1,
+        1,
+        1,
         1
       ],
       "levelNote": "AI草案分级，新课标掌握+六维启发，需人工核验。",
@@ -9600,13 +8837,7 @@
       "keyPoints": [
         "运用乘法解决行程、购物类应用题"
       ],
-      "commonMistakes": [
-        "计算/操作失误",
-        "题意理解偏差",
-        "关键信息遗漏",
-        "前置知识缺失",
-        "迁移失败"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#数与代数",
         "#乘除运算",
@@ -9626,7 +8857,7 @@
         "needsPageRef": true,
         "reviewNote": "新课标运用层级，需教材正文核验。"
       },
-      "level": "D",
+      "level": "A",
       "levelScore": 12,
       "levelDims": [
         2,
@@ -9658,11 +8889,7 @@
       "keyPoints": [
         "掌握整十数除整十、几百几十数口算"
       ],
-      "commonMistakes": [
-        "计算/操作失误",
-        "前置知识缺失",
-        "解题策略缺失"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#数与代数",
         "#乘除运算",
@@ -9682,15 +8909,15 @@
         "needsPageRef": true,
         "reviewNote": "新课标掌握层级，需教材正文核验。"
       },
-      "level": "C",
-      "levelScore": 9,
+      "level": "A",
+      "levelScore": 12,
       "levelDims": [
-        1,
         2,
         2,
-        1,
         2,
-        1
+        2,
+        2,
+        2
       ],
       "levelNote": "AI草案分级，新课标掌握+六维启发，需人工核验。",
       "curriculumLevelLabel": "掌握——能够独立做"
@@ -9714,11 +8941,7 @@
       "keyPoints": [
         "理解试商、调商的算理"
       ],
-      "commonMistakes": [
-        "概念混淆",
-        "前置知识缺失",
-        "解题策略缺失"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#数与代数",
         "#乘除运算",
@@ -9770,11 +8993,7 @@
       "keyPoints": [
         "掌握除数是两位数笔算除法"
       ],
-      "commonMistakes": [
-        "计算/操作失误",
-        "前置知识缺失",
-        "解题策略缺失"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#数与代数",
         "#乘除运算",
@@ -9794,15 +9013,15 @@
         "needsPageRef": true,
         "reviewNote": "新课标掌握层级，需教材正文核验。"
       },
-      "level": "C",
-      "levelScore": 9,
+      "level": "A",
+      "levelScore": 12,
       "levelDims": [
-        1,
         2,
         2,
-        1,
         2,
-        1
+        2,
+        2,
+        2
       ],
       "levelNote": "AI草案分级，新课标掌握+六维启发，需人工核验。",
       "curriculumLevelLabel": "掌握——能够独立做"
@@ -9826,12 +9045,7 @@
       "keyPoints": [
         "理解商的变化规律"
       ],
-      "commonMistakes": [
-        "概念混淆",
-        "记忆提取失败",
-        "数形结合规律发现失败",
-        "前置知识缺失"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#数与代数",
         "#乘除运算",
@@ -9883,14 +9097,7 @@
       "keyPoints": [
         "运用除法解决归一、归总实际问题"
       ],
-      "commonMistakes": [
-        "计算/操作失误",
-        "题意理解偏差",
-        "关键信息遗漏",
-        "前置知识缺失",
-        "解题策略缺失",
-        "迁移失败"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#数与代数",
         "#乘除运算",
@@ -9910,7 +9117,7 @@
         "needsPageRef": true,
         "reviewNote": "新课标运用层级，需教材正文核验。"
       },
-      "level": "D",
+      "level": "A",
       "levelScore": 12,
       "levelDims": [
         2,
@@ -9942,10 +9149,7 @@
       "keyPoints": [
         "认识线段、直线、射线及区别"
       ],
-      "commonMistakes": [
-        "概念混淆",
-        "前置知识缺失"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#图形与几何",
         "#角与线",
@@ -9965,14 +9169,14 @@
         "needsPageRef": true,
         "reviewNote": "新课标了解层级，需教材正文核验。"
       },
-      "level": "A",
-      "levelScore": 3,
+      "level": "C",
+      "levelScore": 2,
       "levelDims": [
-        1,
-        1,
-        1,
         0,
         0,
+        0,
+        1,
+        1,
         0
       ],
       "levelNote": "AI草案分级，新课标了解+六维启发，需人工核验。",
@@ -9997,11 +9201,7 @@
       "keyPoints": [
         "理解角的含义与组成"
       ],
-      "commonMistakes": [
-        "题意理解偏差",
-        "概念混淆",
-        "前置知识缺失"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#图形与几何",
         "#角与线",
@@ -10053,11 +9253,7 @@
       "keyPoints": [
         "掌握用量角器量角、画角方法"
       ],
-      "commonMistakes": [
-        "题意理解偏差",
-        "前置知识缺失",
-        "解题策略缺失"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#图形与几何",
         "#角与线",
@@ -10077,14 +9273,14 @@
         "needsPageRef": true,
         "reviewNote": "新课标掌握层级，需教材正文核验。"
       },
-      "level": "C",
-      "levelScore": 9,
+      "level": "B",
+      "levelScore": 6,
       "levelDims": [
         1,
-        2,
-        2,
         1,
-        2,
+        1,
+        1,
+        1,
         1
       ],
       "levelNote": "AI草案分级，新课标掌握+六维启发，需人工核验。",
@@ -10109,11 +9305,7 @@
       "keyPoints": [
         "认识锐角、直角、钝角、平角、周角"
       ],
-      "commonMistakes": [
-        "题意理解偏差",
-        "概念混淆",
-        "前置知识缺失"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#图形与几何",
         "#角与线",
@@ -10133,14 +9325,14 @@
         "needsPageRef": true,
         "reviewNote": "新课标了解层级，需教材正文核验。"
       },
-      "level": "A",
-      "levelScore": 3,
+      "level": "C",
+      "levelScore": 2,
       "levelDims": [
-        1,
-        1,
-        1,
         0,
         0,
+        0,
+        1,
+        1,
         0
       ],
       "levelNote": "AI草案分级，新课标了解+六维启发，需人工核验。",
@@ -10165,13 +9357,7 @@
       "keyPoints": [
         "掌握各类角之间大小关系"
       ],
-      "commonMistakes": [
-        "题意理解偏差",
-        "概念混淆",
-        "记忆提取失败",
-        "前置知识缺失",
-        "解题策略缺失"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#图形与几何",
         "#角与线",
@@ -10191,14 +9377,14 @@
         "needsPageRef": true,
         "reviewNote": "新课标掌握层级，需教材正文核验。"
       },
-      "level": "C",
-      "levelScore": 9,
+      "level": "B",
+      "levelScore": 6,
       "levelDims": [
         1,
-        2,
-        2,
         1,
-        2,
+        1,
+        1,
+        1,
         1
       ],
       "levelNote": "AI草案分级，新课标掌握+六维启发，需人工核验。",
@@ -10223,10 +9409,7 @@
       "keyPoints": [
         "理解平行与垂直的概念"
       ],
-      "commonMistakes": [
-        "概念混淆",
-        "前置知识缺失"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#图形与几何",
         "#平行与梯形",
@@ -10278,11 +9461,7 @@
       "keyPoints": [
         "掌握画平行线、画垂线的方法"
       ],
-      "commonMistakes": [
-        "概念混淆",
-        "前置知识缺失",
-        "解题策略缺失"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#图形与几何",
         "#平行与梯形",
@@ -10302,14 +9481,14 @@
         "needsPageRef": true,
         "reviewNote": "新课标掌握层级，需教材正文核验。"
       },
-      "level": "C",
-      "levelScore": 9,
+      "level": "B",
+      "levelScore": 6,
       "levelDims": [
         1,
-        2,
-        2,
         1,
-        2,
+        1,
+        1,
+        1,
         1
       ],
       "levelNote": "AI草案分级，新课标掌握+六维启发，需人工核验。",
@@ -10334,11 +9513,7 @@
       "keyPoints": [
         "认识平行四边形、梯形特征"
       ],
-      "commonMistakes": [
-        "概念混淆",
-        "记忆提取失败",
-        "前置知识缺失"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#图形与几何",
         "#平行与梯形",
@@ -10358,14 +9533,14 @@
         "needsPageRef": true,
         "reviewNote": "新课标了解层级，需教材正文核验。"
       },
-      "level": "A",
-      "levelScore": 3,
+      "level": "C",
+      "levelScore": 2,
       "levelDims": [
-        1,
-        1,
-        1,
         0,
         0,
+        0,
+        1,
+        1,
         0
       ],
       "levelNote": "AI草案分级，新课标了解+六维启发，需人工核验。",
@@ -10390,10 +9565,7 @@
       "keyPoints": [
         "掌握画高的基本方法"
       ],
-      "commonMistakes": [
-        "前置知识缺失",
-        "解题策略缺失"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#图形与几何",
         "#平行与梯形",
@@ -10413,14 +9585,14 @@
         "needsPageRef": true,
         "reviewNote": "新课标掌握层级，需教材正文核验。"
       },
-      "level": "C",
-      "levelScore": 9,
+      "level": "B",
+      "levelScore": 6,
       "levelDims": [
         1,
-        2,
-        2,
         1,
-        2,
+        1,
+        1,
+        1,
         1
       ],
       "levelNote": "AI草案分级，新课标掌握+六维启发，需人工核验。",
@@ -10445,13 +9617,7 @@
       "keyPoints": [
         "了解 1 格代表多个单位的条形图特点"
       ],
-      "commonMistakes": [
-        "题意理解偏差",
-        "概念混淆",
-        "表达/书写/格式问题",
-        "前置知识缺失",
-        "体积/长度单位换算错误"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#统计与概率",
         "#条形统计图",
@@ -10471,14 +9637,14 @@
         "needsPageRef": true,
         "reviewNote": "新课标了解层级，需教材正文核验。"
       },
-      "level": "A",
-      "levelScore": 3,
+      "level": "C",
+      "levelScore": 2,
       "levelDims": [
-        1,
-        1,
-        1,
         0,
         0,
+        0,
+        1,
+        1,
         0
       ],
       "levelNote": "AI草案分级，新课标了解+六维启发，需人工核验。",
@@ -10503,11 +9669,7 @@
       "keyPoints": [
         "能绘制、读取并分析条形统计图数据"
       ],
-      "commonMistakes": [
-        "题意理解偏差",
-        "前置知识缺失",
-        "题型不熟"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#统计与概率",
         "#条形统计图",
@@ -10527,14 +9689,14 @@
         "needsPageRef": true,
         "reviewNote": "新课标掌握层级，需教材正文核验。"
       },
-      "level": "C",
-      "levelScore": 9,
+      "level": "B",
+      "levelScore": 6,
       "levelDims": [
         1,
-        2,
-        2,
         1,
-        2,
+        1,
+        1,
+        1,
         1
       ],
       "levelNote": "AI草案分级，新课标掌握+六维启发，需人工核验。",
@@ -10559,11 +9721,7 @@
       "keyPoints": [
         "理解合理安排时间的统筹思想"
       ],
-      "commonMistakes": [
-        "概念混淆",
-        "前置知识缺失",
-        "解题策略缺失"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#综合与实践",
         "#数学广角",
@@ -10615,10 +9773,7 @@
       "keyPoints": [
         "掌握沏茶、烙饼、田忌赛马基本策略"
       ],
-      "commonMistakes": [
-        "前置知识缺失",
-        "解题策略缺失"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#综合与实践",
         "#数学广角",
@@ -10638,14 +9793,14 @@
         "needsPageRef": true,
         "reviewNote": "新课标掌握层级，需教材正文核验。"
       },
-      "level": "C",
-      "levelScore": 9,
+      "level": "B",
+      "levelScore": 6,
       "levelDims": [
         1,
-        2,
-        2,
         1,
-        2,
+        1,
+        1,
+        1,
         1
       ],
       "levelNote": "AI草案分级，新课标掌握+六维启发，需人工核验。",
@@ -10670,14 +9825,7 @@
       "keyPoints": [
         "理解加减乘除四则运算的意义及各部分关系"
       ],
-      "commonMistakes": [
-        "计算/操作失误",
-        "题意理解偏差",
-        "概念混淆",
-        "记忆提取失败",
-        "前置知识缺失",
-        "解题策略缺失"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#数与代数",
         "#四则运算与定律",
@@ -10698,12 +9846,12 @@
         "reviewNote": "新课标理解层级，需教材正文核验。"
       },
       "level": "B",
-      "levelScore": 6,
+      "levelScore": 8,
       "levelDims": [
         1,
+        2,
         1,
-        1,
-        1,
+        2,
         1,
         1
       ],
@@ -10729,11 +9877,7 @@
       "keyPoints": [
         "掌握有关 0 的运算规则"
       ],
-      "commonMistakes": [
-        "计算/操作失误",
-        "前置知识缺失",
-        "解题策略缺失"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#数与代数",
         "#四则运算与定律",
@@ -10753,15 +9897,15 @@
         "needsPageRef": true,
         "reviewNote": "新课标掌握层级，需教材正文核验。"
       },
-      "level": "C",
-      "levelScore": 9,
+      "level": "A",
+      "levelScore": 12,
       "levelDims": [
-        1,
         2,
         2,
-        1,
         2,
-        1
+        2,
+        2,
+        2
       ],
       "levelNote": "AI草案分级，新课标掌握+六维启发，需人工核验。",
       "curriculumLevelLabel": "掌握——能够独立做"
@@ -10785,12 +9929,7 @@
       "keyPoints": [
         "掌握含括号的四则混合运算顺序"
       ],
-      "commonMistakes": [
-        "计算/操作失误",
-        "总复习综合混淆",
-        "前置知识缺失",
-        "解题策略缺失"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#数与代数",
         "#四则运算与定律",
@@ -10810,15 +9949,15 @@
         "needsPageRef": true,
         "reviewNote": "新课标掌握层级，需教材正文核验。"
       },
-      "level": "C",
-      "levelScore": 9,
+      "level": "A",
+      "levelScore": 12,
       "levelDims": [
-        1,
         2,
         2,
-        1,
         2,
-        1
+        2,
+        2,
+        2
       ],
       "levelNote": "AI草案分级，新课标掌握+六维启发，需人工核验。",
       "curriculumLevelLabel": "掌握——能够独立做"
@@ -10842,10 +9981,7 @@
       "keyPoints": [
         "理解加法交换律、结合律含义"
       ],
-      "commonMistakes": [
-        "概念混淆",
-        "前置知识缺失"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#数与代数",
         "#四则运算与定律",
@@ -10866,12 +10002,12 @@
         "reviewNote": "新课标理解层级，需教材正文核验。"
       },
       "level": "B",
-      "levelScore": 6,
+      "levelScore": 8,
       "levelDims": [
         1,
+        2,
         1,
-        1,
-        1,
+        2,
         1,
         1
       ],
@@ -10897,12 +10033,7 @@
       "keyPoints": [
         "理解乘法交换律、结合律、分配律含义"
       ],
-      "commonMistakes": [
-        "计算/操作失误",
-        "题意理解偏差",
-        "概念混淆",
-        "前置知识缺失"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#数与代数",
         "#四则运算与定律",
@@ -10922,15 +10053,15 @@
         "needsPageRef": true,
         "reviewNote": "新课标理解层级，需教材正文核验。"
       },
-      "level": "B",
-      "levelScore": 6,
+      "level": "A",
+      "levelScore": 9,
       "levelDims": [
         1,
+        2,
         1,
+        2,
         1,
-        1,
-        1,
-        1
+        2
       ],
       "levelNote": "AI草案分级，新课标理解+六维启发，需人工核验。",
       "curriculumLevelLabel": "理解——知道为什么"
@@ -10954,16 +10085,7 @@
       "keyPoints": [
         "掌握五大运算定律的简便运算应用"
       ],
-      "commonMistakes": [
-        "计算/操作失误",
-        "题意理解偏差",
-        "概念混淆",
-        "关键信息遗漏",
-        "记忆提取失败",
-        "前置知识缺失",
-        "解题策略缺失",
-        "迁移失败"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#数与代数",
         "#四则运算与定律",
@@ -10983,15 +10105,15 @@
         "needsPageRef": true,
         "reviewNote": "新课标掌握层级，需教材正文核验。"
       },
-      "level": "C",
-      "levelScore": 9,
+      "level": "A",
+      "levelScore": 12,
       "levelDims": [
-        1,
         2,
         2,
-        1,
         2,
-        1
+        2,
+        2,
+        2
       ],
       "levelNote": "AI草案分级，新课标掌握+六维启发，需人工核验。",
       "curriculumLevelLabel": "掌握——能够独立做"
@@ -11015,13 +10137,7 @@
       "keyPoints": [
         "理解小数的意义及计数单位"
       ],
-      "commonMistakes": [
-        "题意理解偏差",
-        "概念混淆",
-        "表达/书写/格式问题",
-        "前置知识缺失",
-        "体积/长度单位换算错误"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#数与代数",
         "#小数体系",
@@ -11042,14 +10158,14 @@
         "reviewNote": "新课标理解层级，需教材正文核验。"
       },
       "level": "B",
-      "levelScore": 6,
+      "levelScore": 7,
       "levelDims": [
         1,
         1,
         1,
         1,
         1,
-        1
+        2
       ],
       "levelNote": "AI草案分级，新课标理解+六维启发，需人工核验。",
       "curriculumLevelLabel": "理解——知道为什么"
@@ -11073,13 +10189,7 @@
       "keyPoints": [
         "掌握小数读写、数位顺序识别"
       ],
-      "commonMistakes": [
-        "概念混淆",
-        "表达/书写/格式问题",
-        "前置知识缺失",
-        "题型不熟",
-        "解题策略缺失"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#数与代数",
         "#小数体系",
@@ -11099,15 +10209,15 @@
         "needsPageRef": true,
         "reviewNote": "新课标掌握层级，需教材正文核验。"
       },
-      "level": "C",
-      "levelScore": 9,
+      "level": "B",
+      "levelScore": 7,
       "levelDims": [
         1,
-        2,
-        2,
         1,
-        2,
-        1
+        1,
+        1,
+        1,
+        2
       ],
       "levelNote": "AI草案分级，新课标掌握+六维启发，需人工核验。",
       "curriculumLevelLabel": "掌握——能够独立做"
@@ -11131,11 +10241,7 @@
       "keyPoints": [
         "理解小数的基本性质"
       ],
-      "commonMistakes": [
-        "概念混淆",
-        "记忆提取失败",
-        "前置知识缺失"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#数与代数",
         "#小数体系",
@@ -11156,14 +10262,14 @@
         "reviewNote": "新课标理解层级，需教材正文核验。"
       },
       "level": "B",
-      "levelScore": 6,
+      "levelScore": 7,
       "levelDims": [
         1,
         1,
         1,
         1,
         1,
-        1
+        2
       ],
       "levelNote": "AI草案分级，新课标理解+六维启发，需人工核验。",
       "curriculumLevelLabel": "理解——知道为什么"
@@ -11187,11 +10293,7 @@
       "keyPoints": [
         "掌握小数大小比较方法"
       ],
-      "commonMistakes": [
-        "概念混淆",
-        "前置知识缺失",
-        "解题策略缺失"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#数与代数",
         "#小数体系",
@@ -11211,15 +10313,15 @@
         "needsPageRef": true,
         "reviewNote": "新课标掌握层级，需教材正文核验。"
       },
-      "level": "C",
-      "levelScore": 9,
+      "level": "B",
+      "levelScore": 7,
       "levelDims": [
         1,
-        2,
-        2,
         1,
-        2,
-        1
+        1,
+        1,
+        1,
+        2
       ],
       "levelNote": "AI草案分级，新课标掌握+六维启发，需人工核验。",
       "curriculumLevelLabel": "掌握——能够独立做"
@@ -11243,13 +10345,7 @@
       "keyPoints": [
         "理解小数点移动引起小数大小变化规律"
       ],
-      "commonMistakes": [
-        "概念混淆",
-        "分数小数互化错误",
-        "记忆提取失败",
-        "数形结合规律发现失败",
-        "前置知识缺失"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#数与代数",
         "#小数体系",
@@ -11270,14 +10366,14 @@
         "reviewNote": "新课标理解层级，需教材正文核验。"
       },
       "level": "B",
-      "levelScore": 6,
+      "levelScore": 7,
       "levelDims": [
         1,
         1,
         1,
         1,
         1,
-        1
+        2
       ],
       "levelNote": "AI草案分级，新课标理解+六维启发，需人工核验。",
       "curriculumLevelLabel": "理解——知道为什么"
@@ -11301,13 +10397,7 @@
       "keyPoints": [
         "掌握小数与单位换算"
       ],
-      "commonMistakes": [
-        "题意理解偏差",
-        "表达/书写/格式问题",
-        "前置知识缺失",
-        "解题策略缺失",
-        "体积/长度单位换算错误"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#数与代数",
         "#小数体系",
@@ -11327,15 +10417,15 @@
         "needsPageRef": true,
         "reviewNote": "新课标掌握层级，需教材正文核验。"
       },
-      "level": "C",
-      "levelScore": 9,
+      "level": "B",
+      "levelScore": 7,
       "levelDims": [
         1,
-        2,
-        2,
         1,
-        2,
-        1
+        1,
+        1,
+        1,
+        2
       ],
       "levelNote": "AI草案分级，新课标掌握+六维启发，需人工核验。",
       "curriculumLevelLabel": "掌握——能够独立做"
@@ -11359,10 +10449,7 @@
       "keyPoints": [
         "掌握求小数近似数的方法"
       ],
-      "commonMistakes": [
-        "前置知识缺失",
-        "解题策略缺失"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#数与代数",
         "#小数体系",
@@ -11382,15 +10469,15 @@
         "needsPageRef": true,
         "reviewNote": "新课标掌握层级，需教材正文核验。"
       },
-      "level": "C",
-      "levelScore": 9,
+      "level": "B",
+      "levelScore": 7,
       "levelDims": [
         1,
-        2,
-        2,
         1,
-        2,
-        1
+        1,
+        1,
+        1,
+        2
       ],
       "levelNote": "AI草案分级，新课标掌握+六维启发，需人工核验。",
       "curriculumLevelLabel": "掌握——能够独立做"
@@ -11414,12 +10501,7 @@
       "keyPoints": [
         "理解小数加减法对齐算理"
       ],
-      "commonMistakes": [
-        "计算/操作失误",
-        "概念混淆",
-        "前置知识缺失",
-        "解题策略缺失"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#数与代数",
         "#小数体系",
@@ -11439,15 +10521,15 @@
         "needsPageRef": true,
         "reviewNote": "新课标理解层级，需教材正文核验。"
       },
-      "level": "B",
-      "levelScore": 6,
+      "level": "A",
+      "levelScore": 9,
       "levelDims": [
         1,
+        2,
         1,
+        2,
         1,
-        1,
-        1,
-        1
+        2
       ],
       "levelNote": "AI草案分级，新课标理解+六维启发，需人工核验。",
       "curriculumLevelLabel": "理解——知道为什么"
@@ -11471,12 +10553,7 @@
       "keyPoints": [
         "掌握小数加减法笔算、混合运算"
       ],
-      "commonMistakes": [
-        "计算/操作失误",
-        "总复习综合混淆",
-        "前置知识缺失",
-        "解题策略缺失"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#数与代数",
         "#小数体系",
@@ -11496,15 +10573,15 @@
         "needsPageRef": true,
         "reviewNote": "新课标掌握层级，需教材正文核验。"
       },
-      "level": "C",
-      "levelScore": 9,
+      "level": "A",
+      "levelScore": 12,
       "levelDims": [
-        1,
         2,
         2,
-        1,
         2,
-        1
+        2,
+        2,
+        2
       ],
       "levelNote": "AI草案分级，新课标掌握+六维启发，需人工核验。",
       "curriculumLevelLabel": "掌握——能够独立做"
@@ -11528,11 +10605,7 @@
       "keyPoints": [
         "掌握小数加减法简便运算"
       ],
-      "commonMistakes": [
-        "计算/操作失误",
-        "前置知识缺失",
-        "解题策略缺失"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#数与代数",
         "#小数体系",
@@ -11552,15 +10625,15 @@
         "needsPageRef": true,
         "reviewNote": "新课标掌握层级，需教材正文核验。"
       },
-      "level": "C",
-      "levelScore": 9,
+      "level": "A",
+      "levelScore": 12,
       "levelDims": [
-        1,
         2,
         2,
-        1,
         2,
-        1
+        2,
+        2,
+        2
       ],
       "levelNote": "AI草案分级，新课标掌握+六维启发，需人工核验。",
       "curriculumLevelLabel": "掌握——能够独立做"
@@ -11584,13 +10657,7 @@
       "keyPoints": [
         "运用小数加减法解决生活实际问题"
       ],
-      "commonMistakes": [
-        "计算/操作失误",
-        "题意理解偏差",
-        "关键信息遗漏",
-        "前置知识缺失",
-        "迁移失败"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#数与代数",
         "#小数体系",
@@ -11610,7 +10677,7 @@
         "needsPageRef": true,
         "reviewNote": "新课标运用层级，需教材正文核验。"
       },
-      "level": "D",
+      "level": "A",
       "levelScore": 12,
       "levelDims": [
         2,
@@ -11642,11 +10709,7 @@
       "keyPoints": [
         "认识三角形各部分名称及稳定性"
       ],
-      "commonMistakes": [
-        "题意理解偏差",
-        "概念混淆",
-        "前置知识缺失"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#图形与几何",
         "#三角形",
@@ -11666,14 +10729,14 @@
         "needsPageRef": true,
         "reviewNote": "新课标了解层级，需教材正文核验。"
       },
-      "level": "A",
-      "levelScore": 3,
+      "level": "C",
+      "levelScore": 2,
       "levelDims": [
-        1,
-        1,
-        1,
         0,
         0,
+        0,
+        1,
+        1,
         0
       ],
       "levelNote": "AI草案分级，新课标了解+六维启发，需人工核验。",
@@ -11698,12 +10761,7 @@
       "keyPoints": [
         "理解三角形三边关系、内角和 180°"
       ],
-      "commonMistakes": [
-        "题意理解偏差",
-        "概念混淆",
-        "记忆提取失败",
-        "前置知识缺失"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#图形与几何",
         "#三角形",
@@ -11755,11 +10813,7 @@
       "keyPoints": [
         "掌握三角形按角、按边分类方法"
       ],
-      "commonMistakes": [
-        "题意理解偏差",
-        "前置知识缺失",
-        "解题策略缺失"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#图形与几何",
         "#三角形",
@@ -11779,14 +10833,14 @@
         "needsPageRef": true,
         "reviewNote": "新课标掌握层级，需教材正文核验。"
       },
-      "level": "C",
-      "levelScore": 9,
+      "level": "B",
+      "levelScore": 6,
       "levelDims": [
         1,
-        2,
-        2,
         1,
-        2,
+        1,
+        1,
+        1,
         1
       ],
       "levelNote": "AI草案分级，新课标掌握+六维启发，需人工核验。",
@@ -11811,11 +10865,7 @@
       "keyPoints": [
         "能从前面、上面、左面观察立体图形形状"
       ],
-      "commonMistakes": [
-        "概念混淆",
-        "前置知识缺失",
-        "三视图还原错误"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#图形与几何",
         "#观察物体与图形运动",
@@ -11835,14 +10885,14 @@
         "needsPageRef": true,
         "reviewNote": "新课标掌握层级，需教材正文核验。"
       },
-      "level": "C",
-      "levelScore": 9,
+      "level": "B",
+      "levelScore": 6,
       "levelDims": [
         1,
-        2,
-        2,
         1,
-        2,
+        1,
+        1,
+        1,
         1
       ],
       "levelNote": "AI草案分级，新课标掌握+六维启发，需人工核验。",
@@ -11867,12 +10917,7 @@
       "keyPoints": [
         "理解轴对称图形特征、平移含义"
       ],
-      "commonMistakes": [
-        "概念混淆",
-        "记忆提取失败",
-        "前置知识缺失",
-        "解题策略缺失"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#图形与几何",
         "#观察物体与图形运动",
@@ -11924,10 +10969,7 @@
       "keyPoints": [
         "掌握补全轴对称图形、画出平移后图形"
       ],
-      "commonMistakes": [
-        "前置知识缺失",
-        "解题策略缺失"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#图形与几何",
         "#观察物体与图形运动",
@@ -11947,14 +10989,14 @@
         "needsPageRef": true,
         "reviewNote": "新课标掌握层级，需教材正文核验。"
       },
-      "level": "C",
-      "levelScore": 9,
+      "level": "B",
+      "levelScore": 6,
       "levelDims": [
         1,
-        2,
-        2,
         1,
-        2,
+        1,
+        1,
+        1,
         1
       ],
       "levelNote": "AI草案分级，新课标掌握+六维启发，需人工核验。",
@@ -11979,10 +11021,7 @@
       "keyPoints": [
         "理解平均数的统计意义"
       ],
-      "commonMistakes": [
-        "概念混淆",
-        "前置知识缺失"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#统计与概率",
         "#平均数与复式条形",
@@ -12034,11 +11073,7 @@
       "keyPoints": [
         "掌握平均数计算方法"
       ],
-      "commonMistakes": [
-        "计算/操作失误",
-        "前置知识缺失",
-        "解题策略缺失"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#统计与概率",
         "#平均数与复式条形",
@@ -12058,15 +11093,15 @@
         "needsPageRef": true,
         "reviewNote": "新课标掌握层级，需教材正文核验。"
       },
-      "level": "C",
-      "levelScore": 9,
+      "level": "A",
+      "levelScore": 12,
       "levelDims": [
-        1,
         2,
         2,
-        1,
         2,
-        1
+        2,
+        2,
+        2
       ],
       "levelNote": "AI草案分级，新课标掌握+六维启发，需人工核验。",
       "curriculumLevelLabel": "掌握——能够独立做"
@@ -12090,10 +11125,7 @@
       "keyPoints": [
         "能读懂、绘制复式条形统计图"
       ],
-      "commonMistakes": [
-        "前置知识缺失",
-        "题型不熟"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#统计与概率",
         "#平均数与复式条形",
@@ -12113,14 +11145,14 @@
         "needsPageRef": true,
         "reviewNote": "新课标掌握层级，需教材正文核验。"
       },
-      "level": "C",
-      "levelScore": 9,
+      "level": "B",
+      "levelScore": 6,
       "levelDims": [
         1,
-        2,
-        2,
         1,
-        2,
+        1,
+        1,
+        1,
         1
       ],
       "levelNote": "AI草案分级，新课标掌握+六维启发，需人工核验。",
@@ -12145,14 +11177,7 @@
       "keyPoints": [
         "理解鸡兔同笼问题模型思想"
       ],
-      "commonMistakes": [
-        "题意理解偏差",
-        "概念混淆",
-        "关键信息遗漏",
-        "前置知识缺失",
-        "解题策略缺失",
-        "迁移失败"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#综合与实践",
         "#数学广角",
@@ -12172,14 +11197,14 @@
         "needsPageRef": true,
         "reviewNote": "新课标理解层级，需教材正文核验。"
       },
-      "level": "B",
-      "levelScore": 6,
+      "level": "A",
+      "levelScore": 9,
       "levelDims": [
         1,
         1,
-        1,
-        1,
-        1,
+        2,
+        2,
+        2,
         1
       ],
       "levelNote": "AI草案分级，新课标理解+六维启发，需人工核验。",
@@ -12204,10 +11229,7 @@
       "keyPoints": [
         "掌握列表法、假设法解题思路"
       ],
-      "commonMistakes": [
-        "前置知识缺失",
-        "解题策略缺失"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#综合与实践",
         "#数学广角",
@@ -12227,14 +11249,14 @@
         "needsPageRef": true,
         "reviewNote": "新课标掌握层级，需教材正文核验。"
       },
-      "level": "C",
-      "levelScore": 9,
+      "level": "B",
+      "levelScore": 6,
       "levelDims": [
         1,
-        2,
-        2,
         1,
-        2,
+        1,
+        1,
+        1,
         1
       ],
       "levelNote": "AI草案分级，新课标掌握+六维启发，需人工核验。",
@@ -12259,12 +11281,7 @@
       "keyPoints": [
         "运用模型解决同类变式问题"
       ],
-      "commonMistakes": [
-        "题意理解偏差",
-        "关键信息遗漏",
-        "前置知识缺失",
-        "迁移失败"
-      ],
+      "commonMistakes": [],
       "tags": [
         "#综合与实践",
         "#数学广角",
@@ -12284,22 +11301,18 @@
         "needsPageRef": true,
         "reviewNote": "新课标运用层级，需教材正文核验。"
       },
-      "level": "D",
-      "levelScore": 12,
+      "level": "A",
+      "levelScore": 10,
       "levelDims": [
         2,
+        1,
         2,
         2,
         2,
-        2,
-        2
+        1
       ],
       "levelNote": "AI草案分级，新课标运用+六维启发，需人工核验。",
       "curriculumLevelLabel": "运用——能够迁移创新"
     }
-  ],
-  "_metadata": {},
-  "meta": {},
-  "info": {},
-  "_last_fixed": "2026-05-14 22:04"
+  ]
 }

@@ -1,4 +1,4 @@
-# 09 行为事件协议 v2.0.6
+# 09 行为事件协议 v2.0.8
 
 ## 变更记录
 
@@ -7,11 +7,13 @@
 | 1.0 | - | 初始版本：15 个事件命名 + 4 个事件样例 |
 | 2.0 | 2026-05-14 | 全部事件定义完整 Schema；引入 chainId 串联诊断链路；必填字段强制校验；新增 version 字段；新增 diagnosis_attempted 事件；lesson_started.knowledgeCode 改为 knowledgeCodes 数组 |
 | 2.0.1 | 2026-05-14 | 地狱自检修复：chainId 鸡生蛋问题（预生成规则）；mainHypothesis 补 confidence 字段；答对/放弃链路规则（1.6）；新增 answer_abandoned 事件（现 20 个事件）；lessonId 补充到 diagnosis_attempted/strategy_applied/strategy_completed；strategy_completed 补 diagnosisId；概率调整规则澄清（weakened vs inconclusive）；概率样例数学校正；1.5 去掉"尽量"改为必填规则表；5.1/5.2 优先级明确；probability/confidence 区别解释；triggerReason 按 triggerSource 格式约束；difficulty/level 分工说明（1.7）；effectScore 计分方明确；activeMs Phase 过渡规则；lesson_completed 补 byKnowledgeCode 拆分；事件矩阵消费方补全；章节 8 输入对齐 11 号文档 |
+| 2.0.8 | 2026-05-15 03:31 | 地狱级交叉审查：(1)§8.3 家长摘要输入事件列表修正——原列四事件（lesson_started/lesson_completed/diagnosis_attempted/strategy_completed）与 13 号 v2.6.1 §9 接口表不一致（缺 answer_submitted 事件 1、缺 strategy_applied 事件 9、diagnosis_attempted 应为 diagnosis_updated），改为对齐 13 号实际消费的 5 事件（answer_submitted/lesson_completed/diagnosis_updated/strategy_applied/strategy_completed） |
 | 2.0.2 | 2026-05-14 | 新增 diagnosis_updated 事件（事件 8）：多轮验证过程中每轮验证完成后诊断引擎发出，携带更新后的假设集、status、diagnosisStatus。解耦策略引擎介入时机（读 diagnosis_updated 而非等 diagnosis_attempted）。事件总数从 20 升至 21。事件 8→11 重编号（strategy_applied→9, strategy_completed→10, answer_abandoned→11），Phase 2/3 事件 11-20→12-21。8.1 节验证链路更新 |
 | 2.0.3 | 2026-05-14 18:37 | 地狱自检修复 - 数据底座对齐：(1)所有 knowledgeCode 样例从语义编码格式（M5S1-DECIMAL-MUL-003）修正为数字编码格式（M5S1-3），对齐真实 knowledge.json 数据；(2)validation_triggered 的 hypothesisType 枚举对齐 error_taxonomy.json：migration_failure→transfer_failure、key_info_missed→info_omission，补全 comprehension_bias / expression_format_error，从 8 个增至完整 10 个 L1 错因；(3)文件迁移至 acceptance-artifacts 目录 |
 | 2.0.4 | 2026-05-14 19:05 | 地狱自检修复：(1)1.2 节链路图补 diagnosis_updated（validation_completed→strategy_applied 之间）；(2)lesson_completed 的 activeMs 增加异常值校验（<0 或 >7200000 标记无效）；(3)事件矩阵 strategy_applied 消费方补全（策略引擎+家长摘要）；(4)hint_requested 增加 previousHintLevel 字段区分求助模式；(5)answer_submitted 增加 context.activeStrategyPack 解决策略执行期间答题归属；(6)所有事件 version 字段从 "2.0" 升级到 "2.0.3"，同主版本内兼容变更不拒收 |
 | 2.0.5 | 2026-05-14 19:12 | 地狱自检修复：(1)activeStrategyPack 增加前端时序规则——以 strategy_applied/completed 时间窗口为主判断，activeStrategyPack 仅作为校验辅助；(2)previousHintLevel 增加降级求助模式（低于上次=提示理解困难）；(3)activeMs 异常值校验增加 Phase 2 历史数据重新校验规则；(4)diagnosis_updated 消费方补全诊断引擎自身（溯源决策与状态机推进） |
 | 2.0.6 | 2026-05-14 19:28 | 地狱自检修复：(1)1.3 节新增 version 升级规则——事件样例 version 值为最后一次 Schema 结构变更的版本号，纯文本说明修改不触发升级；(2)activeMs Phase 2 上限 4 小时增加来源说明（idle_timeout 精确扣除后覆盖长时间沉浸式学习场景）；(3)diagnosis_attempted 的 status 字段说明增加语义差异标注——open/inconclusive 出现在 diagnosis_attempted 中，validated/closed 只在 diagnosis_updated 中出现 |
+| 2.0.7 | 2026-05-14 19:52 | 10 号文档交叉审计修复（P2）：diagnosis_updated 的 diagnosisStatus 枚举从 4 态扩展为六态 full——补 confirmed_with_reservation（有保留确诊，对齐 11 号诊断引擎 v2.3 的满 3 轮 0.5-0.8 输出；策略引擎见此态只发轻量策略，不发强策略）和 traced（溯源切入态，对齐 11 号溯源流程输出） |
 
 ---
 
@@ -645,19 +647,21 @@ answer_submitted 携带两个难度信号：
 | mainHypothesis.probability | 是 | number | 主假设概率 |
 | mainHypothesis.confidence | 是 | number | 主假设置信度 |
 | status | 是 | string | open（继续验证）/ validated（确诊）/ closed（已排除）/ inconclusive（无法判断） |
-| diagnosisStatus | 是 | string | confirmed（假设被验证确认）/ excluded（假设被排除）/ in_progress（验证未完成，继续）/ inconclusive（证据不足无法判断） |
+| diagnosisStatus | 是 | string | confirmed（假设被验证确认，prob≥0.85）/ confirmed_with_reservation（有保留确诊，满 3 轮 prob 在 0.5-0.8，策略引擎见此态只发轻量策略）/ excluded（假设被排除）/ in_progress（验证未完成，继续）/ inconclusive（证据不足无法判断）/ traced（已切入溯源，诊断引擎正在追溯前置知识点的错因根源） |
 | validationRound | 是 | number | 当前验证轮次（1-3） |
 | triggerResult | 是 | string | 本轮触发更新的验证结果：supported / weakened / inconclusive（来自 validation_completed.result） |
 | method | 否 | string | 诊断方法（rule_engine / decision_tree / ai_assisted） |
 | timestamp | 是 | string | ISO 8601 UTC 时间戳 |
 
-**status 与 diagnosisStatus 的对照**：
+**status 与 diagnosisStatus 的对照（六态）**：
 
 | status | diagnosisStatus | 含义 | 后续动作 |
 |--------|----------------|------|----------|
 | open | in_progress | 验证中 | 继续下一轮 validation_triggered |
-| validated | confirmed | 假设被验证确认 | 停止验证，策略引擎介入 |
+| validated | confirmed | 确诊（prob≥0.85） | 停止验证，策略引擎介入，允许发强策略 |
+| validated | confirmed_with_reservation | 有保留确诊（满 3 轮 prob 在 0.5-0.8） | 策略引擎仅发轻量策略（基础巩固包），不发强策略（变式特训包、精准计算包等） |
 | closed | excluded | 假设被排除 | 切换次高假设或走溯源 |
+| open | traced | 已切入溯源 | 诊断引擎追溯前置知识点错因根源，暂停当知识点的验证 |
 | inconclusive | inconclusive | 无法判断 | 降低难度，记录 badcase |
 
 **多轮验证的 diagnosis_updated 发出规则**：
@@ -935,6 +939,6 @@ answer_submitted 携带两个难度信号：
 
 ### 8.3 家长摘要（13_PARENT_SUMMARY_RULES.md）
 
-- 输入：lesson_started、lesson_completed、diagnosis_attempted、strategy_completed 事件
+- 输入：answer_submitted（事件 1，提取题目/学生回答）、lesson_completed（事件 4，提取 outcome.questionsAnswered/outcome.questionsCorrect + completionStatus）、diagnosis_updated（事件 8）、strategy_applied（事件 9，提取策略名称/类型）、strategy_completed（事件 10，提取 effectScore）
 - 摘要生成：将事件链翻译为"学习现象 + 芽芽支持 + 积极变化/下一步建议"
 - 家长反馈：parent_feedback_submitted 事件不能直接修改画像，仅作为重新观察/置信度调整/badcase复盘信号
