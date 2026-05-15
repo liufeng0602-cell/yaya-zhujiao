@@ -1,4 +1,4 @@
-# 芽芽助教自我进化 AI 教学适配引擎 · 文档索引 v2.0
+# 芽芽助教自我进化 AI 教学适配引擎 · 文档索引 v2.1
 
 本文档集用于指导「芽芽助教」K12 多学科自我进化 AI 教学适配引擎的产品、工程、AI 教研与数据闭环开发。
 
@@ -25,10 +25,14 @@
 
 ## 推荐阅读顺序
 
+### 先看北极星（项目根目录）
+1. `NORTH_STAR.md` — 芽芽终局愿景：三大未来 + AI 纠错新物种
+2. `product-ai-factchecker/FACTCHECKER_VISION.md` — 事实之眼产品愿景
+
 ### 第一次来？从这里开始
-1. `00_INDEX.md`（本文件）
-2. `01_PRODUCT_VISION.md` — 产品定义、核心壁垒
-3. `02_DEVELOPMENT_ROADMAP.md` — 分阶段开发路线
+1. `acceptance-artifacts/00_INDEX.md`（本文件）
+2. `acceptance-artifacts/01_PRODUCT_VISION.md` — 产品定义、核心壁垒
+3. `acceptance-artifacts/02_DEVELOPMENT_ROADMAP.md` — 分阶段开发路线
 
 ### 理解数据底座
 1. `03_SYLLABUS_SOURCE_RULES.md` — 教材/教参/课标来源规则
@@ -38,20 +42,26 @@
 5. `07_ERROR_TAXONOMY.md` — 错因分类与边界
 
 ### 理解引擎链路
-1. `08_STRATEGY_PACKS.md` — 策略包定义（39 包 + 映射表）
-2. `09_EVENT_PROTOCOL.md` — 事件协议 v2.0.4（11 种事件 + 链式追踪）
+1. `08_STRATEGY_PACKS.md` — 策略包定义（40 包 + 映射表）
+2. `09_EVENT_PROTOCOL.md` — 事件协议（11 种事件 + 链式追踪）
 3. `10_DATA_MODEL.md` — 数据模型（10 张表完整 Schema）
-4. `11_DIAGNOSIS_ENGINE.md` — 诊断引擎 v2.3（四步诊断 + 六态输出）
-5. `12_STRATEGY_ENGINE.md` — 策略引擎 v2.0（六态调度 + 安全护栏）
-6. `13_PARENT_SUMMARY_RULES.md` — 家长摘要 v2.0（模板 + 风险评分）
-7. `14_QUALITY_DASHBOARD.md` — 质量仪表盘 v2.0（24 指标 + badcase 管理）
+4. `11_DIAGNOSIS_ENGINE.md` — 诊断引擎（四步诊断 + 六态输出）
+5. `12_STRATEGY_ENGINE.md` — 策略引擎（六态调度 + 安全护栏）
+6. `13_PARENT_SUMMARY_RULES.md` — 家长摘要（模板 + 风险评分）
+7. `14_QUALITY_DASHBOARD.md` — 质量仪表盘（24 指标 + badcase 管理）
+8. `15_PREFERENCE_AND_STATE.md` — 偏好与状态感知（问卷 + 状态卡）
+9. `16_BEHAVIOR_PATTERNS.md` — 行为观察模式（27 项埋点 + 10 类模式）
+10. `17_PORTRAIT_AND_INHERITANCE.md` — 画像结构与继承规则（四层画像）
+11. `18_PERSONALIZED_CLASSROOM_ENGINE.md` — 个性化课堂生成引擎（C→D→E 进化路线）
 
 ## 文档版本与状态
 
 | 文件 | 版本 | 状态 | 说明 |
 |------|------|------|------|
-| `01_PRODUCT_VISION.md` | v2.0.2 | 就绪 ✅ | MVP + 合规 + MCP + 六标志 |
-| `02_DEVELOPMENT_ROADMAP.md` | v2.0.0 | 就绪 ✅ | 按现状重写 Stage 1-3 |
+| `NORTH_STAR.md` | v1.0 | 就绪 ✅ | 终局四愿景 + 两条产品线演进路线 |
+| `product-ai-factchecker/FACTCHECKER_VISION.md` | v1.0 | 就绪 ✅ | 事实之眼产品愿景 + 商业模式 + 竞争壁垒 |
+| `01_PRODUCT_VISION.md` | v2.1.0 | 就绪 ✅ | 七标志 + 个性化课堂生成写入产品定义 |
+| `02_DEVELOPMENT_ROADMAP.md` | v2.2.0 | 就绪 ✅ | Stage 2 补 18 号 + Stage 3 补 C→D→E 递进 |
 | `03_SYLLABUS_SOURCE_RULES.md` | v2.0.0 | 就绪 ✅ | MVP 5-6，1-4 第二阶段 |
 | `04_KNOWLEDGE_LEVELING.md` | v2.0.0 | 就绪 ✅ | 全文对齐新课标 4 级，6 维体系已废止 |
 | `05_COVERAGE_GATE.md` | v2.0.0 | 就绪 ✅ | 9 铁规 + 17 项整合，D 级门禁新增 |
@@ -59,11 +69,15 @@
 | `07_ERROR_TAXONOMY.md` | v2.0.0 | 就绪 ✅ | L1 中英对照，L2 标注 errorCode |
 | `08_STRATEGY_PACKS.md` | v2.1.2 | 就绪 ✅ | 40 策略包 + 编码体系 + 映射表 |
 | `09_EVENT_PROTOCOL.md` | v2.0.7 | 就绪 ✅ | 11 事件 + 链式追踪 |
-| `10_DATA_MODEL.md` | v2.1.2 | 就绪 ✅ | 10 张表完整 Schema |
-| `11_DIAGNOSIS_ENGINE.md` | v2.4.1 | 就绪 ✅ | 四步诊断 + 六态 + 多轮验证 |
+| `10_DATA_MODEL.md` | v2.1.4 | 就绪 ✅ | 10 张表完整 Schema |
+| `11_DIAGNOSIS_ENGINE.md` | v2.4.2 | 就绪 ✅ | 四步诊断 + 六态 + 多轮验证 |
 | `12_STRATEGY_ENGINE.md` | v2.2.2 | 就绪 ✅ | 六态调度 + 安全护栏 + 中策略定义 |
-| `13_PARENT_SUMMARY_RULES.md` | v2.1 | 审查中 | 交叉审查进行中 |
-| `14_QUALITY_DASHBOARD.md` | v2.0 | 待审查 | 24 指标 + 9 铁规集成 |
+| `13_PARENT_SUMMARY_RULES.md` | v2.6.1 | 就绪 ✅ | 模板 + 风险评分 + 家长反馈闭环 |
+| `14_QUALITY_DASHBOARD.md` | v2.4.1 | 就绪 ✅ | 24 指标 + 9 铁规集成 |
+| `15_PREFERENCE_AND_STATE.md` | v1.0.1 | 就绪 ✅ | 五题问卷 + 状态卡 + 偏好更新原则 |
+| `16_BEHAVIOR_PATTERNS.md` | v1.0 | 就绪 ✅ | 27 项埋点 + 10 类行为模式 |
+| `17_PORTRAIT_AND_INHERITANCE.md` | v1.0 | 就绪 ✅ | 四层画像 + 学段跃迁继承 |
+| `18_PERSONALIZED_CLASSROOM_ENGINE.md` | v1.0 | 就绪 ✅ | 方案 C/D/E + 五环节 + 输入输出接口 |
 
 ## 数据文件清单
 
@@ -94,6 +108,6 @@ python3 data_quality_gate.py
 ## 当前整体进度
 
 **数据层：95%**（394 KP / 86 错因 / 1390 绑定 / 两层图谱全量建成）
-**规则层：95%**（14 份规划文档中：13 份就绪 + 1 份审查中）
-**引擎层：50%**（诊断引擎规则完备，策略引擎规则完备，家长摘要规则完备，但均未实现代码）
+**规则层：98%**（18 份 K12 规划文档全部就绪 + NORTH_STAR + 事实之眼产品愿景）
+**引擎层：55%**（诊断/策略/家长摘要/课堂生成引擎协议全部完成，待代码实现）
 **实现层：0%**（无后端服务、无前端集成、无真实数据流）
