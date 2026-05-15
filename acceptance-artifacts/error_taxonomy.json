@@ -4,8 +4,8 @@
   "status": "phase3_draft",
   "generatedAt": "2026-05-13T22:28:58.158491",
   "summary": {
-    "totalErrors": 86,
-    "l1Universal": 10,
+    "totalErrors": 87,
+    "l1Universal": 11,
     "l2MathSpecific": 76,
     "domains": [
       "通用",
@@ -188,6 +188,19 @@
         "mnemonic_anchors"
       ],
       "parentExplanation": "孩子对公式和方法的记忆还需要更多巩固，我们在通过间隔复习帮助孩子把知识从短期记忆转化为长期记忆。"
+    },
+    "unknown_error": {
+      "name": "未知错因（兜底）",
+      "level": "L1",
+      "domain": "通用",
+      "definition": "诊断引擎在完成全部匹配流程后仍无法将学生的错误模式归入任何已知错因时使用的兜底信号。",
+      "typicalManifestation": "学生答题模式不符合 L1 10 类通用错因和 L2 76 类数学专属错因的任何定义。",
+      "triggerCondition": "诊断引擎 Step2 匹配阶段所有候选错因置信度 < 0.3，且 fallback 逻辑触发。",
+      "exclusionCondition": "诊断引擎至少一个候选错因置信度 ≥ 0.3 时，应发对应错因而非 unknown_error。",
+      "validationAction": "收集 unknown_error 事件的答题上下文（KP、题目类型、学生年级），用于阶段 2 聚类分析发现候选新错因。",
+      "adjacentDifference": "不是诊断引擎的 bug——是系统明确知道「这不符合已知错因」的信号，区别于空字符串/null（那才是 bug）。",
+      "recommendedStrategies": ["generic_review", "manual_diagnosis_fallback"],
+      "parentExplanation": "系统正在分析孩子这次的答题模式，以提供更有针对性的帮助。"
     }
   },
   "l2_math_specific": {
