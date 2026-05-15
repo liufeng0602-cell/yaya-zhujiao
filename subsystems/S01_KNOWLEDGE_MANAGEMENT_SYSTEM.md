@@ -90,6 +90,21 @@ KP是超市分区——蔬菜区、肉区，方便超市管理但不是你脑子
 - `cognitive_primitives` — 认知质候选数组 []。每个预设shareable判定字段。Phase 3+填充
 - `observations` — 动态观察对象{}。预埋 baselineMetrics + modificationHistory + confoundingEvents
 
+**modificationHistory 字段结构**（每次对 KP 的修改/回滚后写入，供因果推断和回滚追溯）：
+
+```json
+{
+  "modificationId": "d1_mod_001",
+  "startedAt": "<ISO8601>",
+  "endedAt": "<ISO8601>",
+  "rollbackAt": null,
+  "description": "认知质自动发现阈值从0.7调整到0.72",
+  "confoundingEvents": []
+}
+```
+
+五个字段必须存在：`startedAt`（修改开始时间）、`endedAt`（修改结束时间，回滚后为空）、`rollbackAt`（回滚发生时间，未回滚为 null）、`description`（修改内容描述）、`confoundingEvents`（同期外部事件数组——教材更新/学期开学等混淆变量）。
+
 **文件级 scope 字段**（每个 knowledge.json 顶层，双重校验门禁）：`scope.subject` / `scope.stage` / `scope.grades` / `scope.version` / `scope.contentType` / `scope.levelingFramework`。KP不得超出文件声明的范围。
 
 > **设计理由**（约束）：现在394条是黄金窗口——加扩展字段设默认值即完成。5000+条时加字段=重做全部数据录入。认知质和contentType不绑定——「识别」「提取」「分解」这些认知动作在数学和编程中都存在。
