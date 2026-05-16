@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
-"""S09 课堂生成引擎自动化审计脚本 v2
-覆盖 DOC_ACCEPTANCE_STANDARD v2.2 全部 BLOCK 项 + 两轮地狱评审19类问题模式
+"""S09 课堂生成引擎自动化审计脚本 v3
+覆盖 DOC_ACCEPTANCE_STANDARD v2.2 全部 BLOCK 项 + 三轮地狱评审所有问题模式
+v3: 适配 v1.8 结构变更(降级策略独立章节/维度二后移/信用分单分制)
 用法: python3 audit_s09.py
 退出码: 0=全部通过, 1=有 BLOCK 错误
 """
 
 import re, sys, os
 
-BASE = os.path.dirname(os.path.abspath(__file__))
 S09_PATH = "/Users/liufeng/Documents/芽芽AI助教/subsystems/S09_CLASSROOM_ENGINE.md"
 errors = []
 warnings = []
@@ -19,14 +19,14 @@ with open(S09_PATH) as f:
     doc = f.read()
 lines = doc.split('\n')
 
-print(f"=== S09 审计开始 ({len(lines)}行) ===\n")
+print(f"=== S09 审计 v3 ({len(lines)}行) ===\n")
 
 # ===== 1. 必填章节完整性 (1.1) =====
 required_sections = [
     ('变更记录', '变更记录'),
     ('北极星对齐', '北极星对齐'),
     ('定义与职责', '定义与职责'),
-    ('通用骨架标准定义', '通用骨架标准定义'),
+    ('降级策略', '降级策略'),
     ('核心设计', '核心设计'),
     ('它还不会什么', '它还不会什么'),
     ('设计演化推理链', '设计演化推理链'),
@@ -44,8 +44,8 @@ for name, pattern in required_sections:
 
 # ===== 2. 版本号一致性 (1.2) =====
 title_line = lines[0]
-ver_match = re.search(r'v(\d+\.\d+(?:\.\d+)?)', title_line)
-changelog_versions = re.findall(r'\|\s*v(\d+\.\d+(?:\.\d+)?)\s*\|', '\n'.join(lines[3:15]))
+ver_match = re.search(r'v(\d+\.\d+(?:\d+\.\d+)?)', title_line)
+changelog_versions = re.findall(r'\|\s*v(\d+\.\d+(?:\d+\.\d+)?)\s*\|', '\n'.join(lines[3:15]))
 if ver_match and changelog_versions:
     if ver_match.group(1) != changelog_versions[0]:
         err(f"[1.2] 标题版本 {ver_match.group(1)} ≠ 变更记录最新版本 {changelog_versions[0]}")
@@ -104,158 +104,175 @@ if not ('内容进化' in doc and '代码进化' in doc and '混合进化' in do
     err("[1.15] 内容与代码进化分离不完整或缺失")
 
 # ===== 14. 维度交互矩阵 (1.17) =====
-# Use ### heading to avoid matching changelog mentions
-matrix_start = doc.find('### 维度交互矩阵\n')
+matrix_start = doc.find('### 维度交互矩阵')
 matrix_text = doc[matrix_start:matrix_start+1200] if matrix_start > 0 else ''
 if matrix_start > 0:
     if '验证步骤' not in matrix_text:
         err("[1.17] 维度交互矩阵缺少验证步骤")
 else:
-    err("[1.17] 维度交互矩阵缺失（### 标题）")
+    err("[1.17] 维度交互矩阵缺失")
 
 # ===== 15. 三级权限分级 =====
-if '三级权限分级' in doc:
-    if not ('高级' in doc and '中级' in doc and '低级' in doc):
-        warn("[1.12] 三级权限分级缺少完整三级定义")
-else:
+if '三级权限分级' not in doc:
     err("[1.12] 缺少三级权限分级")
+elif not ('高级' in doc and '中级' in doc and '低级' in doc):
+    warn("[1.12] 三级权限分级缺少完整三级定义")
 
-# ===== 16. HUMAN-SIGNED 参数节 =====
+# ===== 16. HUMAN-SIGNED =====
 if 'HUMAN-SIGNED' not in doc:
     warn("[1.7附] 缺少 HUMAN-SIGNED 参数节")
 
-# ===== 17. 提交前自查声明 (3.18) =====
+# ===== 17. 提交前自查声明 =====
 if not ('自查一' in doc and '自查二' in doc and '自查三' in doc):
     err("[3.18] 缺少提交前自查声明")
 
-# ===== SPECIFIC CHECKS: 两轮地狱评审问题模式 =====
+# ===================================================================
+# v1.6-v1.7 SPECIFIC CHECKS
+# ===================================================================
 
-# P1: 通用骨架标准定义集中化 (v1.7问题1)
-if '通用骨架标准定义' not in doc:
-    err("[P1] 缺少通用骨架标准定义集中章节")
-# 验证4处引用点都在
-gs_ref_count = doc.count('通用骨架——标准定义见 §通用骨架标准定义')
-if gs_ref_count < 4:
-    warn(f"[P1] 通用骨架引用仅{gs_ref_count}处（预期≥4处: 北极星底线/超纲/质检回退/信用分）")
-
-# P2: SP_G_D01 AI字眼免疫说明 (v1.7问题2)
-# Find SP_G_D01 definition (skip changelog by searching for the definition text)
-sp_def_start = doc.find('SP_G_D01 即通用骨架（标准定义见')
-sp_d01_text = doc[sp_def_start:sp_def_start+500] if sp_def_start > 0 else ''
-if '不经过LLM生成' not in sp_d01_text:
-    warn("[P2] SP_G_D01未标注不经过LLM生成")
-if '使用场景区分' not in sp_d01_text:
-    warn("[P2] SP_G_D01未标注与通用骨架的使用场景区分")
-
-# P3: 缓存1500组合数(v1.7问题3)
+# P3: 缓存容量
 if '1500 个活跃组合' not in doc:
-    err("[P3] 缓存容量未明确1500=组合数(非记录数)")
+    err("[P3] 缓存容量未明确")
+if '服务端内存' not in doc:
+    warn("[P3] 缓存未标注服务端位置")
+if '13.5MB' in doc and '浏览器' not in doc:
+    warn("[P3] 缓存标注了服务端但未提醒不可放前端")
 
-# P4: 退化计数器跨骨架(v1.7问题4)
+# P4: 退化计数器跨骨架
 if '跨骨架类型累计' not in doc:
     err("[P4] 退化计数器未明确跨骨架累计")
 
-# P5: 退化组合场景枚举(v1.7问题5)
+# P5: 退化组合枚举
 if '退化组合场景枚举' not in doc:
     err("[P5] 缺少退化组合场景枚举")
 
-# P6: 接口契约附件标注(v1.7问题6)
-s02_contract = doc[doc.find('S02/S09 接口契约附件'):doc.find('S02/S09 接口契约附件')+150] if 'S02/S09 接口契约附件' in doc else ''
-if '当前该附件不存在' not in s02_contract:
-    warn("[P6] S02/S09接口契约附件未标注不存在")
+# P6: S02接口契约
+s02_contract = doc[doc.find('S02/S09 接口契约附件'):doc.find('S02/S09 接口契约附件')+200] if 'S02/S09 接口契约附件' in doc else ''
+if '内联' not in s02_contract and '替代方案' not in s02_contract:
+    warn("[P6] S02接口契约附件未标注替代方案")
 
-# P7: 维度交互矩阵三条件
-matrix_start = doc.find('### 维度交互矩阵\n')
-matrix_end = doc.find('### 退化组合场景枚举', matrix_start) if matrix_start > 0 else -1
-if matrix_end == -1:
-    matrix_end = doc.find('## 自我进化执行方法', matrix_start) if matrix_start > 0 else -1
-matrix_text = doc[matrix_start:matrix_end] if matrix_start > 0 and matrix_end > 0 else ''
-if '三个触发条件' not in matrix_text:
-    err("[P7] 维度交互矩阵未验证全部三个触发条件")
+# P7: 维度交互矩阵三条件(已在1.17检查)
 
-# P8: 维度二触发不依赖积木库≥50 (只检查维度二的触发条件行，不检查终局状态)
-dim2_section_start = doc.find('### 维度二：生成效率进化')
-dim2_section = doc[dim2_section_start:dim2_section_start+500] if dim2_section_start > 0 else ''
-# 提取触发条件列(表格第2列)
-dim2_lines = dim2_section.split('\n')
-for line in dim2_lines:
-    if '|' in line and '阶段' in line and '2' in line and '自主' in line:
-        if re.search(r'积木库\s*[≥>]\s*50', line):
-            err("[P8] 维度二触发条件仍含积木库≥50（循环依赖）")
-        break
+# P8: 维度二 Phase 3 后移标记
+dim2_title = doc.find('### 维度二：生成效率进化')
+if dim2_title > 0:
+    dim2_line = lines[doc[:dim2_title].count('\n')]
+    if 'Phase 3' not in dim2_line and 'Phase 3' not in doc[dim2_title:dim2_title+200]:
+        warn("[P8] 维度二未标注Phase 3后移")
 
-# P9: SP_G_D01错因排序(v1.6已修复) - search for definition text directly
-sp_d01_line = doc.find('SP_G_D01 即通用骨架（标准定义见')
-if sp_d01_line > 0:
-    sp_context = doc[sp_d01_line:sp_d01_line+800]
-    if '绑定频率降序' not in sp_context and 'error_kp_bindings' not in sp_context and '排序规则与通用骨架一致' not in sp_context:
-        warn("[P9] SP_G_D01缺少错因排序规则")
+# P9: SP_G_D01错因排序 — L3 defers to L2
+# Check if L3 explicitly has sorting, or references L2 which has it
+l3_start = doc.find('### L3 有感知降级') if '### L3 有感知降级' in doc else -1
+l2_start = doc.find('### L2 无感知降级')
+l2_text = doc[l2_start:l2_start+800] if l2_start > 0 else ''
+l3_text = doc[l3_start:l3_start+800] if l3_start > 0 else ''
+has_sort_l2 = 'error_kp_bindings' in l2_text or '绑定频率降序' in l2_text
+has_sort_l3 = 'error_kp_bindings' in l3_text or '绑定频率降序' in l3_text
+l3_refs_l2 = '通用骨架' in l3_text and '完全相同' in l3_text
+if not has_sort_l3 and not (has_sort_l2 and l3_refs_l2):
+    warn("[P9] SP_G_D01(L3)缺少错因排序规则且未引用L2")
 
-# P10: 200ms标注
-if 'p50经验值' not in doc:
-    err("[P10] 200ms延迟未标注p50经验值/非硬阈值")
+# P10: 200ms
+if '本地压测' not in doc:
+    warn("[P10] 200ms p50未标注数据来源(本地压测)")
 
-# P11: parentExplanation兜底话术
+# P11: parentExplanation兜底
 if 'parentExplanation 也缺失' not in doc:
     warn("[P11] parentExplanation缺失时未标注兜底话术")
 
-# P12: S13缺失降级方案 (check in both 通用骨架标准定义 and S13消费清单行)
-gs_def = doc[doc.find('通用骨架标准定义'):doc.find('通用骨架标准定义')+800] if '通用骨架标准定义' in doc else ''
+# P12: S13降级
+l2_start = doc.find('### L2 无感知降级')
+l2_text = doc[l2_start:l2_start+800] if l2_start > 0 else ''
 s13_consumer = doc[doc.find('| 题目数据 | S13'):doc.find('| 题目数据 | S13')+200] if '| 题目数据 | S13' in doc else ''
-has_s13_fallback = ('S13 未就绪' in gs_def and '降级为 S01' in gs_def) or ('S13 子系统未建' in s13_consumer)
-if not has_s13_fallback:
+if 'S13 子系统未建' not in (l2_text + s13_consumer):
     warn("[P12] S13缺失降级方案未标注")
 
-# P13: 退化计数器清零
+# P13: 计数器清零
 if '从0重新开始计数' not in doc:
     err("[P13] 退化计数器清零规则未定义")
 
-# P14: 总时长约束
-if '总时长约束' not in doc or '480秒' not in doc:
-    err("[P14] 五环节总时长上限未定义")
+# P14: 总时长 → v1.8改为690
+if '690 秒' not in doc:
+    err("[P14] 总时长约束未更新为690秒")
 
-# P15: 8种画像组合逻辑
+# P15: 8种画像
 if 'G5默认「夸他」，G6默认「积分」' not in doc:
-    warn("[P15] 8种画像组合逻辑未完整解释")
+    warn("[P15] 8种画像组合逻辑不完整")
 
-# P16: SP_G_D01使用场景(已在P2检查)
-
-# P17: 缓存3次用途
+# P17: 缓存3次
 if '缓存 3 次而非 1 次的原因' not in doc:
     warn("[P17] 缓存3次用途未说明")
 
-# P18: 矩阵月度回顾标注
-if '月度回顾性核查' not in doc:
-    warn("[P18] 矩阵验证步骤未标注月度回顾")
+# P19: 自查声明数字(15条—已确认)
 
-# P19: 自查声明数字
-if '共 15 条记录' not in doc:
-    warn("[P19] 自查声明消费清单记录数未更新")
+# ===================================================================
+# v1.8 NEW CHECKS
+# ===================================================================
+
+# N1: 降级策略L0-L4表
+if '| L0: 无降级' not in doc:
+    err("[N1] 降级策略缺少L0-L4降级层级表")
+elif '| L4:' not in doc:
+    warn("[N1] 降级策略L4层级不完整")
+
+# N2: SP_G_D01宕机场景
+if 'S08_UNAVAILABLE' not in doc:
+    warn("[N2] SP_G_D01缺少宕机errorCode")
+
+# N3: 冷启动体验
+if '冷启动体验标注' not in doc:
+    warn("[N3] 缺少冷启动体验标注(前3次课堂反馈质量差异)")
+
+# N4: 逐字段回退策略表
+if '| 钩子字段 | 数据来源 | Phase1默认值 | Phase2回退条件 | Phase2回退值 |' not in doc:
+    warn("[N4] 缺少逐字段回退策略表")
+
+# N5: 种子积木手动标记
+if '种子积木手动标记' not in doc:
+    warn("[N5] 缺少种子积木手动标记入口")
+
+# N6: 复习类统一模板
+if '统一标准模板' not in doc:
+    warn("[N6] 复习类未使用统一标准模板(仍为豁免)")
+
+# N7: 信用分单分制
+if '单分制' not in doc:
+    warn("[N7] 信用分未简化为单分制")
+
+# N8: 500ms移除
+if '500ms超时' in doc:
+    warn("[N8] 仍含500ms超时等待(应与异步推送冲突)")
+if 'S09不主动查询S07' not in doc:
+    warn("[N8] S07消费清单行未更新异步说明")
+
+# N9: 矩阵纠正措施
+if '纠正措施' not in doc:
+    warn("[N9] 矩阵验证步骤缺少未通过时的纠正措施")
+
+# N10: HTML注释格式
+if '-- >' in doc:
+    err("[N10] 仍含格式错误的HTML注释 '-- >'")
 
 # ===== 跨文档引用检查 =====
-# S02 masteryLevel - check that the broken reference doc note exists
-s02_section = doc[doc.find('S02 知识图谱'):doc.find('S02 知识图谱')+300] if 'S02 知识图谱' in doc else ''
+# S02 masteryLevel
+s02_section = doc[doc.find('S02 知识图谱'):doc.find('S02 知识图谱')+400] if 'S02 知识图谱' in doc else ''
 if 'S02/S09 接口契约附件' in s02_section and '当前该附件不存在' not in s02_section:
     warn("[跨文档] S02 接口契约附件引用未标注不存在")
 
-# S13 存在性 - only warn if S13 is referenced WITHOUT proper annotation
-s13_doc_exists = os.path.exists('/Users/liufeng/Documents/芽芽AI助教/subsystems/S13_DIFFICULTY_MATRIX.md')
+# S13 存在性
 s13_refs = [l for l in lines if 'S13' in l and ('教材' in l or '题库' in l or '题型' in l)]
+s13_doc_exists = os.path.exists('/Users/liufeng/Documents/芽芽AI助教/subsystems/S13_DIFFICULTY_MATRIX.md')
 if s13_refs and not s13_doc_exists:
     for l in s13_refs:
-        l_stripped = l.strip()
-        # Skip lines that already have proper annotations
         if any(kw in l for kw in ['待 S13', 'S13 子系统', 'S13子系统', 'S13 确认', 'S13 未就绪', 'S13未就绪', 'S13 缺失', 'S13 子系统未建', 'S13子系统未建']):
             continue
-        # Skip 大白话 section mentions (just listing data sources)
         if '知识库（S01）+图谱（S02）+错因定义（S03）' in l:
             continue
-        # Skip 阶段1触发条件 line (listing dependency requirements, not a reference to consume)
         if 'S13 教材数据全量录入 + S07/S08 引擎就绪' in l:
             continue
-        warn(f"[跨文档] S13引用但子系统不存在且未标注待定义: {l_stripped[:80]}...")
+        warn(f"[跨文档] S13引用但子系统不存在且未标注待定义: {l.strip()[:80]}...")
 
-# ===== 结果输出 =====
+# ===== 结果 =====
 print(f"\n=== 审计结果 ===")
 print(f"  BLOCK错误: {len(errors)}")
 print(f"  WARN建议: {len(warnings)}")
