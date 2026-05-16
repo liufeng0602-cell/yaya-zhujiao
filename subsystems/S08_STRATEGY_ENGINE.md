@@ -1,9 +1,10 @@
-# S08 策略引擎 v1.1
+# S08 策略引擎 v1.2
 
 ## 变更记录
 
 | 版本 | 日期 | 变更内容 |
 |------|------|----------|
+| v1.2 | 2026-05-16 17:29 | DeepSeek 地狱审计修复（4 项）：(1)§2.4.6 traced 链触发条件增加 knowledgeCode 判断——匹配同一 chainId 下 knowledgeCode 不同于原始 KP 的 diagnosis_updated；(2)§2.6 Step 5 历史效果查询的统计数据口径与 §2.5 强策略/冷启动的 sampleCount 区分——前者是策略执行次数，后者是学生总答题次数，开发不可共用同一变量；(3)§2.3 体验保护增加连续错误计数范围定义——同一 lessonId 内，跨 lesson 重置；(4)§2.5 强策略列表和轻量安全策略列表增加 HUMAN-SIGNED 注释标记。 |
 | v1.1 | 2026-05-16 09:47 | DeepSeek 地狱审计修复（10+1 项）：(1)§2.4 子节 4.1-4.6→2.4.1-2.4.6，消除章节编号偏移；(2)安全护栏移到算法之前，确保 Step 8 引用时函数已定义；(3)§2.7 增加 S09 未就绪时的 strategy_applied/strategy_completed 兜底声明；(4)§2.4.6 traced 链关联键从 diagnosisId 改为 chainId（对齐 S07 溯源规则）；(5)§2.3 Phase 1 降级规则澄清——仅前两行（学习能量相关）受影响，其余 4 行正常生效；(6)§6.2 信用分熔断与安全护栏冲突解决——熔断覆盖强策略条件，熔断期间唯一输出=基础巩固包；(7)§2.5 Step 4 KP→SP_M_* 映射逻辑修正——改用 neighborErrors 查找相邻错因的 SP_M_*；(8)维度二阶段 3 增加多策略对比算法架构修改说明；(9)§8.4 新增 Step 5 乘数修改的间接影响评估；(10)北极星正信号增加回归均值排除规则；(11)新增 §6.3 Phase 1 初始启动状态（30 天信用分预热期）。 |
 | v1.0 | 2026-05-16 09:47 | 首版。从 acceptance-artifacts/12_STRATEGY_ENGINE.md v2.2.2 迁移重构——保留六态调度树+策略选择算法+体验保护+安全护栏全部设计，按 DOC_ACCEPTANCE_STANDARD v2.2 新增：北极星对齐、设计演化推理链、自我进化路线图、自我进化执行方法、不可修改边界七类、大白话十类、消费关系清单七列、数据闭环声明、维度交互矩阵、提交前自查声明。AI-MUTABLE 阈值全量标注。 |
 
@@ -115,6 +116,8 @@
 | 同一 lessonId 内连续 3 次 answer_abandoned<!-- AI-MUTABLE: 3次, type=int, range=[2, 5] --> | 能量恢复包 SP_G_D03 或舒缓讲解包 SP_G_D01 | 高 |
 | 5 分钟内连续退出<!-- AI-MUTABLE: 5分钟, type=int, range=[3, 10] --> | 下次进入时预设能量恢复包 | 中 |
 
+> **连续错误计数范围**：同一 lessonId 内。跨 lesson 不累计——每节课开始时连续错误计数器重置为 0。这样避免学生在第二节课第一道题就被判定为「挣扎」，也避免在单节课内连错三道才补救。
+
 > **effectScore = -2 的触发时序**：基于当前 chainId 内的 strategy_completed 事件即时判断，不等 StrategyEffect 表异步写入。触发一次兜底后同时标记该策略待禁用——7 天禁用规则接管后续保护。
 >
 > **学习能量状态来源**：由画像系统 GrowthMemory 表存储。
@@ -200,8 +203,7 @@ probability 在 0.5-0.85，满 3 轮验证：
 
 ```
 诊断引擎已对前置知识点发起新诊断。
-策略引擎通过 diagnosisStatus=traced + 同一 diagnosisId 关联溯源链，不对原始知识点触发策略。
-如果溯源链的 diagnosisStatus = "confirmed" → 对前置知识点触发策略（回到 2.4.1）
+策略引擎通过同一 chainId 下的下一个 diagnosis_updated 事件识别溯源结果——如果该事件的 knowledgeCode 不同于原始诊断的 knowledgeCode（说明是对前置知识点的诊断），且 diagnosisStatus = 'confirmed'，则对该前置知识点触发策略（回到 2.4.1）
 如果溯源 3 层仍 inconclusive → 对原始知识点触发轻量安全策略（回到 2.4.4）
 判断方式：策略引擎收到 diagnosisStatus='inconclusive' 且 errorDiagnosis.traceDepth=3，两个条件同时满足则触发。
 ```
@@ -210,7 +212,7 @@ probability 在 0.5-0.85，满 3 轮验证：
 
 #### 强策略触发条件
 
-以下策略为「强策略」：变式特训包 SP_G_C02 / 错因专项包 SP_G_C03
+以下策略为「强策略」：变式特训包 SP_G_C02 / 错因专项包 SP_G_C03<!-- HUMAN-SIGNED: 强策略列表, 签字人=教研人员 -->
 
 必须同时满足 5 个条件：
 1. diagnosisStatus = confirmed
@@ -233,7 +235,7 @@ probability 在 0.5-0.85，满 3 轮验证：
 sampleCount < 30<!-- AI-MUTABLE: 冷启动样本门槛, type=int, range=[10, 50] --> 时：
 - 所有强策略关闭
 - 策略参数自动降级：questionCount 减半，hintLevel + 1，difficultyAdjustment - 0.2
-- 优先使用轻量安全策略（基础巩固包、记忆唤醒包、能量恢复包）
+- 优先使用轻量安全策略（基础巩固包、记忆唤醒包、能量恢复包）<!-- HUMAN-SIGNED: 轻量安全策略列表, 签字人=教研人员 -->
 
 ### 2.6 策略选择算法
 
@@ -265,6 +267,9 @@ function selectStrategy(diagnosisUpdated, studentHistory):
     if neighborSp 非空: candidateStrategies += neighborSp
 
   // Step 5: 历史效果调整权重
+  // 注意：Step 5 查询的是“该策略对该学生该知识点的历史执行次数”（用于判断效果置信度），
+  // 区别于 §2.5 强策略/冷启动使用的 sampleCount——“该学生该知识点的总答题次数”。
+  // 两者统计口径不同，开发实现时不可共用同一个变量。
   for each strategy in candidateStrategies:
     historyEffect = queryStrategyEffect(
       studentId, strategy, knowledgeCode,
