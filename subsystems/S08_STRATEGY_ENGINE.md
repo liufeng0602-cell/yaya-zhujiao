@@ -1,9 +1,10 @@
-# S08 策略引擎 v1.5
+# S08 策略引擎 v1.6
 
 ## 变更记录
 
 | 版本 | 日期 | 变更内容 |
 |------|------|----------|
+| v1.6 | 2026-05-16 19:26 | DeepSeek 地狱审计修复（4 项）：(1)§2.4.6 traced 链增加同一 knowledgeCode 异常重试的 120 秒超时兜底；(2)§2.3 答题时间 3σ 冷启动阈值（10）补充说明——与 §2.5 冷启动保护阈值（30）用途不同、不冲突；(3)§2.5 冷启动轻量安全策略列表补全 SP_G_D01（舒缓讲解包）；(4)§2.6 权重因子冷启动折扣增加注释——仅影响未被关闭的策略，强策略不参与。 |
 | v1.5 | 2026-05-16 18:55 | DeepSeek 地狱审计修复（5 项）：(1)§2.4.6 traced 链增加 diagnosisStatus=traced 分支——溯源链上诊断引擎继续向更上层溯源时继续等待不误判；(2)§2.3 答题时间 3σ 增加冷启动 fallback——studentAnswerCount<10 时使用年级全局均值和标准差；(3)§2.4.3 excluded 超时降级措辞修正——明确指出只发基础巩固包 SP_G_C01，避免开发误以为覆盖全部轻量策略；(4)§7 消费清单 S04 行增加学科级聚合查询接口要求——知识点级样本量不足时 fallbackScope=subject 依赖 S04 提供聚合查询；(5)§2.3 明确"同一知识点"的判断标准——knowledgeCode 完全匹配，不同 KP 独立计数器。 |
 | v1.4 | 2026-05-16 18:14 | DeepSeek 地狱审计修复（9 项）：(1)§2.4.6 traced 链增加 excluded 分支覆盖；(2)§2.4.1 强策略分支增加对 §2.5 五条件的引用，消除重复声明；(3)§2.3/§2.4.4 连续错误阈值声明同步——共用同一计数器和阈值；(4)§2.6 Step 5 historyEffect 中间值穿透修补——effectScore 为 0 或中间值时不调整权重；(5)§5 维度交互矩阵"维护性升级"流程更正——走内容进化流程（维度一管道），不走代码进化流程；(6)§2.5 冷启动轻量安全策略列表补全 SP_G_B06/SP_G_E04；(7)§2.3 学习能量状态字段标注 10 号 Schema 缺失——需新增 learningEnergy 字段；(8)§6.3 预热期切换日过渡规则——未扣分 badcase 不追溯，正式体系从切换日重新计窗口；(9)§2.5/§2.6/§8.4 全面将 sampleCount 重命名为 studentAnswerCount，与 Step 5 的策略执行次数彻底区分。 |
 | v1.3 | 2026-05-16 17:51 | DeepSeek 地狱审计修复（2 项）：(1)§2.4.6 traced 链增加 confirmed_with_reservation 和 inconclusive 分支覆盖——有保留确诊触发轻量策略，inconclusive 继续等待；(2)§6.3 预热期信用分机制修正——改为即时更新（效果好 +1，效果差只记录不扣分），解决原"连续 30 天"条件在 30 天预热期内永远无法触发的问题。 |
@@ -125,7 +126,7 @@
 >
 > **学习能量状态来源**：由画像系统 GrowthMemory 表存储（此字段当前不在 10 号 Schema v2.1 GrowthMemory 定义中——Phase 1 需新增 `learningEnergy` 字段，待 10 号数据模型同步更新）。
 >
-> **答题时间 3σ 的冷启动 fallback**：studentAnswerCount < 10 时以该年级该知识点的全局答题时间均值和标准差作为 fallback。Phase 1 如无年级全局数据，该条件暂时不生效。
+> **答题时间 3σ 的冷启动 fallback**：studentAnswerCount < 10 时以该年级该知识点的全局答题时间均值和标准差作为 fallback。Phase 1 如无年级全局数据，该条件暂时不生效。此阈值（10）与 §2.5 冷启动保护阈值（30）不同——10 是统计意义上计算标准差的最小样本量，§2.5 的 30 是更宽的安全网（关闭强策略+参数降级）。
 >
 > **"同一知识点"的判断标准**：knowledgeCode 完全匹配。不同 knowledgeCode 的错误不累计——每个 KP 维护独立的连续错误计数器。同一 lessonId 内、同一 knowledgeCode 下答错 ≥ 3 道才触发保护。
 >
@@ -217,7 +218,7 @@ probability 在 0.5-0.85，满 3 轮验证：
   - diagnosisStatus = 'confirmed_with_reservation' → 对前置知识点触发轻量策略（基础巩固包 SP_G_C01），不触发强策略
   - diagnosisStatus = 'inconclusive' → 继续等待下一个 diagnosis_updated（溯源仍在进行中）
   - diagnosisStatus = 'excluded' → 诊断已排除该前置知识点为根因，等待下一个 diagnosis_updated（诊断引擎切换假设）
-  - diagnosisStatus = 'traced' → 继续等待下一个 diagnosis_updated（诊断引擎正在向更上层溯源——该前置知识点被诊断引擎判定仍需继续溯源）
+  - diagnosisStatus = 'traced' → 继续等待下一个 diagnosis_updated（诊断引擎正在向更上层溯源——该前置知识点被诊断引擎判定仍需继续溯源）。如果 traced 事件的 knowledgeCode 与原始诊断相同（非前置知识点）→ 可能是诊断引擎异常重试，等待 120 秒，超时后降级为轻量策略（基础巩固包 SP_G_C01）
 - 如果溯源 3 层仍 inconclusive → 对原始知识点触发轻量安全策略（回到 2.4.4）
   判断方式：策略引擎收到 diagnosisStatus='inconclusive' 且 errorDiagnosis.traceDepth=3，两个条件同时满足则触发。
 ```
@@ -249,7 +250,7 @@ probability 在 0.5-0.85，满 3 轮验证：
 studentAnswerCount < 30<!-- AI-MUTABLE: 冷启动样本门槛, type=int, range=[10, 50] --> 时：
 - 所有强策略关闭
 - 策略参数自动降级：questionCount 减半，hintLevel + 1，difficultyAdjustment - 0.2
-- 优先使用轻量安全策略（基础巩固包 SP_G_C01、记忆唤醒包 SP_G_C06、能量恢复包 SP_G_D03、格式规范包 SP_G_B06、检查清单包 SP_G_E04）<!-- HUMAN-SIGNED: 轻量安全策略列表, 签字人=教研人员 -->
+- 优先使用轻量安全策略（基础巩固包 SP_G_C01、记忆唤醒包 SP_G_C06、能量恢复包 SP_G_D03、舒缓讲解包 SP_G_D01、格式规范包 SP_G_B06、检查清单包 SP_G_E04）<!-- HUMAN-SIGNED: 轻量安全策略列表, 签字人=教研人员 -->
 
 ### 2.6 策略选择算法
 
@@ -320,7 +321,7 @@ function selectStrategy(diagnosisUpdated, studentHistory):
 | 历史中性 | effectScore = 0 | × 1.0 |
 | 历史无效 | effectScore < 0 | × 0.5 |
 | 历史有害 | effectScore = -2 | 标记为禁用（7 天冷却） |
-| 冷启动折扣 | studentAnswerCount < 30<!-- AI-MUTABLE: 冷启动样本门槛, type=int, range=[10, 50] --> | × 0.7 |
+| 冷启动折扣 | studentAnswerCount < 30<!-- AI-MUTABLE: 冷启动样本门槛, type=int, range=[10, 50] --> | × 0.7（此折扣仅影响未被 §2.5 关闭的策略——轻量策略和中策略。强策略已在 §2.5 被关闭，不参与权重计算） |
 | 同天频次 > 3<!-- AI-MUTABLE: 疲劳防护阈值, type=int, range=[2, 5] --> | 疲劳防护 | 移除 |
 | 家长标记 | unsuitable → × 0.3；helpful → × 1.2；accurate/inaccurate → 不影响权重（标记人工复核）；reobserve → 不影响权重但降 confidence | 见左列 |
 
