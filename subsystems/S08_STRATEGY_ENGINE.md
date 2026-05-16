@@ -1,9 +1,10 @@
-# S08 策略引擎 v1.4
+# S08 策略引擎 v1.5
 
 ## 变更记录
 
 | 版本 | 日期 | 变更内容 |
 |------|------|----------|
+| v1.5 | 2026-05-16 18:55 | DeepSeek 地狱审计修复（5 项）：(1)§2.4.6 traced 链增加 diagnosisStatus=traced 分支——溯源链上诊断引擎继续向更上层溯源时继续等待不误判；(2)§2.3 答题时间 3σ 增加冷启动 fallback——studentAnswerCount<10 时使用年级全局均值和标准差；(3)§2.4.3 excluded 超时降级措辞修正——明确指出只发基础巩固包 SP_G_C01，避免开发误以为覆盖全部轻量策略；(4)§7 消费清单 S04 行增加学科级聚合查询接口要求——知识点级样本量不足时 fallbackScope=subject 依赖 S04 提供聚合查询；(5)§2.3 明确"同一知识点"的判断标准——knowledgeCode 完全匹配，不同 KP 独立计数器。 |
 | v1.4 | 2026-05-16 18:14 | DeepSeek 地狱审计修复（9 项）：(1)§2.4.6 traced 链增加 excluded 分支覆盖；(2)§2.4.1 强策略分支增加对 §2.5 五条件的引用，消除重复声明；(3)§2.3/§2.4.4 连续错误阈值声明同步——共用同一计数器和阈值；(4)§2.6 Step 5 historyEffect 中间值穿透修补——effectScore 为 0 或中间值时不调整权重；(5)§5 维度交互矩阵"维护性升级"流程更正——走内容进化流程（维度一管道），不走代码进化流程；(6)§2.5 冷启动轻量安全策略列表补全 SP_G_B06/SP_G_E04；(7)§2.3 学习能量状态字段标注 10 号 Schema 缺失——需新增 learningEnergy 字段；(8)§6.3 预热期切换日过渡规则——未扣分 badcase 不追溯，正式体系从切换日重新计窗口；(9)§2.5/§2.6/§8.4 全面将 sampleCount 重命名为 studentAnswerCount，与 Step 5 的策略执行次数彻底区分。 |
 | v1.3 | 2026-05-16 17:51 | DeepSeek 地狱审计修复（2 项）：(1)§2.4.6 traced 链增加 confirmed_with_reservation 和 inconclusive 分支覆盖——有保留确诊触发轻量策略，inconclusive 继续等待；(2)§6.3 预热期信用分机制修正——改为即时更新（效果好 +1，效果差只记录不扣分），解决原"连续 30 天"条件在 30 天预热期内永远无法触发的问题。 |
 | v1.2 | 2026-05-16 17:29 | DeepSeek 地狱审计修复（4 项）：(1)§2.4.6 traced 链触发条件增加 knowledgeCode 判断——匹配同一 chainId 下 knowledgeCode 不同于原始 KP 的 diagnosis_updated；(2)§2.6 Step 5 历史效果查询的统计数据口径与 §2.5 强策略/冷启动的 sampleCount 区分——前者是策略执行次数，后者是学生总答题次数，开发不可共用同一变量；(3)§2.3 体验保护增加连续错误计数范围定义——同一 lessonId 内，跨 lesson 重置；(4)§2.5 强策略列表和轻量安全策略列表增加 HUMAN-SIGNED 注释标记。 |
@@ -124,6 +125,10 @@
 >
 > **学习能量状态来源**：由画像系统 GrowthMemory 表存储（此字段当前不在 10 号 Schema v2.1 GrowthMemory 定义中——Phase 1 需新增 `learningEnergy` 字段，待 10 号数据模型同步更新）。
 >
+> **答题时间 3σ 的冷启动 fallback**：studentAnswerCount < 10 时以该年级该知识点的全局答题时间均值和标准差作为 fallback。Phase 1 如无年级全局数据，该条件暂时不生效。
+>
+> **"同一知识点"的判断标准**：knowledgeCode 完全匹配。不同 knowledgeCode 的错误不累计——每个 KP 维护独立的连续错误计数器。同一 lessonId 内、同一 knowledgeCode 下答错 ≥ 3 道才触发保护。
+>
 > **Phase 1 降级规则**：Phase 1 如未接入学习能量信号，仅前两行（学习能量状态相关）降级——连续错误 >= 3 一律使用舒缓讲解包 SP_G_D01。其余 4 行（答题时间 > 3sigma、effectScore = -2、连续 3 次 answer_abandoned、5 分钟内连续退出）不受学习能量信号缺失影响，正常生效。
 >
 > **连续退出定义**：同一 lessonId 内连续 2 次 answer_abandoned，或 lesson_completed.completionStatus = interrupted。触发后写入 GrowthMemory.pendingAction，下次 lesson_started 时策略引擎读取并预设能量恢复包，读取后清除。
@@ -175,7 +180,7 @@ probability 在 0.5-0.85，满 3 轮验证：
 等待下一个 diagnosis_updated（诊断引擎正在切换假设）
   如果下一个 diagnosisStatus = "traced" → 见 2.4.6
   如果下一个 diagnosisStatus = "in_progress" → 不动作，继续等待
-  如果超过 120 秒未收到新 diagnosis_updated → 降级：发轻量策略（基础巩固包），记录 badcase
+  如果超过 120 秒未收到新 diagnosis_updated → 降级：发基础巩固包 SP_G_C01（超时降级比冷启动保护更保守，不覆盖其他轻量安全策略），记录 badcase
 ```
 
 #### 2.4.4 inconclusive（无法判断）
@@ -212,6 +217,7 @@ probability 在 0.5-0.85，满 3 轮验证：
   - diagnosisStatus = 'confirmed_with_reservation' → 对前置知识点触发轻量策略（基础巩固包 SP_G_C01），不触发强策略
   - diagnosisStatus = 'inconclusive' → 继续等待下一个 diagnosis_updated（溯源仍在进行中）
   - diagnosisStatus = 'excluded' → 诊断已排除该前置知识点为根因，等待下一个 diagnosis_updated（诊断引擎切换假设）
+  - diagnosisStatus = 'traced' → 继续等待下一个 diagnosis_updated（诊断引擎正在向更上层溯源——该前置知识点被诊断引擎判定仍需继续溯源）
 - 如果溯源 3 层仍 inconclusive → 对原始知识点触发轻量安全策略（回到 2.4.4）
   判断方式：策略引擎收到 diagnosisStatus='inconclusive' 且 errorDiagnosis.traceDepth=3，两个条件同时满足则触发。
 ```
@@ -511,7 +517,7 @@ function selectStrategy(diagnosisUpdated, studentHistory):
 | `diagnosis_updated` 事件（09 号事件 8） | S07 诊断引擎 | 监听事件 + 读取 diagnosisStatus/errorCode/probability/confidence/recommendedAction | 崩溃 | P0 | 集成测试：事件 Schema 验证 + 六态全覆盖 | 同步 |
 | `errorCode` → recommendedStrategies 映射 | S03 错因体系（error_taxonomy.json） | 读取 errorTaxonomy[errorCode].recommendedStrategies | 崩溃 | P0 | 映射覆盖率检查（CI 每次 commit） | 同步 |
 | 策略包编码 → strategyPack 定义 | S04 策略包体系（strategy_mapping.json） | 读取 strategy_mapping.json 做编码映射 | 崩溃 | P0 | 编码全对齐检查（CI） | 同步 |
-| `strategyCode` → effectScore 历史 | S04 策略包体系（StrategyEffect 表） | 查询该学生+该策略+该 KP 的历史 effectScore 均值 | 静默失败 | P1 | 定期统计校验 + 异常值 WARN | 同步 |
+| `strategyCode` → effectScore 历史 | S04 策略包体系（StrategyEffect 表） | 查询该学生+该策略+该 KP 的历史 effectScore 均值。知识点级样本量 < 3 时通过 fallbackScope="subject" 扩大到学科级聚合查询 | 静默失败 | P1 | 定期统计校验 + 异常值 WARN。S04 需提供学科级聚合查询接口（按 subject+grade+strategyCode 聚合 effectScore 均值），用于知识点级样本量不足时的 fallback 查询 | 同步 |
 | 互斥规则 | S04 策略包体系（互斥矩阵） | 调度时检查策略冲突 | 静默失败 | P2 | 单元测试：互斥矩阵全覆盖（CI） | 同步 |
 | `curriculumLevel` → `calculate_step_size()` | S06 分级系统 | 算教学步长（levelScore → 步长） | 数据错误 | P0 | 集成测试：步长计算正确性 | 同步 |
 | `curriculumLevel` + `observedDifficulty` | S01 KP 管理系统 | 双输入融合决策——curriculumLevel 权重 ≥ 50%，observedDifficulty 从 observations 字段读取 | 静默失败 | P1 | 仪表盘监控：observedDifficulty 空值率 | 异步 |
