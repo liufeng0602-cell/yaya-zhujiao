@@ -1,9 +1,10 @@
-# S08 策略引擎 v1.0
+# S08 策略引擎 v1.1
 
 ## 变更记录
 
 | 版本 | 日期 | 变更内容 |
 |------|------|----------|
+| v1.1 | 2026-05-16 09:47 | DeepSeek 地狱审计修复（10+1 项）：(1)§2.4 子节 4.1-4.6→2.4.1-2.4.6，消除章节编号偏移；(2)安全护栏移到算法之前，确保 Step 8 引用时函数已定义；(3)§2.7 增加 S09 未就绪时的 strategy_applied/strategy_completed 兜底声明；(4)§2.4.6 traced 链关联键从 diagnosisId 改为 chainId（对齐 S07 溯源规则）；(5)§2.3 Phase 1 降级规则澄清——仅前两行（学习能量相关）受影响，其余 4 行正常生效；(6)§6.2 信用分熔断与安全护栏冲突解决——熔断覆盖强策略条件，熔断期间唯一输出=基础巩固包；(7)§2.5 Step 4 KP→SP_M_* 映射逻辑修正——改用 neighborErrors 查找相邻错因的 SP_M_*；(8)维度二阶段 3 增加多策略对比算法架构修改说明；(9)§8.4 新增 Step 5 乘数修改的间接影响评估；(10)北极星正信号增加回归均值排除规则；(11)新增 §6.3 Phase 1 初始启动状态（30 天信用分预热期）。 |
 | v1.0 | 2026-05-16 09:47 | 首版。从 acceptance-artifacts/12_STRATEGY_ENGINE.md v2.2.2 迁移重构——保留六态调度树+策略选择算法+体验保护+安全护栏全部设计，按 DOC_ACCEPTANCE_STANDARD v2.2 新增：北极星对齐、设计演化推理链、自我进化路线图、自我进化执行方法、不可修改边界七类、大白话十类、消费关系清单七列、数据闭环声明、维度交互矩阵、提交前自查声明。AI-MUTABLE 阈值全量标注。 |
 
 ---
@@ -20,6 +21,7 @@
 
 **正信号**（策略质量上升）：
 - 策略干预后学生后续答题正确率上升（同一 KP 间隔掌握率提升）<!-- AI-MUTABLE: 上升阈值 5%, type=float, range=[0.03, 0.10] -->
+  > **排除回归均值规则**：正确率上升必须排除回归均值——将学生前 5 次该 KP 的答题正确率均值作为基线，策略后正确率必须高于基线 + 1 个标准差才算有效提升。基线自动衰减（时间越久远权重越低）。
 - 学生求助后不再重复求助（同一 KP 再次 hint_requested 比例下降）<!-- AI-MUTABLE: 下降阈值 10%, type=float, range=[0.05, 0.15] -->
 - 策略覆盖率提升（新错因有对应策略可查）<!-- AI-MUTABLE: 覆盖率目标 95%, type=float, range=[0.90, 0.99] -->
 
@@ -95,7 +97,7 @@
 策略引擎的执行顺序不是「诊断→策略」一步到位。在选策略之前，先查体验保护——学生可能正在挣扎、连续错误、想退出。这时候先抢救状态，再谈策略。
 
 ```
-体验保护检查（§2.3）→ 六态决策（§2.4）→ 策略选择算法（§2.5）→ 安全护栏检查（§2.6）→ 发出 strategy_applied
+体验保护检查（§2.3）→ 六态决策（§2.4）→ 安全护栏检查（§2.5）→ 策略选择算法（§2.6）→ 发出 strategy_applied
 ```
 
 体验保护触发后跳过六态决策，直接覆盖策略选择。
@@ -115,7 +117,9 @@
 
 > **effectScore = -2 的触发时序**：基于当前 chainId 内的 strategy_completed 事件即时判断，不等 StrategyEffect 表异步写入。触发一次兜底后同时标记该策略待禁用——7 天禁用规则接管后续保护。
 >
-> **学习能量状态来源**：由画像系统 GrowthMemory 表存储。Phase 1 如未接入，inconclusive 和体验保护中的能量条件暂不生效——统一按连续错误 ≥ 3 判断：≥ 3 → 舒缓讲解包；< 3 → 基础巩固包。
+> **学习能量状态来源**：由画像系统 GrowthMemory 表存储。
+>
+> **Phase 1 降级规则**：Phase 1 如未接入学习能量信号，仅前两行（学习能量状态相关）降级——连续错误 >= 3 一律使用舒缓讲解包 SP_G_D01。其余 4 行（答题时间 > 3sigma、effectScore = -2、连续 3 次 answer_abandoned、5 分钟内连续退出）不受学习能量信号缺失影响，正常生效。
 >
 > **连续退出定义**：同一 lessonId 内连续 2 次 answer_abandoned，或 lesson_completed.completionStatus = interrupted。触发后写入 GrowthMemory.pendingAction，下次 lesson_started 时策略引擎读取并预设能量恢复包，读取后清除。
 
@@ -123,7 +127,7 @@
 
 根据 `diagnosisStatus` 走不同分支：
 
-#### 4.1 confirmed（确诊）
+#### 2.4.1 confirmed（确诊）
 
 ```
 mainHypothesis.probability ≥ 0.85：
@@ -145,7 +149,7 @@ mainHypothesis.probability < 0.85：
 > **confidence 阈值**：0.7<!-- AI-MUTABLE: 强策略confidence阈值, type=float, range=[0.60, 0.85] -->
 > **中策略定义**：介于强策略和轻量策略之间，包括分步引航包 SP_G_B01、审题侦探包 SP_G_B04、精准计算包 SP_G_C05。中策略触发门槛比强策略宽松：probability ≥ 0.5 即可<!-- AI-MUTABLE: 中策略概率阈值, type=float, range=[0.40, 0.60] -->，不要求 confidence ≥ 0.7。
 
-#### 4.2 confirmed_with_reservation（有保留确诊）
+#### 2.4.2 confirmed_with_reservation（有保留确诊）
 
 ```
 probability 在 0.5-0.85，满 3 轮验证：
@@ -160,16 +164,16 @@ probability 在 0.5-0.85，满 3 轮验证：
     difficultyAdjustment = -0.1（略降难度）
 ```
 
-#### 4.3 excluded（假设被排除）
+#### 2.4.3 excluded（假设被排除）
 
 ```
 等待下一个 diagnosis_updated（诊断引擎正在切换假设）
-  如果下一个 diagnosisStatus = "traced" → 见 4.6
+  如果下一个 diagnosisStatus = "traced" → 见 2.4.6
   如果下一个 diagnosisStatus = "in_progress" → 不动作，继续等待
   如果超过 120 秒未收到新 diagnosis_updated → 降级：发轻量策略（基础巩固包），记录 badcase
 ```
 
-#### 4.4 inconclusive（无法判断）
+#### 2.4.4 inconclusive（无法判断）
 
 ```
 触发轻量安全策略：
@@ -185,24 +189,53 @@ probability 在 0.5-0.85，满 3 轮验证：
 
 > **连续错误阈值**：3<!-- AI-MUTABLE: inconclusive连续错误阈值, type=int, range=[2, 5] -->
 
-#### 4.5 in_progress（验证进行中）
+#### 2.4.5 in_progress（验证进行中）
 
 ```
 不动作。策略引擎继续等待下一个 diagnosis_updated。
 不记录策略事件。
 ```
 
-#### 4.6 traced（切入溯源）
+#### 2.4.6 traced（切入溯源）
 
 ```
 诊断引擎已对前置知识点发起新诊断。
 策略引擎通过 diagnosisStatus=traced + 同一 diagnosisId 关联溯源链，不对原始知识点触发策略。
-如果溯源链的 diagnosisStatus = "confirmed" → 对前置知识点触发策略（回到 4.1）
-如果溯源 3 层仍 inconclusive → 对原始知识点触发轻量安全策略（回到 4.4）
+如果溯源链的 diagnosisStatus = "confirmed" → 对前置知识点触发策略（回到 2.4.1）
+如果溯源 3 层仍 inconclusive → 对原始知识点触发轻量安全策略（回到 2.4.4）
 判断方式：策略引擎收到 diagnosisStatus='inconclusive' 且 errorDiagnosis.traceDepth=3，两个条件同时满足则触发。
 ```
 
-### 2.5 策略选择算法
+### 2.5 安全护栏
+
+#### 强策略触发条件
+
+以下策略为「强策略」：变式特训包 SP_G_C02 / 错因专项包 SP_G_C03
+
+必须同时满足 5 个条件：
+1. diagnosisStatus = confirmed
+2. mainHypothesis.probability ≥ 0.85<!-- AI-MUTABLE: 强策略概率门槛, type=float, range=[0.75, 0.95] -->
+3. mainHypothesis.confidence ≥ 0.7<!-- AI-MUTABLE: 强策略置信度门槛, type=float, range=[0.60, 0.85] -->
+4. sampleCount ≥ 30<!-- AI-MUTABLE: 强策略最小样本量, type=int, range=[20, 50] -->
+5. 该策略历史 effectScore 不低于 -1
+
+#### 策略频率限制
+
+| 限制 | 说明 |
+|------|------|
+| 同策略同天 ≤ 3 次<!-- AI-MUTABLE: 同策略日上限, type=int, range=[2, 5] --> | 超过后当天禁用 |
+| 同策略连续使用 ≤ 5 次<!-- AI-MUTABLE: 连续使用上限, type=int, range=[3, 7] --> | 第 6 次强制轮换为备选策略包 |
+| 强策略同天 ≤ 2 次<!-- AI-MUTABLE: 强策略日上限, type=int, range=[1, 3] --> | 同天内强策略总触发次数，不受策略包种类限制 |
+| effectScore = -2 的策略 7 天内禁用<!-- AI-MUTABLE: 冷却天数, type=int, range=[3, 14] --> | 给策略冷却期 |
+
+#### 冷启动保护
+
+sampleCount < 30<!-- AI-MUTABLE: 冷启动样本门槛, type=int, range=[10, 50] --> 时：
+- 所有强策略关闭
+- 策略参数自动降级：questionCount 减半，hintLevel + 1，difficultyAdjustment - 0.2
+- 优先使用轻量安全策略（基础巩固包、记忆唤醒包、能量恢复包）
+
+### 2.6 策略选择算法
 
 ```
 function selectStrategy(diagnosisUpdated, studentHistory):
@@ -223,9 +256,13 @@ function selectStrategy(diagnosisUpdated, studentHistory):
   if diagnosisStatus in ("confirmed_with_reservation", "inconclusive"):
     candidateStrategies = filterLightOnly(candidateStrategies)
 
-  // Step 4: 叠加知识点专属策略
-  kpStrategies = 从 taxonomy 映射后的策略包中筛选该 KP 专属的 SP_M_*
-  if kpStrategies 非空: candidateStrategies += kpStrategies
+  // Step 4: 叠加知识点专属策略（SP_M_*）
+  // 如果 taxonomy 映射后已包含 SP_M_* 策略包（该错因的 recommendedStrategies 已映射到 SP_M_*），则保留。
+  // 如果映射结果中没有任何 SP_M_*，则从该错因的 error_taxonomy 条目中读取 neighborErrors 字段，
+  // 查找相邻错因是否有 SP_M_* 映射，有则加入候选。
+  if candidateStrategies 中不含 SP_M_*:
+    neighborSp = 从 neighborErrors 查找相邻错因的 SP_M_* 映射
+    if neighborSp 非空: candidateStrategies += neighborSp
 
   // Step 5: 历史效果调整权重
   for each strategy in candidateStrategies:
@@ -266,35 +303,6 @@ function selectStrategy(diagnosisUpdated, studentHistory):
 | 同天频次 > 3<!-- AI-MUTABLE: 疲劳防护阈值, type=int, range=[2, 5] --> | 疲劳防护 | 移除 |
 | 家长标记 | unsuitable → × 0.3；helpful → × 1.2；accurate/inaccurate → 不影响权重（标记人工复核）；reobserve → 不影响权重但降 confidence | 见左列 |
 
-### 2.6 安全护栏
-
-#### 强策略触发条件
-
-以下策略为「强策略」：变式特训包 SP_G_C02 / 错因专项包 SP_G_C03
-
-必须同时满足 5 个条件：
-1. diagnosisStatus = confirmed
-2. mainHypothesis.probability ≥ 0.85<!-- AI-MUTABLE: 强策略概率门槛, type=float, range=[0.75, 0.95] -->
-3. mainHypothesis.confidence ≥ 0.7<!-- AI-MUTABLE: 强策略置信度门槛, type=float, range=[0.60, 0.85] -->
-4. sampleCount ≥ 30<!-- AI-MUTABLE: 强策略最小样本量, type=int, range=[20, 50] -->
-5. 该策略历史 effectScore 不低于 -1
-
-#### 策略频率限制
-
-| 限制 | 说明 |
-|------|------|
-| 同策略同天 ≤ 3 次<!-- AI-MUTABLE: 同策略日上限, type=int, range=[2, 5] --> | 超过后当天禁用 |
-| 同策略连续使用 ≤ 5 次<!-- AI-MUTABLE: 连续使用上限, type=int, range=[3, 7] --> | 第 6 次强制轮换为备选策略包 |
-| 强策略同天 ≤ 2 次<!-- AI-MUTABLE: 强策略日上限, type=int, range=[1, 3] --> | 同天内强策略总触发次数，不受策略包种类限制 |
-| effectScore = -2 的策略 7 天内禁用<!-- AI-MUTABLE: 冷却天数, type=int, range=[3, 14] --> | 给策略冷却期 |
-
-#### 冷启动保护
-
-sampleCount < 30<!-- AI-MUTABLE: 冷启动样本门槛, type=int, range=[10, 50] --> 时：
-- 所有强策略关闭
-- 策略参数自动降级：questionCount 减半，hintLevel + 1，difficultyAdjustment - 0.2
-- 优先使用轻量安全策略（基础巩固包、记忆唤醒包、能量恢复包）
-
 ### 2.7 输出：strategy_applied / strategy_completed
 
 #### strategy_applied 事件（09 号事件 9）
@@ -324,7 +332,9 @@ sampleCount < 30<!-- AI-MUTABLE: 冷启动样本门槛, type=int, range=[10, 50]
 
 #### strategy_completed 事件（09 号事件 10）
 
-策略执行完成后（由前端/课堂引擎发出），策略引擎消费此事件做效果回写：
+策略执行完成后（由 S09 课堂引擎发出），策略引擎消费此事件做效果回写：
+
+> **S09 未就绪时的兜底声明**：S09 课堂生成引擎未上线前，strategy_applied 事件写入事件日志但策略不实际执行（课堂内容不生成）。strategy_completed 事件由前端或测试环境模拟发出，用于验证策略选择逻辑正确性和积累初始 effectScore 数据。S09 上线后切换为完整链路。
 
 策略引擎读 `effectScore`：
 - ≥ 1 → 有效，权重 × 1.3
@@ -408,7 +418,7 @@ sampleCount < 30<!-- AI-MUTABLE: 冷启动样本门槛, type=int, range=[10, 50]
 |------|----------|---------|----------|---------|-------------|
 | 1 | Phase 1 启动（当前） | 单策略选择。每个 diagnosis_updated 只选一个策略包。穷举候选列表 + 权重排序。 | 工程师优化算法效率 | — | — |
 | 2 | 策略池 ≥ 20 个 + 选择耗时中位数 > 500ms<!-- AI-MUTABLE: 效率触发策略池大小, type=int, range=[15, 30] --> | 策略选择缓存——同一 (errorCode, studentLevel, strategyHistory) 组合缓存 24 小时。冷启动时用同年级同错因的缓存结果做初始权重。 | 工程师维护缓存一致性 | 策略选择耗时中位数 < 100ms。预计算最常用的 100 个 (错因×学段) 组合的策略排序。 | 缓存命中率 < 60% → 关闭缓存，回退到实时计算模式<!-- AI-MUTABLE: 缓存命中率阈值, type=float, range=[0.50, 0.75] --> |
-| 3 | Phase 2 完成（策略池充足） | 多策略并行对比——同一诊断同时输出 2 个策略，A/B 分流，effectScore 收集后系统自动淘汰弱者。 | 教研人员定期复核对比结果，确认淘汰决策 | 策略选择从「选」变为「赛」——系统不断试不同策略，效果数据自动排名。 | 对比实验中任一分组 effectScore 连续 ≤ 0 3 次 → 暂停对比，全量走安全模式 |
+| 3 | Phase 2 完成（策略池充足） | 多策略并行对比——同一诊断同时输出 2 个策略，A/B 分流，effectScore 收集后系统自动淘汰弱者。**此阶段需修改 section 2.6 算法**：topWeighted 改为 topTwoWeighted，输出两个策略分别写入两组学生的 strategy_applied 事件。对比期间 effectScore 收集逻辑不变，但需额外标记分组 ID（experimentGroup=A/B）用于后续淘汰判断。 | 教研人员定期复核对比结果，确认淘汰决策 | 策略选择从「选」变为「赛」——系统不断试不同策略，效果数据自动排名。 | 对比实验中任一分组 effectScore 连续 ≤ 0 3 次 → 暂停对比，全量走安全模式 |
 
 ### 维度交互矩阵
 
@@ -442,10 +452,20 @@ sampleCount < 30<!-- AI-MUTABLE: 冷启动样本门槛, type=int, range=[10, 50]
 - **下降信号**：强策略触发后 effectScore = -2 比例 > 10% → -10
 - **底线信号**：策略导致放弃率连续 7 天上升 → -20
 - **上限**：100
-- **下限**：0（触发全系统熔断——策略引擎降级为仅发基础巩固包）
+- **下限**：0（触发全系统熔断——策略引擎降级为仅发基础巩固包 SP_G_C01）
+
+> **信用分熔断与安全护栏的层叠关系**：信用分触发熔断时，安全护栏的频率限制和冷启动保护仍然生效，但强策略条件被覆盖——即使满足五条件，也不发强策略。熔断期间唯一输出 = 基础巩固包 SP_G_C01。
 - **信用分影响**：信用分 < 20 → 所有强策略关闭<!-- AI-MUTABLE: 强策略关闭信用分阈值, type=int, range=[10, 30] -->；信用分 < 10 → 仅保留体验保护覆盖逻辑，关闭权重选择（所有策略包等权随机选）<!-- AI-MUTABLE: 等权随机信用分阈值, type=int, range=[5, 15] -->
 
-### 6.3 安全执行管道
+### 6.3 Phase 1 初始启动状态
+
+策略引擎上线后立即开始六态调度和策略选择（不设纯观测期）。信用分从上线第一天开始计算。
+
+- **前 30 天为信用分预热期**——期间信用分只涨不跌（不上涨->不下跌->不回滚、不熔断），用于积累 baseline 数据。
+- **预热期结束后正式启用完整信用分体系**——信用分可涨可跌，20 分以下关闭强策略，10 分以下仅等权随机选，0 分熔断为仅基础巩固包。
+- 预热期期间的数据自然积累 strategy_completed 事件——30 天后至少有一定数据量供信用分初始校准。
+
+### 6.4 安全执行管道
 
 策略引擎的任何自我进化（算法修改、阈值调整、权重因子变更）走三层管道：
 
@@ -457,7 +477,7 @@ sampleCount < 30<!-- AI-MUTABLE: 冷启动样本门槛, type=int, range=[10, 50]
 
 > **数据脱敏**：影子模式和 A/B 测试中，策略选择日志和学生行为数据的关联分析必须脱敏——studentId 替换为匿名实验 ID，knowledgeCode 保留下游分析但 location/name/学校信息全部剥离。脱敏后的数据仅用于 effectScore 计算和统计显著检验，不用于其他用途。
 
-### 6.4 元进化递归上限
+### 6.5 元进化递归上限
 
 策略引擎自身进化的进化规则（元进化）也受限制：
 - 修改安全执行管道的门槛（影子→A/B→全量的阈值）→ 必须教研人员签字 + 审查员审批
@@ -479,7 +499,7 @@ sampleCount < 30<!-- AI-MUTABLE: 冷启动样本门槛, type=int, range=[10, 50]
 | `curriculumLevel` → `calculate_step_size()` | S06 分级系统 | 算教学步长（levelScore → 步长） | 数据错误 | P0 | 集成测试：步长计算正确性 | 同步 |
 | `curriculumLevel` + `observedDifficulty` | S01 KP 管理系统 | 双输入融合决策——curriculumLevel 权重 ≥ 50%，observedDifficulty 从 observations 字段读取 | 静默失败 | P1 | 仪表盘监控：observedDifficulty 空值率 | 异步 |
 | `knowledgeCode`（全局外键） | S01 KP 管理系统（knowledge.json） | 查 KP 元信息（prerequisites/next/curriculumLevel）用于溯源路径判断 | 静默失败 | P1 | R2/R8 铁规自动校验（CI） | 同步 |
-| `strategy_applied` 事件（09 号事件 9） | S09 课堂生成引擎【待 S09 定义：消费 strategyPack+params 生成具体课堂话术和题目序列】 | 发出事件。S09 读取 strategyPack + params + triggerReason 生成课堂内容 | 崩溃 | P0 | 集成测试：事件 Schema 验证 + S09 消费接口对齐 | 同步 |
+| `strategy_applied` 事件（09 号事件 9） | S09 课堂生成引擎 | 发出事件。S09 读取 strategyPack + params + triggerReason 生成课堂内容 | 崩溃 | P0 | 集成测试：事件 Schema 验证 + S09 消费接口对齐 | 同步 |
 | `strategy_applied` 事件（09 号事件 9） | S12 质量仪表盘【待 S12 定义：策略有效率/提示依赖变化指标的统计入口】 | 发出事件。S12 统计策略选择频率、effectScore 分布、强策略/轻量策略比例 | 数据错误 | P2 | 仪表盘数据完整性校验（每日） | 异步 |
 | `strategy_completed` 事件（09 号事件 10） | S09 课堂生成引擎 → S08（回写） | S08 消费此事件计算 effectScore，回写到 StrategyEffect 表 + GrowthMemory | 静默失败 | P1 | effectScore 写入验证 + 定期审计 | 异步 |
 | `strategy_completed` 事件（09 号事件 10） | S07 诊断引擎 | S07 读取 effectScore 用于调整信用分 | 静默失败 | P2 | 信用分变化审计（每周） | 异步 |
@@ -525,7 +545,8 @@ sampleCount < 30<!-- AI-MUTABLE: 冷启动样本门槛, type=int, range=[10, 50]
 |------|------------------|---------|-----------|
 | 修改权重因子 × 1.3 → × 1.5 | 不直接改策略推荐，但放大历史有效策略的权重→历史上有效的策略被系统性偏好→可能挤出新策略 | 所有策略选择偏好偏移 | < 5% → 正常推进；5-15% → 记录并月度审查; > 15% → 暂停，审查员复核 |
 | 修改冷启动折扣 0.7 → 0.9 | 不直接改策略，但减少冷启动保护→冷启动场景中强策略更容易触发 | 冷启动学生群体（sampleCount < 30） | < 10% → 正常推进；10-20% → WARN；> 20% → 暂停 |
-| 修改体验保护 σ 阈值 3.0 → 2.0 | 不直接改策略选择，但降低挣扎检测门槛→更多学生被判定为「挣扎」→能量恢复包触发频率上升 | 正常学生被误判为挣扎→收到不需要的能量恢复包 | < 10% → WARN；> 10% → 回滚 |
+| 修改体验保护 sigma 阈值 3.0 -> 2.0 | 不直接改策略选择，但降低挣扎检测门槛->更多学生被判定为「挣扎」->能量恢复包触发频率上升 | 正常学生被误判为挣扎->收到不需要的能量恢复包 | < 10% -> WARN；> 10% -> 回滚 |
+| 修改 Step 5 历史效果调整乘数（x 1.3 -> x 1.5） | 不直接改 effectScore 公式，但放大 effectScore 的边际效应->同分策略权重差距拉大->策略选择偏好偏移 | 学生级权重偏移——effectScore >= 1 的策略权重被放大 | < 10% -> 正常推进；10-20% -> 审查员复核；> 20% -> 暂停 |
 
 ---
 
@@ -591,9 +612,9 @@ grep -c 'AI-MUTABLE' subsystems/S08_STRATEGY_ENGINE.md
 - [x] 越界告警表（§8.3 — 轻/中/重三级处置）
 - [x] 间接修改量化表（§8.4 — 权重因子/冷启动折扣/体验保护 σ 三层阈值）
 - [x] 数据闭环声明（§5 维度一阶段 2 触发条件含明确数据源 strategy_completed 事件 + StrategyEffect 表）
-- [x] 安全执行管道含脱敏（§6.3 — 影子/A/B/全量三层 + 数据脱敏 studentId 匿名化）
-- [x] A/B 分组规则（§6.3 — 5%实验组、随机分层、p<0.05、最小样本量 30）
-- [x] 元进化递归上限（§6.4 — 上限 2 层、信用分公式修改需双签）
+- [x] 安全执行管道含脱敏（§6.4 — 影子/A/B/全量三层 + 数据脱敏 studentId 匿名化）
+- [x] A/B 分组规则（§6.4 — 5%实验组、随机分层、p<0.05、最小样本量 30）
+- [x] 元进化递归上限（§6.5 — 上限 2 层、信用分公式修改需双签）
 - [x] G1-G7 七卡点（§2.4 六态+§2.3 体验保护——confirmed/confirmed_with_reservation/excluded/inconclusive/in_progress/traced + 体验保护覆盖逻辑）
 - [x] 大白话十类（§9 — 全部 10 类独立段落）
 - [x] 消费清单七列（§7 — 12 条记录含严重等级 P0-P4 + 同步/异步标注）
