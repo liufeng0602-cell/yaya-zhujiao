@@ -81,12 +81,12 @@ class DocProductionHandler:
     def check_dead_loop(self):
         tasks = get_tasks_by_status(self.project, 'needs_revision')
         for task in tasks:
-            if task.get('iteration_count', 0) >= 3:
+            if task.get('iteration_count', 0) >= 6:
                 update_task_status(self.project, task['id'], 'blocked',
                                    blocked_reason='max_iterations_exceeded',
                                    blocked_recovery_target='backlog')
                 add_comment(self.project, task['id'], 'watcher',
-                            f'死循环：iteration={task["iteration_count"]} >= 3')
+                            f'死循环：iteration={task["iteration_count"]} >= 6')
                 self.alert(f'DEAD_LOOP: task {task["id"]} '
                            f'iteration={task["iteration_count"]}')
 

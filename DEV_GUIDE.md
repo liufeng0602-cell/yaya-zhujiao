@@ -294,7 +294,7 @@ def save_quality_score(project: str, task_id: str, version: str, scores: dict):
 | p2_clearing -> needs_revision | writer | 修 P2 时发现需改逻辑，需重新审核 |
 | p2_clearing -> p2_cleared | writer | P2 全部修复完毕，添加 P2_FIXED 标记 comment 后置入 |
 | p2_cleared -> signed_off | liufeng | P2=0 确认 + liufeng 终审签字 |
-| 任意状态 -> blocked | watcher/liufeng | 异常/3轮上限/token超支/连续3轮审核不过 |
+| 任意状态 -> blocked | watcher/liufeng | 异常/6轮上限/token超支/连续6轮审核不过 |
 
 ### 2.5 blocked 恢复路径
 
@@ -540,12 +540,12 @@ def reviewer_workflow(project: str):
         # 不通过
         increment_iteration(project, task['id'])  # iteration_count +1
         task = get_task(project, task['id'])
-        if task['iteration_count'] >= 3:
+        if task['iteration_count'] >= 6:
             update_task_status(project, task['id'], 'blocked',
                                blocked_reason='max_iterations_exceeded',
                                blocked_recovery_target='backlog')
             add_comment(project, task['id'], 'watcher',
-                        f'iteration_count={task["iteration_count"]} >= 3，自动 blocked')
+                        f'iteration_count={task["iteration_count"]} >= 6，自动 blocked')
         else:
             update_task_status(project, task['id'], 'needs_revision')
         add_comment(project, task['id'], 'reviewer',
@@ -689,12 +689,12 @@ class DocProductionHandler(FileSystemEventHandler):
         """死循环检测"""
         tasks = get_tasks_by_status(self.project, 'needs_revision')
         for task in tasks:
-            if task['iteration_count'] >= 3:
+            if task['iteration_count'] >= 6:
                 update_task_status(self.project, task['id'], 'blocked',
                                    blocked_reason='max_iterations_exceeded',
                                    blocked_recovery_target='backlog')
                 add_comment(self.project, task['id'], 'watcher',
-                           f'死循环检测：iteration_count={task["iteration_count"]} >= 3，自动 blocked')
+                           f'死循环检测：iteration_count={task["iteration_count"]} >= 6，自动 blocked')
                 self.alert(f'DEAD_LOOP: task {task["id"]} iteration={task["iteration_count"]}')
     
     def check_data_loss(self):
