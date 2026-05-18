@@ -8,7 +8,7 @@
 
 | 版本 | 日期 | 变更内容 |
 |------|------|----------|
-| v1.1 | 2026-05-18 14:04 | 审核 v1.0 全量修复：P0-1 p2_clearing->needs_revision 状态机修正；P0-2 Reviewer 直接设 p2_clearing 不再等 watcher；P0-3 增加 p2_cleared 中间状态+Writer P2_FIXED 标记；P1-1 get_tasks_by_status status 参数改为可选；P1-2 blocked 恢复 fallback 修复；P1-3 心跳/启动标记文件按项目区分；P1-4 质量评分触发改到 signed_off 后；P1-5 fromisoformat 改 strptime；P1-6 移除 no_agent watch.py 改为 Writer agent cron 直接扫描 kanban；P2-1 3.2 注释残留修复；P2-2 6.2 通知+暂停cron 函数修复；P2-2 git 仓库路径统一；P2-3 部署步骤修复；P2-4 Writer 新增 3.4 p2_clearing 处理流程；P3-3 check_stuck_tasks 增加 p2_clearing 超时；P3-1 PRD 质量评分触发时机同步 signed_off；补充建议：previous_status 字段/git diff 守卫/wrapper.py 强制自检/prompt 单任务锁定/PRD 同步； |
+| v1.1 | 2026-05-18 14:09 | 审核 v1.0 全量修复：P0-1 p2_clearing->needs_revision 状态机修正；P0-2 Reviewer 直接设 p2_clearing 不再等 watcher；P0-3 增加 p2_cleared 中间状态+Writer P2_FIXED 标记；P1-1 get_tasks_by_status status 参数改为可选；P1-2 blocked 恢复 fallback 修复；P1-3 心跳/启动标记文件按项目区分；P1-4 质量评分触发改到 signed_off 后；P1-5 fromisoformat 改 strptime；P1-6 移除 no_agent watch.py 改为 Writer agent cron 直接扫描 kanban；P1-7 needs_revision->drafting 遗漏（writer_revision_workflow 跳过 claim，与状态机矛盾）；P2-1 3.2 注释残留修复；P2-2 6.2 通知+暂停cron 函数修复；P2-2 git 仓库路径统一；P2-3 部署步骤修复；P2-4 Writer 新增 3.4 p2_clearing 处理流程；P3-3 check_stuck_tasks 增加 p2_clearing 超时；P3-1 PRD 质量评分触发时机同步 signed_off；补充建议：previous_status 字段/git diff 守卫/wrapper.py 强制自检/prompt 单任务锁定/PRD 同步； |
 
 ## 目录
 
@@ -340,7 +340,7 @@ prompt: |
   扫描 yaya-zhujiao 项目的 kanban 任务（使用 kanban_ops.py）：
   
   1. 先扫描 backlog 状态任务：取最旧的 1 个开始写作
-  2. 如果没有 backlog，扫描 needs_revision 状态任务：取最旧的 1 个开始修改
+  2. 如果没有 backlog，扫描 needs_revision 状态任务：取最旧的 1 个，claim（needs_revision->drafting）后开始修改
   3. 如果没有 needs_revision，扫描 p2_clearing 状态任务：取最旧的 1 个开始修 P2
   4. 以上都没有就什么都不做
   
@@ -403,17 +403,21 @@ def writer_revision_workflow(project: str, task_id: str):
     """needs_revision 状态下的修改流程"""
     task = get_task(project, task_id)
     
-    # 1. 读取审核报告（从 audit-reports/ 或 task_comments）
+    # 1. claim task：needs_revision -> drafting（等 watcher 可见，避免监控盲区）
+    update_task_status(project, task_id, 'drafting', assigned_to='writer')
+    add_comment(project, task_id, 'writer', f'开始修改（来自 needs_revision）')
+    
+    # 2. 读取审核报告（从 audit-reports/ 或 task_comments）
     comments = get_comments(project, task_id)
     review = [c for c in comments if c['author'] == 'reviewer'][-1]
     
-    # 2. 修复所有 P0/P1 问题
-    # 3. 可修复自己发现的额外问题
-    # 4. 用 git diff 记录额外修改
+    # 3. 修复所有 P0/P1 问题
+    # 4. 可修复自己发现的额外问题
+    # 5. 用 git diff 记录额外修改
     
-    # 5. 自检 + 版本号 bump + 变更记录
-    # 6. 实物验证
-    # 7. 提交审核
+    # 6. 自检 + 版本号 bump + 变更记录
+    # 7. 实物验证
+    # 8. 提交审核（drafting -> awaiting_review）
     update_task_status(project, task_id, 'awaiting_review')
     
     # 提交审核时附带的交接上下文
