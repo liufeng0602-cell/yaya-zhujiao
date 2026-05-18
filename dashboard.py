@@ -279,6 +279,12 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
       <div id="blockedAnalysis" style="margin-bottom:10px;padding:8px 10px;background:var(--card);border:1px solid var(--yellow);border-radius:6px;font-size:13px;line-height:1.6;color:var(--text)"><strong>📋 分析：</strong> <span id="blockedAnalysisText">加载中...</span></div>
       <div id="autoRecoveryStatus" style="margin-bottom:10px;padding:8px 10px;background:var(--bg);border:1px solid var(--green);border-radius:6px;font-size:13px;line-height:1.6;color:var(--green)"><strong>⚙️ 系统自动处理：</strong> <span id="autoRecoveryText">正在自动恢复...</span></div>
     </div>
+    <div id="reviewerFeedback" class="reviewer-feedback" style="display:none;border-top:1px solid var(--border);margin-top:12px;padding-top:12px">
+      <div style="font-size:13px;font-weight:600;color:var(--red);margin-bottom:8px">📋 复审不通过 — 需要修复的问题</div>
+      <div id="reviewerFeedbackPcounts" style="margin-bottom:8px;font-size:12px"></div>
+      <div id="reviewerFeedbackIssues" style="margin-bottom:8px"></div>
+      <div id="reviewerFeedbackReport" style="font-size:12px;color:var(--dim)"></div>
+    </div>
     <div id="autoRepairInfo" class="auto-repair-info" style="display:none;border-top:1px solid var(--border);margin-top:12px;padding-top:12px">
       <div style="padding:8px 10px;background:var(--card);border:1px solid var(--yellow);border-radius:6px;font-size:13px;line-height:1.6;color:var(--text)">
         <strong>自动修复状态：</strong>
@@ -430,7 +436,7 @@ function renderCard(t, status) {
   }
   // re_review result badge
   let rrBadge = '';
-  if (t.re_review_result === 'fail') rrBadge = '<span class="tag" style="background:#f8514933;color:#f85149">复审不通过 → 已回到修改中</span>';
+  if (t.re_review_result === 'fail') rrBadge = '<span class="tag" style="background:#f8514933;color:#f85149">复审不通过 — 等待修改</span>';
   else if (t.re_review_result === 'pass') rrBadge = '<span class="tag" style="background:#3fb95033;color:#3fb950">复审通过 → 等待人工审核</span>';
   // Auto-repair badge
   let repairBadge = '';
@@ -559,6 +565,55 @@ function openDoc(taskId, status) {
       }
     } else {
       repairEl.style.display = 'none';
+    }
+    // Show reviewer feedback for tasks with audit data (re_review, revision, waiting_human_review)
+    const reviewerEl = document.getElementById('reviewerFeedback');
+    const pcountsEl = document.getElementById('reviewerFeedbackPcounts');
+    const issuesEl = document.getElementById('reviewerFeedbackIssues');
+    const reportEl = document.getElementById('reviewerFeedbackReport');
+    if (d.revision_data && (status === 're_review' || status === 'revision' || status === 'waiting_human_review')) {
+      try {
+        const rd = JSON.parse(d.revision_data);
+        const hasIssues = rd.issues && rd.issues.length > 0;
+        const hasResult = rd.re_review_result;
+        const p0 = rd.p0_count || 0;
+        const p1 = rd.p1_count || 0;
+        const p2 = rd.p2_count || 0;
+        if (hasIssues && hasResult === 'fail') {
+          reviewerEl.style.display = 'block';
+          pcountsEl.innerHTML = `<span style="color:#f85149">P0: ${p0}</span> <span style="color:#d29922">P1: ${p1}</span> <span style="color:var(--dim)">P2: ${p2}</span>`;
+          issuesEl.innerHTML = rd.issues.map((i, idx) => {
+            const pri = i.priority || 'P2';
+            const desc = i.description || '';
+            const standard = i.standard || '';
+            const priColor = pri === 'P0' ? '#f85149' : pri === 'P1' ? '#d29922' : 'var(--dim)';
+            return '<div style="padding:6px 8px;margin-bottom:4px;background:var(--card);border:1px solid var(--border);border-radius:4px;font-size:12px;line-height:1.5">' +
+              '<span style="color:' + priColor + ';font-weight:600">[' + pri + ']</span> ' +
+              '<span>' + desc + '</span>' +
+              (standard ? '<br/><span style="color:var(--dim);font-size:11px">规则：' + standard + '</span>' : '') +
+              '</div>';
+          }).join('');
+          if (rd.report_path) {
+            const fn = rd.report_path.split('/').pop() || rd.report_path;
+            reportEl.innerHTML = '审计报告：<a href="' + rd.report_path + '" target="_blank" style="color:var(--blue)">' + fn + '</a>';
+          } else {
+            reportEl.innerHTML = '';
+          }
+        } else if (hasResult === 'pass') {
+          reviewerEl.style.display = 'block';
+          reviewerEl.querySelector('div:first-child').innerHTML = '✅ 复审通过 — 等待人工确认';
+          reviewerEl.querySelector('div:first-child').style.color = '#3fb950';
+          pcountsEl.innerHTML = '<span style="color:var(--green)">P0: 0 P1: 0 P2: 0</span> — 无问题';
+          issuesEl.innerHTML = '';
+          reportEl.innerHTML = '';
+        } else {
+          reviewerEl.style.display = 'none';
+        }
+      } catch(e) {
+        reviewerEl.style.display = 'none';
+      }
+    } else {
+      reviewerEl.style.display = 'none';
     }
   });
 }

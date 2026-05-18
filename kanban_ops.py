@@ -235,6 +235,13 @@ def update_task_status(project: str, task_id: str, new_status: str,
         if task:
             extra['previous_status'] = task['status']
 
+    # 非 blocked 状态自动清除 blocked_reason（除非 extra 显式提供了新的值）
+    if new_status != 'blocked':
+        if 'blocked_reason' not in extra:
+            extra['blocked_reason'] = None
+        if 'blocked_recovery_target' not in extra:
+            extra['blocked_recovery_target'] = None
+
     for k, v in extra.items():
         fields.append(f'{k}=?')
         values.append(v)

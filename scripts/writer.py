@@ -185,7 +185,7 @@ def process_revision(task: dict):
             attempts = increment_auto_repair(PROJECT, task_id, 'self_check_failed')
             handle_auto_repair_result(
                 PROJECT, task_id, attempts, max_attempts=3,
-                target_on_exhaust='re_review',
+                target_on_exhaust='revision',
                 task_title=task['title'], task_version=task.get('version', ''))
             return
 
@@ -200,7 +200,7 @@ def process_revision(task: dict):
             attempts = increment_auto_repair(PROJECT, task_id, 'commit_failed')
             handle_auto_repair_result(
                 PROJECT, task_id, attempts, max_attempts=3,
-                target_on_exhaust='re_review',
+                target_on_exhaust='revision',
                 task_title=task['title'], task_version=task.get('version', ''))
             return
     else:
@@ -277,6 +277,9 @@ def handle_auto_repair_result(project: str, task_id: str, attempts: int,
             f.write(f'auto-repair exhausted at {datetime.now().isoformat()}')
         print(f'[WRITER] auto-repair exhausted ({max_attempts}/{max_attempts}), '
               f'pushed to {target_on_exhaust}, triggering reviewer')
+
+
+def trigger_reviewer():
     """写 NOTIFY 文件触发 reviewer（零轮询事件驱动）"""
     notify_dir = os.path.join(KANBAN_DIR, '.notify')
     os.makedirs(notify_dir, exist_ok=True)
