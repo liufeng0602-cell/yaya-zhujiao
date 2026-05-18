@@ -375,9 +375,13 @@ function render() {
   // profiles
   fetchJSON('/api/profiles').then(d => {
     if (!d) return;
-    document.getElementById('profiles').innerHTML = d.map(p =>
-      `<div class="profile-card"><h3>${p.role} (${p.name})</h3><div class="model">${p.model}</div><div class="status" style="color:${p.running?'var(--green)':'var(--red)'}"><span class="status-dot" style="background:${p.running?'var(--green)':'var(--red)'}"></span>${p.running?'运行中':'已停止'}</div></div>`
-    ).join('');
+    document.getElementById('profiles').innerHTML = d.map(p => {
+      const st = p.workflow_state || (p.running ? 'running' : 'stopped');
+      const colors = {running: 'var(--green)', paused: 'var(--yellow)', stopped: 'var(--red)'};
+      const labels = {running: '运行中', paused: '已暂停', stopped: '已停止'};
+      const c = colors[st] || 'var(--red)';
+      return `<div class="profile-card"><h3>${p.role} (${p.name})</h3><div class="model">${p.model}</div><div class="status" style="color:${c}"><span class="status-dot" style="background:${c}"></span>${labels[st]||'已停止'}</div></div>`;
+    }).join('');
   });
   // watcher
   fetchJSON('/api/watcher').then(d => {
@@ -862,6 +866,10 @@ async def api_profiles():
         {"name": "yaya-reviewer", "role": "Reviewer"},
         {"name": "yaya-watcher", "role": "Watcher"},
     ]
+    # 读取自动化控制状态
+    auto = get_automation_state()
+    auto_running = auto.get("running", True)
+    auto_paused = auto.get("paused", False)
     # 扫描所有 hermes gateway / hermes chat 进程
     r = subprocess.run(["ps", "aux"], capture_output=True, text=True)
     all_procs = r.stdout
@@ -876,17 +884,26 @@ async def api_profiles():
                 m = re.search(r"model:\s*(\S+)", content)
             if m:
                 p["model"] = m.group(1)
-        # 用 ps aux 检测正在运行的 gateway 进程（独立进程或 launchctl 启动）
+        # 如果工作流已停止，Profiles 状态跟随工作流，不看进程
+        if not auto_running:
+            p["running"] = False
+            p["workflow_state"] = "stopped"
+            continue
+        if auto_paused:
+            p["running"] = False
+            p["workflow_state"] = "paused"
+            continue
+        # 工作流运行中：检测进程是否存活
         if p["name"] in all_procs and ("gateway" in all_procs or "hermes" in all_procs):
             for line in all_procs.split("\n"):
                 if p["name"] in line and ("hermes" in line or "gateway" in line):
                     p["running"] = True
                     break
-        # fallback: 也检查 launchctl
         if not p["running"]:
             lr = subprocess.run(["launchctl", "list"], capture_output=True, text=True)
             if f"hermes.{p['name']}" in lr.stdout:
                 p["running"] = True
+        p["workflow_state"] = "running" if p["running"] else "stopped"
     return JSONResponse(profiles_info)
 
 @app.get("/api/watcher")
