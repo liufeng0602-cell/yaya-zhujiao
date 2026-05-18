@@ -1,8 +1,14 @@
-# 自动化文档生产-审核循环工作流 开发者指南 v1.0
+# 自动化文档生产-审核循环工作流 开发者指南 v1.1
 
 基于 PRD v2.2 实现。本文档提供每个模块的实现细节：文件路径、接口签名、数据模型 DDL、配置文件模板、命令行参数。目标是：照着本文档就能写代码。
 
 ---
+
+## 变更记录
+
+| 版本 | 日期 | 变更内容 |
+|------|------|----------|
+| v1.1 | <!-- DATE --> | 审核 v1.0 修复：P0-1 p2_clearing->needs_revision 状态机修正；P0-2 Reviewer 直接设 p2_clearing 不再等 watcher；P0-3 增加 p2_cleared 中间状态+Writer P2_FIXED 标记；P1-1 get_tasks_by_status status 参数改为可选；P1-2 blocked 恢复 fallback 修复；P1-3 心跳/启动标记文件按项目区分；P1-4 质量评分触发改到 signed_off 后；P1-5 fromisoformat 改 strptime；P1-6 移除 no_agent watch.py 改为 Writer agent cron 直接扫描 kanban；P2-2 git 仓库路径统一；P2-4 Writer 新增 3.4 p2_clearing 处理流程； |
 
 ## 目录
 
@@ -40,11 +46,11 @@
 │   ├── yaya.db                         # 芽芽项目的 kanban SQLite
 │   ├── project-spark.db                # Spark 项目的 kanban SQLite
 │   ├── project-spark-adult.db          # Spark Adult 项目的 kanban SQLite
-│   ├── watcher_started.json            # Watcher 启动标记
-│   ├── watcher_heartbeat.json          # Watcher 心跳
+│   ├── watcher_started_<project>.json   # Watcher 启动标记（按项目区分）
+│   ├── watcher_heartbeat_<project>.json # Watcher 心跳（按项目区分）
 │   └── .alerts/                        # Alert 文件目录
 └── scripts/                            # 辅助脚本
-    ├── watch.py                        # no_agent 扫描脚本（Writer 的 project-watch cron job）
+    ├── watch.py                        # （已弃用）agent cron 直接扫描 kanban，此文件可删除
     ├── quality_score.py                # 质量评分计算
     └── evolution_summary.py            # 进化总结生成
 ```
@@ -64,7 +70,7 @@
 CREATE TABLE IF NOT EXISTS tasks (
     id              TEXT PRIMARY KEY,         -- 格式: t_<random_hex>, 如 t_a1b2c3d4
     title           TEXT NOT NULL,            -- 任务标题, 如 "审核 S01"
-    status          TEXT NOT NULL DEFAULT 'backlog',  -- 状态值: backlog|drafting|awaiting_review|needs_revision|approved|p2_clearing|signed_off|blocked
+    status          TEXT NOT NULL DEFAULT 'backlog',  -- 状态值: backlog|drafting|awaiting_review|needs_revision|approved|p2_clearing|p2_cleared|signed_off|blocked
     assigned_to     TEXT,                     -- 分配给哪个 profile: writer|reviewer|liufeng
     project         TEXT NOT NULL,            -- 项目标识: yaya-zhujiao|project-spark|project-spark-adult
     file_path       TEXT,                     -- 被审核文档的绝对路径
@@ -198,13 +204,19 @@ def get_task(project: str, task_id: str) -> dict:
     conn.close()
     return dict(row) if row else None
 
-def get_tasks_by_status(project: str, status: str) -> list:
-    """按状态获取任务列表"""
+def get_tasks_by_status(project: str, status: str = None) -> list:
+    """按状态获取任务列表。status=None 返回该项目的全部任务。"""
     conn = _conn(project)
-    rows = conn.execute(
-        "SELECT * FROM tasks WHERE project=? AND status=? ORDER BY updated_at ASC",
-        (project, status)
-    ).fetchall()
+    if status is None:
+        rows = conn.execute(
+            "SELECT * FROM tasks WHERE project=? ORDER BY updated_at ASC",
+            (project,)
+        ).fetchall()
+    else:
+        rows = conn.execute(
+            "SELECT * FROM tasks WHERE project=? AND status=? ORDER BY updated_at ASC",
+            (project, status)
+        ).fetchall()
     conn.close()
     return [dict(r) for r in rows]
 
@@ -276,9 +288,10 @@ def save_quality_score(project: str, task_id: str, version: str, scores: dict):
 | awaiting_review -> needs_revision | reviewer | P0>0 或 P1>0 |
 | awaiting_review -> approved | reviewer | P0=0 且 P1=0 |
 | needs_revision -> drafting | writer | writer 接手修改 |
-| approved -> p2_clearing | watcher | approved 且 P2>0 时自动进入 |
-| p2_clearing -> approved | writer | 修 P2 时发现需改逻辑 |
-| p2_clearing -> signed_off | liufeng | P2=0 + liufeng 终审签字 |
+| approved -> p2_clearing | reviewer | P2>0 且 P0=P1=0 时 reviewer 直接置入 |
+| p2_clearing -> needs_revision | writer | 修 P2 时发现需改逻辑，需重新审核 |
+| p2_clearing -> p2_cleared | writer | P2 全部修复完毕，添加 P2_FIXED 标记 comment 后置入 |
+| p2_cleared -> signed_off | liufeng | P2=0 确认 + liufeng 终审签字 |
 | 任意状态 -> blocked | watcher/liufeng | 异常/3轮上限/token超支/连续3轮审核不过 |
 
 ### 2.5 blocked 恢复路径
@@ -294,7 +307,7 @@ def recover_blocked_task(project: str, task_id: str, action: str):
         return
     
     recovery_map = {
-        'continue': task['blocked_recovery_target'] or task['status'],
+        'continue': task['blocked_recovery_target'] or 'backlog',
         'reset_backlog': 'backlog',
         'adjust_budget': 'drafting',
         'git_restore': 'drafting',
@@ -311,58 +324,30 @@ def recover_blocked_task(project: str, task_id: str, action: str):
 
 ## 3. Writer 模块
 
-### 3.1 no_agent 扫描脚本（watch.py）
+### 3.1 Writer 触发机制（agent cron 直接扫描 kanban）
 
-路径：`/Users/liufeng/Documents/DocProductionReview/scripts/watch.py`
+Writer 不使用 no_agent 扫描脚本，改为 agent cron job 直接查询 kanban。
+每个项目注册一个 Writer agent cron job，每 5 分钟运行一次。
 
-cron job 配置：
 ```yaml
-# 在 writer profile 的 cron 配置中注册
-name: project-watch-<project>
-schedule: "*/5 * * * *"  # 每5分钟扫描一次
-no_agent: true
-script: scripts/watch.py
+# 在 Writer profile 的 cron 配置中注册
+name: writer-yaya-zhujiao
+schedule: "*/5 * * * *"
+prompt: |
+  在 /Users/liufeng/Documents/DocProductionReview/ 项目目录中，
+  扫描 yaya-zhujiao 项目的 kanban 任务（使用 kanban_ops.py）：
+  
+  1. 先扫描 backlog 状态任务：取最旧的 1 个开始写作
+  2. 如果没有 backlog，扫描 needs_revision 状态任务：取最旧的 1 个开始修改
+  3. 如果没有 needs_revision，扫描 p2_clearing 状态任务：取最旧的 1 个开始修 P2
+  4. 以上都没有就什么都不做
+  
+  检测到待处理任务后，先 claim（backlog->drafting），
+  再执行对应的写作/修改/P2 修复流程。
+  一个 cron tick 只处理 1 个任务。
 ```
 
-watch.py 逻辑（约 80 行）：
-
-```python
-#!/usr/bin/env python3
-"""no_agent 扫描脚本。被 cron 调度，0 token 空转。返回非空输出时触发 writer agent。"""
-
-import sys
-sys.path.insert(0, '/Users/liufeng/Documents/DocProductionReview')
-
-from kanban_ops import get_tasks_by_status
-
-PROJECTS = ['yaya-zhujiao', 'project-spark', 'project-spark-adult']
-
-def scan():
-    """扫描所有项目的 backlog 和 needs_revision 任务
-    
-    返回格式: <project>:<task_id>:<status>
-    每行一个任务。空输出表示没有待处理任务。
-    """
-    output = []
-    for project in PROJECTS:
-        # 扫描 backlog（待写作）
-        backlog_tasks = get_tasks_by_status(project, 'backlog')
-        for t in backlog_tasks:
-            output.append(f'{project}:{t["id"]}:backlog')
-        
-        # 扫描 needs_revision（待修改）
-        needs_rev_tasks = get_tasks_by_status(project, 'needs_revision')
-        for t in needs_rev_tasks:
-            output.append(f'{project}:{t["id"]}:needs_revision')
-    
-    return '\n'.join(output)
-
-if __name__ == '__main__':
-    result = scan()
-    if result:
-        print(result)
-```
-
+不再需要 watch.py 脚本。如果已存在 `scripts/watch.py` 可删除。
 ### 3.2 Writer 写作流程
 
 Writer agent 被 project-watch 的 no_agent 脚本输出触发后，执行以下流程：
@@ -441,6 +426,47 @@ def writer_revision_workflow(project: str, task_id: str):
 ''')
 ```
 
+
+### 3.4 p2_clearing 处理流程
+
+当 Writer agent cron 扫描到 `p2_clearing` 状态的任务时，执行以下流程：
+
+```python
+def writer_p2_clearing_workflow(project: str, task_id: str):
+    """p2_clearing 状态下的 P2 修复流程"""
+    task = get_task(project, task_id)
+    
+    # 1. 读取审核报告，定位 P2 项
+    # 从 audit-reports/<project>/ 目录读取最近的审核报告
+    # 提取所有 P2 项的修复建议
+    
+    # 2. 逐一修复 P2 问题
+    # - 术语不一致 -> 全文统一
+    # - 格式错误 -> 修正格式
+    # - 引用未标注路径 -> 补全路径
+    # - 其他 P2 项同理
+    
+    # 3. 自检
+    # - 确认所有 P2 项已修复
+    # - 运行 wrapper.py 做语法检查
+    # - 确认未引入新的 P0/P1
+    
+    # 4. 标记 P2 修复完毕
+    add_comment(project, task_id, 'writer', 
+                'P2_FIXED: 所有 P2 项已修复。变更清单：<git diff 摘要>')
+    update_task_status(project, task_id, 'p2_cleared')
+    
+    # 5. 通知 liufeng 终审
+    # （liufeng 检查任务状态为 p2_cleared 以及 P2_FIXED comment 后做终审签字）
+```
+
+注意：
+- 执行环境与 Writer 3.2/3.3 一致，使用 Writer profile 的 API Key
+- 修复 P2 时如果发现实际需要改动文档逻辑/结构（超出纯 P2 范围），应回到 3.3 流程走 needs_revision
+- 修复完成后务必在 comment 中包含 `P2_FIXED` 标记，liufeng 终审时以此作为"修完"信号
+
+---
+
 ---
 
 ## 4. Reviewer 模块
@@ -489,8 +515,9 @@ def reviewer_workflow(project: str):
     if p0_count == 0 and p1_count == 0:
         # 通过
         if p2_count > 0:
-            update_task_status(project, task['id'], 'approved')
-            # watcher 会检测到 approved 且有 P2>0，自动进入 p2_clearing
+            update_task_status(project, task['id'], 'p2_clearing')
+            add_comment(project, task['id'], 'reviewer',
+                        f'P0=P1=0 但 P2>0，直接进入 p2_clearing。审核报告：{report_path}')
         else:
             update_task_status(project, task['id'], 'approved')
         add_comment(project, task['id'], 'reviewer', f'审核通过。审计报告：{report_path}')
@@ -623,7 +650,7 @@ class DocProductionHandler(FileSystemEventHandler):
         for status in ['drafting', 'awaiting_review']:
             tasks = get_tasks_by_status(self.project, status)
             for task in tasks:
-                updated = datetime.fromisoformat(task['updated_at'])
+                updated = datetime.strptime(task['updated_at'], '%Y-%m-%d %H:%M:%S')
                 elapsed = (datetime.now() - updated).total_seconds()
                 
                 # 根据文档行数判断超时阈值
@@ -672,8 +699,8 @@ class DocProductionHandler(FileSystemEventHandler):
                 # 非 drafting 状态——尝试 git checkout 恢复
                 self.alert(f'DATA_LOSS: task {task["id"]} file missing, attempting git restore: {file_path}')
                 # 执行 git checkout
-                repo_dir = os.path.dirname(file_path)
-                os.system(f'cd {repo_dir} && git checkout -- {os.path.basename(file_path)}')
+                repo_dir = PROJECT_ROOT  # Git 仓库根目录，所有文档统一管理
+                os.system(f'cd {repo_dir} && git checkout -- {file_path}')
                 # 如果仍然不存在，回退状态
                 if not os.path.exists(file_path):
                     update_task_status(self.project, task['id'], 'blocked',
@@ -692,7 +719,7 @@ class DocProductionHandler(FileSystemEventHandler):
             'timestamp': datetime.now().isoformat(),
             'pid': os.getpid()
         }
-        heartbeat_path = os.path.join(PROJECT_ROOT, '.kanban', 'watcher_heartbeat.json')
+        heartbeat_path = os.path.join(PROJECT_ROOT, '.kanban', f'watcher_heartbeat_{self.project}.json')
         with open(heartbeat_path, 'w') as f:
             json.dump(heartbeat, f)
     
@@ -711,7 +738,7 @@ def write_started_marker(project: str):
         'started_at': datetime.now().isoformat(),
         'pid': os.getpid()
     }
-    marker_path = os.path.join(PROJECT_ROOT, '.kanban', 'watcher_started.json')
+    marker_path = os.path.join(PROJECT_ROOT, '.kanban', f'watcher_started_{project}.json')
     with open(marker_path, 'w') as f:
         json.dump(marker, f)
 
@@ -856,12 +883,14 @@ def pause_project_cron(project: str, profile_type: str):
 model: deepseek-reasoner
 provider: deepseek
 
-# cron job：no_agent 扫描脚本
+# cron job：agent 模式直接扫描 kanban（每 5 分钟）
 cron:
-  - name: project-watch-yaya
+  - name: writer-yaya-zhujiao
     schedule: "*/5 * * * *"
-    no_agent: true
-    script: /Users/liufeng/Documents/DocProductionReview/scripts/watch.py
+    prompt: |
+      扫描 yaya-zhujiao 项目的 kanban 任务。
+      优先处理 backlog，其次 needs_revision，最后 p2_clearing。
+      一个 tick 只处理一个任务。
 
 # SOUL.md 内容（在 ~/.hermes/profiles/yaya/SOUL.md）
 # 职责：文档生产者，负责按规范写出可通过审核的详细设计文档
@@ -1225,7 +1254,8 @@ def calculate_compliance_score(doc: dict) -> dict:
 
 ### 10.2 AI 质量分
 
-文档 approved 后触发，使用廉价模型（deepseek-chat），约 10K tokens。
+文档 signed_off 后触发（即 P2 清零 + 终审签字后），使用廉价模型（deepseek-chat），约 10K tokens。
+# 注意：不在 approved 或 p2_clearing 时触发，确保评分反映 P2 修复后的最终质量。
 
 ```python
 def calculate_ai_quality_score(file_path: str) -> dict:
@@ -1339,14 +1369,14 @@ pip install watchdog
 launchctl load ~/Library/LaunchAgents/com.docprodreview.watcher.yaya.plist
 
 # 7. 检查 watcher 是否正常启动
-cat /Users/liufeng/Documents/DocProductionReview/.kanban/watcher_started.json
+cat /Users/liufeng/Documents/DocProductionReview/.kanban/watcher_started_yaya-zhujiao.json  # 按项目名称替换
 ```
 
 ### 11.2 日常运维
 
 ```bash
 # 查看 watcher 心跳
-cat /Users/liufeng/Documents/DocProductionReview/.kanban/watcher_heartbeat.json
+cat /Users/liufeng/Documents/DocProductionReview/.kanban/watcher_heartbeat_yaya-zhujiao.json  # 按项目名称替换
 
 # 查看 alert
 ls -la /Users/liufeng/Documents/DocProductionReview/.kanban/.alerts/
@@ -1391,7 +1421,7 @@ ls ~/.hermes/profiles/yaya-reviewer/logs/
 | 文件 | 职责 | 实现阶段 |
 |------|------|----------|
 | `kanban_ops.py` | Kanban SQLite 操作封装 | Phase 1 |
-| `scripts/watch.py` | no_agent 扫描脚本，0 token | Phase 1 |
+| `scripts/watch.py` | （已弃用）agent cron 直接扫描 kanban | Phase 1 -> 弃用 |
 | `scripts/watcher_daemon.py` | Watchdog daemon + 4个看门狗 | Phase 1 |
 | `reusable-review-rules/wrapper.py` | Vale/markdownlint 语法检查 | Phase 1 |
 | `evolution_rules.yaml` | 自我进化规则（初始模板） | Phase 1 |
