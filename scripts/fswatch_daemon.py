@@ -76,7 +76,17 @@ def build_writer_prompt():
     base_instruction = f"在 {PROJECT_DIR} 中运行 python3 scripts/writer.py 处理 yaya-zhujiao 项目的 Writer 工作流"
 
     if feedback_info:
-        feedback_text = "\n".join(f"  - {fb}" for fb in feedback_info['human_feedback'])
+        raw_feedback = feedback_info['human_feedback']
+        # 截断过长的反馈（超过 500 字符每项截断，最多 3 项）
+        truncated = []
+        for i, fb in enumerate(raw_feedback[:3]):
+            txt = str(fb)
+            if len(txt) > 500:
+                txt = txt[:500] + f'\n...（共 {len(txt)} 字符，已截断。共 {len(raw_feedback)} 条反馈中的第 {i+1} 条）'
+            truncated.append(f'  - {txt}')
+        if len(raw_feedback) > 3:
+            truncated.append(f'  ...（还有 {len(raw_feedback) - 3} 条反馈被省略）')
+        feedback_text = "\n".join(truncated)
         fp = feedback_info.get('file_path', '')
         return f"""任务：处理 {PROJECT_DIR} 的 Writer 工作流
 
