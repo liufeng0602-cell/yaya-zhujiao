@@ -1,0 +1,88 @@
+# Evolution Rules — 文档生产审核工作流的自我进化规则
+# 
+# 规则分两段：pre_flight（writer自检使用）和 post_flight（reviewer审核使用）
+# 新规则由 writer/reviewer 在每轮approved后自动生成建议，
+# owner审阅后可手工启用（status: active）或拒绝（status: rejected）。
+# 规则 ID 配对：一条 pre_flight 配一条同 ID 的 post_flight，同步启用/停用。
+
+rules:
+
+  # ============================================================
+  # 预置规则（系统自带，不可删除）
+  # ============================================================
+  - id: "builtin-001"
+    type: pre_flight
+    status: active
+    check: "所有AI-MUTABLE参数默认值全文一致"
+    grep_pattern: "AI-MUTABLE"
+    p_level: P1
+    plain_explanation: "系统自调整的参数（比如信用分初始值）在全文只能出现一个值"
+    added_by: "system"
+    total_rounds: 0
+    hit_count: 0
+    last_hit_round: ""
+
+  - id: "builtin-001"
+    type: post_flight
+    status: active
+    check: "验证AI-MUTABLE参数默认值一致性自检"
+    description: "验证writer已执行AI-MUTABLE参数检查"
+    verify_method: "grep全文，确认每个AI-MUTABLE字段只对应一个值"
+    p_level: P1
+    added_by: "system"
+    total_rounds: 0
+    hit_count: 0
+    last_hit_round: ""
+
+  - id: "builtin-002"
+    type: pre_flight
+    status: active
+    check: "所有Sxx引用版本号与目标文档一致"
+    grep_pattern: "S[0-9][0-9]"
+    p_level: P1
+    plain_explanation: "引用其他系统文档时，版本号必须和那个文档当前版本一致"
+    added_by: "system"
+    total_rounds: 0
+    hit_count: 0
+    last_hit_round: ""
+
+  - id: "builtin-002"
+    type: post_flight
+    status: active
+    check: "验证Sxx引用版本号正确性"
+    description: "验证writer已检查版本号一致性"
+    verify_method: "grep全文的Sxx引用，与目标文档头部版本号对照"
+    p_level: P1
+    added_by: "system"
+    total_rounds: 0
+    hit_count: 0
+    last_hit_round: ""
+
+  - id: "builtin-003"
+    type: pre_flight
+    status: active
+    check: "变更记录版本号与文档标题一致"
+    grep_pattern: "^# .*v[0-9]"
+    p_level: P2
+    plain_explanation: "文档大标题写的版本号和变更记录里最新版本号必须一样"
+    added_by: "system"
+    total_rounds: 0
+    hit_count: 0
+    last_hit_round: ""
+
+  - id: "builtin-003"
+    type: post_flight
+    status: active
+    check: "验证变更记录版本号一致性"
+    description: "验证writer已检查版本号一致性"
+    verify_method: "对比文档标题版本号与变更记录最新条目版本号"
+    p_level: P2
+    added_by: "system"
+    total_rounds: 0
+    hit_count: 0
+    last_hit_round: ""
+
+  # ============================================================
+  # 进化规则（由回顾总结自动生成建议，owner批准后加入）
+  # ============================================================
+  # 新规则在此区域添加，ID格式为 evo-<三位数字>
