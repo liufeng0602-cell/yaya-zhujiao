@@ -8,7 +8,7 @@
 
 | 版本 | 日期 | 变更内容 |
 |------|------|----------|
-| v1.1 | <!-- DATE --> | 审核 v1.0 修复：P0-1 p2_clearing->needs_revision 状态机修正；P0-2 Reviewer 直接设 p2_clearing 不再等 watcher；P0-3 增加 p2_cleared 中间状态+Writer P2_FIXED 标记；P1-1 get_tasks_by_status status 参数改为可选；P1-2 blocked 恢复 fallback 修复；P1-3 心跳/启动标记文件按项目区分；P1-4 质量评分触发改到 signed_off 后；P1-5 fromisoformat 改 strptime；P1-6 移除 no_agent watch.py 改为 Writer agent cron 直接扫描 kanban；P2-2 git 仓库路径统一；P2-4 Writer 新增 3.4 p2_clearing 处理流程； |
+| v1.1 | 2026-05-18 14:04 | 审核 v1.0 全量修复：P0-1 p2_clearing->needs_revision 状态机修正；P0-2 Reviewer 直接设 p2_clearing 不再等 watcher；P0-3 增加 p2_cleared 中间状态+Writer P2_FIXED 标记；P1-1 get_tasks_by_status status 参数改为可选；P1-2 blocked 恢复 fallback 修复；P1-3 心跳/启动标记文件按项目区分；P1-4 质量评分触发改到 signed_off 后；P1-5 fromisoformat 改 strptime；P1-6 移除 no_agent watch.py 改为 Writer agent cron 直接扫描 kanban；P2-1 3.2 注释残留修复；P2-2 6.2 通知+暂停cron 函数修复；P2-2 git 仓库路径统一；P2-3 部署步骤修复；P2-4 Writer 新增 3.4 p2_clearing 处理流程；P3-3 check_stuck_tasks 增加 p2_clearing 超时；P3-1 PRD 质量评分触发时机同步 signed_off；补充建议：previous_status 字段/git diff 守卫/wrapper.py 强制自检/prompt 单任务锁定/PRD 同步； |
 
 ## 目录
 
@@ -81,6 +81,7 @@ CREATE TABLE IF NOT EXISTS tasks (
     tokens_spent    INTEGER DEFAULT 0,        -- 已消耗 token 数
     blocked_reason  TEXT,                     -- blocked 原因: max_iterations_exceeded|timeout|token_overrun|data_loss|quality_deviation
     blocked_recovery_target TEXT,             -- blocked 恢复后的目标状态: backlog|drafting|原状态
+    previous_status TEXT,                     -- 进入 blocked 前的状态（用于断点续传/精确恢复原上下文）
     created_at      TEXT NOT NULL DEFAULT (datetime('now')),
     updated_at      TEXT NOT NULL DEFAULT (datetime('now'))
 );
@@ -177,6 +178,7 @@ def _ensure_tables(conn: sqlite3.Connection):
             tokens_spent INTEGER DEFAULT 0,
             blocked_reason TEXT,
             blocked_recovery_target TEXT,
+            previous_status TEXT,
             created_at TEXT NOT NULL DEFAULT (datetime('now')),
             updated_at TEXT NOT NULL DEFAULT (datetime('now'))
         );
@@ -344,13 +346,14 @@ prompt: |
   
   检测到待处理任务后，先 claim（backlog->drafting），
   再执行对应的写作/修改/P2 修复流程。
-  一个 cron tick 只处理 1 个任务。
+  一个 cron tick 只处理 1 个任务。完成当前任务后立即退出本轮 cron tick，
+  不要扫描并启动第二个任务。
 ```
 
 不再需要 watch.py 脚本。如果已存在 `scripts/watch.py` 可删除。
 ### 3.2 Writer 写作流程
 
-Writer agent 被 project-watch 的 no_agent 脚本输出触发后，执行以下流程：
+Writer agent 被 agent cron 扫描 kanban 触发后（每次 tick 只处理 1 个任务），执行以下流程：
 
 ```python
 # 伪代码：Writer 主流程
@@ -446,9 +449,15 @@ def writer_p2_clearing_workflow(project: str, task_id: str):
     # - 引用未标注路径 -> 补全路径
     # - 其他 P2 项同理
     
-    # 3. 自检
+    # 3. git diff 守卫：确认仅修改 P2 项
+    # - git diff HEAD~1 --stat，检查修改文件范围
+    # - git diff HEAD~1，确认 diff 仅涉及术语/格式/路径修正
+    # - 如果 diff 涉及核心逻辑变更（状态机、数据流、新增章节结构），
+    #   必须在 comment 说明理由并退回 needs_revision（而不是强行签入 p2_cleared）
+    
+    # 4. 自检
     # - 确认所有 P2 项已修复
-    # - 运行 wrapper.py 做语法检查
+    # - 运行 wrapper.py 做语法检查（强制步骤，不可跳过）
     # - 确认未引入新的 P0/P1
     
     # 4. 标记 P2 修复完毕
@@ -463,6 +472,8 @@ def writer_p2_clearing_workflow(project: str, task_id: str):
 注意：
 - 执行环境与 Writer 3.2/3.3 一致，使用 Writer profile 的 API Key
 - 修复 P2 时如果发现实际需要改动文档逻辑/结构（超出纯 P2 范围），应回到 3.3 流程走 needs_revision
+- 无论 P2 修复多简单（哪怕只改一个词），必须调用 wrapper.py 做语法检查，禁止直接跳过
+- git diff 守卫建议：修完 P2 后先 git diff 检查修改范围，确认不涉及核心逻辑再提交
 - 修复完成后务必在 comment 中包含 `P2_FIXED` 标记，liufeng 终审时以此作为"修完"信号
 
 ---
@@ -647,7 +658,7 @@ class DocProductionHandler(FileSystemEventHandler):
     
     def check_stuck_tasks(self):
         """卡死检测"""
-        for status in ['drafting', 'awaiting_review']:
+        for status in ['drafting', 'awaiting_review', 'p2_clearing']:
             tasks = get_tasks_by_status(self.project, status)
             for task in tasks:
                 updated = datetime.strptime(task['updated_at'], '%Y-%m-%d %H:%M:%S')
@@ -840,7 +851,7 @@ HERMES_PROFILE=spark-adult-reviewer hermes cron run review-project-spark-adult
 
 ### 6.2 Reviewer -> Writer 通知
 
-Reviewer 更新 kanban 状态为 `needs_revision`。Writer 的 project-watch cron job 在 no_agent 脚本扫描到 needs_revision 时接手修改。
+Reviewer 更新 kanban 状态为 `needs_revision`。Writer 的 agent cron job 在下一 tick 扫描到 needs_revision 时接手修改。
 
 ### 6.3 Watcher 通知
 
@@ -863,7 +874,7 @@ def pause_project_cron(project: str, profile_type: str):
     }
     profile = profile_map[project][profile_type]
     
-    cron_name = 'project-watch' if profile_type == 'writer' else f'review-{project}'
+    cron_name = f'writer-{project}' if profile_type == 'writer' else f'review-{project}'
     os.system(f'hermes cron pause {cron_name} --profile {profile}')
 ```
 
@@ -890,7 +901,7 @@ cron:
     prompt: |
       扫描 yaya-zhujiao 项目的 kanban 任务。
       优先处理 backlog，其次 needs_revision，最后 p2_clearing。
-      一个 tick 只处理一个任务。
+      一个 tick 只处理 1 个任务，完成即退出本轮 cron，不要启动第二个。
 
 # SOUL.md 内容（在 ~/.hermes/profiles/yaya/SOUL.md）
 # 职责：文档生产者，负责按规范写出可通过审核的详细设计文档
@@ -1359,7 +1370,7 @@ pip install watchdog
 # 编辑 ~/.hermes/profiles/yaya-watcher/config.yaml
 
 # 4. 注册 cron job
-# 在 yaya profile 中注册 project-watch cron job
+# 在 yaya profile 中注册 writer agent cron job（配置参考第 3.1 节）
 # 在 yaya-reviewer profile 中注册 review-yaya-zhujiao cron job
 
 # 5. 创建 evolution_rules.yaml 初始模板
