@@ -147,6 +147,17 @@ def generate_report(project: str, task: dict, audit_result: dict) -> str:
     return report_path
 
 
+def trigger_writer():
+    """写 NOTIFY 文件触发 writer（零轮询事件驱动）"""
+    from kanban_ops import KANBAN_DIR
+    notify_dir = os.path.join(KANBAN_DIR, '.notify')
+    os.makedirs(notify_dir, exist_ok=True)
+    notify_path = os.path.join(notify_dir, f'writer-{PROJECT}')
+    print(f"[REVIEWER] 触发 writer (NOTIFY: {notify_path})...")
+    with open(notify_path, 'w') as f:
+        f.write(f'NOTIFY by reviewer at {datetime.now().isoformat()}')
+
+
 def process_review(task: dict):
     """审核单个任务"""
     task_id = task['id']
@@ -176,6 +187,7 @@ def process_review(task: dict):
                         f'P0=P1=0 但 P2>0 ({p2c}个)，直接进入 p2_clearing。'
                         f'审计报告：{report_path}')
             print(f"[REVIEWER] -> p2_clearing (P2={p2c})")
+            trigger_writer()
         else:
             update_task_status(PROJECT, task_id, 'approved')
             add_comment(PROJECT, task_id, 'reviewer',
@@ -201,6 +213,7 @@ def process_review(task: dict):
                         f'审核不通过 (P0={p0c} P1={p1c})。'
                         f'审计报告：{report_path}')
             print(f"[REVIEWER] -> needs_revision (P0={p0c} P1={p1c})")
+            trigger_writer()
 
 
 def main():

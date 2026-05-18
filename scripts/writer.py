@@ -216,13 +216,13 @@ def process_p2_clearing(task: dict):
 
 
 def trigger_reviewer():
-    """触发 reviewer cron job"""
-    print("[WRITER] 触发 reviewer...")
-    subprocess.run(
-        ['hermes', 'cron', 'run', f'review-{PROJECT}',
-         '--profile', 'yaya-reviewer'],
-        capture_output=True, timeout=30
-    )
+    """写 NOTIFY 文件触发 reviewer（零轮询事件驱动）"""
+    notify_dir = os.path.join(KANBAN_DIR, '.notify')
+    os.makedirs(notify_dir, exist_ok=True)
+    notify_path = os.path.join(notify_dir, f'review-{PROJECT}')
+    print(f"[WRITER] 触发 reviewer (NOTIFY: {notify_path})...")
+    with open(notify_path, 'w') as f:
+        f.write(f'NOTIFY by writer at {datetime.now().isoformat()}')
 
 
 def main():
