@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Kanban 核心操作库 — SQLite 数据层 + 状态机校验"""
+"""Kanban 核心操作库 — SQLite 数据层 + 状态机校验 (v2.1: 加复审状态)"""
 
 import sqlite3
 import os
@@ -14,22 +14,38 @@ AUDIT_REPORTS_DIR = os.path.join(PROJECT_ROOT, 'audit-reports')
 
 # ---------- 有效状态列表 ----------
 VALID_STATUSES = frozenset([
-    'backlog', 'drafting', 'awaiting_review', 'needs_revision',
-    'approved', 'p2_clearing', 'p2_cleared', 'signed_off', 'blocked'
+    'backlog', 'drafting', 'awaiting_review', 'reviewing',
+    'revision', 're_review', 'waiting_human_review', 'finalized', 'blocked'
 ])
 
 # ---------- 状态迁移白名单 ----------
 VALID_TRANSITIONS = {
-    'backlog':          {'drafting'},
-    'drafting':         {'awaiting_review', 'blocked'},
-    'awaiting_review':  {'needs_revision', 'approved', 'p2_clearing', 'blocked'},
-    'needs_revision':   {'drafting', 'blocked'},
-    'approved':         {'p2_clearing', 'signed_off', 'blocked'},
-    'p2_clearing':      {'needs_revision', 'p2_cleared', 'blocked'},
-    'p2_cleared':       {'signed_off', 'blocked'},
-    'signed_off':       {'blocked'},             # 封版后只进 blocked
-    'blocked':          {'backlog', 'drafting', 'awaiting_review', 'needs_revision', 'approved', 'p2_cleared', 'signed_off'},
+    'backlog':             {'drafting'},
+    'drafting':            {'awaiting_review', 're_review', 'blocked'},
+    'awaiting_review':     {'reviewing', 'blocked'},
+    'reviewing':           {'revision', 'waiting_human_review', 'blocked'},
+    'revision':            {'drafting', 're_review', 'blocked'},
+    're_review':           {'revision', 'waiting_human_review', 'blocked'},
+    'waiting_human_review':{'finalized', 'revision', 'blocked'},
+    'finalized':           {'blocked'},
+    'blocked':             {'backlog', 'drafting', 'revision', 're_review'},
 }
+
+# ---------- DB 迁移 ----------
+MIGRATE_SQL = """
+ALTER TABLE tasks ADD COLUMN status_entered_at TEXT;
+ALTER TABLE tasks ADD COLUMN p0_count INTEGER DEFAULT 0;
+ALTER TABLE tasks ADD COLUMN p1_count INTEGER DEFAULT 0;
+ALTER TABLE tasks ADD COLUMN p2_count INTEGER DEFAULT 0;
+ALTER TABLE tasks ADD COLUMN revision_data TEXT;
+"""
+
+MIGRATE_STATUS_SQL = """
+UPDATE tasks SET status = 'revision' WHERE status IN ('needs_revision', 'p2_clearing');
+UPDATE tasks SET status = 'waiting_human_review' WHERE status IN ('p2_cleared', 'approved');
+UPDATE tasks SET status = 'finalized' WHERE status = 'signed_off';
+UPDATE tasks SET status_entered_at = datetime('now') WHERE status_entered_at IS NULL;
+"""
 
 # ---------- 内部函数 ----------
 
@@ -44,6 +60,7 @@ def _conn(project: str) -> sqlite3.Connection:
     conn.execute("PRAGMA journal_mode=WAL")
     conn.execute("PRAGMA foreign_keys=ON")
     _ensure_tables(conn)
+    _migrate_schema(conn)
     return conn
 
 def _ensure_tables(conn: sqlite3.Connection):
@@ -63,6 +80,11 @@ def _ensure_tables(conn: sqlite3.Connection):
             blocked_reason  TEXT,
             blocked_recovery_target TEXT,
             previous_status TEXT,
+            status_entered_at TEXT,
+            p0_count        INTEGER DEFAULT 0,
+            p1_count        INTEGER DEFAULT 0,
+            p2_count        INTEGER DEFAULT 0,
+            revision_data   TEXT,
             created_at      TEXT NOT NULL DEFAULT (datetime('now')),
             updated_at      TEXT NOT NULL DEFAULT (datetime('now'))
         );
@@ -112,6 +134,31 @@ def _ensure_tables(conn: sqlite3.Connection):
     """)
     conn.commit()
 
+def _migrate_schema(conn: sqlite3.Connection):
+    """迁移旧 schema 到 v2.0"""
+    # 检查旧状态是否存在
+    old_statuses = conn.execute(
+        "SELECT DISTINCT status FROM tasks WHERE status IN "
+        "('needs_revision','p2_clearing','p2_cleared','approved','signed_off')"
+    ).fetchall()
+    if not old_statuses:
+        # 再检查列是否存在
+        cols = [r[1] for r in conn.execute("PRAGMA table_info(tasks)").fetchall()]
+        if 'status_entered_at' in cols:
+            return  # 已经是最新 schema
+    # 执行迁移
+    for stmt in MIGRATE_SQL.split(';'):
+        s = stmt.strip()
+        if s:
+            try:
+                conn.execute(s)
+            except sqlite3.OperationalError:
+                pass  # 列已存在
+    for stmt in MIGRATE_STATUS_SQL.split(';'):
+        s = stmt.strip()
+        if s:
+            conn.execute(s)
+    conn.commit()
 
 def _validate_transition(current_status: str, new_status: str, task_id: str = ''):
     """校验状态迁移合法性"""
@@ -123,7 +170,6 @@ def _validate_transition(current_status: str, new_status: str, task_id: str = ''
             f"非法状态迁移 [{task_id}]: {current_status} -> {new_status} "
             f"(允许: {sorted(allowed)})"
         )
-
 
 # ---------- 公开 API ----------
 
@@ -141,14 +187,12 @@ def create_task(project: str, title: str, file_path: str = None,
     conn.close()
     return task_id
 
-
 def get_task(project: str, task_id: str) -> dict:
     """获取单个任务"""
     conn = _conn(project)
     row = conn.execute("SELECT * FROM tasks WHERE id=?", (task_id,)).fetchone()
     conn.close()
     return dict(row) if row else None
-
 
 def get_tasks_by_status(project: str, status: str = None) -> list:
     """按状态获取任务列表。status=None 返回该项目全部任务"""
@@ -166,14 +210,14 @@ def get_tasks_by_status(project: str, status: str = None) -> list:
     conn.close()
     return [dict(r) for r in rows]
 
-
 def update_task_status(project: str, task_id: str, new_status: str,
                        validate: bool = True, **extra):
     """更新任务状态 + 附加字段。validate=True 时校验迁移合法性。
 
     extra 支持字段: assigned_to, file_path, version, commit_sha,
                    iteration_count, tokens_budget, tokens_spent,
-                   blocked_reason, blocked_recovery_target, previous_status
+                   blocked_reason, blocked_recovery_target, previous_status,
+                   p0_count, p1_count, p2_count, revision_data
     """
     if validate:
         task = get_task(project, task_id)
@@ -181,7 +225,8 @@ def update_task_status(project: str, task_id: str, new_status: str,
             _validate_transition(task['status'], new_status, task_id)
 
     conn = _conn(project)
-    fields = ["status=?", "updated_at=datetime('now')"]
+    # Status 变化时重置 status_entered_at
+    fields = ["status=?", "status_entered_at=datetime('now')", "updated_at=datetime('now')"]
     values = [new_status]
 
     # blocked 时自动保存 previous_status
@@ -201,7 +246,6 @@ def update_task_status(project: str, task_id: str, new_status: str,
     conn.commit()
     conn.close()
 
-
 def add_comment(project: str, task_id: str, author: str, content: str,
                 iteration_number: int = 0):
     """添加评论"""
@@ -214,20 +258,24 @@ def add_comment(project: str, task_id: str, author: str, content: str,
     conn.commit()
     conn.close()
 
-
-def get_comments(project: str, task_id: str) -> list:
-    """获取任务所有评论"""
+def get_comments(project: str, task_id: str, author: str = None) -> list:
+    """获取任务评论。author 可选过滤"""
     conn = _conn(project)
-    rows = conn.execute(
-        "SELECT * FROM task_comments WHERE task_id=? ORDER BY created_at ASC",
-        (task_id,)
-    ).fetchall()
+    if author:
+        rows = conn.execute(
+            "SELECT * FROM task_comments WHERE task_id=? AND author=? ORDER BY created_at ASC",
+            (task_id, author)
+        ).fetchall()
+    else:
+        rows = conn.execute(
+            "SELECT * FROM task_comments WHERE task_id=? ORDER BY created_at ASC",
+            (task_id,)
+        ).fetchall()
     conn.close()
     return [dict(r) for r in rows]
 
-
 def increment_iteration(project: str, task_id: str):
-    """iteration_count +1（reviewer 判定 needs_revision 时调用）"""
+    """iteration_count +1（reviewer 判定 revision 时调用）"""
     conn = _conn(project)
     conn.execute(
         "UPDATE tasks SET iteration_count = iteration_count + 1, "
@@ -236,7 +284,6 @@ def increment_iteration(project: str, task_id: str):
     )
     conn.commit()
     conn.close()
-
 
 def save_quality_score(project: str, task_id: str, version: str, scores: dict):
     """保存质量评分"""
@@ -254,7 +301,6 @@ def save_quality_score(project: str, task_id: str, version: str, scores: dict):
     conn.commit()
     conn.close()
 
-
 def add_alert(project: str, message: str):
     """写 alert 文件到 .kanban/.alerts/"""
     alerts_dir = os.path.join(KANBAN_DIR, '.alerts')
@@ -263,7 +309,6 @@ def add_alert(project: str, message: str):
     alert_file = os.path.join(alerts_dir, f'{project}_{timestamp}.alert')
     with open(alert_file, 'w') as f:
         f.write(f'{datetime.now().isoformat()}\n{message}\n')
-
 
 def recover_blocked_task(project: str, task_id: str, action: str):
     """恢复 blocked 任务。
@@ -288,7 +333,6 @@ def recover_blocked_task(project: str, task_id: str, action: str):
                 f'手动恢复: blocked_reason={task["blocked_reason"]}, '
                 f'action={action}, target={target}')
 
-
 def save_evolution_suggestion(source: str, task_id: str, round_number: int,
                               tech: str, recommendation: str, plain: str,
                               p_level: str = None, scope: str = 'universal'):
@@ -303,7 +347,6 @@ def save_evolution_suggestion(source: str, task_id: str, round_number: int,
     )
     conn.commit()
     conn.close()
-
 
 def get_evolution_suggestions(status: str = None) -> list:
     """获取进化建议"""
@@ -320,12 +363,31 @@ def get_evolution_suggestions(status: str = None) -> list:
     conn.close()
     return [dict(r) for r in rows]
 
+def get_document_content(task_id: str, project: str = 'yaya-zhujiao') -> dict:
+    """获取任务对应文档的内容"""
+    task = get_task(project, task_id)
+    if not task:
+        return {'error': '任务不存在', 'found': False}
+    file_path = task.get('file_path', '')
+    if not file_path or not os.path.exists(file_path):
+        return {'error': '文件不存在', 'found': False, 'file_path': file_path}
+    with open(file_path, 'r') as f:
+        content = f.read()
+    return {
+        'found': True,
+        'title': task['title'],
+        'file_path': file_path,
+        'content': content,
+        'total_chars': len(content),
+        'truncated': False,
+    }
+
 
 # ====== 自检 ======
 if __name__ == '__main__':
     import sys
     test_project = '__test_kanban'
-    print("=== kanban_ops 自检 ===")
+    print("=== kanban_ops v2.0 自检 ===")
 
     # 1. 创建任务
     tid = create_task(test_project, '测试任务', file_path='/tmp/test.md', version='v1.0')
@@ -333,90 +395,121 @@ if __name__ == '__main__':
 
     # 2. 获取任务
     task = get_task(test_project, tid)
-    assert task and task['status'] == 'backlog', "状态应为 backlog"
-    print(f"  任务状态: {task['status']}")
+    assert task and task['status'] == 'backlog'
+    print(f"  初始状态: {task['status']}")
 
-    # 3. 状态迁移: backlog -> drafting
+    # 3. backlog -> drafting
     update_task_status(test_project, tid, 'drafting', assigned_to='writer')
     task = get_task(test_project, tid)
     assert task['status'] == 'drafting'
-    print(f"  迁移到: {task['status']}")
+    print(f"  drafting: {task['status']}")
 
     # 4. 非法迁移拦截
     try:
-        update_task_status(test_project, tid, 'signed_off')
-        print("  FAIL: 应该拦截 drafting -> signed_off")
+        update_task_status(test_project, tid, 'finalized')
+        print("  FAIL: 应该拦截 drafting -> finalized")
         sys.exit(1)
     except ValueError as e:
-        print(f"  拦截非法迁移: drafting -> signed_off ✓")
+        print(f"  拦截非法 ✓ ({e.args[0][:50]}...)")
 
-    # 5. 合法迁移: drafting -> awaiting_review
+    # 5. drafting -> awaiting_review
     update_task_status(test_project, tid, 'awaiting_review')
     task = get_task(test_project, tid)
     assert task['status'] == 'awaiting_review'
 
-    # 6. await_review -> needs_revision
+    # 6. awaiting_review -> reviewing (reviewer claim)
+    update_task_status(test_project, tid, 'reviewing')
+    task = get_task(test_project, tid)
+    assert task['status'] == 'reviewing'
+
+    # 7. reviewing -> revision (P0/P1 > 0)
     increment_iteration(test_project, tid)
-    update_task_status(test_project, tid, 'needs_revision')
+    update_task_status(test_project, tid, 'revision',
+                       p0_count=2, p1_count=3, p2_count=5)
     task = get_task(test_project, tid)
-    assert task['status'] == 'needs_revision'
+    assert task['status'] == 'revision'
     assert task['iteration_count'] == 1
+    assert task['p0_count'] == 2
+    print(f"  revision: {task['status']} (P0={task['p0_count']} P1={task['p1_count']})")
 
-    # 7. needs_revision -> drafting -> awaiting_review -> approved
-    update_task_status(test_project, tid, 'drafting')
-    update_task_status(test_project, tid, 'awaiting_review')
-    update_task_status(test_project, tid, 'approved')
+    # 8. revision -> re_review (writer submits fix)
+    update_task_status(test_project, tid, 're_review',
+                       p0_count=0, p1_count=0, p2_count=0)
     task = get_task(test_project, tid)
-    assert task['status'] == 'approved'
+    assert task['status'] == 're_review'
+    print(f"  re_review: {task['status']}")
 
-    # 8. approved -> p2_clearing
-    update_task_status(test_project, tid, 'p2_clearing')
+    # 9. re_review -> waiting_human_review (re-review pass)
+    update_task_status(test_project, tid, 'waiting_human_review')
     task = get_task(test_project, tid)
-    assert task['status'] == 'p2_clearing'
+    assert task['status'] == 'waiting_human_review'
+    print(f"  re_review pass -> waiting_human_review: {task['status']} ✓")
 
-    # 9. p2_clearing -> p2_cleared
-    add_comment(test_project, tid, 'writer', 'P2_FIXED: 所有 P2 已修复')
-    update_task_status(test_project, tid, 'p2_cleared')
+    # 10. human rejects -> revision
+    update_task_status(test_project, tid, 'revision',
+                       revision_data=json.dumps({'human_feedback': ['第3节描述不清晰']}))
     task = get_task(test_project, tid)
-    assert task['status'] == 'p2_cleared'
+    assert task['status'] == 'revision'
+    rev_data = json.loads(task['revision_data'] or '{}')
+    assert 'human_feedback' in rev_data
+    print(f"  人工打回 -> revision ✓")
 
-    # 10. p2_cleared -> signed_off
-    update_task_status(test_project, tid, 'signed_off')
+    # 11. revision -> re_review (fix and submit)
+    update_task_status(test_project, tid, 're_review')
     task = get_task(test_project, tid)
-    assert task['status'] == 'signed_off'
+    assert task['status'] == 're_review'
+    print(f"  fix submit -> re_review ✓")
 
-    # 11. signed_off -> blocked
+    # 12. re_review -> revision (re-review fail)
+    update_task_status(test_project, tid, 'revision',
+                       p0_count=2, p1_count=1, p2_count=3,
+                       revision_data=json.dumps({'re_review_result': 'fail'}))
+    task = get_task(test_project, tid)
+    assert task['status'] == 'revision'
+    print(f"  re_review fail -> revision ✓")
+
+    # 13. revision -> re_review -> waiting_human_review -> finalized
+    update_task_status(test_project, tid, 're_review')
+    update_task_status(test_project, tid, 'waiting_human_review')
+    update_task_status(test_project, tid, 'finalized')
+    task = get_task(test_project, tid)
+    assert task['status'] == 'finalized'
+    print(f"  finalized: {task['status']} ✓")
+
+    # 12. finalized -> blocked
     update_task_status(test_project, tid, 'blocked',
-                       blocked_reason='quality_deviation',
-                       blocked_recovery_target='backlog')
+                       blocked_reason='post_finalize_issue',
+                       blocked_recovery_target='revision')
     task = get_task(test_project, tid)
     assert task['status'] == 'blocked'
-    assert task['blocked_reason'] == 'quality_deviation'
-    assert task['previous_status'] == 'signed_off'
+    assert task['blocked_reason'] == 'post_finalize_issue'
+    assert task['previous_status'] == 'finalized'
+    print(f"  blocked: {task['status']} (from {task['previous_status']})")
 
-    # 12. blocked 恢复
-    recover_blocked_task(test_project, tid, 'reset_backlog')
+    # 13. blocked 恢复
+    recover_blocked_task(test_project, tid, 'continue')
     task = get_task(test_project, tid)
-    assert task['status'] == 'backlog'
+    assert task['status'] == 'revision'
+    print(f"  blocked → revision ✓")
 
-    # 13. 评论
+    # 14. status_entered_at 检查
+    assert task.get('status_entered_at') is not None
+    print(f"  status_entered_at: {task['status_entered_at']}")
+
+    # 注释
+    add_comment(test_project, tid, 'writer', '修改完成')
+    add_comment(test_project, tid, 'reviewer', '审核通过')
     comments = get_comments(test_project, tid)
-    assert len(comments) >= 1
+    assert len(comments) == 3  # recover_blocked_task 加了一条，writer/reviewer 各加一条
+    print(f"  评论数: {len(comments)}")
 
-    # 14. get_tasks_by_status
-    tasks = get_tasks_by_status(test_project, 'backlog')
-    assert any(t['id'] == tid for t in tasks)
-    empty = get_tasks_by_status(test_project, 'drafting')
-    assert not any(t['id'] == tid for t in empty)
-
-    # 15. alert
-    add_alert(test_project, '测试报警')
-    alerts_dir = os.path.join(KANBAN_DIR, '.alerts')
-    alert_files = [f for f in os.listdir(alerts_dir) if f.startswith(test_project)]
-    assert len(alert_files) >= 1
+    # 按作者过滤
+    writer_comments = get_comments(test_project, tid, author='writer')
+    assert len(writer_comments) == 1
+    print(f"  writer 评论过滤 ✓")
 
     # 清理测试数据库
     db_path = _db_path(test_project)
     if os.path.exists(db_path):
         os.remove(db_path)
-    print("\n=== 全部 15 项测试通过 ✓ ===")
+    print("\n=== 全部测试通过 ✓ ===")

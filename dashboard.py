@@ -1,0 +1,1124 @@
+#!/usr/bin/env python3
+"""DocProductionReview Dashboard v3.0 — 全量文档 / 质量评分 / 人工审核 / 控制按钮"""
+import json, os, re, sqlite3, subprocess, sys, shutil
+from datetime import datetime, timezone
+from pathlib import Path
+import uvicorn
+from fastapi import FastAPI, Request
+from fastapi.responses import HTMLResponse, JSONResponse
+
+app = FastAPI(title="DocProductionReview Dashboard v3")
+PROJECT_ROOT = Path(__file__).parent
+KANBAN_DIR = PROJECT_ROOT / ".kanban"
+ALERTS_DIR = KANBAN_DIR / ".alerts"
+AUDIT_DIR = PROJECT_ROOT / "audit-reports"
+CONTROL_DIR = KANBAN_DIR / ".control"
+CONTROL_FILE = CONTROL_DIR / "automation_state.json"
+NOTIFY_DIR = KANBAN_DIR / ".notify"
+HERMES_HOME = Path.home() / ".hermes" / "profiles"
+SUBSYSTEMS_DIR = PROJECT_ROOT / "subsystems"
+sys.path.insert(0, str(PROJECT_ROOT))
+from kanban_ops import get_document_content, get_task, update_task_status, add_comment
+
+default_project = "yaya-zhujiao"
+
+# 列布局：(key, label, is_combined, (upper_status, lower_status), tooltip)
+KANBAN_LAYOUT = [
+    ("finalized",        "已封版",    False, ("finalized",),
+     "人工确认通过，文档已完成并封版。"),
+    ("backlog",          "待领取",    False, ("backlog",),
+     "尚未分配的文档任务，等待 Writer 认领后开始撰写。"),
+    ("drafting",         "撰写中",    False, ("drafting",),
+     "Writer 正在撰写或修改文档，完成后自动转入待审查。"),
+    ("awaiting_review",  "待审查",    False, ("awaiting_review",),
+     "Writer 已完成并提交，等待 Reviewer 审查。"),
+    ("reviewing",        "审查中",    False, ("reviewing",),
+     "Reviewer 正在执行审查，检查文档合规性、术语一致性等。"),
+    ("revision",         "修改中",    False, ("revision",),
+     "Reviewer 发现问题（P0/P1/P2），Writer 需修复后送复审。"),
+    ("review_outcome",   "评审结果",  True,  ("waiting_human_review", "re_review"),
+     "上栏：复审通过，等待人工确认。下栏：复审不通过，等待 Writer 接收。"),
+    ("blocked",          "已阻塞",    False, ("blocked",),
+     "环境问题导致流程无法继续（如工具缺失、git 失败、超过最大迭代次数）。需要你（liufeng）手动处理恢复。解决方法：修复环境后点击文档查看详情，使用「恢复」按钮将任务重置到合适的状态。"),
+]
+
+ALERT_SECONDS = {
+    "drafting": 3600, "awaiting_review": 1800, "reviewing": 1800,
+    "revision": 7200, "waiting_human_review": 86400, "re_review": 7200,
+    "blocked": 3600,
+}
+
+def get_automation_state():
+    """读取自动化控制状态"""
+    state = {"running": True, "paused": False, "message": "运行中"}
+    if CONTROL_FILE.exists():
+        try:
+            data = json.loads(CONTROL_FILE.read_text())
+            state.update(data)
+        except:
+            pass
+    return state
+
+def set_automation_state(**updates):
+    """写入自动化控制状态"""
+    CONTROL_DIR.mkdir(parents=True, exist_ok=True)
+    current = get_automation_state()
+    current.update(updates)
+    current["updated_at"] = datetime.now().isoformat()
+    CONTROL_FILE.write_text(json.dumps(current, ensure_ascii=False, indent=2))
+    # 如果 stopped，清理 NOTIFY 目录
+    if current.get("running") == False:
+        if NOTIFY_DIR.exists():
+            for f in NOTIFY_DIR.iterdir():
+                if f.is_file() and not f.name.startswith("."):
+                    try: f.unlink()
+                    except: pass
+    return current
+
+def discover_projects():
+    """发现所有 kanban 项目（.kanban/*.db）"""
+    projects = []
+    if KANBAN_DIR.exists():
+        for f in sorted(KANBAN_DIR.iterdir()):
+            if f.suffix == ".db":
+                projects.append({"name": f.stem, "path": str(f)})
+    if not projects:
+        projects = [{"name": default_project, "path": str(KANBAN_DIR / f"{default_project}.db")}]
+    return projects
+
+HTML = r"""<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DocProductionReview 看板</title>
+<style>
+:root{--bg:#0d1117;--card:#161b22;--border:#30363d;--text:#e6edf3;--dim:#8b949e;--green:#3fb950;--red:#f85149;--yellow:#d29922;--blue:#58a6ff;--purple:#bc8cff;--orange:#d4760a;--pink:#f778ba}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;font-size:14px;padding:20px}
+.header{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px;gap:16px;flex-wrap:wrap}
+.header h1{font-size:22px}
+.header-controls{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.header-controls select,.ctrl-btn{background:var(--card);color:var(--text);border:1px solid var(--border);border-radius:6px;padding:6px 10px;font-size:13px;cursor:pointer}
+.ctrl-btn:hover{border-color:var(--blue)}
+.ctrl-btn.active{background:var(--green);border-color:var(--green);color:#fff}
+.ctrl-btn.paused{background:var(--yellow);border-color:var(--yellow)}
+.ctrl-btn.stopped{background:var(--red);border-color:var(--red)}
+.updated{font-size:12px;color:var(--dim)}
+/* 告警 -> 放在看板上面 */
+.alerts-section{margin-bottom:16px}
+.alerts-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.alerts-header span{font-size:14px;font-weight:600}
+.alerts-header button{background:none;border:1px solid var(--border);color:var(--dim);padding:2px 8px;border-radius:4px;font-size:11px;cursor:pointer}
+.alerts-header button:hover{color:var(--text)}
+.alerts{display:flex;flex-wrap:wrap;gap:6px}
+.alert-item{background:var(--card);border:1px solid var(--border);border-left:3px solid var(--yellow);padding:6px 10px;border-radius:4px;font-size:12px;flex:1;min-width:200px}
+.alert-item .time{color:var(--dim);margin-right:8px}
+/* 看板 */
+.board{display:flex;gap:12px;overflow-x:auto;padding-bottom:12px;margin-bottom:16px}
+.column{min-width:200px;max-width:280px;flex-shrink:0;background:var(--card);border:1px solid var(--border);border-radius:8px;padding:12px}
+.column.combined{min-width:280px;max-width:360px}
+.column-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;font-size:12px;color:var(--dim);text-transform:uppercase;letter-spacing:0.5px}
+.column-header .help-icon{display:inline-flex;align-items:center;justify-content:center;width:16px;height:16px;border-radius:50%;background:var(--border);color:var(--dim);font-size:10px;font-weight:700;cursor:pointer;margin-left:4px;flex-shrink:0;line-height:16px}
+.column-header .help-icon:hover{background:var(--blue);color:#fff}
+.column-count{background:var(--border);padding:1px 8px;border-radius:10px;font-size:11px}
+/* 组合列上下分区 */
+.combined-section{margin-bottom:8px}
+.combined-section:last-child{margin-bottom:0}
+.combined-section .sub-header{font-size:11px;color:var(--dim);margin-bottom:6px;padding:2px 6px;border-radius:4px;background:var(--bg);display:inline-block}
+/* 卡片 */
+.card{background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:10px;margin-bottom:8px;cursor:pointer;transition:border-color .2s;position:relative}
+.card:hover{border-color:var(--blue)}
+.card-title{font-size:13px;font-weight:500;margin-bottom:6px}
+.card-meta{font-size:11px;color:var(--dim);display:flex;gap:8px;flex-wrap:wrap;word-break:break-all;overflow-wrap:break-word}
+.tag{display:inline-block;padding:1px 6px;border-radius:4px;font-size:10px;font-weight:600}
+.tag-writer{background:#1f6feb33;color:#58a6ff}
+.tag-reviewer{background:#bc8cff33;color:#bc8cff}
+.tag-liufeng{background:#f778ba33;color:#f778ba}
+.badges{margin-top:4px;display:flex;gap:4px;flex-wrap:wrap}
+.iteration-badge{display:inline-block;padding:1px 6px;border-radius:4px;font-size:10px;background:var(--orange);color:#fff}
+.level-row{display:flex;gap:12px;margin-top:6px;font-size:11px;flex-wrap:wrap}
+.level-item{display:flex;align-items:center;gap:4px}
+.level-dot{display:inline-block;width:6px;height:6px;border-radius:50%}
+.level-dot-done{background:var(--green)}
+.level-dot-working{background:var(--orange)}
+.level-dot-queued{background:var(--dim)}
+/* 质量评分 */
+.score-row{display:flex;gap:8px;margin-top:4px;font-size:10px;flex-wrap:wrap}
+.score-item{background:var(--card);padding:1px 5px;border-radius:3px}
+.score-good{color:var(--green)}
+.score-warn{color:var(--yellow)}
+.score-bad{color:var(--red)}
+/* 计时器 */
+.timer{font-size:11px;margin-top:6px;display:flex;flex-direction:column;align-items:flex-start;gap:2px}
+.timer-row{display:flex;justify-content:space-between;align-items:center;width:100%}
+.timer-stale{color:var(--yellow);font-weight:600}
+.timer-ok{color:var(--dim)}
+.timer-reason{font-size:10px;color:var(--red);line-height:1.3}
+/* Modal */
+.modal-overlay{display:none;position:fixed;z-index:1000;left:0;top:0;width:100%;height:100%;background:rgba(0,0,0,0.7);overflow-y:auto}
+.modal-content{background:var(--card);margin:5% auto;padding:24px;width:85%;max-width:1000px;border-radius:8px;border:1px solid var(--border);position:relative}
+.modal-close{position:absolute;right:16px;top:12px;font-size:24px;cursor:pointer;color:var(--dim)}
+.modal-close:hover{color:var(--text)}
+.modal-title{font-size:16px;font-weight:600;margin-bottom:8px;padding-right:40px}
+.modal-path{font-size:11px;color:var(--dim);margin-bottom:12px;word-break:break-all}
+.modal-body{background:var(--bg);padding:16px;border-radius:6px;font-family:'SF Mono','Consolas',monospace;font-size:12px;white-space:pre-wrap;word-break:break-all;max-height:50vh;overflow-y:auto;line-height:1.6}
+/* 人工审核操作栏 */
+.human-actions{border-top:1px solid var(--border);margin-top:16px;padding-top:16px;display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.human-actions button{padding:6px 16px;border-radius:6px;border:none;font-size:13px;font-weight:600;cursor:pointer}
+.btn-pass{background:var(--green);color:#fff}
+.btn-fail{background:var(--red);color:#fff}
+.btn-fail:hover{opacity:.9}
+.btn-pass:hover{opacity:.9}
+.human-input{flex:1;min-width:200px}
+.human-input textarea{width:100%;background:var(--bg);border:1px solid var(--border);border-radius:4px;padding:8px;color:var(--text);font-size:12px;resize:vertical;min-height:50px}
+.human-input textarea:focus{outline:none;border-color:var(--blue)}
+/* 已阻塞 */
+.blocked-actions{margin-top:12px;display:flex;gap:8px;flex-wrap:wrap}
+.blocked-actions button{padding:6px 12px;border:1px solid var(--border);border-radius:6px;background:var(--card);color:var(--text);cursor:pointer;font-size:12px}
+.blocked-actions button:hover{background:var(--green);color:#000}
+/* 空状态 */
+.empty{color:var(--dim);font-size:13px;padding:20px;text-align:center}
+.profiles{display:flex;gap:12px;margin-bottom:16px}
+.profile-card{flex:1;background:var(--card);border:1px solid var(--border);border-radius:8px;padding:12px}
+.profile-card h3{font-size:14px;margin-bottom:4px}
+.profile-card .model{font-size:11px;color:var(--dim);margin-bottom:4px}
+.profile-card .status{display:inline-block;padding:2px 8px;border-radius:12px;font-size:11px;font-weight:600}
+.status-dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:6px}
+.section-title{font-size:15px;font-weight:600;margin:16px 0 10px;color:var(--text)}
+.reports{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:8px;margin-bottom:16px}
+.report-item{background:var(--card);border:1px solid var(--border);padding:8px 10px;border-radius:6px;font-size:12px}
+.report-item .name{font-weight:500}
+.report-item .time{color:var(--dim);font-size:11px}
+.watcher-section{margin-bottom:16px}
+.watcher-row{background:var(--card);border:1px solid var(--border);border-radius:6px;padding:10px 12px;margin-bottom:4px;display:flex;align-items:center;gap:16px;font-size:13px}
+.watcher-row .label{color:var(--dim);min-width:100px}
+.stale{color:var(--red);font-weight:600}
+.ok{color:var(--green)}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>DocProductionReview 看板</h1>
+  <div class="header-controls">
+    <span class="updated" id="updated">加载中...</span>
+    <label>
+      <span style="font-size:12px;color:var(--dim);margin-right:4px">项目</span>
+      <select id="projectSelect" onchange="switchProject(this.value)"></select>
+    </label>
+
+  </div>
+</div>
+
+<div class="profiles" id="profiles">
+  <div class="profile-card"><h3>Writer (yaya)</h3><div class="model">—</div><div class="status">检查中...</div></div>
+  <div class="profile-card"><h3>Reviewer (yaya-reviewer)</h3><div class="model">—</div><div class="status">检查中...</div></div>
+  <div class="profile-card"><h3>Watcher (yaya-watcher)</h3><div class="model">—</div><div class="status">检查中...</div></div>
+</div>
+
+<div class="watcher-section" id="watcher">
+  <div class="watcher-row"><span class="label">fswatch 心跳</span><span>检查中...</span></div>
+  <div class="watcher-row"><span class="label">自动化状态</span><span id="autoState">检查中...</span></div>
+</div>
+
+
+
+<div class="section-title" style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+  <span>看板</span>
+  <span style="font-size:12px;font-weight:400;color:var(--dim)">
+    <button class="ctrl-btn" id="ctrlStart" onclick="controlAutomation('start')" title="开始">▶ 开始</button>
+    <button class="ctrl-btn" id="ctrlPause" onclick="controlAutomation('pause')" title="暂停">⏸ 暂停</button>
+    <button class="ctrl-btn" id="ctrlStop" onclick="controlAutomation('stop')" title="停止">⏹ 停止</button>
+  </span>
+</div>
+<div class="board" id="board"></div>
+
+<!-- 告警移看板下面 -->
+<div class="alerts-section">
+  <div class="alerts-header">
+    <span>⚠ 告警日志</span>
+    <button onclick="document.getElementById('alerts').innerHTML='<div class=empty>暂无告警</div>'">清空</button>
+  </div>
+  <div class="alerts" id="alerts"></div>
+</div>
+
+<div class="section-title">审查报告</div>
+<div class="reports" id="reports"></div>
+
+<!-- 文档预览 Modal -->
+<div id="docModal" class="modal-overlay">
+  <div class="modal-content">
+    <span class="modal-close" onclick="closeDocModal()">&times;</span>
+    <div class="modal-title" id="modalTitle" style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+      <span id="modalTitleText"></span>
+      <button class="ctrl-btn" onclick="copyDocContent()" title="一键复制全文" style="font-size:11px;padding:2px 8px">📋 复制</button>
+      <button class="ctrl-btn" onclick="plainLanguage()" id="plainLangBtn" title="用大白话重新描述文档" style="font-size:11px;padding:2px 8px">🗣 大白话</button>
+    </div>
+    <div class="modal-path" id="modalPath"></div>
+    <div class="modal-body" id="modalBody"></div>
+    <!-- 大白话结果区域 -->
+    <div id="plainLangSection" style="display:none;border-top:1px solid var(--border);margin-top:12px;padding-top:12px">
+      <div style="font-size:13px;font-weight:600;color:var(--blue);margin-bottom:8px">🗣 大白话版本</div>
+      <div class="modal-body" id="plainLangBody" style="max-height:40vh;background:var(--card);border:1px solid var(--border)"></div>
+      <div style="margin-top:8px;display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+        <button class="btn-pass" onclick="plainLangFeedback('understood')" id="understoodBtn">😊 看懂了</button>
+        <button class="btn-fail" onclick="plainLangFeedback('confused')" id="confusedBtn">🤔 还是没看懂</button>
+        <span id="plainLangFeedback" style="font-size:12px;color:var(--dim);display:none"></span>
+      </div>
+    </div>
+    <div id="modalActions" class="human-actions" style="display:none">
+      <button class="btn-pass" onclick="humanReview('pass')">✔ 通过</button>
+      <button class="btn-fail" onclick="humanReview('fail')">✘ 不通过</button>
+      <div class="human-input">
+        <textarea id="reviewComment" placeholder="不通过请输入理由或修改意见..."></textarea>
+      </div>
+    </div>
+    <div id="blockedActions" class="blocked-actions" style="display:none">
+      <div id="blockedReasonText" style="margin-bottom:10px;padding:8px 10px;background:var(--bg);border:1px solid var(--border);border-radius:6px;font-size:13px;line-height:1.6;color:var(--text)"><strong>⚠️ 阻塞原因：</strong> <span id="blockedReasonValue">无</span></div>
+      <div id="blockedAnalysis" style="margin-bottom:10px;padding:8px 10px;background:var(--card);border:1px solid var(--yellow);border-radius:6px;font-size:13px;line-height:1.6;color:var(--text)"><strong>📋 分析：</strong> <span id="blockedAnalysisText">加载中...</span></div>
+      <div id="autoRecoveryStatus" style="margin-bottom:10px;padding:8px 10px;background:var(--bg);border:1px solid var(--green);border-radius:6px;font-size:13px;line-height:1.6;color:var(--green)"><strong>⚙️ 系统自动处理：</strong> <span id="autoRecoveryText">正在自动恢复...</span></div>
+    </div>
+    <div id="autoRepairInfo" class="auto-repair-info" style="display:none;border-top:1px solid var(--border);margin-top:12px;padding-top:12px">
+      <div style="padding:8px 10px;background:var(--card);border:1px solid var(--yellow);border-radius:6px;font-size:13px;line-height:1.6;color:var(--text)">
+        <strong>自动修复状态：</strong>
+        <span id="autoRepairAttemptsText">加载中...</span>
+        <span id="autoRepairFailureText" style="display:none"><br/>最后一次失败原因：<span id="autoRepairFailureValue"></span></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 问号帮助 Modal -->
+<div id="helpModal" class="modal-overlay">
+  <div class="modal-content" style="max-width:600px">
+    <span class="modal-close" onclick="closeHelpModal()">&times;</span>
+    <div class="modal-title" id="helpModalTitle" style="font-size:16px;font-weight:600;margin-bottom:12px"></div>
+    <div class="modal-body" id="helpModalBody" style="font-size:14px;font-family:inherit;white-space:normal;line-height:1.7;background:var(--card)"></div>
+  </div>
+</div>
+
+<script>
+let currentProject = "yaya-zhujiao";
+let currentTaskId = null;
+
+async function fetchJSON(url) {
+  try { const r = await fetch(url); if (!r.ok) return null; return await r.json(); } catch { return null; }
+}
+
+function elapsedStr(iso) {
+  if (!iso) return '';
+  const t = new Date(iso + (iso.endsWith('Z') ? '' : 'Z'));
+  const secs = Math.floor((Date.now() - t.getTime()) / 1000);
+  if (secs < 60) return secs + 's';
+  if (secs < 3600) return Math.floor(secs/60) + 'm ' + (secs%60) + 's';
+  const h = Math.floor(secs/3600);
+  const m = Math.floor((secs%3600)/60);
+  return h + 'h ' + m + 'm';
+}
+
+function scoreClass(s) { if (s===null||s===undefined) return ''; return s >= 80 ? 'score-good' : s >= 50 ? 'score-warn' : 'score-bad'; }
+function translateReason(r) {
+  const m = {
+    'commit_failed': 'git 提交失败，可能是文件没有变化或 git 仓库异常',
+    'self_check_failed': '文档自检未通过，存在 P0/P1 问题未修复',
+    'max_iterations_exceeded': '超过最大修改迭代次数，需要人工判断是否继续',
+    'unknown': '未知原因，需查看日志确认'
+  };
+  return m[r] || r;
+}
+
+function render() {
+  document.getElementById('updated').textContent = '更新于 ' + new Date().toLocaleTimeString();
+  // 项目列表
+  fetchJSON('/api/projects').then(d => {
+    const sel = document.getElementById('projectSelect');
+    if (!d || !d.length) return;
+    sel.innerHTML = d.map(p => `<option value="${p.name}" ${p.name===currentProject?'selected':''}>${p.name}</option>`).join('');
+  });
+  // 自动化状态
+  fetchJSON('/api/automation/state').then(d => {
+    const el = document.getElementById('autoState');
+    if (!d) { el.textContent = '无法获取'; return; }
+    let cls = d.running && !d.paused ? 'ok' : 'stale';
+    let text = d.running ? (d.paused ? '已暂停' : '运行中') : '已停止';
+    el.innerHTML = `<span class="${cls}">${text}</span>${d.message ? ' — '+d.message : ''}`;
+  });
+  // 控制按钮样式
+  fetchJSON('/api/automation/state').then(d => {
+    if (!d) return;
+    document.getElementById('ctrlStart').className = 'ctrl-btn' + (d.running && !d.paused ? ' active' : '');
+    document.getElementById('ctrlPause').className = 'ctrl-btn' + (d.paused ? ' paused' : '');
+    document.getElementById('ctrlStop').className = 'ctrl-btn' + (!d.running ? ' stopped' : '');
+  });
+  // profiles
+  fetchJSON('/api/profiles').then(d => {
+    if (!d) return;
+    document.getElementById('profiles').innerHTML = d.map(p =>
+      `<div class="profile-card"><h3>${p.role} (${p.name})</h3><div class="model">${p.model}</div><div class="status" style="color:${p.running?'var(--green)':'var(--red)'}"><span class="status-dot" style="background:${p.running?'var(--green)':'var(--red)'}"></span>${p.running?'运行中':'已停止'}</div></div>`
+    ).join('');
+  });
+  // watcher
+  fetchJSON('/api/watcher').then(d => {
+    if (!d) return;
+    const hb = d.heartbeat, st = d.started;
+    let hbEl = '<span>未检测到心跳</span>';
+    if (hb) {
+      const secs = (Date.now() - new Date(hb.timestamp).getTime())/1000;
+      const cls = secs>180 ? 'stale' : 'ok';
+      hbEl = `<span class="${cls}">${hb.timestamp} (PID ${hb.pid}, ${Math.round(secs)}s 前)</span>`;
+    }
+    document.getElementById('watcher').innerHTML =
+      `<div class="watcher-row"><span class="label">fswatch 心跳</span>${hbEl}</div>` +
+      `<div class="watcher-row"><span class="label">自动化状态</span><span id="autoState2">检查中...</span></div>`;
+  });
+  // alerts
+  fetchJSON('/api/alerts').then(d => {
+    const el = document.getElementById('alerts');
+    if (!d || d.length===0) { el.innerHTML = '<div class="empty">暂无告警</div>'; return; }
+    el.innerHTML = d.map(a => `<div class="alert-item"><span class="time">${a.time}</span>${a.message}</div>`).join('');
+  });
+  // board
+  fetchJSON('/api/board?project='+currentProject).then(d => {
+    if (!d) return;
+    document.getElementById('board').innerHTML = d.map(col => {
+      if (col.type === 'combined') {
+        return `<div class="column combined">
+          <div class="column-header"><span>${col.label}<span class="help-icon" onclick="showHelp('${col.label}','${col.tooltip}')">?</span></span><span class="column-count">${col.total_count}</span></div>
+          ${col.upper_count>0 ? '<div class="combined-section"><div class="sub-header">↑ 复审通过，等待人工审核 (${col.upper_count})</div>' +
+            col.upper_tasks.map(t => renderCard(t, col.upper_status)).join('') + '</div>' : '<div class="empty">等待人工审核: 0</div>'}
+          ${col.lower_count>0 ? '<div class="combined-section"><div class="sub-header">↓ 复审不通过，等待修改 (${col.lower_count})</div>' +
+            col.lower_tasks.map(t => renderCard(t, col.lower_status)).join('') + '</div>' : ''}
+        </div>`;
+      }
+      let css = col.extra_css||'';
+      return `<div class="column${css}" style="${col.combined?'max-width:300px':''}">
+        <div class="column-header"><span>${col.label}<span class="help-icon" onclick="showHelp('${col.label}','${col.tooltip}')">?</span></span><span class="column-count">${col.count}</span></div>
+        ${col.count>0 ? col.tasks.map(t => renderCard(t, col.status)).join('') : '<div class="empty">空</div>'}
+      </div>`;
+    }).join('');
+  });
+  // reports
+  fetchJSON('/api/reports').then(d => {
+    const el = document.getElementById('reports');
+    if (!d || d.length===0) { el.innerHTML = '<div class="empty">暂无审查报告</div>'; return; }
+    el.innerHTML = d.map(r => `<div class="report-item"><div class="name">${r.name}</div><div class="time">${r.time} · ${r.size} bytes</div></div>`).join('');
+  });
+}
+
+function renderCard(t, status) {
+  // P dots
+  let pdots = '';
+  if (t.p0_count !== undefined) {
+    pdots = `<div class="level-row">
+      <span class="level-item"><span class="level-dot level-dot-${t.p0_dot}"></span>P0:${t.p0_count}</span>
+      <span class="level-item"><span class="level-dot level-dot-${t.p1_dot}"></span>P1:${t.p1_count}</span>
+      <span class="level-item"><span class="level-dot level-dot-${t.p2_dot}"></span>P2:${t.p2_count}</span>
+    </div>`;
+  }
+  // Quality score
+  let scores = '';
+  if (t.scores && t.scores.total != null && t.scores.total !== undefined) {
+    scores = `<div class="score-row">
+      <span class="score-item ${scoreClass(t.scores.compliance)}">合规:${t.scores.compliance??'-'}</span>
+      <span class="score-item ${scoreClass(t.scores.ai_quality)}">AI质量:${t.scores.ai_quality??'-'}</span>
+      <span class="score-item ${scoreClass(t.scores.defect_trend)}">缺陷:${t.scores.defect_trend??'-'}</span>
+      <span class="score-item ${scoreClass(t.scores.total)}">总分:${t.scores.total??'-'}</span>
+    </div>`;
+  } else {
+    scores = `<div class="score-row"><span class="score-item" style="color:var(--dim)">暂无评分</span></div>`;
+  }
+  // re_review result badge
+  let rrBadge = '';
+  if (t.re_review_result === 'fail') rrBadge = '<span class="tag" style="background:#f8514933;color:#f85149">复审不通过 → 已回到修改中</span>';
+  else if (t.re_review_result === 'pass') rrBadge = '<span class="tag" style="background:#3fb95033;color:#3fb950">复审通过 → 等待人工审核</span>';
+  // Auto-repair badge
+  let repairBadge = '';
+  if (t.auto_repair_attempts && t.auto_repair_attempts > 0) {
+    const color = t.auto_repair_attempts >= 3 ? '#f0883e' : '#d29922';
+    const bg = t.auto_repair_attempts >= 3 ? '#f0883e33' : '#d2992233';
+    repairBadge = `<span class="tag" style="background:${bg};color:${color}">🔧 自动修复 ${t.auto_repair_attempts}/3</span>`;
+  }
+  return `<div class="card" onclick="openDoc('${t.id}','${status}' )">
+    <div class="card-title">${t.title}</div>
+    <div class="card-meta">
+      <span class="file-path">${t.file_path||'—'}</span>
+      ${t.version ? '<span>v'+t.version+'</span>' : ''}
+      ${t.assigned_to ? '<span class="tag tag-'+t.assigned_to+'">'+t.assigned_to+'</span>' : ''}
+    </div>
+    <div class="badges">
+      ${t.iteration>0 ? '<span class="iteration-badge">迭代'+t.iteration+'</span>' : ''}
+      ${t.commit_sha ? '<span class="tag" style="background:#1f6feb33;color:#58a6ff">'+t.commit_sha.slice(0,7)+'</span>' : ''}
+      ${repairBadge}
+      ${rrBadge}
+    </div>
+    ${pdots}
+    ${scores}
+    <div class="timer ${t.timer_stale?'timer-stale':'timer-ok'}">
+      <div class="timer-row"><span>${t.elapsed ? '\u23f1 '+t.elapsed : ''}</span></div>
+      ${t.blocked_reason ? `<div class="timer-reason">\u26a0 ${translateReason(t.blocked_reason)}</div>` : ''}
+    </div>
+  </div>`;
+}
+
+function openDoc(taskId, status) {
+  currentTaskId = taskId;
+  fetchJSON('/api/document/'+taskId+'?project='+currentProject).then(d => {
+    if (!d || !d.found) { alert('文档不可用'); return; }
+    document.getElementById('modalTitleText').textContent = d.title;
+    document.getElementById('plainLangSection').style.display = 'none';
+    document.getElementById('plainLangBtn').disabled = false;
+    document.getElementById('plainLangBtn').textContent = '\uD83D\uDDE3 \u5927\u767d\u8bdd';
+    document.getElementById('plainLangFeedback').style.display = 'none';
+    document.getElementById('understoodBtn').style.display = 'inline-block';
+    document.getElementById('confusedBtn').style.display = 'inline-block';
+    document.getElementById('modalPath').textContent = d.file_path;
+    document.getElementById('modalBody').textContent = d.content + (d.truncated ? '\n\n[文档截断]' : '');
+    document.getElementById('docModal').style.display = 'block';
+    // Show human review actions only for waiting_human_review
+    const actionsEl = document.getElementById('modalActions');
+    const blockedEl = document.getElementById('blockedActions');
+    if (status === 'waiting_human_review' || status === 'review_outcome') {
+      actionsEl.style.display = 'flex';
+      document.getElementById('reviewComment').value = '';
+    } else {
+      actionsEl.style.display = 'none';
+    }
+    // Show blocked recovery for blocked tasks - auto-recover
+    if (status === 'blocked') {
+      blockedEl.style.display = 'block';
+      // 显示译后的原因和详细分析
+      const reasonValEl = document.getElementById('blockedReasonValue');
+      const analysisEl = document.getElementById('blockedAnalysisText');
+      const autoEl = document.getElementById('autoRecoveryText');
+      if (d.blocked_reason) {
+        const r = d.blocked_reason;
+        const cn = translateReason(r);
+        reasonValEl.textContent = cn;
+        // 详细分析
+        if (r === 'commit_failed') {
+          analysisEl.textContent = 'Writer 在完成文档撰写后尝试 git 提交时，.kanban/writer_state.json 中的文档内容版本没有变化。这可能是因为 Writer 在上次提交后没有实际修改文档内容，或者文档在撰写过程中未保存成功。系统将自动把文档推送到「修改中」状态，让 Writer 重新提交。';
+        } else if (r === 'self_check_failed') {
+          analysisEl.textContent = 'Writer 完成文档后执行自检流程时发现 P0（必须修复）或 P1（强烈建议修复）级别的问题。这些问题是系统在文档中包含的一致性检查规则中定义的，可能是概念引用错误、跨系统依赖缺失、术语使用不一致等。系统会自动将文档推送到「修改中」状态，并要求 Writer 逐一修复所有 P0/P1 问题后再提交。';
+        } else if (r === 'max_iterations_exceeded') {
+          analysisEl.textContent = '文档已经过多轮修改迭代（Writer→Reviewer 循环），仍然存在未解决问题。通常是因为 Reviewer 发现的深层问题需要重新设计文档结构，而非表面修改。系统会自动将文档推送到「待领取」状态，让 Writer 重新从头撰写。';
+        } else {
+          analysisEl.textContent = '发生了一个意外的系统异常，导致工作流中断。可能原因包括：git 仓库异常、数据库连接失败、或外部工具不可用。系统会自动将文档推送到「修改中」状态，让 Writer 重新尝试。';
+        }
+        // 自动恢复 - 根据原因选择合适的恢复策略
+        autoEl.textContent = '正在自动恢复...';
+        let target = 'revision';
+        if (r === 'max_iterations_exceeded') target = 'backlog';
+        fetch('/api/recover-blocked/'+currentTaskId, {
+          method: 'POST',
+          headers: {'Content-Type':'application/json'},
+          body: JSON.stringify({target: target, project: currentProject})
+        }).then(resp => resp.json()).then(data => {
+          if (data.success) {
+            autoEl.textContent = '✓ 已自动恢复：推送到「' + (target==='revision'?'修改中':'待领取') + '」状态，Writer 将在下一周期接收到修复任务。';
+          } else {
+            autoEl.textContent = '✗ 自动恢复失败：' + (data.error||'未知错误');
+          }
+        }).catch(e => {
+          autoEl.textContent = '✗ 自动恢复请求失败：' + e.message;
+        });
+      }
+    } else {
+      blockedEl.style.display = 'none';
+    }
+    // Show auto-repair info for tasks in auto-repair mode
+    const repairEl = document.getElementById('autoRepairInfo');
+    const attemptsEl = document.getElementById('autoRepairAttemptsText');
+    const failureEl = document.getElementById('autoRepairFailureText');
+    const failureValEl = document.getElementById('autoRepairFailureValue');
+    if (d.revision_data) {
+      try {
+        const rd = JSON.parse(d.revision_data);
+        const a = rd.auto_repair_attempts || 0;
+        if (a > 0) {
+          repairEl.style.display = 'block';
+          const f = rd.last_auto_repair_failure || '';
+          if (a >= 3) {
+            attemptsEl.textContent = a + '/3（已耗尽量试次数，将送审由 Reviewer 判断）';
+            attemptsEl.style.color = '#f0883e';
+          } else {
+            attemptsEl.textContent = a + '/3（将自动重试）';
+            attemptsEl.style.color = '#d29922';
+          }
+          if (f) {
+            failureEl.style.display = 'inline';
+            failureValEl.textContent = f;
+          } else {
+            failureEl.style.display = 'none';
+          }
+        } else {
+          repairEl.style.display = 'none';
+        }
+      } catch(e) {
+        repairEl.style.display = 'none';
+      }
+    } else {
+      repairEl.style.display = 'none';
+    }
+  });
+}
+
+function closeDocModal() { document.getElementById('docModal').style.display = 'none'; currentTaskId = null; }
+window.onclick = function(e) { if (e.target == document.getElementById('docModal')) closeDocModal(); };
+
+function showHelp(name, text) {
+  document.getElementById('helpModalTitle').textContent = name;
+  document.getElementById('helpModalBody').textContent = text;
+  document.getElementById('helpModal').style.display = 'block';
+}
+function closeHelpModal() { document.getElementById('helpModal').style.display = 'none'; }
+
+// 一键复制
+function copyDocContent() {
+  const text = document.getElementById('modalBody').textContent;
+  navigator.clipboard.writeText(text).then(() => {
+    const btns = document.querySelectorAll('#modalTitle .ctrl-btn');
+    for (let b of btns) {
+      if (b.textContent.includes('\u{1F4CB}')) {
+        const orig = b.textContent;
+        b.textContent = '\u2705 \u5df2\u590d\u5236';
+        setTimeout(() => b.textContent = orig, 2000);
+        break;
+      }
+    }
+  }).catch(() => alert('\u590d\u5236\u5931\u8d25\uff0c\u8bf7\u624b\u52a8\u9009\u4e2d\u5185\u5bb9\u590d\u5236'));
+}
+
+// 大白话
+async function plainLanguage() {
+  if (!currentTaskId) return;
+  const btn = document.getElementById('plainLangBtn');
+  btn.disabled = true;
+  btn.textContent = '\u23f3 \u751f\u6210\u4e2d...';
+  document.getElementById('plainLangFeedback').style.display = 'none';
+  try {
+    const r = await fetch('/api/plain-language/' + currentTaskId + '?project=' + currentProject);
+    const data = await r.json();
+    if (!data.success) { document.getElementById('plainLangBody').textContent = '\u274c \u751f\u6210\u5931\u8d25: ' + (data.error||'\u672a\u77e5\u9519\u8bef'); document.getElementById('plainLangSection').style.display = 'block'; btn.textContent = '\uD83D\uDDE3 \u5927\u767d\u8bdd'; btn.disabled = false; return; }
+    document.getElementById('plainLangBody').textContent = data.content;
+    document.getElementById('plainLangSection').style.display = 'block';
+    document.getElementById('understoodBtn').style.display = 'inline-block';
+    document.getElementById('confusedBtn').style.display = 'inline-block';
+    btn.textContent = '\u2705 \u5df2\u751f\u6210';
+  } catch(e) {
+    alert('\u8bf7\u6c42\u5931\u8d25: ' + e.message);
+    btn.textContent = '\uD83D\uDDE3 \u5927\u767d\u8bdd';
+    btn.disabled = false;
+  }
+}
+
+// 大白话反馈
+async function plainLangFeedback(action) {
+  if (!currentTaskId) return;
+  document.getElementById('understoodBtn').style.display = 'none';
+  document.getElementById('confusedBtn').style.display = 'none';
+  const fb = document.getElementById('plainLangFeedback');
+  fb.style.display = 'inline-block';
+  if (action === 'understood') {
+    fb.textContent = '\ud83d\ude0a \u5df2\u786e\u8ba4 \u2014 \u4f60\u770b\u61c2\u4e86\u5927\u767d\u8bdd\u63cf\u8ff0';
+    fb.style.color = 'var(--green)';
+    await fetch('/api/plain-language-feedback/' + currentTaskId, {
+      method: 'POST',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({understood: true, project: currentProject})
+    });
+  } else {
+    fb.style.color = 'var(--red)';
+    fb.innerHTML = '\uD83E\uDD14 \u4f60\u89c9\u5f97\u54ea\u91cc\u6ca1\u8bf4\u6e05\u695a\uff1f<br><textarea id="confusedReason" style="width:100%;background:var(--bg);border:1px solid var(--border);border-radius:4px;padding:6px;color:var(--text);font-size:12px;min-height:40px;margin-top:4px" placeholder="\u968f\u4fbf\u5199\uff0c\u6211\u4f1a\u53cd\u9988\u7ed9 Writer \u6539\u8fdb..."></textarea><button onclick="submitConfused()" style="margin-top:4px;padding:4px 10px;background:var(--blue);border:none;border-radius:4px;color:#fff;font-size:11px;cursor:pointer">\u63d0\u4ea4\u53cd\u9988</button>';
+  }
+}
+
+async function submitConfused() {
+  const reason = document.getElementById('confusedReason').value;
+  await fetch('/api/plain-language-feedback/' + currentTaskId, {
+    method: 'POST',
+    headers: {'Content-Type':'application/json'},
+    body: JSON.stringify({understood: false, reason: reason, project: currentProject})
+  });
+  document.getElementById('plainLangFeedback').textContent = '\u2705 \u5df2\u53cd\u9988\uff0cWriter \u4f1a\u6539\u8fdb\u6587\u6863';
+  document.getElementById('plainLangFeedback').style.color = 'var(--green)';
+}
+
+
+function switchProject(project) { currentProject = project; render(); }
+
+async function controlAutomation(action) {
+  const r = await fetchJSON('/api/automation/control?action='+action);
+  if (r) render();
+}
+
+async function humanReview(action) {
+  if (!currentTaskId) return;
+  const comment = document.getElementById('reviewComment').value;
+  const r = await fetch('/api/human-review/'+currentTaskId, {
+    method: 'POST',
+    headers: {'Content-Type':'application/json'},
+    body: JSON.stringify({action: action, comment: comment, project: currentProject})
+  });
+  const data = await r.json();
+  closeDocModal();
+  render();
+  if (!data.success) alert('操作失败: '+data.error);
+}
+
+async function recoverBlocked(target) {
+  if (!currentTaskId) return;
+  const r = await fetch('/api/recover-blocked/'+currentTaskId, {
+    method: 'POST',
+    headers: {'Content-Type':'application/json'},
+    body: JSON.stringify({target: target, project: currentProject})
+  });
+  const data = await r.json();
+  closeDocModal();
+  render();
+  if (!data.success) alert('恢复失败: '+data.error);
+}
+
+render();
+setInterval(render, 10000);
+</script>
+</body>
+</html>"""
+
+# ===================== API =====================
+
+@app.get("/")
+async def root():
+    return HTMLResponse(HTML)
+
+@app.get("/api/projects")
+async def api_projects():
+    return JSONResponse(discover_projects())
+
+@app.get("/api/profiles")
+async def api_profiles():
+    profiles_info = [
+        {"name": "yaya", "role": "Writer"},
+        {"name": "yaya-reviewer", "role": "Reviewer"},
+        {"name": "yaya-watcher", "role": "Watcher"},
+    ]
+    for p in profiles_info:
+        cfg_path = HERMES_HOME / p["name"] / "config.yaml"
+        gateway_pid_path = HERMES_HOME / p["name"] / "gateway.pid"
+        p["model"] = "—"
+        p["running"] = False
+        if cfg_path.exists():
+            content = cfg_path.read_text()
+            m = re.search(r"default:\s*(\S+)", content)
+            if not m:
+                m = re.search(r"model:\s*(\S+)", content)
+            if m:
+                p["model"] = m.group(1)
+        if gateway_pid_path.exists():
+            try:
+                pid_data = json.loads(gateway_pid_path.read_text())
+                pid = pid_data.get("pid")
+                if pid:
+                    subprocess.run(["kill", "-0", str(pid)], capture_output=True)
+                    p["running"] = True
+            except:
+                pass
+    return JSONResponse(profiles_info)
+
+@app.get("/api/watcher")
+async def api_watcher():
+    heartbeat, started = None, None
+    hb_path = KANBAN_DIR / "watcher_heartbeat_yaya-zhujiao.json"
+    st_path = KANBAN_DIR / "watcher_started_yaya-zhujiao.json"
+    if hb_path.exists():
+        try: heartbeat = json.loads(hb_path.read_text())
+        except: pass
+    if st_path.exists():
+        try: started = json.loads(st_path.read_text())
+        except: pass
+    return JSONResponse({"heartbeat": heartbeat, "started": started})
+
+@app.get("/api/alerts")
+async def api_alerts():
+    alerts = []
+    if ALERTS_DIR.exists():
+        files = sorted(ALERTS_DIR.iterdir(), reverse=True)[:50]
+        for f in files:
+            try: content = f.read_text().strip()
+            except: content = ""
+            parts = content.split("\n", 1)
+            time = parts[0] if parts else f.name
+            msg = parts[1] if len(parts) > 1 else ""
+            alerts.append({"time": time, "message": msg, "file": f.name})
+    return JSONResponse(alerts)
+
+@app.get("/api/board")
+async def api_board(project: str = default_project):
+    db_path = KANBAN_DIR / f"{project}.db"
+    columns = []
+    if not db_path.exists():
+        for key, label, combined, statuses, tooltip in KANBAN_LAYOUT:
+            columns.append({"status": key, "label": label, "count": 0, "tasks": [], "tooltip": tooltip,
+                            "type": "combined" if combined else "single"})
+        return JSONResponse(columns)
+
+    conn = sqlite3.connect(str(db_path))
+    conn.row_factory = sqlite3.Row
+    try:
+        now_iso = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
+
+        # 自动恢复所有阻塞任务（阻塞超过 30 秒的）
+        auto_recovered = []
+        try:
+            blocked_rows = conn.execute("SELECT * FROM tasks WHERE status='blocked'").fetchall()
+            for br in blocked_rows:
+                bd = dict(br)
+                reason = bd.get("blocked_reason", "")
+                # 只恢复进入阻塞状态超过 30 秒的任务，避免刚进去就恢复
+                entered = bd.get("status_entered_at")
+                auto_recover = False
+                if entered:
+                    try:
+                        et = datetime.fromisoformat(entered)
+                        nt = datetime.fromisoformat(now_iso)
+                        if (nt - et).total_seconds() > 30:
+                            auto_recover = True
+                    except:
+                        auto_recover = True
+                else:
+                    auto_recover = True
+                if not auto_recover:
+                    continue
+                # 根据原因选择恢复目标
+                target = "backlog" if reason == "max_iterations_exceeded" else "revision"
+                update_task_status(project, bd["id"], target, validate=False)
+                add_comment(project, bd["id"], "system",
+                    f"系统自动恢复阻塞：阻塞原因[{reason}]，已推送到{target}")
+                # 通知 Writer
+                notify_path = NOTIFY_DIR / f"writer-{project}"
+                NOTIFY_DIR.mkdir(parents=True, exist_ok=True)
+                notify_path.write_text(
+                    f"auto-recover blocked {bd['id']} to {target} at {now_iso}")
+                auto_recovered.append({"id": bd["id"], "title": bd["title"],
+                    "reason": reason, "target": target})
+        except Exception as e:
+            auto_recovered = [{"error": str(e)}]
+
+        # 提前加载评分
+        scores_by_task = {}
+        try:
+            rows = conn.execute("SELECT task_id, total_score, compliance_score, ai_quality_score, defect_trend_score FROM quality_scores ORDER BY id DESC").fetchall()
+            for r in rows:
+                tid = r["task_id"]
+                if tid not in scores_by_task:
+                    scores_by_task[tid] = {
+                        "total": r["total_score"],
+                        "compliance": r["compliance_score"],
+                        "ai_quality": r["ai_quality_score"],
+                        "defect_trend": r["defect_trend_score"],
+                    }
+        except:
+            pass
+
+        for key, label, combined, statuses, tooltip in KANBAN_LAYOUT:
+            if combined:
+                upper_status, lower_status = statuses[0], statuses[1] if len(statuses) > 1 else None
+                upper_rows = conn.execute(
+                    "SELECT * FROM tasks WHERE status=? ORDER BY updated_at ASC", (upper_status,)
+                ).fetchall() if upper_status else []
+                lower_rows = conn.execute(
+                    "SELECT * FROM tasks WHERE status=? ORDER BY updated_at ASC", (lower_status,)
+                ).fetchall() if lower_status else []
+
+                def build_task(r, status):
+                    d = dict(r)
+                    elapsed, timer_stale = calc_elapsed(d.get("status_entered_at"), now_iso, status)
+                    p0_dot, p1_dot, p2_dot = calc_pdots(d, status)
+                    rr = ""
+                    rev_data = {}
+                    if d.get("revision_data"):
+                        try: rev_data = json.loads(d["revision_data"])
+                        except: pass
+                    rr = rev_data.get("re_review_result", "")
+                    auto_repair_attempts = rev_data.get("auto_repair_attempts", 0)
+                    auto_repair_failure = rev_data.get("last_auto_repair_failure", "")
+                    return {
+                        "id": d["id"], "title": d["title"], "file_path": d.get("file_path",""),
+                        "version": d.get("version"), "assigned_to": d.get("assigned_to",""),
+                        "commit_sha": d.get("commit_sha",""),
+                        "iteration": d.get("iteration_count",0) or 0,
+                        "elapsed": elapsed, "timer_stale": timer_stale,
+                        "blocked_reason": d.get("blocked_reason",""),
+                        "p0_count": d.get("p0_count",0) or 0,
+                        "p1_count": d.get("p1_count",0) or 0,
+                        "p2_count": d.get("p2_count",0) or 0,
+                        "p0_dot": p0_dot, "p1_dot": p1_dot, "p2_dot": p2_dot,
+                        "re_review_result": rr,
+                        "scores": scores_by_task.get(d["id"]),
+                        "auto_repair_attempts": auto_repair_attempts,
+                        "auto_repair_failure": auto_repair_failure,
+                    }
+
+                upper_tasks = [build_task(r, upper_status) for r in upper_rows]
+                lower_tasks = [build_task(r, lower_status) for r in lower_rows]
+                columns.append({
+                    "status": key, "label": label, "tooltip": tooltip,
+                    "type": "combined", "total_count": len(upper_tasks) + len(lower_tasks),
+                    "upper_count": len(upper_tasks), "upper_status": upper_status,
+                    "upper_tasks": upper_tasks,
+                    "lower_count": len(lower_tasks), "lower_status": lower_status,
+                    "lower_tasks": lower_tasks,
+                })
+            else:
+                status = statuses[0]
+                rows = conn.execute(
+                    "SELECT * FROM tasks WHERE status=? ORDER BY updated_at ASC", (status,)
+                ).fetchall()
+                tasks = []
+                for r in rows:
+                    d = dict(r)
+                    elapsed, timer_stale = calc_elapsed(d.get("status_entered_at"), now_iso, status)
+                    p0_dot, p1_dot, p2_dot = calc_pdots(d, status)
+                    rev_data = {}
+                    if d.get("revision_data"):
+                        try: rev_data = json.loads(d["revision_data"])
+                        except: pass
+                    auto_repair_attempts = rev_data.get("auto_repair_attempts", 0)
+                    auto_repair_failure = rev_data.get("last_auto_repair_failure", "")
+                    tasks.append({
+                        "id": d["id"], "title": d["title"], "file_path": d.get("file_path",""),
+                        "version": d.get("version"), "assigned_to": d.get("assigned_to",""),
+                        "commit_sha": d.get("commit_sha",""),
+                        "iteration": d.get("iteration_count",0) or 0,
+                        "elapsed": elapsed, "timer_stale": timer_stale,
+                        "blocked_reason": d.get("blocked_reason",""),
+                        "p0_count": d.get("p0_count",0) or 0,
+                        "p1_count": d.get("p1_count",0) or 0,
+                        "p2_count": d.get("p2_count",0) or 0,
+                        "p0_dot": p0_dot, "p1_dot": p1_dot, "p2_dot": p2_dot,
+                        "scores": scores_by_task.get(d["id"]),
+                        "auto_repair_attempts": auto_repair_attempts,
+                        "auto_repair_failure": auto_repair_failure,
+                    })
+                columns.append({
+                    "status": status, "label": label, "tooltip": tooltip,
+                    "type": "single", "count": len(tasks), "tasks": tasks,
+                    "extra_css": " combined" if status in ("waiting_human_review","re_review") else "",
+                })
+    finally:
+        conn.close()
+    return JSONResponse(columns)
+
+def calc_elapsed(status_entered_at, now_iso, status):
+    if not status_entered_at:
+        return "", False
+    try:
+        et = datetime.fromisoformat(status_entered_at)
+        nt = datetime.fromisoformat(now_iso)
+        secs = (nt - et).total_seconds()
+        if secs < 60:
+            elapsed = f"{int(secs)}s"
+        elif secs < 3600:
+            elapsed = f"{int(secs//60)}m {int(secs%60)}s"
+        else:
+            h = int(secs // 3600)
+            m = int((secs % 3600) // 60)
+            elapsed = f"{h}h {m}m"
+        threshold = ALERT_SECONDS.get(status, 7200)
+        return elapsed, secs > threshold
+    except:
+        return "", False
+
+def calc_pdots(d, status):
+    p0_dot, p1_dot, p2_dot = "done", "done", "done"
+    if status == "revision":
+        if (d.get("p0_count",0) or 0) > 0: p0_dot = "queued"
+        if (d.get("p1_count",0) or 0) > 0: p1_dot = "queued"
+        if (d.get("p2_count",0) or 0) > 0: p2_dot = "queued"
+        rev_data = {}
+        if d.get("revision_data"):
+            try: rev_data = json.loads(d["revision_data"])
+            except: pass
+        if rev_data.get("human_feedback"):
+            p0_dot, p1_dot, p2_dot = "working", "working", "working"
+    return p0_dot, p1_dot, p2_dot
+
+@app.get("/api/document/{task_id}")
+async def api_document(task_id: str, project: str = default_project):
+    sys.path.insert(0, str(PROJECT_ROOT))
+    from kanban_ops import get_document_content, get_task  # noqa
+    task = get_task(project, task_id)
+    result = get_document_content(task_id, project)
+    if task:
+        result["blocked_reason"] = task.get("blocked_reason", "")
+        result["revision_data"] = task.get("revision_data", "")
+    return JSONResponse(result)
+
+@app.post("/api/human-review/{task_id}")
+async def api_human_review(task_id: str, request: Request):
+    data = await request.json()
+    action = data.get("action")
+    comment = data.get("comment", "")
+    project = data.get("project", default_project)
+    try:
+        task = get_task(project, task_id)
+        if not task:
+            return JSONResponse({"success": False, "error": "任务不存在"})
+        if task["status"] != "waiting_human_review":
+            return JSONResponse({"success": False, "error": f"当前状态为 {task['status']}，无法进行人工审核"})
+        if action == "pass":
+            update_task_status(project, task_id, "finalized")
+            add_comment(project, task_id, "liufeng", f"人工审核通过")
+        elif action == "fail":
+            if not comment.strip():
+                return JSONResponse({"success": False, "error": "不通过时必须输入理由"})
+            update_task_status(project, task_id, "revision",
+                               revision_data=json.dumps({"human_feedback": [comment]}))
+            add_comment(project, task_id, "liufeng", f"人工审核不通过，意见：{comment}")
+        else:
+            return JSONResponse({"success": False, "error": f"未知操作: {action}"})
+        return JSONResponse({"success": True})
+    except Exception as e:
+        return JSONResponse({"success": False, "error": str(e)})
+
+@app.post("/api/recover-blocked/{task_id}")
+async def api_recover_blocked(task_id: str, request: Request):
+    data = await request.json()
+    target = data.get("target", "backlog")
+    project = data.get("project", default_project)
+    try:
+        task = get_task(project, task_id)
+        if not task:
+            return JSONResponse({"success": False, "error": "任务不存在"})
+        if task["status"] != "blocked":
+            return JSONResponse({"success": False, "error": f"当前状态为 {task['status']}，不是阻塞状态"})
+        update_task_status(project, task_id, target, validate=False)
+        add_comment(project, task_id, "liufeng", f"手动恢复阻塞：重置为 {target}")
+        # 恢复后触发 writer 或 reviewer
+        notify_path = NOTIFY_DIR / f"writer-{project}"
+        NOTIFY_DIR.mkdir(parents=True, exist_ok=True)
+        notify_path.write_text(f"recover blocked {task_id} to {target} at {datetime.now().isoformat()}")
+        return JSONResponse({"success": True, "target": target})
+    except Exception as e:
+        return JSONResponse({"success": False, "error": str(e)})
+
+
+@app.get("/api/plain-language/{task_id}")
+async def api_plain_language(task_id: str, project: str = default_project):
+    """调用 Hermes CLI 用大白话重述文档"""
+    try:
+        # 获取文档内容
+        task = get_task(project, task_id)
+        if not task:
+            return JSONResponse({"success": False, "error": "任务不存在"})
+        doc = get_document_content(task_id, project)
+        if not doc.get("found"):
+            return JSONResponse({"success": False, "error": "文档内容不可用"})
+        content_text = doc.get("content", "")
+        if not content_text.strip():
+            return JSONResponse({"success": False, "error": "文档内容为空"})
+
+        # 调用 Hermes CLI 生成大白话
+        prompt = f"请用大白话总结概括下面文档的主要内容。用几句话说清楚：这个模块是干嘛的、解决什么问题、怎么工作的。简短易懂，别用术语。直接输出结果：\n\n{content_text[:6000]}"
+        result = subprocess.run(
+             ["/Users/liufeng/.hermes/hermes-agent/venv/bin/hermes",
+             "chat", "-q", prompt, "--profile", "yaya"],
+            capture_output=True, text=True, timeout=60
+        )
+        output = result.stdout.strip()
+        # 提取 Hermes 的回复正文（去掉框架、推理等装饰内容）
+        if output:
+            # 从最后一条 ╭─ Hermes 框里提取正文
+            import re as _re
+            lines = output.split('\n')
+            clean = []
+            in_response = False
+            for line in lines:
+                if '╭─' in line and 'Hermes' in line:
+                    in_response = True
+                    continue
+                if in_response:
+                    if '╰' in line:
+                        break
+                    stripped = line.strip()
+                    if stripped and not stripped.startswith('│'):
+                        clean.append(stripped)
+                    elif stripped.startswith('│'):
+                        clean.append(stripped[1:].strip())
+            if clean:
+                output = '\n'.join(clean)
+            else:
+                # fallback: 去掉开头几行框架信息
+                output = '\n'.join(l for l in lines if not l.startswith('Query:') and 'Initializing' not in l and '━━' not in l and not l.startswith('┌─') and not l.startswith('└') and not l.startswith('│')).strip()
+        if not output:
+            output = result.stderr.strip() or "生成失败"
+        return JSONResponse({"success": True, "content": output})
+    except subprocess.TimeoutExpired:
+        return JSONResponse({"success": False, "error": "生成超时，文档可能过长"})
+    except Exception as e:
+        return JSONResponse({"success": False, "error": str(e)})
+
+@app.post("/api/plain-language-feedback/{task_id}")
+async def api_plain_language_feedback(task_id: str, request: Request):
+    """记录大白话反馈"""
+    try:
+        data = await request.json()
+        understood = data.get("understood", False)
+        reason = data.get("reason", "")
+        project = data.get("project", default_project)
+
+        task = get_task(project, task_id)
+        if not task:
+            return JSONResponse({"success": False, "error": "任务不存在"})
+
+        if understood:
+            add_comment(project, task_id, "liufeng", "用户确认看懂了大白话描述")
+        else:
+            comment = f"用户觉得大白话没看懂"
+            if reason:
+                comment += f"，反馈意见：{reason}"
+            add_comment(project, task_id, "liufeng", comment)
+
+        return JSONResponse({"success": True})
+    except Exception as e:
+        return JSONResponse({"success": False, "error": str(e)})
+
+
+@app.get("/api/automation/state")
+async def api_automation_state():
+    return JSONResponse(get_automation_state())
+
+@app.get("/api/automation/control")
+async def api_automation_control(action: str = ""):
+    if action == "start":
+        state = set_automation_state(running=True, paused=False, message="运行中")
+        # 触发 bootstrap：写 NOTIFY 检查待处理任务
+        notify_path = NOTIFY_DIR / "writer-yaya-zhujiao"
+        NOTIFY_DIR.mkdir(parents=True, exist_ok=True)
+        notify_path.write_text(f"restart automation at {datetime.now().isoformat()}")
+    elif action == "pause":
+        state = set_automation_state(running=True, paused=True, message="已暂停")
+    elif action == "stop":
+        state = set_automation_state(running=False, paused=False, message="已停止")
+    else:
+        return JSONResponse({"success": False, "error": f"未知操作: {action}"})
+    return JSONResponse({"success": True, "state": state})
+
+@app.get("/api/reports")
+async def api_reports():
+    reports = []
+    if AUDIT_DIR.exists():
+        files = sorted(AUDIT_DIR.iterdir(), key=lambda f: f.stat().st_mtime, reverse=True)[:20]
+        for f in files:
+            if f.suffix in (".md", ".json", ".txt"):
+                reports.append({
+                    "name": f.name,
+                    "time": datetime.fromtimestamp(f.stat().st_mtime).strftime("%Y-%m-%d %H:%M"),
+                    "size": f.stat().st_size,
+                })
+    return JSONResponse(reports)
+
+if __name__ == "__main__":
+    print("DocProductionReview Dashboard v3.0 → http://127.0.0.1:9119")
+    print(f"Kanban DB: {KANBAN_DIR / 'yaya-zhujiao.db'}")
+    uvicorn.run(app, host="127.0.0.1", port=9119, log_level="info")

@@ -294,7 +294,7 @@ def save_quality_score(project: str, task_id: str, version: str, scores: dict):
 | p2_clearing -> needs_revision | writer | 修 P2 时发现需改逻辑，需重新审核 |
 | p2_clearing -> p2_cleared | writer | P2 全部修复完毕，添加 P2_FIXED 标记 comment 后置入 |
 | p2_cleared -> signed_off | liufeng | P2=0 确认 + liufeng 终审签字 |
-| 任意状态 -> blocked | watcher/liufeng | 异常/6轮上限/token超支/连续6轮审核不过 |
+| 任意状态 -> blocked | watcher/liufeng | 异常/6轮上限/token超支/连续6轮审核不过（自检失败和commit失败已不再阻塞，改为自动修复重试3次后送审） |
 
 ### 2.5 blocked 恢复路径
 

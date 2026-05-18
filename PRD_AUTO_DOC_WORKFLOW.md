@@ -433,6 +433,15 @@ Python watchdog daemon，launchctl 管理。监听 .kanban/board.db / projects/ 
 
 策略6：Token 预算制度。Writer 和 reviewer 在各自会话结束前必须更新 kanban 的 tokens_spent 字段。在 tokens_spent 达 80%/100% 时嵌入预警提示。超出 50% 自动 blocked。
 
+### 8.5 自动修复机制
+
+Writer 在自检或 git commit 失败时，不再直接 blocked，而是进入自动修复重试循环：
+
+1. **auto_repair_attempts 计数**：每个任务在 revision_data 中维护 auto_repair_attempts 计数器。
+2. **重试逻辑**：失败时 attempts+1，如果 < 3 则写 writer NOTIFY 触发重试（不改变看板状态），如果 >= 3 则推进到下一状态（backlog 任务 → awaiting_review，revision 任务 → re_review），写 reviewer NOTIFY 送审。
+3. **看板显示**：卡片上显示 🔧 自动修复 x/3 标签，详情页显示具体失败原因和剩余重试次数。
+4. **设计原则**：Writer 自己的 bug（自检没通过、文件没修改）自己修，修不好就交给 Reviewer 挑问题，不打回给用户。用户永远不需要处理 commit_failed 或 self_check_failed 阻塞。
+
 策略7：审计报告独立存档。每次审核结果写入 audit-reports/<编号>_audit_report_v<版本>.md。
 
 ### 8.4 质量评分体系
