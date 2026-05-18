@@ -23,11 +23,12 @@ SCAN_ORDER = ['backlog', 'revision', 're_review', 'drafting']
 
 
 def claim_task(task_id: str, from_status: str):
-    """claim 任务: 移到 drafting"""
-    update_task_status(PROJECT, task_id, 'drafting', assigned_to='writer')
+    """claim 任务: 移到 drafting（或 revision —— 如果来自 re_review）"""
+    target = 'revision' if from_status == 're_review' else 'drafting'
+    update_task_status(PROJECT, task_id, target, assigned_to='writer')
     add_comment(PROJECT, task_id, 'writer',
                 f'开始{"写作" if from_status == "backlog" else "修改"}（来自 {from_status}）')
-    print(f"[WRITER] claim 任务 {task_id} ({from_status} -> drafting)")
+    print(f"[WRITER] claim 任务 {task_id} ({from_status} -> {target})")
 
 
 def run_self_check(file_path: str) -> bool:
@@ -265,18 +266,28 @@ def handle_auto_repair_result(project: str, task_id: str, attempts: int,
                     f'自动修复 {attempts}/{max_attempts} 次失败，即将重试第 {attempts+1} 次')
         print(f'[WRITER] auto-repair #{attempts} failed, retrying...')
     else:
-        # 已达上限 — 推进到下一状态（送审），写 reviewer NOTIFY
+        # 已达上限 — 根据 target 选择重试方向
+        # revision/re_review → 写 writer NOTIFY 让 Writer 继续重试（避免死循环）
+        # awaiting_review/backlog → 写 reviewer NOTIFY 送审（首次审核场景）
+        should_retry_writer = target_on_exhaust in ('revision', 're_review')
         update_task_status(project, task_id, target_on_exhaust,
                            commit_sha=None, validate=False)
-        add_comment(project, task_id, 'writer',
-                    f'自动修复已达 {max_attempts} 次上限，已送审，'
-                    f'由 Reviewer 检查问题')
-        # 写 reviewer NOTIFY
-        notify_path = os.path.join(notify_dir, f'review-{PROJECT}')
+        if should_retry_writer:
+            add_comment(project, task_id, 'writer',
+                        f'自动修复已达 {max_attempts} 次上限，继续重试'
+                        f'（目标：{target_on_exhaust}）')
+            notify_path = os.path.join(notify_dir, f'writer-{PROJECT}')
+        else:
+            add_comment(project, task_id, 'writer',
+                        f'自动修复已达 {max_attempts} 次上限，已送审，'
+                        f'由 Reviewer 检查问题')
+            notify_path = os.path.join(notify_dir, f'review-{PROJECT}')
         with open(notify_path, 'w') as f:
-            f.write(f'auto-repair exhausted at {datetime.now().isoformat()}')
+            f.write(f'auto-repair exhausted at {datetime.now().isoformat()}'
+                    f' target={target_on_exhaust}')
         print(f'[WRITER] auto-repair exhausted ({max_attempts}/{max_attempts}), '
-              f'pushed to {target_on_exhaust}, triggering reviewer')
+              f'pushed to {target_on_exhaust}, '
+              f'notify={"writer" if should_retry_writer else "reviewer"}')
 
 
 def trigger_reviewer():

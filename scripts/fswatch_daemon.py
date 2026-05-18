@@ -10,6 +10,8 @@ import sqlite3
 from datetime import datetime
 
 NOTIFY_DIR = "/Users/liufeng/Documents/DocProductionReview/.kanban/.notify"
+CONTROL_DIR = "/Users/liufeng/Documents/DocProductionReview/.kanban/.control"
+CONTROL_FILE = os.path.join(CONTROL_DIR, "automation_state.json")
 HERMES = "/Users/liufeng/.hermes/hermes-agent/venv/bin/hermes"
 LOG_DIR = "/Users/liufeng/.hermes/logs"
 PROJECT_DIR = "/Users/liufeng/Documents/DocProductionReview"
@@ -125,10 +127,37 @@ reviewer.py 执行完毕后，检查哪些 re_review 任务被处理了。
 
 注意：步骤二是静默执行，不需要写任何 NOTIFY 或修改 kanban 状态。"""
 
+def get_automation_state():
+    """读取自动化控制状态"""
+    try:
+        if os.path.exists(CONTROL_FILE):
+            with open(CONTROL_FILE) as f:
+                data = json.load(f)
+            running = data.get("running", True)
+            paused = data.get("paused", False)
+            return running, paused
+    except:
+        pass
+    return True, False  # 默认运行中
+
+
 def handle_notify(filepath):
     """处理单个 NOTIFY 文件"""
     if not os.path.isfile(filepath):
         return
+
+    # 检查自动化控制状态
+    running, paused = get_automation_state()
+    if not running:
+        log(f"自动化已停止，跳过 {os.path.basename(filepath)}")
+        # 仍然清理文件
+        try: os.remove(filepath)
+        except: pass
+        return
+    if paused:
+        log(f"自动化已暂停，跳过 {os.path.basename(filepath)}")
+        return  # 不清除文件，恢复后继续处理
+
     filename = os.path.basename(filepath)
     if filename.startswith("."):
         return
@@ -187,14 +216,11 @@ def bootstrap():
     try:
         conn = sqlite3.connect(kanban_db)
         c = conn.cursor()
-        # 检查所有需要处理的状态
+        now_iso = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        
+        # 1. 检查需要处理的状态
         c.execute("SELECT status, count(*) FROM tasks WHERE status IN ('awaiting_review', 'reviewing', 'revision', 're_review') GROUP BY status")
         rows = c.fetchall()
-        conn.close()
-
-        if not rows:
-            log("bootstrap: 无待处理任务，跳过")
-            return
 
         pending = {s: n for s, n in rows}
         log(f"bootstrap: 发现待处理任务 {pending}")
@@ -221,17 +247,51 @@ def bootstrap():
             log("bootstrap: 写 NOTIFY -> writer (revision)")
 
         if 're_review' in pending:
-            notify_path = os.path.join(NOTIFY_DIR, "review-yaya-zhujiao")
-            os.makedirs(NOTIFY_DIR, exist_ok=True)
-            with open(notify_path, 'w') as f:
-                f.write('bootstrap review for re_review')
-            log("bootstrap: 写 NOTIFY -> reviewer (re_review)")
+            # 2. 检查是否有废弃的 re_review 卡片（状态超过5分钟且 re_review_result='fail'）
+            c.execute("SELECT id, title, revision_data, status_entered_at FROM tasks WHERE status='re_review'")
+            stale_reviews = []
+            for row2 in c.fetchall():
+                tid, title, rd_json, entered = row2
+                rev_data = json.loads(rd_json or '{}')
+                if rev_data.get('re_review_result') == 'fail' and entered:
+                    try:
+                        et = datetime.fromisoformat(entered)
+                        nt = datetime.fromisoformat(now_iso)
+                        if (nt - et).total_seconds() > 300:  # >5分钟
+                            stale_reviews.append((tid, title))
+                    except:
+                        pass
+            if stale_reviews:
+                for tid, title in stale_reviews:
+                    # 自动迁移到 revision（而不是留在 re_review）
+                    from kanban_ops import update_task_status, add_comment
+                    update_task_status('yaya-zhujiao', tid, 'revision', validate=False)
+                    add_comment('yaya-zhujiao', tid, 'system',
+                                f'定时 bootstrap: re_review 超时(>5min)，自动迁移到 revision')
+                    log(f"bootstrap: 迁移废弃 re_review -> revision: {tid} {title}")
+                # 迁移后写 writer NOTIFY
+                notify_path = os.path.join(NOTIFY_DIR, "writer-yaya-zhujiao")
+                os.makedirs(NOTIFY_DIR, exist_ok=True)
+                with open(notify_path, 'w') as f:
+                    f.write('bootstrap writer for stale re_review')
+                log("bootstrap: 写 NOTIFY -> writer (stale re_review migrated)")
+            else:
+                # 没有废弃的，正常触发 reviewer
+                notify_path = os.path.join(NOTIFY_DIR, "review-yaya-zhujiao")
+                os.makedirs(NOTIFY_DIR, exist_ok=True)
+                with open(notify_path, 'w') as f:
+                    f.write('bootstrap review for re_review')
+                log("bootstrap: 写 NOTIFY -> reviewer (re_review)")
+
+        conn.close()
 
     except Exception as e:
         log(f"bootstrap: 异常 {e}")
 
 
 def main():
+    import select as _select
+
     log("守护进程启动")
     os.makedirs(NOTIFY_DIR, exist_ok=True)
     log(f"监听目录: {NOTIFY_DIR}")
@@ -245,8 +305,7 @@ def main():
 
     # 启动自愈：有待处理任务就写 NOTIFY 触发循环
     bootstrap()
-
-    # 处理 bootstrap 写的 NOTIFY 文件（fswatch 还未开始，手动触发）
+    # 处理 bootstrap 写的 NOTIFY 文件
     for f in sorted(os.listdir(NOTIFY_DIR)):
         fp = os.path.join(NOTIFY_DIR, f)
         if os.path.isfile(fp) and not f.startswith("."):
@@ -261,22 +320,44 @@ def main():
     )
     log(f"fswatch PID: {fswatch_proc.pid}")
 
+    last_bootstrap = time.time()
+
     try:
         while True:
-            # 读取 null 分隔的事件
-            chunk = b""
-            while True:
-                byte = fswatch_proc.stdout.read(1)
-                if not byte:
-                    log("fswatch stdout 关闭，退出")
-                    return
-                if byte == b"\x00":
-                    break
-                chunk += byte
+            # 用 select 做 60 秒超时等待，同时支持 fswatch 事件和定时 bootstrap
+            try:
+                ready, _, _ = _select.select([fswatch_proc.stdout], [], [], 60)
+            except ValueError:
+                # stdout 已关闭
+                log("fswatch stdout 关闭，退出")
+                break
 
-            event_path = chunk.decode("utf-8", errors="replace").strip()
-            if event_path:
-                handle_notify(event_path)
+            if ready:
+                # 读取 null 分隔的事件
+                chunk = b""
+                while True:
+                    byte = fswatch_proc.stdout.read(1)
+                    if not byte:
+                        log("fswatch stdout 关闭，退出")
+                        return
+                    if byte == b"\x00":
+                        break
+                    chunk += byte
+
+                event_path = chunk.decode("utf-8", errors="replace").strip()
+                if event_path:
+                    handle_notify(event_path)
+
+            # 每 60 秒执行一次定时 bootstrap
+            if time.time() - last_bootstrap >= 60:
+                last_bootstrap = time.time()
+                # 先检查自动化状态
+                running, paused = get_automation_state()
+                if running and not paused:
+                    log("定时 bootstrap: 扫描 kanban...")
+                    bootstrap()
+                else:
+                    log(f"定时 bootstrap: 跳过（running={running} paused={paused}）")
 
     except KeyboardInterrupt:
         log("收到 SIGINT，退出")

@@ -294,6 +294,19 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
         <span id="autoRepairFailureText" style="display:none"><br/>最后一次失败原因：<span id="autoRepairFailureValue"></span></span>
       </div>
     </div>
+    <!-- 用户操作区：滞卡任务处理 -->
+    <div id="stuckActions" style="display:none;border-top:1px solid var(--border);margin-top:12px;padding-top:12px">
+      <div style="font-size:13px;font-weight:600;color:var(--yellow);margin-bottom:8px">⚠️ 任务处理建议</div>
+      <div id="stuckReasonDisplay" style="margin-bottom:10px;padding:8px 10px;background:var(--bg);border:1px solid var(--yellow);border-radius:6px;font-size:13px;line-height:1.6;color:var(--text)">
+        <span id="stuckReasonText">加载中...</span>
+      </div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
+        <button class="ctrl-btn" onclick="retriggerTask()" style="background:var(--green);color:#fff;border-color:var(--green)" title="重新触发当前流程">↻ 重新触发</button>
+        <button class="ctrl-btn" onclick="resetTaskToBacklog()" style="background:var(--orange);color:#fff;border-color:var(--orange)" title="退回待领取状态，Writer 将重新撰写">⏮ 退回待领取</button>
+        <button class="ctrl-btn" onclick="markTaskBlocked()" style="background:var(--red);color:#fff;border-color:var(--red)" title="标记为阻塞，由系统自动恢复">⛔ 标记阻塞</button>
+        <span id="stuckActionFeedback" style="font-size:12px;color:var(--dim);display:none"></span>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -464,6 +477,7 @@ function renderCard(t, status) {
     ${scores}
     <div class="timer ${t.timer_stale?'timer-stale':'timer-ok'}">
       <div class="timer-row"><span>${t.elapsed ? '\u23f1 '+t.elapsed : ''}</span></div>
+      ${t.stale ? `<div class="timer-reason">\u26a0 ${t.stale_reason}</div>` : ''}
       ${t.blocked_reason ? `<div class="timer-reason">\u26a0 ${translateReason(t.blocked_reason)}</div>` : ''}
     </div>
   </div>`;
@@ -567,6 +581,26 @@ function openDoc(taskId, status) {
       }
     } else {
       repairEl.style.display = 'none';
+    }
+    // Show stuck actions for tasks that have been in same status too long
+    const stuckEl = document.getElementById('stuckActions');
+    const stuckReasonEl = document.getElementById('stuckReasonText');
+    const statusList = ['drafting','awaiting_review','reviewing','revision','re_review','re_reviewing','waiting_human_review'];
+    if (d.timer_stale && statusList.includes(status)) {
+      stuckEl.style.display = 'block';
+      const reasonMap = {
+        'drafting': 'Writer 长时间未完成撰写，可能已中断。您可以重新触发 Writer 来处理此任务，或者退回待领取让 Writer 重新开始。',
+        'awaiting_review': 'Reviewer 长时间未启动审核，可能任务漏触发。建议重新触发 Reviewer。',
+        'reviewing': 'Reviewer 审核超时，可能已中断。建议重新触发 Reviewer 重新审核。',
+        'revision': 'Writer 修改超时，可能已中断或自动修复陷入循环。您可以重新触发 Writer 重试，或标记阻塞由系统自动恢复。',
+        're_review': '复审超时，可能 Reviewer 未正常处理。建议重新触发 Reviewer 进行复审。',
+        're_reviewing': '复审中长时间未响应，可能已中断。建议重新触发 Reviewer。',
+        'waiting_human_review': '此任务等待您人工审核，请查看文档并点击「通过」或「不通过」。',
+      };
+      stuckReasonEl.textContent = reasonMap[status] || '任务在当前位置停留时间过长，可能出现了异常。';
+      document.getElementById('stuckActionFeedback').style.display = 'none';
+    } else {
+      stuckEl.style.display = 'none';
     }
     // Show reviewer feedback for tasks with audit data (re_review, revision, waiting_human_review)
     const reviewerEl = document.getElementById('reviewerFeedback');
@@ -736,6 +770,75 @@ async function recoverBlocked(target) {
   if (!data.success) alert('恢复失败: '+data.error);
 }
 
+// 用户操作：重新触发当前任务
+async function retriggerTask() {
+  if (!currentTaskId) return;
+  const fb = document.getElementById('stuckActionFeedback');
+  fb.style.display = 'inline-block';
+  fb.textContent = '⏳ 正在重触发...';
+  fb.style.color = 'var(--yellow)';
+  const r = await fetch('/api/retrigger-task/'+currentTaskId, {
+    method: 'POST',
+    headers: {'Content-Type':'application/json'},
+    body: JSON.stringify({project: currentProject})
+  });
+  const data = await r.json();
+  if (data.success) {
+    fb.textContent = '✅ 已发送重触发信号，等待处理...';
+    fb.style.color = 'var(--green)';
+    setTimeout(() => { closeDocModal(); render(); }, 1500);
+  } else {
+    fb.textContent = '❌ 触发失败: '+data.error;
+    fb.style.color = 'var(--red)';
+  }
+}
+
+// 用户操作：退回待领取
+async function resetTaskToBacklog() {
+  if (!currentTaskId) return;
+  if (!confirm('确定要将此任务退回「待领取」状态吗？Writer 将重新撰写此文档。')) return;
+  const fb = document.getElementById('stuckActionFeedback');
+  fb.style.display = 'inline-block';
+  fb.textContent = '⏳ 正在退回...';
+  const r = await fetch('/api/reset-task-backlog/'+currentTaskId, {
+    method: 'POST',
+    headers: {'Content-Type':'application/json'},
+    body: JSON.stringify({project: currentProject})
+  });
+  const data = await r.json();
+  if (data.success) {
+    fb.textContent = '✅ 已退回待领取';
+    fb.style.color = 'var(--green)';
+    setTimeout(() => { closeDocModal(); render(); }, 1500);
+  } else {
+    fb.textContent = '❌ 退回失败: '+data.error;
+    fb.style.color = 'var(--red)';
+  }
+}
+
+// 用户操作：标记阻塞
+async function markTaskBlocked() {
+  if (!currentTaskId) return;
+  if (!confirm('确定要将此任务标记为「已阻塞」吗？系统将自动尝试恢复。')) return;
+  const fb = document.getElementById('stuckActionFeedback');
+  fb.style.display = 'inline-block';
+  fb.textContent = '⏳ 正在标记...';
+  const r = await fetch('/api/mark-task-blocked/'+currentTaskId, {
+    method: 'POST',
+    headers: {'Content-Type':'application/json'},
+    body: JSON.stringify({project: currentProject})
+  });
+  const data = await r.json();
+  if (data.success) {
+    fb.textContent = '✅ 已标记为阻塞，系统将自动恢复';
+    fb.style.color = 'var(--green)';
+    setTimeout(() => { closeDocModal(); render(); }, 2000);
+  } else {
+    fb.textContent = '❌ 标记失败: '+data.error;
+    fb.style.color = 'var(--red)';
+  }
+}
+
 render();
 setInterval(render, 10000);
 </script>
@@ -759,9 +862,11 @@ async def api_profiles():
         {"name": "yaya-reviewer", "role": "Reviewer"},
         {"name": "yaya-watcher", "role": "Watcher"},
     ]
+    # 扫描所有 hermes gateway / hermes chat 进程
+    r = subprocess.run(["ps", "aux"], capture_output=True, text=True)
+    all_procs = r.stdout
     for p in profiles_info:
         cfg_path = HERMES_HOME / p["name"] / "config.yaml"
-        gateway_pid_path = HERMES_HOME / p["name"] / "gateway.pid"
         p["model"] = "—"
         p["running"] = False
         if cfg_path.exists():
@@ -771,15 +876,17 @@ async def api_profiles():
                 m = re.search(r"model:\s*(\S+)", content)
             if m:
                 p["model"] = m.group(1)
-        if gateway_pid_path.exists():
-            try:
-                pid_data = json.loads(gateway_pid_path.read_text())
-                pid = pid_data.get("pid")
-                if pid:
-                    subprocess.run(["kill", "-0", str(pid)], capture_output=True)
+        # 用 ps aux 检测正在运行的 gateway 进程（独立进程或 launchctl 启动）
+        if p["name"] in all_procs and ("gateway" in all_procs or "hermes" in all_procs):
+            for line in all_procs.split("\n"):
+                if p["name"] in line and ("hermes" in line or "gateway" in line):
                     p["running"] = True
-            except:
-                pass
+                    break
+        # fallback: 也检查 launchctl
+        if not p["running"]:
+            lr = subprocess.run(["launchctl", "list"], capture_output=True, text=True)
+            if f"hermes.{p['name']}" in lr.stdout:
+                p["running"] = True
     return JSONResponse(profiles_info)
 
 @app.get("/api/watcher")
@@ -899,12 +1006,29 @@ async def api_board(project: str = default_project):
                     rr = rev_data.get("re_review_result", "")
                     auto_repair_attempts = rev_data.get("auto_repair_attempts", 0)
                     auto_repair_failure = rev_data.get("last_auto_repair_failure", "")
+                    # 计算卡住原因
+                    stale = False
+                    stale_reason = ""
+                    if timer_stale:
+                        stale = True
+                        reas = {
+                            "drafting": "Writer 长时间未完成撰写，可能已中断",
+                            "awaiting_review": "Reviewer 长时间未启动审核，可能任务漏触发",
+                            "reviewing": "Reviewer 审核超时，可能已中断",
+                            "revision": "Writer 修改超时，可能已中断或自动修复循环",
+                            "re_review": "复审超时，可能 Reviewer 未正常处理",
+                            "re_reviewing": "复审中长时间未响应，可能已中断",
+                            "waiting_human_review": "等待人工审核超时（您可能需要查看）",
+                            "blocked": "任务已阻塞，需手动处理",
+                        }
+                        stale_reason = reas.get(status, "未知状态超时")
                     return {
                         "id": d["id"], "title": d["title"], "file_path": d.get("file_path",""),
                         "version": d.get("version"), "assigned_to": d.get("assigned_to",""),
                         "commit_sha": d.get("commit_sha",""),
                         "iteration": d.get("iteration_count",0) or 0,
                         "elapsed": elapsed, "timer_stale": timer_stale,
+                        "stale": stale, "stale_reason": stale_reason,
                         "blocked_reason": d.get("blocked_reason",""),
                         "p0_count": d.get("p0_count",0) or 0,
                         "p1_count": d.get("p1_count",0) or 0,
@@ -942,12 +1066,29 @@ async def api_board(project: str = default_project):
                         except: pass
                     auto_repair_attempts = rev_data.get("auto_repair_attempts", 0)
                     auto_repair_failure = rev_data.get("last_auto_repair_failure", "")
+                    # 计算卡住原因
+                    stale = False
+                    stale_reason = ""
+                    if timer_stale:
+                        stale = True
+                        reas = {
+                            "drafting": "Writer 长时间未完成撰写，可能已中断",
+                            "awaiting_review": "Reviewer 长时间未启动审核，可能任务漏触发",
+                            "reviewing": "Reviewer 审核超时，可能已中断",
+                            "revision": "Writer 修改超时，可能已中断或自动修复循环",
+                            "re_review": "复审超时，可能 Reviewer 未正常处理",
+                            "re_reviewing": "复审中长时间未响应，可能已中断",
+                            "waiting_human_review": "等待人工审核超时（您可能需要查看）",
+                            "blocked": "任务已阻塞，需手动处理",
+                        }
+                        stale_reason = reas.get(status, "未知状态超时")
                     tasks.append({
                         "id": d["id"], "title": d["title"], "file_path": d.get("file_path",""),
                         "version": d.get("version"), "assigned_to": d.get("assigned_to",""),
                         "commit_sha": d.get("commit_sha",""),
                         "iteration": d.get("iteration_count",0) or 0,
                         "elapsed": elapsed, "timer_stale": timer_stale,
+                        "stale": stale, "stale_reason": stale_reason,
                         "blocked_reason": d.get("blocked_reason",""),
                         "p0_count": d.get("p0_count",0) or 0,
                         "p1_count": d.get("p1_count",0) or 0,
@@ -1009,6 +1150,12 @@ async def api_document(task_id: str, project: str = default_project):
     if task:
         result["blocked_reason"] = task.get("blocked_reason", "")
         result["revision_data"] = task.get("revision_data", "")
+        # 计算 timer_stale
+        status = task.get("status", "")
+        entered = task.get("status_entered_at", "")
+        now_iso = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
+        _, timer_stale = calc_elapsed(entered, now_iso, status)
+        result["timer_stale"] = timer_stale
     return JSONResponse(result)
 
 @app.post("/api/human-review/{task_id}")
@@ -1056,6 +1203,84 @@ async def api_recover_blocked(task_id: str, request: Request):
         NOTIFY_DIR.mkdir(parents=True, exist_ok=True)
         notify_path.write_text(f"recover blocked {task_id} to {target} at {datetime.now().isoformat()}")
         return JSONResponse({"success": True, "target": target})
+    except Exception as e:
+        return JSONResponse({"success": False, "error": str(e)})
+
+
+@app.post("/api/retrigger-task/{task_id}")
+async def api_retrigger_task(task_id: str, request: Request):
+    """重新触发当前任务 — 根据状态写 NOTIFY 文件"""
+    data = await request.json()
+    project = data.get("project", default_project)
+    try:
+        task = get_task(project, task_id)
+        if not task:
+            return JSONResponse({"success": False, "error": "任务不存在"})
+        status = task["status"]
+        # 根据状态选择触发的 profile
+        writer_states = ("backlog", "drafting", "revision")
+        reviewer_states = ("awaiting_review", "reviewing", "re_review", "re_reviewing")
+        if status in writer_states:
+            notify_path = NOTIFY_DIR / f"writer-{project}"
+        elif status in reviewer_states:
+            notify_path = NOTIFY_DIR / f"review-{project}"
+        elif status == "waiting_human_review":
+            # 等待人工审核的，通知 reviewer 重新审核
+            notify_path = NOTIFY_DIR / f"review-{project}"
+        elif status == "blocked":
+            # 阻塞的则调用恢复逻辑
+            target = "backlog" if task.get("blocked_reason") == "max_iterations_exceeded" else "revision"
+            update_task_status(project, task_id, target, validate=False)
+            add_comment(project, task_id, "system", f"用户通过重触发恢复阻塞：目标 {target}")
+            notify_path = NOTIFY_DIR / f"writer-{project}"
+        else:
+            return JSONResponse({"success": False, "error": f"状态 {status} 不支持重触发"})
+        NOTIFY_DIR.mkdir(parents=True, exist_ok=True)
+        notify_path.write_text(f"user retrigger {task_id} at {datetime.now().isoformat()}")
+        add_comment(project, task_id, "liufeng", f"用户触发了重操作（当前状态：{status}）")
+        return JSONResponse({"success": True, "status": status, "notify": str(notify_path.name)})
+    except Exception as e:
+        return JSONResponse({"success": False, "error": str(e)})
+
+
+@app.post("/api/reset-task-backlog/{task_id}")
+async def api_reset_task_backlog(task_id: str, request: Request):
+    """退回待领取"""
+    data = await request.json()
+    project = data.get("project", default_project)
+    try:
+        task = get_task(project, task_id)
+        if not task:
+            return JSONResponse({"success": False, "error": "任务不存在"})
+        update_task_status(project, task_id, "backlog", validate=False)
+        add_comment(project, task_id, "liufeng", "用户将任务退回「待领取」状态")
+        # 触发 Writer 认领
+        notify_path = NOTIFY_DIR / f"writer-{project}"
+        NOTIFY_DIR.mkdir(parents=True, exist_ok=True)
+        notify_path.write_text(f"user reset to backlog {task_id} at {datetime.now().isoformat()}")
+        return JSONResponse({"success": True})
+    except Exception as e:
+        return JSONResponse({"success": False, "error": str(e)})
+
+
+@app.post("/api/mark-task-blocked/{task_id}")
+async def api_mark_task_blocked(task_id: str, request: Request):
+    """标记为阻塞"""
+    data = await request.json()
+    project = data.get("project", default_project)
+    try:
+        task = get_task(project, task_id)
+        if not task:
+            return JSONResponse({"success": False, "error": "任务不存在"})
+        if task["status"] == "blocked":
+            return JSONResponse({"success": False, "error": "任务已经是阻塞状态"})
+        reason = data.get("reason", "user_marked_stale")
+        update_task_status(project, task_id, "blocked",
+                           blocked_reason=reason,
+                           blocked_recovery_target="revision")
+        add_comment(project, task_id, "liufeng",
+                    f"用户手动标记为阻塞（原状态：{task['status']}，原因：{reason}）")
+        return JSONResponse({"success": True})
     except Exception as e:
         return JSONResponse({"success": False, "error": str(e)})
 
