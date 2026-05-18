@@ -2,20 +2,128 @@
 """fswatch 事件驱动守护进程 — 监听 .notify/ 目录，零轮询触发 Hermes 任务"""
 import os
 import sys
+import json
 import subprocess
 import signal
 import time
+import sqlite3
+from datetime import datetime
 
 NOTIFY_DIR = "/Users/liufeng/Documents/DocProductionReview/.kanban/.notify"
 HERMES = "/Users/liufeng/.hermes/hermes-agent/venv/bin/hermes"
 LOG_DIR = "/Users/liufeng/.hermes/logs"
 PROJECT_DIR = "/Users/liufeng/Documents/DocProductionReview"
+KANBAN_DB = "/Users/liufeng/Documents/DocProductionReview/.kanban/yaya-zhujiao.db"
 
 def log(msg):
     ts = time.strftime("%Y-%m-%d %H:%M:%S")
     with open(os.path.join(LOG_DIR, "fswatch.log"), "a") as f:
         f.write(f"[{ts}] {msg}\n")
     print(f"[{ts}] {msg}", flush=True)
+
+def read_human_feedback_for_writer():
+    """读取 kanban DB，找有 human_feedback 的 revision/re_review 任务"""
+    if not os.path.exists(KANBAN_DB):
+        return None
+    try:
+        conn = sqlite3.connect(KANBAN_DB)
+        c = conn.cursor()
+        c.execute("SELECT id, title, file_path, revision_data, version, iteration_count FROM tasks WHERE status IN ('revision','re_review','drafting') ORDER BY updated_at ASC LIMIT 1")
+        row = c.fetchone()
+        conn.close()
+        if not row:
+            return None
+        task_id, title, file_path, revision_data_json, version, iteration = row
+        rev_data = json.loads(revision_data_json or '{}')
+        human_feedback = rev_data.get('human_feedback', [])
+        if not human_feedback:
+            return None
+        return {
+            'task_id': task_id,
+            'title': title,
+            'file_path': file_path,
+            'human_feedback': human_feedback,
+            'version': version,
+            'iteration': iteration or 0,
+        }
+    except Exception as e:
+        log(f"read_human_feedback: 异常 {e}")
+        return None
+
+def read_task_id_and_human_feedback(task_id: str):
+    """读取指定 task_id 的 human_feedback"""
+    if not os.path.exists(KANBAN_DB):
+        return []
+    try:
+        conn = sqlite3.connect(KANBAN_DB)
+        c = conn.cursor()
+        c.execute("SELECT revision_data FROM tasks WHERE id=?", (task_id,))
+        row = c.fetchone()
+        conn.close()
+        if not row:
+            return []
+        rev_data = json.loads(row[0] or '{}')
+        return rev_data.get('human_feedback', [])
+    except Exception as e:
+        log(f"read_task_feedback({task_id}): 异常 {e}")
+        return []
+
+def build_writer_prompt():
+    """构建 Writer agent 的执行提示词"""
+    feedback_info = read_human_feedback_for_writer()
+    base_instruction = f"在 {PROJECT_DIR} 中运行 python3 scripts/writer.py 处理 yaya-zhujiao 项目的 Writer 工作流"
+
+    if feedback_info:
+        feedback_text = "\n".join(f"  - {fb}" for fb in feedback_info['human_feedback'])
+        fp = feedback_info.get('file_path', '')
+        return f"""任务：处理 {PROJECT_DIR} 的 Writer 工作流
+
+【注意】当前有一个待处理任务（{feedback_info['title']}，文件：{fp}），包含人工审核反馈意见（human_feedback）。请你严格按以下步骤执行：
+
+步骤一 —— 分析人工反馈：
+逐条分析以下反馈意见，判断每条是否属实（在文档中有实际证据）：
+{feedback_text}
+
+对于「属实」或「半属实」的反馈：在文档中定位具体位置，给出修复方案，然后修改文档内容。
+对于「不属实」的反馈：记录在 comment 中但不做修改。
+
+步骤二 —— 修改文档：
+依据步骤一的分析结果，直接修改文件 {fp}。每次修改后检查文件内容是否确实已修改（用 grep 验证）。
+
+步骤三 —— 格式模板自查：
+分析人类反馈中是否有任何点，是当前 Writer 文档格式模板中没有覆盖到的。如果有，将这些缺失的规则写入 /Users/liufeng/Documents/DocProductionReview/.kanban/writer_format_notes.md（追加，标记日期）。格式示例：
+2026-05-18: [新规则] 文档必须包含当节知识点与前置知识点的关联说明（来自人类反馈：xxx）
+
+步骤四 —— 提交：
+完成上述所有修改后，执行：
+python3 scripts/writer.py
+
+当 writer.py 执行完毕后，检查输出确认流程正常。"""
+    else:
+        return f"{base_instruction}\n\n【注】当前无人工审核反馈，按标准流程执行。"
+
+def build_reviewer_prompt():
+    """构建 Reviewer agent 的执行提示词"""
+    return f"""任务：在 {PROJECT_DIR} 中运行审核工作流，处理 yaya-zhujiao 项目
+
+执行步骤：
+
+步骤一 —— 运行审核脚本：
+python3 scripts/reviewer.py
+
+步骤二 —— 检查复审任务的 human_feedback（可选自我进化）：
+reviewer.py 执行完毕后，检查哪些 re_review 任务被处理了。
+对于每个被处理的复审任务，读取 revision_data 中的 human_feedback（如果有）。
+对于每条 human_feedback，分析：
+  - 这条反馈涉及的内容，是否在 Reviewer 当前审核规则（reusable-review-rules/）的覆盖范围之外？
+  - 是否应将其新增为一条审核规则？（例如：人类指出了某个术语错误，但审核规则没有检查这个术语）
+  - 如果应新增，分析应归到哪个审核维度（doc_completeness / term_consistency / rule_consistency / logic_self_consistency / extreme_scenario / cross_references / deliverables / changelog_standard）
+
+如果发现审核规则需要更新：
+  1. 将新规则写入 /Users/liufeng/Documents/DocProductionReview/.kanban/reviewer_scope_notes.md（追加，标记日期和来源 human_feedback task_id）
+  2. 注意：这个文件只是记录，不需要修改 reusable-review-rules/wrapper.py——wrapper 负责调用外部工具，具体规则在 .vale.ini 或 markdownlint 配置中定义。
+
+注意：步骤二是静默执行，不需要写任何 NOTIFY 或修改 kanban 状态。"""
 
 def handle_notify(filepath):
     """处理单个 NOTIFY 文件"""
@@ -29,7 +137,7 @@ def handle_notify(filepath):
 
     if filename.startswith("review-"):
         log("-> 触发 reviewer (profile: yaya-reviewer)")
-        prompt = f"在 {PROJECT_DIR} 中运行 python3 scripts/reviewer.py 处理 yaya-zhujiao 项目的审核工作流"
+        prompt = build_reviewer_prompt()
         r = subprocess.run(
             [HERMES, "chat", "-q", prompt, "--profile", "yaya-reviewer"],
             cwd=PROJECT_DIR,
@@ -44,7 +152,7 @@ def handle_notify(filepath):
 
     elif filename.startswith("writer-"):
         log("-> 触发 writer (profile: yaya)")
-        prompt = f"在 {PROJECT_DIR} 中运行 python3 scripts/writer.py 处理 yaya-zhujiao 项目的 Writer 工作流"
+        prompt = build_writer_prompt()
         r = subprocess.run(
             [HERMES, "chat", "-q", prompt, "--profile", "yaya"],
             cwd=PROJECT_DIR,

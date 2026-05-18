@@ -36,6 +36,8 @@ KANBAN_LAYOUT = [
      "Reviewer 正在执行审查，检查文档合规性、术语一致性等。"),
     ("revision",         "修改中",    False, ("revision",),
      "Reviewer 发现问题（P0/P1/P2），Writer 需修复后送复审。"),
+    ("re_reviewing",     "复审中",    False, ("re_reviewing",),
+     "Reviewer 正在复审 Writer 修改后的文档。"),
     ("review_outcome",   "评审结果",  True,  ("waiting_human_review", "re_review"),
      "上栏：复审通过，等待人工确认。下栏：复审不通过，等待 Writer 接收。"),
     ("blocked",          "已阻塞",    False, ("blocked",),
@@ -45,7 +47,7 @@ KANBAN_LAYOUT = [
 ALERT_SECONDS = {
     "drafting": 3600, "awaiting_review": 1800, "reviewing": 1800,
     "revision": 7200, "waiting_human_review": 86400, "re_review": 7200,
-    "blocked": 3600,
+    "re_reviewing": 1800, "blocked": 3600,
 }
 
 def get_automation_state():

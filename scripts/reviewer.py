@@ -241,8 +241,10 @@ def process_re_review(task: dict):
     version = task.get('version', 'unknown')
     print(f"[REVIEWER] 复审: {task['title']} ({file_path})")
 
+    # Claim: re_review -> re_reviewing
+    update_task_status(PROJECT, task_id, 're_reviewing')
     add_comment(PROJECT, task_id, 'reviewer',
-                f'Reviewer 开始复审（修订后检查）')
+                f'Reviewer 开始复审（修订后检查，状态：复审中）')
 
     # 全量审核（复用同一套逻辑）
     audit = run_audit(file_path, version)
