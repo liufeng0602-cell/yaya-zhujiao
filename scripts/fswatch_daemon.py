@@ -18,6 +18,9 @@ LOG_DIR = "/Users/liufeng/.hermes/logs"
 PROJECT_DIR = "/Users/liufeng/Documents/DocProductionReview"
 KANBAN_DB = "/Users/liufeng/Documents/DocProductionReview/.kanban/yaya-zhujiao.db"
 
+# 确保 kanban_ops 可导入（fswatch daemon 不固定在项目目录启动）
+sys.path.insert(0, PROJECT_DIR)
+
 # ===== 并发控制 =====
 # 目标=3，架构最高=5，扩量只改这个常量
 MAX_CONCURRENCY = 3
