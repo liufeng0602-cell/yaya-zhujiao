@@ -1,5 +1,4 @@
-"""
-Strategy pack interface — closed-source extension contract.
+"""Strategy pack interface — closed-source extension contract.
 
 The open-source framework ships with 6 built-in checkers (L0 + L1).
 Closed-source strategy packs inject additional capabilities at
@@ -14,7 +13,7 @@ Usage
     from reusable_review_rules.strategy_pack import StrategyPack
     from reusable_review_rules.audit_engine import AuditEngine
 
-    pack = StrategyPack.load("path/to/pack.yaml")
+    pack = StrategyPack.load("path/to/pack/dir")
     engine = AuditEngine()
     engine.load_strategy(pack)
 
@@ -37,10 +36,22 @@ class StrategyPack:
     Fields
     ------
     prompts : dict
-        Mapping of ``{checker_id: {purpose: prompt_template}}``.
-        Example: ``{"llm/arch_contradiction": {"main": "...", "cross_validate": "..."}}``.
-        The inner dict keys are purposes (``"main"``, ``"cross_validate"``, etc.)
+        Mapping of ``{prompt_id: {purpose: prompt_template}}``.
+        Auto-loaded by ``load()`` from the ``prompts/`` subdirectory.
+        Outer key is the prompt_id (filename without extension).
+        Inner keys are purposes (``\"main\"``, ``\"cross_validate\"``, etc.)
         and are consumed by the checker's ``_strategy_prompts`` attribute.
+
+        File layout::
+
+            pack_dir/prompts/
+                prd/l2/arch_contradiction.yaml       # → {"main": "...", "cross_validate": "..."}
+                tech_doc/l2/recovery_path_gap.yaml   # → same structure
+
+        Each YAML file must have at least a ``main`` top-level key.
+        The optional ``cross_validate`` key enables two-pass verification.
+    prompts_dir : str or None
+        Absolute path to the ``prompts/`` directory.  Set during ``load()``.
     checkers : list[BaseChecker]
         Additional checkers (typically Layer 2) to register.
         Each checker's ``_strategy_prompts`` attribute is set to the resolved
@@ -55,16 +66,28 @@ class StrategyPack:
     """
 
     prompts: Dict[str, Dict[str, str]] = field(default_factory=dict)
+    prompts_dir: Optional[str] = None
     checkers: List[BaseChecker] = field(default_factory=list)
     config: Dict[str, Any] = field(default_factory=dict)
     glossary_path: Optional[str] = None
 
     @classmethod
     def load(cls, path: str) -> 'StrategyPack':
-        """Load a strategy pack from a YAML file.
+        """Load a strategy pack from a directory on disk.
 
-        The actual YAML parser is not part of the open-source framework.
-        Subclasses or the closed-source pack must implement this method.
+        The load method:
+
+        1. Scans ``path/`` for ``rules_*.yaml`` rule files and parses them.
+        2. Scans ``path/prompts/`` recursively for all ``.yaml`` prompt files
+           and loads each into ``self.prompts[prompt_id]``.
+        3. Loads ``path/glossary.yaml`` if present → sets ``self.glossary_path``.
+        4. Builds ``self.checkers`` from the parsed rules.
+
+        .. admonition:: Implementation note
+
+           The actual YAML parser and checker factory are not part of the
+           open-source framework.  Subclasses or the closed-source pack
+           must implement this method.
         """
         raise NotImplementedError(
             "StrategyPack.load() is not implemented in the open-source "

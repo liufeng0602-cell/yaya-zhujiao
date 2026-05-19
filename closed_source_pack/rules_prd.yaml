@@ -1,0 +1,374 @@
+# =============================================================================
+# PRD 审查规则库 / Review Rules — PRD
+# 用途：定义所有 PRD 审查规则，按 Layer 分组
+#       每条规则可被 AuditEngine 加载为 BaseChecker 子类
+# 加载：StrategyPack.load() 自动加载
+# 维护：规则库作者手写，按 tags/status 管理生命周期
+# =============================================================================
+
+version: "1.0"
+
+# ████████████████████████████████████████████████████████████████████████████
+# 规则数据模型说明
+# ████████████████████████████████████████████████████████████████████████████
+#
+# tags:
+#   - 文档标签匹配规则。Writer 在自检报告中声明 doc_tags，AuditEngine 只
+#     加载 tags 与 doc_tags 有交集的规则。tags: ["general"] 适用于所有文档。
+#
+# trigger:
+#   - always                 每次都执行此规则
+#   - on_doc_flag            文档自检报告 doc_flags 包含指定值才执行
+#                            对应参数: params.flag (string)
+#   - on_term                文档中出现 glossary 中定义的术语才执行
+#                            对应参数: params.term_refs (string list)
+#   - on_pattern             文档匹配 params.pattern 正则才执行
+#                            对应参数: params.pattern (string)
+#
+# check_type:
+#   - section_presence       检查章节标题是否存在（纯结构，不读内容）
+#   - section_coverage       检查章节内容是否达到质量要求
+#   - term_consistency       检查术语是否与 glossary 一致
+#   - value_range            检查 PARAM 声明的值是否在约束范围内
+#   - cross_field_consistency 检查文档中不同位置的同字段值是否一致
+#   - llm_evidence           使用 LLM 做语义级检查，参考 prompts/{prompt_id}.yaml
+#
+# 职责分离（关键设计决策）:
+#   L0 规则只查"有没有"(存在性)，不查"好不好"(质量)。
+#   L1 规则查"好不好"(内容质量、一致性、值域合规)。
+#   L0 和 L1 不会检查同一个问题——L0 说"缺少章节"，L1 说"章节内容不足"。
+#   新增 check_type=cross_field_consistency 是 L1 的特例——检查字段值一致性，
+#   不涉及语义推测，不消耗 LLM Token。
+#
+# status:
+#   - active        当前生效的规则
+#   - experimental  测试中的规则，Issue 标记为 [EXPERIMENTAL]
+#   - deprecated    已废弃，被 deprecated_by 替代，运行时不加载
+
+rules:
+
+  # ═══════════════════════════════════════════════════════════════════════
+  # Layer 0 — 结构完整性 (section_presence)
+  # ═══════════════════════════════════════════════════════════════════════
+
+  - id: "prd/l0/required_sections"
+    name: "PRD 必备章节检查"
+    tags: ["general"]
+    layer: 0
+    severity: P1
+    status: active
+    trigger: always
+    check_type: section_presence
+    description: "每个 PRD 模块必须包含 7 项必备交付物章节"
+    params:
+      required:
+        - "核心概念定义"
+        - "系统冷启动默认值"
+        - "新实体默认值"
+        - "异常恢复策略"
+        - "与已有系统的交互风险"
+        - "极端场景验证"
+        - "跨系统引用落地验证"
+
+  - id: "prd/l0/config_sections"
+    name: "状态机章节完整性检查"
+    tags: ["general"]
+    layer: 0
+    severity: P1
+    status: active
+    trigger: on_doc_flag
+    check_type: section_presence
+    description: "涉及状态机的模块必须包含状态转换章节"
+    params:
+      flag: "state_machine"
+      required:
+        - "状态转换图"
+        - "状态机触发条件"
+
+  - id: "prd/l0/restoration_sections"
+    name: "恢复机制章节检查"
+    tags: ["general"]
+    layer: 0
+    severity: P1
+    status: active
+    trigger: on_doc_flag
+    check_type: section_presence
+    description: "涉及恢复机制的文档必须包含恢复策略章节"
+    params:
+      flag: "restoration"
+      required:
+        - "异常恢复策略"
+        - "数据一致性保障"
+
+  - id: "prd/l0/self_check_report_present"
+    name: "自检报告存在性检查"
+    tags: ["general"]
+    layer: 0
+    severity: P0
+    status: active
+    trigger: always
+    check_type: section_presence
+    description: "文档必须包含 <self_check_report> 自检报告块——Writer 门禁已强制要求，此规则验证闭环完整性"
+    params:
+      required:
+        - "<self_check_report>"
+
+  # ═══════════════════════════════════════════════════════════════════════
+  # Layer 1 — 术语一致性 (term_consistency, value_range)
+  # ═══════════════════════════════════════════════════════════════════════
+
+  - id: "prd/l1/term_consistency"
+    name: "术语一致性检查"
+    tags: ["general"]
+    layer: 1
+    severity: P2
+    status: active
+    trigger: always
+    check_type: term_consistency
+    description: "文档中出现的标准化术语应与 glossary.yaml 一致，使用标准名而非别名"
+    params:
+      glossary_ref: "glossary.yaml"
+      check_aliases: true
+
+  - id: "prd/l1/value_range"
+    name: "值域检查"
+    tags: ["general"]
+    layer: 1
+    severity: P1
+    status: active
+    trigger: always
+    check_type: value_range
+    description: "PARAM 声明的值必须在 glossary 定义的约束范围内"
+    params:
+      glossary_ref: "glossary.yaml"
+
+  - id: "prd/l1/param_consistency"
+    name: "同类参数一致性检查"
+    tags: ["general"]
+    layer: 1
+    severity: P1
+    status: active
+    trigger: always
+    check_type: value_range
+    description: "同一术语在同一文档中的多个 PARAM 声明，值必须一致"
+    params:
+      glossary_ref: "glossary.yaml"
+      cross_check: "same_doc"
+
+  # ═══════════════════════════════════════════════════════════════════════
+  # Layer 1 — 章节内容质量 (section_coverage)
+  # 注意：这些规则假设 L0 已经确认章节存在。L1 只查内容质量。
+  # ═══════════════════════════════════════════════════════════════════════
+
+  - id: "prd/l1/cold_start_coverage"
+    name: "冷启动默认值内容检查"
+    tags: ["general"]
+    layer: 1
+    severity: P1
+    status: active
+    trigger: on_doc_flag
+    check_type: section_coverage
+    description: >
+      当文档涉及冷启动状态时，检查冷启动默认值章节的内容充分性——
+      需要给出具体的默认值表，而非只有一句话描述
+    params:
+      flag: "cold_start"
+      section: "系统冷启动默认值"
+      quality_criteria:
+        - "包含具体的默认值表（非空描述）"
+        - "每个配置项写明默认值"
+        - "说明默认值的选取依据"
+
+  - id: "prd/l1/abnormal_scenario_coverage"
+    name: "异常场景覆盖率检查"
+    tags: ["general"]
+    layer: 1
+    severity: P1
+    status: active
+    trigger: always
+    check_type: section_coverage
+    description: >
+      检查极端场景验证章节是否覆盖了异常恢复策略中声明的所有异常
+    params:
+      section: "极端场景验证"
+      cross_section: "异常恢复策略"
+      quality_criteria:
+        - "每个异常恢复策略至少有一个对应的极端场景验证用例"
+        - "极端场景验证不包含未在异常恢复策略中声明的异常"
+
+  - id: "prd/l1/cross_ref_traceability"
+    name: "跨系统引用落地验证"
+    tags: ["general"]
+    layer: 1
+    severity: P2
+    status: active
+    trigger: on_pattern
+    check_type: section_coverage
+    description: >
+      文档中声明的每个关联系统或依赖系统，必须在跨系统引用章节
+      有具体的交互描述和异常处理
+    params:
+      pattern: "(?i)关联系统|依赖系统|上游系统|下游系统"
+      section: "跨系统引用落地验证"
+      quality_criteria:
+        - "对每个引用的外部系统，至少有一句话描述交互方式"
+        - "对每个外部系统的异常情况有处理方案说明"
+
+  - id: "prd/l1/cross_module_param_ref"
+    name: "跨模块 PARAM 引用一致性"
+    tags: ["general"]
+    layer: 1
+    severity: P1
+    status: active
+    trigger: on_doc_flag
+    check_type: section_coverage
+    description: >
+      当前 PRD 模块引用了其他模块的 PARAM，需要验证被引用模块是否
+      确实定义了该 PARAM——适用于多模块 PRD 最终封版时的交叉检查
+    params:
+      flag: "cross_module_ref"
+      section: "跨系统引用落地验证"
+      quality_criteria:
+        - "每个引用的外部模块 PARAM 在被引用模块文档中真实存在"
+        - "引用值与被引用模块的定义值域一致"
+
+  # ═══════════════════════════════════════════════════════════════════════
+  # Layer 1 — 字段一致性 (cross_field_consistency)
+  # ═══════════════════════════════════════════════════════════════════════
+
+  - id: "prd/l1/version_consistency"
+    name: "版本号一致性检查"
+    tags: ["general"]
+    layer: 1
+    severity: P1
+    status: active
+    trigger: always
+    check_type: cross_field_consistency
+    description: "文档头部声明的版本号必须与变更记录中最新的版本号一致"
+    params:
+      pairs:
+        - source: "document.header.version"
+          target: "document.changelog.latest_version"
+          description: "头部版本号应与变更记录第一条版本号相同"
+
+  - id: "prd/l1/changelog_format"
+    name: "变更记录格式检查"
+    tags: ["general"]
+    layer: 1
+    severity: P2
+    status: active
+    trigger: always
+    check_type: section_coverage
+    description: "变更记录必须按「版本号 + 问题编号列表 + 摘要」的格式编写"
+    params:
+      section: "变更记录"
+      quality_criteria:
+        - "每一条变更记录包含版本号"
+        - "每条记录包含对应的问题编号列表"
+        - "每条记录包含变更摘要描述"
+
+  # ═══════════════════════════════════════════════════════════════════════
+  # Layer 2 — 语义级/架构级检查 (llm_evidence)
+  # 注意：这些规则消耗 LLM Token，仅在必要条件下触发
+  # ═══════════════════════════════════════════════════════════════════════
+
+  - id: "prd/l2/arch_contradiction"
+    name: "架构矛盾检测"
+    tags: ["general"]
+    layer: 2
+    severity: P0
+    status: active
+    trigger: always
+    check_type: llm_evidence
+    description: >
+      两个章节对同一实体的定义存在冲突——例如不同模块对同一配置项给出
+      不同的默认值，或对同一条快路径给出不同的超时时间
+    params:
+      prompt_id: "prd/l2/arch_contradiction"
+      cross_validate: true
+
+  - id: "prd/l2/missing_border_case"
+    name: "边界情况遗漏检测"
+    tags: ["general"]
+    layer: 2
+    severity: P0
+    status: active
+    trigger: always
+    check_type: llm_evidence
+    description: >
+      文档声明的逻辑或阈值存在未处理的边界情况——例如信用分阈值定义了
+      A/B/C/D 但没有定义 A 到 B 降级阈值
+    params:
+      prompt_id: "prd/l2/missing_border_case"
+      cross_validate: true
+
+  - id: "prd/l2/init_recovery_gap"
+    name: "初始化与恢复策略遗漏检测"
+    tags: ["general"]
+    layer: 2
+    severity: P1
+    status: active
+    trigger: on_doc_flag
+    check_type: llm_evidence
+    description: >
+      涉及 state_machine 或 restoration 的文档，检查是否有未覆盖的初始化
+      默认值或异常恢复场景
+    params:
+      flag: "state_machine"
+      prompt_id: "prd/l2/init_recovery_gap"
+      cross_validate: false
+
+  - id: "prd/l2/insufficient_constant_packing"
+    name: "硬编码值遗漏检测"
+    tags: ["general"]
+    layer: 2
+    severity: P1
+    status: experimental
+    trigger: always
+    check_type: llm_evidence
+    description: >
+      检查文档中是否有未声明为 PARAM 或 CONFIG 的硬编码常量——
+      例如"等待 30 秒"但没有 [PARAM:timeout=30] 声明
+    params:
+      prompt_id: "prd/l2/insufficient_constant_packing"
+      cross_validate: false
+
+  - id: "prd/l2/recovery_coverage"
+    name: "异常恢复策略全面性检测"
+    tags: ["general"]
+    layer: 2
+    severity: P1
+    status: active
+    trigger: on_doc_flag
+    check_type: llm_evidence
+    description: >
+      检查异常恢复策略是否覆盖了以下 6 种场景：请求超时、下游不可用、
+      数据不一致、状态恢复失败、并发冲突、外部系统波动
+    params:
+      flag: "restoration"
+      prompt_id: "prd/l2/recovery_coverage"
+      cross_validate: false
+
+  - id: "prd/l2/extreme_scenario_validity"
+    name: "极端场景推演合理性检测"
+    tags: ["general"]
+    layer: 2
+    severity: P0
+    status: active
+    trigger: always
+    check_type: llm_evidence
+    description: >
+      检查极端场景验证章节中的推演逻辑是否合理——不只是看有没有写，
+      还要看推演的前提、推理链、结论是否自洽
+    params:
+      prompt_id: "prd/l2/extreme_scenario_validity"
+      cross_validate: true
+
+  # ═══════════════════════════════════════════════════════════════════════
+  # 已被替换的旧规则（保留用于审计历史追溯）
+  # ═══════════════════════════════════════════════════════════════════════
+
+  # - id: "prd/l0/wip_arch_rules"
+  #   status: deprecated
+  #   deprecated_by: "prd/l2/arch_contradiction"
+  #   # 旧版架构规则已被 LLM 语义级检查取代

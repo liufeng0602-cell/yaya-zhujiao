@@ -1,0 +1,215 @@
+# =============================================================================
+# 技术文档审查规则库 / Review Rules — Tech Doc
+# 用途：定义所有技术文档审查规则，按 Layer 分组
+#       与 rules_prd.yaml 共享 check_type 定义和 glossary
+# 加载：StrategyPack.load() 自动加载
+# 维护：规则库作者手写，按 tags/status 管理生命周期
+# =============================================================================
+
+version: "1.0"
+
+# tags:
+#   - tech_doc 标记的规则只为技术文档类型加载
+#   - general 标记的规则适用所有文档类型
+
+rules:
+
+  # ═══════════════════════════════════════════════════════════════════════
+  # Layer 0 — 结构完整性 (section_presence)
+  # ═══════════════════════════════════════════════════════════════════════
+
+  - id: "tech/l0/api_endpoint_sections"
+    name: "API 端点文档必备章节检查"
+    tags: ["tech_doc"]
+    layer: 0
+    severity: P1
+    status: active
+    trigger: on_pattern
+    check_type: section_presence
+    description: "每个 API 端点定义必须包含 5 项必备信息块"
+    params:
+      pattern: "(?i)接口|API |endpoint"
+      required:
+        - "请求路径"
+        - "请求方法"
+        - "请求参数"
+        - "响应格式"
+        - "错误码"
+
+  - id: "tech/l0/data_flow_sections"
+    name: "数据流文档必备章节检查"
+    tags: ["tech_doc"]
+    layer: 0
+    severity: P1
+    status: active
+    trigger: on_pattern
+    check_type: section_presence
+    description: "每个数据流定义必须包含输入/处理/输出三个环节的描述"
+    params:
+      pattern: "(?i)数据流|data flow|流程"
+      required:
+        - "输入说明"
+        - "处理逻辑"
+        - "输出说明"
+        - "异常处理"
+
+  # ═══════════════════════════════════════════════════════════════════════
+  # Layer 1 — 命名约定与术语一致性
+  # ═══════════════════════════════════════════════════════════════════════
+
+  - id: "tech/l1/endpoint_naming"
+    name: "端点路径命名约定检查"
+    tags: ["tech_doc"]
+    layer: 1
+    severity: P2
+    status: active
+    trigger: on_pattern
+    check_type: section_coverage
+    description: "API 端点路径应遵循 RESTful 命名约定：小写+连字符+复数名词"
+    params:
+      pattern: "(?i)/[a-z]"
+      section: "请求路径"
+      quality_criteria:
+        - "路径使用小写字母"
+        - "多词路径使用连字符连接"
+        - "资源名为复数形式"
+        - "路径不包含大写字母或下划线"
+
+  - id: "tech/l1/error_code_convention"
+    name: "错误码规范符合性检查"
+    tags: ["tech_doc"]
+    layer: 1
+    severity: P1
+    status: active
+    trigger: on_term
+    check_type: section_coverage
+    description: "错误码应与 glossary 定义的错误码前缀规范一致"
+    params:
+      term_refs: ["错误码前缀"]
+      section: "错误码"
+      quality_criteria:
+        - "每个错误码使用 glossary 中定义的 error_code_prefix 前缀"
+        - "错误码包含明确的错误类别标识"
+        - "每个错误码附有含义说明"
+
+  - id: "tech/l1/value_range_tech"
+    name: "技术参数值域校验"
+    tags: ["tech_doc"]
+    layer: 1
+    severity: P1
+    status: active
+    trigger: always
+    check_type: value_range
+    description: "技术文档中的 PARAM 声明值必须在 glossary 定义的约束范围内"
+    params:
+      glossary_ref: "glossary.yaml"
+
+  # ═══════════════════════════════════════════════════════════════════════
+  # Layer 1 — 内容质量检查 (section_coverage)
+  # ═══════════════════════════════════════════════════════════════════════
+
+  - id: "tech/l1/idempotency_declaration"
+    name: "幂等性声明检查"
+    tags: ["tech_doc"]
+    layer: 1
+    severity: P1
+    status: active
+    trigger: on_pattern
+    check_type: section_coverage
+    description: "所有修改性端点（POST/PUT/PATCH/DELETE）必须声明幂等性保证"
+    params:
+      pattern: "(?i)(POST|PUT|PATCH|DELETE)"
+      section: "请求方法"
+      quality_criteria:
+        - "修改性端点明确声明是否为幂等操作"
+        - "幂等性声明与 glossary 中 idempotency_guarantee 的定义一致"
+        - "非幂等操作说明幂等键（idempotency_key）的使用方式"
+
+  - id: "tech/l1/field_definition_completeness"
+    name: "字段定义完整性检查"
+    tags: ["tech_doc"]
+    layer: 1
+    severity: P1
+    status: active
+    trigger: on_pattern
+    check_type: section_coverage
+    description: "每个请求/响应字段必须有名称、类型、约束、示例值"
+    params:
+      pattern: "(?i)请求参数|响应格式|字段|参数说明"
+      section: "请求参数"
+      quality_criteria:
+        - "每个字段包含名称"
+        - "每个字段包含类型定义"
+        - "可选/必填标记"
+        - "包含示例值"
+        - "包含取值范围或枚举值说明（如适用）"
+
+  - id: "tech/l1/data_flow_completeness"
+    name: "数据流完整性检查"
+    tags: ["tech_doc"]
+    layer: 1
+    severity: P1
+    status: active
+    trigger: on_pattern
+    check_type: section_coverage
+    description: "数据流文档应包含完整的输入→处理→输出链路说明"
+    params:
+      pattern: "(?i)数据流|data flow"
+      section: "处理逻辑"
+      quality_criteria:
+        - "描述输入数据的来源和格式"
+        - "描述中间处理步骤（含边界检查、过滤、转换）"
+        - "描述输出数据的目标和格式"
+        - "描述异常分支的处理"
+
+  # ═══════════════════════════════════════════════════════════════════════
+  # Layer 2 — 语义级/架构级检查 (llm_evidence)
+  # ═══════════════════════════════════════════════════════════════════════
+
+  - id: "tech/l2/recovery_path_gap"
+    name: "错误恢复路径遗漏检测"
+    tags: ["tech_doc"]
+    layer: 2
+    severity: P0
+    status: active
+    trigger: on_pattern
+    check_type: llm_evidence
+    description: >
+      检查文档中声明的错误码或异常，是否有对应的恢复路径或重试策略——
+      每个错误场景都应有明确定义的恢复路径
+    params:
+      pattern: "(?i)错误码|异常|error"
+      prompt_id: "tech_doc/l2/recovery_path_gap"
+      cross_validate: true
+
+  - id: "tech/l2/performance_boundary"
+    name: "性能边界模糊检测"
+    tags: ["tech_doc"]
+    layer: 2
+    severity: P1
+    status: active
+    trigger: on_term
+    check_type: llm_evidence
+    description: >
+      检查技术文档中是否存在未声明量级或上限的性能描述——
+      如"高并发""低延迟"等模糊表述
+    params:
+      term_refs: ["响应时间", "请求速率"]
+      prompt_id: "tech_doc/l2/performance_boundary"
+      cross_validate: true
+
+  - id: "tech/l2/security_consideration"
+    name: "安全考虑遗漏检测"
+    tags: ["tech_doc"]
+    layer: 2
+    severity: P2
+    status: active
+    trigger: on_pattern
+    check_type: llm_evidence
+    description: >
+      检查涉及认证、鉴权、敏感数据的接口是否考虑了必要的安全措施——
+      如鉴权方式、数据加密、输入校验等
+    params:
+      pattern: "(?i)认证|鉴权|token|密码|权限|敏感|加密|登录|授权"
+      prompt_id: "tech_doc/l2/security_consideration"
+      cross_validate: false

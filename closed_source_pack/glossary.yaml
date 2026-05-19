@@ -1,0 +1,247 @@
+# =============================================================================
+# 术语表 / Glossary
+# 用途：定义项目中所有标准化术语及其约束
+#       供 Reviewer Layer 1 做术语一致性和值域校验
+# 加载：StrategyPack.load() 自动加载
+# 维护：规则库作者手写，按文档类型（prd / tech_doc）扩充
+# =============================================================================
+
+version: "1.0"
+tags: ["general"]
+
+terms:
+  # ═══════════════════════════════════════════════════════════════════════════
+  # PRD 术语 — 数值类型：范围约束
+  # ═══════════════════════════════════════════════════════════════════════════
+
+  - name: "信用分"
+    english: "credit_score"
+    definition: "用户信用评估分值"
+    type: integer
+    constraints:
+      min: 0
+      max: 100
+      default: 50
+    aliases: ["信用值", "信用评分"]
+    related_config: "credit_system"
+
+  - name: "超时时间"
+    english: "timeout"
+    definition: "操作等待的最大时间"
+    type: integer
+    unit: "seconds"
+    constraints:
+      min: 1
+      max: 300
+    aliases: ["超时时长", "timeout 时间"]
+
+  - name: "重试次数"
+    english: "max_retries"
+    definition: "操作失败后的最大重试次数"
+    type: integer
+    constraints:
+      min: 0
+      max: 10
+      default: 3
+
+  - name: "批处理大小"
+    english: "batch_size"
+    definition: "单次批量处理的最大条目数"
+    type: integer
+    constraints:
+      min: 1
+      max: 10000
+      default: 100
+
+  - name: "缓存有效期"
+    english: "cache_ttl"
+    definition: "缓存数据的最长有效时间"
+    type: integer
+    unit: "seconds"
+    constraints:
+      min: 0
+      max: 86400
+      default: 300
+
+  - name: "最大并发数"
+    english: "max_concurrency"
+    definition: "系统允许的最大并发请求数"
+    type: integer
+    constraints:
+      min: 1
+      max: 100000
+      default: 100
+    aliases: ["并发上限", "最大连接数"]
+
+  # ═══════════════════════════════════════════════════════════════════════════
+  # PRD 术语 — 枚举类型：允许值列表
+  # ═══════════════════════════════════════════════════════════════════════════
+
+  - name: "信用等级"
+    english: "credit_tier"
+    definition: "用户信用等级划分"
+    type: string
+    allowed_values: ["A", "B", "C", "D"]
+    constraints:
+      default: "C"
+    aliases: ["信用级别"]
+
+  - name: "处理状态"
+    english: "processing_status"
+    definition: "任务或事务的处理状态"
+    type: string
+    allowed_values: ["pending", "processing", "completed", "failed", "cancelled"]
+    constraints:
+      default: "pending"
+    aliases: ["状态", "progress_status"]
+
+  - name: "存储引擎"
+    english: "storage_engine"
+    definition: "数据存储引擎类型"
+    type: string
+    allowed_values: ["mysql", "postgresql", "redis", "mongodb", "elasticsearch"]
+    aliases: ["数据库引擎", "存储类型"]
+
+  - name: "部署环境"
+    english: "deploy_env"
+    definition: "部署环境标识"
+    type: string
+    allowed_values: ["dev", "staging", "production"]
+    constraints:
+      default: "dev"
+    aliases: ["环境", "运行环境"]
+
+  # ═══════════════════════════════════════════════════════════════════════════
+  # PRD 术语 — 状态标记：无值约束，但术语必须统一
+  # ═══════════════════════════════════════════════════════════════════════════
+
+  - name: "冷启动"
+    english: "cold_start"
+    definition: "系统首次运行时无历史数据的状态"
+    type: state
+    required_sections: ["系统冷启动默认值", "新实体默认值"]
+
+  - name: "熔断"
+    english: "circuit_breaker"
+    definition: "系统检测到下游不可用后主动拒绝请求的保护机制"
+    type: state
+    aliases: ["熔断机制", "断路器"]
+
+  - name: "降级"
+    english: "degradation"
+    definition: "系统在资源不足时主动降级部分功能以保持核心可用"
+    type: state
+    aliases: ["功能降级", "降级策略"]
+
+  # ═══════════════════════════════════════════════════════════════════════════
+  # 技术文档术语 — 数值类型：范围约束
+  # ═══════════════════════════════════════════════════════════════════════════
+
+  - name: "响应时间"
+    english: "response_time"
+    definition: "接口从收到请求到返回响应的最大耗时"
+    type: integer
+    unit: "milliseconds"
+    constraints:
+      min: 1
+      max: 30000
+      default: 200
+    aliases: ["延迟", "latency", "rt"]
+
+  - name: "请求速率"
+    english: "rate_limit"
+    definition: "接口每分钟允许的最大请求数"
+    type: integer
+    unit: "rpm"
+    constraints:
+      min: 1
+      max: 1000000
+      default: 1000
+    aliases: ["限流", "qps", "tps"]
+
+  - name: "分页大小"
+    english: "page_size"
+    definition: "分页查询单次返回的最大条目数"
+    type: integer
+    constraints:
+      min: 1
+      max: 1000
+      default: 20
+    aliases: ["每页数量", "limit"]
+
+  - name: "重试间隔"
+    english: "retry_interval"
+    definition: "重试操作之间的等待时间"
+    type: integer
+    unit: "seconds"
+    constraints:
+      min: 1
+      max: 3600
+      default: 30
+    aliases: ["重试等待", "retry_delay"]
+
+  - name: "令牌过期时间"
+    english: "token_ttl"
+    definition: "认证令牌的有效时间"
+    type: integer
+    unit: "seconds"
+    constraints:
+      min: 60
+      max: 86400
+      default: 3600
+    aliases: ["token 过期时间", "令牌有效期"]
+
+  - name: "超时时长（接口）"
+    english: "endpoint_timeout"
+    definition: "单个接口请求的最大等待时间"
+    type: integer
+    unit: "seconds"
+    constraints:
+      min: 1
+      max: 60
+      default: 10
+    aliases: ["接口超时", "read_timeout"]
+
+  # ═══════════════════════════════════════════════════════════════════════════
+  # 技术文档术语 — 枚举类型：允许值列表
+  # ═══════════════════════════════════════════════════════════════════════════
+
+  - name: "HTTP 方法"
+    english: "http_method"
+    definition: "HTTP 请求方法"
+    type: string
+    allowed_values: ["GET", "POST", "PUT", "PATCH", "DELETE"]
+    aliases: ["请求方法", "method"]
+
+  - name: "认证方式"
+    english: "auth_type"
+    definition: "接口认证方式"
+    type: string
+    allowed_values: ["bearer_token", "api_key", "basic_auth", "oauth2", "jwt"]
+    aliases: ["认证类型", "鉴权方式"]
+
+  - name: "幂等性保证"
+    english: "idempotency_guarantee"
+    definition: "接口是否保证相同请求多次提交结果一致"
+    type: string
+    allowed_values: ["idempotent", "non_idempotent"]
+    constraints:
+      default: "non_idempotent"
+    aliases: ["幂等性", "idempotent"]
+
+  - name: "错误码前缀"
+    english: "error_code_prefix"
+    definition: "错误码的领域标识前缀"
+    type: string
+    allowed_values: ["ERR_AUTH_", "ERR_VAL_", "ERR_SYS_", "ERR_NET_", "ERR_BUS_"]
+    aliases: ["错误码分类", "error_category"]
+
+  # ═══════════════════════════════════════════════════════════════════════════
+  # 技术文档术语 — 无约束标准化术语
+  # ═══════════════════════════════════════════════════════════════════════════
+
+  - name: "回调地址"
+    english: "callback_url"
+    definition: "异步操作完成后回调通知的目标地址"
+    type: string
+    aliases: ["webhook 地址", "通知回调", "回调 URL"]
