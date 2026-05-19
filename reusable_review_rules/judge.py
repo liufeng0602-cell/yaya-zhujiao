@@ -154,6 +154,9 @@ class Judge:
         -------
         Decision
         """
+        # ── clamp max_iterations to prevent infinite loop / zero cap ──
+        max_iterations = max(max_iterations, 1)
+
         counts = {
             'P0': len(report.get('P0', [])),
             'P1': len(report.get('P1', [])),

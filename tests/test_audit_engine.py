@@ -7,6 +7,7 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 from reusable_review_rules.audit_engine import AuditEngine
 from reusable_review_rules.base_checker import BaseChecker, CheckResult
 from reusable_review_rules.builtin_checkers import get_default_checkers
+from reusable_review_rules.strategy_pack import StrategyPack
 
 
 # ── Dummy checkers for testing ───────────────────────────────────────
@@ -37,6 +38,15 @@ class AlwaysP1Checker(BaseChecker):
     layer = 1
     def check(self, document, tracker):
         return [CheckResult('P1', self.id, 'forced P1')]
+
+class AlwaysP2Checker(BaseChecker):
+    id = 'test/always_p2'
+    name = 'Always P2'
+    description = 'Always reports a P2 issue.'
+    severity = 'P2'
+    layer = 2
+    def check(self, document, tracker):
+        return [CheckResult('P2', self.id, 'forced P2')]
 
 
 # ── Tests ────────────────────────────────────────────────────────────
@@ -110,16 +120,64 @@ def test_p0_and_p1_collected():
     print('  PASS P0 and P1 both collected')
 
 
-def test_skip_layer_via_checker_selection():
-    """Selectively register checkers of different layers (no skip_layer param)."""
+def test_p2_collected():
+    """P2 issues from registered checkers are collected."""
+    engine = AuditEngine()
+    engine.register(AlwaysP2Checker())
+    audit = engine.run('doc')
+    assert len(audit['P2']) == 1
+    assert audit['P2'][0]['check_id'] == 'test/always_p2'
+    print('  PASS P2 collected')
+
+
+def test_layer_attribute_present():
+    """Checkers have a 'layer' attribute for skip_layer filtering."""
     engine = AuditEngine()
     engine.register(AlwaysP0Checker())     # layer 0
     engine.register(AlwaysP1Checker())     # layer 1
     audit = engine.run('doc')
-    # Both run — no skip mechanism exists yet
     assert len(audit['P0']) == 1
     assert len(audit['P1']) == 1
     print('  PASS layer attribute present on checkers')
+
+
+def test_skip_layer_blocks_layer1():
+    """skip_layer=1 should skip all checkers with layer >= 1."""
+    engine = AuditEngine(skip_layer=1)
+    engine.register(AlwaysP0Checker())     # layer 0 — should run
+    engine.register(AlwaysP1Checker())     # layer 1 — should be skipped
+    engine.register(AlwaysPassChecker())   # layer 1 — should be skipped
+    audit = engine.run('doc')
+    assert len(audit['P0']) == 1, 'P0 should still fire'
+    assert len(audit['P1']) == 0, 'P1 should be skipped'
+    assert 'test/always_p1' in audit['skipped']
+    assert 'test/always_pass' in audit['skipped']
+    print('  PASS skip_layer=1 blocks Layer 1 checkers')
+
+
+def test_skip_layer_0_skips_all():
+    """skip_layer=0 should skip all checkers (layer >= 0 is always true)."""
+    engine = AuditEngine(skip_layer=0)
+    engine.register(AlwaysP0Checker())
+    engine.register(AlwaysP1Checker())
+    audit = engine.run('doc')
+    assert len(audit['P0']) == 0, 'P0 should be skipped'
+    assert len(audit['P1']) == 0, 'P1 should be skipped'
+    assert audit['checkers'] == []
+    assert len(audit['skipped']) == 2
+    print('  PASS skip_layer=0 skips all checkers')
+
+
+def test_skip_layer_none_runs_all():
+    """skip_layer=None (default) runs all registered checkers."""
+    engine = AuditEngine()
+    engine.register(AlwaysP0Checker())
+    engine.register(AlwaysP1Checker())
+    audit = engine.run('doc')
+    assert len(audit['P0']) == 1
+    assert len(audit['P1']) == 1
+    assert audit['skipped'] == []
+    print('  PASS skip_layer=None runs all')
 
 
 def test_run_idempotent():
@@ -157,6 +215,46 @@ def test_builtin_checkers_all():
     print('  PASS all 6 built-in checkers')
 
 
+def test_load_strategy_injects_checkers():
+    """load_strategy() appends strategy checkers and injects prompts."""
+    engine = AuditEngine()
+
+    # Create a strategy pack with one checker and config
+    checker = AlwaysP2Checker()
+    pack = StrategyPack(
+        prompts={'test/always_p2': {'main': 'check this'}},
+        checkers=[checker],
+        config={'max_iterations': 10},
+    )
+    engine.load_strategy(pack)
+    ids = engine.checker_ids
+    assert 'test/always_p2' in ids
+    assert getattr(checker, '_strategy_prompts', None) == {'main': 'check this'}
+    print('  PASS load_strategy injects checkers and prompts')
+
+
+def test_load_strategy_config_accessible():
+    """Config from strategy pack is accessible via get_config()."""
+    engine = AuditEngine()
+    pack = StrategyPack(
+        prompts={},
+        checkers=[],
+        config={'max_iterations': 10, 'max_body_size': 9999},
+    )
+    engine.load_strategy(pack)
+    assert engine.get_config('max_iterations') == 10
+    assert engine.get_config('max_body_size') == 9999
+    assert engine.get_config('nonexistent', 'default') == 'default'
+    print('  PASS load_strategy config accessible')
+
+
+def test_load_strategy_no_pack_returns_default():
+    """get_config() returns default when no strategy pack loaded."""
+    engine = AuditEngine()
+    assert engine.get_config('max_iterations', 6) == 6
+    print('  PASS get_config default without pack')
+
+
 # ── Run all ──────────────────────────────────────────────────────────
 
 if __name__ == '__main__':
@@ -168,8 +266,15 @@ if __name__ == '__main__':
     test_clean_document()
     test_p0_collected()
     test_p0_and_p1_collected()
-    test_skip_layer_via_checker_selection()
+    test_p2_collected()
+    test_layer_attribute_present()
+    test_skip_layer_blocks_layer1()
+    test_skip_layer_0_skips_all()
+    test_skip_layer_none_runs_all()
     test_run_idempotent()
     test_duration_ms_nonzero()
     test_builtin_checkers_all()
+    test_load_strategy_injects_checkers()
+    test_load_strategy_config_accessible()
+    test_load_strategy_no_pack_returns_default()
     print('\nAll audit_engine tests PASSED')

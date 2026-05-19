@@ -1,4 +1,5 @@
-"""Strategy pack interface — closed-source extension contract.
+"""
+Strategy pack interface — closed-source extension contract.
 
 The open-source framework ships with 6 built-in checkers (L0 + L1).
 Closed-source strategy packs inject additional capabilities at
@@ -36,13 +37,14 @@ class StrategyPack:
     Fields
     ------
     prompts : dict
-        Mapping of ``{checker_id: prompt_template_string}``.
-        Layer 2 checkers access their prompt via ``self.prompts[checker_id]``
-        which is set on the checker instance at registration time.
+        Mapping of ``{checker_id: {purpose: prompt_template}}``.
+        Example: ``{"llm/arch_contradiction": {"main": "...", "cross_validate": "..."}}``.
+        The inner dict keys are purposes (``"main"``, ``"cross_validate"``, etc.)
+        and are consumed by the checker's ``_strategy_prompts`` attribute.
     checkers : list[BaseChecker]
         Additional checkers (typically Layer 2) to register.
-        Each checker's ``prompts`` attribute will be set to ``self`` so it
-        can retrieve its prompt template.
+        Each checker's ``_strategy_prompts`` attribute is set to the resolved
+        prompts dict at registration time.
     config : dict
         Arbitrary configuration keys consumed by checkers or the pipeline:
           - ``max_iterations`` (int, default 6) — override Judge iteration cap
@@ -52,7 +54,7 @@ class StrategyPack:
         Absolute path to a ``glossary.yaml`` file.  ``None`` if unused.
     """
 
-    prompts: Dict[str, str] = field(default_factory=dict)
+    prompts: Dict[str, Dict[str, str]] = field(default_factory=dict)
     checkers: List[BaseChecker] = field(default_factory=list)
     config: Dict[str, Any] = field(default_factory=dict)
     glossary_path: Optional[str] = None
@@ -71,11 +73,16 @@ class StrategyPack:
 
     def __post_init__(self):
         """Validate invariants."""
-        for cid in self.prompts:
+        for cid, purpose_map in self.prompts.items():
             if '/' not in cid:
                 raise ValueError(
                     f"Prompt key '{cid}' must use dot-notation checker ID "
                     f"(e.g. 'llm/hardcoded_ip')."
+                )
+            if not isinstance(purpose_map, dict):
+                raise ValueError(
+                    f"Prompt value for '{cid}' must be a dict "
+                    f"{{purpose: template}}, got {type(purpose_map).__name__}."
                 )
         for c in self.checkers:
             if not hasattr(c, 'layer'):

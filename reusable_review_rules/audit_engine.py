@@ -29,16 +29,23 @@ Usage
     else:
         print(f'Clean: {len(report["P2"])} advisory notes.')
 
+Strategy pack injection
+-----------------------
+    pack = StrategyPack.load("path/to/pack.yaml")
+    engine = AuditEngine()
+    engine.load_strategy(pack)      # Must call BEFORE run()
+    report = engine.run(document)
+
+    # Read config values from the loaded pack
+    max_iter = engine.get_config('max_iterations', 6)
+
+Calling load_strategy() is optional — the engine works without it.
+
 Zero external dependency (stdlib only).
 """
 
 import time
-from typing import Dict, List, Any
-
-from reusable_review_rules.base_checker import BaseChecker, CheckResult
-from reusable_review_rules.hardcoded_tracker import scan
-from reusable_review_rules.hardcoded_tracker import param_values_by_name
-from reusable_review_rules.hardcoded_tracker import config_fields_by_entity
+from typing import Dict, List, Any, Optional
 
 
 class AuditEngine:
@@ -53,12 +60,14 @@ class AuditEngine:
     """
 
     def __init__(self, skip_layer: int | None = None):
-        self._checkers: List[BaseChecker] = []
+        self._checkers: List['BaseChecker'] = []
         self._skip_layer = skip_layer
+        self._strategy_config: Dict[str, Any] = {}
+        self._glossary_path: Optional[str] = None
 
     # ── registration ────────────────────────────────────────────────
 
-    def register(self, checker: BaseChecker) -> None:
+    def register(self, checker: 'BaseChecker') -> None:
         """Register a checker instance.
 
         Raises ``ValueError`` if another checker with the same ``id`` is
@@ -68,7 +77,7 @@ class AuditEngine:
             raise ValueError(f"Duplicate checker id: {checker.id!r}")
         self._checkers.append(checker)
 
-    def register_list(self, checkers: List[BaseChecker]) -> None:
+    def register_list(self, checkers: List['BaseChecker']) -> None:
         """Register multiple checkers at once."""
         for c in checkers:
             self.register(c)
@@ -77,6 +86,51 @@ class AuditEngine:
     def checker_ids(self) -> List[str]:
         """Return IDs of all registered checkers."""
         return [c.id for c in self._checkers]
+
+    # ── strategy pack injection ─────────────────────────────────────
+
+    def load_strategy(self, pack: 'StrategyPack') -> None:
+        """Inject a strategy pack.
+
+        Must be called before ``run()``.  Calling after ``run()`` will
+        not affect audits already executed.
+
+        Merging: strategy pack checkers are **appended** to existing
+        registered checkers.  Duplicate checker IDs are rejected.
+
+        Each strategy checker has its ``_strategy_prompts`` attribute set
+        to the prompts dict resolved for that checker ID from the pack.
+        """
+        from reusable_review_rules.strategy_pack import StrategyPack
+        # Type check for callers that may bypass the type hint
+        if not isinstance(pack, StrategyPack):
+            raise TypeError(f"Expected StrategyPack instance, got {type(pack).__name__}")
+
+        # Store config for external consumers (Judge, etc.)
+        self._strategy_config = dict(pack.config)
+
+        # Set glossary path if present
+        if pack.glossary_path:
+            self._glossary_path = pack.glossary_path
+
+        # Register each strategy checker with its prompts injected
+        for checker in pack.checkers:
+            checker_id = checker.id
+            prompts_for_checker = pack.prompts.get(checker_id, {})
+            checker._strategy_prompts = prompts_for_checker
+            self.register(checker)
+
+    def get_config(self, key: str, default: Any = None) -> Any:
+        """Read a config value from the loaded strategy pack.
+
+        Returns ``default`` if no strategy pack has been loaded or the
+        key is not present.
+        """
+        return self._strategy_config.get(key, default)
+
+    def get_glossary_path(self) -> Optional[str]:
+        """Return the glossary path from the loaded strategy pack, if any."""
+        return self._glossary_path
 
     # ── execution ───────────────────────────────────────────────────
 
@@ -94,13 +148,15 @@ class AuditEngine:
           'skipped'  — list of checker IDs that were skipped
           'duration_ms' — wall-clock time in milliseconds
         """
+        from reusable_review_rules.hardcoded_tracker import scan
+
         t0 = time.perf_counter()
 
         # ── scan markers ─────────────────────────────────────────────
         tracker = scan(document)
 
         # ── run each checker ─────────────────────────────────────────
-        issues: List[CheckResult] = []
+        issues: List = []
         skipped: List[str] = []
         ran: List[str] = []
 
@@ -112,6 +168,7 @@ class AuditEngine:
             issues.extend(checker.check(document, tracker))
 
         # ── promote tracker errors to P2 issues ──────────────────────
+        from reusable_review_rules.base_checker import CheckResult
         for err in tracker.get('errors', []):
             issues.append(CheckResult(
                 severity='P2',

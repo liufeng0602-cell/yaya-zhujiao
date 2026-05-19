@@ -136,6 +136,38 @@ def test_custom_max_iterations():
     print('  PASS custom max_iterations=3 respected')
 
 
+def test_max_iterations_zero_is_clamped():
+    """max_iterations=0 should be clamped to 1, not block on first pass."""
+    d = Judge.evaluate(make_report(p0=1), iteration=0, max_iterations=0)
+    # Clamped to 1: iteration=0 < 1, so not blocked
+    assert d.state == 'needs_revision', f"Expected needs_revision, got {d.state}"
+    d2 = Judge.evaluate(make_report(p0=1), iteration=1, max_iterations=0)
+    # iteration=1 >= clamped max_iterations=1 -> blocked
+    assert d2.state == 'blocked', f"Expected blocked, got {d2.state}"
+    print('  PASS max_iterations=0 clamped to 1')
+
+
+def test_should_block_property():
+    """Decision.should_block is True for needs_revision and blocked."""
+    for state in ('needs_revision', 'blocked'):
+        d = Decision(state=state, reason='x', issue_counts={'P0': 0, 'P1': 0, 'P2': 0})
+        assert d.should_block is True, f"{state}.should_block should be True"
+    for state in ('p2_clearing', 'waiting_human_review'):
+        d = Decision(state=state, reason='x', issue_counts={'P0': 0, 'P1': 0, 'P2': 0})
+        assert d.should_block is False, f"{state}.should_block should be False"
+    print('  PASS should_block property')
+
+
+def test_is_clean_property():
+    """Decision.is_clean is True only for waiting_human_review."""
+    d = Decision(state='waiting_human_review', reason='x', issue_counts={'P0': 0, 'P1': 0, 'P2': 0})
+    assert d.is_clean is True
+    for state in ('needs_revision', 'blocked', 'p2_clearing'):
+        d = Decision(state=state, reason='x', issue_counts={'P0': 0, 'P1': 0, 'P2': 0})
+        assert d.is_clean is False, f"{state}.is_clean should be False"
+    print('  PASS is_clean property')
+
+
 # ── Run all ──────────────────────────────────────────────────────────
 
 if __name__ == '__main__':
@@ -156,4 +188,7 @@ if __name__ == '__main__':
     test_iteration_cap_clean_not_blocked()
     test_iteration_over_cap_clean_not_blocked()
     test_custom_max_iterations()
+    test_max_iterations_zero_is_clamped()
+    test_should_block_property()
+    test_is_clean_property()
     print('\nAll judge tests PASSED')

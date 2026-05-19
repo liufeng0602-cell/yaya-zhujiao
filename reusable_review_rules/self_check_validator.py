@@ -305,7 +305,7 @@ def _parse_yaml_simple(yaml_text: str) -> Optional[Dict[str, Any]]:
     return result
 
 
-_QUOTED_RE = re.compile(r"""^(["'])(.*)\1$""", re.DOTALL)
+_QUOTED_RE = re.compile(r"""^(["'])(.*?)\1$""", re.DOTALL)
 
 
 def _parse_scalar(val_str: str) -> Any:

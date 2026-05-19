@@ -113,6 +113,9 @@ and launches the Writer process, which picks up the card from `backlog` (via
 `try_claim_task`) and enters `drafting`.  After commit, the Writer transitions
 the card to `awaiting_review` or `re_review`, which triggers the Reviewer again.
 
+*Implementation detail: see DEV_GUIDE.md §3.1 (Writer trigger) and §4.1
+(Reviewer trigger) for the NOTIFY file format and fswatch lifecycle.*
+
 ---
 
 ## Quick Start

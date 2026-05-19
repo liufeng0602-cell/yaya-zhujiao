@@ -5,6 +5,7 @@ import os
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 
 from reusable_review_rules.self_check_validator import SelfCheckReportValidator
+from reusable_review_rules.self_check_validator import _parse_scalar
 
 
 # ── Helpers ──────────────────────────────────────────────────────────
@@ -51,7 +52,35 @@ VALID_TRACKER = {
 }
 
 
-# ── Tests ────────────────────────────────────────────────────────────
+# ── _parse_scalar unit tests ─────────────────────────────────────────
+
+def test_parse_scalar_empty():
+    """Regression: _parse_scalar('') must not raise IndexError."""
+    result = _parse_scalar('')
+    assert result == '', repr(result)
+    print('  PASS _parse_scalar empty string')
+
+
+def test_parse_scalar_quoted_empty():
+    result = _parse_scalar('""')
+    assert result == '', repr(result)
+    print('  PASS _parse_scalar quoted empty string')
+
+
+def test_parse_scalar_normal():
+    result = _parse_scalar('hello')
+    assert result == 'hello', repr(result)
+    print('  PASS _parse_scalar normal string')
+
+
+def test_parse_scalar_bool_and_int():
+    assert _parse_scalar('true') is True
+    assert _parse_scalar('false') is False
+    assert _parse_scalar('42') == 42
+    print('  PASS _parse_scalar bool and int')
+
+
+# ── Integration tests ────────────────────────────────────────────────
 
 def test_valid_report():
     data, issues = SelfCheckReportValidator.validate(VALID_DOC, VALID_TRACKER)
@@ -81,19 +110,24 @@ checks: {}
     print('  PASS missing required key')
 
 
-def test_version_int():
-    """version as int should be rejected (must be str)."""
+def test_version_int_rejected():
+    """version as int (2) should be flagged as P1 issue."""
     doc = make_doc("""<self_check_report>
 version: 2
 checks:
-  v: true
+  v:
     result: true
 reported_params: []
 reported_configs: []
 </self_check_report>""")
-    # This has a malformed YAML block, but test the concept
-    # Actually let me just verify the KEY_TYPES restriction works
-    pass
+    data, issues = SelfCheckReportValidator.validate(doc, VALID_TRACKER)
+    # Must not crash
+    assert data is not None
+    # Should have at least one type-related issue for version
+    version_issues = [i for i in issues if 'version' in i.get('msg', '').lower()]
+    assert len(version_issues) >= 1, f"Expected version type issue, got: {[i['msg'] for i in issues]}"
+    assert version_issues[0]['severity'] == 'P1'
+    print('  PASS version int rejected with P1 issue')
 
 
 def test_empty_report():
@@ -144,9 +178,14 @@ def test_no_tracker():
 
 if __name__ == '__main__':
     print('=== test_self_check_validator ===')
+    test_parse_scalar_empty()
+    test_parse_scalar_quoted_empty()
+    test_parse_scalar_normal()
+    test_parse_scalar_bool_and_int()
     test_valid_report()
     test_no_report_block()
     test_missing_required_key()
+    test_version_int_rejected()
     test_empty_report()
     test_tracker_cross_check_missing_param()
     test_report_after_doc_end()

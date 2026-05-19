@@ -73,15 +73,21 @@ class SelfCheckReportChecker(BaseChecker):
             document, tracker,
         )
 
-        return [
-            CheckResult(
+        results = []
+        for iss in issues:
+            msg = iss['msg']
+            if iss.get('severity') == 'P0':
+                msg += (
+                    ' (Writer export gate: auto-fix not yet active — '
+                    'this is a Reviewer-side check)'
+                )
+            results.append(CheckResult(
                 severity=iss.get('severity', 'P2'),
                 check_id=f"{self.id}/{iss.get('check_id', iss['msg'].split()[0].lower().strip('<>'))}",
-                msg=iss['msg'],
+                msg=msg,
                 location=iss.get('location'),
-            )
-            for iss in issues
-        ]
+            ))
+        return results
 
 
 # ══════════════════════════════════════════════════════════════════════
