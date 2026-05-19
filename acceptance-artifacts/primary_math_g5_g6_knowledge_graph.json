@@ -1,0 +1,6469 @@
+{
+  "schema": "yaya.adaptive_engine.knowledge_graph.v1",
+  "scope": "primary_math_g5_g6_pep",
+  "status": "phase2_reviewed",
+  "generatedAt": "2026-05-14T00:30:00.000000",
+  "summary": {
+    "totalNodes": 189,
+    "aLevelNodes": 16,
+    "bLevelNodes": 53,
+    "cLevelNodes": 100,
+    "dLevelNodes": 20,
+    "nodesWithPrerequisites": 158,
+    "nodesWithNext": 161,
+    "emptyPrerequisitesAnnotated": 31,
+    "emptyNextAnnotated": 28,
+    "status": "phase2_reviewed — 31 starters + 28 terminals annotated"
+  },
+  "nodes": [
+    {
+      "knowledgeCode": "M5S1-0",
+      "name": "小数乘整数的计算意义",
+      "grade": "5",
+      "book": "上册",
+      "unit": "第一单元 小数乘法",
+      "lesson": "1.小数乘整数",
+      "level": "A",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs5s/",
+      "prerequisites": [
+        "M4S2-6"
+      ],
+      "next": [
+        "M5S1-1"
+      ],
+      "questionTypes": [
+        "decimal_mul_int",
+        "decimal_mul_decimal",
+        "decimal_mul_approx",
+        "decimal_mul_law",
+        "decimal_mul_word"
+      ],
+      "commonErrors": [
+        "decimal_point_position_error",
+        "decimal_mul_carry_error",
+        "decimal_mul_factor_change_error"
+      ],
+      "strategyPacks": [
+        "decimal_point_visual_anchor",
+        "integer_then_adjust",
+        "estimation_guard"
+      ],
+      "masteryRule": "A_individual_v1",
+      "status": "draft",
+      "prereq_note": "LEGIT_STARTER: 该课时/单元起始节点，无前置合理"
+    },
+    {
+      "knowledgeCode": "M5S1-1",
+      "name": "小数乘整数笔算方法",
+      "grade": "5",
+      "book": "上册",
+      "unit": "第一单元 小数乘法",
+      "lesson": "1.小数乘整数",
+      "level": "C",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs5s/",
+      "prerequisites": [
+        "M5S1-0",
+        "M4S2-13"
+      ],
+      "next": [
+        "M5S1-2"
+      ],
+      "questionTypes": [
+        "decimal_mul_int",
+        "decimal_mul_decimal",
+        "decimal_mul_approx",
+        "decimal_mul_law",
+        "decimal_mul_word"
+      ],
+      "commonErrors": [
+        "decimal_point_position_error",
+        "decimal_mul_carry_error",
+        "decimal_mul_factor_change_error"
+      ],
+      "strategyPacks": [
+        "decimal_point_visual_anchor",
+        "integer_then_adjust",
+        "estimation_guard"
+      ],
+      "masteryRule": "A_individual_v1",
+      "status": "draft"
+    },
+    {
+      "knowledgeCode": "M5S1-10",
+      "name": "小数乘法简便运算技巧",
+      "grade": "5",
+      "book": "上册",
+      "unit": "第一单元 小数乘法",
+      "lesson": "4.整数乘法运算定律推广到小数",
+      "level": "C",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs5s/",
+      "prerequisites": [
+        "M5S1-9"
+      ],
+      "next": [
+        "M5S1-11"
+      ],
+      "questionTypes": [
+        "decimal_mul_int",
+        "decimal_mul_decimal",
+        "decimal_mul_approx",
+        "decimal_mul_law",
+        "decimal_mul_word"
+      ],
+      "commonErrors": [
+        "decimal_point_position_error",
+        "decimal_mul_carry_error",
+        "decimal_mul_factor_change_error"
+      ],
+      "strategyPacks": [
+        "decimal_point_visual_anchor",
+        "integer_then_adjust",
+        "estimation_guard"
+      ],
+      "masteryRule": "B_standard_v1",
+      "status": "draft"
+    },
+    {
+      "knowledgeCode": "M5S1-11",
+      "name": "分段计费问题（水费、电费、打车费）",
+      "grade": "5",
+      "book": "上册",
+      "unit": "第一单元 小数乘法",
+      "lesson": "5.解决问题",
+      "level": "D",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs5s/",
+      "prerequisites": [
+        "M5S1-10"
+      ],
+      "next": [
+        "M5S1-12"
+      ],
+      "questionTypes": [
+        "decimal_mul_int",
+        "decimal_mul_decimal",
+        "decimal_mul_approx",
+        "decimal_mul_law",
+        "decimal_mul_word"
+      ],
+      "commonErrors": [
+        "decimal_point_position_error",
+        "decimal_mul_carry_error",
+        "decimal_mul_factor_change_error"
+      ],
+      "strategyPacks": [
+        "decimal_point_visual_anchor",
+        "integer_then_adjust",
+        "estimation_guard"
+      ],
+      "masteryRule": "B_standard_v1",
+      "status": "draft"
+    },
+    {
+      "knowledgeCode": "M5S1-12",
+      "name": "估算解决实际购物问题",
+      "grade": "5",
+      "book": "上册",
+      "unit": "第一单元 小数乘法",
+      "lesson": "5.解决问题",
+      "level": "D",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs5s/",
+      "prerequisites": [
+        "M5S1-11"
+      ],
+      "next": [
+        "M5S1-13"
+      ],
+      "questionTypes": [
+        "decimal_mul_int",
+        "decimal_mul_decimal",
+        "decimal_mul_approx",
+        "decimal_mul_law",
+        "decimal_mul_word"
+      ],
+      "commonErrors": [
+        "decimal_point_position_error",
+        "decimal_mul_carry_error",
+        "decimal_mul_factor_change_error"
+      ],
+      "strategyPacks": [
+        "decimal_point_visual_anchor",
+        "integer_then_adjust",
+        "estimation_guard"
+      ],
+      "masteryRule": "B_standard_v1",
+      "status": "draft"
+    },
+    {
+      "knowledgeCode": "M5S1-13",
+      "name": "小数乘法综合计算",
+      "grade": "5",
+      "book": "上册",
+      "unit": "第一单元 小数乘法",
+      "lesson": "6.单元整理复习",
+      "level": "C",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs5s/",
+      "prerequisites": [
+        "M5S1-12"
+      ],
+      "next": [
+        "M5S1-14"
+      ],
+      "questionTypes": [
+        "decimal_mul_int",
+        "decimal_mul_decimal",
+        "decimal_mul_approx",
+        "decimal_mul_law",
+        "decimal_mul_word"
+      ],
+      "commonErrors": [
+        "decimal_point_position_error",
+        "decimal_mul_carry_error",
+        "decimal_mul_factor_change_error"
+      ],
+      "strategyPacks": [
+        "decimal_point_visual_anchor",
+        "integer_then_adjust",
+        "estimation_guard"
+      ],
+      "masteryRule": "B_standard_v1",
+      "status": "draft"
+    },
+    {
+      "knowledgeCode": "M5S1-14",
+      "name": "易错点辨析（小数点、末尾0）",
+      "grade": "5",
+      "book": "上册",
+      "unit": "第一单元 小数乘法",
+      "lesson": "6.单元整理复习",
+      "level": "C",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs5s/",
+      "prerequisites": [
+        "M5S1-13"
+      ],
+      "next": [],
+      "questionTypes": [
+        "decimal_mul_int",
+        "decimal_mul_decimal",
+        "decimal_mul_approx",
+        "decimal_mul_law",
+        "decimal_mul_word"
+      ],
+      "commonErrors": [
+        "decimal_point_position_error",
+        "decimal_mul_carry_error",
+        "decimal_mul_factor_change_error"
+      ],
+      "strategyPacks": [
+        "decimal_point_visual_anchor",
+        "integer_then_adjust",
+        "estimation_guard"
+      ],
+      "masteryRule": "B_standard_v1",
+      "status": "draft"
+    },
+    {
+      "knowledgeCode": "M5S1-15",
+      "name": "列、行定义（先列后行）",
+      "grade": "5",
+      "book": "上册",
+      "unit": "第二单元 位置",
+      "lesson": "1.用数对表示位置",
+      "level": "A",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs5s/",
+      "prerequisites": [],
+      "next": [
+        "M5S1-16"
+      ],
+      "questionTypes": [
+        "coordinate_read",
+        "coordinate_write",
+        "coordinate_movement"
+      ],
+      "commonErrors": [
+        "coordinate_col_row_error",
+        "coordinate_movement_error"
+      ],
+      "strategyPacks": [
+        "coordinate_grid_drill",
+        "movement_trace"
+      ],
+      "masteryRule": "B_standard_v1",
+      "status": "draft",
+      "prereq_note": "LEGIT_STARTER: 该课时/单元起始节点，无前置合理"
+    },
+    {
+      "knowledgeCode": "M5S1-16",
+      "name": "数对书写格式（列，行）",
+      "grade": "5",
+      "book": "上册",
+      "unit": "第二单元 位置",
+      "lesson": "1.用数对表示位置",
+      "level": "C",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs5s/",
+      "prerequisites": [
+        "M5S1-15"
+      ],
+      "next": [
+        "M5S1-17"
+      ],
+      "questionTypes": [
+        "coordinate_read",
+        "coordinate_write",
+        "coordinate_movement"
+      ],
+      "commonErrors": [
+        "coordinate_col_row_error",
+        "coordinate_movement_error"
+      ],
+      "strategyPacks": [
+        "coordinate_grid_drill",
+        "movement_trace"
+      ],
+      "masteryRule": "B_standard_v1",
+      "status": "draft"
+    },
+    {
+      "knowledgeCode": "M5S1-17",
+      "name": "根据数对找点",
+      "grade": "5",
+      "book": "上册",
+      "unit": "第二单元 位置",
+      "lesson": "2.方格纸上用数对确定位置",
+      "level": "C",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs5s/",
+      "prerequisites": [
+        "M5S1-16"
+      ],
+      "next": [
+        "M5S1-18"
+      ],
+      "questionTypes": [
+        "coordinate_read",
+        "coordinate_write",
+        "coordinate_movement"
+      ],
+      "commonErrors": [
+        "coordinate_col_row_error",
+        "coordinate_movement_error"
+      ],
+      "strategyPacks": [
+        "coordinate_grid_drill",
+        "movement_trace"
+      ],
+      "masteryRule": "B_standard_v1",
+      "status": "draft"
+    },
+    {
+      "knowledgeCode": "M5S1-18",
+      "name": "根据点写出数对",
+      "grade": "5",
+      "book": "上册",
+      "unit": "第二单元 位置",
+      "lesson": "2.方格纸上用数对确定位置",
+      "level": "C",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs5s/",
+      "prerequisites": [
+        "M5S1-17"
+      ],
+      "next": [
+        "M5S1-19"
+      ],
+      "questionTypes": [
+        "coordinate_read",
+        "coordinate_write",
+        "coordinate_movement"
+      ],
+      "commonErrors": [
+        "coordinate_col_row_error",
+        "coordinate_movement_error"
+      ],
+      "strategyPacks": [
+        "coordinate_grid_drill",
+        "movement_trace"
+      ],
+      "masteryRule": "B_standard_v1",
+      "status": "draft"
+    },
+    {
+      "knowledgeCode": "M5S1-19",
+      "name": "数对平移变化规律",
+      "grade": "5",
+      "book": "上册",
+      "unit": "第二单元 位置",
+      "lesson": "2.方格纸上用数对确定位置",
+      "level": "B",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs5s/",
+      "prerequisites": [
+        "M5S1-18"
+      ],
+      "next": [],
+      "questionTypes": [
+        "coordinate_read",
+        "coordinate_write",
+        "coordinate_movement"
+      ],
+      "commonErrors": [
+        "coordinate_col_row_error",
+        "coordinate_movement_error"
+      ],
+      "strategyPacks": [
+        "coordinate_grid_drill",
+        "movement_trace"
+      ],
+      "masteryRule": "B_standard_v1",
+      "status": "draft",
+      "next_note": "LEGIT_TERMINAL: 课时/单元终末节点，学习路径自然终点"
+    },
+    {
+      "knowledgeCode": "M5S1-2",
+      "name": "积末尾有0的化简规则",
+      "grade": "5",
+      "book": "上册",
+      "unit": "第一单元 小数乘法",
+      "lesson": "1.小数乘整数",
+      "level": "C",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs5s/",
+      "prerequisites": [
+        "M5S1-1"
+      ],
+      "next": [
+        "M5S1-3"
+      ],
+      "questionTypes": [
+        "decimal_mul_int",
+        "decimal_mul_decimal",
+        "decimal_mul_approx",
+        "decimal_mul_law",
+        "decimal_mul_word"
+      ],
+      "commonErrors": [
+        "decimal_point_position_error",
+        "decimal_mul_carry_error",
+        "decimal_mul_factor_change_error"
+      ],
+      "strategyPacks": [
+        "decimal_point_visual_anchor",
+        "integer_then_adjust",
+        "estimation_guard"
+      ],
+      "masteryRule": "A_individual_v1",
+      "status": "draft"
+    },
+    {
+      "knowledgeCode": "M5S1-20",
+      "name": "商的小数点对齐被除数小数点",
+      "grade": "5",
+      "book": "上册",
+      "unit": "第三单元 小数除法",
+      "lesson": "1.除数是整数的小数除法",
+      "level": "B",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs5s/",
+      "prerequisites": [
+        "M5S1-3"
+      ],
+      "next": [
+        "M5S1-21"
+      ],
+      "questionTypes": [
+        "decimal_div_int",
+        "decimal_div_by_decimal",
+        "decimal_div_approx",
+        "decimal_div_cycle",
+        "decimal_div_word"
+      ],
+      "commonErrors": [
+        "decimal_div_align_error",
+        "decimal_div_placement_error",
+        "decimal_div_approx_error",
+        "decimal_div_cycle_error"
+      ],
+      "strategyPacks": [
+        "division_algorithm_checklist",
+        "expand_divisor_method",
+        "context_approximation"
+      ],
+      "masteryRule": "A_individual_v1",
+      "status": "draft",
+      "prereq_note": "LEGIT_STARTER: 该课时/单元起始节点，无前置合理"
+    },
+    {
+      "knowledgeCode": "M5S1-21",
+      "name": "整数部分不够除补0",
+      "grade": "5",
+      "book": "上册",
+      "unit": "第三单元 小数除法",
+      "lesson": "1.除数是整数的小数除法",
+      "level": "C",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs5s/",
+      "prerequisites": [
+        "M5S1-20"
+      ],
+      "next": [
+        "M5S1-22"
+      ],
+      "questionTypes": [
+        "decimal_div_int",
+        "decimal_div_by_decimal",
+        "decimal_div_approx",
+        "decimal_div_cycle",
+        "decimal_div_word"
+      ],
+      "commonErrors": [
+        "decimal_div_align_error",
+        "decimal_div_placement_error",
+        "decimal_div_approx_error",
+        "decimal_div_cycle_error"
+      ],
+      "strategyPacks": [
+        "division_algorithm_checklist",
+        "expand_divisor_method",
+        "context_approximation"
+      ],
+      "masteryRule": "A_individual_v1",
+      "status": "draft"
+    },
+    {
+      "knowledgeCode": "M5S1-22",
+      "name": "除不尽末尾补0继续除",
+      "grade": "5",
+      "book": "上册",
+      "unit": "第三单元 小数除法",
+      "lesson": "1.除数是整数的小数除法",
+      "level": "C",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs5s/",
+      "prerequisites": [
+        "M5S1-21"
+      ],
+      "next": [
+        "M5S1-23"
+      ],
+      "questionTypes": [
+        "decimal_div_int",
+        "decimal_div_by_decimal",
+        "decimal_div_approx",
+        "decimal_div_cycle",
+        "decimal_div_word"
+      ],
+      "commonErrors": [
+        "decimal_div_align_error",
+        "decimal_div_placement_error",
+        "decimal_div_approx_error",
+        "decimal_div_cycle_error"
+      ],
+      "strategyPacks": [
+        "division_algorithm_checklist",
+        "expand_divisor_method",
+        "context_approximation"
+      ],
+      "masteryRule": "A_individual_v1",
+      "status": "draft"
+    },
+    {
+      "knowledgeCode": "M5S1-23",
+      "name": "利用商不变性质转化除数为整数",
+      "grade": "5",
+      "book": "上册",
+      "unit": "第三单元 小数除法",
+      "lesson": "2.一个数除以小数",
+      "level": "B",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs5s/",
+      "prerequisites": [
+        "M5S1-22"
+      ],
+      "next": [
+        "M5S1-24"
+      ],
+      "questionTypes": [
+        "decimal_div_int",
+        "decimal_div_by_decimal",
+        "decimal_div_approx",
+        "decimal_div_cycle",
+        "decimal_div_word"
+      ],
+      "commonErrors": [
+        "decimal_div_align_error",
+        "decimal_div_placement_error",
+        "decimal_div_approx_error",
+        "decimal_div_cycle_error"
+      ],
+      "strategyPacks": [
+        "division_algorithm_checklist",
+        "expand_divisor_method",
+        "context_approximation"
+      ],
+      "masteryRule": "A_individual_v1",
+      "status": "draft"
+    },
+    {
+      "knowledgeCode": "M5S1-24",
+      "name": "被除数位数不足补0",
+      "grade": "5",
+      "book": "上册",
+      "unit": "第三单元 小数除法",
+      "lesson": "2.一个数除以小数",
+      "level": "C",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs5s/",
+      "prerequisites": [
+        "M5S1-23"
+      ],
+      "next": [
+        "M5S1-25"
+      ],
+      "questionTypes": [
+        "decimal_div_int",
+        "decimal_div_by_decimal",
+        "decimal_div_approx",
+        "decimal_div_cycle",
+        "decimal_div_word"
+      ],
+      "commonErrors": [
+        "decimal_div_align_error",
+        "decimal_div_placement_error",
+        "decimal_div_approx_error",
+        "decimal_div_cycle_error"
+      ],
+      "strategyPacks": [
+        "division_algorithm_checklist",
+        "expand_divisor_method",
+        "context_approximation"
+      ],
+      "masteryRule": "A_individual_v1",
+      "status": "draft"
+    },
+    {
+      "knowledgeCode": "M5S1-25",
+      "name": "多算一位再四舍五入",
+      "grade": "5",
+      "book": "上册",
+      "unit": "第三单元 小数除法",
+      "lesson": "3.商的近似数",
+      "level": "C",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs5s/",
+      "prerequisites": [
+        "M5S1-24"
+      ],
+      "next": [
+        "M5S1-26"
+      ],
+      "questionTypes": [
+        "decimal_div_int",
+        "decimal_div_by_decimal",
+        "decimal_div_approx",
+        "decimal_div_cycle",
+        "decimal_div_word"
+      ],
+      "commonErrors": [
+        "decimal_div_align_error",
+        "decimal_div_placement_error",
+        "decimal_div_approx_error",
+        "decimal_div_cycle_error"
+      ],
+      "strategyPacks": [
+        "division_algorithm_checklist",
+        "expand_divisor_method",
+        "context_approximation"
+      ],
+      "masteryRule": "A_individual_v1",
+      "status": "draft"
+    },
+    {
+      "knowledgeCode": "M5S1-26",
+      "name": "生活场景保留位数规则",
+      "grade": "5",
+      "book": "上册",
+      "unit": "第三单元 小数除法",
+      "lesson": "3.商的近似数",
+      "level": "C",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs5s/",
+      "prerequisites": [
+        "M5S1-25"
+      ],
+      "next": [
+        "M5S1-27"
+      ],
+      "questionTypes": [
+        "decimal_div_int",
+        "decimal_div_by_decimal",
+        "decimal_div_approx",
+        "decimal_div_cycle",
+        "decimal_div_word"
+      ],
+      "commonErrors": [
+        "decimal_div_align_error",
+        "decimal_div_placement_error",
+        "decimal_div_approx_error",
+        "decimal_div_cycle_error"
+      ],
+      "strategyPacks": [
+        "division_algorithm_checklist",
+        "expand_divisor_method",
+        "context_approximation"
+      ],
+      "masteryRule": "A_individual_v1",
+      "status": "draft"
+    },
+    {
+      "knowledgeCode": "M5S1-27",
+      "name": "循环小数定义、循环节",
+      "grade": "5",
+      "book": "上册",
+      "unit": "第三单元 小数除法",
+      "lesson": "4.循环小数",
+      "level": "A",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs5s/",
+      "prerequisites": [
+        "M5S1-26"
+      ],
+      "next": [
+        "M5S1-28"
+      ],
+      "questionTypes": [
+        "decimal_div_int",
+        "decimal_div_by_decimal",
+        "decimal_div_approx",
+        "decimal_div_cycle",
+        "decimal_div_word"
+      ],
+      "commonErrors": [
+        "decimal_div_align_error",
+        "decimal_div_placement_error",
+        "decimal_div_approx_error",
+        "decimal_div_cycle_error"
+      ],
+      "strategyPacks": [
+        "division_algorithm_checklist",
+        "expand_divisor_method",
+        "context_approximation"
+      ],
+      "masteryRule": "A_individual_v1",
+      "status": "draft"
+    },
+    {
+      "knowledgeCode": "M5S1-28",
+      "name": "循环小数简写方式",
+      "grade": "5",
+      "book": "上册",
+      "unit": "第三单元 小数除法",
+      "lesson": "4.循环小数",
+      "level": "A",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs5s/",
+      "prerequisites": [
+        "M5S1-27"
+      ],
+      "next": [
+        "M5S1-29"
+      ],
+      "questionTypes": [
+        "decimal_div_int",
+        "decimal_div_by_decimal",
+        "decimal_div_approx",
+        "decimal_div_cycle",
+        "decimal_div_word"
+      ],
+      "commonErrors": [
+        "decimal_div_align_error",
+        "decimal_div_placement_error",
+        "decimal_div_approx_error",
+        "decimal_div_cycle_error"
+      ],
+      "strategyPacks": [
+        "division_algorithm_checklist",
+        "expand_divisor_method",
+        "context_approximation"
+      ],
+      "masteryRule": "A_individual_v1",
+      "status": "draft"
+    },
+    {
+      "knowledgeCode": "M5S1-29",
+      "name": "有限小数、无限小数区分",
+      "grade": "5",
+      "book": "上册",
+      "unit": "第三单元 小数除法",
+      "lesson": "4.循环小数",
+      "level": "A",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs5s/",
+      "prerequisites": [
+        "M5S1-28"
+      ],
+      "next": [
+        "M5S1-30"
+      ],
+      "questionTypes": [
+        "decimal_div_int",
+        "decimal_div_by_decimal",
+        "decimal_div_approx",
+        "decimal_div_cycle",
+        "decimal_div_word"
+      ],
+      "commonErrors": [
+        "decimal_div_align_error",
+        "decimal_div_placement_error",
+        "decimal_div_approx_error",
+        "decimal_div_cycle_error"
+      ],
+      "strategyPacks": [
+        "division_algorithm_checklist",
+        "expand_divisor_method",
+        "context_approximation"
+      ],
+      "masteryRule": "A_individual_v1",
+      "status": "draft"
+    },
+    {
+      "knowledgeCode": "M5S1-3",
+      "name": "小数乘小数算理（转化整数乘法）",
+      "grade": "5",
+      "book": "上册",
+      "unit": "第一单元 小数乘法",
+      "lesson": "2.小数乘小数",
+      "level": "B",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs5s/",
+      "prerequisites": [
+        "M5S1-2"
+      ],
+      "next": [
+        "M5S1-4",
+        "M5S1-20"
+      ],
+      "questionTypes": [
+        "decimal_mul_int",
+        "decimal_mul_decimal",
+        "decimal_mul_approx",
+        "decimal_mul_law",
+        "decimal_mul_word"
+      ],
+      "commonErrors": [
+        "decimal_point_position_error",
+        "decimal_mul_carry_error",
+        "decimal_mul_factor_change_error"
+      ],
+      "strategyPacks": [
+        "decimal_point_visual_anchor",
+        "integer_then_adjust",
+        "estimation_guard"
+      ],
+      "masteryRule": "A_individual_v1",
+      "status": "draft"
+    },
+    {
+      "knowledgeCode": "M5S1-30",
+      "name": "小数除法规律观察归纳",
+      "grade": "5",
+      "book": "上册",
+      "unit": "第三单元 小数除法",
+      "lesson": "5.用计算器探索规律",
+      "level": "B",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs5s/",
+      "prerequisites": [
+        "M5S1-29"
+      ],
+      "next": [
+        "M5S1-31"
+      ],
+      "questionTypes": [
+        "decimal_div_int",
+        "decimal_div_by_decimal",
+        "decimal_div_approx",
+        "decimal_div_cycle",
+        "decimal_div_word"
+      ],
+      "commonErrors": [
+        "decimal_div_align_error",
+        "decimal_div_placement_error",
+        "decimal_div_approx_error",
+        "decimal_div_cycle_error"
+      ],
+      "strategyPacks": [
+        "division_algorithm_checklist",
+        "expand_divisor_method",
+        "context_approximation"
+      ],
+      "masteryRule": "A_individual_v1",
+      "status": "draft"
+    },
+    {
+      "knowledgeCode": "M5S1-31",
+      "name": "进一法（装桶、装箱）",
+      "grade": "5",
+      "book": "上册",
+      "unit": "第三单元 小数除法",
+      "lesson": "6.解决问题",
+      "level": "D",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs5s/",
+      "prerequisites": [
+        "M5S1-30"
+      ],
+      "next": [
+        "M5S1-32"
+      ],
+      "questionTypes": [
+        "decimal_div_int",
+        "decimal_div_by_decimal",
+        "decimal_div_approx",
+        "decimal_div_cycle",
+        "decimal_div_word"
+      ],
+      "commonErrors": [
+        "decimal_div_align_error",
+        "decimal_div_placement_error",
+        "decimal_div_approx_error",
+        "decimal_div_cycle_error"
+      ],
+      "strategyPacks": [
+        "division_algorithm_checklist",
+        "expand_divisor_method",
+        "context_approximation"
+      ],
+      "masteryRule": "A_individual_v1",
+      "status": "draft"
+    },
+    {
+      "knowledgeCode": "M5S1-32",
+      "name": "去尾法（做衣服、购买物品）",
+      "grade": "5",
+      "book": "上册",
+      "unit": "第三单元 小数除法",
+      "lesson": "6.解决问题",
+      "level": "D",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs5s/",
+      "prerequisites": [
+        "M5S1-31"
+      ],
+      "next": [
+        "M5S1-33"
+      ],
+      "questionTypes": [
+        "decimal_div_int",
+        "decimal_div_by_decimal",
+        "decimal_div_approx",
+        "decimal_div_cycle",
+        "decimal_div_word"
+      ],
+      "commonErrors": [
+        "decimal_div_align_error",
+        "decimal_div_placement_error",
+        "decimal_div_approx_error",
+        "decimal_div_cycle_error"
+      ],
+      "strategyPacks": [
+        "division_algorithm_checklist",
+        "expand_divisor_method",
+        "context_approximation"
+      ],
+      "masteryRule": "A_individual_v1",
+      "status": "draft"
+    },
+    {
+      "knowledgeCode": "M5S1-33",
+      "name": "小数乘除法对比辨析",
+      "grade": "5",
+      "book": "上册",
+      "unit": "第三单元 小数除法",
+      "lesson": "7.单元整理复习",
+      "level": "C",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs5s/",
+      "prerequisites": [
+        "M5S1-32"
+      ],
+      "next": [],
+      "questionTypes": [
+        "decimal_div_int",
+        "decimal_div_by_decimal",
+        "decimal_div_approx",
+        "decimal_div_cycle",
+        "decimal_div_word"
+      ],
+      "commonErrors": [
+        "decimal_div_align_error",
+        "decimal_div_placement_error",
+        "decimal_div_approx_error",
+        "decimal_div_cycle_error"
+      ],
+      "strategyPacks": [
+        "division_algorithm_checklist",
+        "expand_divisor_method",
+        "context_approximation"
+      ],
+      "masteryRule": "A_individual_v1",
+      "status": "draft",
+      "next_note": "LEGIT_TERMINAL: 课时/单元终末节点，学习路径自然终点"
+    },
+    {
+      "knowledgeCode": "M5S1-34",
+      "name": "确定事件（一定、不可能）",
+      "grade": "5",
+      "book": "上册",
+      "unit": "第四单元 可能性",
+      "lesson": "1.可能性基础",
+      "level": "A",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs5s/",
+      "prerequisites": [],
+      "next": [
+        "M5S1-35"
+      ],
+      "questionTypes": [
+        "probability_certain",
+        "probability_uncertain",
+        "probability_scale"
+      ],
+      "commonErrors": [
+        "probability_misconception",
+        "probability_scale_error"
+      ],
+      "strategyPacks": [
+        "frequency_experiment",
+        "probability_line"
+      ],
+      "masteryRule": "B_standard_v1",
+      "status": "draft",
+      "prereq_note": "LEGIT_STARTER: 该课时/单元起始节点，无前置合理"
+    },
+    {
+      "knowledgeCode": "M5S1-35",
+      "name": "不确定事件（可能）",
+      "grade": "5",
+      "book": "上册",
+      "unit": "第四单元 可能性",
+      "lesson": "1.可能性基础",
+      "level": "B",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs5s/",
+      "prerequisites": [
+        "M5S1-34"
+      ],
+      "next": [
+        "M5S1-36"
+      ],
+      "questionTypes": [
+        "probability_certain",
+        "probability_uncertain",
+        "probability_scale"
+      ],
+      "commonErrors": [
+        "probability_misconception",
+        "probability_scale_error"
+      ],
+      "strategyPacks": [
+        "frequency_experiment",
+        "probability_line"
+      ],
+      "masteryRule": "B_standard_v1",
+      "status": "draft"
+    },
+    {
+      "knowledgeCode": "M5S1-36",
+      "name": "数量多少决定可能性大小",
+      "grade": "5",
+      "book": "上册",
+      "unit": "第四单元 可能性",
+      "lesson": "2.可能性大小",
+      "level": "C",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs5s/",
+      "prerequisites": [
+        "M5S1-35"
+      ],
+      "next": [
+        "M5S1-37"
+      ],
+      "questionTypes": [
+        "probability_certain",
+        "probability_uncertain",
+        "probability_scale"
+      ],
+      "commonErrors": [
+        "probability_misconception",
+        "probability_scale_error"
+      ],
+      "strategyPacks": [
+        "frequency_experiment",
+        "probability_line"
+      ],
+      "masteryRule": "B_standard_v1",
+      "status": "draft"
+    },
+    {
+      "knowledgeCode": "M5S1-37",
+      "name": "掷骰子概率实验分析",
+      "grade": "5",
+      "book": "上册",
+      "unit": "第四单元 可能性",
+      "lesson": "3.综合实践：掷一掷",
+      "level": "C",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs5s/",
+      "prerequisites": [
+        "M5S1-36"
+      ],
+      "next": [],
+      "questionTypes": [
+        "probability_certain",
+        "probability_uncertain",
+        "probability_scale"
+      ],
+      "commonErrors": [
+        "probability_misconception",
+        "probability_scale_error"
+      ],
+      "strategyPacks": [
+        "frequency_experiment",
+        "probability_line"
+      ],
+      "masteryRule": "C_basic_v1",
+      "status": "draft",
+      "next_note": "LEGIT_TERMINAL: 课时/单元终末节点，学习路径自然终点"
+    },
+    {
+      "knowledgeCode": "M5S1-38",
+      "name": "字母表示任意数、数量关系",
+      "grade": "5",
+      "book": "上册",
+      "unit": "第五单元 简易方程",
+      "lesson": "1.用字母表示数",
+      "level": "B",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs5s/",
+      "prerequisites": [
+        "M4S2-0"
+      ],
+      "next": [
+        "M5S1-39"
+      ],
+      "questionTypes": [
+        "equation_letter",
+        "equation_solve",
+        "equation_word_problem",
+        "equation_verify"
+      ],
+      "commonErrors": [
+        "equation_balance_error",
+        "equation_unknown_confusion",
+        "equation_word_mapping_error",
+        "equation_verify_skip"
+      ],
+      "strategyPacks": [
+        "balance_scale_visual",
+        "word_to_equation_map",
+        "solution_back_substitution"
+      ],
+      "masteryRule": "A_individual_v1",
+      "status": "draft",
+      "prereq_note": "LEGIT_STARTER: 该课时/单元起始节点，无前置合理"
+    },
+    {
+      "knowledgeCode": "M5S1-39",
+      "name": "字母乘法简写规则",
+      "grade": "5",
+      "book": "上册",
+      "unit": "第五单元 简易方程",
+      "lesson": "1.用字母表示数",
+      "level": "C",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs5s/",
+      "prerequisites": [
+        "M5S1-38"
+      ],
+      "next": [
+        "M5S1-40"
+      ],
+      "questionTypes": [
+        "equation_letter",
+        "equation_solve",
+        "equation_word_problem",
+        "equation_verify"
+      ],
+      "commonErrors": [
+        "equation_balance_error",
+        "equation_unknown_confusion",
+        "equation_word_mapping_error",
+        "equation_verify_skip"
+      ],
+      "strategyPacks": [
+        "balance_scale_visual",
+        "word_to_equation_map",
+        "solution_back_substitution"
+      ],
+      "masteryRule": "A_individual_v1",
+      "status": "draft"
+    },
+    {
+      "knowledgeCode": "M5S1-4",
+      "name": "小数点位置确定规则",
+      "grade": "5",
+      "book": "上册",
+      "unit": "第一单元 小数乘法",
+      "lesson": "2.小数乘小数",
+      "level": "B",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs5s/",
+      "prerequisites": [
+        "M5S1-3"
+      ],
+      "next": [
+        "M5S1-5"
+      ],
+      "questionTypes": [
+        "decimal_mul_int",
+        "decimal_mul_decimal",
+        "decimal_mul_approx",
+        "decimal_mul_law",
+        "decimal_mul_word"
+      ],
+      "commonErrors": [
+        "decimal_point_position_error",
+        "decimal_mul_carry_error",
+        "decimal_mul_factor_change_error"
+      ],
+      "strategyPacks": [
+        "decimal_point_visual_anchor",
+        "integer_then_adjust",
+        "estimation_guard"
+      ],
+      "masteryRule": "A_individual_v1",
+      "status": "draft"
+    },
+    {
+      "knowledgeCode": "M5S1-40",
+      "name": "代入求值计算",
+      "grade": "5",
+      "book": "上册",
+      "unit": "第五单元 简易方程",
+      "lesson": "1.用字母表示数",
+      "level": "C",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs5s/",
+      "prerequisites": [
+        "M5S1-39"
+      ],
+      "next": [
+        "M5S1-41"
+      ],
+      "questionTypes": [
+        "equation_letter",
+        "equation_solve",
+        "equation_word_problem",
+        "equation_verify"
+      ],
+      "commonErrors": [
+        "equation_balance_error",
+        "equation_unknown_confusion",
+        "equation_word_mapping_error",
+        "equation_verify_skip"
+      ],
+      "strategyPacks": [
+        "balance_scale_visual",
+        "word_to_equation_map",
+        "solution_back_substitution"
+      ],
+      "masteryRule": "A_individual_v1",
+      "status": "draft"
+    },
+    {
+      "knowledgeCode": "M5S1-41",
+      "name": "方程的定义（含有未知数的等式）",
+      "grade": "5",
+      "book": "上册",
+      "unit": "第五单元 简易方程",
+      "lesson": "2.解简易方程",
+      "level": "B",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs5s/",
+      "prerequisites": [
+        "M5S1-40"
+      ],
+      "next": [
+        "M5S1-42"
+      ],
+      "questionTypes": [
+        "equation_letter",
+        "equation_solve",
+        "equation_word_problem",
+        "equation_verify"
+      ],
+      "commonErrors": [
+        "equation_balance_error",
+        "equation_unknown_confusion",
+        "equation_word_mapping_error",
+        "equation_verify_skip"
+      ],
+      "strategyPacks": [
+        "balance_scale_visual",
+        "word_to_equation_map",
+        "solution_back_substitution"
+      ],
+      "masteryRule": "A_individual_v1",
+      "status": "draft"
+    },
+    {
+      "knowledgeCode": "M5S1-42",
+      "name": "等式的两条基本性质",
+      "grade": "5",
+      "book": "上册",
+      "unit": "第五单元 简易方程",
+      "lesson": "2.解简易方程",
+      "level": "B",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs5s/",
+      "prerequisites": [
+        "M5S1-41"
+      ],
+      "next": [
+        "M5S1-43"
+      ],
+      "questionTypes": [
+        "equation_letter",
+        "equation_solve",
+        "equation_word_problem",
+        "equation_verify"
+      ],
+      "commonErrors": [
+        "equation_balance_error",
+        "equation_unknown_confusion",
+        "equation_word_mapping_error",
+        "equation_verify_skip"
+      ],
+      "strategyPacks": [
+        "balance_scale_visual",
+        "word_to_equation_map",
+        "solution_back_substitution"
+      ],
+      "masteryRule": "A_individual_v1",
+      "status": "draft"
+    },
+    {
+      "knowledgeCode": "M5S1-43",
+      "name": "一步、两步方程解法",
+      "grade": "5",
+      "book": "上册",
+      "unit": "第五单元 简易方程",
+      "lesson": "2.解简易方程",
+      "level": "C",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs5s/",
+      "prerequisites": [
+        "M5S1-42",
+        "M4S2-5"
+      ],
+      "next": [
+        "M5S1-44",
+        "M6S2-19"
+      ],
+      "questionTypes": [
+        "equation_letter",
+        "equation_solve",
+        "equation_word_problem",
+        "equation_verify"
+      ],
+      "commonErrors": [
+        "equation_balance_error",
+        "equation_unknown_confusion",
+        "equation_word_mapping_error",
+        "equation_verify_skip"
+      ],
+      "strategyPacks": [
+        "balance_scale_visual",
+        "word_to_equation_map",
+        "solution_back_substitution"
+      ],
+      "masteryRule": "A_individual_v1",
+      "status": "draft"
+    },
+    {
+      "knowledgeCode": "M5S1-44",
+      "name": "方程检验格式",
+      "grade": "5",
+      "book": "上册",
+      "unit": "第五单元 简易方程",
+      "lesson": "2.解简易方程",
+      "level": "C",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs5s/",
+      "prerequisites": [
+        "M5S1-43"
+      ],
+      "next": [
+        "M5S1-45"
+      ],
+      "questionTypes": [
+        "equation_letter",
+        "equation_solve",
+        "equation_word_problem",
+        "equation_verify"
+      ],
+      "commonErrors": [
+        "equation_balance_error",
+        "equation_unknown_confusion",
+        "equation_word_mapping_error",
+        "equation_verify_skip"
+      ],
+      "strategyPacks": [
+        "balance_scale_visual",
+        "word_to_equation_map",
+        "solution_back_substitution"
+      ],
+      "masteryRule": "A_individual_v1",
+      "status": "draft"
+    },
+    {
+      "knowledgeCode": "M5S1-45",
+      "name": "找等量关系列方程",
+      "grade": "5",
+      "book": "上册",
+      "unit": "第五单元 简易方程",
+      "lesson": "3.实际问题与方程",
+      "level": "C",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs5s/",
+      "prerequisites": [
+        "M5S1-44"
+      ],
+      "next": [
+        "M5S1-46"
+      ],
+      "questionTypes": [
+        "equation_letter",
+        "equation_solve",
+        "equation_word_problem",
+        "equation_verify"
+      ],
+      "commonErrors": [
+        "equation_balance_error",
+        "equation_unknown_confusion",
+        "equation_word_mapping_error",
+        "equation_verify_skip"
+      ],
+      "strategyPacks": [
+        "balance_scale_visual",
+        "word_to_equation_map",
+        "solution_back_substitution"
+      ],
+      "masteryRule": "A_individual_v1",
+      "status": "draft"
+    },
+    {
+      "knowledgeCode": "M5S1-46",
+      "name": "几倍多/少应用题",
+      "grade": "5",
+      "book": "上册",
+      "unit": "第五单元 简易方程",
+      "lesson": "3.实际问题与方程",
+      "level": "D",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs5s/",
+      "prerequisites": [
+        "M5S1-45"
+      ],
+      "next": [
+        "M5S1-47"
+      ],
+      "questionTypes": [
+        "equation_letter",
+        "equation_solve",
+        "equation_word_problem",
+        "equation_verify"
+      ],
+      "commonErrors": [
+        "equation_balance_error",
+        "equation_unknown_confusion",
+        "equation_word_mapping_error",
+        "equation_verify_skip"
+      ],
+      "strategyPacks": [
+        "balance_scale_visual",
+        "word_to_equation_map",
+        "solution_back_substitution"
+      ],
+      "masteryRule": "A_individual_v1",
+      "status": "draft"
+    },
+    {
+      "knowledgeCode": "M5S1-47",
+      "name": "相遇问题、和差问题",
+      "grade": "5",
+      "book": "上册",
+      "unit": "第五单元 简易方程",
+      "lesson": "3.实际问题与方程",
+      "level": "D",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs5s/",
+      "prerequisites": [
+        "M5S1-46"
+      ],
+      "next": [
+        "M5S1-48"
+      ],
+      "questionTypes": [
+        "equation_letter",
+        "equation_solve",
+        "equation_word_problem",
+        "equation_verify"
+      ],
+      "commonErrors": [
+        "equation_balance_error",
+        "equation_unknown_confusion",
+        "equation_word_mapping_error",
+        "equation_verify_skip"
+      ],
+      "strategyPacks": [
+        "balance_scale_visual",
+        "word_to_equation_map",
+        "solution_back_substitution"
+      ],
+      "masteryRule": "A_individual_v1",
+      "status": "draft"
+    },
+    {
+      "knowledgeCode": "M5S1-48",
+      "name": "含两个未知数应用题",
+      "grade": "5",
+      "book": "上册",
+      "unit": "第五单元 简易方程",
+      "lesson": "3.实际问题与方程",
+      "level": "D",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs5s/",
+      "prerequisites": [
+        "M5S1-47"
+      ],
+      "next": [
+        "M5S1-49"
+      ],
+      "questionTypes": [
+        "equation_letter",
+        "equation_solve",
+        "equation_word_problem",
+        "equation_verify"
+      ],
+      "commonErrors": [
+        "equation_balance_error",
+        "equation_unknown_confusion",
+        "equation_word_mapping_error",
+        "equation_verify_skip"
+      ],
+      "strategyPacks": [
+        "balance_scale_visual",
+        "word_to_equation_map",
+        "solution_back_substitution"
+      ],
+      "masteryRule": "A_individual_v1",
+      "status": "draft"
+    },
+    {
+      "knowledgeCode": "M5S1-49",
+      "name": "算术法与方程法区别",
+      "grade": "5",
+      "book": "上册",
+      "unit": "第五单元 简易方程",
+      "lesson": "4.单元整理复习",
+      "level": "B",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs5s/",
+      "prerequisites": [
+        "M5S1-48"
+      ],
+      "next": [],
+      "questionTypes": [
+        "equation_letter",
+        "equation_solve",
+        "equation_word_problem",
+        "equation_verify"
+      ],
+      "commonErrors": [
+        "equation_balance_error",
+        "equation_unknown_confusion",
+        "equation_word_mapping_error",
+        "equation_verify_skip"
+      ],
+      "strategyPacks": [
+        "balance_scale_visual",
+        "word_to_equation_map",
+        "solution_back_substitution"
+      ],
+      "masteryRule": "A_individual_v1",
+      "status": "draft",
+      "next_note": "LEGIT_TERMINAL: 课时/单元终末节点，学习路径自然终点"
+    },
+    {
+      "knowledgeCode": "M5S1-5",
+      "name": "积位数不足补0占位",
+      "grade": "5",
+      "book": "上册",
+      "unit": "第一单元 小数乘法",
+      "lesson": "2.小数乘小数",
+      "level": "B",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs5s/",
+      "prerequisites": [
+        "M5S1-4"
+      ],
+      "next": [
+        "M5S1-6"
+      ],
+      "questionTypes": [
+        "decimal_mul_int",
+        "decimal_mul_decimal",
+        "decimal_mul_approx",
+        "decimal_mul_law",
+        "decimal_mul_word"
+      ],
+      "commonErrors": [
+        "decimal_point_position_error",
+        "decimal_mul_carry_error",
+        "decimal_mul_factor_change_error"
+      ],
+      "strategyPacks": [
+        "decimal_point_visual_anchor",
+        "integer_then_adjust",
+        "estimation_guard"
+      ],
+      "masteryRule": "A_individual_v1",
+      "status": "draft"
+    },
+    {
+      "knowledgeCode": "M5S1-50",
+      "name": "割补转化思想",
+      "grade": "5",
+      "book": "上册",
+      "unit": "第六单元 多边形的面积",
+      "lesson": "1.平行四边形的面积",
+      "level": "B",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs5s/",
+      "prerequisites": [
+        "M4S2-19"
+      ],
+      "next": [
+        "M5S1-51",
+        "M6S1-29"
+      ],
+      "questionTypes": [
+        "area_parallelogram",
+        "area_triangle",
+        "area_trapezoid",
+        "area_composite",
+        "area_irregular"
+      ],
+      "commonErrors": [
+        "area_perimeter_confusion",
+        "area_formula_misapply",
+        "area_unit_error",
+        "area_composite_decomposition_error"
+      ],
+      "strategyPacks": [
+        "cut_and_paste_derive",
+        "formula_chorus",
+        "unit_anchor_visual"
+      ],
+      "masteryRule": "C_basic_v1",
+      "status": "draft",
+      "prereq_note": "LEGIT_STARTER: 该课时/单元起始节点，无前置合理"
+    },
+    {
+      "knowledgeCode": "M5S1-51",
+      "name": "面积公式 S=ah",
+      "grade": "5",
+      "book": "上册",
+      "unit": "第六单元 多边形的面积",
+      "lesson": "1.平行四边形的面积",
+      "level": "C",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs5s/",
+      "prerequisites": [
+        "M5S1-50"
+      ],
+      "next": [
+        "M5S1-52"
+      ],
+      "questionTypes": [
+        "area_parallelogram",
+        "area_triangle",
+        "area_trapezoid",
+        "area_composite",
+        "area_irregular"
+      ],
+      "commonErrors": [
+        "area_perimeter_confusion",
+        "area_formula_misapply",
+        "area_unit_error",
+        "area_composite_decomposition_error"
+      ],
+      "strategyPacks": [
+        "cut_and_paste_derive",
+        "formula_chorus",
+        "unit_anchor_visual"
+      ],
+      "masteryRule": "A_individual_v1",
+      "status": "draft"
+    },
+    {
+      "knowledgeCode": "M5S1-52",
+      "name": "两个完全相同三角形拼接",
+      "grade": "5",
+      "book": "上册",
+      "unit": "第六单元 多边形的面积",
+      "lesson": "2.三角形的面积",
+      "level": "B",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs5s/",
+      "prerequisites": [
+        "M5S1-51",
+        "M4S2-17"
+      ],
+      "next": [
+        "M5S1-53"
+      ],
+      "questionTypes": [
+        "area_parallelogram",
+        "area_triangle",
+        "area_trapezoid",
+        "area_composite",
+        "area_irregular"
+      ],
+      "commonErrors": [
+        "area_perimeter_confusion",
+        "area_formula_misapply",
+        "area_unit_error",
+        "area_composite_decomposition_error"
+      ],
+      "strategyPacks": [
+        "cut_and_paste_derive",
+        "formula_chorus",
+        "unit_anchor_visual"
+      ],
+      "masteryRule": "C_basic_v1",
+      "status": "draft"
+    },
+    {
+      "knowledgeCode": "M5S1-53",
+      "name": "面积公式 S=ah÷2",
+      "grade": "5",
+      "book": "上册",
+      "unit": "第六单元 多边形的面积",
+      "lesson": "2.三角形的面积",
+      "level": "C",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs5s/",
+      "prerequisites": [
+        "M5S1-52"
+      ],
+      "next": [
+        "M5S1-54"
+      ],
+      "questionTypes": [
+        "area_parallelogram",
+        "area_triangle",
+        "area_trapezoid",
+        "area_composite",
+        "area_irregular"
+      ],
+      "commonErrors": [
+        "area_perimeter_confusion",
+        "area_formula_misapply",
+        "area_unit_error",
+        "area_composite_decomposition_error"
+      ],
+      "strategyPacks": [
+        "cut_and_paste_derive",
+        "formula_chorus",
+        "unit_anchor_visual"
+      ],
+      "masteryRule": "A_individual_v1",
+      "status": "draft"
+    },
+    {
+      "knowledgeCode": "M5S1-54",
+      "name": "等底等高面积相等规律",
+      "grade": "5",
+      "book": "上册",
+      "unit": "第六单元 多边形的面积",
+      "lesson": "2.三角形的面积",
+      "level": "B",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs5s/",
+      "prerequisites": [
+        "M5S1-53"
+      ],
+      "next": [
+        "M5S1-55"
+      ],
+      "questionTypes": [
+        "area_parallelogram",
+        "area_triangle",
+        "area_trapezoid",
+        "area_composite",
+        "area_irregular"
+      ],
+      "commonErrors": [
+        "area_perimeter_confusion",
+        "area_formula_misapply",
+        "area_unit_error",
+        "area_composite_decomposition_error"
+      ],
+      "strategyPacks": [
+        "cut_and_paste_derive",
+        "formula_chorus",
+        "unit_anchor_visual"
+      ],
+      "masteryRule": "B_standard_v1",
+      "status": "draft"
+    },
+    {
+      "knowledgeCode": "M5S1-55",
+      "name": "梯形拼接转化推导",
+      "grade": "5",
+      "book": "上册",
+      "unit": "第六单元 多边形的面积",
+      "lesson": "3.梯形的面积",
+      "level": "B",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs5s/",
+      "prerequisites": [
+        "M5S1-54"
+      ],
+      "next": [
+        "M5S1-56"
+      ],
+      "questionTypes": [
+        "area_parallelogram",
+        "area_triangle",
+        "area_trapezoid",
+        "area_composite",
+        "area_irregular"
+      ],
+      "commonErrors": [
+        "area_perimeter_confusion",
+        "area_formula_misapply",
+        "area_unit_error",
+        "area_composite_decomposition_error"
+      ],
+      "strategyPacks": [
+        "cut_and_paste_derive",
+        "formula_chorus",
+        "unit_anchor_visual"
+      ],
+      "masteryRule": "C_basic_v1",
+      "status": "draft"
+    },
+    {
+      "knowledgeCode": "M5S1-56",
+      "name": "面积公式 S=(a+b)h÷2",
+      "grade": "5",
+      "book": "上册",
+      "unit": "第六单元 多边形的面积",
+      "lesson": "3.梯形的面积",
+      "level": "C",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs5s/",
+      "prerequisites": [
+        "M5S1-55"
+      ],
+      "next": [
+        "M5S1-57"
+      ],
+      "questionTypes": [
+        "area_parallelogram",
+        "area_triangle",
+        "area_trapezoid",
+        "area_composite",
+        "area_irregular"
+      ],
+      "commonErrors": [
+        "area_perimeter_confusion",
+        "area_formula_misapply",
+        "area_unit_error",
+        "area_composite_decomposition_error"
+      ],
+      "strategyPacks": [
+        "cut_and_paste_derive",
+        "formula_chorus",
+        "unit_anchor_visual"
+      ],
+      "masteryRule": "A_individual_v1",
+      "status": "draft"
+    },
+    {
+      "knowledgeCode": "M5S1-57",
+      "name": "分割法求和",
+      "grade": "5",
+      "book": "上册",
+      "unit": "第六单元 多边形的面积",
+      "lesson": "4.组合图形的面积",
+      "level": "C",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs5s/",
+      "prerequisites": [
+        "M5S1-56"
+      ],
+      "next": [
+        "M5S1-58"
+      ],
+      "questionTypes": [
+        "area_parallelogram",
+        "area_triangle",
+        "area_trapezoid",
+        "area_composite",
+        "area_irregular"
+      ],
+      "commonErrors": [
+        "area_perimeter_confusion",
+        "area_formula_misapply",
+        "area_unit_error",
+        "area_composite_decomposition_error"
+      ],
+      "strategyPacks": [
+        "cut_and_paste_derive",
+        "formula_chorus",
+        "unit_anchor_visual"
+      ],
+      "masteryRule": "C_basic_v1",
+      "status": "draft"
+    },
+    {
+      "knowledgeCode": "M5S1-58",
+      "name": "补全法求差",
+      "grade": "5",
+      "book": "上册",
+      "unit": "第六单元 多边形的面积",
+      "lesson": "4.组合图形的面积",
+      "level": "C",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs5s/",
+      "prerequisites": [
+        "M5S1-57"
+      ],
+      "next": [
+        "M5S1-59"
+      ],
+      "questionTypes": [
+        "area_parallelogram",
+        "area_triangle",
+        "area_trapezoid",
+        "area_composite",
+        "area_irregular"
+      ],
+      "commonErrors": [
+        "area_perimeter_confusion",
+        "area_formula_misapply",
+        "area_unit_error",
+        "area_composite_decomposition_error"
+      ],
+      "strategyPacks": [
+        "cut_and_paste_derive",
+        "formula_chorus",
+        "unit_anchor_visual"
+      ],
+      "masteryRule": "C_basic_v1",
+      "status": "draft"
+    },
+    {
+      "knowledgeCode": "M5S1-59",
+      "name": "不规则图形估算面积（数格子）",
+      "grade": "5",
+      "book": "上册",
+      "unit": "第六单元 多边形的面积",
+      "lesson": "5.解决问题",
+      "level": "A",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs5s/",
+      "prerequisites": [
+        "M5S1-58"
+      ],
+      "next": [
+        "M5S1-60"
+      ],
+      "questionTypes": [
+        "area_parallelogram",
+        "area_triangle",
+        "area_trapezoid",
+        "area_composite",
+        "area_irregular"
+      ],
+      "commonErrors": [
+        "area_perimeter_confusion",
+        "area_formula_misapply",
+        "area_unit_error",
+        "area_composite_decomposition_error"
+      ],
+      "strategyPacks": [
+        "cut_and_paste_derive",
+        "formula_chorus",
+        "unit_anchor_visual"
+      ],
+      "masteryRule": "C_basic_v1",
+      "status": "draft"
+    },
+    {
+      "knowledgeCode": "M5S1-6",
+      "name": "因数与积大小变化规律",
+      "grade": "5",
+      "book": "上册",
+      "unit": "第一单元 小数乘法",
+      "lesson": "2.小数乘小数",
+      "level": "B",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs5s/",
+      "prerequisites": [
+        "M5S1-5"
+      ],
+      "next": [
+        "M5S1-7"
+      ],
+      "questionTypes": [
+        "decimal_mul_int",
+        "decimal_mul_decimal",
+        "decimal_mul_approx",
+        "decimal_mul_law",
+        "decimal_mul_word"
+      ],
+      "commonErrors": [
+        "decimal_point_position_error",
+        "decimal_mul_carry_error",
+        "decimal_mul_factor_change_error"
+      ],
+      "strategyPacks": [
+        "decimal_point_visual_anchor",
+        "integer_then_adjust",
+        "estimation_guard"
+      ],
+      "masteryRule": "A_individual_v1",
+      "status": "draft"
+    },
+    {
+      "knowledgeCode": "M5S1-60",
+      "name": "公顷、平方千米单位换算",
+      "grade": "5",
+      "book": "上册",
+      "unit": "第六单元 多边形的面积",
+      "lesson": "5.解决问题",
+      "level": "C",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs5s/",
+      "prerequisites": [
+        "M5S1-59"
+      ],
+      "next": [],
+      "questionTypes": [
+        "area_parallelogram",
+        "area_triangle",
+        "area_trapezoid",
+        "area_composite",
+        "area_irregular"
+      ],
+      "commonErrors": [
+        "area_perimeter_confusion",
+        "area_formula_misapply",
+        "area_unit_error",
+        "area_composite_decomposition_error"
+      ],
+      "strategyPacks": [
+        "cut_and_paste_derive",
+        "formula_chorus",
+        "unit_anchor_visual"
+      ],
+      "masteryRule": "B_standard_v1",
+      "status": "draft",
+      "next_note": "LEGIT_TERMINAL: 课时/单元终末节点，学习路径自然终点"
+    },
+    {
+      "knowledgeCode": "M5S1-61",
+      "name": "两端都栽：棵数=间隔数+1",
+      "grade": "5",
+      "book": "上册",
+      "unit": "第七单元 数学广角——植树问题",
+      "lesson": "1.直线植树问题",
+      "level": "B",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs5s/",
+      "prerequisites": [],
+      "next": [
+        "M5S1-62"
+      ],
+      "questionTypes": [
+        "tree_planting_both",
+        "tree_planting_none",
+        "tree_planting_closed"
+      ],
+      "commonErrors": [
+        "tree_interval_confusion",
+        "tree_case_mismatch"
+      ],
+      "strategyPacks": [
+        "interval_drawing",
+        "case_classification_table"
+      ],
+      "masteryRule": "B_standard_v1",
+      "status": "draft",
+      "prereq_note": "LEGIT_STARTER: 该课时/单元起始节点，无前置合理"
+    },
+    {
+      "knowledgeCode": "M5S1-62",
+      "name": "两端不栽：棵数=间隔数−1",
+      "grade": "5",
+      "book": "上册",
+      "unit": "第七单元 数学广角——植树问题",
+      "lesson": "1.直线植树问题",
+      "level": "B",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs5s/",
+      "prerequisites": [
+        "M5S1-61"
+      ],
+      "next": [
+        "M5S1-63"
+      ],
+      "questionTypes": [
+        "tree_planting_both",
+        "tree_planting_none",
+        "tree_planting_closed"
+      ],
+      "commonErrors": [
+        "tree_interval_confusion",
+        "tree_case_mismatch"
+      ],
+      "strategyPacks": [
+        "interval_drawing",
+        "case_classification_table"
+      ],
+      "masteryRule": "B_standard_v1",
+      "status": "draft"
+    },
+    {
+      "knowledgeCode": "M5S1-63",
+      "name": "封闭图形：棵数=间隔数",
+      "grade": "5",
+      "book": "上册",
+      "unit": "第七单元 数学广角——植树问题",
+      "lesson": "2.封闭图形植树",
+      "level": "C",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs5s/",
+      "prerequisites": [
+        "M5S1-62"
+      ],
+      "next": [],
+      "questionTypes": [
+        "tree_planting_both",
+        "tree_planting_none",
+        "tree_planting_closed"
+      ],
+      "commonErrors": [
+        "tree_interval_confusion",
+        "tree_case_mismatch"
+      ],
+      "strategyPacks": [
+        "interval_drawing",
+        "case_classification_table"
+      ],
+      "masteryRule": "B_standard_v1",
+      "status": "draft",
+      "next_note": "LEGIT_TERMINAL: 课时/单元终末节点，学习路径自然终点"
+    },
+    {
+      "knowledgeCode": "M5S1-64",
+      "name": "小数乘除法综合计算",
+      "grade": "5",
+      "book": "上册",
+      "unit": "第八单元 总复习",
+      "lesson": "1.数与代数",
+      "level": "C",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs5s/",
+      "prerequisites": [],
+      "next": [
+        "M5S1-65"
+      ],
+      "questionTypes": [
+        "review_calc",
+        "review_geometry",
+        "review_stats"
+      ],
+      "commonErrors": [
+        "mixed_topic_confusion"
+      ],
+      "strategyPacks": [
+        "spiral_review_map",
+        "error_pattern_flashback",
+        "topic_web_synthesis"
+      ],
+      "masteryRule": "C_basic_v1",
+      "status": "draft",
+      "prereq_note": "LEGIT_STARTER: 该课时/单元起始节点，无前置合理"
+    },
+    {
+      "knowledgeCode": "M5S1-65",
+      "name": "方程综合应用",
+      "grade": "5",
+      "book": "上册",
+      "unit": "第八单元 总复习",
+      "lesson": "1.数与代数",
+      "level": "C",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs5s/",
+      "prerequisites": [
+        "M5S1-64"
+      ],
+      "next": [
+        "M5S1-66"
+      ],
+      "questionTypes": [
+        "review_calc",
+        "review_geometry",
+        "review_stats"
+      ],
+      "commonErrors": [
+        "mixed_topic_confusion"
+      ],
+      "strategyPacks": [
+        "spiral_review_map",
+        "error_pattern_flashback",
+        "topic_web_synthesis"
+      ],
+      "masteryRule": "C_basic_v1",
+      "status": "draft"
+    },
+    {
+      "knowledgeCode": "M5S1-66",
+      "name": "数对位置复习",
+      "grade": "5",
+      "book": "上册",
+      "unit": "第八单元 总复习",
+      "lesson": "2.图形与几何",
+      "level": "C",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs5s/",
+      "prerequisites": [
+        "M5S1-65"
+      ],
+      "next": [
+        "M5S1-67"
+      ],
+      "questionTypes": [
+        "review_calc",
+        "review_geometry",
+        "review_stats"
+      ],
+      "commonErrors": [
+        "mixed_topic_confusion"
+      ],
+      "strategyPacks": [
+        "spiral_review_map",
+        "error_pattern_flashback",
+        "topic_web_synthesis"
+      ],
+      "masteryRule": "C_basic_v1",
+      "status": "draft"
+    },
+    {
+      "knowledgeCode": "M5S1-67",
+      "name": "三大图形面积公式汇总",
+      "grade": "5",
+      "book": "上册",
+      "unit": "第八单元 总复习",
+      "lesson": "2.图形与几何",
+      "level": "C",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs5s/",
+      "prerequisites": [
+        "M5S1-66"
+      ],
+      "next": [
+        "M5S1-68"
+      ],
+      "questionTypes": [
+        "review_calc",
+        "review_geometry",
+        "review_stats"
+      ],
+      "commonErrors": [
+        "mixed_topic_confusion"
+      ],
+      "strategyPacks": [
+        "spiral_review_map",
+        "error_pattern_flashback",
+        "topic_web_synthesis"
+      ],
+      "masteryRule": "C_basic_v1",
+      "status": "draft"
+    },
+    {
+      "knowledgeCode": "M5S1-68",
+      "name": "可能性判断与大小分析",
+      "grade": "5",
+      "book": "上册",
+      "unit": "第八单元 总复习",
+      "lesson": "3.统计与概率",
+      "level": "C",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs5s/",
+      "prerequisites": [
+        "M5S1-67"
+      ],
+      "next": [
+        "M5S1-69"
+      ],
+      "questionTypes": [
+        "review_calc",
+        "review_geometry",
+        "review_stats"
+      ],
+      "commonErrors": [
+        "mixed_topic_confusion"
+      ],
+      "strategyPacks": [
+        "spiral_review_map",
+        "error_pattern_flashback",
+        "topic_web_synthesis"
+      ],
+      "masteryRule": "C_basic_v1",
+      "status": "draft"
+    },
+    {
+      "knowledgeCode": "M5S1-69",
+      "name": "植树问题模型总结",
+      "grade": "5",
+      "book": "上册",
+      "unit": "第八单元 总复习",
+      "lesson": "4.数学思考",
+      "level": "C",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs5s/",
+      "prerequisites": [
+        "M5S1-68"
+      ],
+      "next": [
+        "M5S2-0"
+      ],
+      "questionTypes": [
+        "review_calc",
+        "review_geometry",
+        "review_stats"
+      ],
+      "commonErrors": [
+        "mixed_topic_confusion"
+      ],
+      "strategyPacks": [
+        "spiral_review_map",
+        "error_pattern_flashback",
+        "topic_web_synthesis"
+      ],
+      "masteryRule": "C_basic_v1",
+      "status": "draft",
+      "next_note": "LEGIT_TERMINAL: 课时/单元终末节点，学习路径自然终点"
+    },
+    {
+      "knowledgeCode": "M5S1-7",
+      "name": "四舍五入法保留小数位数",
+      "grade": "5",
+      "book": "上册",
+      "unit": "第一单元 小数乘法",
+      "lesson": "3.积的近似数",
+      "level": "C",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs5s/",
+      "prerequisites": [
+        "M5S1-6"
+      ],
+      "next": [
+        "M5S1-8"
+      ],
+      "questionTypes": [
+        "decimal_mul_int",
+        "decimal_mul_decimal",
+        "decimal_mul_approx",
+        "decimal_mul_law",
+        "decimal_mul_word"
+      ],
+      "commonErrors": [
+        "decimal_point_position_error",
+        "decimal_mul_carry_error",
+        "decimal_mul_factor_change_error"
+      ],
+      "strategyPacks": [
+        "decimal_point_visual_anchor",
+        "integer_then_adjust",
+        "estimation_guard"
+      ],
+      "masteryRule": "B_standard_v1",
+      "status": "draft"
+    },
+    {
+      "knowledgeCode": "M5S1-8",
+      "name": "人民币保留两位小数应用",
+      "grade": "5",
+      "book": "上册",
+      "unit": "第一单元 小数乘法",
+      "lesson": "3.积的近似数",
+      "level": "C",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs5s/",
+      "prerequisites": [
+        "M5S1-7"
+      ],
+      "next": [
+        "M5S1-9"
+      ],
+      "questionTypes": [
+        "decimal_mul_int",
+        "decimal_mul_decimal",
+        "decimal_mul_approx",
+        "decimal_mul_law",
+        "decimal_mul_word"
+      ],
+      "commonErrors": [
+        "decimal_point_position_error",
+        "decimal_mul_carry_error",
+        "decimal_mul_factor_change_error"
+      ],
+      "strategyPacks": [
+        "decimal_point_visual_anchor",
+        "integer_then_adjust",
+        "estimation_guard"
+      ],
+      "masteryRule": "B_standard_v1",
+      "status": "draft"
+    },
+    {
+      "knowledgeCode": "M5S1-9",
+      "name": "乘法交换律、结合律、分配律",
+      "grade": "5",
+      "book": "上册",
+      "unit": "第一单元 小数乘法",
+      "lesson": "4.整数乘法运算定律推广到小数",
+      "level": "B",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs5s/",
+      "prerequisites": [
+        "M5S1-8",
+        "M4S2-5"
+      ],
+      "next": [
+        "M5S1-10"
+      ],
+      "questionTypes": [
+        "decimal_mul_int",
+        "decimal_mul_decimal",
+        "decimal_mul_approx",
+        "decimal_mul_law",
+        "decimal_mul_word"
+      ],
+      "commonErrors": [
+        "decimal_point_position_error",
+        "decimal_mul_carry_error",
+        "decimal_mul_factor_change_error"
+      ],
+      "strategyPacks": [
+        "decimal_point_visual_anchor",
+        "integer_then_adjust",
+        "estimation_guard"
+      ],
+      "masteryRule": "B_standard_v1",
+      "status": "draft"
+    },
+    {
+      "knowledgeCode": "M5S2-0",
+      "name": "根据多个方向的视图还原物体",
+      "grade": "5",
+      "book": "下册",
+      "unit": "第一单元 观察物体(三)",
+      "lesson": "1.从不同方向观察",
+      "level": "B",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs5x_new/",
+      "prerequisites": [
+        "M5S1-69"
+      ],
+      "next": [],
+      "questionTypes": [
+        "spatial_3view_reconstruct"
+      ],
+      "commonErrors": [
+        "spatial_view_mismatch"
+      ],
+      "strategyPacks": [
+        "cube_stack_physical",
+        "multi_view_grid"
+      ],
+      "masteryRule": "B_standard_v1",
+      "status": "draft",
+      "prereq_note": "LEGIT_STARTER: 该课时/单元起始节点，无前置合理",
+      "next_note": "LEGIT_TERMINAL: 课时/单元终末节点，学习路径自然终点"
+    },
+    {
+      "knowledgeCode": "M5S2-1",
+      "name": "因数和倍数的意义",
+      "grade": "5",
+      "book": "下册",
+      "unit": "第二单元 因数与倍数",
+      "lesson": "1.因数与倍数",
+      "level": "B",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs5x_new/",
+      "prerequisites": [
+        "M3S1-30"
+      ],
+      "next": [
+        "M5S2-2",
+        "M5S2-18"
+      ],
+      "questionTypes": [
+        "factor_find",
+        "multiple_find",
+        "divisibility_2_5",
+        "divisibility_3",
+        "prime_composite"
+      ],
+      "commonErrors": [
+        "factor_multiple_confusion",
+        "prime_composite_confusion",
+        "divisibility_rule_3_error"
+      ],
+      "strategyPacks": [
+        "factor_pair_hunt",
+        "divisibility_song",
+        "prime_eratosthenes"
+      ],
+      "masteryRule": "A_individual_v1",
+      "status": "draft",
+      "prereq_note": "LEGIT_STARTER: 该课时/单元起始节点，无前置合理"
+    },
+    {
+      "knowledgeCode": "M5S2-10",
+      "name": "实际生活中的表面积应用",
+      "grade": "5",
+      "book": "下册",
+      "unit": "第三单元 长方体和正方体",
+      "lesson": "2.表面积",
+      "level": "C",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs5x_new/",
+      "prerequisites": [
+        "M5S2-9"
+      ],
+      "next": [
+        "M5S2-11"
+      ],
+      "questionTypes": [
+        "cuboid_feature",
+        "cuboid_surface",
+        "cuboid_volume",
+        "cuboid_capacity"
+      ],
+      "commonErrors": [
+        "surface_volume_confusion",
+        "unit_conversion_error",
+        "capacity_volume_confusion"
+      ],
+      "strategyPacks": [
+        "net_unfolding",
+        "unit_cube_counting",
+        "real_object_measure"
+      ],
+      "masteryRule": "A_individual_v1",
+      "status": "draft",
+      "prereq_note": "LEGIT_STARTER: 该课时/单元起始节点，无前置合理"
+    },
+    {
+      "knowledgeCode": "M5S2-11",
+      "name": "体积的概念和单位",
+      "grade": "5",
+      "book": "下册",
+      "unit": "第三单元 长方体和正方体",
+      "lesson": "3.体积",
+      "level": "B",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs5x_new/",
+      "prerequisites": [
+        "M5S2-10"
+      ],
+      "next": [
+        "M5S2-12"
+      ],
+      "questionTypes": [
+        "cuboid_feature",
+        "cuboid_surface",
+        "cuboid_volume",
+        "cuboid_capacity"
+      ],
+      "commonErrors": [
+        "surface_volume_confusion",
+        "unit_conversion_error",
+        "capacity_volume_confusion"
+      ],
+      "strategyPacks": [
+        "net_unfolding",
+        "unit_cube_counting",
+        "real_object_measure"
+      ],
+      "masteryRule": "A_individual_v1",
+      "status": "draft"
+    },
+    {
+      "knowledgeCode": "M5S2-12",
+      "name": "长方体正方体体积公式",
+      "grade": "5",
+      "book": "下册",
+      "unit": "第三单元 长方体和正方体",
+      "lesson": "3.体积",
+      "level": "C",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs5x_new/",
+      "prerequisites": [
+        "M5S2-11"
+      ],
+      "next": [
+        "M5S2-13",
+        "M6S2-12"
+      ],
+      "questionTypes": [
+        "cuboid_feature",
+        "cuboid_surface",
+        "cuboid_volume",
+        "cuboid_capacity"
+      ],
+      "commonErrors": [
+        "surface_volume_confusion",
+        "unit_conversion_error",
+        "capacity_volume_confusion"
+      ],
+      "strategyPacks": [
+        "net_unfolding",
+        "unit_cube_counting",
+        "real_object_measure"
+      ],
+      "masteryRule": "A_individual_v1",
+      "status": "draft"
+    },
+    {
+      "knowledgeCode": "M5S2-13",
+      "name": "容积的概念",
+      "grade": "5",
+      "book": "下册",
+      "unit": "第三单元 长方体和正方体",
+      "lesson": "4.容积",
+      "level": "B",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs5x_new/",
+      "prerequisites": [
+        "M5S2-12"
+      ],
+      "next": [
+        "M5S2-14"
+      ],
+      "questionTypes": [
+        "cuboid_feature",
+        "cuboid_surface",
+        "cuboid_volume",
+        "cuboid_capacity"
+      ],
+      "commonErrors": [
+        "surface_volume_confusion",
+        "unit_conversion_error",
+        "capacity_volume_confusion"
+      ],
+      "strategyPacks": [
+        "net_unfolding",
+        "unit_cube_counting",
+        "real_object_measure"
+      ],
+      "masteryRule": "A_individual_v1",
+      "status": "draft"
+    },
+    {
+      "knowledgeCode": "M5S2-14",
+      "name": "综合应用题",
+      "grade": "5",
+      "book": "下册",
+      "unit": "第三单元 长方体和正方体",
+      "lesson": "5.解决问题",
+      "level": "D",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs5x_new/",
+      "prerequisites": [
+        "M5S2-13"
+      ],
+      "next": [
+        "M5S2-29"
+      ],
+      "questionTypes": [
+        "cuboid_feature",
+        "cuboid_surface",
+        "cuboid_volume",
+        "cuboid_capacity"
+      ],
+      "commonErrors": [
+        "surface_volume_confusion",
+        "unit_conversion_error",
+        "capacity_volume_confusion"
+      ],
+      "strategyPacks": [
+        "net_unfolding",
+        "unit_cube_counting",
+        "real_object_measure"
+      ],
+      "masteryRule": "A_individual_v1",
+      "status": "draft"
+    },
+    {
+      "knowledgeCode": "M5S2-15",
+      "name": "分数的产生与意义",
+      "grade": "5",
+      "book": "下册",
+      "unit": "第四单元 分数的意义和性质",
+      "lesson": "1.分数的意义",
+      "level": "B",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs5x_new/",
+      "prerequisites": [
+        "M3S1-18"
+      ],
+      "next": [
+        "M5S2-16",
+        "M5S2-22",
+        "M6S1-0",
+        "M6S1-20"
+      ],
+      "questionTypes": [
+        "fraction_meaning",
+        "fraction_compare",
+        "fraction_equivalent",
+        "gcd_lcm",
+        "fraction_decimal_convert"
+      ],
+      "commonErrors": [
+        "fraction_unit_error",
+        "fraction_compare_error",
+        "gcd_lcm_method_error",
+        "fraction_decimal_convert_error"
+      ],
+      "strategyPacks": [
+        "fraction_bar_model",
+        "equivalent_fraction_wall",
+        "gcd_lcm_ladder"
+      ],
+      "masteryRule": "A_individual_v1",
+      "status": "draft",
+      "prereq_note": "LEGIT_STARTER: 该课时/单元起始节点，无前置合理"
+    },
+    {
+      "knowledgeCode": "M5S2-16",
+      "name": "真假分数的区分",
+      "grade": "5",
+      "book": "下册",
+      "unit": "第四单元 分数的意义和性质",
+      "lesson": "2.真分数与假分数",
+      "level": "C",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs5x_new/",
+      "prerequisites": [
+        "M5S2-15"
+      ],
+      "next": [
+        "M5S2-17"
+      ],
+      "questionTypes": [
+        "fraction_meaning",
+        "fraction_compare",
+        "fraction_equivalent",
+        "gcd_lcm",
+        "fraction_decimal_convert"
+      ],
+      "commonErrors": [
+        "fraction_unit_error",
+        "fraction_compare_error",
+        "gcd_lcm_method_error",
+        "fraction_decimal_convert_error"
+      ],
+      "strategyPacks": [
+        "fraction_bar_model",
+        "equivalent_fraction_wall",
+        "gcd_lcm_ladder"
+      ],
+      "masteryRule": "A_individual_v1",
+      "status": "draft"
+    },
+    {
+      "knowledgeCode": "M5S2-17",
+      "name": "分数的基本性质",
+      "grade": "5",
+      "book": "下册",
+      "unit": "第四单元 分数的意义和性质",
+      "lesson": "3.分数的基本性质",
+      "level": "B",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs5x_new/",
+      "prerequisites": [
+        "M5S2-16"
+      ],
+      "next": [
+        "M5S2-18",
+        "M6S1-22"
+      ],
+      "questionTypes": [
+        "fraction_meaning",
+        "fraction_compare",
+        "fraction_equivalent",
+        "gcd_lcm",
+        "fraction_decimal_convert"
+      ],
+      "commonErrors": [
+        "fraction_unit_error",
+        "fraction_compare_error",
+        "gcd_lcm_method_error",
+        "fraction_decimal_convert_error"
+      ],
+      "strategyPacks": [
+        "fraction_bar_model",
+        "equivalent_fraction_wall",
+        "gcd_lcm_ladder"
+      ],
+      "masteryRule": "A_individual_v1",
+      "status": "draft"
+    },
+    {
+      "knowledgeCode": "M5S2-18",
+      "name": "最大公因数和约分",
+      "grade": "5",
+      "book": "下册",
+      "unit": "第四单元 分数的意义和性质",
+      "lesson": "4.约分",
+      "level": "C",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs5x_new/",
+      "prerequisites": [
+        "M5S2-17",
+        "M5S2-1"
+      ],
+      "next": [
+        "M5S2-19"
+      ],
+      "questionTypes": [
+        "fraction_meaning",
+        "fraction_compare",
+        "fraction_equivalent",
+        "gcd_lcm",
+        "fraction_decimal_convert"
+      ],
+      "commonErrors": [
+        "fraction_unit_error",
+        "fraction_compare_error",
+        "gcd_lcm_method_error",
+        "fraction_decimal_convert_error"
+      ],
+      "strategyPacks": [
+        "fraction_bar_model",
+        "equivalent_fraction_wall",
+        "gcd_lcm_ladder"
+      ],
+      "masteryRule": "A_individual_v1",
+      "status": "draft"
+    },
+    {
+      "knowledgeCode": "M5S2-19",
+      "name": "最小公倍数和通分",
+      "grade": "5",
+      "book": "下册",
+      "unit": "第四单元 分数的意义和性质",
+      "lesson": "5.通分",
+      "level": "C",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs5x_new/",
+      "prerequisites": [
+        "M5S2-18",
+        "M5S2-3"
+      ],
+      "next": [
+        "M5S2-20",
+        "M5S2-23",
+        "M6S1-17"
+      ],
+      "questionTypes": [
+        "fraction_meaning",
+        "fraction_compare",
+        "fraction_equivalent",
+        "gcd_lcm",
+        "fraction_decimal_convert"
+      ],
+      "commonErrors": [
+        "fraction_unit_error",
+        "fraction_compare_error",
+        "gcd_lcm_method_error",
+        "fraction_decimal_convert_error"
+      ],
+      "strategyPacks": [
+        "fraction_bar_model",
+        "equivalent_fraction_wall",
+        "gcd_lcm_ladder"
+      ],
+      "masteryRule": "A_individual_v1",
+      "status": "draft"
+    },
+    {
+      "knowledgeCode": "M5S2-2",
+      "name": "求一个数的因数",
+      "grade": "5",
+      "book": "下册",
+      "unit": "第二单元 因数与倍数",
+      "lesson": "1.因数与倍数",
+      "level": "C",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs5x_new/",
+      "prerequisites": [
+        "M5S2-1",
+        "M2S1-6"
+      ],
+      "next": [
+        "M5S2-3"
+      ],
+      "questionTypes": [
+        "factor_find",
+        "multiple_find",
+        "divisibility_2_5",
+        "divisibility_3",
+        "prime_composite"
+      ],
+      "commonErrors": [
+        "factor_multiple_confusion",
+        "prime_composite_confusion",
+        "divisibility_rule_3_error"
+      ],
+      "strategyPacks": [
+        "factor_pair_hunt",
+        "divisibility_song",
+        "prime_eratosthenes"
+      ],
+      "masteryRule": "A_individual_v1",
+      "status": "draft"
+    },
+    {
+      "knowledgeCode": "M5S2-20",
+      "name": "分数与小数互化方法",
+      "grade": "5",
+      "book": "下册",
+      "unit": "第四单元 分数的意义和性质",
+      "lesson": "6.分数与小数互化",
+      "level": "C",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs5x_new/",
+      "prerequisites": [
+        "M5S2-19"
+      ],
+      "next": [
+        "M5S2-31"
+      ],
+      "questionTypes": [
+        "fraction_meaning",
+        "fraction_compare",
+        "fraction_equivalent",
+        "gcd_lcm",
+        "fraction_decimal_convert"
+      ],
+      "commonErrors": [
+        "fraction_unit_error",
+        "fraction_compare_error",
+        "gcd_lcm_method_error",
+        "fraction_decimal_convert_error"
+      ],
+      "strategyPacks": [
+        "fraction_bar_model",
+        "equivalent_fraction_wall",
+        "gcd_lcm_ladder"
+      ],
+      "masteryRule": "A_individual_v1",
+      "status": "draft"
+    },
+    {
+      "knowledgeCode": "M5S2-21",
+      "name": "图形的旋转",
+      "grade": "5",
+      "book": "下册",
+      "unit": "第五单元 图形的运动(三)",
+      "lesson": "1.旋转",
+      "level": "B",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs5x_new/",
+      "prerequisites": [],
+      "next": [
+        "M5S2-32"
+      ],
+      "questionTypes": [
+        "rotation_describe",
+        "rotation_draw"
+      ],
+      "commonErrors": [
+        "rotation_angle_error",
+        "rotation_center_error"
+      ],
+      "strategyPacks": [
+        "rotation_tracing_paper",
+        "coordinate_grid_rotation"
+      ],
+      "masteryRule": "B_standard_v1",
+      "status": "draft",
+      "prereq_note": "LEGIT_STARTER: 该课时/单元起始节点，无前置合理"
+    },
+    {
+      "knowledgeCode": "M5S2-22",
+      "name": "同分母分数加减计算",
+      "grade": "5",
+      "book": "下册",
+      "unit": "第六单元 分数的加法和减法",
+      "lesson": "1.同分母分数加减",
+      "level": "C",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs5x_new/",
+      "prerequisites": [
+        "M5S2-15",
+        "M3S1-21"
+      ],
+      "next": [
+        "M5S2-23",
+        "M6S1-1"
+      ],
+      "questionTypes": [
+        "fraction_add_sub_same",
+        "fraction_add_sub_diff",
+        "fraction_add_sub_mixed"
+      ],
+      "commonErrors": [
+        "fraction_add_denominator_error",
+        "fraction_mixed_number_error",
+        "fraction_add_sub_word_mapping_error"
+      ],
+      "strategyPacks": [
+        "lcd_finder",
+        "pizza_pie_visual"
+      ],
+      "masteryRule": "A_individual_v1",
+      "status": "draft",
+      "prereq_note": "LEGIT_STARTER: 该课时/单元起始节点，无前置合理"
+    },
+    {
+      "knowledgeCode": "M5S2-23",
+      "name": "异分母分数加减(先通分)",
+      "grade": "5",
+      "book": "下册",
+      "unit": "第六单元 分数的加法和减法",
+      "lesson": "2.异分母分数加减",
+      "level": "C",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs5x_new/",
+      "prerequisites": [
+        "M5S2-22",
+        "M5S2-19"
+      ],
+      "next": [
+        "M5S2-24"
+      ],
+      "questionTypes": [
+        "fraction_add_sub_same",
+        "fraction_add_sub_diff",
+        "fraction_add_sub_mixed"
+      ],
+      "commonErrors": [
+        "fraction_add_denominator_error",
+        "fraction_mixed_number_error",
+        "fraction_add_sub_word_mapping_error"
+      ],
+      "strategyPacks": [
+        "lcd_finder",
+        "pizza_pie_visual"
+      ],
+      "masteryRule": "A_individual_v1",
+      "status": "draft"
+    },
+    {
+      "knowledgeCode": "M5S2-24",
+      "name": "分数加减混合运算",
+      "grade": "5",
+      "book": "下册",
+      "unit": "第六单元 分数的加法和减法",
+      "lesson": "3.分数加减混合运算",
+      "level": "C",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs5x_new/",
+      "prerequisites": [
+        "M5S2-23"
+      ],
+      "next": [
+        "M5S2-33"
+      ],
+      "questionTypes": [
+        "fraction_add_sub_same",
+        "fraction_add_sub_diff",
+        "fraction_add_sub_mixed"
+      ],
+      "commonErrors": [
+        "fraction_add_denominator_error",
+        "fraction_mixed_number_error",
+        "fraction_add_sub_word_mapping_error"
+      ],
+      "strategyPacks": [
+        "lcd_finder",
+        "pizza_pie_visual"
+      ],
+      "masteryRule": "A_individual_v1",
+      "status": "draft"
+    },
+    {
+      "knowledgeCode": "M5S2-25",
+      "name": "单式折线统计图的认识",
+      "grade": "5",
+      "book": "下册",
+      "unit": "第七单元 折线统计图",
+      "lesson": "1.单式折线统计图",
+      "level": "B",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs5x_new/",
+      "prerequisites": [],
+      "next": [
+        "M5S2-26"
+      ],
+      "questionTypes": [
+        "line_chart_single",
+        "line_chart_dual"
+      ],
+      "commonErrors": [
+        "line_chart_trend_error",
+        "dual_line_compare_error"
+      ],
+      "strategyPacks": [
+        "trend_storytelling",
+        "dual_line_overlay"
+      ],
+      "masteryRule": "B_standard_v1",
+      "status": "draft",
+      "prereq_note": "LEGIT_STARTER: 该课时/单元起始节点，无前置合理"
+    },
+    {
+      "knowledgeCode": "M5S2-26",
+      "name": "复式折线统计图比较",
+      "grade": "5",
+      "book": "下册",
+      "unit": "第七单元 折线统计图",
+      "lesson": "2.复式折线统计图",
+      "level": "C",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs5x_new/",
+      "prerequisites": [
+        "M5S2-25"
+      ],
+      "next": [],
+      "questionTypes": [
+        "line_chart_single",
+        "line_chart_dual"
+      ],
+      "commonErrors": [
+        "line_chart_trend_error",
+        "dual_line_compare_error"
+      ],
+      "strategyPacks": [
+        "trend_storytelling",
+        "dual_line_overlay"
+      ],
+      "masteryRule": "B_standard_v1",
+      "status": "draft",
+      "next_note": "LEGIT_TERMINAL: 课时/单元终末节点，学习路径自然终点"
+    },
+    {
+      "knowledgeCode": "M5S2-27",
+      "name": "用天平找次品的最少次数",
+      "grade": "5",
+      "book": "下册",
+      "unit": "第八单元 数学广角——找次品",
+      "lesson": "1.找次品",
+      "level": "B",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs5x_new/",
+      "prerequisites": [],
+      "next": [
+        "M6S1-0"
+      ],
+      "questionTypes": [
+        "find_defective_min"
+      ],
+      "commonErrors": [
+        "find_defective_logic_error"
+      ],
+      "strategyPacks": [
+        "balance_tree_diagram",
+        "divide_conquer_min_steps"
+      ],
+      "masteryRule": "B_standard_v1",
+      "status": "draft",
+      "prereq_note": "LEGIT_STARTER: 该课时/单元起始节点，无前置合理",
+      "next_note": "LEGIT_TERMINAL: 课时/单元终末节点，学习路径自然终点"
+    },
+    {
+      "knowledgeCode": "M5S2-28",
+      "name": "探索和的奇偶性",
+      "grade": "5",
+      "book": "下册",
+      "unit": "第二单元 因数与倍数",
+      "lesson": "5.解决问题",
+      "level": "A",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs5x_new/",
+      "prerequisites": [
+        "M5S2-6"
+      ],
+      "next": [],
+      "questionTypes": [
+        "factor_find",
+        "multiple_find",
+        "divisibility_2_5",
+        "divisibility_3",
+        "prime_composite"
+      ],
+      "commonErrors": [
+        "factor_multiple_confusion",
+        "prime_composite_confusion",
+        "divisibility_rule_3_error"
+      ],
+      "strategyPacks": [
+        "factor_pair_hunt",
+        "divisibility_song",
+        "prime_eratosthenes"
+      ],
+      "masteryRule": "C_basic_v1",
+      "status": "draft"
+    },
+    {
+      "knowledgeCode": "M5S2-29",
+      "name": "体积单位间的进率",
+      "grade": "5",
+      "book": "下册",
+      "unit": "第三单元 长方体和正方体",
+      "lesson": "3.体积",
+      "level": "C",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs5x_new/",
+      "prerequisites": [
+        "M5S2-14"
+      ],
+      "next": [
+        "M5S2-30"
+      ],
+      "questionTypes": [
+        "cuboid_feature",
+        "cuboid_surface",
+        "cuboid_volume",
+        "cuboid_capacity"
+      ],
+      "commonErrors": [
+        "surface_volume_confusion",
+        "unit_conversion_error",
+        "capacity_volume_confusion"
+      ],
+      "strategyPacks": [
+        "net_unfolding",
+        "unit_cube_counting",
+        "real_object_measure"
+      ],
+      "masteryRule": "A_individual_v1",
+      "status": "draft"
+    },
+    {
+      "knowledgeCode": "M5S2-3",
+      "name": "求一个数的倍数",
+      "grade": "5",
+      "book": "下册",
+      "unit": "第二单元 因数与倍数",
+      "lesson": "1.因数与倍数",
+      "level": "C",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs5x_new/",
+      "prerequisites": [
+        "M5S2-2"
+      ],
+      "next": [
+        "M5S2-4",
+        "M5S2-19"
+      ],
+      "questionTypes": [
+        "factor_find",
+        "multiple_find",
+        "divisibility_2_5",
+        "divisibility_3",
+        "prime_composite"
+      ],
+      "commonErrors": [
+        "factor_multiple_confusion",
+        "prime_composite_confusion",
+        "divisibility_rule_3_error"
+      ],
+      "strategyPacks": [
+        "factor_pair_hunt",
+        "divisibility_song",
+        "prime_eratosthenes"
+      ],
+      "masteryRule": "A_individual_v1",
+      "status": "draft"
+    },
+    {
+      "knowledgeCode": "M5S2-30",
+      "name": "不规则物体的体积测量",
+      "grade": "5",
+      "book": "下册",
+      "unit": "第三单元 长方体和正方体",
+      "lesson": "5.解决问题",
+      "level": "D",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs5x_new/",
+      "prerequisites": [
+        "M5S2-29"
+      ],
+      "next": [],
+      "questionTypes": [
+        "cuboid_feature",
+        "cuboid_surface",
+        "cuboid_volume",
+        "cuboid_capacity"
+      ],
+      "commonErrors": [
+        "surface_volume_confusion",
+        "unit_conversion_error",
+        "capacity_volume_confusion"
+      ],
+      "strategyPacks": [
+        "net_unfolding",
+        "unit_cube_counting",
+        "real_object_measure"
+      ],
+      "masteryRule": "B_standard_v1",
+      "status": "draft"
+    },
+    {
+      "knowledgeCode": "M5S2-31",
+      "name": "分数与除法的关系",
+      "grade": "5",
+      "book": "下册",
+      "unit": "第四单元 分数的意义和性质",
+      "lesson": "1.分数的意义",
+      "level": "B",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs5x_new/",
+      "prerequisites": [
+        "M5S2-20",
+        "M3S2-1"
+      ],
+      "next": [],
+      "questionTypes": [
+        "fraction_meaning",
+        "fraction_compare",
+        "fraction_equivalent",
+        "gcd_lcm",
+        "fraction_decimal_convert"
+      ],
+      "commonErrors": [
+        "fraction_unit_error",
+        "fraction_compare_error",
+        "gcd_lcm_method_error",
+        "fraction_decimal_convert_error"
+      ],
+      "strategyPacks": [
+        "fraction_bar_model",
+        "equivalent_fraction_wall",
+        "gcd_lcm_ladder"
+      ],
+      "masteryRule": "A_individual_v1",
+      "status": "draft"
+    },
+    {
+      "knowledgeCode": "M5S2-32",
+      "name": "用旋转解决实际问题",
+      "grade": "5",
+      "book": "下册",
+      "unit": "第五单元 图形的运动(三)",
+      "lesson": "2.解决问题",
+      "level": "C",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs5x_new/",
+      "prerequisites": [
+        "M5S2-21"
+      ],
+      "next": [],
+      "questionTypes": [
+        "rotation_describe",
+        "rotation_draw"
+      ],
+      "commonErrors": [
+        "rotation_angle_error",
+        "rotation_center_error"
+      ],
+      "strategyPacks": [
+        "rotation_tracing_paper",
+        "coordinate_grid_rotation"
+      ],
+      "masteryRule": "C_basic_v1",
+      "status": "draft",
+      "next_note": "LEGIT_TERMINAL: 课时/单元终末节点，学习路径自然终点"
+    },
+    {
+      "knowledgeCode": "M5S2-33",
+      "name": "分数加减法应用题",
+      "grade": "5",
+      "book": "下册",
+      "unit": "第六单元 分数的加法和减法",
+      "lesson": "4.解决问题",
+      "level": "D",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs5x_new/",
+      "prerequisites": [
+        "M5S2-24"
+      ],
+      "next": [],
+      "questionTypes": [
+        "fraction_add_sub_same",
+        "fraction_add_sub_diff",
+        "fraction_add_sub_mixed"
+      ],
+      "commonErrors": [
+        "fraction_add_denominator_error",
+        "fraction_mixed_number_error",
+        "fraction_add_sub_word_mapping_error"
+      ],
+      "strategyPacks": [
+        "lcd_finder",
+        "pizza_pie_visual"
+      ],
+      "masteryRule": "B_standard_v1",
+      "status": "draft",
+      "next_note": "LEGIT_TERMINAL: 课时/单元终末节点，学习路径自然终点"
+    },
+    {
+      "knowledgeCode": "M5S2-4",
+      "name": "2和5的倍数特征",
+      "grade": "5",
+      "book": "下册",
+      "unit": "第二单元 因数与倍数",
+      "lesson": "2.2、5、3的倍数特征",
+      "level": "C",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs5x_new/",
+      "prerequisites": [
+        "M5S2-3"
+      ],
+      "next": [
+        "M5S2-5"
+      ],
+      "questionTypes": [
+        "factor_find",
+        "multiple_find",
+        "divisibility_2_5",
+        "divisibility_3",
+        "prime_composite"
+      ],
+      "commonErrors": [
+        "factor_multiple_confusion",
+        "prime_composite_confusion",
+        "divisibility_rule_3_error"
+      ],
+      "strategyPacks": [
+        "factor_pair_hunt",
+        "divisibility_song",
+        "prime_eratosthenes"
+      ],
+      "masteryRule": "A_individual_v1",
+      "status": "draft"
+    },
+    {
+      "knowledgeCode": "M5S2-5",
+      "name": "3的倍数特征",
+      "grade": "5",
+      "book": "下册",
+      "unit": "第二单元 因数与倍数",
+      "lesson": "2.2、5、3的倍数特征",
+      "level": "C",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs5x_new/",
+      "prerequisites": [
+        "M5S2-4"
+      ],
+      "next": [
+        "M5S2-6"
+      ],
+      "questionTypes": [
+        "factor_find",
+        "multiple_find",
+        "divisibility_2_5",
+        "divisibility_3",
+        "prime_composite"
+      ],
+      "commonErrors": [
+        "factor_multiple_confusion",
+        "prime_composite_confusion",
+        "divisibility_rule_3_error"
+      ],
+      "strategyPacks": [
+        "factor_pair_hunt",
+        "divisibility_song",
+        "prime_eratosthenes"
+      ],
+      "masteryRule": "A_individual_v1",
+      "status": "draft"
+    },
+    {
+      "knowledgeCode": "M5S2-6",
+      "name": "质数和合数",
+      "grade": "5",
+      "book": "下册",
+      "unit": "第二单元 因数与倍数",
+      "lesson": "3.质数和合数",
+      "level": "B",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs5x_new/",
+      "prerequisites": [
+        "M5S2-5"
+      ],
+      "next": [
+        "M5S2-28"
+      ],
+      "questionTypes": [
+        "factor_find",
+        "multiple_find",
+        "divisibility_2_5",
+        "divisibility_3",
+        "prime_composite"
+      ],
+      "commonErrors": [
+        "factor_multiple_confusion",
+        "prime_composite_confusion",
+        "divisibility_rule_3_error"
+      ],
+      "strategyPacks": [
+        "factor_pair_hunt",
+        "divisibility_song",
+        "prime_eratosthenes"
+      ],
+      "masteryRule": "A_individual_v1",
+      "status": "draft",
+      "next_note": "LEGIT_TERMINAL: 课时/单元终末节点，学习路径自然终点"
+    },
+    {
+      "knowledgeCode": "M5S2-7",
+      "name": "长方体的特征",
+      "grade": "5",
+      "book": "下册",
+      "unit": "第三单元 长方体和正方体",
+      "lesson": "1.长方体的认识",
+      "level": "A",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs5x_new/",
+      "prerequisites": [],
+      "next": [
+        "M5S2-8"
+      ],
+      "questionTypes": [
+        "cuboid_feature",
+        "cuboid_surface",
+        "cuboid_volume",
+        "cuboid_capacity"
+      ],
+      "commonErrors": [
+        "surface_volume_confusion",
+        "unit_conversion_error",
+        "capacity_volume_confusion"
+      ],
+      "strategyPacks": [
+        "net_unfolding",
+        "unit_cube_counting",
+        "real_object_measure"
+      ],
+      "masteryRule": "A_individual_v1",
+      "status": "draft"
+    },
+    {
+      "knowledgeCode": "M5S2-8",
+      "name": "正方体的特征及与长方体关系",
+      "grade": "5",
+      "book": "下册",
+      "unit": "第三单元 长方体和正方体",
+      "lesson": "1.长方体的认识",
+      "level": "A",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs5x_new/",
+      "prerequisites": [
+        "M5S2-7"
+      ],
+      "next": [
+        "M5S2-9"
+      ],
+      "questionTypes": [
+        "cuboid_feature",
+        "cuboid_surface",
+        "cuboid_volume",
+        "cuboid_capacity"
+      ],
+      "commonErrors": [
+        "surface_volume_confusion",
+        "unit_conversion_error",
+        "capacity_volume_confusion"
+      ],
+      "strategyPacks": [
+        "net_unfolding",
+        "unit_cube_counting",
+        "real_object_measure"
+      ],
+      "masteryRule": "A_individual_v1",
+      "status": "draft"
+    },
+    {
+      "knowledgeCode": "M5S2-9",
+      "name": "长方体表面积计算",
+      "grade": "5",
+      "book": "下册",
+      "unit": "第三单元 长方体和正方体",
+      "lesson": "2.表面积",
+      "level": "C",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs5x_new/",
+      "prerequisites": [
+        "M5S2-8"
+      ],
+      "next": [
+        "M5S2-10"
+      ],
+      "questionTypes": [
+        "cuboid_feature",
+        "cuboid_surface",
+        "cuboid_volume",
+        "cuboid_capacity"
+      ],
+      "commonErrors": [
+        "surface_volume_confusion",
+        "unit_conversion_error",
+        "capacity_volume_confusion"
+      ],
+      "strategyPacks": [
+        "net_unfolding",
+        "unit_cube_counting",
+        "real_object_measure"
+      ],
+      "masteryRule": "A_individual_v1",
+      "status": "draft"
+    },
+    {
+      "knowledgeCode": "M6S1-0",
+      "name": "分数乘整数的意义",
+      "grade": "6",
+      "book": "上册",
+      "unit": "第一单元 分数乘法",
+      "lesson": "1.分数乘整数",
+      "level": "B",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs6s/",
+      "prerequisites": [
+        "M5S2-27",
+        "M5S2-15"
+      ],
+      "next": [
+        "M6S1-1"
+      ],
+      "questionTypes": [
+        "fraction_mul_int",
+        "fraction_mul_fraction",
+        "fraction_mul_decimal",
+        "fraction_mul_mixed",
+        "fraction_mul_word"
+      ],
+      "commonErrors": [
+        "fraction_mul_cancel_error",
+        "fraction_mul_word_unit_error",
+        "fraction_mul_mixed_error"
+      ],
+      "strategyPacks": [
+        "area_model_fraction",
+        "cancel_first_rule",
+        "fraction_of_quantity_anchor"
+      ],
+      "masteryRule": "A_individual_v1",
+      "status": "draft",
+      "prereq_note": "LEGIT_STARTER: 该课时/单元起始节点，无前置合理"
+    },
+    {
+      "knowledgeCode": "M6S1-1",
+      "name": "分数乘整数计算法则",
+      "grade": "6",
+      "book": "上册",
+      "unit": "第一单元 分数乘法",
+      "lesson": "1.分数乘整数",
+      "level": "C",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs6s/",
+      "prerequisites": [
+        "M6S1-0",
+        "M5S2-22"
+      ],
+      "next": [
+        "M6S1-2",
+        "M6S1-12",
+        "M6S1-34",
+        "M6S1-14",
+        "M6S1-17"
+      ],
+      "questionTypes": [
+        "fraction_mul_int",
+        "fraction_mul_fraction",
+        "fraction_mul_decimal",
+        "fraction_mul_mixed",
+        "fraction_mul_word"
+      ],
+      "commonErrors": [
+        "fraction_mul_cancel_error",
+        "fraction_mul_word_unit_error",
+        "fraction_mul_mixed_error"
+      ],
+      "strategyPacks": [
+        "area_model_fraction",
+        "cancel_first_rule",
+        "fraction_of_quantity_anchor"
+      ],
+      "masteryRule": "A_individual_v1",
+      "status": "draft"
+    },
+    {
+      "knowledgeCode": "M6S1-10",
+      "name": "用方向和距离描述位置",
+      "grade": "6",
+      "book": "上册",
+      "unit": "第二单元 位置与方向(二)",
+      "lesson": "1.根据方向和距离确定位置",
+      "level": "B",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs6s/",
+      "prerequisites": [],
+      "next": [
+        "M6S1-11"
+      ],
+      "questionTypes": [
+        "direction_distance_describe",
+        "route_draw"
+      ],
+      "commonErrors": [
+        "direction_angle_error",
+        "direction_reference_error"
+      ],
+      "strategyPacks": [
+        "compass_protractor_practice",
+        "route_step_decomposition"
+      ],
+      "masteryRule": "B_standard_v1",
+      "status": "draft",
+      "prereq_note": "LEGIT_STARTER: 该课时/单元起始节点，无前置合理"
+    },
+    {
+      "knowledgeCode": "M6S1-11",
+      "name": "根据描述绘制简单路线图",
+      "grade": "6",
+      "book": "上册",
+      "unit": "第二单元 位置与方向(二)",
+      "lesson": "2.绘制路线图",
+      "level": "C",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs6s/",
+      "prerequisites": [
+        "M6S1-10"
+      ],
+      "next": [],
+      "questionTypes": [
+        "direction_distance_describe",
+        "route_draw"
+      ],
+      "commonErrors": [
+        "direction_angle_error",
+        "direction_reference_error"
+      ],
+      "strategyPacks": [
+        "compass_protractor_practice",
+        "route_step_decomposition"
+      ],
+      "masteryRule": "B_standard_v1",
+      "status": "draft",
+      "next_note": "LEGIT_TERMINAL: 课时/单元终末节点，学习路径自然终点"
+    },
+    {
+      "knowledgeCode": "M6S1-12",
+      "name": "倒数的意义和判定",
+      "grade": "6",
+      "book": "上册",
+      "unit": "第三单元 分数除法",
+      "lesson": "1.倒数",
+      "level": "B",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs6s/",
+      "prerequisites": [
+        "M6S1-1"
+      ],
+      "next": [
+        "M6S1-13"
+      ],
+      "questionTypes": [
+        "fraction_div_int",
+        "fraction_div_fraction",
+        "fraction_div_mixed",
+        "fraction_div_word",
+        "engineering_problem"
+      ],
+      "commonErrors": [
+        "reciprocal_confusion",
+        "fraction_div_word_unit_error",
+        "engineering_work_unit_error"
+      ],
+      "strategyPacks": [
+        "reciprocal_meaning_bridge",
+        "how_many_groups_model",
+        "engineering_unity_method"
+      ],
+      "masteryRule": "A_individual_v1",
+      "status": "draft",
+      "prereq_note": "LEGIT_STARTER: 该课时/单元起始节点，无前置合理"
+    },
+    {
+      "knowledgeCode": "M6S1-13",
+      "name": "求一个数的倒数",
+      "grade": "6",
+      "book": "上册",
+      "unit": "第三单元 分数除法",
+      "lesson": "1.倒数",
+      "level": "C",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs6s/",
+      "prerequisites": [
+        "M6S1-12"
+      ],
+      "next": [
+        "M6S1-14"
+      ],
+      "questionTypes": [
+        "fraction_div_int",
+        "fraction_div_fraction",
+        "fraction_div_mixed",
+        "fraction_div_word",
+        "engineering_problem"
+      ],
+      "commonErrors": [
+        "reciprocal_confusion",
+        "fraction_div_word_unit_error",
+        "engineering_work_unit_error"
+      ],
+      "strategyPacks": [
+        "reciprocal_meaning_bridge",
+        "how_many_groups_model",
+        "engineering_unity_method"
+      ],
+      "masteryRule": "A_individual_v1",
+      "status": "draft"
+    },
+    {
+      "knowledgeCode": "M6S1-14",
+      "name": "分数除以整数的算法",
+      "grade": "6",
+      "book": "上册",
+      "unit": "第三单元 分数除法",
+      "lesson": "2.分数除以整数",
+      "level": "B",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs6s/",
+      "prerequisites": [
+        "M6S1-13",
+        "M6S1-1"
+      ],
+      "next": [
+        "M6S1-15"
+      ],
+      "questionTypes": [
+        "fraction_div_int",
+        "fraction_div_fraction",
+        "fraction_div_mixed",
+        "fraction_div_word",
+        "engineering_problem"
+      ],
+      "commonErrors": [
+        "reciprocal_confusion",
+        "fraction_div_word_unit_error",
+        "engineering_work_unit_error"
+      ],
+      "strategyPacks": [
+        "reciprocal_meaning_bridge",
+        "how_many_groups_model",
+        "engineering_unity_method"
+      ],
+      "masteryRule": "A_individual_v1",
+      "status": "draft"
+    },
+    {
+      "knowledgeCode": "M6S1-15",
+      "name": "一个数除以分数的算法",
+      "grade": "6",
+      "book": "上册",
+      "unit": "第三单元 分数除法",
+      "lesson": "3.一个数除以分数",
+      "level": "B",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs6s/",
+      "prerequisites": [
+        "M6S1-14"
+      ],
+      "next": [
+        "M6S1-16"
+      ],
+      "questionTypes": [
+        "fraction_div_int",
+        "fraction_div_fraction",
+        "fraction_div_mixed",
+        "fraction_div_word",
+        "engineering_problem"
+      ],
+      "commonErrors": [
+        "reciprocal_confusion",
+        "fraction_div_word_unit_error",
+        "engineering_work_unit_error"
+      ],
+      "strategyPacks": [
+        "reciprocal_meaning_bridge",
+        "how_many_groups_model",
+        "engineering_unity_method"
+      ],
+      "masteryRule": "A_individual_v1",
+      "status": "draft"
+    },
+    {
+      "knowledgeCode": "M6S1-16",
+      "name": "分数除法的统一计算法则",
+      "grade": "6",
+      "book": "上册",
+      "unit": "第三单元 分数除法",
+      "lesson": "3.一个数除以分数",
+      "level": "C",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs6s/",
+      "prerequisites": [
+        "M6S1-15"
+      ],
+      "next": [
+        "M6S1-17"
+      ],
+      "questionTypes": [
+        "fraction_div_int",
+        "fraction_div_fraction",
+        "fraction_div_mixed",
+        "fraction_div_word",
+        "engineering_problem"
+      ],
+      "commonErrors": [
+        "reciprocal_confusion",
+        "fraction_div_word_unit_error",
+        "engineering_work_unit_error"
+      ],
+      "strategyPacks": [
+        "reciprocal_meaning_bridge",
+        "how_many_groups_model",
+        "engineering_unity_method"
+      ],
+      "masteryRule": "A_individual_v1",
+      "status": "draft"
+    },
+    {
+      "knowledgeCode": "M6S1-17",
+      "name": "分数四则混合运算",
+      "grade": "6",
+      "book": "上册",
+      "unit": "第三单元 分数除法",
+      "lesson": "4.分数混合运算",
+      "level": "C",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs6s/",
+      "prerequisites": [
+        "M6S1-16",
+        "M5S2-19",
+        "M6S1-1"
+      ],
+      "next": [
+        "M6S1-18"
+      ],
+      "questionTypes": [
+        "fraction_div_int",
+        "fraction_div_fraction",
+        "fraction_div_mixed",
+        "fraction_div_word",
+        "engineering_problem"
+      ],
+      "commonErrors": [
+        "reciprocal_confusion",
+        "fraction_div_word_unit_error",
+        "engineering_work_unit_error"
+      ],
+      "strategyPacks": [
+        "reciprocal_meaning_bridge",
+        "how_many_groups_model",
+        "engineering_unity_method"
+      ],
+      "masteryRule": "A_individual_v1",
+      "status": "draft"
+    },
+    {
+      "knowledgeCode": "M6S1-18",
+      "name": "已知一个数的几分之几是多少求这个数",
+      "grade": "6",
+      "book": "上册",
+      "unit": "第三单元 分数除法",
+      "lesson": "5.解决问题",
+      "level": "D",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs6s/",
+      "prerequisites": [
+        "M6S1-17"
+      ],
+      "next": [
+        "M6S1-19"
+      ],
+      "questionTypes": [
+        "fraction_div_int",
+        "fraction_div_fraction",
+        "fraction_div_mixed",
+        "fraction_div_word",
+        "engineering_problem"
+      ],
+      "commonErrors": [
+        "reciprocal_confusion",
+        "fraction_div_word_unit_error",
+        "engineering_work_unit_error"
+      ],
+      "strategyPacks": [
+        "reciprocal_meaning_bridge",
+        "how_many_groups_model",
+        "engineering_unity_method"
+      ],
+      "masteryRule": "A_individual_v1",
+      "status": "draft"
+    },
+    {
+      "knowledgeCode": "M6S1-19",
+      "name": "工程问题",
+      "grade": "6",
+      "book": "上册",
+      "unit": "第三单元 分数除法",
+      "lesson": "5.解决问题",
+      "level": "D",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs6s/",
+      "prerequisites": [
+        "M6S1-18"
+      ],
+      "next": [],
+      "questionTypes": [
+        "fraction_div_int",
+        "fraction_div_fraction",
+        "fraction_div_mixed",
+        "fraction_div_word",
+        "engineering_problem"
+      ],
+      "commonErrors": [
+        "reciprocal_confusion",
+        "fraction_div_word_unit_error",
+        "engineering_work_unit_error"
+      ],
+      "strategyPacks": [
+        "reciprocal_meaning_bridge",
+        "how_many_groups_model",
+        "engineering_unity_method"
+      ],
+      "masteryRule": "A_individual_v1",
+      "status": "draft",
+      "next_note": "LEGIT_TERMINAL: 课时/单元终末节点，学习路径自然终点"
+    },
+    {
+      "knowledgeCode": "M6S1-2",
+      "name": "分数乘分数的算理",
+      "grade": "6",
+      "book": "上册",
+      "unit": "第一单元 分数乘法",
+      "lesson": "2.分数乘分数",
+      "level": "B",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs6s/",
+      "prerequisites": [
+        "M6S1-1"
+      ],
+      "next": [
+        "M6S1-3"
+      ],
+      "questionTypes": [
+        "fraction_mul_int",
+        "fraction_mul_fraction",
+        "fraction_mul_decimal",
+        "fraction_mul_mixed",
+        "fraction_mul_word"
+      ],
+      "commonErrors": [
+        "fraction_mul_cancel_error",
+        "fraction_mul_word_unit_error",
+        "fraction_mul_mixed_error"
+      ],
+      "strategyPacks": [
+        "area_model_fraction",
+        "cancel_first_rule",
+        "fraction_of_quantity_anchor"
+      ],
+      "masteryRule": "A_individual_v1",
+      "status": "draft"
+    },
+    {
+      "knowledgeCode": "M6S1-20",
+      "name": "比的定义与各部分名称",
+      "grade": "6",
+      "book": "上册",
+      "unit": "第四单元 比",
+      "lesson": "1.比的意义",
+      "level": "B",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs6s/",
+      "prerequisites": [
+        "M5S2-15"
+      ],
+      "next": [
+        "M6S1-21",
+        "M6S2-16"
+      ],
+      "questionTypes": [
+        "ratio_define",
+        "ratio_simplify",
+        "ratio_apply"
+      ],
+      "commonErrors": [
+        "ratio_meaning_confusion",
+        "ratio_simplify_error",
+        "ratio_application_formula_error"
+      ],
+      "strategyPacks": [
+        "ratio_table_organizer",
+        "real_recipe_examples",
+        "part_to_whole_visual"
+      ],
+      "masteryRule": "A_individual_v1",
+      "status": "draft",
+      "prereq_note": "LEGIT_STARTER: 该课时/单元起始节点，无前置合理"
+    },
+    {
+      "knowledgeCode": "M6S1-21",
+      "name": "比与除法、分数的关系",
+      "grade": "6",
+      "book": "上册",
+      "unit": "第四单元 比",
+      "lesson": "1.比的意义",
+      "level": "B",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs6s/",
+      "prerequisites": [
+        "M6S1-20"
+      ],
+      "next": [
+        "M6S1-22"
+      ],
+      "questionTypes": [
+        "ratio_define",
+        "ratio_simplify",
+        "ratio_apply"
+      ],
+      "commonErrors": [
+        "ratio_meaning_confusion",
+        "ratio_simplify_error",
+        "ratio_application_formula_error"
+      ],
+      "strategyPacks": [
+        "ratio_table_organizer",
+        "real_recipe_examples",
+        "part_to_whole_visual"
+      ],
+      "masteryRule": "A_individual_v1",
+      "status": "draft"
+    },
+    {
+      "knowledgeCode": "M6S1-22",
+      "name": "比的基本性质",
+      "grade": "6",
+      "book": "上册",
+      "unit": "第四单元 比",
+      "lesson": "2.比的基本性质",
+      "level": "C",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs6s/",
+      "prerequisites": [
+        "M6S1-21",
+        "M5S2-17"
+      ],
+      "next": [
+        "M6S1-23"
+      ],
+      "questionTypes": [
+        "ratio_define",
+        "ratio_simplify",
+        "ratio_apply"
+      ],
+      "commonErrors": [
+        "ratio_meaning_confusion",
+        "ratio_simplify_error",
+        "ratio_application_formula_error"
+      ],
+      "strategyPacks": [
+        "ratio_table_organizer",
+        "real_recipe_examples",
+        "part_to_whole_visual"
+      ],
+      "masteryRule": "A_individual_v1",
+      "status": "draft"
+    },
+    {
+      "knowledgeCode": "M6S1-23",
+      "name": "化简比",
+      "grade": "6",
+      "book": "上册",
+      "unit": "第四单元 比",
+      "lesson": "2.比的基本性质",
+      "level": "C",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs6s/",
+      "prerequisites": [
+        "M6S1-22"
+      ],
+      "next": [
+        "M6S1-24"
+      ],
+      "questionTypes": [
+        "ratio_define",
+        "ratio_simplify",
+        "ratio_apply"
+      ],
+      "commonErrors": [
+        "ratio_meaning_confusion",
+        "ratio_simplify_error",
+        "ratio_application_formula_error"
+      ],
+      "strategyPacks": [
+        "ratio_table_organizer",
+        "real_recipe_examples",
+        "part_to_whole_visual"
+      ],
+      "masteryRule": "A_individual_v1",
+      "status": "draft"
+    },
+    {
+      "knowledgeCode": "M6S1-24",
+      "name": "按比分配问题",
+      "grade": "6",
+      "book": "上册",
+      "unit": "第四单元 比",
+      "lesson": "3.比的应用",
+      "level": "D",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs6s/",
+      "prerequisites": [
+        "M6S1-23"
+      ],
+      "next": [],
+      "questionTypes": [
+        "ratio_define",
+        "ratio_simplify",
+        "ratio_apply"
+      ],
+      "commonErrors": [
+        "ratio_meaning_confusion",
+        "ratio_simplify_error",
+        "ratio_application_formula_error"
+      ],
+      "strategyPacks": [
+        "ratio_table_organizer",
+        "real_recipe_examples",
+        "part_to_whole_visual"
+      ],
+      "masteryRule": "B_standard_v1",
+      "status": "draft",
+      "next_note": "LEGIT_TERMINAL: 课时/单元终末节点，学习路径自然终点"
+    },
+    {
+      "knowledgeCode": "M6S1-25",
+      "name": "圆心、半径、直径的概念",
+      "grade": "6",
+      "book": "上册",
+      "unit": "第五单元 圆",
+      "lesson": "1.圆的认识",
+      "level": "A",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs6s/",
+      "prerequisites": [],
+      "next": [
+        "M6S1-26"
+      ],
+      "questionTypes": [
+        "circle_concept",
+        "circle_circumference",
+        "circle_area",
+        "circle_ring",
+        "circle_sector"
+      ],
+      "commonErrors": [
+        "radius_diameter_confusion",
+        "pi_formula_misapply",
+        "circle_area_circumference_confusion",
+        "ring_sector_error"
+      ],
+      "strategyPacks": [
+        "string_compass_draw",
+        "formula_derive_cut_pie",
+        "real_circle_measure"
+      ],
+      "masteryRule": "C_basic_v1",
+      "status": "draft",
+      "prereq_note": "LEGIT_STARTER: 该课时/单元起始节点，无前置合理"
+    },
+    {
+      "knowledgeCode": "M6S1-26",
+      "name": "圆的对称性",
+      "grade": "6",
+      "book": "上册",
+      "unit": "第五单元 圆",
+      "lesson": "1.圆的认识",
+      "level": "A",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs6s/",
+      "prerequisites": [
+        "M6S1-25"
+      ],
+      "next": [
+        "M6S1-27"
+      ],
+      "questionTypes": [
+        "circle_concept",
+        "circle_circumference",
+        "circle_area",
+        "circle_ring",
+        "circle_sector"
+      ],
+      "commonErrors": [
+        "radius_diameter_confusion",
+        "pi_formula_misapply",
+        "circle_area_circumference_confusion",
+        "ring_sector_error"
+      ],
+      "strategyPacks": [
+        "string_compass_draw",
+        "formula_derive_cut_pie",
+        "real_circle_measure"
+      ],
+      "masteryRule": "C_basic_v1",
+      "status": "draft"
+    },
+    {
+      "knowledgeCode": "M6S1-27",
+      "name": "圆周率π的认识",
+      "grade": "6",
+      "book": "上册",
+      "unit": "第五单元 圆",
+      "lesson": "2.圆的周长",
+      "level": "B",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs6s/",
+      "prerequisites": [
+        "M6S1-26"
+      ],
+      "next": [
+        "M6S1-28"
+      ],
+      "questionTypes": [
+        "circle_concept",
+        "circle_circumference",
+        "circle_area",
+        "circle_ring",
+        "circle_sector"
+      ],
+      "commonErrors": [
+        "radius_diameter_confusion",
+        "pi_formula_misapply",
+        "circle_area_circumference_confusion",
+        "ring_sector_error"
+      ],
+      "strategyPacks": [
+        "string_compass_draw",
+        "formula_derive_cut_pie",
+        "real_circle_measure"
+      ],
+      "masteryRule": "A_individual_v1",
+      "status": "draft"
+    },
+    {
+      "knowledgeCode": "M6S1-28",
+      "name": "圆的周长公式 C=2πr 或 C=πd",
+      "grade": "6",
+      "book": "上册",
+      "unit": "第五单元 圆",
+      "lesson": "2.圆的周长",
+      "level": "C",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs6s/",
+      "prerequisites": [
+        "M6S1-27"
+      ],
+      "next": [
+        "M6S1-29"
+      ],
+      "questionTypes": [
+        "circle_concept",
+        "circle_circumference",
+        "circle_area",
+        "circle_ring",
+        "circle_sector"
+      ],
+      "commonErrors": [
+        "radius_diameter_confusion",
+        "pi_formula_misapply",
+        "circle_area_circumference_confusion",
+        "ring_sector_error"
+      ],
+      "strategyPacks": [
+        "string_compass_draw",
+        "formula_derive_cut_pie",
+        "real_circle_measure"
+      ],
+      "masteryRule": "A_individual_v1",
+      "status": "draft"
+    },
+    {
+      "knowledgeCode": "M6S1-29",
+      "name": "圆面积公式推导",
+      "grade": "6",
+      "book": "上册",
+      "unit": "第五单元 圆",
+      "lesson": "3.圆的面积",
+      "level": "B",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs6s/",
+      "prerequisites": [
+        "M6S1-28",
+        "M5S1-50"
+      ],
+      "next": [
+        "M6S1-30"
+      ],
+      "questionTypes": [
+        "circle_concept",
+        "circle_circumference",
+        "circle_area",
+        "circle_ring",
+        "circle_sector"
+      ],
+      "commonErrors": [
+        "radius_diameter_confusion",
+        "pi_formula_misapply",
+        "circle_area_circumference_confusion",
+        "ring_sector_error"
+      ],
+      "strategyPacks": [
+        "string_compass_draw",
+        "formula_derive_cut_pie",
+        "real_circle_measure"
+      ],
+      "masteryRule": "A_individual_v1",
+      "status": "draft"
+    },
+    {
+      "knowledgeCode": "M6S1-3",
+      "name": "分数乘分数计算法则",
+      "grade": "6",
+      "book": "上册",
+      "unit": "第一单元 分数乘法",
+      "lesson": "2.分数乘分数",
+      "level": "C",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs6s/",
+      "prerequisites": [
+        "M6S1-2"
+      ],
+      "next": [
+        "M6S1-4"
+      ],
+      "questionTypes": [
+        "fraction_mul_int",
+        "fraction_mul_fraction",
+        "fraction_mul_decimal",
+        "fraction_mul_mixed",
+        "fraction_mul_word"
+      ],
+      "commonErrors": [
+        "fraction_mul_cancel_error",
+        "fraction_mul_word_unit_error",
+        "fraction_mul_mixed_error"
+      ],
+      "strategyPacks": [
+        "area_model_fraction",
+        "cancel_first_rule",
+        "fraction_of_quantity_anchor"
+      ],
+      "masteryRule": "A_individual_v1",
+      "status": "draft"
+    },
+    {
+      "knowledgeCode": "M6S1-30",
+      "name": "圆面积公式 S=πr²",
+      "grade": "6",
+      "book": "上册",
+      "unit": "第五单元 圆",
+      "lesson": "3.圆的面积",
+      "level": "C",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs6s/",
+      "prerequisites": [
+        "M6S1-29"
+      ],
+      "next": [
+        "M6S1-31"
+      ],
+      "questionTypes": [
+        "circle_concept",
+        "circle_circumference",
+        "circle_area",
+        "circle_ring",
+        "circle_sector"
+      ],
+      "commonErrors": [
+        "radius_diameter_confusion",
+        "pi_formula_misapply",
+        "circle_area_circumference_confusion",
+        "ring_sector_error"
+      ],
+      "strategyPacks": [
+        "string_compass_draw",
+        "formula_derive_cut_pie",
+        "real_circle_measure"
+      ],
+      "masteryRule": "A_individual_v1",
+      "status": "draft"
+    },
+    {
+      "knowledgeCode": "M6S1-31",
+      "name": "扇形的认识",
+      "grade": "6",
+      "book": "上册",
+      "unit": "第五单元 圆",
+      "lesson": "4.扇形",
+      "level": "A",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs6s/",
+      "prerequisites": [
+        "M6S1-30"
+      ],
+      "next": [
+        "M6S1-32"
+      ],
+      "questionTypes": [
+        "circle_concept",
+        "circle_circumference",
+        "circle_area",
+        "circle_ring",
+        "circle_sector"
+      ],
+      "commonErrors": [
+        "radius_diameter_confusion",
+        "pi_formula_misapply",
+        "circle_area_circumference_confusion",
+        "ring_sector_error"
+      ],
+      "strategyPacks": [
+        "string_compass_draw",
+        "formula_derive_cut_pie",
+        "real_circle_measure"
+      ],
+      "masteryRule": "C_basic_v1",
+      "status": "draft"
+    },
+    {
+      "knowledgeCode": "M6S1-32",
+      "name": "圆环面积计算",
+      "grade": "6",
+      "book": "上册",
+      "unit": "第五单元 圆",
+      "lesson": "5.解决问题",
+      "level": "C",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs6s/",
+      "prerequisites": [
+        "M6S1-31"
+      ],
+      "next": [
+        "M6S1-33"
+      ],
+      "questionTypes": [
+        "circle_concept",
+        "circle_circumference",
+        "circle_area",
+        "circle_ring",
+        "circle_sector"
+      ],
+      "commonErrors": [
+        "radius_diameter_confusion",
+        "pi_formula_misapply",
+        "circle_area_circumference_confusion",
+        "ring_sector_error"
+      ],
+      "strategyPacks": [
+        "string_compass_draw",
+        "formula_derive_cut_pie",
+        "real_circle_measure"
+      ],
+      "masteryRule": "B_standard_v1",
+      "status": "draft"
+    },
+    {
+      "knowledgeCode": "M6S1-33",
+      "name": "圆与正方形的关系",
+      "grade": "6",
+      "book": "上册",
+      "unit": "第五单元 圆",
+      "lesson": "5.解决问题",
+      "level": "D",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs6s/",
+      "prerequisites": [
+        "M6S1-32"
+      ],
+      "next": [],
+      "questionTypes": [
+        "circle_concept",
+        "circle_circumference",
+        "circle_area",
+        "circle_ring",
+        "circle_sector"
+      ],
+      "commonErrors": [
+        "radius_diameter_confusion",
+        "pi_formula_misapply",
+        "circle_area_circumference_confusion",
+        "ring_sector_error"
+      ],
+      "strategyPacks": [
+        "string_compass_draw",
+        "formula_derive_cut_pie",
+        "real_circle_measure"
+      ],
+      "masteryRule": "C_basic_v1",
+      "status": "draft",
+      "next_note": "LEGIT_TERMINAL: 课时/单元终末节点，学习路径自然终点"
+    },
+    {
+      "knowledgeCode": "M6S1-34",
+      "name": "百分数的概念",
+      "grade": "6",
+      "book": "上册",
+      "unit": "第六单元 百分数(一)",
+      "lesson": "1.百分数的意义",
+      "level": "B",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs6s/",
+      "prerequisites": [
+        "M6S1-1"
+      ],
+      "next": [
+        "M6S1-35",
+        "M6S2-4"
+      ],
+      "questionTypes": [
+        "percent_meaning",
+        "percent_convert",
+        "percent_find_ratio",
+        "percent_find_amount",
+        "percent_find_whole"
+      ],
+      "commonErrors": [
+        "percent_standard_amount_error",
+        "percent_convert_direction_error",
+        "percent_compare_error"
+      ],
+      "strategyPacks": [
+        "hundred_grid_visual",
+        "convert_triangle_method",
+        "standard_100_anchor"
+      ],
+      "masteryRule": "A_individual_v1",
+      "status": "draft",
+      "prereq_note": "LEGIT_STARTER: 该课时/单元起始节点，无前置合理"
+    },
+    {
+      "knowledgeCode": "M6S1-35",
+      "name": "百分数与分数互化",
+      "grade": "6",
+      "book": "上册",
+      "unit": "第六单元 百分数(一)",
+      "lesson": "2.百分数与分数小数互化",
+      "level": "C",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs6s/",
+      "prerequisites": [
+        "M6S1-34"
+      ],
+      "next": [
+        "M6S1-36"
+      ],
+      "questionTypes": [
+        "percent_meaning",
+        "percent_convert",
+        "percent_find_ratio",
+        "percent_find_amount",
+        "percent_find_whole"
+      ],
+      "commonErrors": [
+        "percent_standard_amount_error",
+        "percent_convert_direction_error",
+        "percent_compare_error"
+      ],
+      "strategyPacks": [
+        "hundred_grid_visual",
+        "convert_triangle_method",
+        "standard_100_anchor"
+      ],
+      "masteryRule": "A_individual_v1",
+      "status": "draft"
+    },
+    {
+      "knowledgeCode": "M6S1-36",
+      "name": "百分数与小数互化",
+      "grade": "6",
+      "book": "上册",
+      "unit": "第六单元 百分数(一)",
+      "lesson": "2.百分数与分数小数互化",
+      "level": "C",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs6s/",
+      "prerequisites": [
+        "M6S1-35"
+      ],
+      "next": [
+        "M6S1-37"
+      ],
+      "questionTypes": [
+        "percent_meaning",
+        "percent_convert",
+        "percent_find_ratio",
+        "percent_find_amount",
+        "percent_find_whole"
+      ],
+      "commonErrors": [
+        "percent_standard_amount_error",
+        "percent_convert_direction_error",
+        "percent_compare_error"
+      ],
+      "strategyPacks": [
+        "hundred_grid_visual",
+        "convert_triangle_method",
+        "standard_100_anchor"
+      ],
+      "masteryRule": "A_individual_v1",
+      "status": "draft"
+    },
+    {
+      "knowledgeCode": "M6S1-37",
+      "name": "求一个数是另一个数的百分之几",
+      "grade": "6",
+      "book": "上册",
+      "unit": "第六单元 百分数(一)",
+      "lesson": "3.百分数应用",
+      "level": "C",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs6s/",
+      "prerequisites": [
+        "M6S1-36"
+      ],
+      "next": [
+        "M6S1-38"
+      ],
+      "questionTypes": [
+        "percent_meaning",
+        "percent_convert",
+        "percent_find_ratio",
+        "percent_find_amount",
+        "percent_find_whole"
+      ],
+      "commonErrors": [
+        "percent_standard_amount_error",
+        "percent_convert_direction_error",
+        "percent_compare_error"
+      ],
+      "strategyPacks": [
+        "hundred_grid_visual",
+        "convert_triangle_method",
+        "standard_100_anchor"
+      ],
+      "masteryRule": "A_individual_v1",
+      "status": "draft"
+    },
+    {
+      "knowledgeCode": "M6S1-38",
+      "name": "求一个数的百分之几是多少",
+      "grade": "6",
+      "book": "上册",
+      "unit": "第六单元 百分数(一)",
+      "lesson": "3.百分数应用",
+      "level": "C",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs6s/",
+      "prerequisites": [
+        "M6S1-37"
+      ],
+      "next": [
+        "M6S1-39"
+      ],
+      "questionTypes": [
+        "percent_meaning",
+        "percent_convert",
+        "percent_find_ratio",
+        "percent_find_amount",
+        "percent_find_whole"
+      ],
+      "commonErrors": [
+        "percent_standard_amount_error",
+        "percent_convert_direction_error",
+        "percent_compare_error"
+      ],
+      "strategyPacks": [
+        "hundred_grid_visual",
+        "convert_triangle_method",
+        "standard_100_anchor"
+      ],
+      "masteryRule": "A_individual_v1",
+      "status": "draft"
+    },
+    {
+      "knowledgeCode": "M6S1-39",
+      "name": "已知一个数的百分之几求这个数",
+      "grade": "6",
+      "book": "上册",
+      "unit": "第六单元 百分数(一)",
+      "lesson": "3.百分数应用",
+      "level": "D",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs6s/",
+      "prerequisites": [
+        "M6S1-38"
+      ],
+      "next": [],
+      "questionTypes": [
+        "percent_meaning",
+        "percent_convert",
+        "percent_find_ratio",
+        "percent_find_amount",
+        "percent_find_whole"
+      ],
+      "commonErrors": [
+        "percent_standard_amount_error",
+        "percent_convert_direction_error",
+        "percent_compare_error"
+      ],
+      "strategyPacks": [
+        "hundred_grid_visual",
+        "convert_triangle_method",
+        "standard_100_anchor"
+      ],
+      "masteryRule": "A_individual_v1",
+      "status": "draft",
+      "next_note": "LEGIT_TERMINAL: 课时/单元终末节点，学习路径自然终点"
+    },
+    {
+      "knowledgeCode": "M6S1-4",
+      "name": "计算时先约分再相乘",
+      "grade": "6",
+      "book": "上册",
+      "unit": "第一单元 分数乘法",
+      "lesson": "2.分数乘分数",
+      "level": "C",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs6s/",
+      "prerequisites": [
+        "M6S1-3"
+      ],
+      "next": [
+        "M6S1-5"
+      ],
+      "questionTypes": [
+        "fraction_mul_int",
+        "fraction_mul_fraction",
+        "fraction_mul_decimal",
+        "fraction_mul_mixed",
+        "fraction_mul_word"
+      ],
+      "commonErrors": [
+        "fraction_mul_cancel_error",
+        "fraction_mul_word_unit_error",
+        "fraction_mul_mixed_error"
+      ],
+      "strategyPacks": [
+        "area_model_fraction",
+        "cancel_first_rule",
+        "fraction_of_quantity_anchor"
+      ],
+      "masteryRule": "A_individual_v1",
+      "status": "draft"
+    },
+    {
+      "knowledgeCode": "M6S1-40",
+      "name": "扇形统计图的特点",
+      "grade": "6",
+      "book": "上册",
+      "unit": "第七单元 扇形统计图",
+      "lesson": "1.认识扇形统计图",
+      "level": "B",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs6s/",
+      "prerequisites": [],
+      "next": [
+        "M6S1-41"
+      ],
+      "questionTypes": [
+        "pie_chart_read",
+        "chart_type_select"
+      ],
+      "commonErrors": [
+        "pie_chart_ratio_error",
+        "chart_type_select_error"
+      ],
+      "strategyPacks": [
+        "pie_angle_to_percent",
+        "chart_type_decision_tree"
+      ],
+      "masteryRule": "B_standard_v1",
+      "status": "draft",
+      "prereq_note": "LEGIT_STARTER: 该课时/单元起始节点，无前置合理"
+    },
+    {
+      "knowledgeCode": "M6S1-41",
+      "name": "条形、折线、扇形统计图选用",
+      "grade": "6",
+      "book": "上册",
+      "unit": "第七单元 扇形统计图",
+      "lesson": "2.三种统计图比较",
+      "level": "C",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs6s/",
+      "prerequisites": [
+        "M6S1-40"
+      ],
+      "next": [
+        "M6S1-42"
+      ],
+      "questionTypes": [
+        "pie_chart_read",
+        "chart_type_select"
+      ],
+      "commonErrors": [
+        "pie_chart_ratio_error",
+        "chart_type_select_error"
+      ],
+      "strategyPacks": [
+        "pie_angle_to_percent",
+        "chart_type_decision_tree"
+      ],
+      "masteryRule": "B_standard_v1",
+      "status": "draft",
+      "next_note": "LEGIT_TERMINAL: 课时/单元终末节点，学习路径自然终点"
+    },
+    {
+      "knowledgeCode": "M6S1-42",
+      "name": "数形结合解决数学问题",
+      "grade": "6",
+      "book": "上册",
+      "unit": "第八单元 数学广角——数与形",
+      "lesson": "1.数与形结合",
+      "level": "B",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs6s/",
+      "prerequisites": [
+        "M6S1-41"
+      ],
+      "next": [],
+      "questionTypes": [
+        "number_shape_discover"
+      ],
+      "commonErrors": [
+        "number_shape_pattern_failure"
+      ],
+      "strategyPacks": [
+        "grid_pattern_growth",
+        "inductive_table"
+      ],
+      "masteryRule": "B_standard_v1",
+      "status": "draft",
+      "prereq_note": "LEGIT_STARTER: 该课时/单元起始节点，无前置合理",
+      "next_note": "LEGIT_TERMINAL: 课时/单元终末节点，学习路径自然终点"
+    },
+    {
+      "knowledgeCode": "M6S1-43",
+      "name": "分数乘除法综合",
+      "grade": "6",
+      "book": "上册",
+      "unit": "第九单元 总复习",
+      "lesson": "1.数与代数",
+      "level": "C",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs6s/",
+      "prerequisites": [],
+      "next": [
+        "M6S1-44"
+      ],
+      "questionTypes": [
+        "review_calc",
+        "review_geometry",
+        "review_stats"
+      ],
+      "commonErrors": [
+        "mixed_topic_confusion"
+      ],
+      "strategyPacks": [
+        "spiral_review_map",
+        "error_pattern_flashback",
+        "topic_web_synthesis"
+      ],
+      "masteryRule": "C_basic_v1",
+      "status": "draft",
+      "prereq_note": "LEGIT_STARTER: 该课时/单元起始节点，无前置合理"
+    },
+    {
+      "knowledgeCode": "M6S1-44",
+      "name": "比与百分数综合应用",
+      "grade": "6",
+      "book": "上册",
+      "unit": "第九单元 总复习",
+      "lesson": "1.数与代数",
+      "level": "C",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs6s/",
+      "prerequisites": [
+        "M6S1-43"
+      ],
+      "next": [
+        "M6S1-45"
+      ],
+      "questionTypes": [
+        "review_calc",
+        "review_geometry",
+        "review_stats"
+      ],
+      "commonErrors": [
+        "mixed_topic_confusion"
+      ],
+      "strategyPacks": [
+        "spiral_review_map",
+        "error_pattern_flashback",
+        "topic_web_synthesis"
+      ],
+      "masteryRule": "C_basic_v1",
+      "status": "draft"
+    },
+    {
+      "knowledgeCode": "M6S1-45",
+      "name": "圆相关公式总结",
+      "grade": "6",
+      "book": "上册",
+      "unit": "第九单元 总复习",
+      "lesson": "2.图形与几何",
+      "level": "C",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs6s/",
+      "prerequisites": [
+        "M6S1-44"
+      ],
+      "next": [
+        "M6S1-46"
+      ],
+      "questionTypes": [
+        "review_calc",
+        "review_geometry",
+        "review_stats"
+      ],
+      "commonErrors": [
+        "mixed_topic_confusion"
+      ],
+      "strategyPacks": [
+        "spiral_review_map",
+        "error_pattern_flashback",
+        "topic_web_synthesis"
+      ],
+      "masteryRule": "C_basic_v1",
+      "status": "draft"
+    },
+    {
+      "knowledgeCode": "M6S1-46",
+      "name": "统计图综合判读",
+      "grade": "6",
+      "book": "上册",
+      "unit": "第九单元 总复习",
+      "lesson": "3.统计与概率",
+      "level": "C",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs6s/",
+      "prerequisites": [
+        "M6S1-45"
+      ],
+      "next": [
+        "M6S2-0"
+      ],
+      "questionTypes": [
+        "review_calc",
+        "review_geometry",
+        "review_stats"
+      ],
+      "commonErrors": [
+        "mixed_topic_confusion"
+      ],
+      "strategyPacks": [
+        "spiral_review_map",
+        "error_pattern_flashback",
+        "topic_web_synthesis"
+      ],
+      "masteryRule": "C_basic_v1",
+      "status": "draft",
+      "next_note": "LEGIT_TERMINAL: 课时/单元终末节点，学习路径自然终点"
+    },
+    {
+      "knowledgeCode": "M6S1-5",
+      "name": "小数乘分数的灵活转化",
+      "grade": "6",
+      "book": "上册",
+      "unit": "第一单元 分数乘法",
+      "lesson": "3.小数乘分数",
+      "level": "C",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs6s/",
+      "prerequisites": [
+        "M6S1-4"
+      ],
+      "next": [
+        "M6S1-6"
+      ],
+      "questionTypes": [
+        "fraction_mul_int",
+        "fraction_mul_fraction",
+        "fraction_mul_decimal",
+        "fraction_mul_mixed",
+        "fraction_mul_word"
+      ],
+      "commonErrors": [
+        "fraction_mul_cancel_error",
+        "fraction_mul_word_unit_error",
+        "fraction_mul_mixed_error"
+      ],
+      "strategyPacks": [
+        "area_model_fraction",
+        "cancel_first_rule",
+        "fraction_of_quantity_anchor"
+      ],
+      "masteryRule": "B_standard_v1",
+      "status": "draft"
+    },
+    {
+      "knowledgeCode": "M6S1-6",
+      "name": "分数四则混合运算顺序",
+      "grade": "6",
+      "book": "上册",
+      "unit": "第一单元 分数乘法",
+      "lesson": "4.分数混合运算",
+      "level": "C",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs6s/",
+      "prerequisites": [
+        "M6S1-5"
+      ],
+      "next": [
+        "M6S1-7"
+      ],
+      "questionTypes": [
+        "fraction_mul_int",
+        "fraction_mul_fraction",
+        "fraction_mul_decimal",
+        "fraction_mul_mixed",
+        "fraction_mul_word"
+      ],
+      "commonErrors": [
+        "fraction_mul_cancel_error",
+        "fraction_mul_word_unit_error",
+        "fraction_mul_mixed_error"
+      ],
+      "strategyPacks": [
+        "area_model_fraction",
+        "cancel_first_rule",
+        "fraction_of_quantity_anchor"
+      ],
+      "masteryRule": "B_standard_v1",
+      "status": "draft"
+    },
+    {
+      "knowledgeCode": "M6S1-7",
+      "name": "整数乘法运算定律推广到分数",
+      "grade": "6",
+      "book": "上册",
+      "unit": "第一单元 分数乘法",
+      "lesson": "4.分数混合运算",
+      "level": "B",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs6s/",
+      "prerequisites": [
+        "M6S1-6"
+      ],
+      "next": [
+        "M6S1-8"
+      ],
+      "questionTypes": [
+        "fraction_mul_int",
+        "fraction_mul_fraction",
+        "fraction_mul_decimal",
+        "fraction_mul_mixed",
+        "fraction_mul_word"
+      ],
+      "commonErrors": [
+        "fraction_mul_cancel_error",
+        "fraction_mul_word_unit_error",
+        "fraction_mul_mixed_error"
+      ],
+      "strategyPacks": [
+        "area_model_fraction",
+        "cancel_first_rule",
+        "fraction_of_quantity_anchor"
+      ],
+      "masteryRule": "B_standard_v1",
+      "status": "draft"
+    },
+    {
+      "knowledgeCode": "M6S1-8",
+      "name": "求一个数的几分之几是多少",
+      "grade": "6",
+      "book": "上册",
+      "unit": "第一单元 分数乘法",
+      "lesson": "5.解决问题",
+      "level": "D",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs6s/",
+      "prerequisites": [
+        "M6S1-7"
+      ],
+      "next": [
+        "M6S1-9"
+      ],
+      "questionTypes": [
+        "fraction_mul_int",
+        "fraction_mul_fraction",
+        "fraction_mul_decimal",
+        "fraction_mul_mixed",
+        "fraction_mul_word"
+      ],
+      "commonErrors": [
+        "fraction_mul_cancel_error",
+        "fraction_mul_word_unit_error",
+        "fraction_mul_mixed_error"
+      ],
+      "strategyPacks": [
+        "area_model_fraction",
+        "cancel_first_rule",
+        "fraction_of_quantity_anchor"
+      ],
+      "masteryRule": "B_standard_v1",
+      "status": "draft"
+    },
+    {
+      "knowledgeCode": "M6S1-9",
+      "name": "连续求一个数的几分之几",
+      "grade": "6",
+      "book": "上册",
+      "unit": "第一单元 分数乘法",
+      "lesson": "5.解决问题",
+      "level": "D",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs6s/",
+      "prerequisites": [
+        "M6S1-8"
+      ],
+      "next": [],
+      "questionTypes": [
+        "fraction_mul_int",
+        "fraction_mul_fraction",
+        "fraction_mul_decimal",
+        "fraction_mul_mixed",
+        "fraction_mul_word"
+      ],
+      "commonErrors": [
+        "fraction_mul_cancel_error",
+        "fraction_mul_word_unit_error",
+        "fraction_mul_mixed_error"
+      ],
+      "strategyPacks": [
+        "area_model_fraction",
+        "cancel_first_rule",
+        "fraction_of_quantity_anchor"
+      ],
+      "masteryRule": "B_standard_v1",
+      "status": "draft",
+      "next_note": "LEGIT_TERMINAL: 课时/单元终末节点，学习路径自然终点"
+    },
+    {
+      "knowledgeCode": "M6S2-0",
+      "name": "负数的意义",
+      "grade": "6",
+      "book": "下册",
+      "unit": "第一单元 负数",
+      "lesson": "1.负数的认识",
+      "level": "A",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs6x_new/",
+      "prerequisites": [
+        "M6S1-46"
+      ],
+      "next": [
+        "M6S2-1"
+      ],
+      "questionTypes": [
+        "negative_read_write",
+        "negative_numberline",
+        "negative_compare"
+      ],
+      "commonErrors": [
+        "negative_concept_error",
+        "negative_numberline_placement",
+        "negative_compare_absolute_error"
+      ],
+      "strategyPacks": [
+        "number_line_thermometer",
+        "elevator_floor_model"
+      ],
+      "masteryRule": "A_individual_v1",
+      "status": "draft",
+      "prereq_note": "LEGIT_STARTER: 该课时/单元起始节点，无前置合理"
+    },
+    {
+      "knowledgeCode": "M6S2-1",
+      "name": "负数的读写法",
+      "grade": "6",
+      "book": "下册",
+      "unit": "第一单元 负数",
+      "lesson": "1.负数的认识",
+      "level": "C",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs6x_new/",
+      "prerequisites": [
+        "M6S2-0"
+      ],
+      "next": [
+        "M6S2-2"
+      ],
+      "questionTypes": [
+        "negative_read_write",
+        "negative_numberline",
+        "negative_compare"
+      ],
+      "commonErrors": [
+        "negative_concept_error",
+        "negative_numberline_placement",
+        "negative_compare_absolute_error"
+      ],
+      "strategyPacks": [
+        "number_line_thermometer",
+        "elevator_floor_model"
+      ],
+      "masteryRule": "C_basic_v1",
+      "status": "draft"
+    },
+    {
+      "knowledgeCode": "M6S2-10",
+      "name": "圆柱侧面积公式 S侧=πd×h",
+      "grade": "6",
+      "book": "下册",
+      "unit": "第三单元 圆柱与圆锥",
+      "lesson": "2.圆柱的表面积",
+      "level": "C",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs6x_new/",
+      "prerequisites": [
+        "M6S2-9"
+      ],
+      "next": [
+        "M6S2-11"
+      ],
+      "questionTypes": [
+        "cylinder_feature",
+        "cylinder_surface",
+        "cylinder_volume",
+        "cone_feature",
+        "cone_volume"
+      ],
+      "commonErrors": [
+        "cylinder_surface_formula_error",
+        "cylinder_cone_volume_confusion",
+        "cone_third_factor_error"
+      ],
+      "strategyPacks": [
+        "cylinder_net_construction",
+        "water_displacement",
+        "cone_cylinder_ratio_experiment"
+      ],
+      "masteryRule": "A_individual_v1",
+      "status": "draft",
+      "prereq_note": "LEGIT_STARTER: 该课时/单元起始节点，无前置合理"
+    },
+    {
+      "knowledgeCode": "M6S2-11",
+      "name": "圆柱表面积公式 S=2πr²+2πrh",
+      "grade": "6",
+      "book": "下册",
+      "unit": "第三单元 圆柱与圆锥",
+      "lesson": "2.圆柱的表面积",
+      "level": "C",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs6x_new/",
+      "prerequisites": [
+        "M6S2-10"
+      ],
+      "next": [
+        "M6S2-12"
+      ],
+      "questionTypes": [
+        "cylinder_feature",
+        "cylinder_surface",
+        "cylinder_volume",
+        "cone_feature",
+        "cone_volume"
+      ],
+      "commonErrors": [
+        "cylinder_surface_formula_error",
+        "cylinder_cone_volume_confusion",
+        "cone_third_factor_error"
+      ],
+      "strategyPacks": [
+        "cylinder_net_construction",
+        "water_displacement",
+        "cone_cylinder_ratio_experiment"
+      ],
+      "masteryRule": "A_individual_v1",
+      "status": "draft"
+    },
+    {
+      "knowledgeCode": "M6S2-12",
+      "name": "圆柱体积公式 V=πr²h",
+      "grade": "6",
+      "book": "下册",
+      "unit": "第三单元 圆柱与圆锥",
+      "lesson": "3.圆柱的体积",
+      "level": "C",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs6x_new/",
+      "prerequisites": [
+        "M6S2-11",
+        "M5S2-12"
+      ],
+      "next": [
+        "M6S2-13"
+      ],
+      "questionTypes": [
+        "cylinder_feature",
+        "cylinder_surface",
+        "cylinder_volume",
+        "cone_feature",
+        "cone_volume"
+      ],
+      "commonErrors": [
+        "cylinder_surface_formula_error",
+        "cylinder_cone_volume_confusion",
+        "cone_third_factor_error"
+      ],
+      "strategyPacks": [
+        "cylinder_net_construction",
+        "water_displacement",
+        "cone_cylinder_ratio_experiment"
+      ],
+      "masteryRule": "A_individual_v1",
+      "status": "draft"
+    },
+    {
+      "knowledgeCode": "M6S2-13",
+      "name": "圆锥的特征",
+      "grade": "6",
+      "book": "下册",
+      "unit": "第三单元 圆柱与圆锥",
+      "lesson": "4.圆锥的认识",
+      "level": "A",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs6x_new/",
+      "prerequisites": [
+        "M6S2-12"
+      ],
+      "next": [
+        "M6S2-14"
+      ],
+      "questionTypes": [
+        "cylinder_feature",
+        "cylinder_surface",
+        "cylinder_volume",
+        "cone_feature",
+        "cone_volume"
+      ],
+      "commonErrors": [
+        "cylinder_surface_formula_error",
+        "cylinder_cone_volume_confusion",
+        "cone_third_factor_error"
+      ],
+      "strategyPacks": [
+        "cylinder_net_construction",
+        "water_displacement",
+        "cone_cylinder_ratio_experiment"
+      ],
+      "masteryRule": "C_basic_v1",
+      "status": "draft"
+    },
+    {
+      "knowledgeCode": "M6S2-14",
+      "name": "圆锥体积公式 V=⅓πr²h",
+      "grade": "6",
+      "book": "下册",
+      "unit": "第三单元 圆柱与圆锥",
+      "lesson": "5.圆锥的体积",
+      "level": "B",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs6x_new/",
+      "prerequisites": [
+        "M6S2-13"
+      ],
+      "next": [
+        "M6S2-15"
+      ],
+      "questionTypes": [
+        "cylinder_feature",
+        "cylinder_surface",
+        "cylinder_volume",
+        "cone_feature",
+        "cone_volume"
+      ],
+      "commonErrors": [
+        "cylinder_surface_formula_error",
+        "cylinder_cone_volume_confusion",
+        "cone_third_factor_error"
+      ],
+      "strategyPacks": [
+        "cylinder_net_construction",
+        "water_displacement",
+        "cone_cylinder_ratio_experiment"
+      ],
+      "masteryRule": "A_individual_v1",
+      "status": "draft"
+    },
+    {
+      "knowledgeCode": "M6S2-15",
+      "name": "圆柱圆锥实际应用",
+      "grade": "6",
+      "book": "下册",
+      "unit": "第三单元 圆柱与圆锥",
+      "lesson": "6.解决问题",
+      "level": "D",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs6x_new/",
+      "prerequisites": [
+        "M6S2-14"
+      ],
+      "next": [],
+      "questionTypes": [
+        "cylinder_feature",
+        "cylinder_surface",
+        "cylinder_volume",
+        "cone_feature",
+        "cone_volume"
+      ],
+      "commonErrors": [
+        "cylinder_surface_formula_error",
+        "cylinder_cone_volume_confusion",
+        "cone_third_factor_error"
+      ],
+      "strategyPacks": [
+        "cylinder_net_construction",
+        "water_displacement",
+        "cone_cylinder_ratio_experiment"
+      ],
+      "masteryRule": "B_standard_v1",
+      "status": "draft"
+    },
+    {
+      "knowledgeCode": "M6S2-16",
+      "name": "比例的定义",
+      "grade": "6",
+      "book": "下册",
+      "unit": "第四单元 比例",
+      "lesson": "1.比例的意义",
+      "level": "B",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs6x_new/",
+      "prerequisites": [
+        "M6S1-20"
+      ],
+      "next": [
+        "M6S2-17"
+      ],
+      "questionTypes": [
+        "proportion_define",
+        "proportion_solve",
+        "proportion_scale",
+        "proportion_direct",
+        "proportion_inverse",
+        "proportion_apply"
+      ],
+      "commonErrors": [
+        "proportion_term_error",
+        "proportion_solve_cross_error",
+        "proportion_scale_convert_error",
+        "direct_inverse_confusion"
+      ],
+      "strategyPacks": [
+        "cross_product_verify",
+        "scale_drawing_project",
+        "proportion_table_extend"
+      ],
+      "masteryRule": "A_individual_v1",
+      "status": "draft",
+      "prereq_note": "LEGIT_STARTER: 该课时/单元起始节点，无前置合理"
+    },
+    {
+      "knowledgeCode": "M6S2-17",
+      "name": "比例的项与外项内项",
+      "grade": "6",
+      "book": "下册",
+      "unit": "第四单元 比例",
+      "lesson": "1.比例的意义",
+      "level": "C",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs6x_new/",
+      "prerequisites": [
+        "M6S2-16"
+      ],
+      "next": [
+        "M6S2-18"
+      ],
+      "questionTypes": [
+        "proportion_define",
+        "proportion_solve",
+        "proportion_scale",
+        "proportion_direct",
+        "proportion_inverse",
+        "proportion_apply"
+      ],
+      "commonErrors": [
+        "proportion_term_error",
+        "proportion_solve_cross_error",
+        "proportion_scale_convert_error",
+        "direct_inverse_confusion"
+      ],
+      "strategyPacks": [
+        "cross_product_verify",
+        "scale_drawing_project",
+        "proportion_table_extend"
+      ],
+      "masteryRule": "A_individual_v1",
+      "status": "draft"
+    },
+    {
+      "knowledgeCode": "M6S2-18",
+      "name": "外项积等于内项积",
+      "grade": "6",
+      "book": "下册",
+      "unit": "第四单元 比例",
+      "lesson": "2.比例的基本性质",
+      "level": "C",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs6x_new/",
+      "prerequisites": [
+        "M6S2-17"
+      ],
+      "next": [
+        "M6S2-19"
+      ],
+      "questionTypes": [
+        "proportion_define",
+        "proportion_solve",
+        "proportion_scale",
+        "proportion_direct",
+        "proportion_inverse",
+        "proportion_apply"
+      ],
+      "commonErrors": [
+        "proportion_term_error",
+        "proportion_solve_cross_error",
+        "proportion_scale_convert_error",
+        "direct_inverse_confusion"
+      ],
+      "strategyPacks": [
+        "cross_product_verify",
+        "scale_drawing_project",
+        "proportion_table_extend"
+      ],
+      "masteryRule": "A_individual_v1",
+      "status": "draft"
+    },
+    {
+      "knowledgeCode": "M6S2-19",
+      "name": "解比例的方法",
+      "grade": "6",
+      "book": "下册",
+      "unit": "第四单元 比例",
+      "lesson": "3.解比例",
+      "level": "C",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs6x_new/",
+      "prerequisites": [
+        "M6S2-18",
+        "M5S1-43"
+      ],
+      "next": [
+        "M6S2-20"
+      ],
+      "questionTypes": [
+        "proportion_define",
+        "proportion_solve",
+        "proportion_scale",
+        "proportion_direct",
+        "proportion_inverse",
+        "proportion_apply"
+      ],
+      "commonErrors": [
+        "proportion_term_error",
+        "proportion_solve_cross_error",
+        "proportion_scale_convert_error",
+        "direct_inverse_confusion"
+      ],
+      "strategyPacks": [
+        "cross_product_verify",
+        "scale_drawing_project",
+        "proportion_table_extend"
+      ],
+      "masteryRule": "A_individual_v1",
+      "status": "draft"
+    },
+    {
+      "knowledgeCode": "M6S2-2",
+      "name": "数轴上表示正负数",
+      "grade": "6",
+      "book": "下册",
+      "unit": "第一单元 负数",
+      "lesson": "2.数轴",
+      "level": "C",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs6x_new/",
+      "prerequisites": [
+        "M6S2-1"
+      ],
+      "next": [
+        "M6S2-3"
+      ],
+      "questionTypes": [
+        "negative_read_write",
+        "negative_numberline",
+        "negative_compare"
+      ],
+      "commonErrors": [
+        "negative_concept_error",
+        "negative_numberline_placement",
+        "negative_compare_absolute_error"
+      ],
+      "strategyPacks": [
+        "number_line_thermometer",
+        "elevator_floor_model"
+      ],
+      "masteryRule": "C_basic_v1",
+      "status": "draft"
+    },
+    {
+      "knowledgeCode": "M6S2-20",
+      "name": "正比例的意义",
+      "grade": "6",
+      "book": "下册",
+      "unit": "第四单元 比例",
+      "lesson": "4.正比例",
+      "level": "B",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs6x_new/",
+      "prerequisites": [
+        "M6S2-19"
+      ],
+      "next": [
+        "M6S2-21"
+      ],
+      "questionTypes": [
+        "proportion_define",
+        "proportion_solve",
+        "proportion_scale",
+        "proportion_direct",
+        "proportion_inverse",
+        "proportion_apply"
+      ],
+      "commonErrors": [
+        "proportion_term_error",
+        "proportion_solve_cross_error",
+        "proportion_scale_convert_error",
+        "direct_inverse_confusion"
+      ],
+      "strategyPacks": [
+        "cross_product_verify",
+        "scale_drawing_project",
+        "proportion_table_extend"
+      ],
+      "masteryRule": "A_individual_v1",
+      "status": "draft"
+    },
+    {
+      "knowledgeCode": "M6S2-21",
+      "name": "正比例图像",
+      "grade": "6",
+      "book": "下册",
+      "unit": "第四单元 比例",
+      "lesson": "4.正比例",
+      "level": "B",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs6x_new/",
+      "prerequisites": [
+        "M6S2-20"
+      ],
+      "next": [
+        "M6S2-22"
+      ],
+      "questionTypes": [
+        "proportion_define",
+        "proportion_solve",
+        "proportion_scale",
+        "proportion_direct",
+        "proportion_inverse",
+        "proportion_apply"
+      ],
+      "commonErrors": [
+        "proportion_term_error",
+        "proportion_solve_cross_error",
+        "proportion_scale_convert_error",
+        "direct_inverse_confusion"
+      ],
+      "strategyPacks": [
+        "cross_product_verify",
+        "scale_drawing_project",
+        "proportion_table_extend"
+      ],
+      "masteryRule": "A_individual_v1",
+      "status": "draft"
+    },
+    {
+      "knowledgeCode": "M6S2-22",
+      "name": "反比例的意义",
+      "grade": "6",
+      "book": "下册",
+      "unit": "第四单元 比例",
+      "lesson": "5.反比例",
+      "level": "B",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs6x_new/",
+      "prerequisites": [
+        "M6S2-21"
+      ],
+      "next": [
+        "M6S2-23"
+      ],
+      "questionTypes": [
+        "proportion_define",
+        "proportion_solve",
+        "proportion_scale",
+        "proportion_direct",
+        "proportion_inverse",
+        "proportion_apply"
+      ],
+      "commonErrors": [
+        "proportion_term_error",
+        "proportion_solve_cross_error",
+        "proportion_scale_convert_error",
+        "direct_inverse_confusion"
+      ],
+      "strategyPacks": [
+        "cross_product_verify",
+        "scale_drawing_project",
+        "proportion_table_extend"
+      ],
+      "masteryRule": "A_individual_v1",
+      "status": "draft"
+    },
+    {
+      "knowledgeCode": "M6S2-23",
+      "name": "比例尺的认识",
+      "grade": "6",
+      "book": "下册",
+      "unit": "第四单元 比例",
+      "lesson": "6.比例的应用",
+      "level": "B",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs6x_new/",
+      "prerequisites": [
+        "M6S2-22"
+      ],
+      "next": [
+        "M6S2-24"
+      ],
+      "questionTypes": [
+        "proportion_define",
+        "proportion_solve",
+        "proportion_scale",
+        "proportion_direct",
+        "proportion_inverse",
+        "proportion_apply"
+      ],
+      "commonErrors": [
+        "proportion_term_error",
+        "proportion_solve_cross_error",
+        "proportion_scale_convert_error",
+        "direct_inverse_confusion"
+      ],
+      "strategyPacks": [
+        "cross_product_verify",
+        "scale_drawing_project",
+        "proportion_table_extend"
+      ],
+      "masteryRule": "A_individual_v1",
+      "status": "draft"
+    },
+    {
+      "knowledgeCode": "M6S2-24",
+      "name": "图形的放大与缩小",
+      "grade": "6",
+      "book": "下册",
+      "unit": "第四单元 比例",
+      "lesson": "6.比例的应用",
+      "level": "C",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs6x_new/",
+      "prerequisites": [
+        "M6S2-23"
+      ],
+      "next": [
+        "M6S2-25"
+      ],
+      "questionTypes": [
+        "proportion_define",
+        "proportion_solve",
+        "proportion_scale",
+        "proportion_direct",
+        "proportion_inverse",
+        "proportion_apply"
+      ],
+      "commonErrors": [
+        "proportion_term_error",
+        "proportion_solve_cross_error",
+        "proportion_scale_convert_error",
+        "direct_inverse_confusion"
+      ],
+      "strategyPacks": [
+        "cross_product_verify",
+        "scale_drawing_project",
+        "proportion_table_extend"
+      ],
+      "masteryRule": "A_individual_v1",
+      "status": "draft"
+    },
+    {
+      "knowledgeCode": "M6S2-25",
+      "name": "用比例解决实际问题",
+      "grade": "6",
+      "book": "下册",
+      "unit": "第四单元 比例",
+      "lesson": "6.比例的应用",
+      "level": "D",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs6x_new/",
+      "prerequisites": [
+        "M6S2-24"
+      ],
+      "next": [],
+      "questionTypes": [
+        "proportion_define",
+        "proportion_solve",
+        "proportion_scale",
+        "proportion_direct",
+        "proportion_inverse",
+        "proportion_apply"
+      ],
+      "commonErrors": [
+        "proportion_term_error",
+        "proportion_solve_cross_error",
+        "proportion_scale_convert_error",
+        "direct_inverse_confusion"
+      ],
+      "strategyPacks": [
+        "cross_product_verify",
+        "scale_drawing_project",
+        "proportion_table_extend"
+      ],
+      "masteryRule": "A_individual_v1",
+      "status": "draft",
+      "next_note": "LEGIT_TERMINAL: 课时/单元终末节点，学习路径自然终点"
+    },
+    {
+      "knowledgeCode": "M6S2-26",
+      "name": "鸽巢原理的初步认识",
+      "grade": "6",
+      "book": "下册",
+      "unit": "第五单元 数学广角——鸽巢问题",
+      "lesson": "1.鸽巢原理",
+      "level": "B",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs6x_new/",
+      "prerequisites": [],
+      "next": [
+        "M6S2-27"
+      ],
+      "questionTypes": [
+        "pigeonhole_basic",
+        "pigeonhole_apply"
+      ],
+      "commonErrors": [
+        "pigeonhole_worst_case_error"
+      ],
+      "strategyPacks": [
+        "worst_case_pigeonhole",
+        "drawer_diagram"
+      ],
+      "masteryRule": "B_standard_v1",
+      "status": "draft",
+      "prereq_note": "LEGIT_STARTER: 该课时/单元起始节点，无前置合理"
+    },
+    {
+      "knowledgeCode": "M6S2-27",
+      "name": "鸽巢原理的应用",
+      "grade": "6",
+      "book": "下册",
+      "unit": "第五单元 数学广角——鸽巢问题",
+      "lesson": "2.鸽巢原理推广",
+      "level": "C",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs6x_new/",
+      "prerequisites": [
+        "M6S2-26"
+      ],
+      "next": [],
+      "questionTypes": [
+        "pigeonhole_basic",
+        "pigeonhole_apply"
+      ],
+      "commonErrors": [
+        "pigeonhole_worst_case_error"
+      ],
+      "strategyPacks": [
+        "worst_case_pigeonhole",
+        "drawer_diagram"
+      ],
+      "masteryRule": "B_standard_v1",
+      "status": "draft",
+      "next_note": "LEGIT_TERMINAL: 课时/单元终末节点，学习路径自然终点"
+    },
+    {
+      "knowledgeCode": "M6S2-28",
+      "name": "整数小数分数综合复习",
+      "grade": "6",
+      "book": "下册",
+      "unit": "第六单元 整理和复习",
+      "lesson": "1.数与代数",
+      "level": "C",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs6x_new/",
+      "prerequisites": [],
+      "next": [
+        "M6S2-29"
+      ],
+      "questionTypes": [
+        "review_calc",
+        "review_geometry",
+        "review_stats",
+        "review_word_problem"
+      ],
+      "commonErrors": [
+        "mixed_topic_confusion"
+      ],
+      "strategyPacks": [
+        "spiral_review_map",
+        "error_pattern_flashback",
+        "topic_web_synthesis"
+      ],
+      "masteryRule": "C_basic_v1",
+      "status": "draft",
+      "prereq_note": "LEGIT_STARTER: 该课时/单元起始节点，无前置合理"
+    },
+    {
+      "knowledgeCode": "M6S2-29",
+      "name": "式与方程综合复习",
+      "grade": "6",
+      "book": "下册",
+      "unit": "第六单元 整理和复习",
+      "lesson": "1.数与代数",
+      "level": "C",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs6x_new/",
+      "prerequisites": [
+        "M6S2-28"
+      ],
+      "next": [
+        "M6S2-30"
+      ],
+      "questionTypes": [
+        "review_calc",
+        "review_geometry",
+        "review_stats",
+        "review_word_problem"
+      ],
+      "commonErrors": [
+        "mixed_topic_confusion"
+      ],
+      "strategyPacks": [
+        "spiral_review_map",
+        "error_pattern_flashback",
+        "topic_web_synthesis"
+      ],
+      "masteryRule": "C_basic_v1",
+      "status": "draft"
+    },
+    {
+      "knowledgeCode": "M6S2-3",
+      "name": "比较正负数大小",
+      "grade": "6",
+      "book": "下册",
+      "unit": "第一单元 负数",
+      "lesson": "2.数轴",
+      "level": "C",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs6x_new/",
+      "prerequisites": [
+        "M6S2-2"
+      ],
+      "next": [],
+      "questionTypes": [
+        "negative_read_write",
+        "negative_numberline",
+        "negative_compare"
+      ],
+      "commonErrors": [
+        "negative_concept_error",
+        "negative_numberline_placement",
+        "negative_compare_absolute_error"
+      ],
+      "strategyPacks": [
+        "number_line_thermometer",
+        "elevator_floor_model"
+      ],
+      "masteryRule": "C_basic_v1",
+      "status": "draft",
+      "next_note": "LEGIT_TERMINAL: 课时/单元终末节点，学习路径自然终点"
+    },
+    {
+      "knowledgeCode": "M6S2-30",
+      "name": "比和比例综合复习",
+      "grade": "6",
+      "book": "下册",
+      "unit": "第六单元 整理和复习",
+      "lesson": "1.数与代数",
+      "level": "C",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs6x_new/",
+      "prerequisites": [
+        "M6S2-29"
+      ],
+      "next": [
+        "M6S2-31"
+      ],
+      "questionTypes": [
+        "review_calc",
+        "review_geometry",
+        "review_stats",
+        "review_word_problem"
+      ],
+      "commonErrors": [
+        "mixed_topic_confusion"
+      ],
+      "strategyPacks": [
+        "spiral_review_map",
+        "error_pattern_flashback",
+        "topic_web_synthesis"
+      ],
+      "masteryRule": "C_basic_v1",
+      "status": "draft"
+    },
+    {
+      "knowledgeCode": "M6S2-31",
+      "name": "数学应用题大盘点",
+      "grade": "6",
+      "book": "下册",
+      "unit": "第六单元 整理和复习",
+      "lesson": "1.数与代数",
+      "level": "C",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs6x_new/",
+      "prerequisites": [
+        "M6S2-30"
+      ],
+      "next": [
+        "M6S2-32"
+      ],
+      "questionTypes": [
+        "review_calc",
+        "review_geometry",
+        "review_stats",
+        "review_word_problem"
+      ],
+      "commonErrors": [
+        "mixed_topic_confusion"
+      ],
+      "strategyPacks": [
+        "spiral_review_map",
+        "error_pattern_flashback",
+        "topic_web_synthesis"
+      ],
+      "masteryRule": "B_standard_v1",
+      "status": "draft"
+    },
+    {
+      "knowledgeCode": "M6S2-32",
+      "name": "平面图形面积公式总复习",
+      "grade": "6",
+      "book": "下册",
+      "unit": "第六单元 整理和复习",
+      "lesson": "2.图形与几何",
+      "level": "C",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs6x_new/",
+      "prerequisites": [
+        "M6S2-31"
+      ],
+      "next": [
+        "M6S2-33"
+      ],
+      "questionTypes": [
+        "review_calc",
+        "review_geometry",
+        "review_stats",
+        "review_word_problem"
+      ],
+      "commonErrors": [
+        "mixed_topic_confusion"
+      ],
+      "strategyPacks": [
+        "spiral_review_map",
+        "error_pattern_flashback",
+        "topic_web_synthesis"
+      ],
+      "masteryRule": "C_basic_v1",
+      "status": "draft"
+    },
+    {
+      "knowledgeCode": "M6S2-33",
+      "name": "立体图形体积公式总复习",
+      "grade": "6",
+      "book": "下册",
+      "unit": "第六单元 整理和复习",
+      "lesson": "2.图形与几何",
+      "level": "C",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs6x_new/",
+      "prerequisites": [
+        "M6S2-32"
+      ],
+      "next": [
+        "M6S2-34"
+      ],
+      "questionTypes": [
+        "review_calc",
+        "review_geometry",
+        "review_stats",
+        "review_word_problem"
+      ],
+      "commonErrors": [
+        "mixed_topic_confusion"
+      ],
+      "strategyPacks": [
+        "spiral_review_map",
+        "error_pattern_flashback",
+        "topic_web_synthesis"
+      ],
+      "masteryRule": "C_basic_v1",
+      "status": "draft"
+    },
+    {
+      "knowledgeCode": "M6S2-34",
+      "name": "图形位置与运动综合",
+      "grade": "6",
+      "book": "下册",
+      "unit": "第六单元 整理和复习",
+      "lesson": "2.图形与几何",
+      "level": "C",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs6x_new/",
+      "prerequisites": [
+        "M6S2-33"
+      ],
+      "next": [
+        "M6S2-35"
+      ],
+      "questionTypes": [
+        "review_calc",
+        "review_geometry",
+        "review_stats",
+        "review_word_problem"
+      ],
+      "commonErrors": [
+        "mixed_topic_confusion"
+      ],
+      "strategyPacks": [
+        "spiral_review_map",
+        "error_pattern_flashback",
+        "topic_web_synthesis"
+      ],
+      "masteryRule": "C_basic_v1",
+      "status": "draft"
+    },
+    {
+      "knowledgeCode": "M6S2-35",
+      "name": "统计图综合复习",
+      "grade": "6",
+      "book": "下册",
+      "unit": "第六单元 整理和复习",
+      "lesson": "3.统计与概率",
+      "level": "C",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs6x_new/",
+      "prerequisites": [
+        "M6S2-34"
+      ],
+      "next": [
+        "M6S2-36"
+      ],
+      "questionTypes": [
+        "review_calc",
+        "review_geometry",
+        "review_stats",
+        "review_word_problem"
+      ],
+      "commonErrors": [
+        "mixed_topic_confusion"
+      ],
+      "strategyPacks": [
+        "spiral_review_map",
+        "error_pattern_flashback",
+        "topic_web_synthesis"
+      ],
+      "masteryRule": "C_basic_v1",
+      "status": "draft"
+    },
+    {
+      "knowledgeCode": "M6S2-36",
+      "name": "找规律与数学思维",
+      "grade": "6",
+      "book": "下册",
+      "unit": "第六单元 整理和复习",
+      "lesson": "4.数学思考",
+      "level": "C",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs6x_new/",
+      "prerequisites": [
+        "M6S2-35"
+      ],
+      "next": [
+        "M6S2-37"
+      ],
+      "questionTypes": [
+        "review_calc",
+        "review_geometry",
+        "review_stats",
+        "review_word_problem"
+      ],
+      "commonErrors": [
+        "mixed_topic_confusion"
+      ],
+      "strategyPacks": [
+        "spiral_review_map",
+        "error_pattern_flashback",
+        "topic_web_synthesis"
+      ],
+      "masteryRule": "C_basic_v1",
+      "status": "draft"
+    },
+    {
+      "knowledgeCode": "M6S2-37",
+      "name": "生活中的数学综合应用",
+      "grade": "6",
+      "book": "下册",
+      "unit": "第六单元 整理和复习",
+      "lesson": "5.综合与实践",
+      "level": "C",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs6x_new/",
+      "prerequisites": [
+        "M6S2-36"
+      ],
+      "next": [],
+      "questionTypes": [
+        "review_calc",
+        "review_geometry",
+        "review_stats",
+        "review_word_problem"
+      ],
+      "commonErrors": [
+        "mixed_topic_confusion"
+      ],
+      "strategyPacks": [
+        "spiral_review_map",
+        "error_pattern_flashback",
+        "topic_web_synthesis"
+      ],
+      "masteryRule": "C_basic_v1",
+      "status": "draft",
+      "next_note": "LEGIT_TERMINAL: 课时/单元终末节点，学习路径自然终点"
+    },
+    {
+      "knowledgeCode": "M6S2-4",
+      "name": "折扣的意义与计算",
+      "grade": "6",
+      "book": "下册",
+      "unit": "第二单元 百分数(二)",
+      "lesson": "1.折扣",
+      "level": "C",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs6x_new/",
+      "prerequisites": [
+        "M6S1-34"
+      ],
+      "next": [
+        "M6S2-5"
+      ],
+      "questionTypes": [
+        "percent2_discount",
+        "percent2_chengshu",
+        "percent2_tax",
+        "percent2_interest",
+        "percent2_apply"
+      ],
+      "commonErrors": [
+        "discount_percent_confusion",
+        "tax_interest_formula_error",
+        "percent2_standard_amount_error"
+      ],
+      "strategyPacks": [
+        "shopping_receipt_math",
+        "bank_statement_sim"
+      ],
+      "masteryRule": "A_individual_v1",
+      "status": "draft",
+      "prereq_note": "LEGIT_STARTER: 该课时/单元起始节点，无前置合理"
+    },
+    {
+      "knowledgeCode": "M6S2-5",
+      "name": "成数的意义",
+      "grade": "6",
+      "book": "下册",
+      "unit": "第二单元 百分数(二)",
+      "lesson": "2.成数",
+      "level": "B",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs6x_new/",
+      "prerequisites": [
+        "M6S2-4"
+      ],
+      "next": [
+        "M6S2-6"
+      ],
+      "questionTypes": [
+        "percent2_discount",
+        "percent2_chengshu",
+        "percent2_tax",
+        "percent2_interest",
+        "percent2_apply"
+      ],
+      "commonErrors": [
+        "discount_percent_confusion",
+        "tax_interest_formula_error",
+        "percent2_standard_amount_error"
+      ],
+      "strategyPacks": [
+        "shopping_receipt_math",
+        "bank_statement_sim"
+      ],
+      "masteryRule": "A_individual_v1",
+      "status": "draft"
+    },
+    {
+      "knowledgeCode": "M6S2-6",
+      "name": "税率与应纳税额计算",
+      "grade": "6",
+      "book": "下册",
+      "unit": "第二单元 百分数(二)",
+      "lesson": "3.税率",
+      "level": "C",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs6x_new/",
+      "prerequisites": [
+        "M6S2-5"
+      ],
+      "next": [
+        "M6S2-7"
+      ],
+      "questionTypes": [
+        "percent2_discount",
+        "percent2_chengshu",
+        "percent2_tax",
+        "percent2_interest",
+        "percent2_apply"
+      ],
+      "commonErrors": [
+        "discount_percent_confusion",
+        "tax_interest_formula_error",
+        "percent2_standard_amount_error"
+      ],
+      "strategyPacks": [
+        "shopping_receipt_math",
+        "bank_statement_sim"
+      ],
+      "masteryRule": "A_individual_v1",
+      "status": "draft"
+    },
+    {
+      "knowledgeCode": "M6S2-7",
+      "name": "利率与利息计算",
+      "grade": "6",
+      "book": "下册",
+      "unit": "第二单元 百分数(二)",
+      "lesson": "4.利率",
+      "level": "C",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs6x_new/",
+      "prerequisites": [
+        "M6S2-6"
+      ],
+      "next": [
+        "M6S2-8"
+      ],
+      "questionTypes": [
+        "percent2_discount",
+        "percent2_chengshu",
+        "percent2_tax",
+        "percent2_interest",
+        "percent2_apply"
+      ],
+      "commonErrors": [
+        "discount_percent_confusion",
+        "tax_interest_formula_error",
+        "percent2_standard_amount_error"
+      ],
+      "strategyPacks": [
+        "shopping_receipt_math",
+        "bank_statement_sim"
+      ],
+      "masteryRule": "A_individual_v1",
+      "status": "draft"
+    },
+    {
+      "knowledgeCode": "M6S2-8",
+      "name": "百分数综合应用题",
+      "grade": "6",
+      "book": "下册",
+      "unit": "第二单元 百分数(二)",
+      "lesson": "5.解决问题",
+      "level": "D",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs6x_new/",
+      "prerequisites": [
+        "M6S2-7"
+      ],
+      "next": [],
+      "questionTypes": [
+        "percent2_discount",
+        "percent2_chengshu",
+        "percent2_tax",
+        "percent2_interest",
+        "percent2_apply"
+      ],
+      "commonErrors": [
+        "discount_percent_confusion",
+        "tax_interest_formula_error",
+        "percent2_standard_amount_error"
+      ],
+      "strategyPacks": [
+        "shopping_receipt_math",
+        "bank_statement_sim"
+      ],
+      "masteryRule": "A_individual_v1",
+      "status": "draft",
+      "next_note": "LEGIT_TERMINAL: 课时/单元终末节点，学习路径自然终点"
+    },
+    {
+      "knowledgeCode": "M6S2-9",
+      "name": "圆柱的特征",
+      "grade": "6",
+      "book": "下册",
+      "unit": "第三单元 圆柱与圆锥",
+      "lesson": "1.圆柱的认识",
+      "level": "A",
+      "sourceRef": "http://www.dzkbw.com/books/rjb/shuxue/xs6x_new/",
+      "prerequisites": [],
+      "next": [
+        "M6S2-10"
+      ],
+      "questionTypes": [
+        "cylinder_feature",
+        "cylinder_surface",
+        "cylinder_volume",
+        "cone_feature",
+        "cone_volume"
+      ],
+      "commonErrors": [
+        "cylinder_surface_formula_error",
+        "cylinder_cone_volume_confusion",
+        "cone_third_factor_error"
+      ],
+      "strategyPacks": [
+        "cylinder_net_construction",
+        "water_displacement",
+        "cone_cylinder_ratio_experiment"
+      ],
+      "masteryRule": "B_standard_v1",
+      "status": "draft",
+      "next_note": "LEGIT_TERMINAL: 课时/单元终末节点，学习路径自然终点"
+    }
+  ]
+}

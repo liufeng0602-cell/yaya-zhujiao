@@ -1,0 +1,80 @@
+{
+  "schema": "yaya.adaptive_engine.alignment_flags.v1",
+  "scope": "primary_math_g5_g6_pep",
+  "summary": [
+    {
+      "book": "五年级上册",
+      "outlineUnitCount": 9,
+      "dbKnowledgeCount": 70,
+      "dbUnitCount": 8,
+      "matchedDbUnits": 8,
+      "unmatchedDbUnits": 0,
+      "outlineUnmatchedItems": 1
+    },
+    {
+      "book": "五年级下册",
+      "outlineUnitCount": 11,
+      "dbKnowledgeCount": 28,
+      "dbUnitCount": 8,
+      "matchedDbUnits": 8,
+      "unmatchedDbUnits": 0,
+      "outlineUnmatchedItems": 3
+    },
+    {
+      "book": "六年级上册",
+      "outlineUnitCount": 9,
+      "dbKnowledgeCount": 47,
+      "dbUnitCount": 9,
+      "matchedDbUnits": 9,
+      "unmatchedDbUnits": 0,
+      "outlineUnmatchedItems": 0
+    },
+    {
+      "book": "六年级下册",
+      "outlineUnitCount": 6,
+      "dbKnowledgeCount": 38,
+      "dbUnitCount": 6,
+      "matchedDbUnits": 5,
+      "unmatchedDbUnits": 1,
+      "outlineUnmatchedItems": 1
+    }
+  ],
+  "flags": [
+    {
+      "book": "五年级上册",
+      "type": "OUTLINE_UNIT_WITHOUT_DB_KNOWLEDGE",
+      "name": "掷一掷",
+      "count": 0
+    },
+    {
+      "book": "五年级下册",
+      "type": "OUTLINE_UNIT_WITHOUT_DB_KNOWLEDGE",
+      "name": "探索图形",
+      "count": 0
+    },
+    {
+      "book": "五年级下册",
+      "type": "OUTLINE_UNIT_WITHOUT_DB_KNOWLEDGE",
+      "name": "怎样通知最快",
+      "count": 0
+    },
+    {
+      "book": "五年级下册",
+      "type": "OUTLINE_UNIT_WITHOUT_DB_KNOWLEDGE",
+      "name": "总复习",
+      "count": 0
+    },
+    {
+      "book": "六年级下册",
+      "type": "DB_UNIT_NOT_MATCHED_TO_OUTLINE",
+      "name": "整理和复习",
+      "count": 10
+    },
+    {
+      "book": "六年级下册",
+      "type": "OUTLINE_UNIT_WITHOUT_DB_KNOWLEDGE",
+      "name": "整理与复习",
+      "count": 0
+    }
+  ]
+}

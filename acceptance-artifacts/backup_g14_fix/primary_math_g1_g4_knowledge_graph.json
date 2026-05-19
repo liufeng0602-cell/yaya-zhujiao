@@ -1,0 +1,7362 @@
+{
+  "schema": "yaya.adaptive_engine.knowledge_graph.v1",
+  "scope": "primary_math_g1_g4_pep",
+  "status": "phase2_draft",
+  "summary": {
+    "totalNodes": 205,
+    "levelDistribution": {
+      "C": 32,
+      "B": 95,
+      "A": 78
+    },
+    "avgPrerequisites": 2.8,
+    "avgNext": 2.8
+  },
+  "nodes": [
+    {
+      "knowledgeCode": "M1S1-0",
+      "name": "了解数一数、实物对应数数方法",
+      "grade": "1",
+      "book": "上册",
+      "unit": "第1单元 准备课",
+      "lesson": "1.了解数一数、实物对应数数方法",
+      "level": "C",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [],
+      "next": [
+        "M1S1-1"
+      ],
+      "questionTypes": [
+        "填空",
+        "选择",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-10 以内数的认识与运算-基础错误",
+        "E-10 以内数的认识与运算-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-简要介绍"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.65,
+        "maxTimePerQuestion": 120,
+        "consecutiveCorrect": 1
+      },
+      "status": "phase2_draft",
+      "prereq_note": "起始节点"
+    },
+    {
+      "knowledgeCode": "M1S1-1",
+      "name": "理解同样多、多、少的含义",
+      "grade": "1",
+      "book": "上册",
+      "unit": "第1单元 准备课",
+      "lesson": "2.理解同样多、多、少的含义",
+      "level": "B",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [
+        "M1S1-0"
+      ],
+      "next": [
+        "M1S1-2"
+      ],
+      "questionTypes": [
+        "填空",
+        "选择",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-10 以内数的认识与运算-基础错误",
+        "E-10 以内数的认识与运算-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-标准讲解",
+        "S-练习巩固"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.75,
+        "maxTimePerQuestion": 90,
+        "consecutiveCorrect": 2
+      },
+      "status": "phase2_draft",
+      "prereq_note": ""
+    },
+    {
+      "knowledgeCode": "M1S1-2",
+      "name": "掌握一一对应比较多少的方法",
+      "grade": "1",
+      "book": "上册",
+      "unit": "第1单元 准备课",
+      "lesson": "3.掌握一一对应比较多少的方法",
+      "level": "B",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [
+        "M1S1-1"
+      ],
+      "next": [],
+      "questionTypes": [
+        "填空",
+        "选择",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-10 以内数的认识与运算-基础错误",
+        "E-10 以内数的认识与运算-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-标准讲解",
+        "S-练习巩固"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.75,
+        "maxTimePerQuestion": 90,
+        "consecutiveCorrect": 2
+      },
+      "status": "phase2_draft",
+      "prereq_note": ""
+    },
+    {
+      "knowledgeCode": "M1S1-3",
+      "name": "理解 1-5 各数的含义、读写与顺序",
+      "grade": "1",
+      "book": "上册",
+      "unit": "第2单元 1~5 的认识和加减法",
+      "lesson": "1.理解 1-5 各数的含义、读写与顺序",
+      "level": "B",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [],
+      "next": [
+        "M1S1-4"
+      ],
+      "questionTypes": [
+        "填空",
+        "选择",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-10 以内数的认识与运算-基础错误",
+        "E-10 以内数的认识与运算-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-标准讲解",
+        "S-练习巩固"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.75,
+        "maxTimePerQuestion": 90,
+        "consecutiveCorrect": 2
+      },
+      "status": "phase2_draft",
+      "prereq_note": "起始节点"
+    },
+    {
+      "knowledgeCode": "M1S1-4",
+      "name": "掌握 1-5 数的分与合",
+      "grade": "1",
+      "book": "上册",
+      "unit": "第2单元 1~5 的认识和加减法",
+      "lesson": "2.掌握 1-5 数的分与合",
+      "level": "B",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [
+        "M1S1-3"
+      ],
+      "next": [
+        "M1S1-5"
+      ],
+      "questionTypes": [
+        "填空",
+        "选择",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-10 以内数的认识与运算-基础错误",
+        "E-10 以内数的认识与运算-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-标准讲解",
+        "S-练习巩固"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.75,
+        "maxTimePerQuestion": 90,
+        "consecutiveCorrect": 2
+      },
+      "status": "phase2_draft",
+      "prereq_note": ""
+    },
+    {
+      "knowledgeCode": "M1S1-5",
+      "name": "理解加减法的实际含义",
+      "grade": "1",
+      "book": "上册",
+      "unit": "第2单元 1~5 的认识和加减法",
+      "lesson": "3.理解加减法的实际含义",
+      "level": "A",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [
+        "M1S1-4"
+      ],
+      "next": [
+        "M1S1-6"
+      ],
+      "questionTypes": [
+        "口算",
+        "笔算",
+        "填空",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-10 以内数的认识与运算-基础错误",
+        "E-10 以内数的认识与运算-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-核心讲解",
+        "S-分层练习",
+        "S-错因分析"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.85,
+        "maxTimePerQuestion": 60,
+        "consecutiveCorrect": 3
+      },
+      "status": "phase2_draft",
+      "prereq_note": ""
+    },
+    {
+      "knowledgeCode": "M1S1-6",
+      "name": "掌握 1-5 以内加减法口算",
+      "grade": "1",
+      "book": "上册",
+      "unit": "第2单元 1~5 的认识和加减法",
+      "lesson": "4.掌握 1-5 以内加减法口算",
+      "level": "A",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [
+        "M1S1-5"
+      ],
+      "next": [
+        "M2S1-0"
+      ],
+      "questionTypes": [
+        "口算",
+        "笔算",
+        "填空",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-10 以内数的认识与运算-基础错误",
+        "E-10 以内数的认识与运算-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-核心讲解",
+        "S-分层练习",
+        "S-错因分析"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.85,
+        "maxTimePerQuestion": 60,
+        "consecutiveCorrect": 3
+      },
+      "status": "phase2_draft",
+      "prereq_note": ""
+    },
+    {
+      "knowledgeCode": "M1S1-7",
+      "name": "了解 0 的两种实际含义",
+      "grade": "1",
+      "book": "上册",
+      "unit": "第3单元 0 的认识和加减法",
+      "lesson": "1.了解 0 的两种实际含义",
+      "level": "B",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [],
+      "next": [
+        "M1S1-8"
+      ],
+      "questionTypes": [
+        "应用题",
+        "填空"
+      ],
+      "commonErrors": [
+        "E-10 以内数的认识与运算-基础错误",
+        "E-10 以内数的认识与运算-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-标准讲解",
+        "S-练习巩固"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.75,
+        "maxTimePerQuestion": 90,
+        "consecutiveCorrect": 2
+      },
+      "status": "phase2_draft",
+      "prereq_note": "起始节点"
+    },
+    {
+      "knowledgeCode": "M1S1-8",
+      "name": "掌握 0 的读写与有关 0 的加减法",
+      "grade": "1",
+      "book": "上册",
+      "unit": "第3单元 0 的认识和加减法",
+      "lesson": "2.掌握 0 的读写与有关 0 的加减法",
+      "level": "A",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [
+        "M1S1-7"
+      ],
+      "next": [],
+      "questionTypes": [
+        "口算",
+        "笔算",
+        "填空",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-10 以内数的认识与运算-基础错误",
+        "E-10 以内数的认识与运算-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-核心讲解",
+        "S-分层练习",
+        "S-错因分析"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.85,
+        "maxTimePerQuestion": 60,
+        "consecutiveCorrect": 3
+      },
+      "status": "phase2_draft",
+      "prereq_note": ""
+    },
+    {
+      "knowledgeCode": "M1S1-9",
+      "name": "理解凑十法算理",
+      "grade": "1",
+      "book": "上册",
+      "unit": "第4单元 20 以内的进位加法",
+      "lesson": "1.理解凑十法算理",
+      "level": "B",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [],
+      "next": [
+        "M1S1-10"
+      ],
+      "questionTypes": [
+        "填空",
+        "选择",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-20 以内进位加法-基础错误",
+        "E-20 以内进位加法-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-标准讲解",
+        "S-练习巩固"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.75,
+        "maxTimePerQuestion": 90,
+        "consecutiveCorrect": 2
+      },
+      "status": "phase2_draft",
+      "prereq_note": "起始节点"
+    },
+    {
+      "knowledgeCode": "M1S1-10",
+      "name": "掌握 9、8、7、6 加几进位口算",
+      "grade": "1",
+      "book": "上册",
+      "unit": "第4单元 20 以内的进位加法",
+      "lesson": "2.掌握 9、8、7、6 加几进位口算",
+      "level": "A",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [
+        "M1S1-9"
+      ],
+      "next": [
+        "M1S1-11"
+      ],
+      "questionTypes": [
+        "口算",
+        "笔算",
+        "填空",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-20 以内进位加法-基础错误",
+        "E-20 以内进位加法-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-核心讲解",
+        "S-分层练习",
+        "S-错因分析"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.85,
+        "maxTimePerQuestion": 60,
+        "consecutiveCorrect": 3
+      },
+      "status": "phase2_draft",
+      "prereq_note": ""
+    },
+    {
+      "knowledgeCode": "M1S1-11",
+      "name": "掌握 5、4、3、2 加几口算技巧",
+      "grade": "1",
+      "book": "上册",
+      "unit": "第4单元 20 以内的进位加法",
+      "lesson": "3.掌握 5、4、3、2 加几口算技巧",
+      "level": "A",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [
+        "M1S1-10"
+      ],
+      "next": [
+        "M1S1-12"
+      ],
+      "questionTypes": [
+        "口算",
+        "笔算",
+        "填空",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-20 以内进位加法-基础错误",
+        "E-20 以内进位加法-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-核心讲解",
+        "S-分层练习",
+        "S-错因分析"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.85,
+        "maxTimePerQuestion": 60,
+        "consecutiveCorrect": 3
+      },
+      "status": "phase2_draft",
+      "prereq_note": ""
+    },
+    {
+      "knowledgeCode": "M1S1-12",
+      "name": "运用进位加法解决生活简单问题",
+      "grade": "1",
+      "book": "上册",
+      "unit": "第4单元 20 以内的进位加法",
+      "lesson": "4.运用进位加法解决生活简单问题",
+      "level": "A",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [
+        "M1S1-11"
+      ],
+      "next": [],
+      "questionTypes": [
+        "口算",
+        "笔算",
+        "填空",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-20 以内进位加法-基础错误",
+        "E-20 以内进位加法-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-核心讲解",
+        "S-分层练习",
+        "S-错因分析"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.85,
+        "maxTimePerQuestion": 60,
+        "consecutiveCorrect": 3
+      },
+      "status": "phase2_draft",
+      "prereq_note": ""
+    },
+    {
+      "knowledgeCode": "M1S1-13",
+      "name": "了解长方体、正方体、圆柱、球的外形特征",
+      "grade": "1",
+      "book": "上册",
+      "unit": "第5单元 认识立体图形",
+      "lesson": "1.了解长方体、正方体、圆柱、球的外形特征",
+      "level": "C",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [],
+      "next": [
+        "M1S1-14"
+      ],
+      "questionTypes": [
+        "填空",
+        "选择",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-立体图形认识-基础错误",
+        "E-立体图形认识-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-简要介绍"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.65,
+        "maxTimePerQuestion": 120,
+        "consecutiveCorrect": 1
+      },
+      "status": "phase2_draft",
+      "prereq_note": "起始节点"
+    },
+    {
+      "knowledgeCode": "M1S1-14",
+      "name": "能直观辨认、分类常见立体图形",
+      "grade": "1",
+      "book": "上册",
+      "unit": "第5单元 认识立体图形",
+      "lesson": "2.能直观辨认、分类常见立体图形",
+      "level": "B",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [
+        "M1S1-13"
+      ],
+      "next": [],
+      "questionTypes": [
+        "填空",
+        "选择",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-立体图形认识-基础错误",
+        "E-立体图形认识-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-标准讲解",
+        "S-练习巩固"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.75,
+        "maxTimePerQuestion": 90,
+        "consecutiveCorrect": 2
+      },
+      "status": "phase2_draft",
+      "prereq_note": ""
+    },
+    {
+      "knowledgeCode": "M1S1-15",
+      "name": "了解钟面时针、分针",
+      "grade": "1",
+      "book": "上册",
+      "unit": "第6单元 认识钟表",
+      "lesson": "1.了解钟面时针、分针",
+      "level": "C",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [],
+      "next": [
+        "M1S1-16"
+      ],
+      "questionTypes": [
+        "填空",
+        "选择",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-时间认知-基础错误",
+        "E-时间认知-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-简要介绍"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.65,
+        "maxTimePerQuestion": 120,
+        "consecutiveCorrect": 1
+      },
+      "status": "phase2_draft",
+      "prereq_note": "起始节点"
+    },
+    {
+      "knowledgeCode": "M1S1-16",
+      "name": "掌握认读整时的方法",
+      "grade": "1",
+      "book": "上册",
+      "unit": "第6单元 认识钟表",
+      "lesson": "2.掌握认读整时的方法",
+      "level": "B",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [
+        "M1S1-15"
+      ],
+      "next": [
+        "M1S1-17"
+      ],
+      "questionTypes": [
+        "填空",
+        "选择",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-时间认知-基础错误",
+        "E-时间认知-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-标准讲解",
+        "S-练习巩固"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.75,
+        "maxTimePerQuestion": 90,
+        "consecutiveCorrect": 2
+      },
+      "status": "phase2_draft",
+      "prereq_note": ""
+    },
+    {
+      "knowledgeCode": "M1S1-17",
+      "name": "会用两种形式记录整时",
+      "grade": "1",
+      "book": "上册",
+      "unit": "第6单元 认识钟表",
+      "lesson": "3.会用两种形式记录整时",
+      "level": "B",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [
+        "M1S1-16"
+      ],
+      "next": [],
+      "questionTypes": [
+        "填空",
+        "选择",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-时间认知-基础错误",
+        "E-时间认知-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-标准讲解",
+        "S-练习巩固"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.75,
+        "maxTimePerQuestion": 90,
+        "consecutiveCorrect": 2
+      },
+      "status": "phase2_draft",
+      "prereq_note": ""
+    },
+    {
+      "knowledgeCode": "M1S1-18",
+      "name": "发现简单图形、数字排列规律",
+      "grade": "1",
+      "book": "上册",
+      "unit": "第7单元 数学广角",
+      "lesson": "1.发现简单图形、数字排列规律",
+      "level": "C",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [],
+      "next": [
+        "M1S1-19"
+      ],
+      "questionTypes": [
+        "探索题"
+      ],
+      "commonErrors": [
+        "E-简单规律-基础错误",
+        "E-简单规律-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-简要介绍"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.65,
+        "maxTimePerQuestion": 120,
+        "consecutiveCorrect": 1
+      },
+      "status": "phase2_draft",
+      "prereq_note": "起始节点"
+    },
+    {
+      "knowledgeCode": "M1S1-19",
+      "name": "能按规律补全序列",
+      "grade": "1",
+      "book": "上册",
+      "unit": "第7单元 数学广角",
+      "lesson": "2.能按规律补全序列",
+      "level": "C",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [
+        "M1S1-18"
+      ],
+      "next": [
+        "M1S2-0"
+      ],
+      "questionTypes": [
+        "探索题"
+      ],
+      "commonErrors": [
+        "E-简单规律-基础错误",
+        "E-简单规律-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-简要介绍"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.65,
+        "maxTimePerQuestion": 120,
+        "consecutiveCorrect": 1
+      },
+      "status": "phase2_draft",
+      "prereq_note": ""
+    },
+    {
+      "knowledgeCode": "M1S2-0",
+      "name": "理解破十法、想加算减算理",
+      "grade": "1",
+      "book": "下册",
+      "unit": "第1单元 20 以内的退位减法",
+      "lesson": "1.理解破十法、想加算减算理",
+      "level": "B",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [
+        "M1S1-19"
+      ],
+      "next": [
+        "M1S2-1"
+      ],
+      "questionTypes": [
+        "口算",
+        "笔算",
+        "填空",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-20 以内退位减法-基础错误",
+        "E-20 以内退位减法-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-标准讲解",
+        "S-练习巩固"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.75,
+        "maxTimePerQuestion": 90,
+        "consecutiveCorrect": 2
+      },
+      "status": "phase2_draft",
+      "prereq_note": ""
+    },
+    {
+      "knowledgeCode": "M1S2-1",
+      "name": "熟练掌握 20 以内退位减法口算",
+      "grade": "1",
+      "book": "下册",
+      "unit": "第1单元 20 以内的退位减法",
+      "lesson": "2.熟练掌握 20 以内退位减法口算",
+      "level": "A",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [
+        "M1S2-0"
+      ],
+      "next": [
+        "M1S2-2",
+        "M2S1-2"
+      ],
+      "questionTypes": [
+        "口算",
+        "笔算",
+        "填空",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-20 以内退位减法-基础错误",
+        "E-20 以内退位减法-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-核心讲解",
+        "S-分层练习",
+        "S-错因分析"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.85,
+        "maxTimePerQuestion": 60,
+        "consecutiveCorrect": 3
+      },
+      "status": "phase2_draft",
+      "prereq_note": ""
+    },
+    {
+      "knowledgeCode": "M1S2-2",
+      "name": "运用退位减法解决求总数、求部分问题",
+      "grade": "1",
+      "book": "下册",
+      "unit": "第1单元 20 以内的退位减法",
+      "lesson": "3.运用退位减法解决求总数、求部分问题",
+      "level": "A",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [
+        "M1S2-1"
+      ],
+      "next": [],
+      "questionTypes": [
+        "口算",
+        "笔算",
+        "填空",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-20 以内退位减法-基础错误",
+        "E-20 以内退位减法-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-核心讲解",
+        "S-分层练习",
+        "S-错因分析"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.85,
+        "maxTimePerQuestion": 60,
+        "consecutiveCorrect": 3
+      },
+      "status": "phase2_draft",
+      "prereq_note": ""
+    },
+    {
+      "knowledgeCode": "M1S2-3",
+      "name": "理解个位、十位的数位意义",
+      "grade": "1",
+      "book": "下册",
+      "unit": "第2单元 100 以内数的认识",
+      "lesson": "1.理解个位、十位的数位意义",
+      "level": "B",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [],
+      "next": [
+        "M1S2-4"
+      ],
+      "questionTypes": [
+        "填空",
+        "选择",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-100 以内数的认识-基础错误",
+        "E-100 以内数的认识-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-标准讲解",
+        "S-练习巩固"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.75,
+        "maxTimePerQuestion": 90,
+        "consecutiveCorrect": 2
+      },
+      "status": "phase2_draft",
+      "prereq_note": "起始节点"
+    },
+    {
+      "knowledgeCode": "M1S2-4",
+      "name": "掌握 100 以内数的数数、读写、组成",
+      "grade": "1",
+      "book": "下册",
+      "unit": "第2单元 100 以内数的认识",
+      "lesson": "2.掌握 100 以内数的数数、读写、组成",
+      "level": "B",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [
+        "M1S2-3"
+      ],
+      "next": [
+        "M1S2-5",
+        "M2S2-12"
+      ],
+      "questionTypes": [
+        "填空",
+        "选择",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-100 以内数的认识-基础错误",
+        "E-100 以内数的认识-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-标准讲解",
+        "S-练习巩固"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.75,
+        "maxTimePerQuestion": 90,
+        "consecutiveCorrect": 2
+      },
+      "status": "phase2_draft",
+      "prereq_note": ""
+    },
+    {
+      "knowledgeCode": "M1S2-5",
+      "name": "掌握 100 以内数的大小比较",
+      "grade": "1",
+      "book": "下册",
+      "unit": "第2单元 100 以内数的认识",
+      "lesson": "3.掌握 100 以内数的大小比较",
+      "level": "B",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [
+        "M1S2-4"
+      ],
+      "next": [],
+      "questionTypes": [
+        "填空",
+        "选择",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-100 以内数的认识-基础错误",
+        "E-100 以内数的认识-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-标准讲解",
+        "S-练习巩固"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.75,
+        "maxTimePerQuestion": 90,
+        "consecutiveCorrect": 2
+      },
+      "status": "phase2_draft",
+      "prereq_note": ""
+    },
+    {
+      "knowledgeCode": "M1S2-6",
+      "name": "掌握整十数加、减整十数口算",
+      "grade": "1",
+      "book": "下册",
+      "unit": "第3单元 100 以内的加法和减法（一）",
+      "lesson": "1.掌握整十数加、减整十数口算",
+      "level": "A",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [],
+      "next": [
+        "M1S2-7"
+      ],
+      "questionTypes": [
+        "口算",
+        "笔算",
+        "填空",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-100 以内加减法-基础错误",
+        "E-100 以内加减法-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-核心讲解",
+        "S-分层练习",
+        "S-错因分析"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.85,
+        "maxTimePerQuestion": 60,
+        "consecutiveCorrect": 3
+      },
+      "status": "phase2_draft",
+      "prereq_note": "起始节点"
+    },
+    {
+      "knowledgeCode": "M1S2-7",
+      "name": "掌握两位数加减一位数、整十数口算",
+      "grade": "1",
+      "book": "下册",
+      "unit": "第3单元 100 以内的加法和减法（一）",
+      "lesson": "2.掌握两位数加减一位数、整十数口算",
+      "level": "A",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [
+        "M1S2-6"
+      ],
+      "next": [],
+      "questionTypes": [
+        "口算",
+        "笔算",
+        "填空",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-100 以内加减法-基础错误",
+        "E-100 以内加减法-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-核心讲解",
+        "S-分层练习",
+        "S-错因分析"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.85,
+        "maxTimePerQuestion": 60,
+        "consecutiveCorrect": 3
+      },
+      "status": "phase2_draft",
+      "prereq_note": ""
+    },
+    {
+      "knowledgeCode": "M1S2-8",
+      "name": "直观认识长方形、正方形、三角形、平行四边形、圆",
+      "grade": "1",
+      "book": "下册",
+      "unit": "第4单元 认识平面图形",
+      "lesson": "1.直观认识长方形、正方形、三角形、平行四边形、圆",
+      "level": "C",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [],
+      "next": [
+        "M1S2-9"
+      ],
+      "questionTypes": [
+        "填空",
+        "选择",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-平面图形与位置-基础错误",
+        "E-平面图形与位置-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-简要介绍"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.65,
+        "maxTimePerQuestion": 120,
+        "consecutiveCorrect": 1
+      },
+      "status": "phase2_draft",
+      "prereq_note": "起始节点"
+    },
+    {
+      "knowledgeCode": "M1S2-9",
+      "name": "能辨别、拼组简单平面图形",
+      "grade": "1",
+      "book": "下册",
+      "unit": "第4单元 认识平面图形",
+      "lesson": "2.能辨别、拼组简单平面图形",
+      "level": "B",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [
+        "M1S2-8"
+      ],
+      "next": [],
+      "questionTypes": [
+        "填空",
+        "选择",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-平面图形与位置-基础错误",
+        "E-平面图形与位置-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-标准讲解",
+        "S-练习巩固"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.75,
+        "maxTimePerQuestion": 90,
+        "consecutiveCorrect": 2
+      },
+      "status": "phase2_draft",
+      "prereq_note": ""
+    },
+    {
+      "knowledgeCode": "M1S2-10",
+      "name": "理解上下、前后、左右相对位置关系",
+      "grade": "1",
+      "book": "下册",
+      "unit": "第5单元 位置",
+      "lesson": "1.理解上下、前后、左右相对位置关系",
+      "level": "B",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [],
+      "next": [
+        "M1S2-11"
+      ],
+      "questionTypes": [
+        "填空",
+        "选择",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-平面图形与位置-基础错误",
+        "E-平面图形与位置-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-标准讲解",
+        "S-练习巩固"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.75,
+        "maxTimePerQuestion": 90,
+        "consecutiveCorrect": 2
+      },
+      "status": "phase2_draft",
+      "prereq_note": "起始节点"
+    },
+    {
+      "knowledgeCode": "M1S2-11",
+      "name": "会用方位词描述物体位置",
+      "grade": "1",
+      "book": "下册",
+      "unit": "第5单元 位置",
+      "lesson": "2.会用方位词描述物体位置",
+      "level": "B",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [
+        "M1S2-10"
+      ],
+      "next": [],
+      "questionTypes": [
+        "填空",
+        "选择",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-平面图形与位置-基础错误",
+        "E-平面图形与位置-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-标准讲解",
+        "S-练习巩固"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.75,
+        "maxTimePerQuestion": 90,
+        "consecutiveCorrect": 2
+      },
+      "status": "phase2_draft",
+      "prereq_note": ""
+    },
+    {
+      "knowledgeCode": "M1S2-12",
+      "name": "了解元、角、分面值",
+      "grade": "1",
+      "book": "下册",
+      "unit": "第6单元 认识人民币",
+      "lesson": "1.了解元、角、分面值",
+      "level": "C",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [],
+      "next": [
+        "M1S2-13"
+      ],
+      "questionTypes": [
+        "填空",
+        "选择",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-人民币-基础错误",
+        "E-人民币-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-简要介绍"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.65,
+        "maxTimePerQuestion": 120,
+        "consecutiveCorrect": 1
+      },
+      "status": "phase2_draft",
+      "prereq_note": "起始节点"
+    },
+    {
+      "knowledgeCode": "M1S2-13",
+      "name": "理解元、角、分之间进率",
+      "grade": "1",
+      "book": "下册",
+      "unit": "第6单元 认识人民币",
+      "lesson": "2.理解元、角、分之间进率",
+      "level": "B",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [
+        "M1S2-12"
+      ],
+      "next": [
+        "M1S2-14"
+      ],
+      "questionTypes": [
+        "填空",
+        "选择",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-人民币-基础错误",
+        "E-人民币-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-标准讲解",
+        "S-练习巩固"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.75,
+        "maxTimePerQuestion": 90,
+        "consecutiveCorrect": 2
+      },
+      "status": "phase2_draft",
+      "prereq_note": ""
+    },
+    {
+      "knowledgeCode": "M1S2-14",
+      "name": "掌握简单人民币兑换与购物计算",
+      "grade": "1",
+      "book": "下册",
+      "unit": "第6单元 认识人民币",
+      "lesson": "3.掌握简单人民币兑换与购物计算",
+      "level": "A",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [
+        "M1S2-13"
+      ],
+      "next": [],
+      "questionTypes": [
+        "口算",
+        "笔算",
+        "填空",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-人民币-基础错误",
+        "E-人民币-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-核心讲解",
+        "S-分层练习",
+        "S-错因分析"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.85,
+        "maxTimePerQuestion": 60,
+        "consecutiveCorrect": 3
+      },
+      "status": "phase2_draft",
+      "prereq_note": ""
+    },
+    {
+      "knowledgeCode": "M1S2-15",
+      "name": "了解按单一标准分类的方法",
+      "grade": "1",
+      "book": "下册",
+      "unit": "第7单元 分类与整理",
+      "lesson": "1.了解按单一标准分类的方法",
+      "level": "C",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [],
+      "next": [
+        "M1S2-16"
+      ],
+      "questionTypes": [
+        "填空",
+        "选择",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-分类整理-基础错误",
+        "E-分类整理-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-简要介绍"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.65,
+        "maxTimePerQuestion": 120,
+        "consecutiveCorrect": 1
+      },
+      "status": "phase2_draft",
+      "prereq_note": "起始节点"
+    },
+    {
+      "knowledgeCode": "M1S2-16",
+      "name": "能分类并完成简单象形统计表",
+      "grade": "1",
+      "book": "下册",
+      "unit": "第7单元 分类与整理",
+      "lesson": "2.能分类并完成简单象形统计表",
+      "level": "B",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [
+        "M1S2-15"
+      ],
+      "next": [
+        "M2S1-0"
+      ],
+      "questionTypes": [
+        "填空",
+        "选择",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-分类整理-基础错误",
+        "E-分类整理-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-标准讲解",
+        "S-练习巩固"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.75,
+        "maxTimePerQuestion": 90,
+        "consecutiveCorrect": 2
+      },
+      "status": "phase2_draft",
+      "prereq_note": ""
+    },
+    {
+      "knowledgeCode": "M2S1-0",
+      "name": "理解两位数加减两位数笔算算理",
+      "grade": "2",
+      "book": "上册",
+      "unit": "第1单元 100 以内的加法和减法（二）",
+      "lesson": "1.理解两位数加减两位数笔算算理",
+      "level": "B",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [
+        "M1S2-16",
+        "M1S1-6"
+      ],
+      "next": [
+        "M2S1-1"
+      ],
+      "questionTypes": [
+        "口算",
+        "笔算",
+        "填空",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-100 以内笔算加减法-基础错误",
+        "E-100 以内笔算加减法-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-标准讲解",
+        "S-练习巩固"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.75,
+        "maxTimePerQuestion": 90,
+        "consecutiveCorrect": 2
+      },
+      "status": "phase2_draft",
+      "prereq_note": ""
+    },
+    {
+      "knowledgeCode": "M2S1-1",
+      "name": "掌握不进位、进位加法笔算",
+      "grade": "2",
+      "book": "上册",
+      "unit": "第1单元 100 以内的加法和减法（二）",
+      "lesson": "2.掌握不进位、进位加法笔算",
+      "level": "A",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [
+        "M2S1-0"
+      ],
+      "next": [
+        "M2S1-2"
+      ],
+      "questionTypes": [
+        "口算",
+        "笔算",
+        "填空",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-100 以内笔算加减法-基础错误",
+        "E-100 以内笔算加减法-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-核心讲解",
+        "S-分层练习",
+        "S-错因分析"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.85,
+        "maxTimePerQuestion": 60,
+        "consecutiveCorrect": 3
+      },
+      "status": "phase2_draft",
+      "prereq_note": ""
+    },
+    {
+      "knowledgeCode": "M2S1-2",
+      "name": "掌握不退位、退位减法笔算",
+      "grade": "2",
+      "book": "上册",
+      "unit": "第1单元 100 以内的加法和减法（二）",
+      "lesson": "3.掌握不退位、退位减法笔算",
+      "level": "A",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [
+        "M2S1-1",
+        "M1S2-1"
+      ],
+      "next": [
+        "M2S1-3"
+      ],
+      "questionTypes": [
+        "口算",
+        "笔算",
+        "填空",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-100 以内笔算加减法-基础错误",
+        "E-100 以内笔算加减法-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-核心讲解",
+        "S-分层练习",
+        "S-错因分析"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.85,
+        "maxTimePerQuestion": 60,
+        "consecutiveCorrect": 3
+      },
+      "status": "phase2_draft",
+      "prereq_note": ""
+    },
+    {
+      "knowledgeCode": "M2S1-3",
+      "name": "掌握加减法估算思路与方法",
+      "grade": "2",
+      "book": "上册",
+      "unit": "第1单元 100 以内的加法和减法（二）",
+      "lesson": "4.掌握加减法估算思路与方法",
+      "level": "A",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [
+        "M2S1-2"
+      ],
+      "next": [
+        "M2S1-4"
+      ],
+      "questionTypes": [
+        "口算",
+        "笔算",
+        "填空",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-100 以内笔算加减法-基础错误",
+        "E-100 以内笔算加减法-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-核心讲解",
+        "S-分层练习",
+        "S-错因分析"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.85,
+        "maxTimePerQuestion": 60,
+        "consecutiveCorrect": 3
+      },
+      "status": "phase2_draft",
+      "prereq_note": ""
+    },
+    {
+      "knowledgeCode": "M2S1-4",
+      "name": "运用加减法解决两步实际问题",
+      "grade": "2",
+      "book": "上册",
+      "unit": "第1单元 100 以内的加法和减法（二）",
+      "lesson": "5.运用加减法解决两步实际问题",
+      "level": "A",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [
+        "M2S1-3"
+      ],
+      "next": [],
+      "questionTypes": [
+        "口算",
+        "笔算",
+        "填空",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-100 以内笔算加减法-基础错误",
+        "E-100 以内笔算加减法-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-核心讲解",
+        "S-分层练习",
+        "S-错因分析"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.85,
+        "maxTimePerQuestion": 60,
+        "consecutiveCorrect": 3
+      },
+      "status": "phase2_draft",
+      "prereq_note": ""
+    },
+    {
+      "knowledgeCode": "M2S1-5",
+      "name": "理解乘法的意义与乘号含义",
+      "grade": "2",
+      "book": "上册",
+      "unit": "第2单元 表内乘法（一）",
+      "lesson": "1.理解乘法的意义与乘号含义",
+      "level": "A",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [],
+      "next": [
+        "M2S1-6",
+        "M3S1-13"
+      ],
+      "questionTypes": [
+        "口算",
+        "笔算",
+        "填空",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-表内乘法-基础错误",
+        "E-表内乘法-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-核心讲解",
+        "S-分层练习",
+        "S-错因分析"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.85,
+        "maxTimePerQuestion": 60,
+        "consecutiveCorrect": 3
+      },
+      "status": "phase2_draft",
+      "prereq_note": "起始节点"
+    },
+    {
+      "knowledgeCode": "M2S1-6",
+      "name": "熟记并运用 2～6 的乘法口诀",
+      "grade": "2",
+      "book": "上册",
+      "unit": "第2单元 表内乘法（一）",
+      "lesson": "2.熟记并运用 2～6 的乘法口诀",
+      "level": "A",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [
+        "M2S1-5"
+      ],
+      "next": [
+        "M2S1-7",
+        "M5S2-2"
+      ],
+      "questionTypes": [
+        "口算",
+        "笔算",
+        "填空",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-表内乘法-基础错误",
+        "E-表内乘法-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-核心讲解",
+        "S-分层练习",
+        "S-错因分析"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.85,
+        "maxTimePerQuestion": 60,
+        "consecutiveCorrect": 3
+      },
+      "status": "phase2_draft",
+      "prereq_note": ""
+    },
+    {
+      "knowledgeCode": "M2S1-7",
+      "name": "掌握乘加、乘减算式计算",
+      "grade": "2",
+      "book": "上册",
+      "unit": "第2单元 表内乘法（一）",
+      "lesson": "3.掌握乘加、乘减算式计算",
+      "level": "A",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [
+        "M2S1-6"
+      ],
+      "next": [],
+      "questionTypes": [
+        "口算",
+        "笔算",
+        "填空",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-表内乘法-基础错误",
+        "E-表内乘法-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-核心讲解",
+        "S-分层练习",
+        "S-错因分析"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.85,
+        "maxTimePerQuestion": 60,
+        "consecutiveCorrect": 3
+      },
+      "status": "phase2_draft",
+      "prereq_note": ""
+    },
+    {
+      "knowledgeCode": "M2S1-8",
+      "name": "熟记 7～9 的乘法口诀、完整乘法口诀表",
+      "grade": "2",
+      "book": "上册",
+      "unit": "第3单元 表内乘法（二）",
+      "lesson": "1.熟记 7～9 的乘法口诀、完整乘法口诀表",
+      "level": "A",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [],
+      "next": [
+        "M2S1-9"
+      ],
+      "questionTypes": [
+        "口算",
+        "笔算",
+        "填空",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-表内乘法-基础错误",
+        "E-表内乘法-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-核心讲解",
+        "S-分层练习",
+        "S-错因分析"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.85,
+        "maxTimePerQuestion": 60,
+        "consecutiveCorrect": 3
+      },
+      "status": "phase2_draft",
+      "prereq_note": "起始节点"
+    },
+    {
+      "knowledgeCode": "M2S1-9",
+      "name": "运用乘法口诀解决求几个几的实际问题",
+      "grade": "2",
+      "book": "上册",
+      "unit": "第3单元 表内乘法（二）",
+      "lesson": "2.运用乘法口诀解决求几个几的实际问题",
+      "level": "A",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [
+        "M2S1-8"
+      ],
+      "next": [],
+      "questionTypes": [
+        "口算",
+        "笔算",
+        "填空",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-表内乘法-基础错误",
+        "E-表内乘法-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-核心讲解",
+        "S-分层练习",
+        "S-错因分析"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.85,
+        "maxTimePerQuestion": 60,
+        "consecutiveCorrect": 3
+      },
+      "status": "phase2_draft",
+      "prereq_note": ""
+    },
+    {
+      "knowledgeCode": "M2S1-10",
+      "name": "认识厘米、米长度单位",
+      "grade": "2",
+      "book": "上册",
+      "unit": "第4单元 长度单位",
+      "lesson": "1.认识厘米、米长度单位",
+      "level": "C",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [],
+      "next": [
+        "M2S1-11",
+        "M3S1-22"
+      ],
+      "questionTypes": [
+        "填空",
+        "选择",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-长度与角-基础错误",
+        "E-长度与角-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-简要介绍"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.65,
+        "maxTimePerQuestion": 120,
+        "consecutiveCorrect": 1
+      },
+      "status": "phase2_draft",
+      "prereq_note": "起始节点"
+    },
+    {
+      "knowledgeCode": "M2S1-11",
+      "name": "理解 1 米 = 100 厘米进率关系",
+      "grade": "2",
+      "book": "上册",
+      "unit": "第4单元 长度单位",
+      "lesson": "2.理解 1 米 = 100 厘米进率关系",
+      "level": "B",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [
+        "M2S1-10"
+      ],
+      "next": [
+        "M2S1-12"
+      ],
+      "questionTypes": [
+        "填空",
+        "选择",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-长度与角-基础错误",
+        "E-长度与角-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-标准讲解",
+        "S-练习巩固"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.75,
+        "maxTimePerQuestion": 90,
+        "consecutiveCorrect": 2
+      },
+      "status": "phase2_draft",
+      "prereq_note": ""
+    },
+    {
+      "knowledgeCode": "M2S1-12",
+      "name": "掌握用直尺测量、画线段方法",
+      "grade": "2",
+      "book": "上册",
+      "unit": "第4单元 长度单位",
+      "lesson": "3.掌握用直尺测量、画线段方法",
+      "level": "B",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [
+        "M2S1-11"
+      ],
+      "next": [],
+      "questionTypes": [
+        "填空",
+        "选择",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-长度与角-基础错误",
+        "E-长度与角-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-标准讲解",
+        "S-练习巩固"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.75,
+        "maxTimePerQuestion": 90,
+        "consecutiveCorrect": 2
+      },
+      "status": "phase2_draft",
+      "prereq_note": ""
+    },
+    {
+      "knowledgeCode": "M2S1-13",
+      "name": "了解角的各部分名称",
+      "grade": "2",
+      "book": "上册",
+      "unit": "第5单元 角的初步认识",
+      "lesson": "1.了解角的各部分名称",
+      "level": "C",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [],
+      "next": [
+        "M2S1-14",
+        "M4S1-17"
+      ],
+      "questionTypes": [
+        "填空",
+        "选择",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-长度与角-基础错误",
+        "E-长度与角-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-简要介绍"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.65,
+        "maxTimePerQuestion": 120,
+        "consecutiveCorrect": 1
+      },
+      "status": "phase2_draft",
+      "prereq_note": "起始节点"
+    },
+    {
+      "knowledgeCode": "M2S1-14",
+      "name": "直观认识直角、锐角、钝角",
+      "grade": "2",
+      "book": "上册",
+      "unit": "第5单元 角的初步认识",
+      "lesson": "2.直观认识直角、锐角、钝角",
+      "level": "B",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [
+        "M2S1-13"
+      ],
+      "next": [
+        "M2S1-15"
+      ],
+      "questionTypes": [
+        "填空",
+        "选择",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-长度与角-基础错误",
+        "E-长度与角-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-标准讲解",
+        "S-练习巩固"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.75,
+        "maxTimePerQuestion": 90,
+        "consecutiveCorrect": 2
+      },
+      "status": "phase2_draft",
+      "prereq_note": ""
+    },
+    {
+      "knowledgeCode": "M2S1-15",
+      "name": "会用三角板判断、画直角",
+      "grade": "2",
+      "book": "上册",
+      "unit": "第5单元 角的初步认识",
+      "lesson": "3.会用三角板判断、画直角",
+      "level": "B",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [
+        "M2S1-14"
+      ],
+      "next": [],
+      "questionTypes": [
+        "填空",
+        "选择",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-长度与角-基础错误",
+        "E-长度与角-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-标准讲解",
+        "S-练习巩固"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.75,
+        "maxTimePerQuestion": 90,
+        "consecutiveCorrect": 2
+      },
+      "status": "phase2_draft",
+      "prereq_note": ""
+    },
+    {
+      "knowledgeCode": "M2S1-16",
+      "name": "能从前后左右不同方向辨认物体形状",
+      "grade": "2",
+      "book": "上册",
+      "unit": "第6单元 观察物体（一）",
+      "lesson": "1.能从前后左右不同方向辨认物体形状",
+      "level": "B",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [],
+      "next": [
+        "M4S2-20"
+      ],
+      "questionTypes": [
+        "填空",
+        "选择",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-观察物体-基础错误",
+        "E-观察物体-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-标准讲解",
+        "S-练习巩固"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.75,
+        "maxTimePerQuestion": 90,
+        "consecutiveCorrect": 2
+      },
+      "status": "phase2_draft",
+      "prereq_note": "起始节点"
+    },
+    {
+      "knowledgeCode": "M2S1-17",
+      "name": "理解几时几分、几时半的含义",
+      "grade": "2",
+      "book": "上册",
+      "unit": "第7单元 认识时间",
+      "lesson": "1.理解几时几分、几时半的含义",
+      "level": "B",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [],
+      "next": [
+        "M2S1-18"
+      ],
+      "questionTypes": [
+        "填空",
+        "选择",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-时间-基础错误",
+        "E-时间-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-标准讲解",
+        "S-练习巩固"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.75,
+        "maxTimePerQuestion": 90,
+        "consecutiveCorrect": 2
+      },
+      "status": "phase2_draft",
+      "prereq_note": "起始节点"
+    },
+    {
+      "knowledgeCode": "M2S1-18",
+      "name": "掌握 5 分 5 分数认读时刻的方法",
+      "grade": "2",
+      "book": "上册",
+      "unit": "第7单元 认识时间",
+      "lesson": "2.掌握 5 分 5 分数认读时刻的方法",
+      "level": "B",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [
+        "M2S1-17"
+      ],
+      "next": [],
+      "questionTypes": [
+        "填空",
+        "选择",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-时间-基础错误",
+        "E-时间-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-标准讲解",
+        "S-练习巩固"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.75,
+        "maxTimePerQuestion": 90,
+        "consecutiveCorrect": 2
+      },
+      "status": "phase2_draft",
+      "prereq_note": ""
+    },
+    {
+      "knowledgeCode": "M2S1-19",
+      "name": "理解简单排列、组合搭配逻辑",
+      "grade": "2",
+      "book": "上册",
+      "unit": "第8单元 数学广角",
+      "lesson": "1.理解简单排列、组合搭配逻辑",
+      "level": "C",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [],
+      "next": [
+        "M2S1-20"
+      ],
+      "questionTypes": [
+        "探索题"
+      ],
+      "commonErrors": [
+        "E-搭配问题-基础错误",
+        "E-搭配问题-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-简要介绍"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.65,
+        "maxTimePerQuestion": 120,
+        "consecutiveCorrect": 1
+      },
+      "status": "phase2_draft",
+      "prereq_note": "起始节点"
+    },
+    {
+      "knowledgeCode": "M2S1-20",
+      "name": "掌握简单事物搭配计数方法",
+      "grade": "2",
+      "book": "上册",
+      "unit": "第8单元 数学广角",
+      "lesson": "2.掌握简单事物搭配计数方法",
+      "level": "C",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [
+        "M2S1-19"
+      ],
+      "next": [
+        "M2S2-0"
+      ],
+      "questionTypes": [
+        "探索题"
+      ],
+      "commonErrors": [
+        "E-搭配问题-基础错误",
+        "E-搭配问题-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-简要介绍"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.65,
+        "maxTimePerQuestion": 120,
+        "consecutiveCorrect": 1
+      },
+      "status": "phase2_draft",
+      "prereq_note": ""
+    },
+    {
+      "knowledgeCode": "M2S2-0",
+      "name": "理解平均分的含义与两种分法",
+      "grade": "2",
+      "book": "下册",
+      "unit": "第1单元 表内除法（一）",
+      "lesson": "1.理解平均分的含义与两种分法",
+      "level": "B",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [
+        "M2S1-20"
+      ],
+      "next": [
+        "M2S2-1",
+        "M3S2-1",
+        "M3S1-18"
+      ],
+      "questionTypes": [
+        "填空",
+        "选择",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-表内除法-基础错误",
+        "E-表内除法-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-标准讲解",
+        "S-练习巩固"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.75,
+        "maxTimePerQuestion": 90,
+        "consecutiveCorrect": 2
+      },
+      "status": "phase2_draft",
+      "prereq_note": ""
+    },
+    {
+      "knowledgeCode": "M2S2-1",
+      "name": "理解除法算式各部分名称与意义",
+      "grade": "2",
+      "book": "下册",
+      "unit": "第1单元 表内除法（一）",
+      "lesson": "2.理解除法算式各部分名称与意义",
+      "level": "A",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [
+        "M2S2-0"
+      ],
+      "next": [
+        "M2S2-2"
+      ],
+      "questionTypes": [
+        "口算",
+        "笔算",
+        "填空",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-表内除法-基础错误",
+        "E-表内除法-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-核心讲解",
+        "S-分层练习",
+        "S-错因分析"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.85,
+        "maxTimePerQuestion": 60,
+        "consecutiveCorrect": 3
+      },
+      "status": "phase2_draft",
+      "prereq_note": ""
+    },
+    {
+      "knowledgeCode": "M2S2-2",
+      "name": "掌握用 2～6 乘法口诀求商",
+      "grade": "2",
+      "book": "下册",
+      "unit": "第1单元 表内除法（一）",
+      "lesson": "3.掌握用 2～6 乘法口诀求商",
+      "level": "A",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [
+        "M2S2-1"
+      ],
+      "next": [],
+      "questionTypes": [
+        "口算",
+        "笔算",
+        "填空",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-表内除法-基础错误",
+        "E-表内除法-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-核心讲解",
+        "S-分层练习",
+        "S-错因分析"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.85,
+        "maxTimePerQuestion": 60,
+        "consecutiveCorrect": 3
+      },
+      "status": "phase2_draft",
+      "prereq_note": ""
+    },
+    {
+      "knowledgeCode": "M2S2-3",
+      "name": "掌握用 7～9 乘法口诀求商",
+      "grade": "2",
+      "book": "下册",
+      "unit": "第2单元 表内除法（二）",
+      "lesson": "1.掌握用 7～9 乘法口诀求商",
+      "level": "A",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [],
+      "next": [
+        "M2S2-4"
+      ],
+      "questionTypes": [
+        "口算",
+        "笔算",
+        "填空",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-表内除法-基础错误",
+        "E-表内除法-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-核心讲解",
+        "S-分层练习",
+        "S-错因分析"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.85,
+        "maxTimePerQuestion": 60,
+        "consecutiveCorrect": 3
+      },
+      "status": "phase2_draft",
+      "prereq_note": "起始节点"
+    },
+    {
+      "knowledgeCode": "M2S2-4",
+      "name": "运用除法解决平均分实际问题",
+      "grade": "2",
+      "book": "下册",
+      "unit": "第2单元 表内除法（二）",
+      "lesson": "2.运用除法解决平均分实际问题",
+      "level": "A",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [
+        "M2S2-3"
+      ],
+      "next": [],
+      "questionTypes": [
+        "口算",
+        "笔算",
+        "填空",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-表内除法-基础错误",
+        "E-表内除法-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-核心讲解",
+        "S-分层练习",
+        "S-错因分析"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.85,
+        "maxTimePerQuestion": 60,
+        "consecutiveCorrect": 3
+      },
+      "status": "phase2_draft",
+      "prereq_note": ""
+    },
+    {
+      "knowledgeCode": "M2S2-5",
+      "name": "理解余数的产生和有余数除法含义",
+      "grade": "2",
+      "book": "下册",
+      "unit": "第3单元 有余数的除法",
+      "lesson": "1.理解余数的产生和有余数除法含义",
+      "level": "A",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [],
+      "next": [
+        "M2S2-6",
+        "M4S1-12",
+        "M3S2-2"
+      ],
+      "questionTypes": [
+        "口算",
+        "笔算",
+        "填空",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-有余数除法与混合运算-基础错误",
+        "E-有余数除法与混合运算-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-核心讲解",
+        "S-分层练习",
+        "S-错因分析"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.85,
+        "maxTimePerQuestion": 60,
+        "consecutiveCorrect": 3
+      },
+      "status": "phase2_draft",
+      "prereq_note": "起始节点"
+    },
+    {
+      "knowledgeCode": "M2S2-6",
+      "name": "掌握余数小于除数的规律",
+      "grade": "2",
+      "book": "下册",
+      "unit": "第3单元 有余数的除法",
+      "lesson": "2.掌握余数小于除数的规律",
+      "level": "A",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [
+        "M2S2-5"
+      ],
+      "next": [
+        "M2S2-7"
+      ],
+      "questionTypes": [
+        "口算",
+        "笔算",
+        "填空",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-有余数除法与混合运算-基础错误",
+        "E-有余数除法与混合运算-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-核心讲解",
+        "S-分层练习",
+        "S-错因分析"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.85,
+        "maxTimePerQuestion": 60,
+        "consecutiveCorrect": 3
+      },
+      "status": "phase2_draft",
+      "prereq_note": ""
+    },
+    {
+      "knowledgeCode": "M2S2-7",
+      "name": "掌握有余数除法竖式计算",
+      "grade": "2",
+      "book": "下册",
+      "unit": "第3单元 有余数的除法",
+      "lesson": "3.掌握有余数除法竖式计算",
+      "level": "A",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [
+        "M2S2-6"
+      ],
+      "next": [
+        "M2S2-8"
+      ],
+      "questionTypes": [
+        "口算",
+        "笔算",
+        "填空",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-有余数除法与混合运算-基础错误",
+        "E-有余数除法与混合运算-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-核心讲解",
+        "S-分层练习",
+        "S-错因分析"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.85,
+        "maxTimePerQuestion": 60,
+        "consecutiveCorrect": 3
+      },
+      "status": "phase2_draft",
+      "prereq_note": ""
+    },
+    {
+      "knowledgeCode": "M2S2-8",
+      "name": "运用有余数除法解决周期、分配问题",
+      "grade": "2",
+      "book": "下册",
+      "unit": "第3单元 有余数的除法",
+      "lesson": "4.运用有余数除法解决周期、分配问题",
+      "level": "A",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [
+        "M2S2-7"
+      ],
+      "next": [],
+      "questionTypes": [
+        "口算",
+        "笔算",
+        "填空",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-有余数除法与混合运算-基础错误",
+        "E-有余数除法与混合运算-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-核心讲解",
+        "S-分层练习",
+        "S-错因分析"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.85,
+        "maxTimePerQuestion": 60,
+        "consecutiveCorrect": 3
+      },
+      "status": "phase2_draft",
+      "prereq_note": ""
+    },
+    {
+      "knowledgeCode": "M2S2-9",
+      "name": "理解同级、两级运算顺序",
+      "grade": "2",
+      "book": "下册",
+      "unit": "第4单元 混合运算",
+      "lesson": "1.理解同级、两级运算顺序",
+      "level": "B",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [],
+      "next": [
+        "M2S2-10"
+      ],
+      "questionTypes": [
+        "口算",
+        "笔算",
+        "填空",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-有余数除法与混合运算-基础错误",
+        "E-有余数除法与混合运算-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-标准讲解",
+        "S-练习巩固"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.75,
+        "maxTimePerQuestion": 90,
+        "consecutiveCorrect": 2
+      },
+      "status": "phase2_draft",
+      "prereq_note": "起始节点"
+    },
+    {
+      "knowledgeCode": "M2S2-10",
+      "name": "掌握带小括号的混合运算顺序",
+      "grade": "2",
+      "book": "下册",
+      "unit": "第4单元 混合运算",
+      "lesson": "2.掌握带小括号的混合运算顺序",
+      "level": "A",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [
+        "M2S2-9"
+      ],
+      "next": [
+        "M2S2-11"
+      ],
+      "questionTypes": [
+        "口算",
+        "笔算",
+        "填空",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-有余数除法与混合运算-基础错误",
+        "E-有余数除法与混合运算-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-核心讲解",
+        "S-分层练习",
+        "S-错因分析"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.85,
+        "maxTimePerQuestion": 60,
+        "consecutiveCorrect": 3
+      },
+      "status": "phase2_draft",
+      "prereq_note": ""
+    },
+    {
+      "knowledgeCode": "M2S2-11",
+      "name": "会列综合算式解决两步问题",
+      "grade": "2",
+      "book": "下册",
+      "unit": "第4单元 混合运算",
+      "lesson": "3.会列综合算式解决两步问题",
+      "level": "A",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [
+        "M2S2-10"
+      ],
+      "next": [],
+      "questionTypes": [
+        "应用题",
+        "填空"
+      ],
+      "commonErrors": [
+        "E-有余数除法与混合运算-基础错误",
+        "E-有余数除法与混合运算-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-核心讲解",
+        "S-分层练习",
+        "S-错因分析"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.85,
+        "maxTimePerQuestion": 60,
+        "consecutiveCorrect": 3
+      },
+      "status": "phase2_draft",
+      "prereq_note": ""
+    },
+    {
+      "knowledgeCode": "M2S2-12",
+      "name": "认识千、万数位，理解数位顺序",
+      "grade": "2",
+      "book": "下册",
+      "unit": "第5单元 万以内数的认识",
+      "lesson": "1.认识千、万数位，理解数位顺序",
+      "level": "B",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [
+        "M1S2-4"
+      ],
+      "next": [
+        "M2S2-13",
+        "M4S1-0"
+      ],
+      "questionTypes": [
+        "填空",
+        "选择",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-万以内数的认识-基础错误",
+        "E-万以内数的认识-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-标准讲解",
+        "S-练习巩固"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.75,
+        "maxTimePerQuestion": 90,
+        "consecutiveCorrect": 2
+      },
+      "status": "phase2_draft",
+      "prereq_note": ""
+    },
+    {
+      "knowledgeCode": "M2S2-13",
+      "name": "掌握万以内数的读写、组成、大小比较",
+      "grade": "2",
+      "book": "下册",
+      "unit": "第5单元 万以内数的认识",
+      "lesson": "2.掌握万以内数的读写、组成、大小比较",
+      "level": "B",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [
+        "M2S2-12"
+      ],
+      "next": [
+        "M2S2-14"
+      ],
+      "questionTypes": [
+        "填空",
+        "选择",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-万以内数的认识-基础错误",
+        "E-万以内数的认识-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-标准讲解",
+        "S-练习巩固"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.75,
+        "maxTimePerQuestion": 90,
+        "consecutiveCorrect": 2
+      },
+      "status": "phase2_draft",
+      "prereq_note": ""
+    },
+    {
+      "knowledgeCode": "M2S2-14",
+      "name": "了解近似数的含义与应用",
+      "grade": "2",
+      "book": "下册",
+      "unit": "第5单元 万以内数的认识",
+      "lesson": "3.了解近似数的含义与应用",
+      "level": "B",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [
+        "M2S2-13"
+      ],
+      "next": [],
+      "questionTypes": [
+        "应用题",
+        "填空"
+      ],
+      "commonErrors": [
+        "E-万以内数的认识-基础错误",
+        "E-万以内数的认识-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-标准讲解",
+        "S-练习巩固"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.75,
+        "maxTimePerQuestion": 90,
+        "consecutiveCorrect": 2
+      },
+      "status": "phase2_draft",
+      "prereq_note": ""
+    },
+    {
+      "knowledgeCode": "M2S2-15",
+      "name": "直观认识轴对称、平移、旋转现象",
+      "grade": "2",
+      "book": "下册",
+      "unit": "第6单元 图形的运动（一）",
+      "lesson": "1.直观认识轴对称、平移、旋转现象",
+      "level": "C",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [],
+      "next": [
+        "M2S2-16",
+        "M4S2-21"
+      ],
+      "questionTypes": [
+        "填空",
+        "选择",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-图形的运动-基础错误",
+        "E-图形的运动-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-简要介绍"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.65,
+        "maxTimePerQuestion": 120,
+        "consecutiveCorrect": 1
+      },
+      "status": "phase2_draft",
+      "prereq_note": "起始节点"
+    },
+    {
+      "knowledgeCode": "M2S2-16",
+      "name": "能辨别生活中的平移、旋转、轴对称图形",
+      "grade": "2",
+      "book": "下册",
+      "unit": "第6单元 图形的运动（一）",
+      "lesson": "2.能辨别生活中的平移、旋转、轴对称图形",
+      "level": "B",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [
+        "M2S2-15"
+      ],
+      "next": [],
+      "questionTypes": [
+        "填空",
+        "选择",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-图形的运动-基础错误",
+        "E-图形的运动-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-标准讲解",
+        "S-练习巩固"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.75,
+        "maxTimePerQuestion": 90,
+        "consecutiveCorrect": 2
+      },
+      "status": "phase2_draft",
+      "prereq_note": ""
+    },
+    {
+      "knowledgeCode": "M2S2-17",
+      "name": "了解简单调查、记录数据的方法",
+      "grade": "2",
+      "book": "下册",
+      "unit": "第7单元 数据收集整理",
+      "lesson": "1.了解简单调查、记录数据的方法",
+      "level": "C",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [],
+      "next": [
+        "M2S2-18",
+        "M3S2-29"
+      ],
+      "questionTypes": [
+        "填空",
+        "选择",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-数据收集-基础错误",
+        "E-数据收集-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-简要介绍"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.65,
+        "maxTimePerQuestion": 120,
+        "consecutiveCorrect": 1
+      },
+      "status": "phase2_draft",
+      "prereq_note": "起始节点"
+    },
+    {
+      "knowledgeCode": "M2S2-18",
+      "name": "能整理数据、填写简单统计表并分析",
+      "grade": "2",
+      "book": "下册",
+      "unit": "第7单元 数据收集整理",
+      "lesson": "2.能整理数据、填写简单统计表并分析",
+      "level": "B",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [
+        "M2S2-17"
+      ],
+      "next": [],
+      "questionTypes": [
+        "填空",
+        "选择",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-数据收集-基础错误",
+        "E-数据收集-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-标准讲解",
+        "S-练习巩固"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.75,
+        "maxTimePerQuestion": 90,
+        "consecutiveCorrect": 2
+      },
+      "status": "phase2_draft",
+      "prereq_note": ""
+    },
+    {
+      "knowledgeCode": "M2S2-19",
+      "name": "发现图形、数列周期排列规律",
+      "grade": "2",
+      "book": "下册",
+      "unit": "第8单元 数学广角",
+      "lesson": "1.发现图形、数列周期排列规律",
+      "level": "C",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [],
+      "next": [
+        "M2S2-20"
+      ],
+      "questionTypes": [
+        "探索题"
+      ],
+      "commonErrors": [
+        "E-周期规律-基础错误",
+        "E-周期规律-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-简要介绍"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.65,
+        "maxTimePerQuestion": 120,
+        "consecutiveCorrect": 1
+      },
+      "status": "phase2_draft",
+      "prereq_note": "起始节点"
+    },
+    {
+      "knowledgeCode": "M2S2-20",
+      "name": "运用周期规律推理后续排列",
+      "grade": "2",
+      "book": "下册",
+      "unit": "第8单元 数学广角",
+      "lesson": "2.运用周期规律推理后续排列",
+      "level": "B",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [
+        "M2S2-19"
+      ],
+      "next": [
+        "M3S1-0"
+      ],
+      "questionTypes": [
+        "应用题",
+        "填空"
+      ],
+      "commonErrors": [
+        "E-周期规律-基础错误",
+        "E-周期规律-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-标准讲解",
+        "S-练习巩固"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.75,
+        "maxTimePerQuestion": 90,
+        "consecutiveCorrect": 2
+      },
+      "status": "phase2_draft",
+      "prereq_note": ""
+    },
+    {
+      "knowledgeCode": "M3S1-0",
+      "name": "了解时间单位秒的意义",
+      "grade": "3",
+      "book": "上册",
+      "unit": "第1单元 时分秒",
+      "lesson": "1.了解时间单位秒的意义",
+      "level": "C",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [
+        "M2S2-20"
+      ],
+      "next": [
+        "M3S1-1"
+      ],
+      "questionTypes": [
+        "填空",
+        "选择",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-万以内加减法-基础错误",
+        "E-万以内加减法-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-简要介绍"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.65,
+        "maxTimePerQuestion": 120,
+        "consecutiveCorrect": 1
+      },
+      "status": "phase2_draft",
+      "prereq_note": ""
+    },
+    {
+      "knowledgeCode": "M3S1-1",
+      "name": "理解 1 分 = 60 秒的进率关系",
+      "grade": "3",
+      "book": "上册",
+      "unit": "第1单元 时分秒",
+      "lesson": "2.理解 1 分 = 60 秒的进率关系",
+      "level": "B",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [
+        "M3S1-0"
+      ],
+      "next": [
+        "M3S1-2"
+      ],
+      "questionTypes": [
+        "填空",
+        "选择",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-万以内加减法-基础错误",
+        "E-万以内加减法-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-标准讲解",
+        "S-练习巩固"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.75,
+        "maxTimePerQuestion": 90,
+        "consecutiveCorrect": 2
+      },
+      "status": "phase2_draft",
+      "prereq_note": ""
+    },
+    {
+      "knowledgeCode": "M3S1-2",
+      "name": "掌握认读时刻、计算经过时间的方法",
+      "grade": "3",
+      "book": "上册",
+      "unit": "第1单元 时分秒",
+      "lesson": "3.掌握认读时刻、计算经过时间的方法",
+      "level": "A",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [
+        "M3S1-1"
+      ],
+      "next": [],
+      "questionTypes": [
+        "口算",
+        "笔算",
+        "填空",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-万以内加减法-基础错误",
+        "E-万以内加减法-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-核心讲解",
+        "S-分层练习",
+        "S-错因分析"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.85,
+        "maxTimePerQuestion": 60,
+        "consecutiveCorrect": 3
+      },
+      "status": "phase2_draft",
+      "prereq_note": ""
+    },
+    {
+      "knowledgeCode": "M3S1-3",
+      "name": "掌握两位数加减两位数口算",
+      "grade": "3",
+      "book": "上册",
+      "unit": "第2单元 万以内加减法（一）",
+      "lesson": "1.掌握两位数加减两位数口算",
+      "level": "A",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [],
+      "next": [
+        "M3S1-4"
+      ],
+      "questionTypes": [
+        "口算",
+        "笔算",
+        "填空",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-万以内加减法-基础错误",
+        "E-万以内加减法-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-核心讲解",
+        "S-分层练习",
+        "S-错因分析"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.85,
+        "maxTimePerQuestion": 60,
+        "consecutiveCorrect": 3
+      },
+      "status": "phase2_draft",
+      "prereq_note": "起始节点"
+    },
+    {
+      "knowledgeCode": "M3S1-4",
+      "name": "掌握几百几十加减几百几十笔算",
+      "grade": "3",
+      "book": "上册",
+      "unit": "第2单元 万以内加减法（一）",
+      "lesson": "2.掌握几百几十加减几百几十笔算",
+      "level": "A",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [
+        "M3S1-3"
+      ],
+      "next": [
+        "M3S1-5"
+      ],
+      "questionTypes": [
+        "口算",
+        "笔算",
+        "填空",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-万以内加减法-基础错误",
+        "E-万以内加减法-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-核心讲解",
+        "S-分层练习",
+        "S-错因分析"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.85,
+        "maxTimePerQuestion": 60,
+        "consecutiveCorrect": 3
+      },
+      "status": "phase2_draft",
+      "prereq_note": ""
+    },
+    {
+      "knowledgeCode": "M3S1-5",
+      "name": "理解加减法估算的实际意义",
+      "grade": "3",
+      "book": "上册",
+      "unit": "第2单元 万以内加减法（一）",
+      "lesson": "3.理解加减法估算的实际意义",
+      "level": "A",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [
+        "M3S1-4"
+      ],
+      "next": [
+        "M3S1-6"
+      ],
+      "questionTypes": [
+        "口算",
+        "笔算",
+        "填空",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-万以内加减法-基础错误",
+        "E-万以内加减法-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-核心讲解",
+        "S-分层练习",
+        "S-错因分析"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.85,
+        "maxTimePerQuestion": 60,
+        "consecutiveCorrect": 3
+      },
+      "status": "phase2_draft",
+      "prereq_note": ""
+    },
+    {
+      "knowledgeCode": "M3S1-6",
+      "name": "运用估算解决实际问题",
+      "grade": "3",
+      "book": "上册",
+      "unit": "第2单元 万以内加减法（一）",
+      "lesson": "4.运用估算解决实际问题",
+      "level": "A",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [
+        "M3S1-5"
+      ],
+      "next": [],
+      "questionTypes": [
+        "应用题",
+        "填空"
+      ],
+      "commonErrors": [
+        "E-万以内加减法-基础错误",
+        "E-万以内加减法-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-核心讲解",
+        "S-分层练习",
+        "S-错因分析"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.85,
+        "maxTimePerQuestion": 60,
+        "consecutiveCorrect": 3
+      },
+      "status": "phase2_draft",
+      "prereq_note": ""
+    },
+    {
+      "knowledgeCode": "M3S1-7",
+      "name": "理解三位数加、减法笔算算理",
+      "grade": "3",
+      "book": "上册",
+      "unit": "第3单元 万以内加减法（二）",
+      "lesson": "1.理解三位数加、减法笔算算理",
+      "level": "B",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [],
+      "next": [
+        "M3S1-8"
+      ],
+      "questionTypes": [
+        "口算",
+        "笔算",
+        "填空",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-万以内加减法-基础错误",
+        "E-万以内加减法-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-标准讲解",
+        "S-练习巩固"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.75,
+        "maxTimePerQuestion": 90,
+        "consecutiveCorrect": 2
+      },
+      "status": "phase2_draft",
+      "prereq_note": "起始节点"
+    },
+    {
+      "knowledgeCode": "M3S1-8",
+      "name": "掌握三位数进位加法笔算",
+      "grade": "3",
+      "book": "上册",
+      "unit": "第3单元 万以内加减法（二）",
+      "lesson": "2.掌握三位数进位加法笔算",
+      "level": "A",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [
+        "M3S1-7"
+      ],
+      "next": [
+        "M3S1-9"
+      ],
+      "questionTypes": [
+        "口算",
+        "笔算",
+        "填空",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-万以内加减法-基础错误",
+        "E-万以内加减法-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-核心讲解",
+        "S-分层练习",
+        "S-错因分析"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.85,
+        "maxTimePerQuestion": 60,
+        "consecutiveCorrect": 3
+      },
+      "status": "phase2_draft",
+      "prereq_note": ""
+    },
+    {
+      "knowledgeCode": "M3S1-9",
+      "name": "掌握三位数退位减法笔算",
+      "grade": "3",
+      "book": "上册",
+      "unit": "第3单元 万以内加减法（二）",
+      "lesson": "3.掌握三位数退位减法笔算",
+      "level": "A",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [
+        "M3S1-8"
+      ],
+      "next": [
+        "M3S1-10"
+      ],
+      "questionTypes": [
+        "口算",
+        "笔算",
+        "填空",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-万以内加减法-基础错误",
+        "E-万以内加减法-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-核心讲解",
+        "S-分层练习",
+        "S-错因分析"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.85,
+        "maxTimePerQuestion": 60,
+        "consecutiveCorrect": 3
+      },
+      "status": "phase2_draft",
+      "prereq_note": ""
+    },
+    {
+      "knowledgeCode": "M3S1-10",
+      "name": "掌握加减法验算方法",
+      "grade": "3",
+      "book": "上册",
+      "unit": "第3单元 万以内加减法（二）",
+      "lesson": "4.掌握加减法验算方法",
+      "level": "A",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [
+        "M3S1-9"
+      ],
+      "next": [
+        "M3S1-11"
+      ],
+      "questionTypes": [
+        "口算",
+        "笔算",
+        "填空",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-万以内加减法-基础错误",
+        "E-万以内加减法-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-核心讲解",
+        "S-分层练习",
+        "S-错因分析"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.85,
+        "maxTimePerQuestion": 60,
+        "consecutiveCorrect": 3
+      },
+      "status": "phase2_draft",
+      "prereq_note": ""
+    },
+    {
+      "knowledgeCode": "M3S1-11",
+      "name": "运用三位数加减法解决生活问题",
+      "grade": "3",
+      "book": "上册",
+      "unit": "第3单元 万以内加减法（二）",
+      "lesson": "5.运用三位数加减法解决生活问题",
+      "level": "A",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [
+        "M3S1-10"
+      ],
+      "next": [],
+      "questionTypes": [
+        "口算",
+        "笔算",
+        "填空",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-万以内加减法-基础错误",
+        "E-万以内加减法-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-核心讲解",
+        "S-分层练习",
+        "S-错因分析"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.85,
+        "maxTimePerQuestion": 60,
+        "consecutiveCorrect": 3
+      },
+      "status": "phase2_draft",
+      "prereq_note": ""
+    },
+    {
+      "knowledgeCode": "M3S1-12",
+      "name": "掌握整十、整百数乘一位数口算",
+      "grade": "3",
+      "book": "上册",
+      "unit": "第4单元 多位数乘一位数",
+      "lesson": "1.掌握整十、整百数乘一位数口算",
+      "level": "A",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [],
+      "next": [
+        "M3S1-13"
+      ],
+      "questionTypes": [
+        "口算",
+        "笔算",
+        "填空",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-乘法运算-基础错误",
+        "E-乘法运算-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-核心讲解",
+        "S-分层练习",
+        "S-错因分析"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.85,
+        "maxTimePerQuestion": 60,
+        "consecutiveCorrect": 3
+      },
+      "status": "phase2_draft",
+      "prereq_note": "起始节点"
+    },
+    {
+      "knowledgeCode": "M3S1-13",
+      "name": "理解多位数乘一位数算理",
+      "grade": "3",
+      "book": "上册",
+      "unit": "第4单元 多位数乘一位数",
+      "lesson": "2.理解多位数乘一位数算理",
+      "level": "B",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [
+        "M3S1-12",
+        "M2S1-5"
+      ],
+      "next": [
+        "M3S1-14"
+      ],
+      "questionTypes": [
+        "口算",
+        "笔算",
+        "填空",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-乘法运算-基础错误",
+        "E-乘法运算-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-标准讲解",
+        "S-练习巩固"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.75,
+        "maxTimePerQuestion": 90,
+        "consecutiveCorrect": 2
+      },
+      "status": "phase2_draft",
+      "prereq_note": ""
+    },
+    {
+      "knowledgeCode": "M3S1-14",
+      "name": "掌握多位数乘一位数不进位、进位笔算",
+      "grade": "3",
+      "book": "上册",
+      "unit": "第4单元 多位数乘一位数",
+      "lesson": "3.掌握多位数乘一位数不进位、进位笔算",
+      "level": "A",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [
+        "M3S1-13"
+      ],
+      "next": [
+        "M3S1-15",
+        "M4S1-6",
+        "M4S2-4"
+      ],
+      "questionTypes": [
+        "口算",
+        "笔算",
+        "填空",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-乘法运算-基础错误",
+        "E-乘法运算-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-核心讲解",
+        "S-分层练习",
+        "S-错因分析"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.85,
+        "maxTimePerQuestion": 60,
+        "consecutiveCorrect": 3
+      },
+      "status": "phase2_draft",
+      "prereq_note": ""
+    },
+    {
+      "knowledgeCode": "M3S1-15",
+      "name": "掌握有关 0 的乘法计算",
+      "grade": "3",
+      "book": "上册",
+      "unit": "第4单元 多位数乘一位数",
+      "lesson": "4.掌握有关 0 的乘法计算",
+      "level": "A",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [
+        "M3S1-14"
+      ],
+      "next": [
+        "M3S1-16"
+      ],
+      "questionTypes": [
+        "口算",
+        "笔算",
+        "填空",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-乘法运算-基础错误",
+        "E-乘法运算-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-核心讲解",
+        "S-分层练习",
+        "S-错因分析"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.85,
+        "maxTimePerQuestion": 60,
+        "consecutiveCorrect": 3
+      },
+      "status": "phase2_draft",
+      "prereq_note": ""
+    },
+    {
+      "knowledgeCode": "M3S1-16",
+      "name": "掌握乘法估算方法",
+      "grade": "3",
+      "book": "上册",
+      "unit": "第4单元 多位数乘一位数",
+      "lesson": "5.掌握乘法估算方法",
+      "level": "A",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [
+        "M3S1-15"
+      ],
+      "next": [
+        "M3S1-17"
+      ],
+      "questionTypes": [
+        "口算",
+        "笔算",
+        "填空",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-乘法运算-基础错误",
+        "E-乘法运算-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-核心讲解",
+        "S-分层练习",
+        "S-错因分析"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.85,
+        "maxTimePerQuestion": 60,
+        "consecutiveCorrect": 3
+      },
+      "status": "phase2_draft",
+      "prereq_note": ""
+    },
+    {
+      "knowledgeCode": "M3S1-17",
+      "name": "运用乘法解决归一、归总类实际问题",
+      "grade": "3",
+      "book": "上册",
+      "unit": "第4单元 多位数乘一位数",
+      "lesson": "6.运用乘法解决归一、归总类实际问题",
+      "level": "A",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [
+        "M3S1-16"
+      ],
+      "next": [],
+      "questionTypes": [
+        "口算",
+        "笔算",
+        "填空",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-乘法运算-基础错误",
+        "E-乘法运算-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-核心讲解",
+        "S-分层练习",
+        "S-错因分析"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.85,
+        "maxTimePerQuestion": 60,
+        "consecutiveCorrect": 3
+      },
+      "status": "phase2_draft",
+      "prereq_note": ""
+    },
+    {
+      "knowledgeCode": "M3S1-18",
+      "name": "理解平均分是分数产生的前提",
+      "grade": "3",
+      "book": "上册",
+      "unit": "第5单元 分数的初步认识",
+      "lesson": "1.理解平均分是分数产生的前提",
+      "level": "B",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [
+        "M2S2-0"
+      ],
+      "next": [
+        "M3S1-19",
+        "M5S2-15"
+      ],
+      "questionTypes": [
+        "填空",
+        "选择",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-分数初步-基础错误",
+        "E-分数初步-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-标准讲解",
+        "S-练习巩固"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.75,
+        "maxTimePerQuestion": 90,
+        "consecutiveCorrect": 2
+      },
+      "status": "phase2_draft",
+      "prereq_note": ""
+    },
+    {
+      "knowledgeCode": "M3S1-19",
+      "name": "认识几分之一、几分之几",
+      "grade": "3",
+      "book": "上册",
+      "unit": "第5单元 分数的初步认识",
+      "lesson": "2.认识几分之一、几分之几",
+      "level": "C",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [
+        "M3S1-18"
+      ],
+      "next": [
+        "M3S1-20"
+      ],
+      "questionTypes": [
+        "填空",
+        "选择",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-分数初步-基础错误",
+        "E-分数初步-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-简要介绍"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.65,
+        "maxTimePerQuestion": 120,
+        "consecutiveCorrect": 1
+      },
+      "status": "phase2_draft",
+      "prereq_note": ""
+    },
+    {
+      "knowledgeCode": "M3S1-20",
+      "name": "掌握同分母、同分子分数大小比较",
+      "grade": "3",
+      "book": "上册",
+      "unit": "第5单元 分数的初步认识",
+      "lesson": "3.掌握同分母、同分子分数大小比较",
+      "level": "B",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [
+        "M3S1-19"
+      ],
+      "next": [
+        "M3S1-21"
+      ],
+      "questionTypes": [
+        "填空",
+        "选择",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-分数初步-基础错误",
+        "E-分数初步-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-标准讲解",
+        "S-练习巩固"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.75,
+        "maxTimePerQuestion": 90,
+        "consecutiveCorrect": 2
+      },
+      "status": "phase2_draft",
+      "prereq_note": ""
+    },
+    {
+      "knowledgeCode": "M3S1-21",
+      "name": "掌握简单同分母分数加减法",
+      "grade": "3",
+      "book": "上册",
+      "unit": "第5单元 分数的初步认识",
+      "lesson": "4.掌握简单同分母分数加减法",
+      "level": "A",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [
+        "M3S1-20"
+      ],
+      "next": [
+        "M5S2-22"
+      ],
+      "questionTypes": [
+        "口算",
+        "笔算",
+        "填空",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-分数初步-基础错误",
+        "E-分数初步-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-核心讲解",
+        "S-分层练习",
+        "S-错因分析"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.85,
+        "maxTimePerQuestion": 60,
+        "consecutiveCorrect": 3
+      },
+      "status": "phase2_draft",
+      "prereq_note": ""
+    },
+    {
+      "knowledgeCode": "M3S1-22",
+      "name": "认识毫米、分米、千米、吨",
+      "grade": "3",
+      "book": "上册",
+      "unit": "第6单元 测量",
+      "lesson": "1.认识毫米、分米、千米、吨",
+      "level": "C",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [
+        "M2S1-10"
+      ],
+      "next": [
+        "M3S1-23"
+      ],
+      "questionTypes": [
+        "填空",
+        "选择",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-测量-基础错误",
+        "E-测量-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-简要介绍"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.65,
+        "maxTimePerQuestion": 120,
+        "consecutiveCorrect": 1
+      },
+      "status": "phase2_draft",
+      "prereq_note": ""
+    },
+    {
+      "knowledgeCode": "M3S1-23",
+      "name": "理解长度、质量单位之间进率",
+      "grade": "3",
+      "book": "上册",
+      "unit": "第6单元 测量",
+      "lesson": "2.理解长度、质量单位之间进率",
+      "level": "B",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [
+        "M3S1-22"
+      ],
+      "next": [
+        "M3S1-24"
+      ],
+      "questionTypes": [
+        "填空",
+        "选择",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-测量-基础错误",
+        "E-测量-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-标准讲解",
+        "S-练习巩固"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.75,
+        "maxTimePerQuestion": 90,
+        "consecutiveCorrect": 2
+      },
+      "status": "phase2_draft",
+      "prereq_note": ""
+    },
+    {
+      "knowledgeCode": "M3S1-24",
+      "name": "掌握长度、质量单位换算",
+      "grade": "3",
+      "book": "上册",
+      "unit": "第6单元 测量",
+      "lesson": "3.掌握长度、质量单位换算",
+      "level": "B",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [
+        "M3S1-23"
+      ],
+      "next": [
+        "M3S1-25"
+      ],
+      "questionTypes": [
+        "填空",
+        "选择",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-测量-基础错误",
+        "E-测量-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-标准讲解",
+        "S-练习巩固"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.75,
+        "maxTimePerQuestion": 90,
+        "consecutiveCorrect": 2
+      },
+      "status": "phase2_draft",
+      "prereq_note": ""
+    },
+    {
+      "knowledgeCode": "M3S1-25",
+      "name": "能估测物体长度和质量",
+      "grade": "3",
+      "book": "上册",
+      "unit": "第6单元 测量",
+      "lesson": "4.能估测物体长度和质量",
+      "level": "B",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [
+        "M3S1-24"
+      ],
+      "next": [],
+      "questionTypes": [
+        "填空",
+        "选择",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-测量-基础错误",
+        "E-测量-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-标准讲解",
+        "S-练习巩固"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.75,
+        "maxTimePerQuestion": 90,
+        "consecutiveCorrect": 2
+      },
+      "status": "phase2_draft",
+      "prereq_note": ""
+    },
+    {
+      "knowledgeCode": "M3S1-26",
+      "name": "认识长方形、正方形边和角的特征",
+      "grade": "3",
+      "book": "上册",
+      "unit": "第7单元 长方形和正方形",
+      "lesson": "1.认识长方形、正方形边和角的特征",
+      "level": "C",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [],
+      "next": [
+        "M3S1-27",
+        "M3S2-22"
+      ],
+      "questionTypes": [
+        "填空",
+        "选择",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-平面图形周长-基础错误",
+        "E-平面图形周长-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-简要介绍"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.65,
+        "maxTimePerQuestion": 120,
+        "consecutiveCorrect": 1
+      },
+      "status": "phase2_draft",
+      "prereq_note": "起始节点"
+    },
+    {
+      "knowledgeCode": "M3S1-27",
+      "name": "理解周长的含义",
+      "grade": "3",
+      "book": "上册",
+      "unit": "第7单元 长方形和正方形",
+      "lesson": "2.理解周长的含义",
+      "level": "B",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [
+        "M3S1-26"
+      ],
+      "next": [
+        "M3S1-28",
+        "M3S2-18"
+      ],
+      "questionTypes": [
+        "填空",
+        "选择",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-平面图形周长-基础错误",
+        "E-平面图形周长-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-标准讲解",
+        "S-练习巩固"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.75,
+        "maxTimePerQuestion": 90,
+        "consecutiveCorrect": 2
+      },
+      "status": "phase2_draft",
+      "prereq_note": ""
+    },
+    {
+      "knowledgeCode": "M3S1-28",
+      "name": "掌握长方形、正方形周长计算公式",
+      "grade": "3",
+      "book": "上册",
+      "unit": "第7单元 长方形和正方形",
+      "lesson": "3.掌握长方形、正方形周长计算公式",
+      "level": "A",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [
+        "M3S1-27"
+      ],
+      "next": [
+        "M3S1-29"
+      ],
+      "questionTypes": [
+        "口算",
+        "笔算",
+        "填空",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-平面图形周长-基础错误",
+        "E-平面图形周长-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-核心讲解",
+        "S-分层练习",
+        "S-错因分析"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.85,
+        "maxTimePerQuestion": 60,
+        "consecutiveCorrect": 3
+      },
+      "status": "phase2_draft",
+      "prereq_note": ""
+    },
+    {
+      "knowledgeCode": "M3S1-29",
+      "name": "运用周长公式解决实际围边问题",
+      "grade": "3",
+      "book": "上册",
+      "unit": "第7单元 长方形和正方形",
+      "lesson": "4.运用周长公式解决实际围边问题",
+      "level": "A",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [
+        "M3S1-28"
+      ],
+      "next": [],
+      "questionTypes": [
+        "应用题",
+        "填空"
+      ],
+      "commonErrors": [
+        "E-平面图形周长-基础错误",
+        "E-平面图形周长-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-核心讲解",
+        "S-分层练习",
+        "S-错因分析"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.85,
+        "maxTimePerQuestion": 60,
+        "consecutiveCorrect": 3
+      },
+      "status": "phase2_draft",
+      "prereq_note": ""
+    },
+    {
+      "knowledgeCode": "M3S1-30",
+      "name": "理解 \"倍\" 的概念含义",
+      "grade": "3",
+      "book": "上册",
+      "unit": "第8单元 倍的认识",
+      "lesson": "1.理解 \"倍\" 的概念含义",
+      "level": "B",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [],
+      "next": [
+        "M3S1-31",
+        "M5S2-1"
+      ],
+      "questionTypes": [
+        "填空",
+        "选择",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-倍数关系-基础错误",
+        "E-倍数关系-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-标准讲解",
+        "S-练习巩固"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.75,
+        "maxTimePerQuestion": 90,
+        "consecutiveCorrect": 2
+      },
+      "status": "phase2_draft",
+      "prereq_note": "起始节点"
+    },
+    {
+      "knowledgeCode": "M3S1-31",
+      "name": "掌握求一个数是另一个数的几倍",
+      "grade": "3",
+      "book": "上册",
+      "unit": "第8单元 倍的认识",
+      "lesson": "2.掌握求一个数是另一个数的几倍",
+      "level": "B",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [
+        "M3S1-30"
+      ],
+      "next": [
+        "M3S1-32"
+      ],
+      "questionTypes": [
+        "填空",
+        "选择",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-倍数关系-基础错误",
+        "E-倍数关系-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-标准讲解",
+        "S-练习巩固"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.75,
+        "maxTimePerQuestion": 90,
+        "consecutiveCorrect": 2
+      },
+      "status": "phase2_draft",
+      "prereq_note": ""
+    },
+    {
+      "knowledgeCode": "M3S1-32",
+      "name": "掌握求一个数的几倍是多少",
+      "grade": "3",
+      "book": "上册",
+      "unit": "第8单元 倍的认识",
+      "lesson": "3.掌握求一个数的几倍是多少",
+      "level": "B",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [
+        "M3S1-31"
+      ],
+      "next": [
+        "M3S1-33"
+      ],
+      "questionTypes": [
+        "填空",
+        "选择",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-倍数关系-基础错误",
+        "E-倍数关系-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-标准讲解",
+        "S-练习巩固"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.75,
+        "maxTimePerQuestion": 90,
+        "consecutiveCorrect": 2
+      },
+      "status": "phase2_draft",
+      "prereq_note": ""
+    },
+    {
+      "knowledgeCode": "M3S1-33",
+      "name": "运用倍数关系解决综合应用题",
+      "grade": "3",
+      "book": "上册",
+      "unit": "第8单元 倍的认识",
+      "lesson": "4.运用倍数关系解决综合应用题",
+      "level": "A",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [
+        "M3S1-32"
+      ],
+      "next": [],
+      "questionTypes": [
+        "应用题",
+        "填空"
+      ],
+      "commonErrors": [
+        "E-倍数关系-基础错误",
+        "E-倍数关系-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-核心讲解",
+        "S-分层练习",
+        "S-错因分析"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.85,
+        "maxTimePerQuestion": 60,
+        "consecutiveCorrect": 3
+      },
+      "status": "phase2_draft",
+      "prereq_note": ""
+    },
+    {
+      "knowledgeCode": "M3S1-34",
+      "name": "理解集合重叠部分的含义",
+      "grade": "3",
+      "book": "上册",
+      "unit": "第9单元 集合",
+      "lesson": "1.理解集合重叠部分的含义",
+      "level": "B",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [],
+      "next": [
+        "M3S1-35"
+      ],
+      "questionTypes": [
+        "填空",
+        "选择",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-数学广角-基础错误",
+        "E-数学广角-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-标准讲解",
+        "S-练习巩固"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.75,
+        "maxTimePerQuestion": 90,
+        "consecutiveCorrect": 2
+      },
+      "status": "phase2_draft",
+      "prereq_note": "起始节点"
+    },
+    {
+      "knowledgeCode": "M3S1-35",
+      "name": "掌握简单重叠问题的解题方法",
+      "grade": "3",
+      "book": "上册",
+      "unit": "第9单元 集合",
+      "lesson": "2.掌握简单重叠问题的解题方法",
+      "level": "A",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [
+        "M3S1-34"
+      ],
+      "next": [
+        "M3S2-0"
+      ],
+      "questionTypes": [
+        "应用题",
+        "填空"
+      ],
+      "commonErrors": [
+        "E-数学广角-基础错误",
+        "E-数学广角-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-核心讲解",
+        "S-分层练习",
+        "S-错因分析"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.85,
+        "maxTimePerQuestion": 60,
+        "consecutiveCorrect": 3
+      },
+      "status": "phase2_draft",
+      "prereq_note": ""
+    },
+    {
+      "knowledgeCode": "M3S2-0",
+      "name": "掌握整十、整百数除以一位数口算",
+      "grade": "3",
+      "book": "下册",
+      "unit": "第1单元 除数是一位数的除法",
+      "lesson": "1.掌握整十、整百数除以一位数口算",
+      "level": "A",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [
+        "M3S1-35"
+      ],
+      "next": [
+        "M3S2-1"
+      ],
+      "questionTypes": [
+        "口算",
+        "笔算",
+        "填空",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-除法运算-基础错误",
+        "E-除法运算-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-核心讲解",
+        "S-分层练习",
+        "S-错因分析"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.85,
+        "maxTimePerQuestion": 60,
+        "consecutiveCorrect": 3
+      },
+      "status": "phase2_draft",
+      "prereq_note": ""
+    },
+    {
+      "knowledgeCode": "M3S2-1",
+      "name": "理解两位数、三位数除以一位数算理",
+      "grade": "3",
+      "book": "下册",
+      "unit": "第1单元 除数是一位数的除法",
+      "lesson": "2.理解两位数、三位数除以一位数算理",
+      "level": "B",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [
+        "M3S2-0",
+        "M2S2-0"
+      ],
+      "next": [
+        "M3S2-2",
+        "M4S1-12",
+        "M5S2-31"
+      ],
+      "questionTypes": [
+        "口算",
+        "笔算",
+        "填空",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-除法运算-基础错误",
+        "E-除法运算-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-标准讲解",
+        "S-练习巩固"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.75,
+        "maxTimePerQuestion": 90,
+        "consecutiveCorrect": 2
+      },
+      "status": "phase2_draft",
+      "prereq_note": ""
+    },
+    {
+      "knowledgeCode": "M3S2-2",
+      "name": "掌握首位够除、首位不够除笔算",
+      "grade": "3",
+      "book": "下册",
+      "unit": "第1单元 除数是一位数的除法",
+      "lesson": "3.掌握首位够除、首位不够除笔算",
+      "level": "A",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [
+        "M3S2-1",
+        "M2S2-5"
+      ],
+      "next": [
+        "M3S2-3",
+        "M4S1-11"
+      ],
+      "questionTypes": [
+        "口算",
+        "笔算",
+        "填空",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-除法运算-基础错误",
+        "E-除法运算-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-核心讲解",
+        "S-分层练习",
+        "S-错因分析"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.85,
+        "maxTimePerQuestion": 60,
+        "consecutiveCorrect": 3
+      },
+      "status": "phase2_draft",
+      "prereq_note": ""
+    },
+    {
+      "knowledgeCode": "M3S2-3",
+      "name": "掌握除法验算方法",
+      "grade": "3",
+      "book": "下册",
+      "unit": "第1单元 除数是一位数的除法",
+      "lesson": "4.掌握除法验算方法",
+      "level": "A",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [
+        "M3S2-2"
+      ],
+      "next": [
+        "M3S2-4"
+      ],
+      "questionTypes": [
+        "口算",
+        "笔算",
+        "填空",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-除法运算-基础错误",
+        "E-除法运算-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-核心讲解",
+        "S-分层练习",
+        "S-错因分析"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.85,
+        "maxTimePerQuestion": 60,
+        "consecutiveCorrect": 3
+      },
+      "status": "phase2_draft",
+      "prereq_note": ""
+    },
+    {
+      "knowledgeCode": "M3S2-4",
+      "name": "掌握除法估算策略",
+      "grade": "3",
+      "book": "下册",
+      "unit": "第1单元 除数是一位数的除法",
+      "lesson": "5.掌握除法估算策略",
+      "level": "A",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [
+        "M3S2-3"
+      ],
+      "next": [
+        "M3S2-5"
+      ],
+      "questionTypes": [
+        "口算",
+        "笔算",
+        "填空",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-除法运算-基础错误",
+        "E-除法运算-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-核心讲解",
+        "S-分层练习",
+        "S-错因分析"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.85,
+        "maxTimePerQuestion": 60,
+        "consecutiveCorrect": 3
+      },
+      "status": "phase2_draft",
+      "prereq_note": ""
+    },
+    {
+      "knowledgeCode": "M3S2-5",
+      "name": "运用除法解决平均分、归一问题",
+      "grade": "3",
+      "book": "下册",
+      "unit": "第1单元 除数是一位数的除法",
+      "lesson": "6.运用除法解决平均分、归一问题",
+      "level": "A",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [
+        "M3S2-4"
+      ],
+      "next": [],
+      "questionTypes": [
+        "口算",
+        "笔算",
+        "填空",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-除法运算-基础错误",
+        "E-除法运算-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-核心讲解",
+        "S-分层练习",
+        "S-错因分析"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.85,
+        "maxTimePerQuestion": 60,
+        "consecutiveCorrect": 3
+      },
+      "status": "phase2_draft",
+      "prereq_note": ""
+    },
+    {
+      "knowledgeCode": "M3S2-6",
+      "name": "掌握整十数乘整十数口算",
+      "grade": "3",
+      "book": "下册",
+      "unit": "第2单元 两位数乘两位数",
+      "lesson": "1.掌握整十数乘整十数口算",
+      "level": "A",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [],
+      "next": [
+        "M3S2-7"
+      ],
+      "questionTypes": [
+        "口算",
+        "笔算",
+        "填空",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-两位数乘法-基础错误",
+        "E-两位数乘法-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-核心讲解",
+        "S-分层练习",
+        "S-错因分析"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.85,
+        "maxTimePerQuestion": 60,
+        "consecutiveCorrect": 3
+      },
+      "status": "phase2_draft",
+      "prereq_note": "起始节点"
+    },
+    {
+      "knowledgeCode": "M3S2-7",
+      "name": "理解两位数乘两位数笔算算理",
+      "grade": "3",
+      "book": "下册",
+      "unit": "第2单元 两位数乘两位数",
+      "lesson": "2.理解两位数乘两位数笔算算理",
+      "level": "B",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [
+        "M3S2-6"
+      ],
+      "next": [
+        "M3S2-8"
+      ],
+      "questionTypes": [
+        "口算",
+        "笔算",
+        "填空",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-两位数乘法-基础错误",
+        "E-两位数乘法-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-标准讲解",
+        "S-练习巩固"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.75,
+        "maxTimePerQuestion": 90,
+        "consecutiveCorrect": 2
+      },
+      "status": "phase2_draft",
+      "prereq_note": ""
+    },
+    {
+      "knowledgeCode": "M3S2-8",
+      "name": "掌握两位数乘两位数不进位、进位笔算",
+      "grade": "3",
+      "book": "下册",
+      "unit": "第2单元 两位数乘两位数",
+      "lesson": "3.掌握两位数乘两位数不进位、进位笔算",
+      "level": "A",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [
+        "M3S2-7"
+      ],
+      "next": [
+        "M3S2-9"
+      ],
+      "questionTypes": [
+        "口算",
+        "笔算",
+        "填空",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-两位数乘法-基础错误",
+        "E-两位数乘法-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-核心讲解",
+        "S-分层练习",
+        "S-错因分析"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.85,
+        "maxTimePerQuestion": 60,
+        "consecutiveCorrect": 3
+      },
+      "status": "phase2_draft",
+      "prereq_note": ""
+    },
+    {
+      "knowledgeCode": "M3S2-9",
+      "name": "运用乘法解决连乘实际问题",
+      "grade": "3",
+      "book": "下册",
+      "unit": "第2单元 两位数乘两位数",
+      "lesson": "4.运用乘法解决连乘实际问题",
+      "level": "A",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [
+        "M3S2-8"
+      ],
+      "next": [],
+      "questionTypes": [
+        "口算",
+        "笔算",
+        "填空",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-两位数乘法-基础错误",
+        "E-两位数乘法-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-核心讲解",
+        "S-分层练习",
+        "S-错因分析"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.85,
+        "maxTimePerQuestion": 60,
+        "consecutiveCorrect": 3
+      },
+      "status": "phase2_draft",
+      "prereq_note": ""
+    },
+    {
+      "knowledgeCode": "M3S2-10",
+      "name": "了解小数的读写及各部分名称",
+      "grade": "3",
+      "book": "下册",
+      "unit": "第3单元 小数的初步认识",
+      "lesson": "1.了解小数的读写及各部分名称",
+      "level": "C",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [],
+      "next": [
+        "M3S2-11",
+        "M4S2-6"
+      ],
+      "questionTypes": [
+        "填空",
+        "选择",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-小数初步-基础错误",
+        "E-小数初步-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-简要介绍"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.65,
+        "maxTimePerQuestion": 120,
+        "consecutiveCorrect": 1
+      },
+      "status": "phase2_draft",
+      "prereq_note": "起始节点"
+    },
+    {
+      "knowledgeCode": "M3S2-11",
+      "name": "理解以元、米为单位的小数实际含义",
+      "grade": "3",
+      "book": "下册",
+      "unit": "第3单元 小数的初步认识",
+      "lesson": "2.理解以元、米为单位的小数实际含义",
+      "level": "A",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [
+        "M3S2-10"
+      ],
+      "next": [
+        "M3S2-12"
+      ],
+      "questionTypes": [
+        "应用题",
+        "填空"
+      ],
+      "commonErrors": [
+        "E-小数初步-基础错误",
+        "E-小数初步-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-核心讲解",
+        "S-分层练习",
+        "S-错因分析"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.85,
+        "maxTimePerQuestion": 60,
+        "consecutiveCorrect": 3
+      },
+      "status": "phase2_draft",
+      "prereq_note": ""
+    },
+    {
+      "knowledgeCode": "M3S2-12",
+      "name": "掌握一位小数大小比较方法",
+      "grade": "3",
+      "book": "下册",
+      "unit": "第3单元 小数的初步认识",
+      "lesson": "3.掌握一位小数大小比较方法",
+      "level": "B",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [
+        "M3S2-11"
+      ],
+      "next": [
+        "M3S2-13"
+      ],
+      "questionTypes": [
+        "填空",
+        "选择",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-小数初步-基础错误",
+        "E-小数初步-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-标准讲解",
+        "S-练习巩固"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.75,
+        "maxTimePerQuestion": 90,
+        "consecutiveCorrect": 2
+      },
+      "status": "phase2_draft",
+      "prereq_note": ""
+    },
+    {
+      "knowledgeCode": "M3S2-13",
+      "name": "掌握一位小数简单加减法计算",
+      "grade": "3",
+      "book": "下册",
+      "unit": "第3单元 小数的初步认识",
+      "lesson": "4.掌握一位小数简单加减法计算",
+      "level": "A",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [
+        "M3S2-12"
+      ],
+      "next": [],
+      "questionTypes": [
+        "口算",
+        "笔算",
+        "填空",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-小数初步-基础错误",
+        "E-小数初步-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-核心讲解",
+        "S-分层练习",
+        "S-错因分析"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.85,
+        "maxTimePerQuestion": 60,
+        "consecutiveCorrect": 3
+      },
+      "status": "phase2_draft",
+      "prereq_note": ""
+    },
+    {
+      "knowledgeCode": "M3S2-14",
+      "name": "认识东、南、西、北四个基本方向",
+      "grade": "3",
+      "book": "下册",
+      "unit": "第4单元 位置与方向（一）",
+      "lesson": "1.认识东、南、西、北四个基本方向",
+      "level": "C",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [],
+      "next": [
+        "M3S2-15"
+      ],
+      "questionTypes": [
+        "填空",
+        "选择",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-位置方向-基础错误",
+        "E-位置方向-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-简要介绍"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.65,
+        "maxTimePerQuestion": 120,
+        "consecutiveCorrect": 1
+      },
+      "status": "phase2_draft",
+      "prereq_note": "起始节点"
+    },
+    {
+      "knowledgeCode": "M3S2-15",
+      "name": "认识东北、东南、西北、西南四个方向",
+      "grade": "3",
+      "book": "下册",
+      "unit": "第4单元 位置与方向（一）",
+      "lesson": "2.认识东北、东南、西北、西南四个方向",
+      "level": "C",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [
+        "M3S2-14"
+      ],
+      "next": [
+        "M3S2-16"
+      ],
+      "questionTypes": [
+        "填空",
+        "选择",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-位置方向-基础错误",
+        "E-位置方向-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-简要介绍"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.65,
+        "maxTimePerQuestion": 120,
+        "consecutiveCorrect": 1
+      },
+      "status": "phase2_draft",
+      "prereq_note": ""
+    },
+    {
+      "knowledgeCode": "M3S2-16",
+      "name": "掌握根据给定方向辨别其余方位",
+      "grade": "3",
+      "book": "下册",
+      "unit": "第4单元 位置与方向（一）",
+      "lesson": "3.掌握根据给定方向辨别其余方位",
+      "level": "B",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [
+        "M3S2-15"
+      ],
+      "next": [
+        "M3S2-17"
+      ],
+      "questionTypes": [
+        "填空",
+        "选择",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-位置方向-基础错误",
+        "E-位置方向-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-标准讲解",
+        "S-练习巩固"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.75,
+        "maxTimePerQuestion": 90,
+        "consecutiveCorrect": 2
+      },
+      "status": "phase2_draft",
+      "prereq_note": ""
+    },
+    {
+      "knowledgeCode": "M3S2-17",
+      "name": "能描述简单行走路线",
+      "grade": "3",
+      "book": "下册",
+      "unit": "第4单元 位置与方向（一）",
+      "lesson": "4.能描述简单行走路线",
+      "level": "B",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [
+        "M3S2-16"
+      ],
+      "next": [],
+      "questionTypes": [
+        "填空",
+        "选择",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-位置方向-基础错误",
+        "E-位置方向-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-标准讲解",
+        "S-练习巩固"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.75,
+        "maxTimePerQuestion": 90,
+        "consecutiveCorrect": 2
+      },
+      "status": "phase2_draft",
+      "prereq_note": ""
+    },
+    {
+      "knowledgeCode": "M3S2-18",
+      "name": "理解面积的含义，区分周长与面积",
+      "grade": "3",
+      "book": "下册",
+      "unit": "第5单元 面积",
+      "lesson": "1.理解面积的含义，区分周长与面积",
+      "level": "B",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [
+        "M3S1-27"
+      ],
+      "next": [
+        "M3S2-19"
+      ],
+      "questionTypes": [
+        "填空",
+        "选择",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-面积-基础错误",
+        "E-面积-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-标准讲解",
+        "S-练习巩固"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.75,
+        "maxTimePerQuestion": 90,
+        "consecutiveCorrect": 2
+      },
+      "status": "phase2_draft",
+      "prereq_note": ""
+    },
+    {
+      "knowledgeCode": "M3S2-19",
+      "name": "认识常用面积单位：平方厘米、平方分米、平方米",
+      "grade": "3",
+      "book": "下册",
+      "unit": "第5单元 面积",
+      "lesson": "2.认识常用面积单位：平方厘米、平方分米、平方米",
+      "level": "C",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [
+        "M3S2-18"
+      ],
+      "next": [
+        "M3S2-20"
+      ],
+      "questionTypes": [
+        "填空",
+        "选择",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-面积-基础错误",
+        "E-面积-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-简要介绍"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.65,
+        "maxTimePerQuestion": 120,
+        "consecutiveCorrect": 1
+      },
+      "status": "phase2_draft",
+      "prereq_note": ""
+    },
+    {
+      "knowledgeCode": "M3S2-20",
+      "name": "理解面积单位间进率关系",
+      "grade": "3",
+      "book": "下册",
+      "unit": "第5单元 面积",
+      "lesson": "3.理解面积单位间进率关系",
+      "level": "B",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [
+        "M3S2-19"
+      ],
+      "next": [
+        "M3S2-21"
+      ],
+      "questionTypes": [
+        "填空",
+        "选择",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-面积-基础错误",
+        "E-面积-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-标准讲解",
+        "S-练习巩固"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.75,
+        "maxTimePerQuestion": 90,
+        "consecutiveCorrect": 2
+      },
+      "status": "phase2_draft",
+      "prereq_note": ""
+    },
+    {
+      "knowledgeCode": "M3S2-21",
+      "name": "掌握面积单位换算",
+      "grade": "3",
+      "book": "下册",
+      "unit": "第5单元 面积",
+      "lesson": "4.掌握面积单位换算",
+      "level": "B",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [
+        "M3S2-20"
+      ],
+      "next": [
+        "M3S2-22"
+      ],
+      "questionTypes": [
+        "填空",
+        "选择",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-面积-基础错误",
+        "E-面积-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-标准讲解",
+        "S-练习巩固"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.75,
+        "maxTimePerQuestion": 90,
+        "consecutiveCorrect": 2
+      },
+      "status": "phase2_draft",
+      "prereq_note": ""
+    },
+    {
+      "knowledgeCode": "M3S2-22",
+      "name": "掌握长方形、正方形面积计算公式",
+      "grade": "3",
+      "book": "下册",
+      "unit": "第5单元 面积",
+      "lesson": "5.掌握长方形、正方形面积计算公式",
+      "level": "A",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [
+        "M3S2-21",
+        "M3S1-26"
+      ],
+      "next": [
+        "M3S2-23"
+      ],
+      "questionTypes": [
+        "口算",
+        "笔算",
+        "填空",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-面积-基础错误",
+        "E-面积-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-核心讲解",
+        "S-分层练习",
+        "S-错因分析"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.85,
+        "maxTimePerQuestion": 60,
+        "consecutiveCorrect": 3
+      },
+      "status": "phase2_draft",
+      "prereq_note": ""
+    },
+    {
+      "knowledgeCode": "M3S2-23",
+      "name": "运用面积公式计算、解决铺地类实际问题",
+      "grade": "3",
+      "book": "下册",
+      "unit": "第5单元 面积",
+      "lesson": "6.运用面积公式计算、解决铺地类实际问题",
+      "level": "A",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [
+        "M3S2-22"
+      ],
+      "next": [],
+      "questionTypes": [
+        "口算",
+        "笔算",
+        "填空",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-面积-基础错误",
+        "E-面积-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-核心讲解",
+        "S-分层练习",
+        "S-错因分析"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.85,
+        "maxTimePerQuestion": 60,
+        "consecutiveCorrect": 3
+      },
+      "status": "phase2_draft",
+      "prereq_note": ""
+    },
+    {
+      "knowledgeCode": "M3S2-24",
+      "name": "了解年、月、日基本常识",
+      "grade": "3",
+      "book": "下册",
+      "unit": "第6单元 年月日",
+      "lesson": "1.了解年、月、日基本常识",
+      "level": "C",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [],
+      "next": [
+        "M3S2-25"
+      ],
+      "questionTypes": [
+        "填空",
+        "选择",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-年月日-基础错误",
+        "E-年月日-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-简要介绍"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.65,
+        "maxTimePerQuestion": 120,
+        "consecutiveCorrect": 1
+      },
+      "status": "phase2_draft",
+      "prereq_note": "起始节点"
+    },
+    {
+      "knowledgeCode": "M3S2-25",
+      "name": "掌握大月、小月、2 月判断方法",
+      "grade": "3",
+      "book": "下册",
+      "unit": "第6单元 年月日",
+      "lesson": "2.掌握大月、小月、2 月判断方法",
+      "level": "B",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [
+        "M3S2-24"
+      ],
+      "next": [
+        "M3S2-26"
+      ],
+      "questionTypes": [
+        "填空",
+        "选择",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-年月日-基础错误",
+        "E-年月日-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-标准讲解",
+        "S-练习巩固"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.75,
+        "maxTimePerQuestion": 90,
+        "consecutiveCorrect": 2
+      },
+      "status": "phase2_draft",
+      "prereq_note": ""
+    },
+    {
+      "knowledgeCode": "M3S2-26",
+      "name": "理解平年、闰年的判定规则",
+      "grade": "3",
+      "book": "下册",
+      "unit": "第6单元 年月日",
+      "lesson": "3.理解平年、闰年的判定规则",
+      "level": "B",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [
+        "M3S2-25"
+      ],
+      "next": [
+        "M3S2-27"
+      ],
+      "questionTypes": [
+        "填空",
+        "选择",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-年月日-基础错误",
+        "E-年月日-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-标准讲解",
+        "S-练习巩固"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.75,
+        "maxTimePerQuestion": 90,
+        "consecutiveCorrect": 2
+      },
+      "status": "phase2_draft",
+      "prereq_note": ""
+    },
+    {
+      "knowledgeCode": "M3S2-27",
+      "name": "掌握 24 时计时法与普通计时法互化",
+      "grade": "3",
+      "book": "下册",
+      "unit": "第6单元 年月日",
+      "lesson": "4.掌握 24 时计时法与普通计时法互化",
+      "level": "B",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [
+        "M3S2-26"
+      ],
+      "next": [
+        "M3S2-28"
+      ],
+      "questionTypes": [
+        "填空",
+        "选择",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-年月日-基础错误",
+        "E-年月日-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-标准讲解",
+        "S-练习巩固"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.75,
+        "maxTimePerQuestion": 90,
+        "consecutiveCorrect": 2
+      },
+      "status": "phase2_draft",
+      "prereq_note": ""
+    },
+    {
+      "knowledgeCode": "M3S2-28",
+      "name": "掌握跨时段经过时间计算",
+      "grade": "3",
+      "book": "下册",
+      "unit": "第6单元 年月日",
+      "lesson": "5.掌握跨时段经过时间计算",
+      "level": "A",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [
+        "M3S2-27"
+      ],
+      "next": [],
+      "questionTypes": [
+        "口算",
+        "笔算",
+        "填空",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-年月日-基础错误",
+        "E-年月日-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-核心讲解",
+        "S-分层练习",
+        "S-错因分析"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.85,
+        "maxTimePerQuestion": 60,
+        "consecutiveCorrect": 3
+      },
+      "status": "phase2_draft",
+      "prereq_note": ""
+    },
+    {
+      "knowledgeCode": "M3S2-29",
+      "name": "了解复式统计表结构特点",
+      "grade": "3",
+      "book": "下册",
+      "unit": "第7单元 复式统计表",
+      "lesson": "1.了解复式统计表结构特点",
+      "level": "C",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [
+        "M2S2-17"
+      ],
+      "next": [
+        "M3S2-30",
+        "M4S1-25"
+      ],
+      "questionTypes": [
+        "填空",
+        "选择",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-统计-基础错误",
+        "E-统计-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-简要介绍"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.65,
+        "maxTimePerQuestion": 120,
+        "consecutiveCorrect": 1
+      },
+      "status": "phase2_draft",
+      "prereq_note": ""
+    },
+    {
+      "knowledgeCode": "M3S2-30",
+      "name": "能读懂、填写复式统计表",
+      "grade": "3",
+      "book": "下册",
+      "unit": "第7单元 复式统计表",
+      "lesson": "2.能读懂、填写复式统计表",
+      "level": "B",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [
+        "M3S2-29"
+      ],
+      "next": [
+        "M3S2-31"
+      ],
+      "questionTypes": [
+        "填空",
+        "选择",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-统计-基础错误",
+        "E-统计-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-标准讲解",
+        "S-练习巩固"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.75,
+        "maxTimePerQuestion": 90,
+        "consecutiveCorrect": 2
+      },
+      "status": "phase2_draft",
+      "prereq_note": ""
+    },
+    {
+      "knowledgeCode": "M3S2-31",
+      "name": "能根据表中数据对比分析",
+      "grade": "3",
+      "book": "下册",
+      "unit": "第7单元 复式统计表",
+      "lesson": "3.能根据表中数据对比分析",
+      "level": "B",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [
+        "M3S2-30"
+      ],
+      "next": [
+        "M4S1-0"
+      ],
+      "questionTypes": [
+        "填空",
+        "选择",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-统计-基础错误",
+        "E-统计-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-标准讲解",
+        "S-练习巩固"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.75,
+        "maxTimePerQuestion": 90,
+        "consecutiveCorrect": 2
+      },
+      "status": "phase2_draft",
+      "prereq_note": ""
+    },
+    {
+      "knowledgeCode": "M4S1-0",
+      "name": "认识亿以内、亿以上数的数位顺序",
+      "grade": "4",
+      "book": "上册",
+      "unit": "第1单元 大数的认识",
+      "lesson": "1.认识亿以内、亿以上数的数位顺序",
+      "level": "C",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [
+        "M3S2-31",
+        "M2S2-12"
+      ],
+      "next": [
+        "M4S1-1"
+      ],
+      "questionTypes": [
+        "填空",
+        "选择",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-大数认识-基础错误",
+        "E-大数认识-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-简要介绍"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.65,
+        "maxTimePerQuestion": 120,
+        "consecutiveCorrect": 1
+      },
+      "status": "phase2_draft",
+      "prereq_note": ""
+    },
+    {
+      "knowledgeCode": "M4S1-1",
+      "name": "理解十进制计数法含义",
+      "grade": "4",
+      "book": "上册",
+      "unit": "第1单元 大数的认识",
+      "lesson": "2.理解十进制计数法含义",
+      "level": "B",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [
+        "M4S1-0"
+      ],
+      "next": [
+        "M4S1-2"
+      ],
+      "questionTypes": [
+        "填空",
+        "选择",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-大数认识-基础错误",
+        "E-大数认识-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-标准讲解",
+        "S-练习巩固"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.75,
+        "maxTimePerQuestion": 90,
+        "consecutiveCorrect": 2
+      },
+      "status": "phase2_draft",
+      "prereq_note": ""
+    },
+    {
+      "knowledgeCode": "M4S1-2",
+      "name": "掌握大数分级读写方法",
+      "grade": "4",
+      "book": "上册",
+      "unit": "第1单元 大数的认识",
+      "lesson": "3.掌握大数分级读写方法",
+      "level": "B",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [
+        "M4S1-1"
+      ],
+      "next": [
+        "M4S1-3",
+        "M4S2-2"
+      ],
+      "questionTypes": [
+        "填空",
+        "选择",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-大数认识-基础错误",
+        "E-大数认识-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-标准讲解",
+        "S-练习巩固"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.75,
+        "maxTimePerQuestion": 90,
+        "consecutiveCorrect": 2
+      },
+      "status": "phase2_draft",
+      "prereq_note": ""
+    },
+    {
+      "knowledgeCode": "M4S1-3",
+      "name": "掌握大数大小比较、整万整亿数改写",
+      "grade": "4",
+      "book": "上册",
+      "unit": "第1单元 大数的认识",
+      "lesson": "4.掌握大数大小比较、整万整亿数改写",
+      "level": "B",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [
+        "M4S1-2"
+      ],
+      "next": [
+        "M4S1-4"
+      ],
+      "questionTypes": [
+        "填空",
+        "选择",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-大数认识-基础错误",
+        "E-大数认识-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-标准讲解",
+        "S-练习巩固"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.75,
+        "maxTimePerQuestion": 90,
+        "consecutiveCorrect": 2
+      },
+      "status": "phase2_draft",
+      "prereq_note": ""
+    },
+    {
+      "knowledgeCode": "M4S1-4",
+      "name": "掌握用四舍五入求大数近似数",
+      "grade": "4",
+      "book": "上册",
+      "unit": "第1单元 大数的认识",
+      "lesson": "5.掌握用四舍五入求大数近似数",
+      "level": "B",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [
+        "M4S1-3"
+      ],
+      "next": [
+        "M4S1-5"
+      ],
+      "questionTypes": [
+        "填空",
+        "选择",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-大数认识-基础错误",
+        "E-大数认识-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-标准讲解",
+        "S-练习巩固"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.75,
+        "maxTimePerQuestion": 90,
+        "consecutiveCorrect": 2
+      },
+      "status": "phase2_draft",
+      "prereq_note": ""
+    },
+    {
+      "knowledgeCode": "M4S1-5",
+      "name": "了解算盘、计算器基本使用",
+      "grade": "4",
+      "book": "上册",
+      "unit": "第1单元 大数的认识",
+      "lesson": "6.了解算盘、计算器基本使用",
+      "level": "C",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [
+        "M4S1-4"
+      ],
+      "next": [],
+      "questionTypes": [
+        "口算",
+        "笔算",
+        "填空",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-大数认识-基础错误",
+        "E-大数认识-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-简要介绍"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.65,
+        "maxTimePerQuestion": 120,
+        "consecutiveCorrect": 1
+      },
+      "status": "phase2_draft",
+      "prereq_note": ""
+    },
+    {
+      "knowledgeCode": "M4S1-6",
+      "name": "掌握三位数乘两位数笔算方法",
+      "grade": "4",
+      "book": "上册",
+      "unit": "第2单元 三位数乘两位数",
+      "lesson": "1.掌握三位数乘两位数笔算方法",
+      "level": "A",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [
+        "M3S1-14"
+      ],
+      "next": [
+        "M4S1-7"
+      ],
+      "questionTypes": [
+        "口算",
+        "笔算",
+        "填空",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-乘除运算-基础错误",
+        "E-乘除运算-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-核心讲解",
+        "S-分层练习",
+        "S-错因分析"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.85,
+        "maxTimePerQuestion": 60,
+        "consecutiveCorrect": 3
+      },
+      "status": "phase2_draft",
+      "prereq_note": ""
+    },
+    {
+      "knowledgeCode": "M4S1-7",
+      "name": "理解积的变化规律",
+      "grade": "4",
+      "book": "上册",
+      "unit": "第2单元 三位数乘两位数",
+      "lesson": "2.理解积的变化规律",
+      "level": "B",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [
+        "M4S1-6"
+      ],
+      "next": [
+        "M4S1-8"
+      ],
+      "questionTypes": [
+        "填空",
+        "选择",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-乘除运算-基础错误",
+        "E-乘除运算-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-标准讲解",
+        "S-练习巩固"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.75,
+        "maxTimePerQuestion": 90,
+        "consecutiveCorrect": 2
+      },
+      "status": "phase2_draft",
+      "prereq_note": ""
+    },
+    {
+      "knowledgeCode": "M4S1-8",
+      "name": "掌握常见数量关系：路程、速度、时间",
+      "grade": "4",
+      "book": "上册",
+      "unit": "第2单元 三位数乘两位数",
+      "lesson": "3.掌握常见数量关系：路程、速度、时间",
+      "level": "B",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [
+        "M4S1-7"
+      ],
+      "next": [
+        "M4S1-9"
+      ],
+      "questionTypes": [
+        "填空",
+        "选择",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-乘除运算-基础错误",
+        "E-乘除运算-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-标准讲解",
+        "S-练习巩固"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.75,
+        "maxTimePerQuestion": 90,
+        "consecutiveCorrect": 2
+      },
+      "status": "phase2_draft",
+      "prereq_note": ""
+    },
+    {
+      "knowledgeCode": "M4S1-9",
+      "name": "掌握单价、数量、总价数量关系",
+      "grade": "4",
+      "book": "上册",
+      "unit": "第2单元 三位数乘两位数",
+      "lesson": "4.掌握单价、数量、总价数量关系",
+      "level": "B",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [
+        "M4S1-8"
+      ],
+      "next": [
+        "M4S1-10"
+      ],
+      "questionTypes": [
+        "填空",
+        "选择",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-乘除运算-基础错误",
+        "E-乘除运算-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-标准讲解",
+        "S-练习巩固"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.75,
+        "maxTimePerQuestion": 90,
+        "consecutiveCorrect": 2
+      },
+      "status": "phase2_draft",
+      "prereq_note": ""
+    },
+    {
+      "knowledgeCode": "M4S1-10",
+      "name": "运用乘法解决行程、购物类应用题",
+      "grade": "4",
+      "book": "上册",
+      "unit": "第2单元 三位数乘两位数",
+      "lesson": "5.运用乘法解决行程、购物类应用题",
+      "level": "A",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [
+        "M4S1-9"
+      ],
+      "next": [],
+      "questionTypes": [
+        "口算",
+        "笔算",
+        "填空",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-乘除运算-基础错误",
+        "E-乘除运算-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-核心讲解",
+        "S-分层练习",
+        "S-错因分析"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.85,
+        "maxTimePerQuestion": 60,
+        "consecutiveCorrect": 3
+      },
+      "status": "phase2_draft",
+      "prereq_note": ""
+    },
+    {
+      "knowledgeCode": "M4S1-11",
+      "name": "掌握整十数除整十、几百几十数口算",
+      "grade": "4",
+      "book": "上册",
+      "unit": "第3单元 除数是两位数的除法",
+      "lesson": "1.掌握整十数除整十、几百几十数口算",
+      "level": "A",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [
+        "M3S2-2"
+      ],
+      "next": [
+        "M4S1-12"
+      ],
+      "questionTypes": [
+        "口算",
+        "笔算",
+        "填空",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-乘除运算-基础错误",
+        "E-乘除运算-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-核心讲解",
+        "S-分层练习",
+        "S-错因分析"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.85,
+        "maxTimePerQuestion": 60,
+        "consecutiveCorrect": 3
+      },
+      "status": "phase2_draft",
+      "prereq_note": ""
+    },
+    {
+      "knowledgeCode": "M4S1-12",
+      "name": "理解试商、调商的算理",
+      "grade": "4",
+      "book": "上册",
+      "unit": "第3单元 除数是两位数的除法",
+      "lesson": "2.理解试商、调商的算理",
+      "level": "B",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [
+        "M4S1-11",
+        "M3S2-1",
+        "M2S2-5"
+      ],
+      "next": [
+        "M4S1-13"
+      ],
+      "questionTypes": [
+        "填空",
+        "选择",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-乘除运算-基础错误",
+        "E-乘除运算-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-标准讲解",
+        "S-练习巩固"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.75,
+        "maxTimePerQuestion": 90,
+        "consecutiveCorrect": 2
+      },
+      "status": "phase2_draft",
+      "prereq_note": ""
+    },
+    {
+      "knowledgeCode": "M4S1-13",
+      "name": "掌握除数是两位数笔算除法",
+      "grade": "4",
+      "book": "上册",
+      "unit": "第3单元 除数是两位数的除法",
+      "lesson": "3.掌握除数是两位数笔算除法",
+      "level": "A",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [
+        "M4S1-12"
+      ],
+      "next": [
+        "M4S1-14"
+      ],
+      "questionTypes": [
+        "口算",
+        "笔算",
+        "填空",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-乘除运算-基础错误",
+        "E-乘除运算-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-核心讲解",
+        "S-分层练习",
+        "S-错因分析"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.85,
+        "maxTimePerQuestion": 60,
+        "consecutiveCorrect": 3
+      },
+      "status": "phase2_draft",
+      "prereq_note": ""
+    },
+    {
+      "knowledgeCode": "M4S1-14",
+      "name": "理解商的变化规律",
+      "grade": "4",
+      "book": "上册",
+      "unit": "第3单元 除数是两位数的除法",
+      "lesson": "4.理解商的变化规律",
+      "level": "B",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [
+        "M4S1-13"
+      ],
+      "next": [
+        "M4S1-15"
+      ],
+      "questionTypes": [
+        "填空",
+        "选择",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-乘除运算-基础错误",
+        "E-乘除运算-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-标准讲解",
+        "S-练习巩固"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.75,
+        "maxTimePerQuestion": 90,
+        "consecutiveCorrect": 2
+      },
+      "status": "phase2_draft",
+      "prereq_note": ""
+    },
+    {
+      "knowledgeCode": "M4S1-15",
+      "name": "运用除法解决归一、归总实际问题",
+      "grade": "4",
+      "book": "上册",
+      "unit": "第3单元 除数是两位数的除法",
+      "lesson": "5.运用除法解决归一、归总实际问题",
+      "level": "A",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [
+        "M4S1-14"
+      ],
+      "next": [],
+      "questionTypes": [
+        "口算",
+        "笔算",
+        "填空",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-乘除运算-基础错误",
+        "E-乘除运算-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-核心讲解",
+        "S-分层练习",
+        "S-错因分析"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.85,
+        "maxTimePerQuestion": 60,
+        "consecutiveCorrect": 3
+      },
+      "status": "phase2_draft",
+      "prereq_note": ""
+    },
+    {
+      "knowledgeCode": "M4S1-16",
+      "name": "认识线段、直线、射线及区别",
+      "grade": "4",
+      "book": "上册",
+      "unit": "第4单元 角的度量",
+      "lesson": "1.认识线段、直线、射线及区别",
+      "level": "C",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [],
+      "next": [
+        "M4S1-17"
+      ],
+      "questionTypes": [
+        "填空",
+        "选择",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-角与线-基础错误",
+        "E-角与线-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-简要介绍"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.65,
+        "maxTimePerQuestion": 120,
+        "consecutiveCorrect": 1
+      },
+      "status": "phase2_draft",
+      "prereq_note": "起始节点"
+    },
+    {
+      "knowledgeCode": "M4S1-17",
+      "name": "理解角的含义与组成",
+      "grade": "4",
+      "book": "上册",
+      "unit": "第4单元 角的度量",
+      "lesson": "2.理解角的含义与组成",
+      "level": "B",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [
+        "M4S1-16",
+        "M2S1-13"
+      ],
+      "next": [
+        "M4S1-18"
+      ],
+      "questionTypes": [
+        "填空",
+        "选择",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-角与线-基础错误",
+        "E-角与线-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-标准讲解",
+        "S-练习巩固"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.75,
+        "maxTimePerQuestion": 90,
+        "consecutiveCorrect": 2
+      },
+      "status": "phase2_draft",
+      "prereq_note": ""
+    },
+    {
+      "knowledgeCode": "M4S1-18",
+      "name": "掌握用量角器量角、画角方法",
+      "grade": "4",
+      "book": "上册",
+      "unit": "第4单元 角的度量",
+      "lesson": "3.掌握用量角器量角、画角方法",
+      "level": "B",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [
+        "M4S1-17"
+      ],
+      "next": [
+        "M4S1-19"
+      ],
+      "questionTypes": [
+        "填空",
+        "选择",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-角与线-基础错误",
+        "E-角与线-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-标准讲解",
+        "S-练习巩固"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.75,
+        "maxTimePerQuestion": 90,
+        "consecutiveCorrect": 2
+      },
+      "status": "phase2_draft",
+      "prereq_note": ""
+    },
+    {
+      "knowledgeCode": "M4S1-19",
+      "name": "认识锐角、直角、钝角、平角、周角",
+      "grade": "4",
+      "book": "上册",
+      "unit": "第4单元 角的度量",
+      "lesson": "4.认识锐角、直角、钝角、平角、周角",
+      "level": "C",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [
+        "M4S1-18"
+      ],
+      "next": [
+        "M4S1-20"
+      ],
+      "questionTypes": [
+        "填空",
+        "选择",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-角与线-基础错误",
+        "E-角与线-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-简要介绍"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.65,
+        "maxTimePerQuestion": 120,
+        "consecutiveCorrect": 1
+      },
+      "status": "phase2_draft",
+      "prereq_note": ""
+    },
+    {
+      "knowledgeCode": "M4S1-20",
+      "name": "掌握各类角之间大小关系",
+      "grade": "4",
+      "book": "上册",
+      "unit": "第4单元 角的度量",
+      "lesson": "5.掌握各类角之间大小关系",
+      "level": "B",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [
+        "M4S1-19"
+      ],
+      "next": [],
+      "questionTypes": [
+        "填空",
+        "选择",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-角与线-基础错误",
+        "E-角与线-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-标准讲解",
+        "S-练习巩固"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.75,
+        "maxTimePerQuestion": 90,
+        "consecutiveCorrect": 2
+      },
+      "status": "phase2_draft",
+      "prereq_note": ""
+    },
+    {
+      "knowledgeCode": "M4S1-21",
+      "name": "理解平行与垂直的概念",
+      "grade": "4",
+      "book": "上册",
+      "unit": "第5单元 平行四边形和梯形",
+      "lesson": "1.理解平行与垂直的概念",
+      "level": "B",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [],
+      "next": [
+        "M4S1-22",
+        "M4S1-23"
+      ],
+      "questionTypes": [
+        "填空",
+        "选择",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-平行与梯形-基础错误",
+        "E-平行与梯形-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-标准讲解",
+        "S-练习巩固"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.75,
+        "maxTimePerQuestion": 90,
+        "consecutiveCorrect": 2
+      },
+      "status": "phase2_draft",
+      "prereq_note": "起始节点"
+    },
+    {
+      "knowledgeCode": "M4S1-22",
+      "name": "掌握画平行线、画垂线的方法",
+      "grade": "4",
+      "book": "上册",
+      "unit": "第5单元 平行四边形和梯形",
+      "lesson": "2.掌握画平行线、画垂线的方法",
+      "level": "B",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [
+        "M4S1-21"
+      ],
+      "next": [
+        "M4S1-23"
+      ],
+      "questionTypes": [
+        "填空",
+        "选择",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-平行与梯形-基础错误",
+        "E-平行与梯形-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-标准讲解",
+        "S-练习巩固"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.75,
+        "maxTimePerQuestion": 90,
+        "consecutiveCorrect": 2
+      },
+      "status": "phase2_draft",
+      "prereq_note": ""
+    },
+    {
+      "knowledgeCode": "M4S1-23",
+      "name": "认识平行四边形、梯形特征",
+      "grade": "4",
+      "book": "上册",
+      "unit": "第5单元 平行四边形和梯形",
+      "lesson": "3.认识平行四边形、梯形特征",
+      "level": "C",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [
+        "M4S1-22",
+        "M4S1-21"
+      ],
+      "next": [
+        "M4S1-24"
+      ],
+      "questionTypes": [
+        "填空",
+        "选择",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-平行与梯形-基础错误",
+        "E-平行与梯形-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-简要介绍"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.65,
+        "maxTimePerQuestion": 120,
+        "consecutiveCorrect": 1
+      },
+      "status": "phase2_draft",
+      "prereq_note": ""
+    },
+    {
+      "knowledgeCode": "M4S1-24",
+      "name": "掌握画高的基本方法",
+      "grade": "4",
+      "book": "上册",
+      "unit": "第5单元 平行四边形和梯形",
+      "lesson": "4.掌握画高的基本方法",
+      "level": "B",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [
+        "M4S1-23"
+      ],
+      "next": [],
+      "questionTypes": [
+        "填空",
+        "选择",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-平行与梯形-基础错误",
+        "E-平行与梯形-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-标准讲解",
+        "S-练习巩固"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.75,
+        "maxTimePerQuestion": 90,
+        "consecutiveCorrect": 2
+      },
+      "status": "phase2_draft",
+      "prereq_note": ""
+    },
+    {
+      "knowledgeCode": "M4S1-25",
+      "name": "了解 1 格代表多个单位的条形图特点",
+      "grade": "4",
+      "book": "上册",
+      "unit": "第6单元 条形统计图",
+      "lesson": "1.了解 1 格代表多个单位的条形图特点",
+      "level": "C",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [
+        "M3S2-29"
+      ],
+      "next": [
+        "M4S1-26"
+      ],
+      "questionTypes": [
+        "填空",
+        "选择",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-条形统计图-基础错误",
+        "E-条形统计图-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-简要介绍"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.65,
+        "maxTimePerQuestion": 120,
+        "consecutiveCorrect": 1
+      },
+      "status": "phase2_draft",
+      "prereq_note": ""
+    },
+    {
+      "knowledgeCode": "M4S1-26",
+      "name": "能绘制、读取并分析条形统计图数据",
+      "grade": "4",
+      "book": "上册",
+      "unit": "第6单元 条形统计图",
+      "lesson": "2.能绘制、读取并分析条形统计图数据",
+      "level": "B",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [
+        "M4S1-25"
+      ],
+      "next": [
+        "M4S2-23"
+      ],
+      "questionTypes": [
+        "填空",
+        "选择",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-条形统计图-基础错误",
+        "E-条形统计图-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-标准讲解",
+        "S-练习巩固"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.75,
+        "maxTimePerQuestion": 90,
+        "consecutiveCorrect": 2
+      },
+      "status": "phase2_draft",
+      "prereq_note": ""
+    },
+    {
+      "knowledgeCode": "M4S1-27",
+      "name": "理解合理安排时间的统筹思想",
+      "grade": "4",
+      "book": "上册",
+      "unit": "第7单元 优化",
+      "lesson": "1.理解合理安排时间的统筹思想",
+      "level": "B",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [],
+      "next": [
+        "M4S1-28"
+      ],
+      "questionTypes": [
+        "填空",
+        "选择",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-数学广角-基础错误",
+        "E-数学广角-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-标准讲解",
+        "S-练习巩固"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.75,
+        "maxTimePerQuestion": 90,
+        "consecutiveCorrect": 2
+      },
+      "status": "phase2_draft",
+      "prereq_note": "起始节点"
+    },
+    {
+      "knowledgeCode": "M4S1-28",
+      "name": "掌握沏茶、烙饼、田忌赛马基本策略",
+      "grade": "4",
+      "book": "上册",
+      "unit": "第7单元 优化",
+      "lesson": "2.掌握沏茶、烙饼、田忌赛马基本策略",
+      "level": "B",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [
+        "M4S1-27"
+      ],
+      "next": [
+        "M4S2-0"
+      ],
+      "questionTypes": [
+        "填空",
+        "选择",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-数学广角-基础错误",
+        "E-数学广角-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-标准讲解",
+        "S-练习巩固"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.75,
+        "maxTimePerQuestion": 90,
+        "consecutiveCorrect": 2
+      },
+      "status": "phase2_draft",
+      "prereq_note": ""
+    },
+    {
+      "knowledgeCode": "M4S2-0",
+      "name": "理解加减乘除四则运算的意义及各部分关系",
+      "grade": "4",
+      "book": "下册",
+      "unit": "第1单元 四则运算",
+      "lesson": "1.理解加减乘除四则运算的意义及各部分关系",
+      "level": "B",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [
+        "M4S1-28"
+      ],
+      "next": [
+        "M4S2-1",
+        "M5S1-38"
+      ],
+      "questionTypes": [
+        "口算",
+        "笔算",
+        "填空",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-四则运算与定律-基础错误",
+        "E-四则运算与定律-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-标准讲解",
+        "S-练习巩固"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.75,
+        "maxTimePerQuestion": 90,
+        "consecutiveCorrect": 2
+      },
+      "status": "phase2_draft",
+      "prereq_note": ""
+    },
+    {
+      "knowledgeCode": "M4S2-1",
+      "name": "掌握有关 0 的运算规则",
+      "grade": "4",
+      "book": "下册",
+      "unit": "第1单元 四则运算",
+      "lesson": "2.掌握有关 0 的运算规则",
+      "level": "A",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [
+        "M4S2-0"
+      ],
+      "next": [
+        "M4S2-2"
+      ],
+      "questionTypes": [
+        "口算",
+        "笔算",
+        "填空",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-四则运算与定律-基础错误",
+        "E-四则运算与定律-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-核心讲解",
+        "S-分层练习",
+        "S-错因分析"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.85,
+        "maxTimePerQuestion": 60,
+        "consecutiveCorrect": 3
+      },
+      "status": "phase2_draft",
+      "prereq_note": ""
+    },
+    {
+      "knowledgeCode": "M4S2-2",
+      "name": "掌握含括号的四则混合运算顺序",
+      "grade": "4",
+      "book": "下册",
+      "unit": "第1单元 四则运算",
+      "lesson": "3.掌握含括号的四则混合运算顺序",
+      "level": "A",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [
+        "M4S2-1",
+        "M4S1-2"
+      ],
+      "next": [],
+      "questionTypes": [
+        "口算",
+        "笔算",
+        "填空",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-四则运算与定律-基础错误",
+        "E-四则运算与定律-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-核心讲解",
+        "S-分层练习",
+        "S-错因分析"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.85,
+        "maxTimePerQuestion": 60,
+        "consecutiveCorrect": 3
+      },
+      "status": "phase2_draft",
+      "prereq_note": ""
+    },
+    {
+      "knowledgeCode": "M4S2-3",
+      "name": "理解加法交换律、结合律含义",
+      "grade": "4",
+      "book": "下册",
+      "unit": "第2单元 运算定律与简便计算",
+      "lesson": "1.理解加法交换律、结合律含义",
+      "level": "B",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [],
+      "next": [
+        "M4S2-4"
+      ],
+      "questionTypes": [
+        "口算",
+        "笔算",
+        "填空",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-四则运算与定律-基础错误",
+        "E-四则运算与定律-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-标准讲解",
+        "S-练习巩固"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.75,
+        "maxTimePerQuestion": 90,
+        "consecutiveCorrect": 2
+      },
+      "status": "phase2_draft",
+      "prereq_note": "起始节点"
+    },
+    {
+      "knowledgeCode": "M4S2-4",
+      "name": "理解乘法交换律、结合律、分配律含义",
+      "grade": "4",
+      "book": "下册",
+      "unit": "第2单元 运算定律与简便计算",
+      "lesson": "2.理解乘法交换律、结合律、分配律含义",
+      "level": "A",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [
+        "M4S2-3",
+        "M3S1-14"
+      ],
+      "next": [
+        "M4S2-5"
+      ],
+      "questionTypes": [
+        "口算",
+        "笔算",
+        "填空",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-四则运算与定律-基础错误",
+        "E-四则运算与定律-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-核心讲解",
+        "S-分层练习",
+        "S-错因分析"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.85,
+        "maxTimePerQuestion": 60,
+        "consecutiveCorrect": 3
+      },
+      "status": "phase2_draft",
+      "prereq_note": ""
+    },
+    {
+      "knowledgeCode": "M4S2-5",
+      "name": "掌握五大运算定律的简便运算应用",
+      "grade": "4",
+      "book": "下册",
+      "unit": "第2单元 运算定律与简便计算",
+      "lesson": "3.掌握五大运算定律的简便运算应用",
+      "level": "A",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [
+        "M4S2-4"
+      ],
+      "next": [
+        "M5S1-9",
+        "M5S1-43"
+      ],
+      "questionTypes": [
+        "口算",
+        "笔算",
+        "填空",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-四则运算与定律-基础错误",
+        "E-四则运算与定律-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-核心讲解",
+        "S-分层练习",
+        "S-错因分析"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.85,
+        "maxTimePerQuestion": 60,
+        "consecutiveCorrect": 3
+      },
+      "status": "phase2_draft",
+      "prereq_note": ""
+    },
+    {
+      "knowledgeCode": "M4S2-6",
+      "name": "理解小数的意义及计数单位",
+      "grade": "4",
+      "book": "下册",
+      "unit": "第3单元 小数的意义和性质",
+      "lesson": "1.理解小数的意义及计数单位",
+      "level": "B",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [
+        "M3S2-10"
+      ],
+      "next": [
+        "M4S2-7",
+        "M5S1-0"
+      ],
+      "questionTypes": [
+        "填空",
+        "选择",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-小数体系-基础错误",
+        "E-小数体系-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-标准讲解",
+        "S-练习巩固"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.75,
+        "maxTimePerQuestion": 90,
+        "consecutiveCorrect": 2
+      },
+      "status": "phase2_draft",
+      "prereq_note": ""
+    },
+    {
+      "knowledgeCode": "M4S2-7",
+      "name": "掌握小数读写、数位顺序识别",
+      "grade": "4",
+      "book": "下册",
+      "unit": "第3单元 小数的意义和性质",
+      "lesson": "2.掌握小数读写、数位顺序识别",
+      "level": "B",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [
+        "M4S2-6"
+      ],
+      "next": [
+        "M4S2-8"
+      ],
+      "questionTypes": [
+        "填空",
+        "选择",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-小数体系-基础错误",
+        "E-小数体系-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-标准讲解",
+        "S-练习巩固"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.75,
+        "maxTimePerQuestion": 90,
+        "consecutiveCorrect": 2
+      },
+      "status": "phase2_draft",
+      "prereq_note": ""
+    },
+    {
+      "knowledgeCode": "M4S2-8",
+      "name": "理解小数的基本性质",
+      "grade": "4",
+      "book": "下册",
+      "unit": "第3单元 小数的意义和性质",
+      "lesson": "3.理解小数的基本性质",
+      "level": "B",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [
+        "M4S2-7"
+      ],
+      "next": [
+        "M4S2-9"
+      ],
+      "questionTypes": [
+        "填空",
+        "选择",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-小数体系-基础错误",
+        "E-小数体系-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-标准讲解",
+        "S-练习巩固"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.75,
+        "maxTimePerQuestion": 90,
+        "consecutiveCorrect": 2
+      },
+      "status": "phase2_draft",
+      "prereq_note": ""
+    },
+    {
+      "knowledgeCode": "M4S2-9",
+      "name": "掌握小数大小比较方法",
+      "grade": "4",
+      "book": "下册",
+      "unit": "第3单元 小数的意义和性质",
+      "lesson": "4.掌握小数大小比较方法",
+      "level": "B",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [
+        "M4S2-8"
+      ],
+      "next": [
+        "M4S2-10"
+      ],
+      "questionTypes": [
+        "填空",
+        "选择",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-小数体系-基础错误",
+        "E-小数体系-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-标准讲解",
+        "S-练习巩固"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.75,
+        "maxTimePerQuestion": 90,
+        "consecutiveCorrect": 2
+      },
+      "status": "phase2_draft",
+      "prereq_note": ""
+    },
+    {
+      "knowledgeCode": "M4S2-10",
+      "name": "理解小数点移动引起小数大小变化规律",
+      "grade": "4",
+      "book": "下册",
+      "unit": "第3单元 小数的意义和性质",
+      "lesson": "5.理解小数点移动引起小数大小变化规律",
+      "level": "B",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [
+        "M4S2-9"
+      ],
+      "next": [
+        "M4S2-11"
+      ],
+      "questionTypes": [
+        "填空",
+        "选择",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-小数体系-基础错误",
+        "E-小数体系-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-标准讲解",
+        "S-练习巩固"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.75,
+        "maxTimePerQuestion": 90,
+        "consecutiveCorrect": 2
+      },
+      "status": "phase2_draft",
+      "prereq_note": ""
+    },
+    {
+      "knowledgeCode": "M4S2-11",
+      "name": "掌握小数与单位换算",
+      "grade": "4",
+      "book": "下册",
+      "unit": "第3单元 小数的意义和性质",
+      "lesson": "6.掌握小数与单位换算",
+      "level": "B",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [
+        "M4S2-10"
+      ],
+      "next": [
+        "M4S2-12"
+      ],
+      "questionTypes": [
+        "填空",
+        "选择",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-小数体系-基础错误",
+        "E-小数体系-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-标准讲解",
+        "S-练习巩固"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.75,
+        "maxTimePerQuestion": 90,
+        "consecutiveCorrect": 2
+      },
+      "status": "phase2_draft",
+      "prereq_note": ""
+    },
+    {
+      "knowledgeCode": "M4S2-12",
+      "name": "掌握求小数近似数的方法",
+      "grade": "4",
+      "book": "下册",
+      "unit": "第3单元 小数的意义和性质",
+      "lesson": "7.掌握求小数近似数的方法",
+      "level": "B",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [
+        "M4S2-11"
+      ],
+      "next": [],
+      "questionTypes": [
+        "填空",
+        "选择",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-小数体系-基础错误",
+        "E-小数体系-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-标准讲解",
+        "S-练习巩固"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.75,
+        "maxTimePerQuestion": 90,
+        "consecutiveCorrect": 2
+      },
+      "status": "phase2_draft",
+      "prereq_note": ""
+    },
+    {
+      "knowledgeCode": "M4S2-13",
+      "name": "理解小数加减法对齐算理",
+      "grade": "4",
+      "book": "下册",
+      "unit": "第4单元 小数加减法",
+      "lesson": "1.理解小数加减法对齐算理",
+      "level": "A",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [],
+      "next": [
+        "M4S2-14",
+        "M5S1-1"
+      ],
+      "questionTypes": [
+        "口算",
+        "笔算",
+        "填空",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-小数体系-基础错误",
+        "E-小数体系-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-核心讲解",
+        "S-分层练习",
+        "S-错因分析"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.85,
+        "maxTimePerQuestion": 60,
+        "consecutiveCorrect": 3
+      },
+      "status": "phase2_draft",
+      "prereq_note": "起始节点"
+    },
+    {
+      "knowledgeCode": "M4S2-14",
+      "name": "掌握小数加减法笔算、混合运算",
+      "grade": "4",
+      "book": "下册",
+      "unit": "第4单元 小数加减法",
+      "lesson": "2.掌握小数加减法笔算、混合运算",
+      "level": "A",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [
+        "M4S2-13"
+      ],
+      "next": [
+        "M4S2-15"
+      ],
+      "questionTypes": [
+        "口算",
+        "笔算",
+        "填空",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-小数体系-基础错误",
+        "E-小数体系-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-核心讲解",
+        "S-分层练习",
+        "S-错因分析"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.85,
+        "maxTimePerQuestion": 60,
+        "consecutiveCorrect": 3
+      },
+      "status": "phase2_draft",
+      "prereq_note": ""
+    },
+    {
+      "knowledgeCode": "M4S2-15",
+      "name": "掌握小数加减法简便运算",
+      "grade": "4",
+      "book": "下册",
+      "unit": "第4单元 小数加减法",
+      "lesson": "3.掌握小数加减法简便运算",
+      "level": "A",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [
+        "M4S2-14"
+      ],
+      "next": [
+        "M4S2-16"
+      ],
+      "questionTypes": [
+        "口算",
+        "笔算",
+        "填空",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-小数体系-基础错误",
+        "E-小数体系-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-核心讲解",
+        "S-分层练习",
+        "S-错因分析"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.85,
+        "maxTimePerQuestion": 60,
+        "consecutiveCorrect": 3
+      },
+      "status": "phase2_draft",
+      "prereq_note": ""
+    },
+    {
+      "knowledgeCode": "M4S2-16",
+      "name": "运用小数加减法解决生活实际问题",
+      "grade": "4",
+      "book": "下册",
+      "unit": "第4单元 小数加减法",
+      "lesson": "4.运用小数加减法解决生活实际问题",
+      "level": "A",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [
+        "M4S2-15"
+      ],
+      "next": [],
+      "questionTypes": [
+        "口算",
+        "笔算",
+        "填空",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-小数体系-基础错误",
+        "E-小数体系-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-核心讲解",
+        "S-分层练习",
+        "S-错因分析"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.85,
+        "maxTimePerQuestion": 60,
+        "consecutiveCorrect": 3
+      },
+      "status": "phase2_draft",
+      "prereq_note": ""
+    },
+    {
+      "knowledgeCode": "M4S2-17",
+      "name": "认识三角形各部分名称及稳定性",
+      "grade": "4",
+      "book": "下册",
+      "unit": "第5单元 三角形",
+      "lesson": "1.认识三角形各部分名称及稳定性",
+      "level": "C",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [],
+      "next": [
+        "M4S2-18",
+        "M5S1-52"
+      ],
+      "questionTypes": [
+        "填空",
+        "选择",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-三角形-基础错误",
+        "E-三角形-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-简要介绍"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.65,
+        "maxTimePerQuestion": 120,
+        "consecutiveCorrect": 1
+      },
+      "status": "phase2_draft",
+      "prereq_note": "起始节点"
+    },
+    {
+      "knowledgeCode": "M4S2-18",
+      "name": "理解三角形三边关系、内角和 180°",
+      "grade": "4",
+      "book": "下册",
+      "unit": "第5单元 三角形",
+      "lesson": "2.理解三角形三边关系、内角和 180°",
+      "level": "B",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [
+        "M4S2-17"
+      ],
+      "next": [
+        "M4S2-19"
+      ],
+      "questionTypes": [
+        "填空",
+        "选择",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-三角形-基础错误",
+        "E-三角形-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-标准讲解",
+        "S-练习巩固"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.75,
+        "maxTimePerQuestion": 90,
+        "consecutiveCorrect": 2
+      },
+      "status": "phase2_draft",
+      "prereq_note": ""
+    },
+    {
+      "knowledgeCode": "M4S2-19",
+      "name": "掌握三角形按角、按边分类方法",
+      "grade": "4",
+      "book": "下册",
+      "unit": "第5单元 三角形",
+      "lesson": "3.掌握三角形按角、按边分类方法",
+      "level": "B",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [
+        "M4S2-18"
+      ],
+      "next": [
+        "M5S1-50"
+      ],
+      "questionTypes": [
+        "填空",
+        "选择",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-三角形-基础错误",
+        "E-三角形-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-标准讲解",
+        "S-练习巩固"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.75,
+        "maxTimePerQuestion": 90,
+        "consecutiveCorrect": 2
+      },
+      "status": "phase2_draft",
+      "prereq_note": ""
+    },
+    {
+      "knowledgeCode": "M4S2-20",
+      "name": "能从前面、上面、左面观察立体图形形状",
+      "grade": "4",
+      "book": "下册",
+      "unit": "第6单元 观察物体（二）",
+      "lesson": "1.能从前面、上面、左面观察立体图形形状",
+      "level": "B",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [
+        "M2S1-16"
+      ],
+      "next": [],
+      "questionTypes": [
+        "填空",
+        "选择",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-观察物体与图形运动-基础错误",
+        "E-观察物体与图形运动-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-标准讲解",
+        "S-练习巩固"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.75,
+        "maxTimePerQuestion": 90,
+        "consecutiveCorrect": 2
+      },
+      "status": "phase2_draft",
+      "prereq_note": ""
+    },
+    {
+      "knowledgeCode": "M4S2-21",
+      "name": "理解轴对称图形特征、平移含义",
+      "grade": "4",
+      "book": "下册",
+      "unit": "第7单元 图形的运动（二）",
+      "lesson": "1.理解轴对称图形特征、平移含义",
+      "level": "B",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [
+        "M2S2-15"
+      ],
+      "next": [
+        "M4S2-22"
+      ],
+      "questionTypes": [
+        "填空",
+        "选择",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-观察物体与图形运动-基础错误",
+        "E-观察物体与图形运动-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-标准讲解",
+        "S-练习巩固"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.75,
+        "maxTimePerQuestion": 90,
+        "consecutiveCorrect": 2
+      },
+      "status": "phase2_draft",
+      "prereq_note": ""
+    },
+    {
+      "knowledgeCode": "M4S2-22",
+      "name": "掌握补全轴对称图形、画出平移后图形",
+      "grade": "4",
+      "book": "下册",
+      "unit": "第7单元 图形的运动（二）",
+      "lesson": "2.掌握补全轴对称图形、画出平移后图形",
+      "level": "B",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [
+        "M4S2-21"
+      ],
+      "next": [],
+      "questionTypes": [
+        "填空",
+        "选择",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-观察物体与图形运动-基础错误",
+        "E-观察物体与图形运动-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-标准讲解",
+        "S-练习巩固"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.75,
+        "maxTimePerQuestion": 90,
+        "consecutiveCorrect": 2
+      },
+      "status": "phase2_draft",
+      "prereq_note": ""
+    },
+    {
+      "knowledgeCode": "M4S2-23",
+      "name": "理解平均数的统计意义",
+      "grade": "4",
+      "book": "下册",
+      "unit": "第8单元 平均数与条形统计图",
+      "lesson": "1.理解平均数的统计意义",
+      "level": "B",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [
+        "M4S1-26"
+      ],
+      "next": [
+        "M4S2-24"
+      ],
+      "questionTypes": [
+        "填空",
+        "选择",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-平均数与复式条形-基础错误",
+        "E-平均数与复式条形-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-标准讲解",
+        "S-练习巩固"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.75,
+        "maxTimePerQuestion": 90,
+        "consecutiveCorrect": 2
+      },
+      "status": "phase2_draft",
+      "prereq_note": ""
+    },
+    {
+      "knowledgeCode": "M4S2-24",
+      "name": "掌握平均数计算方法",
+      "grade": "4",
+      "book": "下册",
+      "unit": "第8单元 平均数与条形统计图",
+      "lesson": "2.掌握平均数计算方法",
+      "level": "A",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [
+        "M4S2-23"
+      ],
+      "next": [
+        "M4S2-25"
+      ],
+      "questionTypes": [
+        "口算",
+        "笔算",
+        "填空",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-平均数与复式条形-基础错误",
+        "E-平均数与复式条形-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-核心讲解",
+        "S-分层练习",
+        "S-错因分析"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.85,
+        "maxTimePerQuestion": 60,
+        "consecutiveCorrect": 3
+      },
+      "status": "phase2_draft",
+      "prereq_note": ""
+    },
+    {
+      "knowledgeCode": "M4S2-25",
+      "name": "能读懂、绘制复式条形统计图",
+      "grade": "4",
+      "book": "下册",
+      "unit": "第8单元 平均数与条形统计图",
+      "lesson": "3.能读懂、绘制复式条形统计图",
+      "level": "B",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [
+        "M4S2-24"
+      ],
+      "next": [],
+      "questionTypes": [
+        "填空",
+        "选择",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-平均数与复式条形-基础错误",
+        "E-平均数与复式条形-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-标准讲解",
+        "S-练习巩固"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.75,
+        "maxTimePerQuestion": 90,
+        "consecutiveCorrect": 2
+      },
+      "status": "phase2_draft",
+      "prereq_note": ""
+    },
+    {
+      "knowledgeCode": "M4S2-26",
+      "name": "理解鸡兔同笼问题模型思想",
+      "grade": "4",
+      "book": "下册",
+      "unit": "第9单元 鸡兔同笼",
+      "lesson": "1.理解鸡兔同笼问题模型思想",
+      "level": "A",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [],
+      "next": [
+        "M4S2-27"
+      ],
+      "questionTypes": [
+        "应用题",
+        "填空"
+      ],
+      "commonErrors": [
+        "E-数学广角-基础错误",
+        "E-数学广角-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-核心讲解",
+        "S-分层练习",
+        "S-错因分析"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.85,
+        "maxTimePerQuestion": 60,
+        "consecutiveCorrect": 3
+      },
+      "status": "phase2_draft",
+      "prereq_note": "起始节点"
+    },
+    {
+      "knowledgeCode": "M4S2-27",
+      "name": "掌握列表法、假设法解题思路",
+      "grade": "4",
+      "book": "下册",
+      "unit": "第9单元 鸡兔同笼",
+      "lesson": "2.掌握列表法、假设法解题思路",
+      "level": "B",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [
+        "M4S2-26"
+      ],
+      "next": [
+        "M4S2-28"
+      ],
+      "questionTypes": [
+        "填空",
+        "选择",
+        "判断"
+      ],
+      "commonErrors": [
+        "E-数学广角-基础错误",
+        "E-数学广角-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-标准讲解",
+        "S-练习巩固"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.75,
+        "maxTimePerQuestion": 90,
+        "consecutiveCorrect": 2
+      },
+      "status": "phase2_draft",
+      "prereq_note": ""
+    },
+    {
+      "knowledgeCode": "M4S2-28",
+      "name": "运用模型解决同类变式问题",
+      "grade": "4",
+      "book": "下册",
+      "unit": "第9单元 鸡兔同笼",
+      "lesson": "3.运用模型解决同类变式问题",
+      "level": "A",
+      "sourceRef": "2022版义务教育数学课程标准",
+      "prerequisites": [
+        "M4S2-27"
+      ],
+      "next": [],
+      "questionTypes": [
+        "应用题",
+        "填空"
+      ],
+      "commonErrors": [
+        "E-数学广角-基础错误",
+        "E-数学广角-理解偏差"
+      ],
+      "strategyPacks": [
+        "S-核心讲解",
+        "S-分层练习",
+        "S-错因分析"
+      ],
+      "masteryRule": {
+        "minCorrectRate": 0.85,
+        "maxTimePerQuestion": 60,
+        "consecutiveCorrect": 3
+      },
+      "status": "phase2_draft",
+      "prereq_note": ""
+    }
+  ]
+}

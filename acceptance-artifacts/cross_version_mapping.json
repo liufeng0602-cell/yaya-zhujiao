@@ -1,0 +1,278 @@
+{
+  "schema": "yaya.adaptive_engine.cross_version_mapping.v1",
+  "scope": "primary_math_g5_g6",
+  "base_version": "人教版",
+  "target_versions": [
+    "北师大版",
+    "苏教版"
+  ],
+  "rules": {
+    "global": [
+      "以人教版5-6年级四级知识点库为唯一基准库",
+      "版本超前: 高年级知识点下沉到对应低年级直接复用",
+      "版本滞后: 低年级知识点上浮到对应高年级复用",
+      "版本删减: 对该版本隐藏知识点，不展示/不出题",
+      "顺序不同: 底层四级知识点和认知层级完全不变，只调换目录顺序",
+      "局部新增: 仅在基准库追加一条4级能力点，不改整体结构"
+    ]
+  },
+  "versions": {
+    "北师大版": {
+      "differences": [
+        {
+          "sourceGrade": "五上",
+          "targetGrade": "五上",
+          "topic": "简易方程",
+          "type": "超前",
+          "action": "复用",
+          "instruction": "北师5上已学简易方程；同人教5上知识点，直接复用，无需新增",
+          "refCodes": [
+            "M5S1-38",
+            "M5S1-39",
+            "M5S1-40",
+            "M5S1-41",
+            "M5S1-42",
+            "M5S1-43",
+            "M5S1-44",
+            "M5S1-45",
+            "M5S1-46",
+            "M5S1-47",
+            "M5S1-48",
+            "M5S1-49"
+          ]
+        },
+        {
+          "sourceGrade": "五上",
+          "targetGrade": "五上",
+          "topic": "多边形面积单元编排顺序不同",
+          "type": "顺序差异",
+          "action": "复用",
+          "instruction": "知识点完全一致，仅单元排序调换，四级知识点原样复用"
+        },
+        {
+          "sourceGrade": "五上",
+          "targetGrade": "五上",
+          "topic": "植树问题",
+          "type": "删减",
+          "action": "隐藏",
+          "instruction": "对北师大五上屏蔽植树问题，不学习、不出题",
+          "refCodes": [
+            "M5S1-61",
+            "M5S1-62",
+            "M5S1-63"
+          ]
+        },
+        {
+          "sourceGrade": "五下",
+          "targetGrade": "六上",
+          "topic": "因数与倍数",
+          "type": "后置",
+          "action": "年级映射",
+          "instruction": "北师5下不学因数倍数，整体映射到北师6上调用同人教五下整套知识点",
+          "refCodes": [
+            "M5S2-1",
+            "M5S2-2",
+            "M5S2-3",
+            "M5S2-4",
+            "M5S2-5",
+            "M5S2-6",
+            "M5S2-28"
+          ]
+        },
+        {
+          "sourceGrade": "五下",
+          "targetGrade": "五下",
+          "topic": "折线统计图",
+          "type": "弱化",
+          "action": "降级",
+          "instruction": "保留知识点，但认知层级降为A了解，不做拔高运用题",
+          "refCodes": [
+            "M5S2-25",
+            "M5S2-26"
+          ]
+        },
+        {
+          "sourceGrade": "六上",
+          "targetGrade": "六上",
+          "topic": "分数乘除、比、圆、百分数",
+          "type": "共通",
+          "action": "复用",
+          "instruction": "原样复用人教版四级知识点"
+        },
+        {
+          "sourceGrade": "六下",
+          "targetGrade": "永久",
+          "topic": "负数",
+          "type": "永久删减",
+          "action": "隐藏",
+          "instruction": "北师大小学全学段屏蔽负数知识点",
+          "refCodes": [
+            "M6S2-0",
+            "M6S2-1",
+            "M6S2-2",
+            "M6S2-3"
+          ]
+        },
+        {
+          "sourceGrade": "六下",
+          "targetGrade": "六下",
+          "topic": "鸽巢问题",
+          "type": "删减",
+          "action": "隐藏",
+          "instruction": "屏蔽鸽巢问题",
+          "refCodes": [
+            "M6S2-26",
+            "M6S2-27"
+          ]
+        },
+        {
+          "sourceGrade": "六下",
+          "targetGrade": "六下",
+          "topic": "比例、圆柱圆锥",
+          "type": "共通",
+          "action": "复用",
+          "instruction": "全量复用人教版四级知识点"
+        }
+      ]
+    },
+    "苏教版": {
+      "differences": [
+        {
+          "sourceGrade": "五上",
+          "targetGrade": "五上",
+          "topic": "小数乘除、多边形面积、可能性",
+          "type": "共通",
+          "action": "复用",
+          "instruction": "全量复用人教版四级知识点"
+        },
+        {
+          "sourceGrade": "五上",
+          "targetGrade": "五上",
+          "topic": "植树问题",
+          "type": "删减",
+          "action": "隐藏",
+          "instruction": "苏教五上屏蔽植树问题",
+          "refCodes": [
+            "M5S1-61",
+            "M5S1-62",
+            "M5S1-63"
+          ]
+        },
+        {
+          "sourceGrade": "五上",
+          "targetGrade": "五上",
+          "topic": "复式条形统计图",
+          "type": "新增",
+          "action": "追加",
+          "instruction": "保留原有可能性知识点，额外新增: 复式条形统计图(A了解/B理解)",
+          "newItems": [
+            {
+              "name": "复式条形统计图的认识",
+              "level": "A",
+              "levelLabel": "了解"
+            },
+            {
+              "name": "复式条形统计图的解读与比较",
+              "level": "B",
+              "levelLabel": "理解"
+            }
+          ]
+        },
+        {
+          "sourceGrade": "五下",
+          "targetGrade": "五下",
+          "topic": "圆",
+          "type": "超前",
+          "action": "下沉",
+          "instruction": "苏教5下圆=人教6上圆全套四级知识点；直接映射下沉到五下使用",
+          "refCodes": [
+            "M6S1-25",
+            "M6S1-26",
+            "M6S1-27",
+            "M6S1-28",
+            "M6S1-29",
+            "M6S1-30",
+            "M6S1-31",
+            "M6S1-32",
+            "M6S1-33"
+          ]
+        },
+        {
+          "sourceGrade": "五下",
+          "targetGrade": "五下",
+          "topic": "折线统计图",
+          "type": "弱化",
+          "action": "降级",
+          "instruction": "苏教五下折线统计仅作了解，不做掌握与运用考核",
+          "refCodes": [
+            "M5S2-25",
+            "M5S2-26"
+          ]
+        },
+        {
+          "sourceGrade": "六上",
+          "targetGrade": "六上",
+          "topic": "长方体正方体",
+          "type": "后置",
+          "action": "年级映射",
+          "instruction": "苏教6上长方体正方体=人教五下全套知识点，自动年级映射",
+          "refCodes": [
+            "M5S2-7",
+            "M5S2-8",
+            "M5S2-9",
+            "M5S2-10",
+            "M5S2-11",
+            "M5S2-12",
+            "M5S2-13",
+            "M5S2-14",
+            "M5S2-29",
+            "M5S2-30"
+          ]
+        },
+        {
+          "sourceGrade": "六上",
+          "targetGrade": "六上",
+          "topic": "扇形统计图",
+          "type": "弱化",
+          "action": "降级",
+          "instruction": "降为A了解，不做综合运用",
+          "refCodes": [
+            "M6S1-40",
+            "M6S1-41"
+          ]
+        },
+        {
+          "sourceGrade": "六上",
+          "targetGrade": "六上",
+          "topic": "数与形",
+          "type": "删减",
+          "action": "隐藏",
+          "instruction": "屏蔽该知识点",
+          "refCodes": [
+            "M6S1-42"
+          ]
+        },
+        {
+          "sourceGrade": "六下",
+          "targetGrade": "六下",
+          "topic": "鸽巢问题",
+          "type": "删减",
+          "action": "隐藏",
+          "instruction": "屏蔽鸽巢问题",
+          "refCodes": [
+            "M6S2-26",
+            "M6S2-27"
+          ]
+        },
+        {
+          "sourceGrade": "六下",
+          "targetGrade": "六下",
+          "topic": "总复习知识模块划分不同",
+          "type": "结构差异",
+          "action": "重组目录",
+          "instruction": "底层知识点不变，仅重组目录结构，四级能力点不动"
+        }
+      ]
+    }
+  }
+}

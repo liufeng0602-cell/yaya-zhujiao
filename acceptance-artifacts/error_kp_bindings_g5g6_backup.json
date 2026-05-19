@@ -1,0 +1,4909 @@
+{
+  "schema": "yaya.adaptive_engine.error_bindings.v1",
+  "scope": "primary_math_g5_g6_pep",
+  "status": "phase3_draft",
+  "generatedAt": "2026-05-13T22:28:58.159750",
+  "summary": {
+    "totalBindings": 560,
+    "coveredKnowledgePoints": 189,
+    "aLevelBindings": 374
+  },
+  "bindings": [
+    {
+      "knowledgeCode": "M5S1-0",
+      "knowledgeName": "小数乘整数的计算意义",
+      "level": "A",
+      "errorCode": "decimal_point_position_error",
+      "errorName": "小数点定位错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S1-0",
+      "knowledgeName": "小数乘整数的计算意义",
+      "level": "A",
+      "errorCode": "decimal_mul_carry_error",
+      "errorName": "小数乘法进位错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S1-0",
+      "knowledgeName": "小数乘整数的计算意义",
+      "level": "A",
+      "errorCode": "decimal_mul_factor_change_error",
+      "errorName": "因数变化规律应用错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S1-1",
+      "knowledgeName": "小数乘整数笔算方法",
+      "level": "A",
+      "errorCode": "decimal_point_position_error",
+      "errorName": "小数点定位错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S1-1",
+      "knowledgeName": "小数乘整数笔算方法",
+      "level": "A",
+      "errorCode": "decimal_mul_carry_error",
+      "errorName": "小数乘法进位错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S1-1",
+      "knowledgeName": "小数乘整数笔算方法",
+      "level": "A",
+      "errorCode": "decimal_mul_factor_change_error",
+      "errorName": "因数变化规律应用错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S1-10",
+      "knowledgeName": "小数乘法简便运算技巧",
+      "level": "B",
+      "errorCode": "decimal_point_position_error",
+      "errorName": "小数点定位错误",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M5S1-10",
+      "knowledgeName": "小数乘法简便运算技巧",
+      "level": "B",
+      "errorCode": "decimal_mul_carry_error",
+      "errorName": "小数乘法进位错误",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M5S1-10",
+      "knowledgeName": "小数乘法简便运算技巧",
+      "level": "B",
+      "errorCode": "decimal_mul_factor_change_error",
+      "errorName": "因数变化规律应用错误",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M5S1-11",
+      "knowledgeName": "分段计费问题（水费、电费、打车费）",
+      "level": "B",
+      "errorCode": "decimal_point_position_error",
+      "errorName": "小数点定位错误",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M5S1-11",
+      "knowledgeName": "分段计费问题（水费、电费、打车费）",
+      "level": "B",
+      "errorCode": "decimal_mul_carry_error",
+      "errorName": "小数乘法进位错误",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M5S1-11",
+      "knowledgeName": "分段计费问题（水费、电费、打车费）",
+      "level": "B",
+      "errorCode": "decimal_mul_factor_change_error",
+      "errorName": "因数变化规律应用错误",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M5S1-12",
+      "knowledgeName": "估算解决实际购物问题",
+      "level": "B",
+      "errorCode": "decimal_point_position_error",
+      "errorName": "小数点定位错误",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M5S1-12",
+      "knowledgeName": "估算解决实际购物问题",
+      "level": "B",
+      "errorCode": "decimal_mul_carry_error",
+      "errorName": "小数乘法进位错误",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M5S1-12",
+      "knowledgeName": "估算解决实际购物问题",
+      "level": "B",
+      "errorCode": "decimal_mul_factor_change_error",
+      "errorName": "因数变化规律应用错误",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M5S1-13",
+      "knowledgeName": "小数乘法综合计算",
+      "level": "B",
+      "errorCode": "decimal_point_position_error",
+      "errorName": "小数点定位错误",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M5S1-13",
+      "knowledgeName": "小数乘法综合计算",
+      "level": "B",
+      "errorCode": "decimal_mul_carry_error",
+      "errorName": "小数乘法进位错误",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M5S1-13",
+      "knowledgeName": "小数乘法综合计算",
+      "level": "B",
+      "errorCode": "decimal_mul_factor_change_error",
+      "errorName": "因数变化规律应用错误",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M5S1-14",
+      "knowledgeName": "易错点辨析（小数点、末尾0）",
+      "level": "B",
+      "errorCode": "decimal_point_position_error",
+      "errorName": "小数点定位错误",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M5S1-14",
+      "knowledgeName": "易错点辨析（小数点、末尾0）",
+      "level": "B",
+      "errorCode": "decimal_mul_carry_error",
+      "errorName": "小数乘法进位错误",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M5S1-14",
+      "knowledgeName": "易错点辨析（小数点、末尾0）",
+      "level": "B",
+      "errorCode": "decimal_mul_factor_change_error",
+      "errorName": "因数变化规律应用错误",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M5S1-15",
+      "knowledgeName": "列、行定义（先列后行）",
+      "level": "B",
+      "errorCode": "coordinate_col_row_error",
+      "errorName": "数对行列混淆",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M5S1-15",
+      "knowledgeName": "列、行定义（先列后行）",
+      "level": "B",
+      "errorCode": "coordinate_movement_error",
+      "errorName": "数对平移计算错误",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M5S1-16",
+      "knowledgeName": "数对书写格式（列，行）",
+      "level": "B",
+      "errorCode": "coordinate_col_row_error",
+      "errorName": "数对行列混淆",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M5S1-16",
+      "knowledgeName": "数对书写格式（列，行）",
+      "level": "B",
+      "errorCode": "coordinate_movement_error",
+      "errorName": "数对平移计算错误",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M5S1-17",
+      "knowledgeName": "根据数对找点",
+      "level": "B",
+      "errorCode": "coordinate_col_row_error",
+      "errorName": "数对行列混淆",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M5S1-17",
+      "knowledgeName": "根据数对找点",
+      "level": "B",
+      "errorCode": "coordinate_movement_error",
+      "errorName": "数对平移计算错误",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M5S1-18",
+      "knowledgeName": "根据点写出数对",
+      "level": "B",
+      "errorCode": "coordinate_col_row_error",
+      "errorName": "数对行列混淆",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M5S1-18",
+      "knowledgeName": "根据点写出数对",
+      "level": "B",
+      "errorCode": "coordinate_movement_error",
+      "errorName": "数对平移计算错误",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M5S1-19",
+      "knowledgeName": "数对平移变化规律",
+      "level": "B",
+      "errorCode": "coordinate_col_row_error",
+      "errorName": "数对行列混淆",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M5S1-19",
+      "knowledgeName": "数对平移变化规律",
+      "level": "B",
+      "errorCode": "coordinate_movement_error",
+      "errorName": "数对平移计算错误",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M5S1-2",
+      "knowledgeName": "积末尾有0的化简规则",
+      "level": "A",
+      "errorCode": "decimal_point_position_error",
+      "errorName": "小数点定位错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S1-2",
+      "knowledgeName": "积末尾有0的化简规则",
+      "level": "A",
+      "errorCode": "decimal_mul_carry_error",
+      "errorName": "小数乘法进位错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S1-2",
+      "knowledgeName": "积末尾有0的化简规则",
+      "level": "A",
+      "errorCode": "decimal_mul_factor_change_error",
+      "errorName": "因数变化规律应用错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S1-20",
+      "knowledgeName": "商的小数点对齐被除数小数点",
+      "level": "A",
+      "errorCode": "decimal_div_align_error",
+      "errorName": "小数除法竖式对齐错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S1-20",
+      "knowledgeName": "商的小数点对齐被除数小数点",
+      "level": "A",
+      "errorCode": "decimal_div_placement_error",
+      "errorName": "小数除法商位补0错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S1-20",
+      "knowledgeName": "商的小数点对齐被除数小数点",
+      "level": "A",
+      "errorCode": "decimal_div_approx_error",
+      "errorName": "小数除法近似取值错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S1-20",
+      "knowledgeName": "商的小数点对齐被除数小数点",
+      "level": "A",
+      "errorCode": "decimal_div_cycle_error",
+      "errorName": "循环小数理解错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S1-21",
+      "knowledgeName": "整数部分不够除补0",
+      "level": "A",
+      "errorCode": "decimal_div_align_error",
+      "errorName": "小数除法竖式对齐错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S1-21",
+      "knowledgeName": "整数部分不够除补0",
+      "level": "A",
+      "errorCode": "decimal_div_placement_error",
+      "errorName": "小数除法商位补0错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S1-21",
+      "knowledgeName": "整数部分不够除补0",
+      "level": "A",
+      "errorCode": "decimal_div_approx_error",
+      "errorName": "小数除法近似取值错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S1-21",
+      "knowledgeName": "整数部分不够除补0",
+      "level": "A",
+      "errorCode": "decimal_div_cycle_error",
+      "errorName": "循环小数理解错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S1-22",
+      "knowledgeName": "除不尽末尾补0继续除",
+      "level": "A",
+      "errorCode": "decimal_div_align_error",
+      "errorName": "小数除法竖式对齐错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S1-22",
+      "knowledgeName": "除不尽末尾补0继续除",
+      "level": "A",
+      "errorCode": "decimal_div_placement_error",
+      "errorName": "小数除法商位补0错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S1-22",
+      "knowledgeName": "除不尽末尾补0继续除",
+      "level": "A",
+      "errorCode": "decimal_div_approx_error",
+      "errorName": "小数除法近似取值错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S1-22",
+      "knowledgeName": "除不尽末尾补0继续除",
+      "level": "A",
+      "errorCode": "decimal_div_cycle_error",
+      "errorName": "循环小数理解错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S1-23",
+      "knowledgeName": "利用商不变性质转化除数为整数",
+      "level": "A",
+      "errorCode": "decimal_div_align_error",
+      "errorName": "小数除法竖式对齐错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S1-23",
+      "knowledgeName": "利用商不变性质转化除数为整数",
+      "level": "A",
+      "errorCode": "decimal_div_placement_error",
+      "errorName": "小数除法商位补0错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S1-23",
+      "knowledgeName": "利用商不变性质转化除数为整数",
+      "level": "A",
+      "errorCode": "decimal_div_approx_error",
+      "errorName": "小数除法近似取值错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S1-23",
+      "knowledgeName": "利用商不变性质转化除数为整数",
+      "level": "A",
+      "errorCode": "decimal_div_cycle_error",
+      "errorName": "循环小数理解错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S1-24",
+      "knowledgeName": "被除数位数不足补0",
+      "level": "A",
+      "errorCode": "decimal_div_align_error",
+      "errorName": "小数除法竖式对齐错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S1-24",
+      "knowledgeName": "被除数位数不足补0",
+      "level": "A",
+      "errorCode": "decimal_div_placement_error",
+      "errorName": "小数除法商位补0错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S1-24",
+      "knowledgeName": "被除数位数不足补0",
+      "level": "A",
+      "errorCode": "decimal_div_approx_error",
+      "errorName": "小数除法近似取值错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S1-24",
+      "knowledgeName": "被除数位数不足补0",
+      "level": "A",
+      "errorCode": "decimal_div_cycle_error",
+      "errorName": "循环小数理解错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S1-25",
+      "knowledgeName": "多算一位再四舍五入",
+      "level": "A",
+      "errorCode": "decimal_div_align_error",
+      "errorName": "小数除法竖式对齐错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S1-25",
+      "knowledgeName": "多算一位再四舍五入",
+      "level": "A",
+      "errorCode": "decimal_div_placement_error",
+      "errorName": "小数除法商位补0错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S1-25",
+      "knowledgeName": "多算一位再四舍五入",
+      "level": "A",
+      "errorCode": "decimal_div_approx_error",
+      "errorName": "小数除法近似取值错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S1-25",
+      "knowledgeName": "多算一位再四舍五入",
+      "level": "A",
+      "errorCode": "decimal_div_cycle_error",
+      "errorName": "循环小数理解错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S1-26",
+      "knowledgeName": "生活场景保留位数规则",
+      "level": "A",
+      "errorCode": "decimal_div_align_error",
+      "errorName": "小数除法竖式对齐错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S1-26",
+      "knowledgeName": "生活场景保留位数规则",
+      "level": "A",
+      "errorCode": "decimal_div_placement_error",
+      "errorName": "小数除法商位补0错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S1-26",
+      "knowledgeName": "生活场景保留位数规则",
+      "level": "A",
+      "errorCode": "decimal_div_approx_error",
+      "errorName": "小数除法近似取值错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S1-26",
+      "knowledgeName": "生活场景保留位数规则",
+      "level": "A",
+      "errorCode": "decimal_div_cycle_error",
+      "errorName": "循环小数理解错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S1-27",
+      "knowledgeName": "循环小数定义、循环节",
+      "level": "A",
+      "errorCode": "decimal_div_align_error",
+      "errorName": "小数除法竖式对齐错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S1-27",
+      "knowledgeName": "循环小数定义、循环节",
+      "level": "A",
+      "errorCode": "decimal_div_placement_error",
+      "errorName": "小数除法商位补0错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S1-27",
+      "knowledgeName": "循环小数定义、循环节",
+      "level": "A",
+      "errorCode": "decimal_div_approx_error",
+      "errorName": "小数除法近似取值错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S1-27",
+      "knowledgeName": "循环小数定义、循环节",
+      "level": "A",
+      "errorCode": "decimal_div_cycle_error",
+      "errorName": "循环小数理解错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S1-28",
+      "knowledgeName": "循环小数简写方式",
+      "level": "A",
+      "errorCode": "decimal_div_align_error",
+      "errorName": "小数除法竖式对齐错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S1-28",
+      "knowledgeName": "循环小数简写方式",
+      "level": "A",
+      "errorCode": "decimal_div_placement_error",
+      "errorName": "小数除法商位补0错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S1-28",
+      "knowledgeName": "循环小数简写方式",
+      "level": "A",
+      "errorCode": "decimal_div_approx_error",
+      "errorName": "小数除法近似取值错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S1-28",
+      "knowledgeName": "循环小数简写方式",
+      "level": "A",
+      "errorCode": "decimal_div_cycle_error",
+      "errorName": "循环小数理解错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S1-29",
+      "knowledgeName": "有限小数、无限小数区分",
+      "level": "A",
+      "errorCode": "decimal_div_align_error",
+      "errorName": "小数除法竖式对齐错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S1-29",
+      "knowledgeName": "有限小数、无限小数区分",
+      "level": "A",
+      "errorCode": "decimal_div_placement_error",
+      "errorName": "小数除法商位补0错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S1-29",
+      "knowledgeName": "有限小数、无限小数区分",
+      "level": "A",
+      "errorCode": "decimal_div_approx_error",
+      "errorName": "小数除法近似取值错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S1-29",
+      "knowledgeName": "有限小数、无限小数区分",
+      "level": "A",
+      "errorCode": "decimal_div_cycle_error",
+      "errorName": "循环小数理解错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S1-3",
+      "knowledgeName": "小数乘小数算理（转化整数乘法）",
+      "level": "A",
+      "errorCode": "decimal_point_position_error",
+      "errorName": "小数点定位错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S1-3",
+      "knowledgeName": "小数乘小数算理（转化整数乘法）",
+      "level": "A",
+      "errorCode": "decimal_mul_carry_error",
+      "errorName": "小数乘法进位错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S1-3",
+      "knowledgeName": "小数乘小数算理（转化整数乘法）",
+      "level": "A",
+      "errorCode": "decimal_mul_factor_change_error",
+      "errorName": "因数变化规律应用错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S1-30",
+      "knowledgeName": "小数除法规律观察归纳",
+      "level": "A",
+      "errorCode": "decimal_div_align_error",
+      "errorName": "小数除法竖式对齐错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S1-30",
+      "knowledgeName": "小数除法规律观察归纳",
+      "level": "A",
+      "errorCode": "decimal_div_placement_error",
+      "errorName": "小数除法商位补0错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S1-30",
+      "knowledgeName": "小数除法规律观察归纳",
+      "level": "A",
+      "errorCode": "decimal_div_approx_error",
+      "errorName": "小数除法近似取值错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S1-30",
+      "knowledgeName": "小数除法规律观察归纳",
+      "level": "A",
+      "errorCode": "decimal_div_cycle_error",
+      "errorName": "循环小数理解错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S1-31",
+      "knowledgeName": "进一法（装桶、装箱）",
+      "level": "A",
+      "errorCode": "decimal_div_align_error",
+      "errorName": "小数除法竖式对齐错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S1-31",
+      "knowledgeName": "进一法（装桶、装箱）",
+      "level": "A",
+      "errorCode": "decimal_div_placement_error",
+      "errorName": "小数除法商位补0错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S1-31",
+      "knowledgeName": "进一法（装桶、装箱）",
+      "level": "A",
+      "errorCode": "decimal_div_approx_error",
+      "errorName": "小数除法近似取值错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S1-31",
+      "knowledgeName": "进一法（装桶、装箱）",
+      "level": "A",
+      "errorCode": "decimal_div_cycle_error",
+      "errorName": "循环小数理解错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S1-32",
+      "knowledgeName": "去尾法（做衣服、购买物品）",
+      "level": "A",
+      "errorCode": "decimal_div_align_error",
+      "errorName": "小数除法竖式对齐错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S1-32",
+      "knowledgeName": "去尾法（做衣服、购买物品）",
+      "level": "A",
+      "errorCode": "decimal_div_placement_error",
+      "errorName": "小数除法商位补0错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S1-32",
+      "knowledgeName": "去尾法（做衣服、购买物品）",
+      "level": "A",
+      "errorCode": "decimal_div_approx_error",
+      "errorName": "小数除法近似取值错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S1-32",
+      "knowledgeName": "去尾法（做衣服、购买物品）",
+      "level": "A",
+      "errorCode": "decimal_div_cycle_error",
+      "errorName": "循环小数理解错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S1-33",
+      "knowledgeName": "小数乘除法对比辨析",
+      "level": "A",
+      "errorCode": "decimal_div_align_error",
+      "errorName": "小数除法竖式对齐错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S1-33",
+      "knowledgeName": "小数乘除法对比辨析",
+      "level": "A",
+      "errorCode": "decimal_div_placement_error",
+      "errorName": "小数除法商位补0错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S1-33",
+      "knowledgeName": "小数乘除法对比辨析",
+      "level": "A",
+      "errorCode": "decimal_div_approx_error",
+      "errorName": "小数除法近似取值错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S1-33",
+      "knowledgeName": "小数乘除法对比辨析",
+      "level": "A",
+      "errorCode": "decimal_div_cycle_error",
+      "errorName": "循环小数理解错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S1-34",
+      "knowledgeName": "确定事件（一定、不可能）",
+      "level": "B",
+      "errorCode": "probability_misconception",
+      "errorName": "可能性理解偏差",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M5S1-34",
+      "knowledgeName": "确定事件（一定、不可能）",
+      "level": "B",
+      "errorCode": "probability_scale_error",
+      "errorName": "可能性大小判断错误",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M5S1-35",
+      "knowledgeName": "不确定事件（可能）",
+      "level": "B",
+      "errorCode": "probability_misconception",
+      "errorName": "可能性理解偏差",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M5S1-35",
+      "knowledgeName": "不确定事件（可能）",
+      "level": "B",
+      "errorCode": "probability_scale_error",
+      "errorName": "可能性大小判断错误",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M5S1-36",
+      "knowledgeName": "数量多少决定可能性大小",
+      "level": "B",
+      "errorCode": "probability_misconception",
+      "errorName": "可能性理解偏差",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M5S1-36",
+      "knowledgeName": "数量多少决定可能性大小",
+      "level": "B",
+      "errorCode": "probability_scale_error",
+      "errorName": "可能性大小判断错误",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M5S1-37",
+      "knowledgeName": "掷骰子概率实验分析",
+      "level": "C",
+      "errorCode": "probability_misconception",
+      "errorName": "可能性理解偏差",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M5S1-37",
+      "knowledgeName": "掷骰子概率实验分析",
+      "level": "C",
+      "errorCode": "probability_scale_error",
+      "errorName": "可能性大小判断错误",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M5S1-38",
+      "knowledgeName": "字母表示任意数、数量关系",
+      "level": "A",
+      "errorCode": "equation_balance_error",
+      "errorName": "等式性质应用错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S1-38",
+      "knowledgeName": "字母表示任意数、数量关系",
+      "level": "A",
+      "errorCode": "equation_unknown_confusion",
+      "errorName": "未知数意义混淆",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S1-38",
+      "knowledgeName": "字母表示任意数、数量关系",
+      "level": "A",
+      "errorCode": "equation_word_mapping_error",
+      "errorName": "等量关系建立错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S1-38",
+      "knowledgeName": "字母表示任意数、数量关系",
+      "level": "A",
+      "errorCode": "equation_verify_skip",
+      "errorName": "方程检验缺失",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S1-39",
+      "knowledgeName": "字母乘法简写规则",
+      "level": "A",
+      "errorCode": "equation_balance_error",
+      "errorName": "等式性质应用错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S1-39",
+      "knowledgeName": "字母乘法简写规则",
+      "level": "A",
+      "errorCode": "equation_unknown_confusion",
+      "errorName": "未知数意义混淆",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S1-39",
+      "knowledgeName": "字母乘法简写规则",
+      "level": "A",
+      "errorCode": "equation_word_mapping_error",
+      "errorName": "等量关系建立错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S1-39",
+      "knowledgeName": "字母乘法简写规则",
+      "level": "A",
+      "errorCode": "equation_verify_skip",
+      "errorName": "方程检验缺失",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S1-4",
+      "knowledgeName": "小数点位置确定规则",
+      "level": "A",
+      "errorCode": "decimal_point_position_error",
+      "errorName": "小数点定位错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S1-4",
+      "knowledgeName": "小数点位置确定规则",
+      "level": "A",
+      "errorCode": "decimal_mul_carry_error",
+      "errorName": "小数乘法进位错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S1-4",
+      "knowledgeName": "小数点位置确定规则",
+      "level": "A",
+      "errorCode": "decimal_mul_factor_change_error",
+      "errorName": "因数变化规律应用错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S1-40",
+      "knowledgeName": "代入求值计算",
+      "level": "A",
+      "errorCode": "equation_balance_error",
+      "errorName": "等式性质应用错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S1-40",
+      "knowledgeName": "代入求值计算",
+      "level": "A",
+      "errorCode": "equation_unknown_confusion",
+      "errorName": "未知数意义混淆",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S1-40",
+      "knowledgeName": "代入求值计算",
+      "level": "A",
+      "errorCode": "equation_word_mapping_error",
+      "errorName": "等量关系建立错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S1-40",
+      "knowledgeName": "代入求值计算",
+      "level": "A",
+      "errorCode": "equation_verify_skip",
+      "errorName": "方程检验缺失",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S1-41",
+      "knowledgeName": "方程的定义（含有未知数的等式）",
+      "level": "A",
+      "errorCode": "equation_balance_error",
+      "errorName": "等式性质应用错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S1-41",
+      "knowledgeName": "方程的定义（含有未知数的等式）",
+      "level": "A",
+      "errorCode": "equation_unknown_confusion",
+      "errorName": "未知数意义混淆",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S1-41",
+      "knowledgeName": "方程的定义（含有未知数的等式）",
+      "level": "A",
+      "errorCode": "equation_word_mapping_error",
+      "errorName": "等量关系建立错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S1-41",
+      "knowledgeName": "方程的定义（含有未知数的等式）",
+      "level": "A",
+      "errorCode": "equation_verify_skip",
+      "errorName": "方程检验缺失",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S1-42",
+      "knowledgeName": "等式的两条基本性质",
+      "level": "A",
+      "errorCode": "equation_balance_error",
+      "errorName": "等式性质应用错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S1-42",
+      "knowledgeName": "等式的两条基本性质",
+      "level": "A",
+      "errorCode": "equation_unknown_confusion",
+      "errorName": "未知数意义混淆",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S1-42",
+      "knowledgeName": "等式的两条基本性质",
+      "level": "A",
+      "errorCode": "equation_word_mapping_error",
+      "errorName": "等量关系建立错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S1-42",
+      "knowledgeName": "等式的两条基本性质",
+      "level": "A",
+      "errorCode": "equation_verify_skip",
+      "errorName": "方程检验缺失",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S1-43",
+      "knowledgeName": "一步、两步方程解法",
+      "level": "A",
+      "errorCode": "equation_balance_error",
+      "errorName": "等式性质应用错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S1-43",
+      "knowledgeName": "一步、两步方程解法",
+      "level": "A",
+      "errorCode": "equation_unknown_confusion",
+      "errorName": "未知数意义混淆",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S1-43",
+      "knowledgeName": "一步、两步方程解法",
+      "level": "A",
+      "errorCode": "equation_word_mapping_error",
+      "errorName": "等量关系建立错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S1-43",
+      "knowledgeName": "一步、两步方程解法",
+      "level": "A",
+      "errorCode": "equation_verify_skip",
+      "errorName": "方程检验缺失",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S1-44",
+      "knowledgeName": "方程检验格式",
+      "level": "A",
+      "errorCode": "equation_balance_error",
+      "errorName": "等式性质应用错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S1-44",
+      "knowledgeName": "方程检验格式",
+      "level": "A",
+      "errorCode": "equation_unknown_confusion",
+      "errorName": "未知数意义混淆",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S1-44",
+      "knowledgeName": "方程检验格式",
+      "level": "A",
+      "errorCode": "equation_word_mapping_error",
+      "errorName": "等量关系建立错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S1-44",
+      "knowledgeName": "方程检验格式",
+      "level": "A",
+      "errorCode": "equation_verify_skip",
+      "errorName": "方程检验缺失",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S1-45",
+      "knowledgeName": "找等量关系列方程",
+      "level": "A",
+      "errorCode": "equation_balance_error",
+      "errorName": "等式性质应用错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S1-45",
+      "knowledgeName": "找等量关系列方程",
+      "level": "A",
+      "errorCode": "equation_unknown_confusion",
+      "errorName": "未知数意义混淆",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S1-45",
+      "knowledgeName": "找等量关系列方程",
+      "level": "A",
+      "errorCode": "equation_word_mapping_error",
+      "errorName": "等量关系建立错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S1-45",
+      "knowledgeName": "找等量关系列方程",
+      "level": "A",
+      "errorCode": "equation_verify_skip",
+      "errorName": "方程检验缺失",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S1-46",
+      "knowledgeName": "几倍多/少应用题",
+      "level": "A",
+      "errorCode": "equation_balance_error",
+      "errorName": "等式性质应用错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S1-46",
+      "knowledgeName": "几倍多/少应用题",
+      "level": "A",
+      "errorCode": "equation_unknown_confusion",
+      "errorName": "未知数意义混淆",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S1-46",
+      "knowledgeName": "几倍多/少应用题",
+      "level": "A",
+      "errorCode": "equation_word_mapping_error",
+      "errorName": "等量关系建立错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S1-46",
+      "knowledgeName": "几倍多/少应用题",
+      "level": "A",
+      "errorCode": "equation_verify_skip",
+      "errorName": "方程检验缺失",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S1-47",
+      "knowledgeName": "相遇问题、和差问题",
+      "level": "A",
+      "errorCode": "equation_balance_error",
+      "errorName": "等式性质应用错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S1-47",
+      "knowledgeName": "相遇问题、和差问题",
+      "level": "A",
+      "errorCode": "equation_unknown_confusion",
+      "errorName": "未知数意义混淆",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S1-47",
+      "knowledgeName": "相遇问题、和差问题",
+      "level": "A",
+      "errorCode": "equation_word_mapping_error",
+      "errorName": "等量关系建立错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S1-47",
+      "knowledgeName": "相遇问题、和差问题",
+      "level": "A",
+      "errorCode": "equation_verify_skip",
+      "errorName": "方程检验缺失",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S1-48",
+      "knowledgeName": "含两个未知数应用题",
+      "level": "A",
+      "errorCode": "equation_balance_error",
+      "errorName": "等式性质应用错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S1-48",
+      "knowledgeName": "含两个未知数应用题",
+      "level": "A",
+      "errorCode": "equation_unknown_confusion",
+      "errorName": "未知数意义混淆",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S1-48",
+      "knowledgeName": "含两个未知数应用题",
+      "level": "A",
+      "errorCode": "equation_word_mapping_error",
+      "errorName": "等量关系建立错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S1-48",
+      "knowledgeName": "含两个未知数应用题",
+      "level": "A",
+      "errorCode": "equation_verify_skip",
+      "errorName": "方程检验缺失",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S1-49",
+      "knowledgeName": "算术法与方程法区别",
+      "level": "A",
+      "errorCode": "equation_balance_error",
+      "errorName": "等式性质应用错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S1-49",
+      "knowledgeName": "算术法与方程法区别",
+      "level": "A",
+      "errorCode": "equation_unknown_confusion",
+      "errorName": "未知数意义混淆",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S1-49",
+      "knowledgeName": "算术法与方程法区别",
+      "level": "A",
+      "errorCode": "equation_word_mapping_error",
+      "errorName": "等量关系建立错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S1-49",
+      "knowledgeName": "算术法与方程法区别",
+      "level": "A",
+      "errorCode": "equation_verify_skip",
+      "errorName": "方程检验缺失",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S1-5",
+      "knowledgeName": "积位数不足补0占位",
+      "level": "A",
+      "errorCode": "decimal_point_position_error",
+      "errorName": "小数点定位错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S1-5",
+      "knowledgeName": "积位数不足补0占位",
+      "level": "A",
+      "errorCode": "decimal_mul_carry_error",
+      "errorName": "小数乘法进位错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S1-5",
+      "knowledgeName": "积位数不足补0占位",
+      "level": "A",
+      "errorCode": "decimal_mul_factor_change_error",
+      "errorName": "因数变化规律应用错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S1-50",
+      "knowledgeName": "割补转化思想",
+      "level": "C",
+      "errorCode": "area_perimeter_confusion",
+      "errorName": "周长面积混淆",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M5S1-50",
+      "knowledgeName": "割补转化思想",
+      "level": "C",
+      "errorCode": "area_formula_misapply",
+      "errorName": "面积公式误用",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M5S1-50",
+      "knowledgeName": "割补转化思想",
+      "level": "C",
+      "errorCode": "area_unit_error",
+      "errorName": "面积单位换算错误",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M5S1-50",
+      "knowledgeName": "割补转化思想",
+      "level": "C",
+      "errorCode": "area_composite_decomposition_error",
+      "errorName": "组合图形分解错误",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M5S1-51",
+      "knowledgeName": "面积公式 S=ah",
+      "level": "A",
+      "errorCode": "area_perimeter_confusion",
+      "errorName": "周长面积混淆",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S1-51",
+      "knowledgeName": "面积公式 S=ah",
+      "level": "A",
+      "errorCode": "area_formula_misapply",
+      "errorName": "面积公式误用",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S1-51",
+      "knowledgeName": "面积公式 S=ah",
+      "level": "A",
+      "errorCode": "area_unit_error",
+      "errorName": "面积单位换算错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S1-51",
+      "knowledgeName": "面积公式 S=ah",
+      "level": "A",
+      "errorCode": "area_composite_decomposition_error",
+      "errorName": "组合图形分解错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S1-52",
+      "knowledgeName": "两个完全相同三角形拼接",
+      "level": "C",
+      "errorCode": "area_perimeter_confusion",
+      "errorName": "周长面积混淆",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M5S1-52",
+      "knowledgeName": "两个完全相同三角形拼接",
+      "level": "C",
+      "errorCode": "area_formula_misapply",
+      "errorName": "面积公式误用",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M5S1-52",
+      "knowledgeName": "两个完全相同三角形拼接",
+      "level": "C",
+      "errorCode": "area_unit_error",
+      "errorName": "面积单位换算错误",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M5S1-52",
+      "knowledgeName": "两个完全相同三角形拼接",
+      "level": "C",
+      "errorCode": "area_composite_decomposition_error",
+      "errorName": "组合图形分解错误",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M5S1-53",
+      "knowledgeName": "面积公式 S=ah÷2",
+      "level": "A",
+      "errorCode": "area_perimeter_confusion",
+      "errorName": "周长面积混淆",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S1-53",
+      "knowledgeName": "面积公式 S=ah÷2",
+      "level": "A",
+      "errorCode": "area_formula_misapply",
+      "errorName": "面积公式误用",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S1-53",
+      "knowledgeName": "面积公式 S=ah÷2",
+      "level": "A",
+      "errorCode": "area_unit_error",
+      "errorName": "面积单位换算错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S1-53",
+      "knowledgeName": "面积公式 S=ah÷2",
+      "level": "A",
+      "errorCode": "area_composite_decomposition_error",
+      "errorName": "组合图形分解错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S1-54",
+      "knowledgeName": "等底等高面积相等规律",
+      "level": "B",
+      "errorCode": "area_perimeter_confusion",
+      "errorName": "周长面积混淆",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M5S1-54",
+      "knowledgeName": "等底等高面积相等规律",
+      "level": "B",
+      "errorCode": "area_formula_misapply",
+      "errorName": "面积公式误用",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M5S1-54",
+      "knowledgeName": "等底等高面积相等规律",
+      "level": "B",
+      "errorCode": "area_unit_error",
+      "errorName": "面积单位换算错误",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M5S1-54",
+      "knowledgeName": "等底等高面积相等规律",
+      "level": "B",
+      "errorCode": "area_composite_decomposition_error",
+      "errorName": "组合图形分解错误",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M5S1-55",
+      "knowledgeName": "梯形拼接转化推导",
+      "level": "C",
+      "errorCode": "area_perimeter_confusion",
+      "errorName": "周长面积混淆",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M5S1-55",
+      "knowledgeName": "梯形拼接转化推导",
+      "level": "C",
+      "errorCode": "area_formula_misapply",
+      "errorName": "面积公式误用",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M5S1-55",
+      "knowledgeName": "梯形拼接转化推导",
+      "level": "C",
+      "errorCode": "area_unit_error",
+      "errorName": "面积单位换算错误",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M5S1-55",
+      "knowledgeName": "梯形拼接转化推导",
+      "level": "C",
+      "errorCode": "area_composite_decomposition_error",
+      "errorName": "组合图形分解错误",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M5S1-56",
+      "knowledgeName": "面积公式 S=(a+b)h÷2",
+      "level": "A",
+      "errorCode": "area_perimeter_confusion",
+      "errorName": "周长面积混淆",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S1-56",
+      "knowledgeName": "面积公式 S=(a+b)h÷2",
+      "level": "A",
+      "errorCode": "area_formula_misapply",
+      "errorName": "面积公式误用",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S1-56",
+      "knowledgeName": "面积公式 S=(a+b)h÷2",
+      "level": "A",
+      "errorCode": "area_unit_error",
+      "errorName": "面积单位换算错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S1-56",
+      "knowledgeName": "面积公式 S=(a+b)h÷2",
+      "level": "A",
+      "errorCode": "area_composite_decomposition_error",
+      "errorName": "组合图形分解错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S1-57",
+      "knowledgeName": "分割法求和",
+      "level": "C",
+      "errorCode": "area_perimeter_confusion",
+      "errorName": "周长面积混淆",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M5S1-57",
+      "knowledgeName": "分割法求和",
+      "level": "C",
+      "errorCode": "area_formula_misapply",
+      "errorName": "面积公式误用",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M5S1-57",
+      "knowledgeName": "分割法求和",
+      "level": "C",
+      "errorCode": "area_unit_error",
+      "errorName": "面积单位换算错误",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M5S1-57",
+      "knowledgeName": "分割法求和",
+      "level": "C",
+      "errorCode": "area_composite_decomposition_error",
+      "errorName": "组合图形分解错误",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M5S1-58",
+      "knowledgeName": "补全法求差",
+      "level": "C",
+      "errorCode": "area_perimeter_confusion",
+      "errorName": "周长面积混淆",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M5S1-58",
+      "knowledgeName": "补全法求差",
+      "level": "C",
+      "errorCode": "area_formula_misapply",
+      "errorName": "面积公式误用",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M5S1-58",
+      "knowledgeName": "补全法求差",
+      "level": "C",
+      "errorCode": "area_unit_error",
+      "errorName": "面积单位换算错误",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M5S1-58",
+      "knowledgeName": "补全法求差",
+      "level": "C",
+      "errorCode": "area_composite_decomposition_error",
+      "errorName": "组合图形分解错误",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M5S1-59",
+      "knowledgeName": "不规则图形估算面积（数格子）",
+      "level": "C",
+      "errorCode": "area_perimeter_confusion",
+      "errorName": "周长面积混淆",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M5S1-59",
+      "knowledgeName": "不规则图形估算面积（数格子）",
+      "level": "C",
+      "errorCode": "area_formula_misapply",
+      "errorName": "面积公式误用",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M5S1-59",
+      "knowledgeName": "不规则图形估算面积（数格子）",
+      "level": "C",
+      "errorCode": "area_unit_error",
+      "errorName": "面积单位换算错误",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M5S1-59",
+      "knowledgeName": "不规则图形估算面积（数格子）",
+      "level": "C",
+      "errorCode": "area_composite_decomposition_error",
+      "errorName": "组合图形分解错误",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M5S1-6",
+      "knowledgeName": "因数与积大小变化规律",
+      "level": "A",
+      "errorCode": "decimal_point_position_error",
+      "errorName": "小数点定位错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S1-6",
+      "knowledgeName": "因数与积大小变化规律",
+      "level": "A",
+      "errorCode": "decimal_mul_carry_error",
+      "errorName": "小数乘法进位错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S1-6",
+      "knowledgeName": "因数与积大小变化规律",
+      "level": "A",
+      "errorCode": "decimal_mul_factor_change_error",
+      "errorName": "因数变化规律应用错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S1-60",
+      "knowledgeName": "公顷、平方千米单位换算",
+      "level": "B",
+      "errorCode": "area_perimeter_confusion",
+      "errorName": "周长面积混淆",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M5S1-60",
+      "knowledgeName": "公顷、平方千米单位换算",
+      "level": "B",
+      "errorCode": "area_formula_misapply",
+      "errorName": "面积公式误用",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M5S1-60",
+      "knowledgeName": "公顷、平方千米单位换算",
+      "level": "B",
+      "errorCode": "area_unit_error",
+      "errorName": "面积单位换算错误",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M5S1-60",
+      "knowledgeName": "公顷、平方千米单位换算",
+      "level": "B",
+      "errorCode": "area_composite_decomposition_error",
+      "errorName": "组合图形分解错误",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M5S1-61",
+      "knowledgeName": "两端都栽：棵数=间隔数+1",
+      "level": "B",
+      "errorCode": "tree_interval_confusion",
+      "errorName": "植树问题间隔-棵数混淆",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M5S1-61",
+      "knowledgeName": "两端都栽：棵数=间隔数+1",
+      "level": "B",
+      "errorCode": "tree_case_mismatch",
+      "errorName": "植树问题情境误判",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M5S1-62",
+      "knowledgeName": "两端不栽：棵数=间隔数−1",
+      "level": "B",
+      "errorCode": "tree_interval_confusion",
+      "errorName": "植树问题间隔-棵数混淆",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M5S1-62",
+      "knowledgeName": "两端不栽：棵数=间隔数−1",
+      "level": "B",
+      "errorCode": "tree_case_mismatch",
+      "errorName": "植树问题情境误判",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M5S1-63",
+      "knowledgeName": "封闭图形：棵数=间隔数",
+      "level": "B",
+      "errorCode": "tree_interval_confusion",
+      "errorName": "植树问题间隔-棵数混淆",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M5S1-63",
+      "knowledgeName": "封闭图形：棵数=间隔数",
+      "level": "B",
+      "errorCode": "tree_case_mismatch",
+      "errorName": "植树问题情境误判",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M5S1-64",
+      "knowledgeName": "小数乘除法综合计算",
+      "level": "C",
+      "errorCode": "mixed_topic_confusion",
+      "errorName": "总复习综合混淆",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M5S1-65",
+      "knowledgeName": "方程综合应用",
+      "level": "C",
+      "errorCode": "mixed_topic_confusion",
+      "errorName": "总复习综合混淆",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M5S1-66",
+      "knowledgeName": "数对位置复习",
+      "level": "C",
+      "errorCode": "mixed_topic_confusion",
+      "errorName": "总复习综合混淆",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M5S1-67",
+      "knowledgeName": "三大图形面积公式汇总",
+      "level": "C",
+      "errorCode": "mixed_topic_confusion",
+      "errorName": "总复习综合混淆",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M5S1-68",
+      "knowledgeName": "可能性判断与大小分析",
+      "level": "C",
+      "errorCode": "mixed_topic_confusion",
+      "errorName": "总复习综合混淆",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M5S1-69",
+      "knowledgeName": "植树问题模型总结",
+      "level": "C",
+      "errorCode": "mixed_topic_confusion",
+      "errorName": "总复习综合混淆",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M5S1-7",
+      "knowledgeName": "四舍五入法保留小数位数",
+      "level": "B",
+      "errorCode": "decimal_point_position_error",
+      "errorName": "小数点定位错误",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M5S1-7",
+      "knowledgeName": "四舍五入法保留小数位数",
+      "level": "B",
+      "errorCode": "decimal_mul_carry_error",
+      "errorName": "小数乘法进位错误",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M5S1-7",
+      "knowledgeName": "四舍五入法保留小数位数",
+      "level": "B",
+      "errorCode": "decimal_mul_factor_change_error",
+      "errorName": "因数变化规律应用错误",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M5S1-8",
+      "knowledgeName": "人民币保留两位小数应用",
+      "level": "B",
+      "errorCode": "decimal_point_position_error",
+      "errorName": "小数点定位错误",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M5S1-8",
+      "knowledgeName": "人民币保留两位小数应用",
+      "level": "B",
+      "errorCode": "decimal_mul_carry_error",
+      "errorName": "小数乘法进位错误",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M5S1-8",
+      "knowledgeName": "人民币保留两位小数应用",
+      "level": "B",
+      "errorCode": "decimal_mul_factor_change_error",
+      "errorName": "因数变化规律应用错误",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M5S1-9",
+      "knowledgeName": "乘法交换律、结合律、分配律",
+      "level": "B",
+      "errorCode": "decimal_point_position_error",
+      "errorName": "小数点定位错误",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M5S1-9",
+      "knowledgeName": "乘法交换律、结合律、分配律",
+      "level": "B",
+      "errorCode": "decimal_mul_carry_error",
+      "errorName": "小数乘法进位错误",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M5S1-9",
+      "knowledgeName": "乘法交换律、结合律、分配律",
+      "level": "B",
+      "errorCode": "decimal_mul_factor_change_error",
+      "errorName": "因数变化规律应用错误",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M5S2-0",
+      "knowledgeName": "根据多个方向的视图还原物体",
+      "level": "B",
+      "errorCode": "spatial_view_mismatch",
+      "errorName": "三视图还原错误",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M5S2-1",
+      "knowledgeName": "因数和倍数的意义",
+      "level": "A",
+      "errorCode": "factor_multiple_confusion",
+      "errorName": "因数倍数概念混淆",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S2-1",
+      "knowledgeName": "因数和倍数的意义",
+      "level": "A",
+      "errorCode": "prime_composite_confusion",
+      "errorName": "质数合数分类错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S2-1",
+      "knowledgeName": "因数和倍数的意义",
+      "level": "A",
+      "errorCode": "divisibility_rule_3_error",
+      "errorName": "3的倍数特征应用错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S2-10",
+      "knowledgeName": "实际生活中的表面积应用",
+      "level": "A",
+      "errorCode": "surface_volume_confusion",
+      "errorName": "表面积体积混淆",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S2-10",
+      "knowledgeName": "实际生活中的表面积应用",
+      "level": "A",
+      "errorCode": "unit_conversion_error",
+      "errorName": "体积/长度单位换算错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S2-10",
+      "knowledgeName": "实际生活中的表面积应用",
+      "level": "A",
+      "errorCode": "capacity_volume_confusion",
+      "errorName": "容积体积混淆",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S2-11",
+      "knowledgeName": "体积的概念和单位",
+      "level": "A",
+      "errorCode": "surface_volume_confusion",
+      "errorName": "表面积体积混淆",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S2-11",
+      "knowledgeName": "体积的概念和单位",
+      "level": "A",
+      "errorCode": "unit_conversion_error",
+      "errorName": "体积/长度单位换算错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S2-11",
+      "knowledgeName": "体积的概念和单位",
+      "level": "A",
+      "errorCode": "capacity_volume_confusion",
+      "errorName": "容积体积混淆",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S2-12",
+      "knowledgeName": "长方体正方体体积公式",
+      "level": "A",
+      "errorCode": "surface_volume_confusion",
+      "errorName": "表面积体积混淆",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S2-12",
+      "knowledgeName": "长方体正方体体积公式",
+      "level": "A",
+      "errorCode": "unit_conversion_error",
+      "errorName": "体积/长度单位换算错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S2-12",
+      "knowledgeName": "长方体正方体体积公式",
+      "level": "A",
+      "errorCode": "capacity_volume_confusion",
+      "errorName": "容积体积混淆",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S2-13",
+      "knowledgeName": "容积的概念",
+      "level": "A",
+      "errorCode": "surface_volume_confusion",
+      "errorName": "表面积体积混淆",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S2-13",
+      "knowledgeName": "容积的概念",
+      "level": "A",
+      "errorCode": "unit_conversion_error",
+      "errorName": "体积/长度单位换算错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S2-13",
+      "knowledgeName": "容积的概念",
+      "level": "A",
+      "errorCode": "capacity_volume_confusion",
+      "errorName": "容积体积混淆",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S2-14",
+      "knowledgeName": "综合应用题",
+      "level": "A",
+      "errorCode": "surface_volume_confusion",
+      "errorName": "表面积体积混淆",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S2-14",
+      "knowledgeName": "综合应用题",
+      "level": "A",
+      "errorCode": "unit_conversion_error",
+      "errorName": "体积/长度单位换算错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S2-14",
+      "knowledgeName": "综合应用题",
+      "level": "A",
+      "errorCode": "capacity_volume_confusion",
+      "errorName": "容积体积混淆",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S2-15",
+      "knowledgeName": "分数的产生与意义",
+      "level": "A",
+      "errorCode": "fraction_unit_error",
+      "errorName": "分数单位理解错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S2-15",
+      "knowledgeName": "分数的产生与意义",
+      "level": "A",
+      "errorCode": "fraction_compare_error",
+      "errorName": "分数大小比较错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S2-15",
+      "knowledgeName": "分数的产生与意义",
+      "level": "A",
+      "errorCode": "gcd_lcm_method_error",
+      "errorName": "最大公因数/最小公倍数方法错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S2-15",
+      "knowledgeName": "分数的产生与意义",
+      "level": "A",
+      "errorCode": "fraction_decimal_convert_error",
+      "errorName": "分数小数互化错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S2-16",
+      "knowledgeName": "真假分数的区分",
+      "level": "A",
+      "errorCode": "fraction_unit_error",
+      "errorName": "分数单位理解错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S2-16",
+      "knowledgeName": "真假分数的区分",
+      "level": "A",
+      "errorCode": "fraction_compare_error",
+      "errorName": "分数大小比较错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S2-16",
+      "knowledgeName": "真假分数的区分",
+      "level": "A",
+      "errorCode": "gcd_lcm_method_error",
+      "errorName": "最大公因数/最小公倍数方法错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S2-16",
+      "knowledgeName": "真假分数的区分",
+      "level": "A",
+      "errorCode": "fraction_decimal_convert_error",
+      "errorName": "分数小数互化错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S2-17",
+      "knowledgeName": "分数的基本性质",
+      "level": "A",
+      "errorCode": "fraction_unit_error",
+      "errorName": "分数单位理解错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S2-17",
+      "knowledgeName": "分数的基本性质",
+      "level": "A",
+      "errorCode": "fraction_compare_error",
+      "errorName": "分数大小比较错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S2-17",
+      "knowledgeName": "分数的基本性质",
+      "level": "A",
+      "errorCode": "gcd_lcm_method_error",
+      "errorName": "最大公因数/最小公倍数方法错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S2-17",
+      "knowledgeName": "分数的基本性质",
+      "level": "A",
+      "errorCode": "fraction_decimal_convert_error",
+      "errorName": "分数小数互化错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S2-18",
+      "knowledgeName": "最大公因数和约分",
+      "level": "A",
+      "errorCode": "fraction_unit_error",
+      "errorName": "分数单位理解错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S2-18",
+      "knowledgeName": "最大公因数和约分",
+      "level": "A",
+      "errorCode": "fraction_compare_error",
+      "errorName": "分数大小比较错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S2-18",
+      "knowledgeName": "最大公因数和约分",
+      "level": "A",
+      "errorCode": "gcd_lcm_method_error",
+      "errorName": "最大公因数/最小公倍数方法错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S2-18",
+      "knowledgeName": "最大公因数和约分",
+      "level": "A",
+      "errorCode": "fraction_decimal_convert_error",
+      "errorName": "分数小数互化错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S2-19",
+      "knowledgeName": "最小公倍数和通分",
+      "level": "A",
+      "errorCode": "fraction_unit_error",
+      "errorName": "分数单位理解错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S2-19",
+      "knowledgeName": "最小公倍数和通分",
+      "level": "A",
+      "errorCode": "fraction_compare_error",
+      "errorName": "分数大小比较错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S2-19",
+      "knowledgeName": "最小公倍数和通分",
+      "level": "A",
+      "errorCode": "gcd_lcm_method_error",
+      "errorName": "最大公因数/最小公倍数方法错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S2-19",
+      "knowledgeName": "最小公倍数和通分",
+      "level": "A",
+      "errorCode": "fraction_decimal_convert_error",
+      "errorName": "分数小数互化错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S2-2",
+      "knowledgeName": "求一个数的因数",
+      "level": "A",
+      "errorCode": "factor_multiple_confusion",
+      "errorName": "因数倍数概念混淆",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S2-2",
+      "knowledgeName": "求一个数的因数",
+      "level": "A",
+      "errorCode": "prime_composite_confusion",
+      "errorName": "质数合数分类错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S2-2",
+      "knowledgeName": "求一个数的因数",
+      "level": "A",
+      "errorCode": "divisibility_rule_3_error",
+      "errorName": "3的倍数特征应用错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S2-20",
+      "knowledgeName": "分数与小数互化方法",
+      "level": "A",
+      "errorCode": "fraction_unit_error",
+      "errorName": "分数单位理解错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S2-20",
+      "knowledgeName": "分数与小数互化方法",
+      "level": "A",
+      "errorCode": "fraction_compare_error",
+      "errorName": "分数大小比较错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S2-20",
+      "knowledgeName": "分数与小数互化方法",
+      "level": "A",
+      "errorCode": "gcd_lcm_method_error",
+      "errorName": "最大公因数/最小公倍数方法错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S2-20",
+      "knowledgeName": "分数与小数互化方法",
+      "level": "A",
+      "errorCode": "fraction_decimal_convert_error",
+      "errorName": "分数小数互化错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S2-21",
+      "knowledgeName": "图形的旋转",
+      "level": "B",
+      "errorCode": "rotation_angle_error",
+      "errorName": "旋转角度/方向错误",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M5S2-21",
+      "knowledgeName": "图形的旋转",
+      "level": "B",
+      "errorCode": "rotation_center_error",
+      "errorName": "旋转中心判断错误",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M5S2-22",
+      "knowledgeName": "同分母分数加减计算",
+      "level": "A",
+      "errorCode": "fraction_add_denominator_error",
+      "errorName": "异分母加减不分母处理错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S2-22",
+      "knowledgeName": "同分母分数加减计算",
+      "level": "A",
+      "errorCode": "fraction_mixed_number_error",
+      "errorName": "带分数运算错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S2-22",
+      "knowledgeName": "同分母分数加减计算",
+      "level": "A",
+      "errorCode": "fraction_add_sub_word_mapping_error",
+      "errorName": "分数加减应用题建模错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S2-23",
+      "knowledgeName": "异分母分数加减(先通分)",
+      "level": "A",
+      "errorCode": "fraction_add_denominator_error",
+      "errorName": "异分母加减不分母处理错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S2-23",
+      "knowledgeName": "异分母分数加减(先通分)",
+      "level": "A",
+      "errorCode": "fraction_mixed_number_error",
+      "errorName": "带分数运算错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S2-23",
+      "knowledgeName": "异分母分数加减(先通分)",
+      "level": "A",
+      "errorCode": "fraction_add_sub_word_mapping_error",
+      "errorName": "分数加减应用题建模错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S2-24",
+      "knowledgeName": "分数加减混合运算",
+      "level": "A",
+      "errorCode": "fraction_add_denominator_error",
+      "errorName": "异分母加减不分母处理错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S2-24",
+      "knowledgeName": "分数加减混合运算",
+      "level": "A",
+      "errorCode": "fraction_mixed_number_error",
+      "errorName": "带分数运算错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S2-24",
+      "knowledgeName": "分数加减混合运算",
+      "level": "A",
+      "errorCode": "fraction_add_sub_word_mapping_error",
+      "errorName": "分数加减应用题建模错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S2-25",
+      "knowledgeName": "单式折线统计图的认识",
+      "level": "B",
+      "errorCode": "line_chart_trend_error",
+      "errorName": "折线图趋势判读错误",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M5S2-25",
+      "knowledgeName": "单式折线统计图的认识",
+      "level": "B",
+      "errorCode": "dual_line_compare_error",
+      "errorName": "复式折线图比较错误",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M5S2-26",
+      "knowledgeName": "复式折线统计图比较",
+      "level": "B",
+      "errorCode": "line_chart_trend_error",
+      "errorName": "折线图趋势判读错误",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M5S2-26",
+      "knowledgeName": "复式折线统计图比较",
+      "level": "B",
+      "errorCode": "dual_line_compare_error",
+      "errorName": "复式折线图比较错误",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M5S2-27",
+      "knowledgeName": "用天平找次品的最少次数",
+      "level": "B",
+      "errorCode": "find_defective_logic_error",
+      "errorName": "找次品逻辑推理错误",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M5S2-28",
+      "knowledgeName": "探索和的奇偶性",
+      "level": "C",
+      "errorCode": "factor_multiple_confusion",
+      "errorName": "因数倍数概念混淆",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M5S2-28",
+      "knowledgeName": "探索和的奇偶性",
+      "level": "C",
+      "errorCode": "prime_composite_confusion",
+      "errorName": "质数合数分类错误",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M5S2-28",
+      "knowledgeName": "探索和的奇偶性",
+      "level": "C",
+      "errorCode": "divisibility_rule_3_error",
+      "errorName": "3的倍数特征应用错误",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M5S2-29",
+      "knowledgeName": "体积单位间的进率",
+      "level": "A",
+      "errorCode": "surface_volume_confusion",
+      "errorName": "表面积体积混淆",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S2-29",
+      "knowledgeName": "体积单位间的进率",
+      "level": "A",
+      "errorCode": "unit_conversion_error",
+      "errorName": "体积/长度单位换算错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S2-29",
+      "knowledgeName": "体积单位间的进率",
+      "level": "A",
+      "errorCode": "capacity_volume_confusion",
+      "errorName": "容积体积混淆",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S2-3",
+      "knowledgeName": "求一个数的倍数",
+      "level": "A",
+      "errorCode": "factor_multiple_confusion",
+      "errorName": "因数倍数概念混淆",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S2-3",
+      "knowledgeName": "求一个数的倍数",
+      "level": "A",
+      "errorCode": "prime_composite_confusion",
+      "errorName": "质数合数分类错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S2-3",
+      "knowledgeName": "求一个数的倍数",
+      "level": "A",
+      "errorCode": "divisibility_rule_3_error",
+      "errorName": "3的倍数特征应用错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S2-30",
+      "knowledgeName": "不规则物体的体积测量",
+      "level": "B",
+      "errorCode": "surface_volume_confusion",
+      "errorName": "表面积体积混淆",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M5S2-30",
+      "knowledgeName": "不规则物体的体积测量",
+      "level": "B",
+      "errorCode": "unit_conversion_error",
+      "errorName": "体积/长度单位换算错误",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M5S2-30",
+      "knowledgeName": "不规则物体的体积测量",
+      "level": "B",
+      "errorCode": "capacity_volume_confusion",
+      "errorName": "容积体积混淆",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M5S2-31",
+      "knowledgeName": "分数与除法的关系",
+      "level": "A",
+      "errorCode": "fraction_unit_error",
+      "errorName": "分数单位理解错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S2-31",
+      "knowledgeName": "分数与除法的关系",
+      "level": "A",
+      "errorCode": "fraction_compare_error",
+      "errorName": "分数大小比较错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S2-31",
+      "knowledgeName": "分数与除法的关系",
+      "level": "A",
+      "errorCode": "gcd_lcm_method_error",
+      "errorName": "最大公因数/最小公倍数方法错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S2-31",
+      "knowledgeName": "分数与除法的关系",
+      "level": "A",
+      "errorCode": "fraction_decimal_convert_error",
+      "errorName": "分数小数互化错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S2-32",
+      "knowledgeName": "用旋转解决实际问题",
+      "level": "C",
+      "errorCode": "rotation_angle_error",
+      "errorName": "旋转角度/方向错误",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M5S2-32",
+      "knowledgeName": "用旋转解决实际问题",
+      "level": "C",
+      "errorCode": "rotation_center_error",
+      "errorName": "旋转中心判断错误",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M5S2-33",
+      "knowledgeName": "分数加减法应用题",
+      "level": "B",
+      "errorCode": "fraction_add_denominator_error",
+      "errorName": "异分母加减不分母处理错误",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M5S2-33",
+      "knowledgeName": "分数加减法应用题",
+      "level": "B",
+      "errorCode": "fraction_mixed_number_error",
+      "errorName": "带分数运算错误",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M5S2-33",
+      "knowledgeName": "分数加减法应用题",
+      "level": "B",
+      "errorCode": "fraction_add_sub_word_mapping_error",
+      "errorName": "分数加减应用题建模错误",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M5S2-4",
+      "knowledgeName": "2和5的倍数特征",
+      "level": "A",
+      "errorCode": "factor_multiple_confusion",
+      "errorName": "因数倍数概念混淆",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S2-4",
+      "knowledgeName": "2和5的倍数特征",
+      "level": "A",
+      "errorCode": "prime_composite_confusion",
+      "errorName": "质数合数分类错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S2-4",
+      "knowledgeName": "2和5的倍数特征",
+      "level": "A",
+      "errorCode": "divisibility_rule_3_error",
+      "errorName": "3的倍数特征应用错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S2-5",
+      "knowledgeName": "3的倍数特征",
+      "level": "A",
+      "errorCode": "factor_multiple_confusion",
+      "errorName": "因数倍数概念混淆",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S2-5",
+      "knowledgeName": "3的倍数特征",
+      "level": "A",
+      "errorCode": "prime_composite_confusion",
+      "errorName": "质数合数分类错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S2-5",
+      "knowledgeName": "3的倍数特征",
+      "level": "A",
+      "errorCode": "divisibility_rule_3_error",
+      "errorName": "3的倍数特征应用错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S2-6",
+      "knowledgeName": "质数和合数",
+      "level": "A",
+      "errorCode": "factor_multiple_confusion",
+      "errorName": "因数倍数概念混淆",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S2-6",
+      "knowledgeName": "质数和合数",
+      "level": "A",
+      "errorCode": "prime_composite_confusion",
+      "errorName": "质数合数分类错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S2-6",
+      "knowledgeName": "质数和合数",
+      "level": "A",
+      "errorCode": "divisibility_rule_3_error",
+      "errorName": "3的倍数特征应用错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S2-7",
+      "knowledgeName": "长方体的特征",
+      "level": "A",
+      "errorCode": "surface_volume_confusion",
+      "errorName": "表面积体积混淆",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S2-7",
+      "knowledgeName": "长方体的特征",
+      "level": "A",
+      "errorCode": "unit_conversion_error",
+      "errorName": "体积/长度单位换算错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S2-7",
+      "knowledgeName": "长方体的特征",
+      "level": "A",
+      "errorCode": "capacity_volume_confusion",
+      "errorName": "容积体积混淆",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S2-8",
+      "knowledgeName": "正方体的特征及与长方体关系",
+      "level": "A",
+      "errorCode": "surface_volume_confusion",
+      "errorName": "表面积体积混淆",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S2-8",
+      "knowledgeName": "正方体的特征及与长方体关系",
+      "level": "A",
+      "errorCode": "unit_conversion_error",
+      "errorName": "体积/长度单位换算错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S2-8",
+      "knowledgeName": "正方体的特征及与长方体关系",
+      "level": "A",
+      "errorCode": "capacity_volume_confusion",
+      "errorName": "容积体积混淆",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S2-9",
+      "knowledgeName": "长方体表面积计算",
+      "level": "A",
+      "errorCode": "surface_volume_confusion",
+      "errorName": "表面积体积混淆",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S2-9",
+      "knowledgeName": "长方体表面积计算",
+      "level": "A",
+      "errorCode": "unit_conversion_error",
+      "errorName": "体积/长度单位换算错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S2-9",
+      "knowledgeName": "长方体表面积计算",
+      "level": "A",
+      "errorCode": "capacity_volume_confusion",
+      "errorName": "容积体积混淆",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M6S1-0",
+      "knowledgeName": "分数乘整数的意义",
+      "level": "A",
+      "errorCode": "fraction_mul_cancel_error",
+      "errorName": "分数乘法约分遗漏",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M6S1-0",
+      "knowledgeName": "分数乘整数的意义",
+      "level": "A",
+      "errorCode": "fraction_mul_word_unit_error",
+      "errorName": "分数乘法单位'1'找错",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M6S1-0",
+      "knowledgeName": "分数乘整数的意义",
+      "level": "A",
+      "errorCode": "fraction_mul_mixed_error",
+      "errorName": "分数混合运算错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M6S1-1",
+      "knowledgeName": "分数乘整数计算法则",
+      "level": "A",
+      "errorCode": "fraction_mul_cancel_error",
+      "errorName": "分数乘法约分遗漏",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M6S1-1",
+      "knowledgeName": "分数乘整数计算法则",
+      "level": "A",
+      "errorCode": "fraction_mul_word_unit_error",
+      "errorName": "分数乘法单位'1'找错",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M6S1-1",
+      "knowledgeName": "分数乘整数计算法则",
+      "level": "A",
+      "errorCode": "fraction_mul_mixed_error",
+      "errorName": "分数混合运算错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M6S1-10",
+      "knowledgeName": "用方向和距离描述位置",
+      "level": "B",
+      "errorCode": "direction_angle_error",
+      "errorName": "方向角度描述错误",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M6S1-10",
+      "knowledgeName": "用方向和距离描述位置",
+      "level": "B",
+      "errorCode": "direction_reference_error",
+      "errorName": "方向参照点混淆",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M6S1-11",
+      "knowledgeName": "根据描述绘制简单路线图",
+      "level": "B",
+      "errorCode": "direction_angle_error",
+      "errorName": "方向角度描述错误",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M6S1-11",
+      "knowledgeName": "根据描述绘制简单路线图",
+      "level": "B",
+      "errorCode": "direction_reference_error",
+      "errorName": "方向参照点混淆",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M6S1-12",
+      "knowledgeName": "倒数的意义和判定",
+      "level": "A",
+      "errorCode": "reciprocal_confusion",
+      "errorName": "倒数概念混淆",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M6S1-12",
+      "knowledgeName": "倒数的意义和判定",
+      "level": "A",
+      "errorCode": "fraction_div_word_unit_error",
+      "errorName": "分数除法单位'1'找错",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M6S1-12",
+      "knowledgeName": "倒数的意义和判定",
+      "level": "A",
+      "errorCode": "engineering_work_unit_error",
+      "errorName": "工程问题单位'1'处理错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M6S1-13",
+      "knowledgeName": "求一个数的倒数",
+      "level": "A",
+      "errorCode": "reciprocal_confusion",
+      "errorName": "倒数概念混淆",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M6S1-13",
+      "knowledgeName": "求一个数的倒数",
+      "level": "A",
+      "errorCode": "fraction_div_word_unit_error",
+      "errorName": "分数除法单位'1'找错",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M6S1-13",
+      "knowledgeName": "求一个数的倒数",
+      "level": "A",
+      "errorCode": "engineering_work_unit_error",
+      "errorName": "工程问题单位'1'处理错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M6S1-14",
+      "knowledgeName": "分数除以整数的算法",
+      "level": "A",
+      "errorCode": "reciprocal_confusion",
+      "errorName": "倒数概念混淆",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M6S1-14",
+      "knowledgeName": "分数除以整数的算法",
+      "level": "A",
+      "errorCode": "fraction_div_word_unit_error",
+      "errorName": "分数除法单位'1'找错",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M6S1-14",
+      "knowledgeName": "分数除以整数的算法",
+      "level": "A",
+      "errorCode": "engineering_work_unit_error",
+      "errorName": "工程问题单位'1'处理错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M6S1-15",
+      "knowledgeName": "一个数除以分数的算法",
+      "level": "A",
+      "errorCode": "reciprocal_confusion",
+      "errorName": "倒数概念混淆",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M6S1-15",
+      "knowledgeName": "一个数除以分数的算法",
+      "level": "A",
+      "errorCode": "fraction_div_word_unit_error",
+      "errorName": "分数除法单位'1'找错",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M6S1-15",
+      "knowledgeName": "一个数除以分数的算法",
+      "level": "A",
+      "errorCode": "engineering_work_unit_error",
+      "errorName": "工程问题单位'1'处理错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M6S1-16",
+      "knowledgeName": "分数除法的统一计算法则",
+      "level": "A",
+      "errorCode": "reciprocal_confusion",
+      "errorName": "倒数概念混淆",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M6S1-16",
+      "knowledgeName": "分数除法的统一计算法则",
+      "level": "A",
+      "errorCode": "fraction_div_word_unit_error",
+      "errorName": "分数除法单位'1'找错",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M6S1-16",
+      "knowledgeName": "分数除法的统一计算法则",
+      "level": "A",
+      "errorCode": "engineering_work_unit_error",
+      "errorName": "工程问题单位'1'处理错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M6S1-17",
+      "knowledgeName": "分数四则混合运算",
+      "level": "A",
+      "errorCode": "reciprocal_confusion",
+      "errorName": "倒数概念混淆",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M6S1-17",
+      "knowledgeName": "分数四则混合运算",
+      "level": "A",
+      "errorCode": "fraction_div_word_unit_error",
+      "errorName": "分数除法单位'1'找错",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M6S1-17",
+      "knowledgeName": "分数四则混合运算",
+      "level": "A",
+      "errorCode": "engineering_work_unit_error",
+      "errorName": "工程问题单位'1'处理错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M6S1-18",
+      "knowledgeName": "已知一个数的几分之几是多少求这个数",
+      "level": "A",
+      "errorCode": "reciprocal_confusion",
+      "errorName": "倒数概念混淆",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M6S1-18",
+      "knowledgeName": "已知一个数的几分之几是多少求这个数",
+      "level": "A",
+      "errorCode": "fraction_div_word_unit_error",
+      "errorName": "分数除法单位'1'找错",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M6S1-18",
+      "knowledgeName": "已知一个数的几分之几是多少求这个数",
+      "level": "A",
+      "errorCode": "engineering_work_unit_error",
+      "errorName": "工程问题单位'1'处理错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M6S1-19",
+      "knowledgeName": "工程问题",
+      "level": "A",
+      "errorCode": "reciprocal_confusion",
+      "errorName": "倒数概念混淆",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M6S1-19",
+      "knowledgeName": "工程问题",
+      "level": "A",
+      "errorCode": "fraction_div_word_unit_error",
+      "errorName": "分数除法单位'1'找错",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M6S1-19",
+      "knowledgeName": "工程问题",
+      "level": "A",
+      "errorCode": "engineering_work_unit_error",
+      "errorName": "工程问题单位'1'处理错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M6S1-2",
+      "knowledgeName": "分数乘分数的算理",
+      "level": "A",
+      "errorCode": "fraction_mul_cancel_error",
+      "errorName": "分数乘法约分遗漏",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M6S1-2",
+      "knowledgeName": "分数乘分数的算理",
+      "level": "A",
+      "errorCode": "fraction_mul_word_unit_error",
+      "errorName": "分数乘法单位'1'找错",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M6S1-2",
+      "knowledgeName": "分数乘分数的算理",
+      "level": "A",
+      "errorCode": "fraction_mul_mixed_error",
+      "errorName": "分数混合运算错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M6S1-20",
+      "knowledgeName": "比的定义与各部分名称",
+      "level": "A",
+      "errorCode": "ratio_meaning_confusion",
+      "errorName": "比的意义混淆",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M6S1-20",
+      "knowledgeName": "比的定义与各部分名称",
+      "level": "A",
+      "errorCode": "ratio_simplify_error",
+      "errorName": "化简比方法错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M6S1-20",
+      "knowledgeName": "比的定义与各部分名称",
+      "level": "A",
+      "errorCode": "ratio_application_formula_error",
+      "errorName": "按比分配方法错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M6S1-21",
+      "knowledgeName": "比与除法、分数的关系",
+      "level": "A",
+      "errorCode": "ratio_meaning_confusion",
+      "errorName": "比的意义混淆",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M6S1-21",
+      "knowledgeName": "比与除法、分数的关系",
+      "level": "A",
+      "errorCode": "ratio_simplify_error",
+      "errorName": "化简比方法错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M6S1-21",
+      "knowledgeName": "比与除法、分数的关系",
+      "level": "A",
+      "errorCode": "ratio_application_formula_error",
+      "errorName": "按比分配方法错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M6S1-22",
+      "knowledgeName": "比的基本性质",
+      "level": "A",
+      "errorCode": "ratio_meaning_confusion",
+      "errorName": "比的意义混淆",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M6S1-22",
+      "knowledgeName": "比的基本性质",
+      "level": "A",
+      "errorCode": "ratio_simplify_error",
+      "errorName": "化简比方法错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M6S1-22",
+      "knowledgeName": "比的基本性质",
+      "level": "A",
+      "errorCode": "ratio_application_formula_error",
+      "errorName": "按比分配方法错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M6S1-23",
+      "knowledgeName": "化简比",
+      "level": "A",
+      "errorCode": "ratio_meaning_confusion",
+      "errorName": "比的意义混淆",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M6S1-23",
+      "knowledgeName": "化简比",
+      "level": "A",
+      "errorCode": "ratio_simplify_error",
+      "errorName": "化简比方法错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M6S1-23",
+      "knowledgeName": "化简比",
+      "level": "A",
+      "errorCode": "ratio_application_formula_error",
+      "errorName": "按比分配方法错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M6S1-24",
+      "knowledgeName": "按比分配问题",
+      "level": "B",
+      "errorCode": "ratio_meaning_confusion",
+      "errorName": "比的意义混淆",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M6S1-24",
+      "knowledgeName": "按比分配问题",
+      "level": "B",
+      "errorCode": "ratio_simplify_error",
+      "errorName": "化简比方法错误",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M6S1-24",
+      "knowledgeName": "按比分配问题",
+      "level": "B",
+      "errorCode": "ratio_application_formula_error",
+      "errorName": "按比分配方法错误",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M6S1-25",
+      "knowledgeName": "圆心、半径、直径的概念",
+      "level": "C",
+      "errorCode": "radius_diameter_confusion",
+      "errorName": "半径直径混淆",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M6S1-25",
+      "knowledgeName": "圆心、半径、直径的概念",
+      "level": "C",
+      "errorCode": "pi_formula_misapply",
+      "errorName": "圆周率相关公式误用",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M6S1-25",
+      "knowledgeName": "圆心、半径、直径的概念",
+      "level": "C",
+      "errorCode": "circle_area_circumference_confusion",
+      "errorName": "圆面积周长混淆",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M6S1-25",
+      "knowledgeName": "圆心、半径、直径的概念",
+      "level": "C",
+      "errorCode": "ring_sector_error",
+      "errorName": "圆环/扇形计算错误",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M6S1-26",
+      "knowledgeName": "圆的对称性",
+      "level": "C",
+      "errorCode": "radius_diameter_confusion",
+      "errorName": "半径直径混淆",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M6S1-26",
+      "knowledgeName": "圆的对称性",
+      "level": "C",
+      "errorCode": "pi_formula_misapply",
+      "errorName": "圆周率相关公式误用",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M6S1-26",
+      "knowledgeName": "圆的对称性",
+      "level": "C",
+      "errorCode": "circle_area_circumference_confusion",
+      "errorName": "圆面积周长混淆",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M6S1-26",
+      "knowledgeName": "圆的对称性",
+      "level": "C",
+      "errorCode": "ring_sector_error",
+      "errorName": "圆环/扇形计算错误",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M6S1-27",
+      "knowledgeName": "圆周率π的认识",
+      "level": "A",
+      "errorCode": "radius_diameter_confusion",
+      "errorName": "半径直径混淆",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M6S1-27",
+      "knowledgeName": "圆周率π的认识",
+      "level": "A",
+      "errorCode": "pi_formula_misapply",
+      "errorName": "圆周率相关公式误用",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M6S1-27",
+      "knowledgeName": "圆周率π的认识",
+      "level": "A",
+      "errorCode": "circle_area_circumference_confusion",
+      "errorName": "圆面积周长混淆",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M6S1-27",
+      "knowledgeName": "圆周率π的认识",
+      "level": "A",
+      "errorCode": "ring_sector_error",
+      "errorName": "圆环/扇形计算错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M6S1-28",
+      "knowledgeName": "圆的周长公式 C=2πr 或 C=πd",
+      "level": "A",
+      "errorCode": "radius_diameter_confusion",
+      "errorName": "半径直径混淆",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M6S1-28",
+      "knowledgeName": "圆的周长公式 C=2πr 或 C=πd",
+      "level": "A",
+      "errorCode": "pi_formula_misapply",
+      "errorName": "圆周率相关公式误用",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M6S1-28",
+      "knowledgeName": "圆的周长公式 C=2πr 或 C=πd",
+      "level": "A",
+      "errorCode": "circle_area_circumference_confusion",
+      "errorName": "圆面积周长混淆",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M6S1-28",
+      "knowledgeName": "圆的周长公式 C=2πr 或 C=πd",
+      "level": "A",
+      "errorCode": "ring_sector_error",
+      "errorName": "圆环/扇形计算错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M6S1-29",
+      "knowledgeName": "圆面积公式推导",
+      "level": "A",
+      "errorCode": "radius_diameter_confusion",
+      "errorName": "半径直径混淆",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M6S1-29",
+      "knowledgeName": "圆面积公式推导",
+      "level": "A",
+      "errorCode": "pi_formula_misapply",
+      "errorName": "圆周率相关公式误用",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M6S1-29",
+      "knowledgeName": "圆面积公式推导",
+      "level": "A",
+      "errorCode": "circle_area_circumference_confusion",
+      "errorName": "圆面积周长混淆",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M6S1-29",
+      "knowledgeName": "圆面积公式推导",
+      "level": "A",
+      "errorCode": "ring_sector_error",
+      "errorName": "圆环/扇形计算错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M6S1-3",
+      "knowledgeName": "分数乘分数计算法则",
+      "level": "A",
+      "errorCode": "fraction_mul_cancel_error",
+      "errorName": "分数乘法约分遗漏",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M6S1-3",
+      "knowledgeName": "分数乘分数计算法则",
+      "level": "A",
+      "errorCode": "fraction_mul_word_unit_error",
+      "errorName": "分数乘法单位'1'找错",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M6S1-3",
+      "knowledgeName": "分数乘分数计算法则",
+      "level": "A",
+      "errorCode": "fraction_mul_mixed_error",
+      "errorName": "分数混合运算错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M6S1-30",
+      "knowledgeName": "圆面积公式 S=πr²",
+      "level": "A",
+      "errorCode": "radius_diameter_confusion",
+      "errorName": "半径直径混淆",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M6S1-30",
+      "knowledgeName": "圆面积公式 S=πr²",
+      "level": "A",
+      "errorCode": "pi_formula_misapply",
+      "errorName": "圆周率相关公式误用",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M6S1-30",
+      "knowledgeName": "圆面积公式 S=πr²",
+      "level": "A",
+      "errorCode": "circle_area_circumference_confusion",
+      "errorName": "圆面积周长混淆",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M6S1-30",
+      "knowledgeName": "圆面积公式 S=πr²",
+      "level": "A",
+      "errorCode": "ring_sector_error",
+      "errorName": "圆环/扇形计算错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M6S1-31",
+      "knowledgeName": "扇形的认识",
+      "level": "C",
+      "errorCode": "radius_diameter_confusion",
+      "errorName": "半径直径混淆",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M6S1-31",
+      "knowledgeName": "扇形的认识",
+      "level": "C",
+      "errorCode": "pi_formula_misapply",
+      "errorName": "圆周率相关公式误用",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M6S1-31",
+      "knowledgeName": "扇形的认识",
+      "level": "C",
+      "errorCode": "circle_area_circumference_confusion",
+      "errorName": "圆面积周长混淆",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M6S1-31",
+      "knowledgeName": "扇形的认识",
+      "level": "C",
+      "errorCode": "ring_sector_error",
+      "errorName": "圆环/扇形计算错误",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M6S1-32",
+      "knowledgeName": "圆环面积计算",
+      "level": "B",
+      "errorCode": "radius_diameter_confusion",
+      "errorName": "半径直径混淆",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M6S1-32",
+      "knowledgeName": "圆环面积计算",
+      "level": "B",
+      "errorCode": "pi_formula_misapply",
+      "errorName": "圆周率相关公式误用",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M6S1-32",
+      "knowledgeName": "圆环面积计算",
+      "level": "B",
+      "errorCode": "circle_area_circumference_confusion",
+      "errorName": "圆面积周长混淆",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M6S1-32",
+      "knowledgeName": "圆环面积计算",
+      "level": "B",
+      "errorCode": "ring_sector_error",
+      "errorName": "圆环/扇形计算错误",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M6S1-33",
+      "knowledgeName": "圆与正方形的关系",
+      "level": "C",
+      "errorCode": "radius_diameter_confusion",
+      "errorName": "半径直径混淆",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M6S1-33",
+      "knowledgeName": "圆与正方形的关系",
+      "level": "C",
+      "errorCode": "pi_formula_misapply",
+      "errorName": "圆周率相关公式误用",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M6S1-33",
+      "knowledgeName": "圆与正方形的关系",
+      "level": "C",
+      "errorCode": "circle_area_circumference_confusion",
+      "errorName": "圆面积周长混淆",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M6S1-33",
+      "knowledgeName": "圆与正方形的关系",
+      "level": "C",
+      "errorCode": "ring_sector_error",
+      "errorName": "圆环/扇形计算错误",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M6S1-34",
+      "knowledgeName": "百分数的概念",
+      "level": "A",
+      "errorCode": "percent_standard_amount_error",
+      "errorName": "百分数标准量找错",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M6S1-34",
+      "knowledgeName": "百分数的概念",
+      "level": "A",
+      "errorCode": "percent_convert_direction_error",
+      "errorName": "百分数互化方向错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M6S1-34",
+      "knowledgeName": "百分数的概念",
+      "level": "A",
+      "errorCode": "percent_compare_error",
+      "errorName": "百分数大小比较错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M6S1-35",
+      "knowledgeName": "百分数与分数互化",
+      "level": "A",
+      "errorCode": "percent_standard_amount_error",
+      "errorName": "百分数标准量找错",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M6S1-35",
+      "knowledgeName": "百分数与分数互化",
+      "level": "A",
+      "errorCode": "percent_convert_direction_error",
+      "errorName": "百分数互化方向错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M6S1-35",
+      "knowledgeName": "百分数与分数互化",
+      "level": "A",
+      "errorCode": "percent_compare_error",
+      "errorName": "百分数大小比较错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M6S1-36",
+      "knowledgeName": "百分数与小数互化",
+      "level": "A",
+      "errorCode": "percent_standard_amount_error",
+      "errorName": "百分数标准量找错",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M6S1-36",
+      "knowledgeName": "百分数与小数互化",
+      "level": "A",
+      "errorCode": "percent_convert_direction_error",
+      "errorName": "百分数互化方向错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M6S1-36",
+      "knowledgeName": "百分数与小数互化",
+      "level": "A",
+      "errorCode": "percent_compare_error",
+      "errorName": "百分数大小比较错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M6S1-37",
+      "knowledgeName": "求一个数是另一个数的百分之几",
+      "level": "A",
+      "errorCode": "percent_standard_amount_error",
+      "errorName": "百分数标准量找错",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M6S1-37",
+      "knowledgeName": "求一个数是另一个数的百分之几",
+      "level": "A",
+      "errorCode": "percent_convert_direction_error",
+      "errorName": "百分数互化方向错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M6S1-37",
+      "knowledgeName": "求一个数是另一个数的百分之几",
+      "level": "A",
+      "errorCode": "percent_compare_error",
+      "errorName": "百分数大小比较错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M6S1-38",
+      "knowledgeName": "求一个数的百分之几是多少",
+      "level": "A",
+      "errorCode": "percent_standard_amount_error",
+      "errorName": "百分数标准量找错",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M6S1-38",
+      "knowledgeName": "求一个数的百分之几是多少",
+      "level": "A",
+      "errorCode": "percent_convert_direction_error",
+      "errorName": "百分数互化方向错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M6S1-38",
+      "knowledgeName": "求一个数的百分之几是多少",
+      "level": "A",
+      "errorCode": "percent_compare_error",
+      "errorName": "百分数大小比较错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M6S1-39",
+      "knowledgeName": "已知一个数的百分之几求这个数",
+      "level": "A",
+      "errorCode": "percent_standard_amount_error",
+      "errorName": "百分数标准量找错",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M6S1-39",
+      "knowledgeName": "已知一个数的百分之几求这个数",
+      "level": "A",
+      "errorCode": "percent_convert_direction_error",
+      "errorName": "百分数互化方向错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M6S1-39",
+      "knowledgeName": "已知一个数的百分之几求这个数",
+      "level": "A",
+      "errorCode": "percent_compare_error",
+      "errorName": "百分数大小比较错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M6S1-4",
+      "knowledgeName": "计算时先约分再相乘",
+      "level": "A",
+      "errorCode": "fraction_mul_cancel_error",
+      "errorName": "分数乘法约分遗漏",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M6S1-4",
+      "knowledgeName": "计算时先约分再相乘",
+      "level": "A",
+      "errorCode": "fraction_mul_word_unit_error",
+      "errorName": "分数乘法单位'1'找错",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M6S1-4",
+      "knowledgeName": "计算时先约分再相乘",
+      "level": "A",
+      "errorCode": "fraction_mul_mixed_error",
+      "errorName": "分数混合运算错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M6S1-40",
+      "knowledgeName": "扇形统计图的特点",
+      "level": "B",
+      "errorCode": "pie_chart_ratio_error",
+      "errorName": "扇形统计图比例读取错误",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M6S1-40",
+      "knowledgeName": "扇形统计图的特点",
+      "level": "B",
+      "errorCode": "chart_type_select_error",
+      "errorName": "统计图类型选择错误",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M6S1-41",
+      "knowledgeName": "条形、折线、扇形统计图选用",
+      "level": "B",
+      "errorCode": "pie_chart_ratio_error",
+      "errorName": "扇形统计图比例读取错误",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M6S1-41",
+      "knowledgeName": "条形、折线、扇形统计图选用",
+      "level": "B",
+      "errorCode": "chart_type_select_error",
+      "errorName": "统计图类型选择错误",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M6S1-42",
+      "knowledgeName": "数形结合解决数学问题",
+      "level": "B",
+      "errorCode": "number_shape_pattern_failure",
+      "errorName": "数形结合规律发现失败",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M6S1-43",
+      "knowledgeName": "分数乘除法综合",
+      "level": "C",
+      "errorCode": "mixed_topic_confusion",
+      "errorName": "总复习综合混淆",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M6S1-44",
+      "knowledgeName": "比与百分数综合应用",
+      "level": "C",
+      "errorCode": "mixed_topic_confusion",
+      "errorName": "总复习综合混淆",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M6S1-45",
+      "knowledgeName": "圆相关公式总结",
+      "level": "C",
+      "errorCode": "mixed_topic_confusion",
+      "errorName": "总复习综合混淆",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M6S1-46",
+      "knowledgeName": "统计图综合判读",
+      "level": "C",
+      "errorCode": "mixed_topic_confusion",
+      "errorName": "总复习综合混淆",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M6S1-5",
+      "knowledgeName": "小数乘分数的灵活转化",
+      "level": "B",
+      "errorCode": "fraction_mul_cancel_error",
+      "errorName": "分数乘法约分遗漏",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M6S1-5",
+      "knowledgeName": "小数乘分数的灵活转化",
+      "level": "B",
+      "errorCode": "fraction_mul_word_unit_error",
+      "errorName": "分数乘法单位'1'找错",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M6S1-5",
+      "knowledgeName": "小数乘分数的灵活转化",
+      "level": "B",
+      "errorCode": "fraction_mul_mixed_error",
+      "errorName": "分数混合运算错误",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M6S1-6",
+      "knowledgeName": "分数四则混合运算顺序",
+      "level": "B",
+      "errorCode": "fraction_mul_cancel_error",
+      "errorName": "分数乘法约分遗漏",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M6S1-6",
+      "knowledgeName": "分数四则混合运算顺序",
+      "level": "B",
+      "errorCode": "fraction_mul_word_unit_error",
+      "errorName": "分数乘法单位'1'找错",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M6S1-6",
+      "knowledgeName": "分数四则混合运算顺序",
+      "level": "B",
+      "errorCode": "fraction_mul_mixed_error",
+      "errorName": "分数混合运算错误",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M6S1-7",
+      "knowledgeName": "整数乘法运算定律推广到分数",
+      "level": "B",
+      "errorCode": "fraction_mul_cancel_error",
+      "errorName": "分数乘法约分遗漏",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M6S1-7",
+      "knowledgeName": "整数乘法运算定律推广到分数",
+      "level": "B",
+      "errorCode": "fraction_mul_word_unit_error",
+      "errorName": "分数乘法单位'1'找错",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M6S1-7",
+      "knowledgeName": "整数乘法运算定律推广到分数",
+      "level": "B",
+      "errorCode": "fraction_mul_mixed_error",
+      "errorName": "分数混合运算错误",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M6S1-8",
+      "knowledgeName": "求一个数的几分之几是多少",
+      "level": "B",
+      "errorCode": "fraction_mul_cancel_error",
+      "errorName": "分数乘法约分遗漏",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M6S1-8",
+      "knowledgeName": "求一个数的几分之几是多少",
+      "level": "B",
+      "errorCode": "fraction_mul_word_unit_error",
+      "errorName": "分数乘法单位'1'找错",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M6S1-8",
+      "knowledgeName": "求一个数的几分之几是多少",
+      "level": "B",
+      "errorCode": "fraction_mul_mixed_error",
+      "errorName": "分数混合运算错误",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M6S1-9",
+      "knowledgeName": "连续求一个数的几分之几",
+      "level": "B",
+      "errorCode": "fraction_mul_cancel_error",
+      "errorName": "分数乘法约分遗漏",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M6S1-9",
+      "knowledgeName": "连续求一个数的几分之几",
+      "level": "B",
+      "errorCode": "fraction_mul_word_unit_error",
+      "errorName": "分数乘法单位'1'找错",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M6S1-9",
+      "knowledgeName": "连续求一个数的几分之几",
+      "level": "B",
+      "errorCode": "fraction_mul_mixed_error",
+      "errorName": "分数混合运算错误",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M6S2-0",
+      "knowledgeName": "负数的意义",
+      "level": "A",
+      "errorCode": "negative_concept_error",
+      "errorName": "负数概念理解错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M6S2-0",
+      "knowledgeName": "负数的意义",
+      "level": "A",
+      "errorCode": "negative_numberline_placement",
+      "errorName": "负数数轴定位错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M6S2-0",
+      "knowledgeName": "负数的意义",
+      "level": "A",
+      "errorCode": "negative_compare_absolute_error",
+      "errorName": "负数大小比较绝对值混淆",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M6S2-1",
+      "knowledgeName": "负数的读写法",
+      "level": "C",
+      "errorCode": "negative_concept_error",
+      "errorName": "负数概念理解错误",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M6S2-1",
+      "knowledgeName": "负数的读写法",
+      "level": "C",
+      "errorCode": "negative_numberline_placement",
+      "errorName": "负数数轴定位错误",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M6S2-1",
+      "knowledgeName": "负数的读写法",
+      "level": "C",
+      "errorCode": "negative_compare_absolute_error",
+      "errorName": "负数大小比较绝对值混淆",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M6S2-10",
+      "knowledgeName": "圆柱侧面积公式 S侧=πd×h",
+      "level": "A",
+      "errorCode": "cylinder_surface_formula_error",
+      "errorName": "圆柱表面积公式错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M6S2-10",
+      "knowledgeName": "圆柱侧面积公式 S侧=πd×h",
+      "level": "A",
+      "errorCode": "cylinder_cone_volume_confusion",
+      "errorName": "圆柱圆锥体积混淆",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M6S2-10",
+      "knowledgeName": "圆柱侧面积公式 S侧=πd×h",
+      "level": "A",
+      "errorCode": "cone_third_factor_error",
+      "errorName": "圆锥体积⅓遗漏",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M6S2-11",
+      "knowledgeName": "圆柱表面积公式 S=2πr²+2πrh",
+      "level": "A",
+      "errorCode": "cylinder_surface_formula_error",
+      "errorName": "圆柱表面积公式错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M6S2-11",
+      "knowledgeName": "圆柱表面积公式 S=2πr²+2πrh",
+      "level": "A",
+      "errorCode": "cylinder_cone_volume_confusion",
+      "errorName": "圆柱圆锥体积混淆",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M6S2-11",
+      "knowledgeName": "圆柱表面积公式 S=2πr²+2πrh",
+      "level": "A",
+      "errorCode": "cone_third_factor_error",
+      "errorName": "圆锥体积⅓遗漏",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M6S2-12",
+      "knowledgeName": "圆柱体积公式 V=πr²h",
+      "level": "A",
+      "errorCode": "cylinder_surface_formula_error",
+      "errorName": "圆柱表面积公式错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M6S2-12",
+      "knowledgeName": "圆柱体积公式 V=πr²h",
+      "level": "A",
+      "errorCode": "cylinder_cone_volume_confusion",
+      "errorName": "圆柱圆锥体积混淆",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M6S2-12",
+      "knowledgeName": "圆柱体积公式 V=πr²h",
+      "level": "A",
+      "errorCode": "cone_third_factor_error",
+      "errorName": "圆锥体积⅓遗漏",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M6S2-13",
+      "knowledgeName": "圆锥的特征",
+      "level": "C",
+      "errorCode": "cylinder_surface_formula_error",
+      "errorName": "圆柱表面积公式错误",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M6S2-13",
+      "knowledgeName": "圆锥的特征",
+      "level": "C",
+      "errorCode": "cylinder_cone_volume_confusion",
+      "errorName": "圆柱圆锥体积混淆",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M6S2-13",
+      "knowledgeName": "圆锥的特征",
+      "level": "C",
+      "errorCode": "cone_third_factor_error",
+      "errorName": "圆锥体积⅓遗漏",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M6S2-14",
+      "knowledgeName": "圆锥体积公式 V=⅓πr²h",
+      "level": "A",
+      "errorCode": "cylinder_surface_formula_error",
+      "errorName": "圆柱表面积公式错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M6S2-14",
+      "knowledgeName": "圆锥体积公式 V=⅓πr²h",
+      "level": "A",
+      "errorCode": "cylinder_cone_volume_confusion",
+      "errorName": "圆柱圆锥体积混淆",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M6S2-14",
+      "knowledgeName": "圆锥体积公式 V=⅓πr²h",
+      "level": "A",
+      "errorCode": "cone_third_factor_error",
+      "errorName": "圆锥体积⅓遗漏",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M6S2-15",
+      "knowledgeName": "圆柱圆锥实际应用",
+      "level": "B",
+      "errorCode": "cylinder_surface_formula_error",
+      "errorName": "圆柱表面积公式错误",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M6S2-15",
+      "knowledgeName": "圆柱圆锥实际应用",
+      "level": "B",
+      "errorCode": "cylinder_cone_volume_confusion",
+      "errorName": "圆柱圆锥体积混淆",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M6S2-15",
+      "knowledgeName": "圆柱圆锥实际应用",
+      "level": "B",
+      "errorCode": "cone_third_factor_error",
+      "errorName": "圆锥体积⅓遗漏",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M6S2-16",
+      "knowledgeName": "比例的定义",
+      "level": "A",
+      "errorCode": "proportion_term_error",
+      "errorName": "比例项识别错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M6S2-16",
+      "knowledgeName": "比例的定义",
+      "level": "A",
+      "errorCode": "proportion_solve_cross_error",
+      "errorName": "解比例交叉相乘错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M6S2-16",
+      "knowledgeName": "比例的定义",
+      "level": "A",
+      "errorCode": "proportion_scale_convert_error",
+      "errorName": "比例尺换算错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M6S2-16",
+      "knowledgeName": "比例的定义",
+      "level": "A",
+      "errorCode": "direct_inverse_confusion",
+      "errorName": "正反比例混淆",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M6S2-17",
+      "knowledgeName": "比例的项与外项内项",
+      "level": "A",
+      "errorCode": "proportion_term_error",
+      "errorName": "比例项识别错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M6S2-17",
+      "knowledgeName": "比例的项与外项内项",
+      "level": "A",
+      "errorCode": "proportion_solve_cross_error",
+      "errorName": "解比例交叉相乘错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M6S2-17",
+      "knowledgeName": "比例的项与外项内项",
+      "level": "A",
+      "errorCode": "proportion_scale_convert_error",
+      "errorName": "比例尺换算错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M6S2-17",
+      "knowledgeName": "比例的项与外项内项",
+      "level": "A",
+      "errorCode": "direct_inverse_confusion",
+      "errorName": "正反比例混淆",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M6S2-18",
+      "knowledgeName": "外项积等于内项积",
+      "level": "A",
+      "errorCode": "proportion_term_error",
+      "errorName": "比例项识别错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M6S2-18",
+      "knowledgeName": "外项积等于内项积",
+      "level": "A",
+      "errorCode": "proportion_solve_cross_error",
+      "errorName": "解比例交叉相乘错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M6S2-18",
+      "knowledgeName": "外项积等于内项积",
+      "level": "A",
+      "errorCode": "proportion_scale_convert_error",
+      "errorName": "比例尺换算错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M6S2-18",
+      "knowledgeName": "外项积等于内项积",
+      "level": "A",
+      "errorCode": "direct_inverse_confusion",
+      "errorName": "正反比例混淆",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M6S2-19",
+      "knowledgeName": "解比例的方法",
+      "level": "A",
+      "errorCode": "proportion_term_error",
+      "errorName": "比例项识别错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M6S2-19",
+      "knowledgeName": "解比例的方法",
+      "level": "A",
+      "errorCode": "proportion_solve_cross_error",
+      "errorName": "解比例交叉相乘错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M6S2-19",
+      "knowledgeName": "解比例的方法",
+      "level": "A",
+      "errorCode": "proportion_scale_convert_error",
+      "errorName": "比例尺换算错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M6S2-19",
+      "knowledgeName": "解比例的方法",
+      "level": "A",
+      "errorCode": "direct_inverse_confusion",
+      "errorName": "正反比例混淆",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M6S2-2",
+      "knowledgeName": "数轴上表示正负数",
+      "level": "C",
+      "errorCode": "negative_concept_error",
+      "errorName": "负数概念理解错误",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M6S2-2",
+      "knowledgeName": "数轴上表示正负数",
+      "level": "C",
+      "errorCode": "negative_numberline_placement",
+      "errorName": "负数数轴定位错误",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M6S2-2",
+      "knowledgeName": "数轴上表示正负数",
+      "level": "C",
+      "errorCode": "negative_compare_absolute_error",
+      "errorName": "负数大小比较绝对值混淆",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M6S2-20",
+      "knowledgeName": "正比例的意义",
+      "level": "A",
+      "errorCode": "proportion_term_error",
+      "errorName": "比例项识别错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M6S2-20",
+      "knowledgeName": "正比例的意义",
+      "level": "A",
+      "errorCode": "proportion_solve_cross_error",
+      "errorName": "解比例交叉相乘错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M6S2-20",
+      "knowledgeName": "正比例的意义",
+      "level": "A",
+      "errorCode": "proportion_scale_convert_error",
+      "errorName": "比例尺换算错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M6S2-20",
+      "knowledgeName": "正比例的意义",
+      "level": "A",
+      "errorCode": "direct_inverse_confusion",
+      "errorName": "正反比例混淆",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M6S2-21",
+      "knowledgeName": "正比例图像",
+      "level": "A",
+      "errorCode": "proportion_term_error",
+      "errorName": "比例项识别错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M6S2-21",
+      "knowledgeName": "正比例图像",
+      "level": "A",
+      "errorCode": "proportion_solve_cross_error",
+      "errorName": "解比例交叉相乘错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M6S2-21",
+      "knowledgeName": "正比例图像",
+      "level": "A",
+      "errorCode": "proportion_scale_convert_error",
+      "errorName": "比例尺换算错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M6S2-21",
+      "knowledgeName": "正比例图像",
+      "level": "A",
+      "errorCode": "direct_inverse_confusion",
+      "errorName": "正反比例混淆",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M6S2-22",
+      "knowledgeName": "反比例的意义",
+      "level": "A",
+      "errorCode": "proportion_term_error",
+      "errorName": "比例项识别错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M6S2-22",
+      "knowledgeName": "反比例的意义",
+      "level": "A",
+      "errorCode": "proportion_solve_cross_error",
+      "errorName": "解比例交叉相乘错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M6S2-22",
+      "knowledgeName": "反比例的意义",
+      "level": "A",
+      "errorCode": "proportion_scale_convert_error",
+      "errorName": "比例尺换算错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M6S2-22",
+      "knowledgeName": "反比例的意义",
+      "level": "A",
+      "errorCode": "direct_inverse_confusion",
+      "errorName": "正反比例混淆",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M6S2-23",
+      "knowledgeName": "比例尺的认识",
+      "level": "A",
+      "errorCode": "proportion_term_error",
+      "errorName": "比例项识别错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M6S2-23",
+      "knowledgeName": "比例尺的认识",
+      "level": "A",
+      "errorCode": "proportion_solve_cross_error",
+      "errorName": "解比例交叉相乘错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M6S2-23",
+      "knowledgeName": "比例尺的认识",
+      "level": "A",
+      "errorCode": "proportion_scale_convert_error",
+      "errorName": "比例尺换算错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M6S2-23",
+      "knowledgeName": "比例尺的认识",
+      "level": "A",
+      "errorCode": "direct_inverse_confusion",
+      "errorName": "正反比例混淆",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M6S2-24",
+      "knowledgeName": "图形的放大与缩小",
+      "level": "A",
+      "errorCode": "proportion_term_error",
+      "errorName": "比例项识别错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M6S2-24",
+      "knowledgeName": "图形的放大与缩小",
+      "level": "A",
+      "errorCode": "proportion_solve_cross_error",
+      "errorName": "解比例交叉相乘错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M6S2-24",
+      "knowledgeName": "图形的放大与缩小",
+      "level": "A",
+      "errorCode": "proportion_scale_convert_error",
+      "errorName": "比例尺换算错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M6S2-24",
+      "knowledgeName": "图形的放大与缩小",
+      "level": "A",
+      "errorCode": "direct_inverse_confusion",
+      "errorName": "正反比例混淆",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M6S2-25",
+      "knowledgeName": "用比例解决实际问题",
+      "level": "A",
+      "errorCode": "proportion_term_error",
+      "errorName": "比例项识别错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M6S2-25",
+      "knowledgeName": "用比例解决实际问题",
+      "level": "A",
+      "errorCode": "proportion_solve_cross_error",
+      "errorName": "解比例交叉相乘错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M6S2-25",
+      "knowledgeName": "用比例解决实际问题",
+      "level": "A",
+      "errorCode": "proportion_scale_convert_error",
+      "errorName": "比例尺换算错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M6S2-25",
+      "knowledgeName": "用比例解决实际问题",
+      "level": "A",
+      "errorCode": "direct_inverse_confusion",
+      "errorName": "正反比例混淆",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M6S2-26",
+      "knowledgeName": "鸽巢原理的初步认识",
+      "level": "B",
+      "errorCode": "pigeonhole_worst_case_error",
+      "errorName": "鸽巢问题最坏情况推理错误",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M6S2-27",
+      "knowledgeName": "鸽巢原理的应用",
+      "level": "B",
+      "errorCode": "pigeonhole_worst_case_error",
+      "errorName": "鸽巢问题最坏情况推理错误",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M6S2-28",
+      "knowledgeName": "整数小数分数综合复习",
+      "level": "C",
+      "errorCode": "mixed_topic_confusion",
+      "errorName": "总复习综合混淆",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M6S2-29",
+      "knowledgeName": "式与方程综合复习",
+      "level": "C",
+      "errorCode": "mixed_topic_confusion",
+      "errorName": "总复习综合混淆",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M6S2-3",
+      "knowledgeName": "比较正负数大小",
+      "level": "C",
+      "errorCode": "negative_concept_error",
+      "errorName": "负数概念理解错误",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M6S2-3",
+      "knowledgeName": "比较正负数大小",
+      "level": "C",
+      "errorCode": "negative_numberline_placement",
+      "errorName": "负数数轴定位错误",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M6S2-3",
+      "knowledgeName": "比较正负数大小",
+      "level": "C",
+      "errorCode": "negative_compare_absolute_error",
+      "errorName": "负数大小比较绝对值混淆",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M6S2-30",
+      "knowledgeName": "比和比例综合复习",
+      "level": "C",
+      "errorCode": "mixed_topic_confusion",
+      "errorName": "总复习综合混淆",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M6S2-31",
+      "knowledgeName": "数学应用题大盘点",
+      "level": "B",
+      "errorCode": "mixed_topic_confusion",
+      "errorName": "总复习综合混淆",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M6S2-32",
+      "knowledgeName": "平面图形面积公式总复习",
+      "level": "C",
+      "errorCode": "mixed_topic_confusion",
+      "errorName": "总复习综合混淆",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M6S2-33",
+      "knowledgeName": "立体图形体积公式总复习",
+      "level": "C",
+      "errorCode": "mixed_topic_confusion",
+      "errorName": "总复习综合混淆",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M6S2-34",
+      "knowledgeName": "图形位置与运动综合",
+      "level": "C",
+      "errorCode": "mixed_topic_confusion",
+      "errorName": "总复习综合混淆",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M6S2-35",
+      "knowledgeName": "统计图综合复习",
+      "level": "C",
+      "errorCode": "mixed_topic_confusion",
+      "errorName": "总复习综合混淆",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M6S2-36",
+      "knowledgeName": "找规律与数学思维",
+      "level": "C",
+      "errorCode": "mixed_topic_confusion",
+      "errorName": "总复习综合混淆",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M6S2-37",
+      "knowledgeName": "生活中的数学综合应用",
+      "level": "C",
+      "errorCode": "mixed_topic_confusion",
+      "errorName": "总复习综合混淆",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M6S2-4",
+      "knowledgeName": "折扣的意义与计算",
+      "level": "A",
+      "errorCode": "discount_percent_confusion",
+      "errorName": "折扣与百分数混淆",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M6S2-4",
+      "knowledgeName": "折扣的意义与计算",
+      "level": "A",
+      "errorCode": "tax_interest_formula_error",
+      "errorName": "税率利率公式应用错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M6S2-4",
+      "knowledgeName": "折扣的意义与计算",
+      "level": "A",
+      "errorCode": "percent2_standard_amount_error",
+      "errorName": "百分数(二)标准量混淆",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M6S2-5",
+      "knowledgeName": "成数的意义",
+      "level": "A",
+      "errorCode": "discount_percent_confusion",
+      "errorName": "折扣与百分数混淆",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M6S2-5",
+      "knowledgeName": "成数的意义",
+      "level": "A",
+      "errorCode": "tax_interest_formula_error",
+      "errorName": "税率利率公式应用错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M6S2-5",
+      "knowledgeName": "成数的意义",
+      "level": "A",
+      "errorCode": "percent2_standard_amount_error",
+      "errorName": "百分数(二)标准量混淆",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M6S2-6",
+      "knowledgeName": "税率与应纳税额计算",
+      "level": "A",
+      "errorCode": "discount_percent_confusion",
+      "errorName": "折扣与百分数混淆",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M6S2-6",
+      "knowledgeName": "税率与应纳税额计算",
+      "level": "A",
+      "errorCode": "tax_interest_formula_error",
+      "errorName": "税率利率公式应用错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M6S2-6",
+      "knowledgeName": "税率与应纳税额计算",
+      "level": "A",
+      "errorCode": "percent2_standard_amount_error",
+      "errorName": "百分数(二)标准量混淆",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M6S2-7",
+      "knowledgeName": "利率与利息计算",
+      "level": "A",
+      "errorCode": "discount_percent_confusion",
+      "errorName": "折扣与百分数混淆",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M6S2-7",
+      "knowledgeName": "利率与利息计算",
+      "level": "A",
+      "errorCode": "tax_interest_formula_error",
+      "errorName": "税率利率公式应用错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M6S2-7",
+      "knowledgeName": "利率与利息计算",
+      "level": "A",
+      "errorCode": "percent2_standard_amount_error",
+      "errorName": "百分数(二)标准量混淆",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M6S2-8",
+      "knowledgeName": "百分数综合应用题",
+      "level": "A",
+      "errorCode": "discount_percent_confusion",
+      "errorName": "折扣与百分数混淆",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M6S2-8",
+      "knowledgeName": "百分数综合应用题",
+      "level": "A",
+      "errorCode": "tax_interest_formula_error",
+      "errorName": "税率利率公式应用错误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M6S2-8",
+      "knowledgeName": "百分数综合应用题",
+      "level": "A",
+      "errorCode": "percent2_standard_amount_error",
+      "errorName": "百分数(二)标准量混淆",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M6S2-9",
+      "knowledgeName": "圆柱的特征",
+      "level": "B",
+      "errorCode": "cylinder_surface_formula_error",
+      "errorName": "圆柱表面积公式错误",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M6S2-9",
+      "knowledgeName": "圆柱的特征",
+      "level": "B",
+      "errorCode": "cylinder_cone_volume_confusion",
+      "errorName": "圆柱圆锥体积混淆",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M6S2-9",
+      "knowledgeName": "圆柱的特征",
+      "level": "B",
+      "errorCode": "cone_third_factor_error",
+      "errorName": "圆锥体积⅓遗漏",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M5S1-0",
+      "knowledgeName": "小数乘整数的计算意义",
+      "level": "A",
+      "errorCode": "expression_format_error",
+      "errorName": "表达/书写/格式问题",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S2-15",
+      "knowledgeName": "分数的产生与意义",
+      "level": "A",
+      "errorCode": "expression_format_error",
+      "errorName": "表达/书写/格式问题",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S2-23",
+      "knowledgeName": "异分母分数加减(先通分)",
+      "level": "A",
+      "errorCode": "expression_format_error",
+      "errorName": "表达/书写/格式问题",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M6S1-1",
+      "knowledgeName": "分数乘整数计算法则",
+      "level": "A",
+      "errorCode": "expression_format_error",
+      "errorName": "表达/书写/格式问题",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S2-29",
+      "knowledgeName": "体积单位间的进率",
+      "level": "A",
+      "errorCode": "expression_format_error",
+      "errorName": "表达/书写/格式问题",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S1-0",
+      "knowledgeName": "小数乘整数的计算意义",
+      "level": "A",
+      "errorCode": "comprehension_bias",
+      "errorName": "题意理解偏差",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S2-15",
+      "knowledgeName": "分数的产生与意义",
+      "level": "A",
+      "errorCode": "comprehension_bias",
+      "errorName": "题意理解偏差",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S2-23",
+      "knowledgeName": "异分母分数加减(先通分)",
+      "level": "A",
+      "errorCode": "comprehension_bias",
+      "errorName": "题意理解偏差",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M6S1-1",
+      "knowledgeName": "分数乘整数计算法则",
+      "level": "A",
+      "errorCode": "comprehension_bias",
+      "errorName": "题意理解偏差",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S2-29",
+      "knowledgeName": "体积单位间的进率",
+      "level": "A",
+      "errorCode": "comprehension_bias",
+      "errorName": "题意理解偏差",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S1-0",
+      "knowledgeName": "小数乘整数的计算意义",
+      "level": "A",
+      "errorCode": "transfer_failure",
+      "errorName": "迁移失败",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S2-15",
+      "knowledgeName": "分数的产生与意义",
+      "level": "A",
+      "errorCode": "transfer_failure",
+      "errorName": "迁移失败",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S2-23",
+      "knowledgeName": "异分母分数加减(先通分)",
+      "level": "A",
+      "errorCode": "transfer_failure",
+      "errorName": "迁移失败",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M6S1-1",
+      "knowledgeName": "分数乘整数计算法则",
+      "level": "A",
+      "errorCode": "transfer_failure",
+      "errorName": "迁移失败",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S2-29",
+      "knowledgeName": "体积单位间的进率",
+      "level": "A",
+      "errorCode": "transfer_failure",
+      "errorName": "迁移失败",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S1-0",
+      "knowledgeName": "小数乘整数的计算意义",
+      "level": "A",
+      "errorCode": "question_type_unfamiliar",
+      "errorName": "题型不熟",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S2-15",
+      "knowledgeName": "分数的产生与意义",
+      "level": "A",
+      "errorCode": "question_type_unfamiliar",
+      "errorName": "题型不熟",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S2-23",
+      "knowledgeName": "异分母分数加减(先通分)",
+      "level": "A",
+      "errorCode": "question_type_unfamiliar",
+      "errorName": "题型不熟",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M6S1-1",
+      "knowledgeName": "分数乘整数计算法则",
+      "level": "A",
+      "errorCode": "question_type_unfamiliar",
+      "errorName": "题型不熟",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S2-29",
+      "knowledgeName": "体积单位间的进率",
+      "level": "A",
+      "errorCode": "question_type_unfamiliar",
+      "errorName": "题型不熟",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S1-0",
+      "knowledgeName": "小数乘整数的计算意义",
+      "level": "A",
+      "errorCode": "calculation_error",
+      "errorName": "计算/操作失误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S2-15",
+      "knowledgeName": "分数的产生与意义",
+      "level": "A",
+      "errorCode": "calculation_error",
+      "errorName": "计算/操作失误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S2-23",
+      "knowledgeName": "异分母分数加减(先通分)",
+      "level": "A",
+      "errorCode": "calculation_error",
+      "errorName": "计算/操作失误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M6S1-1",
+      "knowledgeName": "分数乘整数计算法则",
+      "level": "A",
+      "errorCode": "calculation_error",
+      "errorName": "计算/操作失误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S2-29",
+      "knowledgeName": "体积单位间的进率",
+      "level": "A",
+      "errorCode": "calculation_error",
+      "errorName": "计算/操作失误",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S1-0",
+      "knowledgeName": "小数乘整数的计算意义",
+      "level": "A",
+      "errorCode": "memory_retrieval_failure",
+      "errorName": "记忆提取失败",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S2-15",
+      "knowledgeName": "分数的产生与意义",
+      "level": "A",
+      "errorCode": "memory_retrieval_failure",
+      "errorName": "记忆提取失败",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S2-23",
+      "knowledgeName": "异分母分数加减(先通分)",
+      "level": "A",
+      "errorCode": "memory_retrieval_failure",
+      "errorName": "记忆提取失败",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M6S1-1",
+      "knowledgeName": "分数乘整数计算法则",
+      "level": "A",
+      "errorCode": "memory_retrieval_failure",
+      "errorName": "记忆提取失败",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S2-29",
+      "knowledgeName": "体积单位间的进率",
+      "level": "A",
+      "errorCode": "memory_retrieval_failure",
+      "errorName": "记忆提取失败",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S1-0",
+      "knowledgeName": "小数乘整数的计算意义",
+      "level": "A",
+      "errorCode": "concept_confusion",
+      "errorName": "概念混淆",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S2-15",
+      "knowledgeName": "分数的产生与意义",
+      "level": "A",
+      "errorCode": "concept_confusion",
+      "errorName": "概念混淆",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S2-23",
+      "knowledgeName": "异分母分数加减(先通分)",
+      "level": "A",
+      "errorCode": "concept_confusion",
+      "errorName": "概念混淆",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M6S1-1",
+      "knowledgeName": "分数乘整数计算法则",
+      "level": "A",
+      "errorCode": "concept_confusion",
+      "errorName": "概念混淆",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S2-29",
+      "knowledgeName": "体积单位间的进率",
+      "level": "A",
+      "errorCode": "concept_confusion",
+      "errorName": "概念混淆",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S1-0",
+      "knowledgeName": "小数乘整数的计算意义",
+      "level": "A",
+      "errorCode": "info_omission",
+      "errorName": "关键信息遗漏",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S2-15",
+      "knowledgeName": "分数的产生与意义",
+      "level": "A",
+      "errorCode": "info_omission",
+      "errorName": "关键信息遗漏",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S2-23",
+      "knowledgeName": "异分母分数加减(先通分)",
+      "level": "A",
+      "errorCode": "info_omission",
+      "errorName": "关键信息遗漏",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M6S1-1",
+      "knowledgeName": "分数乘整数计算法则",
+      "level": "A",
+      "errorCode": "info_omission",
+      "errorName": "关键信息遗漏",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S2-29",
+      "knowledgeName": "体积单位间的进率",
+      "level": "A",
+      "errorCode": "info_omission",
+      "errorName": "关键信息遗漏",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S1-0",
+      "knowledgeName": "小数乘整数的计算意义",
+      "level": "A",
+      "errorCode": "prerequisite_gap",
+      "errorName": "前置知识缺失",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S2-15",
+      "knowledgeName": "分数的产生与意义",
+      "level": "A",
+      "errorCode": "prerequisite_gap",
+      "errorName": "前置知识缺失",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S2-23",
+      "knowledgeName": "异分母分数加减(先通分)",
+      "level": "A",
+      "errorCode": "prerequisite_gap",
+      "errorName": "前置知识缺失",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M6S1-1",
+      "knowledgeName": "分数乘整数计算法则",
+      "level": "A",
+      "errorCode": "prerequisite_gap",
+      "errorName": "前置知识缺失",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S2-29",
+      "knowledgeName": "体积单位间的进率",
+      "level": "A",
+      "errorCode": "prerequisite_gap",
+      "errorName": "前置知识缺失",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S1-0",
+      "knowledgeName": "小数乘整数的计算意义",
+      "level": "A",
+      "errorCode": "strategy_missing",
+      "errorName": "解题策略缺失",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S2-15",
+      "knowledgeName": "分数的产生与意义",
+      "level": "A",
+      "errorCode": "strategy_missing",
+      "errorName": "解题策略缺失",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S2-23",
+      "knowledgeName": "异分母分数加减(先通分)",
+      "level": "A",
+      "errorCode": "strategy_missing",
+      "errorName": "解题策略缺失",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M6S1-1",
+      "knowledgeName": "分数乘整数计算法则",
+      "level": "A",
+      "errorCode": "strategy_missing",
+      "errorName": "解题策略缺失",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S2-29",
+      "knowledgeName": "体积单位间的进率",
+      "level": "A",
+      "errorCode": "strategy_missing",
+      "errorName": "解题策略缺失",
+      "isPrimary": true
+    },
+    {
+      "knowledgeCode": "M5S1-34",
+      "knowledgeName": "可能性",
+      "level": "A",
+      "errorCode": "comprehension_bias",
+      "errorName": "理解偏差",
+      "isPrimary": false
+    },
+    {
+      "knowledgeCode": "M5S1-15",
+      "knowledgeName": "用数对确定位置",
+      "level": "A",
+      "errorCode": "info_omission",
+      "errorName": "信息遗漏",
+      "isPrimary": false
+    }
+  ]
+}

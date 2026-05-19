@@ -1,0 +1,276 @@
+{
+  "communities": {
+    "0": [
+      "app_js",
+      "src_app_appstate",
+      "src_app_navindicator",
+      "src_app_navitems",
+      "src_app_pageinits",
+      "src_app_pages",
+      "src_app_toastel",
+      "src_app_topbarbadge",
+      "src_app_topbarmap",
+      "src_app_topbarsub",
+      "src_app_topbartitle",
+      "yaya_browser_v3_app_classroomstate",
+      "yaya_browser_v3_app_democlassroomlesson",
+      "yaya_browser_v3_app_explainstate",
+      "yaya_browser_v3_app_explainvoice",
+      "yaya_browser_v3_app_nooptext",
+      "yaya_browser_v3_app_normalizeknowledgelevel",
+      "yaya_browser_v3_app_pausespeech",
+      "yaya_browser_v3_app_playuisound",
+      "yaya_browser_v3_app_resumespeech",
+      "yaya_browser_v3_app_splitforspeech",
+      "yaya_browser_v3_app_streamexplainrequest",
+      "yaya_browser_v3_app_tts_voice_map"
+    ],
+    "1": [
+      "admin_index_itemcard",
+      "admin_index_renderclassroomdetail",
+      "admin_index_renderminisummary",
+      "admin_index_safejson",
+      "board_index_initboardpage",
+      "classroom_index_defaultclassmates",
+      "classroom_index_loadttsaudio",
+      "classroom_index_normalizequiz",
+      "classroom_index_normalizescenes",
+      "classroom_index_playaudio",
+      "home_index_inithomepage",
+      "home_index_statuslabel",
+      "home_index_syllabus",
+      "knowledge_index_getnodelabel",
+      "knowledge_index_initknowledgepage",
+      "leaderboard_index_initleaderboardpage",
+      "leaderboard_index_leaderboarddata",
+      "practice_index_initpracticepage",
+      "practice_index_questions",
+      "src_pages_home_index_js"
+    ],
+    "2": [
+      "api_client_api",
+      "api_client_request",
+      "src_api_client_js",
+      "src_app_showtoast",
+      "yaya_browser_v3_app_buildknowledgegraphic",
+      "yaya_browser_v3_app_getpreferredclassroomlesson",
+      "yaya_browser_v3_app_loadclassroomttsaudio",
+      "yaya_browser_v3_app_openassistantview",
+      "yaya_browser_v3_app_openknowledgedetail",
+      "yaya_browser_v3_app_playexplainanimation",
+      "yaya_browser_v3_app_renderknowledgeminiquiz",
+      "yaya_browser_v3_app_renderselfcheckinteractive",
+      "yaya_browser_v3_app_showpastexammaterials",
+      "yaya_browser_v3_app_showtextbookmaterials"
+    ],
+    "3": [
+      "acceptance_artifacts_data_quality_gate_fail",
+      "acceptance_artifacts_data_quality_gate_load",
+      "acceptance_artifacts_data_quality_gate_ok",
+      "acceptance_artifacts_data_quality_gate_py",
+      "acceptance_artifacts_data_quality_gate_warn",
+      "classroom_index_initclassroompage",
+      "src_app_switchtab",
+      "yaya_browser_v3_app_loadboardpanel",
+      "yaya_browser_v3_app_loadleaderboardpanel",
+      "yaya_browser_v3_app_loadpracticepanel",
+      "yaya_browser_v3_app_renderchapters"
+    ],
+    "4": [
+      "yaya_browser_v3_app_defaultclassmatesforscene",
+      "yaya_browser_v3_app_fitclassroomcanvas",
+      "yaya_browser_v3_app_normalizeclassroomquiz",
+      "yaya_browser_v3_app_normalizeclassroomscenes",
+      "yaya_browser_v3_app_playclassroomaudio",
+      "yaya_browser_v3_app_renderclassroomplayer",
+      "yaya_browser_v3_app_renderclassroomvisualspec",
+      "yaya_browser_v3_app_runclassroomscene"
+    ],
+    "5": [
+      "components_loading_setloading",
+      "components_loading_setpageloading",
+      "src_app_bindnav",
+      "src_app_bootstrap",
+      "src_components_loading_js",
+      "yaya_browser_v3_app_initdefaultvoice",
+      "yaya_browser_v3_app_refreshbackendstatus",
+      "yaya_browser_v3_app_setupcommonhandlers"
+    ],
+    "6": [
+      "yaya_browser_v3_app_animatesectiontext",
+      "yaya_browser_v3_app_getvoicepresets",
+      "yaya_browser_v3_app_ismostlychinese",
+      "yaya_browser_v3_app_renderexplaincard",
+      "yaya_browser_v3_app_renderexplainsections",
+      "yaya_browser_v3_app_sleep",
+      "yaya_browser_v3_app_speaktext",
+      "yaya_browser_v3_app_stopspeech"
+    ],
+    "7": [
+      "admin_index_emptycard",
+      "admin_index_initadminpage",
+      "admin_index_loadadmindata",
+      "admin_index_renderclassroompanel",
+      "admin_index_renderlists"
+    ],
+    "8": [
+      "coverage_gate",
+      "diagnosis_engine",
+      "strategy_engine"
+    ],
+    "9": [
+      "admin_index_collectform",
+      "admin_index_readaipayload",
+      "admin_index_readaiquestionpayload"
+    ],
+    "10": [
+      "yaya_browser_v3_app_formatknowledgecontent",
+      "yaya_browser_v3_app_onlychinese"
+    ],
+    "11": [
+      "classroom_index_buildscenevisual",
+      "classroom_index_esc"
+    ],
+    "12": [
+      "components_toast_toast",
+      "src_components_toast_js"
+    ],
+    "13": [
+      "admin_import_results_renderimportresults",
+      "src_pages_admin_import_results_js"
+    ],
+    "14": [
+      "stem_entity"
+    ]
+  },
+  "cohesion": {
+    "0": 0.09,
+    "1": 0.1,
+    "2": 0.2,
+    "3": 0.18,
+    "4": 0.32,
+    "5": 0.25,
+    "6": 0.29,
+    "7": 0.5,
+    "8": 1.0,
+    "9": 0.67,
+    "10": 1.0,
+    "11": 1.0,
+    "12": 1.0,
+    "13": 1.0,
+    "14": 1.0
+  },
+  "gods": [
+    {
+      "id": "api_client_api",
+      "label": "api",
+      "degree": 11
+    },
+    {
+      "id": "yaya_browser_v3_app_renderclassroomplayer",
+      "label": "renderClassroomPlayer()",
+      "degree": 8
+    },
+    {
+      "id": "src_app_bootstrap",
+      "label": "bootstrap()",
+      "degree": 8
+    },
+    {
+      "id": "yaya_browser_v3_app_openknowledgedetail",
+      "label": "openKnowledgeDetail()",
+      "degree": 7
+    },
+    {
+      "id": "src_app_showtoast",
+      "label": "showToast()",
+      "degree": 7
+    },
+    {
+      "id": "src_app_switchtab",
+      "label": "switchTab()",
+      "degree": 7
+    },
+    {
+      "id": "yaya_browser_v3_app_renderexplaincard",
+      "label": "renderExplainCard()",
+      "degree": 6
+    },
+    {
+      "id": "yaya_browser_v3_app_runclassroomscene",
+      "label": "runClassroomScene()",
+      "degree": 6
+    },
+    {
+      "id": "yaya_browser_v3_app_speaktext",
+      "label": "speakText()",
+      "degree": 4
+    },
+    {
+      "id": "yaya_browser_v3_app_openassistantview",
+      "label": "openAssistantView()",
+      "degree": 4
+    }
+  ],
+  "surprises": [
+    {
+      "source": "refreshBackendStatus()",
+      "target": "api",
+      "source_files": [
+        "app.js",
+        "src/api/client.js"
+      ],
+      "confidence": "EXTRACTED",
+      "relation": "calls",
+      "why": "connects across different repos/directories; bridges separate communities"
+    },
+    {
+      "source": "getPreferredClassroomLesson()",
+      "target": "api",
+      "source_files": [
+        "app.js",
+        "src/api/client.js"
+      ],
+      "confidence": "EXTRACTED",
+      "relation": "calls",
+      "why": "connects across different repos/directories; peripheral node `getPreferredClassroomLesson()` unexpectedly reaches hub `api`"
+    },
+    {
+      "source": "renderChapters()",
+      "target": "api",
+      "source_files": [
+        "app.js",
+        "src/api/client.js"
+      ],
+      "confidence": "EXTRACTED",
+      "relation": "calls",
+      "why": "connects across different repos/directories; bridges separate communities"
+    },
+    {
+      "source": "speakText()",
+      "target": "showToast()",
+      "source_files": [
+        "app.js",
+        "src/app.js"
+      ],
+      "confidence": "EXTRACTED",
+      "relation": "calls",
+      "why": "connects across different repos/directories; bridges separate communities"
+    },
+    {
+      "source": "switchTab()",
+      "target": "loadLeaderboardPanel()",
+      "source_files": [
+        "src/app.js",
+        "app.js"
+      ],
+      "confidence": "EXTRACTED",
+      "relation": "calls",
+      "why": "connects across different repos/directories; peripheral node `loadLeaderboardPanel()` unexpectedly reaches hub `switchTab()`"
+    }
+  ],
+  "tokens": {
+    "input": 97862,
+    "output": 1204
+  }
+}

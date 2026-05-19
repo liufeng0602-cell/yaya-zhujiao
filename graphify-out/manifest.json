@@ -1,0 +1,194 @@
+{
+  "/Users/liufeng/Downloads/yaya-browser-v3/app.js": {
+    "mtime": 1778670608.495457,
+    "hash": "c2bfb8576ffb6a22f97538620ebb2325"
+  },
+  "/Users/liufeng/Downloads/yaya-browser-v3/acceptance-artifacts/data_quality_gate.py": {
+    "mtime": 1778716164.5830376,
+    "hash": "3c1523c1ed37a0c73c5c7b612103d4eb"
+  },
+  "/Users/liufeng/Downloads/yaya-browser-v3/src/app.js": {
+    "mtime": 1778328690.7860382,
+    "hash": "899a9861710131f9b2ab5d0e7871b4f0"
+  },
+  "/Users/liufeng/Downloads/yaya-browser-v3/src/components/loading.js": {
+    "mtime": 1778154105.7521737,
+    "hash": "698952098d2997fee7f349c8a71860d0"
+  },
+  "/Users/liufeng/Downloads/yaya-browser-v3/src/components/toast.js": {
+    "mtime": 1778154105.7551143,
+    "hash": "f2a4000ac851570b29ebad4aea4a74ec"
+  },
+  "/Users/liufeng/Downloads/yaya-browser-v3/src/api/client.js": {
+    "mtime": 1778324916.5617523,
+    "hash": "1c2a09accbc8298d0f034c0e820c6121"
+  },
+  "/Users/liufeng/Downloads/yaya-browser-v3/src/pages/home/index.js": {
+    "mtime": 1778155456.97446,
+    "hash": "4c59d74f7d793efbf54681e920cc6db5"
+  },
+  "/Users/liufeng/Downloads/yaya-browser-v3/src/pages/board/index.js": {
+    "mtime": 1778155477.3851435,
+    "hash": "261f1f02f333be40962867729c5e27d3"
+  },
+  "/Users/liufeng/Downloads/yaya-browser-v3/src/pages/admin/index.js": {
+    "mtime": 1778315416.9245157,
+    "hash": "03a74a9b8a6a042c4fbf64e30bf6bd45"
+  },
+  "/Users/liufeng/Downloads/yaya-browser-v3/src/pages/admin/import-results.js": {
+    "mtime": 1778154105.748978,
+    "hash": "e7be25623d1020de47078625fa0faa7f"
+  },
+  "/Users/liufeng/Downloads/yaya-browser-v3/src/pages/classroom/index.js": {
+    "mtime": 1778329013.5827558,
+    "hash": "0fb2fda4e7432f85c7daec6c08d16327"
+  },
+  "/Users/liufeng/Downloads/yaya-browser-v3/src/pages/leaderboard/index.js": {
+    "mtime": 1778155483.3952127,
+    "hash": "0f22aaa4c066c5f8ee1aaf5a7480eff0"
+  },
+  "/Users/liufeng/Downloads/yaya-browser-v3/src/pages/knowledge/index.js": {
+    "mtime": 1778158043.735211,
+    "hash": "1ce4a4c45cd128bb4e0350cdb5d1f254"
+  },
+  "/Users/liufeng/Downloads/yaya-browser-v3/src/pages/practice/index.js": {
+    "mtime": 1778155470.6170053,
+    "hash": "c24cba9cf32f1111f9d13f827ac5d63c"
+  },
+  "/Users/liufeng/Downloads/yaya-browser-v3/index.html": {
+    "mtime": 1778670608.4946063,
+    "hash": "e8a363fcdb9503d57a2dea7d8ec6d111"
+  },
+  "/Users/liufeng/Downloads/yaya-browser-v3/voice-test.html": {
+    "mtime": 1778248117.388591,
+    "hash": "42878aa7b4051fcb32bc8394460e7d9d"
+  },
+  "/Users/liufeng/Downloads/yaya-browser-v3/design-preview-blackboard.html": {
+    "mtime": 1778346736.343178,
+    "hash": "52a3d82551296dc819179fa541d74bca"
+  },
+  "/Users/liufeng/Downloads/yaya-browser-v3/design-preview-live.html": {
+    "mtime": 1778346736.3431442,
+    "hash": "7a2d03300fa402b6489ec1a5b96f15af"
+  },
+  "/Users/liufeng/Downloads/yaya-browser-v3/acceptance.html": {
+    "mtime": 1778671059.0904465,
+    "hash": "007f4771da833462e280c26110fc6951"
+  },
+  "/Users/liufeng/Downloads/yaya-browser-v3/AGENTS.md": {
+    "mtime": 1778755260.4179263,
+    "hash": "a993bd9a8466b705f520b2a269a544bc"
+  },
+  "/Users/liufeng/Downloads/yaya-browser-v3/acceptance-artifacts/new_curriculum_taxonomy.md": {
+    "mtime": 1778688331.0500393,
+    "hash": "e5aef7cdf9c1b9cecb487958e8bc6297"
+  },
+  "/Users/liufeng/Downloads/yaya-browser-v3/acceptance-artifacts/primary_math_g1_g4_leveling_report.md": {
+    "mtime": 1778711598.3291898,
+    "hash": "b7de73a826025684a31fc61799d9fbfa"
+  },
+  "/Users/liufeng/Downloads/yaya-browser-v3/acceptance-artifacts/01_PRODUCT_VISION.md": {
+    "mtime": 1778728475.5053606,
+    "hash": "a06d4dccb48bd45f7976e01ace050270"
+  },
+  "/Users/liufeng/Downloads/yaya-browser-v3/acceptance-artifacts/primary_math_g5_g6_syllabus.md": {
+    "mtime": 1778671014.9989219,
+    "hash": "0a0a547ec0f4c7b0b33409cb7e23d2ba"
+  },
+  "/Users/liufeng/Downloads/yaya-browser-v3/acceptance-artifacts/primary_math_g1_g4_source_review.md": {
+    "mtime": 1778711598.329071,
+    "hash": "7322044f56d1ca9f7ab3b2647244c5be"
+  },
+  "/Users/liufeng/Downloads/yaya-browser-v3/acceptance-artifacts/DATA_QUALITY_RULES.md": {
+    "mtime": 1778689289.8345113,
+    "hash": "c816a4bda88673653c815e52333b7cab"
+  },
+  "/Users/liufeng/Downloads/yaya-browser-v3/acceptance-artifacts/primary_math_g5_g6_alignment_report.md": {
+    "mtime": 1778671015.0003352,
+    "hash": "bb30dad9a3b8462a495046794cbacc32"
+  },
+  "/Users/liufeng/Downloads/yaya-browser-v3/acceptance-artifacts/02_DEVELOPMENT_ROADMAP.md": {
+    "mtime": 1778728475.5083172,
+    "hash": "75f464a931db783f3b6b0f4f4dc815c7"
+  },
+  "/Users/liufeng/Downloads/yaya-browser-v3/acceptance-artifacts/00_INDEX.md": {
+    "mtime": 1778756579.582614,
+    "hash": "70ff582c126f51a8d2f3bc3c67b9974c"
+  },
+  "/Users/liufeng/Downloads/yaya-browser-v3/acceptance-artifacts/03_SYLLABUS_SOURCE_RULES.md": {
+    "mtime": 1778745446.5746608,
+    "hash": "fdeb248c720fdb7b1e119f7b8320e667"
+  },
+  "/Users/liufeng/Downloads/yaya-browser-v3/acceptance-artifacts/SUPER_HELL_AUDIT_REPORT.md": {
+    "mtime": 1778682444.298317,
+    "hash": "d4b6b0f52ffed3f6b5317c505beb5231"
+  },
+  "/Users/liufeng/Downloads/yaya-browser-v3/acceptance-artifacts/14_QUALITY_DASHBOARD.md": {
+    "mtime": 1778729058.842615,
+    "hash": "ebec7d918602c40edf636cb6ca21c9d6"
+  },
+  "/Users/liufeng/Downloads/yaya-browser-v3/acceptance-artifacts/SUPER_HELL_AUDIT_R2_REPORT.md": {
+    "mtime": 1778683855.7087944,
+    "hash": "98dca570fd26e2aecfc0db5cd7b9afe2"
+  },
+  "/Users/liufeng/Downloads/yaya-browser-v3/acceptance-artifacts/coverage_report.md": {
+    "mtime": 1778681878.6714876,
+    "hash": "4aa0f0c9f6e8a1742c22b0f8e2454b54"
+  },
+  "/Users/liufeng/Downloads/yaya-browser-v3/acceptance-artifacts/04_KNOWLEDGE_LEVELING.md": {
+    "mtime": 1778728475.5137239,
+    "hash": "5425ace6104633f98dbd58c791c7bb24"
+  },
+  "/Users/liufeng/Downloads/yaya-browser-v3/acceptance-artifacts/09_EVENT_PROTOCOL.md": {
+    "mtime": 1778756820.8028712,
+    "hash": "b4441ac2e9f4e2a628c51b0c5e1af046"
+  },
+  "/Users/liufeng/Downloads/yaya-browser-v3/acceptance-artifacts/primary_math_g5_g6_source_review.md": {
+    "mtime": 1778671553.648985,
+    "hash": "ef3dffeac4dcaed0f1ed51cd824f04f8"
+  },
+  "/Users/liufeng/Downloads/yaya-browser-v3/acceptance-artifacts/primary_math_g5_g6_leveling_report.md": {
+    "mtime": 1778680960.390523,
+    "hash": "94c52980f237cc97658aca6ce8a7cf49"
+  },
+  "/Users/liufeng/Downloads/yaya-browser-v3/acceptance-artifacts/13_PARENT_SUMMARY_RULES.md": {
+    "mtime": 1778744810.4302607,
+    "hash": "d4dc6a9e14a35a32a838b503bb7add87"
+  },
+  "/Users/liufeng/Downloads/yaya-browser-v3/acceptance-artifacts/06_KNOWLEDGE_GRAPH.md": {
+    "mtime": 1778745468.9184124,
+    "hash": "0517b902b4564c9bc3df6fbed4fae175"
+  },
+  "/Users/liufeng/Downloads/yaya-browser-v3/acceptance-artifacts/10_DATA_MODEL.md": {
+    "mtime": 1778744745.261115,
+    "hash": "db3b561db03ef8e96a0ad30c641ce3c1"
+  },
+  "/Users/liufeng/Downloads/yaya-browser-v3/acceptance-artifacts/primary_math_g1_g4_syllabus.md": {
+    "mtime": 1778711598.3289745,
+    "hash": "8c5dbecb400fa6eabb26710aa4e5668e"
+  },
+  "/Users/liufeng/Downloads/yaya-browser-v3/acceptance-artifacts/PROJECT_INTRODUCTION.md": {
+    "mtime": 1778671014.9985464,
+    "hash": "53a8b3c4b1c6b65f21952f77eea60e7e"
+  },
+  "/Users/liufeng/Downloads/yaya-browser-v3/acceptance-artifacts/08_STRATEGY_PACKS.md": {
+    "mtime": 1778754325.1013775,
+    "hash": "6347fff0693232cd8774099f8061ca66"
+  },
+  "/Users/liufeng/Downloads/yaya-browser-v3/acceptance-artifacts/12_STRATEGY_ENGINE.md": {
+    "mtime": 1778728895.4098337,
+    "hash": "088ef366c458444a5482e563837c0cf8"
+  },
+  "/Users/liufeng/Downloads/yaya-browser-v3/acceptance-artifacts/11_DIAGNOSIS_ENGINE.md": {
+    "mtime": 1778744763.9804966,
+    "hash": "28ab761dcbb16724469f2fd0b5f744c3"
+  },
+  "/Users/liufeng/Downloads/yaya-browser-v3/acceptance-artifacts/05_COVERAGE_GATE.md": {
+    "mtime": 1778745394.2691734,
+    "hash": "8acf47d702441c7d5873949d7dfe2ec3"
+  },
+  "/Users/liufeng/Downloads/yaya-browser-v3/acceptance-artifacts/07_ERROR_TAXONOMY.md": {
+    "mtime": 1778745494.0013425,
+    "hash": "fdd40f623260d2244649273a685a72f0"
+  }
+}

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta http-equiv="Cache-Control" content="no-store" />
+<title>语音诊断</title>
+<style>
+  body { font-family: -apple-system, "PingFang SC", sans-serif; padding: 24px; max-width: 760px; margin: 0 auto; background: #0c1424; color: #e8eef9; }
+  h1 { margin-top: 0; font-size: 22px; }
+  h2 { font-size: 16px; margin-top: 28px; color: #55efff; }
+  button { display: block; width: 100%; padding: 16px; margin: 10px 0; font-size: 16px; font-weight: 700; background: linear-gradient(135deg, #55efff, #5aa5ff); color: #0c1424; border: none; border-radius: 12px; cursor: pointer; font-family: inherit; }
+  button:hover { opacity: 0.9; }
+  button.secondary { background: rgba(255,255,255,0.08); color: #e8eef9; }
+  pre { background: rgba(0,0,0,0.4); padding: 14px; border-radius: 10px; font-size: 12px; overflow-x: auto; white-space: pre-wrap; line-height: 1.6; }
+  .row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .label { color: #aac; font-size: 13px; margin: 6px 0; }
+</style>
+</head>
+<body>
+
+<h1>🔍 语音诊断工具</h1>
+<p class="label">这个页面会绕过项目代码，<strong>直接调用浏览器原生 API</strong> 试播两段声音。</p>
+<p class="label">请点下面的按钮，仔细听，然后把听到的内容和下面的 Voice 列表发给我。</p>
+
+<h2>🎙️ 试播</h2>
+<div class="row">
+  <button onclick="play('mandarin')">▶️ 试播：普通话（婷婷）</button>
+  <button onclick="play('cantonese')">▶️ 试播：粤语（善怡）</button>
+</div>
+<div class="row">
+  <button onclick="play('male')" class="secondary">▶️ 试播：普通话男声（语舒）</button>
+  <button onclick="play('twvoice')" class="secondary">▶️ 试播：台湾国语（美嘉）</button>
+</div>
+<div class="row">
+  <button onclick="play('en-us')" class="secondary">▶️ 试播：美音（Samantha）</button>
+  <button onclick="play('en-gb')" class="secondary">▶️ 试播：英音（Daniel）</button>
+</div>
+
+<h2>📋 你浏览器里的所有中文/英文 Voice 列表</h2>
+<pre id="voiceList">加载中...</pre>
+
+<h2>📡 最近一次播放的真实状态</h2>
+<pre id="result">（点击上方任意试播按钮后显示）</pre>
+
+<script>
+const TEST_TEXT = {
+  zh: '一二三四五六七八九十，今天天气真好。',
+  en: 'One two three four five, hello world.',
+};
+
+const VOICE_RULES = {
+  mandarin:  { name: '婷婷',    lang: 'zh-CN', text: TEST_TEXT.zh },
+  cantonese: { name: '善怡',    lang: 'zh-HK', text: TEST_TEXT.zh },
+  male:      { name: '语舒',    lang: 'zh-CN', text: TEST_TEXT.zh },
+  twvoice:   { name: '美嘉',    lang: 'zh-TW', text: TEST_TEXT.zh },
+  'en-us':   { name: 'Samantha',lang: 'en-US', text: TEST_TEXT.en },
+  'en-gb':   { name: 'Daniel',  lang: 'en-GB', text: TEST_TEXT.en },
+};
+
+const log = (msg) => {
+  document.getElementById('result').textContent += msg + '\n';
+};
+
+function refreshVoiceList() {
+  const all = window.speechSynthesis.getVoices();
+  const filtered = all.filter(v => v.lang.startsWith('zh') || v.lang.startsWith('en'));
+  if (!filtered.length) {
+    document.getElementById('voiceList').textContent = '暂无 voice（点击试播按钮后会重新加载）';
+    return;
+  }
+  const text = filtered.map(v =>
+    `${v.default ? '★' : ' '}  ${v.name.padEnd(50, ' ')}  ${v.lang.padEnd(6, ' ')}  local=${v.localService}`
+  ).join('\n');
+  document.getElementById('voiceList').textContent = text;
+}
+
+window.speechSynthesis.onvoiceschanged = refreshVoiceList;
+setTimeout(refreshVoiceList, 200);
+
+function play(presetKey) {
+  const syn = window.speechSynthesis;
+  syn.cancel();
+  document.getElementById('result').textContent = '';
+
+  const rule = VOICE_RULES[presetKey];
+  const voices = syn.getVoices();
+  // 找名字精确匹配 + 语言精确匹配的
+  let voice = voices.find(v => v.name === rule.name && v.lang === rule.lang);
+  // 找名字包含的（兼容 Daniel (英语（英国）) 这种带后缀的）
+  if (!voice) voice = voices.find(v => v.name.startsWith(rule.name) && v.lang === rule.lang);
+  // 实在找不到，按 lang 找
+  if (!voice) voice = voices.find(v => v.lang === rule.lang);
+
+  log(`要求：${rule.name} / ${rule.lang}`);
+  log(`找到：${voice ? voice.name + ' / ' + voice.lang : '❌ NOT FOUND'}`);
+  log(`内容：${rule.text}`);
+
+  if (!voice) {
+    log('⚠️ 没找到对应 voice，浏览器会用默认 voice 播放');
+  }
+
+  const u = new SpeechSynthesisUtterance(rule.text);
+  if (voice) u.voice = voice;
+  u.lang = rule.lang;
+  u.rate = 1;
+  u.pitch = 1;
+
+  u.onstart = () => log(`▶️ onstart：实际 voice = ${u.voice?.name || '(浏览器默认)'} / ${u.lang}`);
+  u.onend   = () => log(`✅ onend：播放完毕`);
+  u.onerror = (e) => log(`❌ onerror：${e.error}`);
+
+  syn.speak(u);
+}
+</script>
+</body>
+</html>
