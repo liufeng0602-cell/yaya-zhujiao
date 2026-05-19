@@ -1,6 +1,6 @@
-# 自动化文档生产-审核循环工作流 开发者指南 v1.5
+# 自动化文档生产-审核循环工作流 开发者指南 v1.6
 
-基于 PRD v2.6 实现。本文档提供每个模块的实现细节：文件路径、接口签名、数据模型 DDL、配置文件模板、命令行参数。目标是：照着本文档就能写代码。
+基于 PRD v2.7 实现。本文档提供每个模块的实现细节：文件路径、接口签名、数据模型 DDL、配置文件模板、命令行参数。目标是：照着本文档就能写代码。
 
 ---
 
@@ -8,7 +8,7 @@
 
 | 版本 | 日期 | 变更内容 |
 |------|------|----------|
-| v1.5 | 2026-05-19 10:02 | Dashboard 6项UI优化：卡片workflow_status字段、停止提示stopHint div、移除暂停按钮、file-path CSS截断、空状态/组合列子标全部移除；同步PRD v2.6 |
+| v1.6 | 2026-05-19 10:54 | 对话框改为默认模式、VV2.0修复、停止状态stale前端抑制、卡滞任务三按钮按状态规则、版本传递修复；同步PRD v2.7 |
 | v1.4 | 2026-05-19 09:53 | Dashboard 看板7列分组: 已封版/文档目录/文档撰写/审查+修改/复审+修改/人工审核/阻塞、过渡消息更新、人审不通过退回复审+修改、人审对话框Hermes Chat API模块 |
 | v1.2 | 2026-05-18 14:30 | 同步PRD v2.3实现：状态机重排、fswatch守护进程、Dashboard自动化控制、NOTIFY机制、auto-repair、human_feedback闭环、Profile三态显示 |
 | v1.1 | 2026-05-18 14:09 | 审核 v1.0 全量修复：P0-1 p2_clearing->needs_revision 状态机修正；P0-2 Reviewer 直接设 p2_clearing 不再等 watcher；P0-3 增加 p2_cleared 中间状态+Writer P2_FIXED 标记；P1-1 get_tasks_by_status status 参数改为可选；P1-2 blocked 恢复 fallback 修复；P1-3 心跳/启动标记文件按项目区分；P1-4 质量评分触发改到 signed_off 后；P1-5 fromisoformat 改 strptime；P1-6 移除 no_agent watch.py 改为 Writer agent cron 直接扫描 kanban；P1-7 needs_revision->drafting 遗漏（writer_revision_workflow 跳过 claim，与状态机矛盾）；P2-1 3.2 注释残留修复；P2-2 6.2 通知+暂停cron 函数修复；P2-2 git 仓库路径统一；P2-3 部署步骤修复；P2-4 Writer 新增 3.4 p2_clearing 处理流程；P3-3 check_stuck_tasks 增加 p2_clearing 超时；P3-1 PRD 质量评分触发时机同步 signed_off；补充建议：previous_status 字段/git diff 守卫/wrapper.py 强制自检/prompt 单任务锁定/PRD 同步； |
@@ -394,23 +394,30 @@ KANBAN_LAYOUT = [
 
 ### 2.8 人工审核对话框模块（Hermes Chat API）
 
-当 liufeng 对等待人工审核的文档需要和 Reviewer 对话达成共识时，使用轻量 Hermes Chat API 方案。
+当 liufeng 对等待人工审核（`waiting_human_review`）的文档打开详情页时，**直接进入对话框评审模式**，不再显示简单文本框。用户输入意见后，评审P实时对话，直到达成共识后点击「提交」确认。
+
+**核心流程变化（v1.6 起）：**
+
+- 旧方案：详情页显示文本框 → 点击「对话评审」按钮 → 进入对话框
+- 新方案：详情页直接进入对话框模式，用户输入意见即开始对话
+- 达成共识后点击「确认并触发 Writer」→ 任务状态变成 `re_review`（复审已完成，直接进入修改环节）
+- 生产P（Writer）拿到达成一致的修改建议直接改，不再经过 Reviewer 复审
 
 **后端 API（dashboard.py）：**
 
 | 端点 | 方法 | 功能 |
 |------|------|------|
 | /api/human-review-dialog/{task_id} | POST | liufeng 输入意见，Dashboard 调 Hermes Chat API 模拟 Reviewer 回复 |
-| /api/human-review-consensus/{task_id} | POST | 双方达成共识后，生成修改指令并写 NOTIFY 触发 Writer |
+| /api/human-review-consensus/{task_id} | POST | 双方达成共识后，状态转为 re_review 并写 NOTIFY 触发 Writer |
 
-**对话流程：**
-1. liufeng 点击文档详情中的「评审对话框」按钮
-2. 弹出对话框，liufeng 输入对文档的意见
-3. Dashboard 调用 `hermes chat -q "作为 Reviewer，请审阅此文档的需求。用户意见：{opinion}。请评估这些意见是否合理，给出你的分析和修改建议。" --profile yaya` 
-4. Reviewer 回复展示在对话框中
-5. 可多轮对话，直到达成共识
-6. liufeng 点击「达成共识」，系统生成修改指令文件，写 NOTIFY writer-{project}
-7. 对话框关闭，Writer 收到任务开始修改
+**对话流程（v1.6 起）：**
+1. liufeng 打开 `waiting_human_review` 文档详情 → 直接进入对话框模式
+2. 对话框自动显示「请描述您的评审意见或修改要求」提示
+3. liufeng 在对话框中输入意见，点击「发送」
+4. Dashboard 调用 `hermes chat -q "prompt" --profile yaya` 评审P上下文中包含文档原文 + 用户意见
+5. 评审P回复展示在对话框中（审核分析 + 修改建议）
+6. 可多轮对话（继续输入新意见 → 评审P继续回复），直到达成共识
+7. liufeng 修改共识区的文本后点击「确认并触发 Writer」
 
 **API 调用方式：** 使用 subprocess 调用 Hermes Chat CLI（2 秒响应）
 - CLI: `/Users/liufeng/.hermes/hermes-agent/venv/bin/hermes chat -q "prompt" --profile yaya`
@@ -438,6 +445,57 @@ API 返回的 `workflow_status` 字段控制每张卡片的顶部徽标。字段
 workflow_status = "stopped" if (auto_stopped and status not in ('finalized', 'blocked', 'backlog')) else "running"
 ```
 仅当 `automation_state.running=False` 且状态不为 finalized/blocked/backlog 时设为 "stopped"。不修改 stale 或 stale_reason，不干扰原有的 timer 超时机制。
+
+**停止状态 stale 抑制（v1.6 起）：**
+
+后端 `build_task()` 两处在设置 `workflow_status` 后立即检查：
+```python
+if workflow_status == "stopped":
+    stale = False
+    stale_reason = ""
+```
+前端 `openDoc()` 在判断是否展示「任务处理建议」模块时，额外检查 `d.workflow_status !== 'stopped'`：
+```javascript
+if (d.timer_stale && statusList.includes(status) && d.workflow_status !== 'stopped') {
+```
+停止状态下，「⏹ 已停止」徽标已传达状态，底部不再出现任何 ⚠ 报错。
+
+**文档版本号显示（修复 VV2.0 bug，v1.6 起）：**
+
+```javascript
+// 旧：${t.version ? '<span>v'+t.version+'</span>' : ''}    → 显示 vv2.0
+// 新：${t.version ? '<span>'+t.version+'</span>' : ''}     → 显示 v2.0
+```
+DB 中 version 字段已包含 `v` 前缀（如 `v2.0`），模板直接展示不再额外加 "v"。
+
+**卡滞任务处理：三按钮按状态规则（v1.6 起）：**
+
+文档详情页的「任务处理建议」模块（#stuckActions）展示三按钮，按状态规则隐藏不可用的选项：
+
+| 状态 | 显示按钮 | 逻辑 |
+|------|---------|------|
+| drafting | 全部（重新触发 / 退回待领取 / 标记阻塞） | Writer 停滞有多种处置方式 |
+| awaiting_review | 仅「重新触发」 | Reviewer 未认领，只有重触发有意义 |
+| reviewing | 重新触发 + 标记阻塞 | Reviewer 审核中停滞，可重试或阻塞 |
+| revision | 重新触发 + 标记阻塞 | Writer 修改停滞 |
+| re_review | 仅「重新触发」 | 复审等待 Reviewer，只有重触发 |
+| re_reviewing | 重新触发 + 标记阻塞 | 复审中停滞 |
+| waiting_human_review | 不展示（等人审） | 等待用户操作 |
+
+JS 实现（`openDoc()` 内）：
+```javascript
+const retriggerBtn = document.querySelector('#stuckActions .ctrl-btn[onclick*="retriggerTask"]');
+const resetBtn = document.querySelector('#stuckActions .ctrl-btn[onclick*="resetTaskToBacklog"]');
+const blockBtn = document.querySelector('#stuckActions .ctrl-btn[onclick*="markTaskBlocked"]');
+// 默认全部显示
+// 按状态规则隐藏
+if (status === 'awaiting_review' || status === 're_review') {
+    resetBtn.style.display = 'none';
+    blockBtn.style.display = 'none';
+} else if (status === 'reviewing' || status === 'revision' || status === 're_reviewing') {
+    resetBtn.style.display = 'none';
+}
+```
 
 卡片徽标 CSS：
 ```css

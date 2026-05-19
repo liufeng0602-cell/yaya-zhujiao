@@ -1,9 +1,10 @@
-# 自动化文档生产-审核循环工作流 PRD v2.6
+# 自动化文档生产-审核循环工作流 PRD v2.7
 
 ## 变更记录
 
 | 版本 | 日期 | 变更内容 |
 |------|------|----------|
+| v2.7 | 2026-05-19 10:54 | 对话框默认模式、VV2.0修复、停止状态前端stale抑制、卡滞任务三按钮按状态规则、workflow_status传给前端 |
 | v2.6 | 2026-05-19 10:02 | Dashboard 6项UI优化：卡片状态徽标（进行中/已停止）、停止提示移至按钮下方、移除暂停按钮、卡片CSS截断防列宽撑开、空状态/组合列子标全部移除 |
 | v2.5 | 2026-05-19 09:53 | 看板7列分组、过渡消息更新、人审不通过退回复审+修改、人审对话框模块 |
 | v2.4 | 2026-05-19 08:53 | Dashboard 4项交互优化：停止按钮覆盖stale提示、已封版不报错、过渡消息+5秒倒计时、审查结果展示 |
@@ -777,13 +778,16 @@ DB 状态（9个状态）不动，Dashboard 层做列分组映射，显示为 7 
 
 ### 14.6 人工审核对话框模块
 
-当 liufeng 对 waiting_human_review 文档有意见需要与 Reviewer 达成共识时，通过轻量对话完成：
+当 liufeng 打开 `waiting_human_review` 文档详情时，**直接进入对话框评审模式**（不再显示简单文本框 + 「对话评审」按钮）。用户输入意见后，评审P实时对话，直到达成共识后点击「确认并触发 Writer」提交。
 
-**流程：**
-1. liufeng 点击「评审对话框」按钮
-2. 输入意见，Dashboard 调用 Hermes Chat API (`hermes chat -q "prompt" --profile yaya`)
-3. Reviewer 回复展示，可多轮对话
-4. 达成共识后点击「达成共识」，系统写 NOTIFY 触发 Writer
+**流程（v2.7 起）：**
+1. liufeng 打开详情页 → 直接看到对话框
+2. 对话框中输入意见，点击「发送」
+3. Dashboard 调用 Hermes Chat API (`hermes chat -q "prompt" --profile yaya`)，评审P上下文中包含文档原文 + 用户意见
+4. 评审P回复展示在对话框中（审核分析 + 修改建议）
+5. 可多轮对话，直到达成共识
+6. liufeng 修改共识区的文本后点击「确认并触发 Writer」
+7. 任务状态变成 `re_review`（复审已完成，直接进入修改环节），生产P拿到共识直接改
 
 **技术方案：** 方案1（已选）—— Hermes Chat API 直接调用，不改 Reviewer Profile 架构。2 秒响应，不加 `--accept-hooks`。
 
@@ -794,6 +798,10 @@ DB 状态（9个状态）不动，Dashboard 层做列分组映射，显示为 7 
 - **⏹ 已停止**（红色背景）：自动化已停止，该卡片处于暂停状态
 
 徽标由 API 返回的 `workflow_status` 字段控制，JS renderCard() 渲染。CSS 类名：`.card-workflow-status .card-running` / `.card-stopped`。
+
+**停止状态 stale 抑制（v2.7）：** 当 `workflow_status=stopped` 时，后端强制 `stale=False, stale_reason=""`，前端 `openDoc()` 也检查 `workflow_status !== 'stopped'` 后才显示任务处理建议。停止时不报任何 timer 错误。
+
+**文档版本号（v2.7 修复）：** DB version 字段已含 `v` 前缀（如 `v2.0`），模板直接展示 `t.version` 不再额外加 "v"，消除 VV2.0 显示问题。
 
 ### 14.8 停止按钮与提示
 
@@ -807,7 +815,31 @@ DB 状态（9个状态）不动，Dashboard 层做列分组映射，显示为 7 
 - 组合列的上栏/下栏 sub-header（"↑ 审查中"、"↓ 复审不通过，等待修改"）已移除
 - 组合列仅显示卡片本身，无额外标签和计数
 
-### 14.10 卡片宽度与文件路径截断
+### 14.10 卡滞任务三按钮
+
+文档详情页的「任务处理建议」模块（#stuckActions）展示三个操作按钮，按当前状态规则隐藏不可用选项：
+
+| 按钮 | 功能 | API 端点 |
+|------|------|----------|
+| ↻ 重新触发 | 重新触发当前流程（同状态） | /api/retrigger-task/{task_id} POST |
+| ⏮ 退回待领取 | 退回 backlog，Writer 重新撰写 | /api/reset-task-backlog/{task_id} POST |
+| ⛔ 标记阻塞 | 标记为阻塞，系统自动恢复 | /api/mark-task-blocked/{task_id} POST |
+
+**按钮可见性规则：**
+
+| 状态 | 显示按钮 |
+|------|---------|
+| drafting | 全部三个 |
+| awaiting_review | 仅「重新触发」 |
+| reviewing | 「重新触发」+「标记阻塞」 |
+| revision | 「重新触发」+「标记阻塞」 |
+| re_review | 仅「重新触发」 |
+| re_reviewing | 「重新触发」+「标记阻塞」 |
+| waiting_human_review | 不展示（等人审，由人审对话框处理） |
+
+**停止状态不展示：** 无论哪个状态，如果 `workflow_status=stopped`，整个任务处理建议模块都不展示。
+
+### 14.11 卡片宽度与文件路径截断
 
 为避免长文件路径撑宽列宽，卡片 meta 区域做了 CSS 限制：
 - `.card-meta` 增加 `min-width: 0; max-width: 100%` 防止 flex 溢出
