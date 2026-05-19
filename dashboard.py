@@ -503,7 +503,7 @@ function renderCard(t, status) {
     <div class="card-title">${t.title}</div>
     <div class="card-meta">
       <span class="file-path">${t.file_path||'—'}</span>
-      ${t.version ? '<span>v'+t.version+'</span>' : ''}
+      ${t.version ? '<span>'+t.version+'</span>' : ''}
       ${['reviewing','awaiting_review','revision','re_reviewing','re_review'].includes(status)
         ? ('<span class="tag ' + (['awaiting_review','revision','re_review'].includes(status) ? 'tag-writer' : 'tag-dim') + '">writer</span>' +
            '<span class="tag ' + (['reviewing','re_reviewing'].includes(status) ? 'tag-reviewer' : 'tag-dim') + '">reviewer</span>')
@@ -544,8 +544,13 @@ function openDoc(taskId, status) {
     const actionsEl = document.getElementById('modalActions');
     const blockedEl = document.getElementById('blockedActions');
     if (status === 'waiting_human_review') {
-      actionsEl.style.display = 'flex';
-      document.getElementById('reviewComment').value = '';
+      // direct dialog mode
+      document.getElementById('humanReviewSimple').style.display = 'none';
+      document.getElementById('humanReviewDialog').style.display = 'block';
+      document.getElementById('dialogHistory').innerHTML = '';
+      document.getElementById('consensusSection').style.display = 'none';
+      document.getElementById('dialogInput').value = '';
+      addDialogMessage('system', 'Describe your review opinion, reviewer-P will analyze.', 'var(--dim)');
     } else {
       actionsEl.style.display = 'none';
     }
@@ -629,22 +634,42 @@ function openDoc(taskId, status) {
     const stuckEl = document.getElementById('stuckActions');
     const stuckReasonEl = document.getElementById('stuckReasonText');
     const statusList = ['drafting','awaiting_review','reviewing','revision','re_review','re_reviewing','waiting_human_review'];
-    if (d.timer_stale && statusList.includes(status)) {
-      stuckEl.style.display = 'block';
-      const reasonMap = {
-        'drafting': 'Writer 长时间未完成撰写，可能已中断。您可以重新触发 Writer 来处理此任务，或者退回待领取让 Writer 重新开始。',
-        'awaiting_review': 'Reviewer 长时间未启动审核，可能任务漏触发。建议重新触发 Reviewer。',
-        'reviewing': 'Reviewer 审核超时，可能已中断。建议重新触发 Reviewer 重新审核。',
-        'revision': 'Writer 修改超时，可能已中断或自动修复陷入循环。您可以重新触发 Writer 重试，或标记阻塞由系统自动恢复。',
-        're_review': '复审超时，可能 Reviewer 未正常处理。建议重新触发 Reviewer 进行复审。',
-        're_reviewing': '复审中长时间未响应，可能已中断。建议重新触发 Reviewer。',
-        'waiting_human_review': '此任务等待您人工审核，请查看文档并点击「通过」或「不通过」。',
-      };
-      stuckReasonEl.textContent = reasonMap[status] || '任务在当前位置停留时间过长，可能出现了异常。';
-      document.getElementById('stuckActionFeedback').style.display = 'none';
-    } else {
-      stuckEl.style.display = 'none';
-    }
+    if (d.timer_stale && statusList.includes(status) && d.workflow_status !== 'stopped') {
+          stuckEl.style.display = 'block';
+          const reasonMap = {
+            'drafting': 'Writer not completed for a long time. Retrigger or reset to backlog.',
+            'awaiting_review': 'Reviewer not started. Retrigger reviewer.',
+            'reviewing': 'Reviewer timeout. Retrigger reviewer.',
+            'revision': 'Writer timeout. Retrigger writer or mark blocked.',
+            're_review': 'Re-review timeout. Retrigger reviewer.',
+            're_reviewing': 'Re-review stuck. Retrigger reviewer.',
+            'waiting_human_review': 'Waiting for your review.',
+          };
+          stuckReasonEl.textContent = reasonMap[status] || 'Task stuck.';
+          document.getElementById('stuckActionFeedback').style.display = 'none';
+          
+          // Per-status button rules
+          const retriggerBtn = document.querySelector('#stuckActions .ctrl-btn[onclick*="retriggerTask"]');
+          const resetBtn = document.querySelector('#stuckActions .ctrl-btn[onclick*="resetTaskToBacklog"]');
+          const blockBtn = document.querySelector('#stuckActions .ctrl-btn[onclick*="markTaskBlocked"]');
+          
+          retriggerBtn.style.display = '';
+          resetBtn.style.display = '';
+          blockBtn.style.display = '';
+          
+          if (status === 'drafting') {
+            // show all three
+          } else if (status === 'awaiting_review' || status === 're_review') {
+            // only retrigger
+            resetBtn.style.display = 'none';
+            blockBtn.style.display = 'none';
+          } else if (status === 'reviewing' || status === 'revision' || status === 're_reviewing') {
+            // retrigger + mark blocked
+            resetBtn.style.display = 'none';
+          }
+        } else {
+          stuckEl.style.display = 'none';
+        }
     // Show reviewer feedback for tasks with audit data (re_review, revision, waiting_human_review)
     const reviewerEl = document.getElementById('reviewerFeedback');
     const pcountsEl = document.getElementById('reviewerFeedbackPcounts');
@@ -796,6 +821,91 @@ async function humanReview(action) {
   });
   const data = await r.json();
   closeDocModal();
+
+  // human review dialog functions
+  function startHumanDialog() {
+    document.getElementById('humanReviewSimple').style.display = 'none';
+    document.getElementById('humanReviewDialog').style.display = 'block';
+    document.getElementById('dialogHistory').innerHTML = '';
+    document.getElementById('consensusSection').style.display = 'none';
+    document.getElementById('dialogInput').value = '';
+    addDialogMessage('system', 'Describe your review opinion, reviewer-P will analyze.', 'var(--dim)');
+  }
+
+  function closeHumanDialog() {
+    document.getElementById('humanReviewSimple').style.display = 'block';
+    document.getElementById('humanReviewDialog').style.display = 'none';
+  }
+
+  function addDialogMessage(sender, text, color) {
+    const history = document.getElementById('dialogHistory');
+    const msgDiv = document.createElement('div');
+    msgDiv.style.cssText = 'padding:6px 8px;margin-bottom:6px;background:var(--card);border:1px solid var(--border);border-radius:6px;font-size:12px;line-height:1.5';
+    const label = document.createElement('div');
+    label.style.cssText = 'font-weight:600;color:' + (color || 'var(--text)') + ';margin-bottom:3px';
+    label.textContent = sender;
+    msgDiv.appendChild(label);
+    const contentDiv = document.createElement('div');
+    contentDiv.style.cssText = 'color:var(--text);white-space:pre-wrap';
+    contentDiv.textContent = text;
+    msgDiv.appendChild(contentDiv);
+    history.appendChild(msgDiv);
+    history.scrollTop = history.scrollHeight;
+  }
+
+  async function sendDialogMessage() {
+    if (!currentTaskId) return;
+    const input = document.getElementById('dialogInput');
+    const opinion = input.value.trim();
+    if (!opinion) return;
+
+    addDialogMessage('You (liufeng)', opinion, 'var(--blue)');
+    input.value = '';
+
+    const statusEl = document.getElementById('dialogStatus');
+    statusEl.style.display = 'inline';
+    statusEl.textContent = '⏳ reviewer-P analyzing...';
+
+    try {
+      const r = await fetch('/api/human-review-dialog/' + currentTaskId, {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({opinion: opinion, project: currentProject})
+      });
+      const data = await r.json();
+      statusEl.style.display = 'none';
+
+      if (data.success && data.content) {
+        addDialogMessage('reviewer-P', data.content, 'var(--purple)');
+        document.getElementById('consensusSection').style.display = 'block';
+        document.getElementById('consensusInstructions').value = data.content;
+      } else {
+        addDialogMessage('system', 'Analysis failed: ' + (data.error || 'unknown'), 'var(--red)');
+      }
+    } catch(e) {
+      statusEl.style.display = 'none';
+      addDialogMessage('system', 'Request failed: ' + e.message, 'var(--red)');
+    }
+  }
+
+  async function confirmConsensus() {
+    if (!currentTaskId) return;
+    const instructions = document.getElementById('consensusInstructions').value.trim();
+    if (!instructions) { alert('Fill in modification instructions'); return; }
+
+    const r = await fetch('/api/human-review-consensus/' + currentTaskId, {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({instructions: instructions, project: currentProject})
+    });
+    const data = await r.json();
+    if (data.success) {
+      closeDocModal();
+      render();
+    } else {
+      alert('Confirmation failed: ' + (data.error || 'unknown'));
+    }
+  }
   render();
   if (!data.success) alert('操作失败: '+data.error);
 }
@@ -1335,6 +1445,10 @@ async def api_document(task_id: str, project: str = default_project):
         now_iso = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
         _, timer_stale = calc_elapsed(entered, now_iso, status)
         result["timer_stale"] = timer_stale
+        # pass workflow_status for frontend stopped check
+        auto_state = get_automation_state()
+        status_val = task.get("status", "")
+        result["workflow_status"] = "stopped" if (not auto_state.get("running", True) and status_val not in ("finalized", "blocked", "backlog")) else "running"
     return JSONResponse(result)
 
 @app.post("/api/human-review/{task_id}")
