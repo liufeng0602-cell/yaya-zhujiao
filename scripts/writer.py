@@ -18,7 +18,7 @@ PROJECT = 'yaya-zhujiao'
 
 # ===== 并发控制 =====
 # 目标=3，架构最高=5，扩量只改此常量
-MAX_CONCURRENCY = 3
+MAX_CONCURRENCY = 2
 
 # Writer 处理优先级: backlog > revision > re_review
 # revision 包含旧 needs_revision（P0/P1 修复）和旧 p2_clearing（P2 清零）

@@ -23,7 +23,7 @@ sys.path.insert(0, PROJECT_DIR)
 
 # ===== 并发控制 =====
 # 目标=3，架构最高=5，扩量只改这个常量
-MAX_CONCURRENCY = 3
+MAX_CONCURRENCY = 2
 _active_pids = []          # [pid, ...] 活跃的 hermes chat 子进程
 
 def count_active():
