@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Writer 主脚本 — 由 fswatch 触发，扫描 kanban 处理任务 (v2.0)"""
+"""Writer 主脚本 — 由 fswatch 触发，扫描 kanban 处理任务 (v3.0 并发版)"""
 
 import os
 import sys
@@ -10,25 +10,20 @@ from datetime import datetime
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from kanban_ops import (
     get_tasks_by_status, get_task, get_comments,
-    update_task_status, add_comment,
+    update_task_status, add_comment, try_claim_task,
     PROJECT_ROOT, KANBAN_DIR, AUDIT_REPORTS_DIR
 )
 
 PROJECT = 'yaya-zhujiao'
 
+# ===== 并发控制 =====
+# 目标=3，架构最高=5，扩量只改此常量
+MAX_CONCURRENCY = 3
+
 # Writer 处理优先级: backlog > revision > re_review
 # revision 包含旧 needs_revision（P0/P1 修复）和旧 p2_clearing（P2 清零）
 # re_review 是复审不通过的任务（等待进入修改区）
 SCAN_ORDER = ['backlog', 'revision', 're_review', 'drafting']
-
-
-def claim_task(task_id: str, from_status: str):
-    """claim 任务: 移到 drafting（或 revision —— 如果来自 re_review）"""
-    target = 'revision' if from_status == 're_review' else 'drafting'
-    update_task_status(PROJECT, task_id, target, assigned_to='writer')
-    add_comment(PROJECT, task_id, 'writer',
-                f'开始{"写作" if from_status == "backlog" else "修改"}（来自 {from_status}）')
-    print(f"[WRITER] claim 任务 {task_id} ({from_status} -> {target})")
 
 
 def run_self_check(file_path: str) -> bool:
@@ -51,12 +46,10 @@ def run_self_check(file_path: str) -> bool:
 
 
 def do_git_commit(file_path: str, message: str) -> bool | str:
-    """git commit 并验证
+    """git commit 并验证 — 按文件隔离（git commit -- <file> 防并行交叉）
 
     返回 False 表示真正失败（非 no-change），返回 SHA 表示成功，
-    返回 True 表示文件无变动无需新提交（返回 True 而非 False，
-    调用方统一用 'if sha:' 判断：sha=True / str(sha) 都通过，
-    False / None 才失败）。
+    返回 True 表示文件无变动无需新提交。
     """
     repo = PROJECT_ROOT
 
@@ -75,17 +68,16 @@ def do_git_commit(file_path: str, message: str) -> bool | str:
 
     if not has_staged and not has_unstaged:
         print(f"[WRITER] {file_path} 无变更，跳过 git commit")
-        # 返回已有 commit SHA（如果有）
         r = subprocess.run(
             ['git', 'rev-parse', 'HEAD'],
             capture_output=True, text=True, cwd=repo,
         )
         return r.stdout.strip()[:8] or True
 
-    # 有变更 → add + commit
+    # 有变更 → add + commit（-- <file> 确保只提交当前文件，防并行交叉）
     r = subprocess.run(['git', 'add', file_path], capture_output=True,
                        text=True, cwd=repo)
-    r = subprocess.run(['git', 'commit', '-m', message],
+    r = subprocess.run(['git', 'commit', '-m', message, '--', file_path],
                        capture_output=True, text=True, cwd=repo)
     if r.returncode != 0:
         print(f"[WRITER] git commit 失败: {r.stderr}")
@@ -99,10 +91,8 @@ def do_git_commit(file_path: str, message: str) -> bool | str:
 
 
 def process_backlog(task: dict):
-    """处理 backlog 任务: 写作"""
+    """处理 backlog 任务: 写作（已 claim 成功，不重复 claim）"""
     task_id = task['id']
-    claim_task(task_id, 'backlog')
-
     file_path = task.get('file_path', '')
     title = task.get('title', 'Unknown')
 
@@ -150,18 +140,13 @@ def process_backlog(task: dict):
 - 文件路径：{file_path}
 - 提交 SHA：{sha if file_path else "N/A"}''')
 
-    # 触发 reviewer
-    trigger_reviewer()
+    # 触发 reviewer（按 task 独立 NOTIFY）
+    trigger_reviewer(task_id)
 
 
 def process_revision(task: dict):
-    """处理 revision/re_review 任务: 修复 P0/P1/P2（合并了旧 needs_revision 和 p2_clearing）"""
+    """处理 revision/re_review 任务: 修复 P0/P1/P2（已 claim 成功，不重复 claim）"""
     task_id = task['id']
-
-    # 如果任务不在 drafting，claim 它（revision 或 re_review -> drafting）
-    current_status = task.get('status', '')
-    if current_status != 'drafting':
-        claim_task(task_id, current_status)
 
     # 读取最近的审核报告和人工反馈
     comments = get_comments(PROJECT, task_id)
@@ -212,7 +197,8 @@ def process_revision(task: dict):
 - 文件路径：{file_path}
 - 提交 SHA：{sha if file_path else "N/A"}''')
 
-    trigger_reviewer()
+    # 触发 reviewer（按 task 独立 NOTIFY）
+    trigger_reviewer(task_id)
 
 
 def get_auto_repair_attempts(task: dict) -> int:
@@ -237,7 +223,6 @@ def increment_auto_repair(project: str, task_id: str, failure_reason: str) -> in
     rev_data['auto_repair_attempts'] = attempts
     rev_data['last_auto_repair_failure'] = failure_reason
     rev_data['last_auto_repair_time'] = datetime.now().isoformat()
-    # 用 update_task_status 更新 revision_data（状态不变，仅更新字段）
     update_task_status(project, task_id, task['status'],
                        revision_data=json.dumps(rev_data),
                        validate=False)
@@ -250,25 +235,19 @@ def handle_auto_repair_result(project: str, task_id: str, attempts: int,
                                max_attempts: int = 3,
                                target_on_exhaust: str = 'awaiting_review',
                                task_title: str = '', task_version: str = ''):
-    """根据重试次数决定下一步：
-    - < max_attempts: 写 writer NOTIFY 触发重试
-    - >= max_attempts: 推进到 target_on_exhaust，写 reviewer NOTIFY 送审
-    """
+    """根据重试次数决定下一步"""
     notify_dir = os.path.join(KANBAN_DIR, '.notify')
     os.makedirs(notify_dir, exist_ok=True)
 
     if attempts < max_attempts:
-        # 继续重试 — 写 writer NOTIFY
-        notify_path = os.path.join(notify_dir, f'writer-{PROJECT}')
+        # 继续重试 — 写 writer NOTIFY（带 task_id）
+        notify_path = os.path.join(notify_dir, f'writer-{PROJECT}-{task_id}')
         with open(notify_path, 'w') as f:
             f.write(f'auto-repair retry #{attempts} at {datetime.now().isoformat()}')
         add_comment(project, task_id, 'writer',
                     f'自动修复 {attempts}/{max_attempts} 次失败，即将重试第 {attempts+1} 次')
         print(f'[WRITER] auto-repair #{attempts} failed, retrying...')
     else:
-        # 已达上限 — 根据 target 选择重试方向
-        # revision/re_review → 写 writer NOTIFY 让 Writer 继续重试（避免死循环）
-        # awaiting_review/backlog → 写 reviewer NOTIFY 送审（首次审核场景）
         should_retry_writer = target_on_exhaust in ('revision', 're_review')
         update_task_status(project, task_id, target_on_exhaust,
                            commit_sha=None, validate=False)
@@ -276,12 +255,12 @@ def handle_auto_repair_result(project: str, task_id: str, attempts: int,
             add_comment(project, task_id, 'writer',
                         f'自动修复已达 {max_attempts} 次上限，继续重试'
                         f'（目标：{target_on_exhaust}）')
-            notify_path = os.path.join(notify_dir, f'writer-{PROJECT}')
+            notify_path = os.path.join(notify_dir, f'writer-{PROJECT}-{task_id}')
         else:
             add_comment(project, task_id, 'writer',
                         f'自动修复已达 {max_attempts} 次上限，已送审，'
                         f'由 Reviewer 检查问题')
-            notify_path = os.path.join(notify_dir, f'review-{PROJECT}')
+            notify_path = os.path.join(notify_dir, f'review-{PROJECT}-{task_id}')
         with open(notify_path, 'w') as f:
             f.write(f'auto-repair exhausted at {datetime.now().isoformat()}'
                     f' target={target_on_exhaust}')
@@ -290,11 +269,12 @@ def handle_auto_repair_result(project: str, task_id: str, attempts: int,
               f'notify={"writer" if should_retry_writer else "reviewer"}')
 
 
-def trigger_reviewer():
-    """写 NOTIFY 文件触发 reviewer（零轮询事件驱动）"""
+def trigger_reviewer(task_id: str = ''):
+    """写 NOTIFY 文件触发 reviewer（带 task_id，支持并行独立触发）"""
     notify_dir = os.path.join(KANBAN_DIR, '.notify')
     os.makedirs(notify_dir, exist_ok=True)
-    notify_path = os.path.join(notify_dir, f'review-{PROJECT}')
+    suffix = f'-{task_id}' if task_id else ''
+    notify_path = os.path.join(notify_dir, f'review-{PROJECT}{suffix}')
     print(f"[WRITER] 触发 reviewer (NOTIFY: {notify_path})...")
     with open(notify_path, 'w') as f:
         f.write(f'NOTIFY by writer at {datetime.now().isoformat()}')
@@ -302,36 +282,62 @@ def trigger_reviewer():
 
 def main():
     print(f"[WRITER] ========== {datetime.now().isoformat()} ==========")
-    print(f"[WRITER] 扫描项目: {PROJECT}")
+    print(f"[WRITER] 扫描项目: {PROJECT}, 最大并行: {MAX_CONCURRENCY}")
 
+    processed = 0
     for status in SCAN_ORDER:
+        if processed >= MAX_CONCURRENCY:
+            break
+
         tasks = get_tasks_by_status(PROJECT, status)
-        if tasks:
-            task = tasks[0]  # updated_at ASC，最旧优先
-            print(f"[WRITER] 发现 {status} 任务: {task['id']} {task['title']}")
+        if not tasks:
+            continue
+
+        for task in tasks:
+            if processed >= MAX_CONCURRENCY:
+                break
+
+            task_id = task['id']
+            current_status = task.get('status', '')
+
+            # drafting 任务：仅处理有 auto_repair 记录的（无记录说明是正常工作中，跳过）
+            if status == 'drafting':
+                attempts = get_auto_repair_attempts(task)
+                if attempts == 0:
+                    print(f"[WRITER] drafting 任务 {task_id} {task.get('title','')} 无 auto_repair 记录，跳过")
+                    continue
+
+            # 原子 claim：仅当任务仍处于当前状态时才 claim，防止并行冲突
+            if current_status != 'drafting':
+                if not try_claim_task(PROJECT, task_id, current_status):
+                    print(f"[WRITER] claim 失败（已被其他进程抢占）: {task_id} {task.get('title','')}")
+                    continue
+
+            # claim 成功后 task 状态已变为 drafting，重新读取获取最新数据
+            task = get_task(PROJECT, task_id)
+            if not task:
+                print(f"[WRITER] 任务不存在: {task_id}")
+                continue
+
+            print(f"[WRITER] claim 成功: {task_id} ({current_status} -> drafting)")
 
             if status == 'backlog':
                 process_backlog(task)
-            elif status == 'revision':
-                process_revision(task)
-            elif status == 're_review':
-                # 复审不通过，任务需要继续修改
-                # process_revision 会检测 status 并自动 claim
+            elif status in ('revision', 're_review'):
                 process_revision(task)
             elif status == 'drafting':
-                # 仅处理处于自动修复重试状态的任务
-                attempts = get_auto_repair_attempts(task)
-                if attempts == 0:
-                    print(f"[WRITER] drafting 任务 {task['id']} 无 auto_repair 记录，跳过")
-                    continue
-                print(f"[WRITER] 自动修复重试 #{attempts+1}（上限 3）")
-                process_revision(task)
+                process_revision(task)  # auto-repair 重试也走 process_revision
+            else:
+                print(f"[WRITER] 跳过未知状态: {status}")
+                continue
 
-            # 一个 tick 只处理 1 个任务
-            print(f"[WRITER] 本轮处理完毕: {task['id']}")
-            return
+            processed += 1
+            print(f"[WRITER] 任务完成: {task_id} ({processed}/{MAX_CONCURRENCY})")
 
-    print("[WRITER] 无待处理任务，退出")
+    if processed == 0:
+        print("[WRITER] 无待处理任务，退出")
+    else:
+        print(f"[WRITER] 本轮共处理 {processed} 个任务，退出")
 
 
 if __name__ == '__main__':

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""fswatch 事件驱动守护进程 — 监听 .notify/ 目录，零轮询触发 Hermes 任务"""
+"""fswatch 事件驱动守护进程 — 监听 .notify/ 目录，零轮询触发 Hermes 任务 (v3.0 并发版)"""
 import os
 import sys
 import json
@@ -7,6 +7,7 @@ import subprocess
 import signal
 import time
 import sqlite3
+import threading
 from datetime import datetime
 
 NOTIFY_DIR = "/Users/liufeng/Documents/DocProductionReview/.kanban/.notify"
@@ -16,6 +17,52 @@ HERMES = "/Users/liufeng/.hermes/hermes-agent/venv/bin/hermes"
 LOG_DIR = "/Users/liufeng/.hermes/logs"
 PROJECT_DIR = "/Users/liufeng/Documents/DocProductionReview"
 KANBAN_DB = "/Users/liufeng/Documents/DocProductionReview/.kanban/yaya-zhujiao.db"
+
+# ===== 并发控制 =====
+# 目标=3，架构最高=5，扩量只改这个常量
+MAX_CONCURRENCY = 3
+_active_pids = []          # [pid, ...] 活跃的 hermes chat 子进程
+
+def count_active():
+    """统计当前活跃的 hermes chat 进程数（轮询清理僵尸）"""
+    global _active_pids
+    alive = []
+    for pid in _active_pids:
+        try:
+            os.kill(pid, 0)  # 信号0 = 仅检查存在
+            alive.append(pid)
+        except OSError:
+            pass  # 已退出
+    _active_pids = alive
+    return len(alive)
+
+def wait_for_slot():
+    """阻塞直到活跃进程数 < MAX_CONCURRENCY"""
+    while count_active() >= MAX_CONCURRENCY:
+        log(f"并发已达上限({MAX_CONCURRENCY})，等待中...")
+        time.sleep(3)
+
+def monitor_process(proc, profile_label):
+    """后台线程：等进程结束，记录日志，清理 PID"""
+    global _active_pids
+    try:
+        stdout, stderr = proc.communicate(timeout=600)
+        out = (stdout or b"").decode("utf-8", errors="replace")[:500]
+        err = (stderr or b"").decode("utf-8", errors="replace")[:200]
+        log(f"-> {profile_label} 完成 (exit={proc.returncode})")
+        if out.strip():
+            log(f"   stdout: {out}")
+        if err.strip():
+            log(f"   stderr: {err}")
+    except subprocess.TimeoutExpired:
+        log(f"-> {profile_label} 超时(600s)，kill")
+        proc.kill()
+        proc.wait()
+    finally:
+        if proc.pid in _active_pids:
+            _active_pids.remove(proc.pid)
+# ===== end 并发控制 =====
+
 
 def log(msg):
     ts = time.strftime("%Y-%m-%d %H:%M:%S")
@@ -152,7 +199,7 @@ def get_automation_state():
 
 
 def handle_notify(filepath):
-    """处理单个 NOTIFY 文件"""
+    """处理单个 NOTIFY 文件 — 异步 spawn (Popen)，不阻塞主循环"""
     if not os.path.isfile(filepath):
         return
 
@@ -160,7 +207,6 @@ def handle_notify(filepath):
     running, paused = get_automation_state()
     if not running:
         log(f"自动化已停止，跳过 {os.path.basename(filepath)}")
-        # 仍然清理文件
         try: os.remove(filepath)
         except: pass
         return
@@ -175,34 +221,32 @@ def handle_notify(filepath):
     log(f"文件出现: {filename}")
 
     if filename.startswith("review-"):
-        log("-> 触发 reviewer (profile: yaya-reviewer)")
+        # reviewer: 等待并发槽位
+        wait_for_slot()
+        log("-> Popen reviewer (profile: yaya-reviewer)")
         prompt = build_reviewer_prompt()
-        r = subprocess.run(
+        proc = subprocess.Popen(
             [HERMES, "chat", "-q", prompt, "--profile", "yaya-reviewer"],
             cwd=PROJECT_DIR,
-            capture_output=True, text=True, timeout=600
+            stdout=subprocess.PIPE, stderr=subprocess.PIPE
         )
-        log(f"-> reviewer 完成 (exit={r.returncode})")
-        out = (r.stdout or "")[:500]
-        if out:
-            log(f"   stdout: {out}")
-        if r.stderr:
-            log(f"   stderr: {r.stderr[:200]}")
+        _active_pids.append(proc.pid)
+        log(f"   PID={proc.pid}, active={count_active()}/{MAX_CONCURRENCY}")
+        threading.Thread(target=monitor_process, args=(proc, "reviewer"), daemon=True).start()
 
     elif filename.startswith("writer-"):
-        log("-> 触发 writer (profile: yaya)")
+        # writer: 等待并发槽位
+        wait_for_slot()
+        log("-> Popen writer (profile: yaya)")
         prompt = build_writer_prompt()
-        r = subprocess.run(
+        proc = subprocess.Popen(
             [HERMES, "chat", "-q", prompt, "--profile", "yaya"],
             cwd=PROJECT_DIR,
-            capture_output=True, text=True, timeout=600
+            stdout=subprocess.PIPE, stderr=subprocess.PIPE
         )
-        log(f"-> writer 完成 (exit={r.returncode})")
-        out = (r.stdout or "")[:500]
-        if out:
-            log(f"   stdout: {out}")
-        if r.stderr:
-            log(f"   stderr: {r.stderr[:200]}")
+        _active_pids.append(proc.pid)
+        log(f"   PID={proc.pid}, active={count_active()}/{MAX_CONCURRENCY}")
+        threading.Thread(target=monitor_process, args=(proc, "writer"), daemon=True).start()
 
     else:
         log(f"-> 未知类型: {filename}，跳过")
@@ -235,31 +279,31 @@ def bootstrap():
         pending = {s: n for s, n in rows}
         log(f"bootstrap: 发现待处理任务 {pending}")
 
-        if 'awaiting_review' in pending:
+        # awaiting_review / reviewing → 触发 reviewer
+        if 'awaiting_review' in pending or 'reviewing' in pending:
+            # 只写一个 review NOTIFY（不带 task_id，通用唤醒）
             notify_path = os.path.join(NOTIFY_DIR, "review-yaya-zhujiao")
             os.makedirs(NOTIFY_DIR, exist_ok=True)
             with open(notify_path, 'w') as f:
                 f.write('bootstrap review')
-            log("bootstrap: 写 NOTIFY -> reviewer (awaiting_review)")
+            log("bootstrap: 写 NOTIFY -> reviewer (awaiting_review/reviewing)")
 
-        if 'reviewing' in pending:
-            notify_path = os.path.join(NOTIFY_DIR, "review-yaya-zhujiao")
-            os.makedirs(NOTIFY_DIR, exist_ok=True)
-            with open(notify_path, 'w') as f:
-                f.write('bootstrap review (reviewing)')
-            log("bootstrap: 写 NOTIFY -> reviewer (reviewing)")
-
+        # revision → 触发 writer，按 task 写独立 NOTIFY
         if 'revision' in pending:
-            notify_path = os.path.join(NOTIFY_DIR, "writer-yaya-zhujiao")
+            c.execute("SELECT id FROM tasks WHERE status='revision' ORDER BY updated_at ASC")
+            task_ids = [r[0] for r in c.fetchall()]
             os.makedirs(NOTIFY_DIR, exist_ok=True)
-            with open(notify_path, 'w') as f:
-                f.write('bootstrap writer for revision')
-            log("bootstrap: 写 NOTIFY -> writer (revision)")
+            for tid in task_ids:
+                notify_path = os.path.join(NOTIFY_DIR, f"writer-yaya-zhujiao-{tid}")
+                with open(notify_path, 'w') as f:
+                    f.write('bootstrap writer for revision')
+            log(f"bootstrap: 写 {len(task_ids)} 个 writer NOTIFY (revision)")
 
         if 're_review' in pending:
             # 2. 检查是否有废弃的 re_review 卡片（状态超过5分钟且 re_review_result='fail'）
             c.execute("SELECT id, title, revision_data, status_entered_at FROM tasks WHERE status='re_review'")
             stale_reviews = []
+            fresh_reviews = []
             for row2 in c.fetchall():
                 tid, title, rd_json, entered = row2
                 rev_data = json.loads(rd_json or '{}')
@@ -269,24 +313,27 @@ def bootstrap():
                         nt = datetime.fromisoformat(now_iso)
                         if (nt - et).total_seconds() > 300:  # >5分钟
                             stale_reviews.append((tid, title))
+                        else:
+                            fresh_reviews.append(tid)
                     except:
                         pass
+                else:
+                    fresh_reviews.append(tid)
             if stale_reviews:
                 for tid, title in stale_reviews:
-                    # 自动迁移到 revision（而不是留在 re_review）
                     from kanban_ops import update_task_status, add_comment
                     update_task_status('yaya-zhujiao', tid, 'revision', validate=False)
                     add_comment('yaya-zhujiao', tid, 'system',
                                 f'定时 bootstrap: re_review 超时(>5min)，自动迁移到 revision')
                     log(f"bootstrap: 迁移废弃 re_review -> revision: {tid} {title}")
-                # 迁移后写 writer NOTIFY
-                notify_path = os.path.join(NOTIFY_DIR, "writer-yaya-zhujiao")
-                os.makedirs(NOTIFY_DIR, exist_ok=True)
-                with open(notify_path, 'w') as f:
-                    f.write('bootstrap writer for stale re_review')
-                log("bootstrap: 写 NOTIFY -> writer (stale re_review migrated)")
-            else:
-                # 没有废弃的，正常触发 reviewer
+                    # 写独立 NOTIFY
+                    notify_path = os.path.join(NOTIFY_DIR, f"writer-yaya-zhujiao-{tid}")
+                    os.makedirs(NOTIFY_DIR, exist_ok=True)
+                    with open(notify_path, 'w') as f:
+                        f.write('bootstrap writer for stale re_review')
+                log(f"bootstrap: 写 {len(stale_reviews)} 个 writer NOTIFY (stale re_review migrated)")
+            if fresh_reviews:
+                # 正常 review NOTIFY
                 notify_path = os.path.join(NOTIFY_DIR, "review-yaya-zhujiao")
                 os.makedirs(NOTIFY_DIR, exist_ok=True)
                 with open(notify_path, 'w') as f:
@@ -302,7 +349,7 @@ def bootstrap():
 def main():
     import select as _select
 
-    log("守护进程启动")
+    log(f"守护进程启动 (MAX_CONCURRENCY={MAX_CONCURRENCY})")
     os.makedirs(NOTIFY_DIR, exist_ok=True)
     log(f"监听目录: {NOTIFY_DIR}")
 

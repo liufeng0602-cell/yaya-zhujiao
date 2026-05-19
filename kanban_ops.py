@@ -25,7 +25,7 @@ VALID_TRANSITIONS = {
     'awaiting_review':     {'reviewing', 'blocked'},
     'reviewing':           {'revision', 'waiting_human_review', 'blocked'},
     'revision':            {'drafting', 're_review', 'blocked'},
-    're_review':           {'re_reviewing', 'blocked'},
+    're_review':           {'drafting', 're_reviewing', 'blocked'},
     're_reviewing':        {'revision', 'waiting_human_review', 'blocked'},
     'waiting_human_review':{'finalized', 'revision', 're_review', 'blocked'},
     'finalized':           {'blocked'},
@@ -59,6 +59,7 @@ def _conn(project: str) -> sqlite3.Connection:
     conn = sqlite3.connect(path)
     conn.row_factory = sqlite3.Row
     conn.execute("PRAGMA journal_mode=WAL")
+    conn.execute("PRAGMA busy_timeout=5000")
     conn.execute("PRAGMA foreign_keys=ON")
     _ensure_tables(conn)
     _migrate_schema(conn)
@@ -210,6 +211,29 @@ def get_tasks_by_status(project: str, status: str = None) -> list:
         ).fetchall()
     conn.close()
     return [dict(r) for r in rows]
+
+def try_claim_task(project: str, task_id: str, current_status: str) -> bool:
+    """原子 claim: 仅当任务仍处于 current_status 时才将其 status 改为 drafting。
+
+    使用 UPDATE ... WHERE id=? AND status=? 实现 CAS（Compare-And-Swap），
+    并发安全：两个 writer 同时 claim 同一任务时只有一个成功。
+    SQLite 的 busy_timeout=5000 防止写锁冲突时直接抛异常。
+
+    返回 True 表示 claim 成功，False 表示已被别人抢占。
+    """
+    conn = _conn(project)
+    conn.execute("PRAGMA busy_timeout=5000")
+    # 在 SET 子句中用 previous_status=status 在更新前读取旧值（SQLite 语义：RHS 求旧值）
+    cursor = conn.execute(
+        "UPDATE tasks SET status='drafting', status_entered_at=datetime('now'), "
+        "updated_at=datetime('now'), previous_status=status, "
+        "assigned_to='writer' "
+        "WHERE id=? AND status=?",
+        (task_id, current_status)
+    )
+    conn.commit()
+    conn.close()
+    return cursor.rowcount > 0
 
 def update_task_status(project: str, task_id: str, new_status: str,
                        validate: bool = True, **extra):
