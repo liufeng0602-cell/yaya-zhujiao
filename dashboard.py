@@ -1357,7 +1357,7 @@ async def api_board(project: str = default_project):
                                         ("drafting", "awaiting_review"): "撰写已完成，5秒后进入审查+修改环节",
                                         ("reviewing", "revision"): "审查不通过，5秒钟后进入修改阶段",
                                         ("reviewing", "waiting_human_review"): "审查通过，5秒钟后进入人工审核环节",
-                                        ("re_reviewing", "revision"): "复审不通过，5秒钟后进入修改阶段",
+                                        ("re_reviewing", "revision"): "复审不通过，5秒钟之后继续修改",
                                         ("re_reviewing", "waiting_human_review"): "复审通过，5秒钟后进入人工审核环节",
                                         ("waiting_human_review", "finalized"): "人工审核通过，5秒钟后进入封版区",
                                         ("waiting_human_review", "re_review"): "人工审核不通过，5秒钟后进入复审+修改区",
@@ -1451,7 +1451,7 @@ async def api_board(project: str = default_project):
                                         ("drafting", "awaiting_review"): "撰写已完成，5秒后进入审查+修改环节",
                                         ("reviewing", "revision"): "审查不通过，5秒钟后进入修改阶段",
                                         ("reviewing", "waiting_human_review"): "审查通过，5秒钟后进入人工审核环节",
-                                        ("re_reviewing", "revision"): "复审不通过，5秒钟后进入修改阶段",
+                                        ("re_reviewing", "revision"): "复审不通过，5秒钟之后继续修改",
                                         ("re_reviewing", "waiting_human_review"): "复审通过，5秒钟后进入人工审核环节",
                                         ("waiting_human_review", "finalized"): "人工审核通过，5秒钟后进入封版区",
                                         ("waiting_human_review", "re_review"): "人工审核不通过，5秒钟后进入复审+修改区",
@@ -1498,8 +1498,14 @@ async def api_board(project: str = default_project):
                 tl = col[section_key]
                 to_move = []
                 for t in tl:
+                    # A) 过渡中（10秒内）回退到 previous_status 所在列
                     if t.get('transition_message') and t.get('previous_status'):
                         tgt_key = status_to_column.get(t['previous_status'])
+                        if tgt_key and tgt_key != col_key:
+                            to_move.append((t, tgt_key, col_key))
+                    # B) revision 状态来自复审 → 永久归属复审+修改列（不跳到审查+修改）
+                    elif t.get('status') == 'revision' and t.get('previous_status') in ('re_review', 're_reviewing'):
+                        tgt_key = 're_review_modify'
                         if tgt_key and tgt_key != col_key:
                             to_move.append((t, tgt_key, col_key))
                 for t, tgt_key, _ in to_move:
