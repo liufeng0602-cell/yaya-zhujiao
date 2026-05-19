@@ -134,6 +134,7 @@ class Judge:
         cls,
         report: Dict[str, Any],
         iteration: int = 0,
+        max_iterations: int = 6,
     ) -> Decision:
         """Determine the document's next state.
 
@@ -145,6 +146,9 @@ class Judge:
         iteration : int
             How many times this document has been through the review
             loop (0 = first pass).  The default (0) means first pass.
+        max_iterations : int
+            Maximum iterations before forced blocked (default 6).
+            Callers can override via strategy pack configuration.
 
         Returns
         -------
@@ -157,11 +161,11 @@ class Judge:
         }
 
         # ── iteration cap (overrides all) ────────────────────────────
-        if iteration >= cls.MAX_ITERATIONS and (counts['P0'] + counts['P1'] + counts['P2']) > 0:
+        if iteration >= max_iterations and (counts['P0'] + counts['P1'] + counts['P2']) > 0:
             return Decision(
                 state='blocked',
                 reason=(
-                    f"Document has looped {iteration} times (max {cls.MAX_ITERATIONS}) "
+                    f"Document has looped {iteration} times (max {max_iterations}) "
                     f"without resolving {counts['P0']} P0 + {counts['P1']} P1 + "
                     f"{counts['P2']} P2 issues.  Manual intervention required."
                 ),

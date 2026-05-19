@@ -107,6 +107,12 @@ The kanban card states driven by Judge decisions:
 Iteration cap: if `iteration_count >= 6` and audit fails, card moves to
 `blocked` instead of `revision`.
 
+**Writer trigger mechanism**: When a card enters `revision` or `p2_clearing`,
+the Reviewer writes a NOTIFY file.  A fswatch daemon watches for this file
+and launches the Writer process, which picks up the card from `backlog` (via
+`try_claim_task`) and enters `drafting`.  After commit, the Writer transitions
+the card to `awaiting_review` or `re_review`, which triggers the Reviewer again.
+
 ---
 
 ## Quick Start
@@ -168,7 +174,7 @@ engine.register(MyCustomChecker())
 | Layer | Open Source (this repo) | Closed Source (strategy pack) |
 |---|---|---|
 | L0 + L1 | 6 built-in checkers | Additional custom checkers |
-| L2 | Placeholder for LLM pass | LLM prompting templates, evidence validators |
+| L2 | **Not yet implemented** — placeholder at `max_layer >= 2` | LLM prompting templates, evidence validators |
 | Evolution | — | Training data, rule auto-generation, manual approval gate |
 | Glossary | — | `glossary.yaml` — term definitions, validation specs |
 

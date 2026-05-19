@@ -94,7 +94,7 @@ db: 0
 本节功能由 S03 定义，已完整实现。
 
 <self_check_report>
-version: 2
+version: '2'
 reported_params:
   - name: timeout
     value: "30"
@@ -284,6 +284,16 @@ def main():
     print_issues("P1", audit['P1'], label="审核问题 — 提交前必须审查")
     print_issues("P2", audit['P2'], label="建议项 — 不阻断，推荐修复")
 
+    # Note which checkers fired and which didn't
+    fired_ids = set(iss['check_id'] for iss in audit['P0'] + audit['P1'] + audit['P2'])
+    checker_ids = [c.id for c in checkers]
+    for cid in checker_ids:
+        # Match by prefix: checker ID "validity/self_check_report" matches
+        # issue "validity/self_check_report/missing"
+        fired = any(i.startswith(cid) for i in fired_ids)
+        if not fired:
+            print(f"    {GRAY}· {cid:42s} 条件不满足，未触发{RESET}")
+
     decision = Judge.evaluate(audit, iteration=1)
     print_decision(decision)
     generate_audit_report(doc_label, BUGGY_DOC, audit, decision)
@@ -329,6 +339,8 @@ def main():
         d = Judge.evaluate(audit, iteration=iteration)
         cap_mark = " ← 封顶!" if iteration >= 6 else ""
         print(f"  iteration={iteration:2d} → {d.state:25s}{cap_mark}")
+    print(f"  {GRAY}注: 实际生产中每轮 Writer 修复后重新提交、重新扫描。此处仅{RESET}")
+    print(f"  {GRAY}展示 Judge 在不同 iteration 下的裁决差异，假设审计结果不变。{RESET}")
 
     # ── Summary ─────────────────────────────────────────────────
     print(f"\n\n{BOLD}{'═' * 72}{RESET}")

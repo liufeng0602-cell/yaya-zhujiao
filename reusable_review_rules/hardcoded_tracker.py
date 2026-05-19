@@ -34,11 +34,12 @@ from typing import List, Dict, Any
 # [PARAM:name=value] — name must not contain '=', value consumes up to ']'
 _PARAM_RE = re.compile(r'\[PARAM:([^\]=]+)=([^\]]*)\]')
 
-# [CONFIG:entity] ... [/CONFIG] (dotall mode inside block)
+# [CONFIG:entity] ... [/CONFIG] (dotall mode, body capped at 5000 chars to avoid catastrophic backtracking)
 _CONFIG_BLOCK_RE = re.compile(
-    r'\[CONFIG:([^\]]+)\]\s*\n(.*?)\n\s*\[/CONFIG\]',
+    r'\[CONFIG:([^\]]+)\]\s*\n(.{0,5000}?)\n\s*\[/CONFIG\]',
     re.DOTALL,
 )
+
 
 # Sub-pattern: inside a CONFIG block, each field line is "key: value"
 _FIELD_LINE_RE = re.compile(r'^([a-zA-Z_]\w*)\s*:\s*(.*?)\s*$')

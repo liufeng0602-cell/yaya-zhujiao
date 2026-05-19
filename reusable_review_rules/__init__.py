@@ -3,7 +3,7 @@
 A 3-tier defense system for automated document review:
   Layer 0 — Syntax & structure (code checks, no LLM)
   Layer 1 — Semantic consistency on structured markers (code checks, no LLM)
-  Layer 2 — LLM-assisted evidence collection + code-based judgment (strategy pack)
+  Layer 2 — LLM-assisted evidence collection + code-based judgment (strategy pack — not yet implemented)
 
 Core components
 ---------------

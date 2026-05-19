@@ -71,7 +71,7 @@ REQUIRED_KEYS = ['version', 'checks', 'reported_params', 'reported_configs']
 
 # Valid types for each required key
 KEY_TYPES = {
-    'version': (str, int),    # "1.0" or 2 are both acceptable
+    'version': str,       # must be a string (e.g. "1.0", "2") — no int
     'checks': dict,
     'reported_params': list,
     'reported_configs': list,
@@ -305,6 +305,9 @@ def _parse_yaml_simple(yaml_text: str) -> Optional[Dict[str, Any]]:
     return result
 
 
+_QUOTED_RE = re.compile(r"""^(["'])(.*)\1$""", re.DOTALL)
+
+
 def _parse_scalar(val_str: str) -> Any:
     """Parse a single scalar value from YAML-like text."""
     if not val_str:
@@ -316,10 +319,10 @@ def _parse_scalar(val_str: str) -> Any:
     if val_str == '{}':
         return {}
 
-    # Quoted string
-    if (val_str[0] == '"' and val_str[-1] == '"') or \
-       (val_str[0] == "'" and val_str[-1] == "'"):
-        return val_str[1:-1]
+    # Quoted string — strict regex to avoid IndexError on edge cases
+    m = _QUOTED_RE.match(val_str)
+    if m:
+        return m.group(2)
 
     # Boolean
     if val_str.lower() == 'true':
