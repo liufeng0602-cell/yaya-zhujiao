@@ -1,6 +1,6 @@
-# 自动化文档生产-审核循环工作流 开发者指南 v1.10
+# 自动化文档生产-审核循环工作流 开发者指南 v1.11
 
-基于 PRD v2.11 实现。本文档提供每个模块的实现细节：文件路径、接口签名、数据模型 DDL、配置文件模板、命令行参数。目标是：照着本文档就能写代码。
+基于 PRD v2.12 实现。本文档提供每个模块的实现细节：文件路径、接口签名、数据模型 DDL、配置文件模板、命令行参数。目标是：照着本文档就能写代码。
 
 ---
 
@@ -8,7 +8,8 @@
 
 | 版本 | 日期 | 变更内容 |
 |------|------|----------|
-||| v1.10 | 2026-05-19 13:04 | 并行架构改造 v3.0: fswatch异步spawn(Popen)+并发上限(目标3/架构5)、writer.py批量处理+原子CAS claim+git commit --<file>隔离、NOTIFY按task_id独立文件、kanban_ops加try_claim_task+busy_timeout；同步PRD v2.11 |
+|||| v1.11 | 2026-05-19 13:28 | 卡片三状态机(运行中/排队中/已停止)取代二态徽标；人审不通过退回修改时 increment_iteration；MAX_CONCURRENCY 3→2 降低DeepSeek突发保护风险 |
+|||| v1.10 | 2026-05-19 13:04 | 并行架构改造 v3.0: fswatch异步spawn(Popen)+并发上限(目标3/架构5)、writer.py批量处理+原子CAS claim+git commit --<file>隔离、NOTIFY按task_id独立文件、kanban_ops加try_claim_task+busy_timeout；同步PRD v2.11 |
 ||| v1.9 | 2026-05-19 12:48 | 修复复审不通过列跳转bug：复审不通过后卡片停留复审+修改区，提示改为「5秒钟之后继续修改」；同步PRD v2.10 |
 ||| v1.8 | 2026-05-19 12:37 | 修复过渡中卡片列位置bug：所有状态切换时卡片停留在原列展示5秒倒计时，再跳转至新列；同步PRD v2.9 |
 || v1.7 | 2026-05-19 12:25 | 修复复审超时：人审不通过→revision直入修改区（不再卡re_review）；同步PRD v2.8 |
@@ -274,7 +275,7 @@ def get_comments(project: str, task_id: str) -> list:
     return [dict(r) for r in rows]
 
 def increment_iteration(project: str, task_id: str):
-    """iteration_count +1（reviewer 判定 revision 时调用）"""
+    """iteration_count +1（reviewer 判定 revision 时调用 + 人工审核不通过退回修改时调用）"""
     conn = _conn(project)
     conn.execute(
         "UPDATE tasks SET iteration_count = iteration_count + 1, updated_at = datetime('now') WHERE id=?",
@@ -438,29 +439,40 @@ KANBAN_LAYOUT = [
 
 基于 PRD v2.6 的 14.7-14.10 实现。
 
-**卡片状态徽标：**
+**卡片状态徽标（三状态机，v1.11 起）：**
 
-API 返回的 `workflow_status` 字段控制每张卡片的顶部徽标。字段值：
-- `"running"` — 显示 ▶ 进行中（绿色 `#3fb950`，背景 `#3fb95022`）
-- `"stopped"` — 显示 ⏹ 已停止（红色 `#f85149`，背景 `#f8514933`）
+API 返回的 `card_activity` 字段控制每张卡片的顶部徽标，三值：
 
-设置逻辑（dashboard.py `build_task` 两处，line 1124-1126 和 1213-1215）：
+| 值 | 显示 | 颜色 | 条件 |
+|----|------|------|------|
+| `"active"` | ▶ 运行中 | 绿色 `#3fb950` | 工作流运行中且状态为 `drafting`/`reviewing`/`revision`/`re_reviewing` |
+| `"queued"` | ⏳ 排队中 | 黄色 `#d29922` | 工作流运行中且状态为 `backlog`/`awaiting_review`/`re_review`/`waiting_human_review` |
+| `"stopped"` | ⏹ 已停止 | 红色 `#f85149` | 自动化停止且状态不为 `finalized`/`blocked` |
+
+`finalized` 和 `blocked` 不显示任何徽标。
+
+设置逻辑（dashboard.py `build_task` 两处）：
 ```python
-workflow_status = "stopped" if (auto_stopped and status not in ('finalized', 'blocked', 'backlog')) else "running"
+# 卡片活动状态：运行中 / 排队中 / 已停止（三状态机）
+if auto_stopped and status not in ('finalized', 'blocked'):
+    card_activity = "stopped"
+elif status in ('drafting', 'reviewing', 'revision', 're_reviewing'):
+    card_activity = "active"
+elif status in ('backlog', 'awaiting_review', 're_review', 'waiting_human_review'):
+    card_activity = "queued"
+else:
+    card_activity = ""
 ```
-仅当 `automation_state.running=False` 且状态不为 finalized/blocked/backlog 时设为 "stopped"。不修改 stale 或 stale_reason，不干扰原有的 timer 超时机制。
 
-**停止状态 stale 抑制（v1.6 起）：**
+`openDoc()` API 同样返回 `card_activity`，前端前端 `openDoc()` 在判断是否展示「任务处理建议」模块时检查 `d.card_activity !== 'stopped'`。
 
-后端 `build_task()` 两处在设置 `workflow_status` 后立即检查：
+**停止状态 stale 抑制（v1.6 起，保持）：**
+
+后端在设置 `card_activity` 后立即检查：
 ```python
-if workflow_status == "stopped":
+if card_activity == "stopped":
     stale = False
     stale_reason = ""
-```
-前端 `openDoc()` 在判断是否展示「任务处理建议」模块时，额外检查 `d.workflow_status !== 'stopped'`：
-```javascript
-if (d.timer_stale && statusList.includes(status) && d.workflow_status !== 'stopped') {
 ```
 停止状态下，「⏹ 已停止」徽标已传达状态，底部不再出现任何 ⚠ 报错。
 
@@ -564,13 +576,13 @@ Writer 不由 cron job 触发，而是由 fswatch 守护进程在检测到 NOTIF
 
 fswatch 守护进程中的 prompt_builder 会检查 kanban 中的 human_feedback，如果有则生成包含分析步骤的详细提示词，否则生成标准提示词。
 
-Writer 主脚本（`scripts/writer.py`）扫描 kanban，按优先级处理 backlog → revision → re_review → drafting。**每次最多处理 `MAX_CONCURRENCY` 个任务**（默认 3，架构最高 5），使用原子 CAS（`try_claim_task`）防止并行冲突。
+Writer 主脚本（`scripts/writer.py`）扫描 kanban，按优先级处理 backlog → revision → re_review → drafting。**每次最多处理 `MAX_CONCURRENCY` 个任务**（当前 2，受 DeepSeek API 突发保护限制），使用原子 CAS（`try_claim_task`）防止并行冲突。
 
 关键并发机制：
 
 扫描优先级定义在 `SCAN_ORDER`：
 ```python
-MAX_CONCURRENCY = 3  # 目标=3，架构最高=5，扩量只改此常量
+MAX_CONCURRENCY = 2  # DeepSeek API 突发保护限制，实际可靠并发为 2。架构最高=5，扩量只改此常量
 SCAN_ORDER = ['backlog', 'revision', 're_review', 'drafting']
 ```
 
@@ -822,7 +834,7 @@ KANBAN_DB = "/Users/liufeng/Documents/DocProductionReview/.kanban/yaya-zhujiao.d
 |------|------|
 | `get_automation_state()` | 读取自动化控制状态（running/paused/stopped） |
 | `handle_notify(filepath)` | 处理单个 NOTIFY 文件：检查状态→按前缀路由→Popen 异步 spawn Writer/Reviewer→清除（不阻塞主循环） |
-|| `wait_for_slot()` | 阻塞直到活跃进程 < MAX_CONCURRENCY（默认 3） |
+|| `wait_for_slot()` | 阻塞直到活跃进程 < MAX_CONCURRENCY（当前 2） |
 || `count_active()` | 统计当前活跃的 hermes chat 进程数（轮询清理僵尸） |
 || `monitor_process()` | 后台线程监控子进程，退出时清理 PID 记录 |
 | `bootstrap()` | 定时自愈：扫描 kanban→发现待处理任务→写 NOTIFY→处理 stale re_review→补发 |
