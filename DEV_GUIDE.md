@@ -1,4 +1,4 @@
-# 自动化文档生产-审核循环工作流 开发者指南 v1.6
+# 自动化文档生产-审核循环工作流 开发者指南 v1.7
 
 基于 PRD v2.7 实现。本文档提供每个模块的实现细节：文件路径、接口签名、数据模型 DDL、配置文件模板、命令行参数。目标是：照着本文档就能写代码。
 
@@ -8,7 +8,8 @@
 
 | 版本 | 日期 | 变更内容 |
 |------|------|----------|
-| v1.6 | 2026-05-19 10:54 | 对话框改为默认模式、VV2.0修复、停止状态stale前端抑制、卡滞任务三按钮按状态规则、版本传递修复；同步PRD v2.7 |
+|| v1.7 | 2026-05-19 12:25 | 修复复审超时：人审不通过→revision直入修改区（不再卡re_review）；同步PRD v2.8 |
+|| v1.6 | 2026-05-19 10:54 | 对话框改为默认模式、VV2.0修复、停止状态stale前端抑制、卡滞任务三按钮按状态规则、版本传递修复；同步PRD v2.7 |
 | v1.4 | 2026-05-19 09:53 | Dashboard 看板7列分组: 已封版/文档目录/文档撰写/审查+修改/复审+修改/人工审核/阻塞、过渡消息更新、人审不通过退回复审+修改、人审对话框Hermes Chat API模块 |
 | v1.2 | 2026-05-18 14:30 | 同步PRD v2.3实现：状态机重排、fswatch守护进程、Dashboard自动化控制、NOTIFY机制、auto-repair、human_feedback闭环、Profile三态显示 |
 | v1.1 | 2026-05-18 14:09 | 审核 v1.0 全量修复：P0-1 p2_clearing->needs_revision 状态机修正；P0-2 Reviewer 直接设 p2_clearing 不再等 watcher；P0-3 增加 p2_cleared 中间状态+Writer P2_FIXED 标记；P1-1 get_tasks_by_status status 参数改为可选；P1-2 blocked 恢复 fallback 修复；P1-3 心跳/启动标记文件按项目区分；P1-4 质量评分触发改到 signed_off 后；P1-5 fromisoformat 改 strptime；P1-6 移除 no_agent watch.py 改为 Writer agent cron 直接扫描 kanban；P1-7 needs_revision->drafting 遗漏（writer_revision_workflow 跳过 claim，与状态机矛盾）；P2-1 3.2 注释残留修复；P2-2 6.2 通知+暂停cron 函数修复；P2-2 git 仓库路径统一；P2-3 部署步骤修复；P2-4 Writer 新增 3.4 p2_clearing 处理流程；P3-3 check_stuck_tasks 增加 p2_clearing 超时；P3-1 PRD 质量评分触发时机同步 signed_off；补充建议：previous_status 字段/git diff 守卫/wrapper.py 强制自检/prompt 单任务锁定/PRD 同步； |
@@ -354,7 +355,7 @@ def recover_blocked_task(project: str, task_id: str, action: str):
 | re_reviewing | revision | 复审不通过，5秒钟后进入修改阶段 |
 | re_reviewing | waiting_human_review | 复审通过，5秒钟后进入人工审核环节 |
 | waiting_human_review | finalized | 人工审核通过，5秒钟后封版 |
-| waiting_human_review | re_review | 人工审核不通过，5秒钟后进入复审+修改环节 |
+| waiting_human_review | revision | 人工审核不通过，5秒钟后进入修改阶段 |
 
 **倒计时实现（前端 JS）：**
 - `startTransitionCountdowns()` 在每次 `render()` 后调用
@@ -400,7 +401,7 @@ KANBAN_LAYOUT = [
 
 - 旧方案：详情页显示文本框 → 点击「对话评审」按钮 → 进入对话框
 - 新方案：详情页直接进入对话框模式，用户输入意见即开始对话
-- 达成共识后点击「确认并触发 Writer」→ 任务状态变成 `re_review`（复审已完成，直接进入修改环节）
+- 达成共识后点击「确认并触发 Writer」→ 任务状态变成 `revision`（直接进入修改环节，Writer 自动拾取）
 - 生产P（Writer）拿到达成一致的修改建议直接改，不再经过 Reviewer 复审
 
 **后端 API（dashboard.py）：**
@@ -408,7 +409,7 @@ KANBAN_LAYOUT = [
 | 端点 | 方法 | 功能 |
 |------|------|------|
 | /api/human-review-dialog/{task_id} | POST | liufeng 输入意见，Dashboard 调 Hermes Chat API 模拟 Reviewer 回复 |
-| /api/human-review-consensus/{task_id} | POST | 双方达成共识后，状态转为 re_review 并写 NOTIFY 触发 Writer |
+| /api/human-review-consensus/{task_id} | POST | 双方达成共识后，状态转为 revision 并写 NOTIFY 触发 Writer |
 
 **对话流程（v1.6 起）：**
 1. liufeng 打开 `waiting_human_review` 文档详情 → 直接进入对话框模式
