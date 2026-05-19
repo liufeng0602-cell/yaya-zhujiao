@@ -230,8 +230,8 @@ def update_task_status(project: str, task_id: str, new_status: str,
     fields = ["status=?", "status_entered_at=datetime('now')", "updated_at=datetime('now')"]
     values = [new_status]
 
-    # blocked 时自动保存 previous_status
-    if new_status == 'blocked' and 'previous_status' not in extra:
+    # 记录 previous_status（状态改变时总要保存，用于 Dashboard 过渡动画）
+    if 'previous_status' not in extra:
         task = get_task(project, task_id)
         if task:
             extra['previous_status'] = task['status']

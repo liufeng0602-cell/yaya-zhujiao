@@ -155,6 +155,9 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
 .timer{font-size:11px;margin-top:6px;display:flex;flex-direction:column;align-items:flex-start;gap:2px}
 .timer-row{display:flex;justify-content:space-between;align-items:center;width:100%}
 .timer-stale{color:var(--yellow);font-weight:600}
+.transition-banner{background:#1f6feb33;border:1px solid #1f6feb66;border-radius:4px;color:#58a6ff;font-size:11px;padding:4px 8px;margin-top:6px;text-align:center;animation:pulse-blue 1s ease-in-out infinite}
+.transition-banner .transition-countdown{display:inline-block;background:#1f6feb;color:#fff;border-radius:50%;width:18px;height:18px;line-height:18px;text-align:center;font-size:11px;font-weight:700;margin-left:4px}
+@keyframes pulse-blue{0%,100%{opacity:1}50%{opacity:0.6}}
 .timer-ok{color:var(--dim)}
 .timer-reason{font-size:10px;color:var(--red);line-height:1.3}
 /* Modal */
@@ -484,6 +487,7 @@ function renderCard(t, status) {
       ${t.stale ? `<div class="timer-reason">\u26a0 ${t.stale_reason}</div>` : ''}
       ${t.blocked_reason ? `<div class="timer-reason">\u26a0 ${translateReason(t.blocked_reason)}</div>` : ''}
     </div>
+    ${t.transition_message ? `<div class="transition-banner" id="transition-${t.id}">\u25b6 ${t.transition_message} <span class="transition-countdown">5</span></div>` : ''}
   </div>`;
 }
 
@@ -845,6 +849,33 @@ async function markTaskBlocked() {
 
 render();
 setInterval(render, 10000);
+
+// 过渡提示倒计时：扫描所有 transition-banner，启动 5 秒倒计时
+let _transitionTimers = {};
+function startTransitionCountdowns() {
+  const banners = document.querySelectorAll('.transition-banner');
+  banners.forEach(b => {
+    const id = b.id;
+    if (_transitionTimers[id]) return; // 已有计时器，不重复创建
+    const countdownEl = b.querySelector('.transition-countdown');
+    if (!countdownEl) return;
+    let sec = 5;
+    _transitionTimers[id] = setInterval(() => {
+      sec--;
+      if (sec <= 0) {
+        clearInterval(_transitionTimers[id]);
+        delete _transitionTimers[id];
+        const el = document.getElementById(id);
+        if (el) el.remove();
+      } else {
+        if (countdownEl) countdownEl.textContent = sec;
+      }
+    }, 1000);
+  });
+}
+// 每次 render() 后执行
+const _origRender = render;
+render = function() { _origRender(); startTransitionCountdowns(); };
 </script>
 </body>
 </html>"""
@@ -947,6 +978,8 @@ async def api_board(project: str = default_project):
     conn.row_factory = sqlite3.Row
     try:
         now_iso = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
+        auto_state = get_automation_state()
+        auto_stopped = not auto_state.get("running", True)
 
         # 自动恢复所有阻塞任务（阻塞超过 30 秒的）
         auto_recovered = []
@@ -1039,6 +1072,32 @@ async def api_board(project: str = default_project):
                             "blocked": "任务已阻塞，需手动处理",
                         }
                         stale_reason = reas.get(status, "未知状态超时")
+                    # 如果工作流已停止，卡住原因改为停止提示
+                    if auto_stopped and status not in ('finalized', 'blocked', 'backlog'):
+                        stale = True
+                        stale_reason = "修改已停止，如果想要继续修改，请点击「开始」按钮"
+                    # 计算过渡提示（状态进入 < 10 秒时显示）
+                    transition_message = ""
+                    if d.get("status_entered_at"):
+                        try:
+                            et = datetime.fromisoformat(d["status_entered_at"])
+                            nt = datetime.fromisoformat(now_iso)
+                            if (nt - et).total_seconds() < 10:
+                                prev = d.get("previous_status", "")
+                                if prev:
+                                    tmap = {
+                                        ("revision", "re_review"): "Writer 修改已完成，5秒后进入复审环节",
+                                        ("drafting", "awaiting_review"): "Writer 撰写已完成，5秒后进入审查环节",
+                                        ("reviewing", "revision"): "审查不通过，5秒钟后进入修改环节",
+                                        ("reviewing", "waiting_human_review"): "审查通过，5秒钟后进入评审结果",
+                                        ("re_reviewing", "revision"): "复审不通过，5秒钟后进入修改环节",
+                                        ("re_reviewing", "waiting_human_review"): "复审通过，5秒钟后进入评审结果",
+                                        ("waiting_human_review", "finalized"): "人工审核通过，5秒钟后封版",
+                                        ("waiting_human_review", "revision"): "人工审核不通过，5秒钟后进入修改环节",
+                                    }
+                                    transition_message = tmap.get((prev, status), "")
+                        except:
+                            pass
                     return {
                         "id": d["id"], "title": d["title"], "file_path": d.get("file_path",""),
                         "version": d.get("version"), "assigned_to": d.get("assigned_to",""),
@@ -1053,6 +1112,7 @@ async def api_board(project: str = default_project):
                         "p0_dot": p0_dot, "p1_dot": p1_dot, "p2_dot": p2_dot,
                         "re_review_result": rr,
                         "scores": scores_by_task.get(d["id"]),
+                        "transition_message": transition_message,
                         "auto_repair_attempts": auto_repair_attempts,
                         "auto_repair_failure": auto_repair_failure,
                     }
@@ -1099,6 +1159,32 @@ async def api_board(project: str = default_project):
                             "blocked": "任务已阻塞，需手动处理",
                         }
                         stale_reason = reas.get(status, "未知状态超时")
+                    # 如果工作流已停止，卡住原因改为停止提示
+                    if auto_stopped and status not in ('finalized', 'blocked', 'backlog'):
+                        stale = True
+                        stale_reason = "修改已停止，如果想要继续修改，请点击「开始」按钮"
+                    # 计算过渡提示（状态进入 < 10 秒时显示）
+                    transition_message = ""
+                    if d.get("status_entered_at"):
+                        try:
+                            et = datetime.fromisoformat(d["status_entered_at"])
+                            nt = datetime.fromisoformat(now_iso)
+                            if (nt - et).total_seconds() < 10:
+                                prev = d.get("previous_status", "")
+                                if prev:
+                                    tmap = {
+                                        ("revision", "re_review"): "Writer 修改已完成，5秒后进入复审环节",
+                                        ("drafting", "awaiting_review"): "Writer 撰写已完成，5秒后进入审查环节",
+                                        ("reviewing", "revision"): "审查不通过，5秒钟后进入修改环节",
+                                        ("reviewing", "waiting_human_review"): "审查通过，5秒钟后进入评审结果",
+                                        ("re_reviewing", "revision"): "复审不通过，5秒钟后进入修改环节",
+                                        ("re_reviewing", "waiting_human_review"): "复审通过，5秒钟后进入评审结果",
+                                        ("waiting_human_review", "finalized"): "人工审核通过，5秒钟后封版",
+                                        ("waiting_human_review", "revision"): "人工审核不通过，5秒钟后进入修改环节",
+                                    }
+                                    transition_message = tmap.get((prev, status), "")
+                        except:
+                            pass
                     tasks.append({
                         "id": d["id"], "title": d["title"], "file_path": d.get("file_path",""),
                         "version": d.get("version"), "assigned_to": d.get("assigned_to",""),
@@ -1112,6 +1198,7 @@ async def api_board(project: str = default_project):
                         "p2_count": d.get("p2_count",0) or 0,
                         "p0_dot": p0_dot, "p1_dot": p1_dot, "p2_dot": p2_dot,
                         "scores": scores_by_task.get(d["id"]),
+                        "transition_message": transition_message,
                         "auto_repair_attempts": auto_repair_attempts,
                         "auto_repair_failure": auto_repair_failure,
                     })
@@ -1127,6 +1214,23 @@ async def api_board(project: str = default_project):
 def calc_elapsed(status_entered_at, now_iso, status):
     if not status_entered_at:
         return "", False
+    # 已封版不需要超时告警
+    if status == 'finalized':
+        try:
+            et = datetime.fromisoformat(status_entered_at)
+            nt = datetime.fromisoformat(now_iso)
+            secs = (nt - et).total_seconds()
+            if secs < 60:
+                elapsed = f"{int(secs)}s"
+            elif secs < 3600:
+                elapsed = f"{int(secs//60)}m {int(secs%60)}s"
+            else:
+                h = int(secs // 3600)
+                m = int((secs % 3600) // 60)
+                elapsed = f"{h}h {m}m"
+            return elapsed, False
+        except:
+            return "", False
     try:
         et = datetime.fromisoformat(status_entered_at)
         nt = datetime.fromisoformat(now_iso)
