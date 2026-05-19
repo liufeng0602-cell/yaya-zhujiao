@@ -451,15 +451,15 @@ function render() {
         return `<div class="column combined">
           <div class="column-header"><span>${col.label}<span class="help-icon" onclick="showHelp('${col.label}','${col.tooltip}')">?</span></span><span class="column-count">${col.total_count}</span></div>
           ${col.upper_count>0 ? '<div class="combined-section">' +
-            col.upper_tasks.map(t => renderCard(t, col.upper_status)).join('') + '</div>' : ''}
+            col.upper_tasks.map(t => renderCard(t, t.status)).join('') + '</div>' : ''}
           ${col.lower_count>0 ? '<div class="combined-section">' +
-            col.lower_tasks.map(t => renderCard(t, col.lower_status)).join('') + '</div>' : ''}
+            col.lower_tasks.map(t => renderCard(t, t.status)).join('') + '</div>' : ''}
         </div>`;
       }
       let css = col.extra_css||'';
       return `<div class="column${css}" style="${col.combined?'max-width:300px':''}">
         <div class="column-header"><span>${col.label}<span class="help-icon" onclick="showHelp('${col.label}','${col.tooltip}')">?</span></span><span class="column-count">${col.count}</span></div>
-        ${col.count>0 ? col.tasks.map(t => renderCard(t, col.status)).join('') : ''}
+        ${col.count>0 ? col.tasks.map(t => renderCard(t, t.status)).join('') : ''}
       </div>`;
     }).join('');
   });
@@ -1368,6 +1368,7 @@ async def api_board(project: str = default_project):
                             pass
                     return {
                         "id": d["id"], "title": d["title"], "file_path": d.get("file_path",""),
+                        "status": status, "previous_status": d.get("previous_status",""),
                         "version": d.get("version"), "doc_version": parse_doc_version_from_file(d.get("file_path","")), "assigned_to": d.get("assigned_to",""),
                         "commit_sha": d.get("commit_sha",""),
                         "iteration": d.get("iteration_count",0) or 0,
@@ -1461,6 +1462,7 @@ async def api_board(project: str = default_project):
                             pass
                     tasks.append({
                         "id": d["id"], "title": d["title"], "file_path": d.get("file_path",""),
+                        "status": status, "previous_status": d.get("previous_status",""),
                         "version": d.get("version"), "doc_version": parse_doc_version_from_file(d.get("file_path","")), "assigned_to": d.get("assigned_to",""),
                         "commit_sha": d.get("commit_sha",""),
                         "iteration": d.get("iteration_count",0) or 0,
@@ -1482,6 +1484,49 @@ async def api_board(project: str = default_project):
                     "type": "single", "count": len(tasks), "tasks": tasks,
                     "extra_css": "",
                 })
+
+        # ===== 过渡中任务重新归位：卡片应停留在 previous_status 所在列，等倒计时结束再真正切换 =====
+        status_to_column = {}
+        for _k, _lbl, _cmb, _stat, _tooltip in KANBAN_LAYOUT:
+            for s in _stat:
+                status_to_column[s] = _k
+
+        for col in columns:
+            col_key = col['status']
+            for section_key in ('tasks', 'upper_tasks', 'lower_tasks'):
+                if section_key not in col: continue
+                tl = col[section_key]
+                to_move = []
+                for t in tl:
+                    if t.get('transition_message') and t.get('previous_status'):
+                        tgt_key = status_to_column.get(t['previous_status'])
+                        if tgt_key and tgt_key != col_key:
+                            to_move.append((t, tgt_key, col_key))
+                for t, tgt_key, _ in to_move:
+                    tl.remove(t)
+                for t, tgt_key, cur_key in to_move:
+                    target = next((c for c in columns if c['status'] == tgt_key), None)
+                    if target is None: continue
+                    if 'tasks' in target:
+                        target['tasks'].append(t)
+                        target['count'] = len(target['tasks'])
+                    elif target.get('type') == 'combined':
+                        prev = t.get('previous_status', '')
+                        upper_s = target.get('upper_status')
+                        if upper_s and prev == upper_s:
+                            target['upper_tasks'].append(t)
+                            target['upper_count'] = len(target['upper_tasks'])
+                        elif 'lower_tasks' in target:
+                            target['lower_tasks'].append(t)
+                            target['lower_count'] = len(target['lower_tasks'])
+                        else:
+                            target['upper_tasks'].append(t)
+                            target['upper_count'] = len(target['upper_tasks'])
+                    if 'total_count' in target:
+                        target['total_count'] = (target.get('count', 0) or
+                            target.get('upper_count', 0) + target.get('lower_count', 0))
+        # ===== end 过渡归位 =====
+
     finally:
         conn.close()
     return JSONResponse(columns)
