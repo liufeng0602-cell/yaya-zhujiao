@@ -287,29 +287,22 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
         </div>
       </div>
       <div id="humanReviewDialog" style="width:100%;display:none">
-        <div style="margin-bottom:10px;font-size:13px;font-weight:600;color:var(--purple)">💬 对话评审 — 评审P会分析您的意见并生成修改说明</div>
-        <!-- 对话历史 -->
-        <div id="dialogHistory" style="margin-bottom:10px;max-height:300px;overflow-y:auto;background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:8px">
-          <div style="color:var(--dim);font-size:12px;padding:4px">输入评审意见后，点击「发送」，评审P会分析并给出修改建议。</div>
+        <div style="font-size:13px;font-weight:600;color:var(--purple);margin-bottom:10px">💬 与评审助手对话 — 沟通您的意见，达成共识后触发 Writer</div>
+        <!-- 对话气泡区域 -->
+        <div id="dialogHistory" style="margin-bottom:10px;max-height:320px;overflow-y:auto;background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:12px;display:flex;flex-direction:column;gap:10px"></div>
+        <!-- 输入区 -->
+        <div style="display:flex;gap:8px;align-items:flex-start">
+          <textarea id="dialogInput" placeholder="在此输入您的评审意见或问题..." style="flex:1;background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:8px;color:var(--text);font-size:12px;resize:none;min-height:40px;max-height:80px"></textarea>
+          <button onclick="sendDialogMessage()" style="height:40px;padding:0 16px;background:var(--purple);color:#fff;border:none;border-radius:6px;cursor:pointer;font-size:13px;font-weight:600">发送</button>
         </div>
-        <div style="display:flex;gap:8px;align-items:flex-start;flex-wrap:wrap">
-          <div class="human-input" style="flex:1">
-            <textarea id="dialogInput" placeholder="输入您的评审意见..." style="width:100%;min-height:40px"></textarea>
-          </div>
-        </div>
-        <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:6px">
-          <button class="ctrl-btn" onclick="sendDialogMessage()" style="background:var(--purple);color:#fff;border-color:var(--purple)">发送</button>
-          <button class="ctrl-btn" onclick="closeHumanDialog()" style="color:var(--dim)">返回简单模式</button>
-          <span id="dialogStatus" style="font-size:12px;color:var(--dim);display:none"></span>
-        </div>
-        <!-- 达成共识后显示 -->
-        <div id="consensusSection" style="display:none;margin-top:10px;padding-top:10px;border-top:1px solid var(--border)">
-          <div style="font-size:13px;font-weight:600;color:var(--green);margin-bottom:8px">✅ 达成共识 — 确认修改意见并触发 Writer</div>
-          <div class="human-input">
-            <textarea id="consensusInstructions" placeholder="最终修改说明（可编辑修改）..." style="width:100%;min-height:60px"></textarea>
-          </div>
-          <div style="margin-top:6px">
+        <span id="dialogStatus" style="font-size:12px;color:var(--dim);display:none;margin-top:4px"></span>
+        <!-- 确认操作区 -->
+        <div id="consensusSection" style="display:none;margin-top:12px;padding-top:12px;border-top:1px solid var(--border)">
+          <div style="font-size:13px;font-weight:600;color:var(--green);margin-bottom:8px">✅ 修改说明（可编辑）</div>
+          <textarea id="consensusInstructions" placeholder="修改说明将发送给 Writer..." style="width:100%;min-height:60px;background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:8px;color:var(--text);font-size:12px"></textarea>
+          <div style="margin-top:8px;display:flex;gap:8px;align-items:center">
             <button class="btn-pass" onclick="confirmConsensus()">确认并触发 Writer</button>
+            <button class="ctrl-btn" onclick="document.getElementById('consensusSection').style.display='none'" style="color:var(--dim)">继续对话</button>
           </div>
         </div>
       </div>
@@ -541,18 +534,33 @@ function closeHumanDialog() {
   document.getElementById('humanReviewDialog').style.display = 'none';
 }
 
-function addDialogMessage(sender, text, color) {
+function addDialogMessage(sender, text, senderLabel) {
   const history = document.getElementById('dialogHistory');
   const msgDiv = document.createElement('div');
-  msgDiv.style.cssText = 'padding:6px 8px;margin-bottom:6px;background:var(--card);border:1px solid var(--border);border-radius:6px;font-size:12px;line-height:1.5';
-  const label = document.createElement('div');
-  label.style.cssText = 'font-weight:600;color:' + (color || 'var(--text)') + ';margin-bottom:3px';
-  label.textContent = sender;
-  msgDiv.appendChild(label);
-  const contentDiv = document.createElement('div');
-  contentDiv.style.cssText = 'color:var(--text);white-space:pre-wrap';
-  contentDiv.textContent = text;
-  msgDiv.appendChild(contentDiv);
+  if (sender === 'user') {
+    msgDiv.style.cssText = 'display:flex;flex-direction:column;align-items:flex-end';
+    const bubble = document.createElement('div');
+    bubble.style.cssText = 'max-width:80%;background:#1f6feb;color:#fff;border-radius:12px 12px 4px 12px;padding:8px 12px;font-size:13px;line-height:1.5;white-space:pre-wrap;word-break:break-word';
+    bubble.textContent = text;
+    msgDiv.appendChild(bubble);
+  } else if (sender === 'assistant') {
+    msgDiv.style.cssText = 'display:flex;flex-direction:column;align-items:flex-start';
+    const label = document.createElement('div');
+    label.style.cssText = 'font-size:11px;color:var(--purple);font-weight:600;margin-bottom:2px;margin-left:4px';
+    label.textContent = senderLabel || '评审助手';
+    msgDiv.appendChild(label);
+    const bubble = document.createElement('div');
+    bubble.style.cssText = 'max-width:80%;background:var(--card);color:var(--text);border:1px solid var(--border);border-radius:12px 12px 12px 4px;padding:8px 12px;font-size:13px;line-height:1.5;white-space:pre-wrap;word-break:break-word';
+    bubble.textContent = text;
+    msgDiv.appendChild(bubble);
+  } else {
+    // system messages — centered, muted
+    msgDiv.style.cssText = 'display:flex;flex-direction:column;align-items:center';
+    const bubble = document.createElement('div');
+    bubble.style.cssText = 'max-width:90%;background:transparent;color:var(--dim);font-size:12px;padding:4px 8px;text-align:center;font-style:italic';
+    bubble.textContent = text;
+    msgDiv.appendChild(bubble);
+  }
   history.appendChild(msgDiv);
   history.scrollTop = history.scrollHeight;
 }
@@ -563,12 +571,13 @@ async function sendDialogMessage() {
   const opinion = input.value.trim();
   if (!opinion) return;
 
-  addDialogMessage('You (liufeng)', opinion, 'var(--blue)');
+  addDialogMessage('user', opinion);
   input.value = '';
+  input.style.height = '40px';
 
   const statusEl = document.getElementById('dialogStatus');
   statusEl.style.display = 'inline';
-  statusEl.textContent = '\u23f3 reviewer-P analyzing...';
+  statusEl.textContent = '⏳ 评审助手正在分析...';
 
   try {
     const r = await fetch('/api/human-review-dialog/' + currentTaskId, {
@@ -580,16 +589,32 @@ async function sendDialogMessage() {
     statusEl.style.display = 'none';
 
     if (data.success && data.content) {
-      addDialogMessage('reviewer-P', data.content, 'var(--purple)');
-      document.getElementById('consensusSection').style.display = 'block';
-      document.getElementById('consensusInstructions').value = data.content;
+      addDialogMessage('assistant', data.content);
+      // Store latest analysis for consensus
+      window._lastDialogAnalysis = data.content;
+      if (!window._consensusAsked) {
+        // Show the "confirm consensus" hint after first AI reply
+        window._consensusAsked = true;
+        const hint = document.createElement('div');
+        hint.id = 'consensusHint';
+        hint.style.cssText = 'text-align:center;margin-top:8px;font-size:12px;color:var(--dim)';
+        hint.innerHTML = '如果您对分析满意，点击 <button class="ctrl-btn" onclick="showConsensusSection()" style="font-size:11px;padding:2px 8px">确认评审结果</button> 触发 Writer 修改';
+        document.getElementById('humanReviewDialog').appendChild(hint);
+      }
     } else {
-      addDialogMessage('system', 'Analysis failed: ' + (data.error || 'unknown'), 'var(--red)');
+      addDialogMessage('assistant', '分析失败: ' + (data.error || '未知错误'));
     }
   } catch(e) {
     statusEl.style.display = 'none';
-    addDialogMessage('system', 'Request failed: ' + e.message, 'var(--red)');
+    addDialogMessage('assistant', '请求失败: ' + e.message);
   }
+}
+
+function showConsensusSection() {
+  document.getElementById('consensusSection').style.display = 'block';
+  document.getElementById('consensusInstructions').value = window._lastDialogAnalysis || '';
+  const hint = document.getElementById('consensusHint');
+  if (hint) hint.style.display = 'none';
 }
 
 async function confirmConsensus() {
@@ -631,14 +656,19 @@ function openDoc(taskId, status) {
     const actionsEl = document.getElementById('modalActions');
     const blockedEl = document.getElementById('blockedActions');
     if (status === 'waiting_human_review') {
-      // direct dialog mode
+      // 对话框模式：AI 自动打招呼，用户直接对话
       actionsEl.style.display = '';
       document.getElementById('humanReviewSimple').style.display = 'none';
       document.getElementById('humanReviewDialog').style.display = 'block';
       document.getElementById('dialogHistory').innerHTML = '';
       document.getElementById('consensusSection').style.display = 'none';
       document.getElementById('dialogInput').value = '';
-      addDialogMessage('system', 'Describe your review opinion, reviewer-P will analyze.', 'var(--dim)');
+      window._lastDialogAnalysis = null;
+      window._consensusAsked = false;
+      const existingHint = document.getElementById('consensusHint');
+      if (existingHint) existingHint.remove();
+      // AI 自动发欢迎消息
+      addDialogMessage('assistant', '您好！我是评审助手。请告诉我您对这份文档的评审意见，我会分析并给出修改建议。如果有任何问题需要讨论，我们可以在对话中逐步沟通。');
     } else {
       actionsEl.style.display = 'none';
     }
