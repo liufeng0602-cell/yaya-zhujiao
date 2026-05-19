@@ -5,7 +5,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 import uvicorn
 from fastapi import FastAPI, Request
-from fastapi.responses import HTMLResponse, JSONResponse
+from fastapi.responses import HTMLResponse, JSONResponse, StreamingResponse
 
 app = FastAPI(title="DocProductionReview Dashboard v3")
 PROJECT_ROOT = Path(__file__).parent
@@ -287,23 +287,31 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
         </div>
       </div>
       <div id="humanReviewDialog" style="width:100%;display:none">
-        <div style="font-size:13px;font-weight:600;color:var(--purple);margin-bottom:10px">💬 与评审助手对话 — 沟通您的意见，达成共识后触发 Writer</div>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+          <div style="font-size:13px;font-weight:600;color:var(--purple)">💬 与评审助手对话</div>
+          <div style="display:flex;gap:8px">
+            <button onclick="humanReview('fail')" style="padding:6px 14px;background:var(--red);color:#fff;border:none;border-radius:6px;cursor:pointer;font-size:12px;font-weight:600">✘ 不通过（退回修改）</button>
+            <button onclick="humanReview('pass')" style="padding:6px 14px;background:var(--green);color:#fff;border:none;border-radius:6px;cursor:pointer;font-size:12px;font-weight:600">✔ 审核通过（封版）</button>
+          </div>
+        </div>
         <!-- 对话气泡区域 -->
         <div id="dialogHistory" style="margin-bottom:10px;max-height:320px;overflow-y:auto;background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:12px;display:flex;flex-direction:column;gap:10px"></div>
         <!-- 输入区 -->
         <div style="display:flex;gap:8px;align-items:flex-start">
-          <textarea id="dialogInput" placeholder="在此输入您的评审意见或问题..." style="flex:1;background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:8px;color:var(--text);font-size:12px;resize:none;min-height:40px;max-height:80px"></textarea>
+          <textarea id="dialogInput" placeholder="在此输入您的评审意见或问题...（Enter发送，Shift+Enter换行）" onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendDialogMessage()}" style="flex:1;background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:8px;color:var(--text);font-size:12px;resize:none;min-height:40px;max-height:80px"></textarea>
           <button onclick="sendDialogMessage()" style="height:40px;padding:0 16px;background:var(--purple);color:#fff;border:none;border-radius:6px;cursor:pointer;font-size:13px;font-weight:600">发送</button>
         </div>
         <span id="dialogStatus" style="font-size:12px;color:var(--dim);display:none;margin-top:4px"></span>
-        <!-- 确认操作区 -->
-        <div id="consensusSection" style="display:none;margin-top:12px;padding-top:12px;border-top:1px solid var(--border)">
-          <div style="font-size:13px;font-weight:600;color:var(--green);margin-bottom:8px">✅ 修改说明（可编辑）</div>
-          <textarea id="consensusInstructions" placeholder="修改说明将发送给 Writer..." style="width:100%;min-height:60px;background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:8px;color:var(--text);font-size:12px"></textarea>
-          <div style="margin-top:8px;display:flex;gap:8px;align-items:center">
-            <button class="btn-pass" onclick="confirmConsensus()">确认并触发 Writer</button>
-            <button class="ctrl-btn" onclick="document.getElementById('consensusSection').style.display='none'" style="color:var(--dim)">继续对话</button>
+        <!-- 确认操作区 — 醒目卡片 -->
+        <div id="consensusSection" style="display:none;margin-top:12px;padding:16px;background:linear-gradient(135deg,#e8f5e9,#f1f8e9);border:2px solid #4caf50;border-radius:10px;box-shadow:0 2px 8px rgba(76,175,80,0.2)">
+          <div style="font-size:15px;font-weight:700;color:#2e7d32;margin-bottom:4px">✅ 评审分析完成</div>
+          <div style="font-size:12px;color:#558b2f;margin-bottom:12px">请确认以下修改说明，确认后将触发 Writer 自动修改文档</div>
+          <textarea id="consensusInstructions" placeholder="修改说明将发送给 Writer，您也可以在此编辑调整..." style="width:100%;min-height:80px;background:#fff;border:2px solid #c8e6c9;border-radius:6px;padding:10px;color:#333;font-size:13px;line-height:1.5"></textarea>
+          <div style="margin-top:12px;display:flex;gap:10px;align-items:center;justify-content:center">
+            <button class="btn-pass" onclick="confirmConsensus()" style="font-size:14px;padding:10px 28px;background:linear-gradient(135deg,#43a047,#66bb6a);color:#fff;border:none;border-radius:8px;cursor:pointer;font-weight:700;box-shadow:0 2px 6px rgba(76,175,80,0.4)">确认并触发 Writer 修改</button>
+            <button class="ctrl-btn" onclick="hideConsensusSection()" style="font-size:13px;padding:8px 16px;background:transparent;color:#666;border:1px solid #ccc;border-radius:6px;cursor:pointer">继续对话（不触发）</button>
           </div>
+          <div style="margin-top:8px;font-size:11px;color:#999;text-align:center">💡 确认后将退回到修改中状态，由 Writer 执行修改</div>
         </div>
       </div>
     </div>
@@ -565,6 +573,19 @@ function addDialogMessage(sender, text, senderLabel) {
   history.scrollTop = history.scrollHeight;
 }
 
+function showConsensusSection() {
+  document.getElementById('consensusSection').style.display = 'block';
+  document.getElementById('consensusInstructions').value = window._lastDialogAnalysis || '';
+  document.getElementById('consensusInstructions').focus();
+}
+
+function hideConsensusSection() {
+  document.getElementById('consensusSection').style.display = 'none';
+  window._consensusAsked = true; // don't re-ask this round
+}
+
+var currentStreamAbort = null;
+
 async function sendDialogMessage() {
   if (!currentTaskId) return;
   const input = document.getElementById('dialogInput');
@@ -575,46 +596,98 @@ async function sendDialogMessage() {
   input.value = '';
   input.style.height = '40px';
 
-  const statusEl = document.getElementById('dialogStatus');
-  statusEl.style.display = 'inline';
-  statusEl.textContent = '⏳ 评审助手正在分析...';
+  // Create assistant bubble placeholder
+  const history = document.getElementById('dialogHistory');
+  const assistantDiv = document.createElement('div');
+  assistantDiv.style.cssText = 'display:flex;flex-direction:column;align-items:flex-start';
+  const label = document.createElement('div');
+  label.style.cssText = 'font-size:11px;color:var(--purple);font-weight:600;margin-bottom:2px;margin-left:4px';
+  label.textContent = '评审助手';
+  assistantDiv.appendChild(label);
+  const bubble = document.createElement('div');
+  bubble.style.cssText = 'max-width:80%;background:var(--card);color:var(--text);border:1px solid var(--border);border-radius:12px 12px 12px 4px;padding:8px 12px;font-size:13px;line-height:1.5;white-space:pre-wrap;word-break:break-word';
+  bubble.innerHTML = '<span style="color:var(--dim);font-style:italic">⏳ 思考中...</span>';
+  assistantDiv.appendChild(bubble);
+  history.appendChild(assistantDiv);
+  history.scrollTop = history.scrollHeight;
+
+  // Abort previous stream if any
+  if (currentStreamAbort) {
+    currentStreamAbort.abort();
+  }
+  const abortController = new AbortController();
+  currentStreamAbort = abortController;
 
   try {
-    const r = await fetch('/api/human-review-dialog/' + currentTaskId, {
+    const r = await fetch('/api/human-review-dialog-stream/' + currentTaskId, {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({opinion: opinion, project: currentProject})
+      body: JSON.stringify({opinion: opinion, project: currentProject}),
+      signal: abortController.signal
     });
-    const data = await r.json();
-    statusEl.style.display = 'none';
+    if (!r.ok) {
+      bubble.textContent = '请求失败: HTTP ' + r.status;
+      return;
+    }
+    if (!r.body) {
+      bubble.textContent = '浏览器不支持流式读取';
+      return;
+    }
 
-    if (data.success && data.content) {
-      addDialogMessage('assistant', data.content);
-      // Store latest analysis for consensus
-      window._lastDialogAnalysis = data.content;
-      if (!window._consensusAsked) {
-        // Show the "confirm consensus" hint after first AI reply
-        window._consensusAsked = true;
-        const hint = document.createElement('div');
-        hint.id = 'consensusHint';
-        hint.style.cssText = 'text-align:center;margin-top:8px;font-size:12px;color:var(--dim)';
-        hint.innerHTML = '如果您对分析满意，点击 <button class="ctrl-btn" onclick="showConsensusSection()" style="font-size:11px;padding:2px 8px">确认评审结果</button> 触发 Writer 修改';
-        document.getElementById('humanReviewDialog').appendChild(hint);
+    const reader = r.body.getReader();
+    const decoder = new TextDecoder();
+    let fullText = '';
+    let buffer = '';
+
+    while (true) {
+      const {done, value} = await reader.read();
+      if (done) break;
+      buffer += decoder.decode(value, {stream: true});
+
+      // Parse SSE events from buffer
+      const parts = buffer.split('\n\n');
+      buffer = parts.pop() || '';
+
+      for (const part of parts) {
+        if (!part.startsWith('data: ')) continue;
+        const dataStr = part.slice(6).trim();
+        if (!dataStr) continue;
+        try {
+          const data = JSON.parse(dataStr);
+          if (data.type === 'token') {
+            fullText += data.content;
+            bubble.textContent = fullText;
+            history.scrollTop = history.scrollHeight;
+          } else if (data.type === 'done') {
+            fullText = data.content;
+            bubble.textContent = fullText;
+            history.scrollTop = history.scrollHeight;
+            // Store for consensus
+            window._lastDialogAnalysis = fullText;
+            // Show prominent consensus card
+            if (!window._consensusAsked) {
+              window._consensusAsked = true;
+              // Auto-scroll to show the consensus card
+              document.getElementById('consensusSection').style.display = 'block';
+              document.getElementById('consensusInstructions').value = fullText;
+              setTimeout(() => {
+                document.getElementById('consensusSection').scrollIntoView({behavior: 'smooth', block: 'nearest'});
+              }, 100);
+            }
+          }
+        } catch(e) {
+          console.warn('SSE parse error:', e);
+        }
       }
-    } else {
-      addDialogMessage('assistant', '分析失败: ' + (data.error || '未知错误'));
     }
   } catch(e) {
-    statusEl.style.display = 'none';
-    addDialogMessage('assistant', '请求失败: ' + e.message);
+    if (e.name === 'AbortError') return;
+    bubble.textContent = '请求失败: ' + e.message;
+  } finally {
+    if (currentStreamAbort === abortController) {
+      currentStreamAbort = null;
+    }
   }
-}
-
-function showConsensusSection() {
-  document.getElementById('consensusSection').style.display = 'block';
-  document.getElementById('consensusInstructions').value = window._lastDialogAnalysis || '';
-  const hint = document.getElementById('consensusHint');
-  if (hint) hint.style.display = 'none';
 }
 
 async function confirmConsensus() {
@@ -665,8 +738,7 @@ function openDoc(taskId, status) {
       document.getElementById('dialogInput').value = '';
       window._lastDialogAnalysis = null;
       window._consensusAsked = false;
-      const existingHint = document.getElementById('consensusHint');
-      if (existingHint) existingHint.remove();
+      document.getElementById('consensusSection').style.display = 'none';
       // AI 自动发欢迎消息
       addDialogMessage('assistant', '您好！我是评审助手。请告诉我您对这份文档的评审意见，我会分析并给出修改建议。如果有任何问题需要讨论，我们可以在对话中逐步沟通。');
     } else {
@@ -1287,8 +1359,8 @@ async def api_board(project: str = default_project):
                                         ("reviewing", "waiting_human_review"): "审查通过，5秒钟后进入人工审核环节",
                                         ("re_reviewing", "revision"): "复审不通过，5秒钟后进入修改阶段",
                                         ("re_reviewing", "waiting_human_review"): "复审通过，5秒钟后进入人工审核环节",
-                                        ("waiting_human_review", "finalized"): "人工审核通过，5秒钟后封版",
-                                        ("waiting_human_review", "re_review"): "人工审核不通过，5秒钟后进入复审+修改环节",
+                                        ("waiting_human_review", "finalized"): "人工审核通过，5秒钟后进入封版区",
+                                        ("waiting_human_review", "re_review"): "人工审核不通过，5秒钟后进入复审+修改区",
                                     }
                                     transition_message = tmap.get((prev, status), "")
                         except:
@@ -1379,8 +1451,8 @@ async def api_board(project: str = default_project):
                                         ("reviewing", "waiting_human_review"): "审查通过，5秒钟后进入人工审核环节",
                                         ("re_reviewing", "revision"): "复审不通过，5秒钟后进入修改阶段",
                                         ("re_reviewing", "waiting_human_review"): "复审通过，5秒钟后进入人工审核环节",
-                                        ("waiting_human_review", "finalized"): "人工审核通过，5秒钟后封版",
-                                        ("waiting_human_review", "re_review"): "人工审核不通过，5秒钟后进入复审+修改环节",
+                                        ("waiting_human_review", "finalized"): "人工审核通过，5秒钟后进入封版区",
+                                        ("waiting_human_review", "re_review"): "人工审核不通过，5秒钟后进入复审+修改区",
                                     }
                                     transition_message = tmap.get((prev, status), "")
                         except:
@@ -1771,6 +1843,79 @@ async def api_reports():
                     "size": f.stat().st_size,
                 })
     return JSONResponse(reports)
+
+@app.post("/api/human-review-dialog-stream/{task_id}")
+async def api_human_review_dialog_stream(task_id: str, request: Request):
+    """人审对话框流式版：接收用户意见，调用 Hermes HTTP API 流式生成修改建议"""
+    import json, httpx
+    data = await request.json()
+    opinion = data.get("opinion", "")
+    project = data.get("project", default_project)
+    try:
+        task = get_task(project, task_id)
+        if not task:
+            return JSONResponse({"success": False, "error": "任务不存在"})
+        doc = get_document_content(task_id, project)
+        doc_text = doc.get("content", "")
+        if len(doc_text) > 6000:
+            doc_text = doc_text[:6000] + "\n[文档截断]"
+
+        prompt = f"""你是一位文档评审专家。以下是待评审的文档内容以及用户的评审意见。
+
+文档标题：{task.get('title','')}
+文档内容：
+{doc_text}
+
+用户评审意见：
+{opinion}
+
+请完成以下任务：
+1. 分析用户的评审意见是否合理，与文档中的问题是否一致。
+2. 如果合理，生成详细的修改说明（包含具体位置、修改内容、参考规范）。
+3. 如果不完全合理，给出解释并与用户达成共识。
+4. 输出格式：用「评审分析：」开头说明你的判断，然后「修改说明：」开头列出具体的修改步骤。
+
+请保持专业、客观和建设性。"""
+
+        async def generate():
+            full_text = ""
+            try:
+                async with httpx.AsyncClient(timeout=120) as client:
+                    async with client.stream(
+                        "POST",
+                        "http://127.0.0.1:8643/v1/chat/completions",
+                        json={
+                            "model": "deepseek-chat",
+                            "messages": [{"role": "user", "content": prompt}],
+                            "stream": True,
+                            "max_tokens": 4096
+                        }
+                    ) as resp:
+                        async for line in resp.aiter_lines():
+                            if not line.startswith("data: "):
+                                continue
+                            data_str = line[6:].strip()
+                            if data_str == "[DONE]":
+                                yield f"data: {json.dumps({'type': 'done', 'content': full_text})}\n\n"
+                                return
+                            try:
+                                chunk = json.loads(data_str)
+                                delta = chunk.get("choices", [{}])[0].get("delta", {})
+                                content = delta.get("content", "")
+                                if content:
+                                    full_text += content
+                                    yield f"data: {json.dumps({'type': 'token', 'content': content})}\n\n"
+                            except json.JSONDecodeError:
+                                pass
+                # Fallback: if stream ended without [DONE], send done
+                if full_text:
+                    yield f"data: {json.dumps({'type': 'done', 'content': full_text})}\n\n"
+            except Exception as e:
+                yield f"data: {json.dumps({'type': 'error', 'content': str(e)})}\n\n"
+
+        return StreamingResponse(generate(), media_type="text/event-stream")
+    except Exception as e:
+        return JSONResponse({"success": False, "error": str(e)})
 
 @app.post("/api/human-review-dialog/{task_id}")
 async def api_human_review_dialog(task_id: str, request: Request):

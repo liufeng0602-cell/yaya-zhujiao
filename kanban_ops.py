@@ -27,7 +27,7 @@ VALID_TRANSITIONS = {
     'revision':            {'drafting', 're_review', 'blocked'},
     're_review':           {'re_reviewing', 'blocked'},
     're_reviewing':        {'revision', 'waiting_human_review', 'blocked'},
-    'waiting_human_review':{'finalized', 'revision', 'blocked'},
+    'waiting_human_review':{'finalized', 'revision', 're_review', 'blocked'},
     'finalized':           {'blocked'},
     'blocked':             {'backlog', 'drafting', 'revision', 're_review'},
 }
