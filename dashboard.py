@@ -130,7 +130,8 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
 .card{background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:10px;margin-bottom:8px;cursor:pointer;transition:border-color .2s;position:relative}
 .card:hover{border-color:var(--blue)}
 .card-title{font-size:13px;font-weight:500;margin-bottom:6px}
-.card-meta{font-size:11px;color:var(--dim);display:flex;gap:8px;flex-wrap:wrap;word-break:break-all;overflow-wrap:break-word}
+.file-path{display:inline-block;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;vertical-align:bottom}
+.card-meta{font-size:11px;color:var(--dim);display:flex;gap:8px;flex-wrap:wrap;word-break:break-all;overflow-wrap:break-word;min-width:0;max-width:100%}
 .tag{display:inline-block;padding:1px 6px;border-radius:4px;font-size:10px;font-weight:600}
 .tag-writer{background:#1f6feb33;color:#58a6ff}
 .tag-reviewer{background:#bc8cff33;color:#bc8cff}
@@ -153,6 +154,9 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
 .timer{font-size:11px;margin-top:6px;display:flex;flex-direction:column;align-items:flex-start;gap:2px}
 .timer-row{display:flex;justify-content:space-between;align-items:center;width:100%}
 .timer-stale{color:var(--yellow);font-weight:600}
+.card-workflow-status{font-size:10px;font-weight:600;margin-bottom:4px;padding:1px 6px;border-radius:4px;display:inline-block}
+.card-running{color:var(--green);background:#3fb95022}
+.card-stopped{color:var(--red);background:#f8514933}
 .transition-banner{background:#1f6feb33;border:1px solid #1f6feb66;border-radius:4px;color:#58a6ff;font-size:11px;padding:4px 8px;margin-top:6px;text-align:center;animation:pulse-blue 1s ease-in-out infinite}
 .transition-banner .transition-countdown{display:inline-block;background:#1f6feb;color:#fff;border-radius:50%;width:18px;height:18px;line-height:18px;text-align:center;font-size:11px;font-weight:700;margin-left:4px}
 @keyframes pulse-blue{0%,100%{opacity:1}50%{opacity:0.6}}
@@ -231,9 +235,9 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
   <span>看板</span>
   <span style="font-size:12px;font-weight:400;color:var(--dim)">
     <button class="ctrl-btn" id="ctrlStart" onclick="controlAutomation('start')" title="开始">▶ 开始</button>
-    <button class="ctrl-btn" id="ctrlPause" onclick="controlAutomation('pause')" title="暂停">⏸ 暂停</button>
     <button class="ctrl-btn" id="ctrlStop" onclick="controlAutomation('stop')" title="停止">⏹ 停止</button>
   </span>
+  <div id="stopHint" style="display:none;margin-top:4px;font-size:12px;color:var(--yellow)">修改已停止，如果想继续修改，请点击「开始」按钮</div>
 </div>
 <div class="board" id="board"></div>
 
@@ -405,8 +409,9 @@ function render() {
   fetchJSON('/api/automation/state').then(d => {
     if (!d) return;
     document.getElementById('ctrlStart').className = 'ctrl-btn' + (d.running && !d.paused ? ' active' : '');
-    document.getElementById('ctrlPause').className = 'ctrl-btn' + (d.paused ? ' paused' : '');
     document.getElementById('ctrlStop').className = 'ctrl-btn' + (!d.running ? ' stopped' : '');
+    const stopHint = document.getElementById('stopHint');
+    if (stopHint) stopHint.style.display = (!d.running) ? 'block' : 'none';
   });
   // profiles
   fetchJSON('/api/profiles').then(d => {
@@ -446,16 +451,16 @@ function render() {
       if (col.type === 'combined') {
         return `<div class="column combined">
           <div class="column-header"><span>${col.label}<span class="help-icon" onclick="showHelp('${col.label}','${col.tooltip}')">?</span></span><span class="column-count">${col.total_count}</span></div>
-          ${col.upper_count>0 ? '<div class="combined-section"><div class="sub-header">↑ ' + col.upper_label + ' (' + col.upper_count + ')</div>' +
-            col.upper_tasks.map(t => renderCard(t, col.upper_status)).join('') + '</div>' : '<div class="empty">' + col.upper_label + ': 0</div>'}
-          ${col.lower_count>0 ? '<div class="combined-section"><div class="sub-header">↓ ' + col.lower_label + ' (' + col.lower_count + ')</div>' +
+          ${col.upper_count>0 ? '<div class="combined-section">' +
+            col.upper_tasks.map(t => renderCard(t, col.upper_status)).join('') + '</div>' : ''}
+          ${col.lower_count>0 ? '<div class="combined-section">' +
             col.lower_tasks.map(t => renderCard(t, col.lower_status)).join('') + '</div>' : ''}
         </div>`;
       }
       let css = col.extra_css||'';
       return `<div class="column${css}" style="${col.combined?'max-width:300px':''}">
         <div class="column-header"><span>${col.label}<span class="help-icon" onclick="showHelp('${col.label}','${col.tooltip}')">?</span></span><span class="column-count">${col.count}</span></div>
-        ${col.count>0 ? col.tasks.map(t => renderCard(t, col.status)).join('') : '<div class="empty">空</div>'}
+        ${col.count>0 ? col.tasks.map(t => renderCard(t, col.status)).join('') : ''}
       </div>`;
     }).join('');
   });
@@ -501,6 +506,7 @@ function renderCard(t, status) {
     repairBadge = `<span class="tag" style="background:${bg};color:${color}">🔧 自动修复 ${t.auto_repair_attempts}/3</span>`;
   }
   return `<div class="card" onclick="openDoc('${t.id}','${status}' )">
+    ${t.workflow_status === 'stopped' ? '<div class="card-workflow-status card-stopped">⏹ 已停止</div>' : '<div class="card-workflow-status card-running">▶ 进行中</div>'}
     <div class="card-title">${t.title}</div>
     <div class="card-meta">
       <span class="file-path">${t.file_path||'—'}</span>
@@ -1120,10 +1126,8 @@ async def api_board(project: str = default_project):
                             "blocked": "任务已阻塞，需手动处理",
                         }
                         stale_reason = reas.get(status, "未知状态超时")
-                    # 如果工作流已停止，卡住原因改为停止提示
-                    if auto_stopped and status not in ('finalized', 'blocked', 'backlog'):
-                        stale = True
-                        stale_reason = "修改已停止，如果想要继续修改，请点击「开始」按钮"
+                    # 工作流状态（不设卡住原因，由外部展示）
+                    workflow_status = "stopped" if (auto_stopped and status not in ('finalized', 'blocked', 'backlog')) else "running"
                     # 计算过渡提示（状态进入 < 10 秒时显示）
                     transition_message = ""
                     if d.get("status_entered_at"):
@@ -1163,6 +1167,7 @@ async def api_board(project: str = default_project):
                         "transition_message": transition_message,
                         "auto_repair_attempts": auto_repair_attempts,
                         "auto_repair_failure": auto_repair_failure,
+                        "workflow_status": workflow_status,
                     }
 
                 upper_tasks = [build_task(r, r["status"]) for r in upper_rows]
@@ -1209,10 +1214,8 @@ async def api_board(project: str = default_project):
                             "blocked": "任务已阻塞，需手动处理",
                         }
                         stale_reason = reas.get(status, "未知状态超时")
-                    # 如果工作流已停止，卡住原因改为停止提示
-                    if auto_stopped and status not in ('finalized', 'blocked', 'backlog'):
-                        stale = True
-                        stale_reason = "修改已停止，如果想要继续修改，请点击「开始」按钮"
+                    # 工作流状态（不设卡住原因，由外部展示）
+                    workflow_status = "stopped" if (auto_stopped and status not in ('finalized', 'blocked', 'backlog')) else "running"
                     # 计算过渡提示（状态进入 < 10 秒时显示）
                     transition_message = ""
                     if d.get("status_entered_at"):
@@ -1251,6 +1254,7 @@ async def api_board(project: str = default_project):
                         "transition_message": transition_message,
                         "auto_repair_attempts": auto_repair_attempts,
                         "auto_repair_failure": auto_repair_failure,
+                        "workflow_status": workflow_status,
                     })
                 columns.append({
                     "status": status, "label": label, "tooltip": tooltip,
