@@ -1361,6 +1361,7 @@ async def api_board(project: str = default_project):
                                         ("re_reviewing", "waiting_human_review"): "复审通过，5秒钟后进入人工审核环节",
                                         ("waiting_human_review", "finalized"): "人工审核通过，5秒钟后进入封版区",
                                         ("waiting_human_review", "re_review"): "人工审核不通过，5秒钟后进入复审+修改区",
+                                        ("waiting_human_review", "revision"): "人工审核不通过，5秒钟后进入修改区",
                                     }
                                     transition_message = tmap.get((prev, status), "")
                         except:
@@ -1453,6 +1454,7 @@ async def api_board(project: str = default_project):
                                         ("re_reviewing", "waiting_human_review"): "复审通过，5秒钟后进入人工审核环节",
                                         ("waiting_human_review", "finalized"): "人工审核通过，5秒钟后进入封版区",
                                         ("waiting_human_review", "re_review"): "人工审核不通过，5秒钟后进入复审+修改区",
+                                        ("waiting_human_review", "revision"): "人工审核不通过，5秒钟后进入修改区",
                                     }
                                     transition_message = tmap.get((prev, status), "")
                         except:
@@ -1620,7 +1622,7 @@ async def api_human_review(task_id: str, request: Request):
         elif action == "fail":
             if not comment.strip():
                 return JSONResponse({"success": False, "error": "不通过时必须输入理由"})
-            update_task_status(project, task_id, "re_review",
+            update_task_status(project, task_id, "revision",
                                revision_data=json.dumps({"human_feedback": [comment]}))
             add_comment(project, task_id, "liufeng", f"人工审核不通过，意见：{comment}")
         else:
