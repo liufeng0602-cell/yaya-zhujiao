@@ -78,8 +78,8 @@ class SelfCheckReportChecker(BaseChecker):
             msg = iss['msg']
             if iss.get('severity') == 'P0':
                 msg += (
-                    ' (Writer export gate: auto-fix not yet active — '
-                    'this is a Reviewer-side check)'
+                    ' (Writer export gate: not yet enforced — '
+                    'this P0 should be caught before commit)'
                 )
             results.append(CheckResult(
                 severity=iss.get('severity', 'P2'),

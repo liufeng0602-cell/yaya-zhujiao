@@ -139,6 +139,27 @@ def test_empty_report():
     print('  PASS empty report (no crash)')
 
 
+def test_checks_result_not_bool():
+    """checks.result as string (yes) should be flagged as type issue."""
+    doc = make_doc("""<self_check_report>
+version: '2'
+reported_params: []
+reported_configs: []
+checks:
+  value_audit:
+    result: "yes"
+    note: fake
+</self_check_report>""")
+    data, issues = SelfCheckReportValidator.validate(doc, VALID_TRACKER)
+    assert data is not None
+    type_issues = [i for i in issues if 'result' in i.get('msg', '') and 'bool' in i.get('msg', '')]
+    assert len(type_issues) >= 1, (
+        'Expected a type issue about result=bool, got none'
+    )
+    assert type_issues[0]['severity'] == 'P1'
+    print('  PASS checks.result not bool flagged as P1')
+
+
 def test_tracker_cross_check_missing_param():
     """Writer claims a param that doesn't exist in doc."""
     report = VALID_REPORT.replace(
@@ -187,6 +208,7 @@ if __name__ == '__main__':
     test_missing_required_key()
     test_version_int_rejected()
     test_empty_report()
+    test_checks_result_not_bool()
     test_tracker_cross_check_missing_param()
     test_report_after_doc_end()
     test_no_tracker()
