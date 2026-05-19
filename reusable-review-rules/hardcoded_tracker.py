@@ -60,15 +60,16 @@ def _clean_raw_value(raw: str) -> str:
 # ── public API ──────────────────────────────────────────────────────
 
 
-def scan(text: str) -> Dict[str, List[Dict[str, Any]]]:
+def scan(text: str) -> Dict[str, Any]:
     """
     Scan `text` and return all tagged hardcoded values.
 
     Returns
     -------
-    dict with two keys:
+    dict with three keys:
       'params'  : list of {name, value, line, raw}
       'configs' : list of {entity, fields, line, raw}
+      'errors'  : list of str — format anomalies (e.g. unclosed [CONFIG:)
 
     Each entry includes the 1-based line number where the marker starts
     and the original raw text for diagnostic use.
@@ -118,7 +119,7 @@ def scan(text: str) -> Dict[str, List[Dict[str, Any]]]:
             'raw': m.group(0),
         })
 
-    return {'params': params, 'configs': configs}
+    return {'params': params, 'configs': configs, 'errors': []}
 
 
 # ── convenience / aggregate queries (zero dep) ─────────────────────
