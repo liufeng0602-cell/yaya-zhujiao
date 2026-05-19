@@ -15,7 +15,8 @@ AUDIT_REPORTS_DIR = os.path.join(PROJECT_ROOT, 'audit-reports')
 # ---------- 有效状态列表 ----------
 VALID_STATUSES = frozenset([
     'backlog', 'drafting', 'awaiting_review', 'reviewing',
-    'revision', 're_review', 're_reviewing', 'waiting_human_review', 'finalized', 'blocked'
+    'revision', 're_review', 're_reviewing',
+    'p2_clearing', 'waiting_human_review', 'finalized', 'blocked'
 ])
 
 # ---------- 状态迁移白名单 ----------
@@ -23,10 +24,11 @@ VALID_TRANSITIONS = {
     'backlog':             {'drafting'},
     'drafting':            {'awaiting_review', 're_review', 'blocked'},
     'awaiting_review':     {'reviewing', 'blocked'},
-    'reviewing':           {'revision', 'waiting_human_review', 'blocked'},
+    'reviewing':           {'revision', 'p2_clearing', 'waiting_human_review', 'blocked'},
     'revision':            {'drafting', 're_review', 'blocked'},
     're_review':           {'drafting', 're_reviewing', 'blocked'},
-    're_reviewing':        {'revision', 'waiting_human_review', 'blocked'},
+    're_reviewing':        {'revision', 'p2_clearing', 'waiting_human_review', 'blocked'},
+    'p2_clearing':         {'drafting', 're_review', 'blocked'},
     'waiting_human_review':{'finalized', 'revision', 're_review', 'blocked'},
     'finalized':           {'blocked'},
     'blocked':             {'backlog', 'drafting', 'revision', 're_review'},
