@@ -374,6 +374,10 @@ def _factory_term_consistency(rule: dict) -> BaseChecker:
                 # Build pattern: any of the aliases, but on a line that does NOT contain the standard term
                 escaped = [re.escape(a) for a in aliases]
                 alias_pat = '(' + '|'.join(escaped) + ')'
+                # TODO: if glossary expands, shorter aliases that are substrings of longer ones
+                # can match first via | alternation, causing false positives (e.g. alias="超时"
+                # matches "超时设置" even when user meant standard term "超时时间").
+                # Fix: sort aliases by length descending before joining, or use \b word boundary.
                 for i, line in enumerate(lines, 1):
                     if alias_pat not in line:
                         # Quick skip — re.search is slower than 'in' for non-matches
