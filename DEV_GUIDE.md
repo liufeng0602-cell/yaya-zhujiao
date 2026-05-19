@@ -1,6 +1,6 @@
-# 自动化文档生产-审核循环工作流 开发者指南 v1.2
+# 自动化文档生产-审核循环工作流 开发者指南 v1.3
 
-基于 PRD v2.3 实现。本文档提供每个模块的实现细节：文件路径、接口签名、数据模型 DDL、配置文件模板、命令行参数。目标是：照着本文档就能写代码。
+基于 PRD v2.4 实现。本文档提供每个模块的实现细节：文件路径、接口签名、数据模型 DDL、配置文件模板、命令行参数。目标是：照着本文档就能写代码。
 
 ---
 
@@ -8,6 +8,8 @@
 
 | 版本 | 日期 | 变更内容 |
 |------|------|----------|
+| v1.3 | 2026-05-19 08:53 | Dashboard 4项交互优化实现细节：auto_stopped stale覆盖、finalized跳过超时检测、transition_message 8对映射、5秒JS倒计时 |
+| v1.2 | 2026-05-18 14:30 | 同步PRD v2.3实现：状态机重排、fswatch守护进程、Dashboard自动化控制、NOTIFY机制、auto-repair、human_feedback闭环、Profile三态显示 |
 | v1.1 | 2026-05-18 14:09 | 审核 v1.0 全量修复：P0-1 p2_clearing->needs_revision 状态机修正；P0-2 Reviewer 直接设 p2_clearing 不再等 watcher；P0-3 增加 p2_cleared 中间状态+Writer P2_FIXED 标记；P1-1 get_tasks_by_status status 参数改为可选；P1-2 blocked 恢复 fallback 修复；P1-3 心跳/启动标记文件按项目区分；P1-4 质量评分触发改到 signed_off 后；P1-5 fromisoformat 改 strptime；P1-6 移除 no_agent watch.py 改为 Writer agent cron 直接扫描 kanban；P1-7 needs_revision->drafting 遗漏（writer_revision_workflow 跳过 claim，与状态机矛盾）；P2-1 3.2 注释残留修复；P2-2 6.2 通知+暂停cron 函数修复；P2-2 git 仓库路径统一；P2-3 部署步骤修复；P2-4 Writer 新增 3.4 p2_clearing 处理流程；P3-3 check_stuck_tasks 增加 p2_clearing 超时；P3-1 PRD 质量评分触发时机同步 signed_off；补充建议：previous_status 字段/git diff 守卫/wrapper.py 强制自检/prompt 单任务锁定/PRD 同步； |
 
 ## 目录
@@ -336,6 +338,36 @@ def recover_blocked_task(project: str, task_id: str, action: str):
     add_comment(project, task_id, 'liufeng', 
                 f'手动恢复: blocked_reason={task["blocked_reason"]}, action={action}, target={target}')
 ```
+
+### 2.6 Dashboard 过渡消息机制
+
+每次状态变更时，`update_task_extra` 会自动记录 `previous_status` 到 `extra` 字段（JSON）。Dashboard 读取任务时，如果 `status_entered_at` 在 10 秒内，则根据 `(previous_status, current_status)` 拼接过渡消息。
+
+**过渡消息映射表（dashboard.py /api/board）：**
+
+| previous_status | current_status | 过渡消息 |
+|-----------------|---------------|---------|
+| revision | re_review | Writer修改已经完成，5秒后进入复审环节 |
+| drafting | awaiting_review | 撰写完毕，5秒后进入审查环节 |
+| reviewing | revision | 审查不通过，5秒钟后进入修改环节 |
+| reviewing | waiting_human_review | 审查通过，5秒钟后进入评审结果 |
+| re_reviewing | revision | 复审不通过，5秒钟后进入修改环节 |
+| re_reviewing | waiting_human_review | 复审通过，5秒钟后进入评审结果 |
+| waiting_human_review | finalized | 评审通过，5秒钟后封版 |
+| waiting_human_review | revision | 评审不通过，5秒钟后进入修改环节 |
+
+**倒计时实现（前端 JS）：**
+- `startTransitionCountdowns()` 在每次 `render()` 后调用
+- 扫描所有 `.transition-banner` 元素，为每个启动 5 秒 `setInterval`
+- 倒计时到 0 时自动移除 DOM 元素
+- 使用独立的定时器 key（按元素 id），互不干扰
+
+**自动化停止覆盖（/api/board）：**
+- 读取 `automation_state.json`，若 `running=false`，对所有非 finalized/blocked/backlog 的卡片注入 `stale=true, stale_reason="修改已停止，如果想要继续修改，请点击「开始」按钮"`
+
+**已封版不报错（calc_elapsed）：**
+- 接收到 `finalized` 状态的任务直接返回 `stale=False`，跳过所有超时和中断检测逻辑。
+- stale_reason 为空字符串。
 
 ---
 

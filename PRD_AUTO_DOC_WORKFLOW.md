@@ -1,10 +1,12 @@
-# 自动化文档生产-审核循环工作流 PRD v2.3
+# 自动化文档生产-审核循环工作流 PRD v2.4
 
 ## 变更记录
 
 | 版本 | 日期 | 变更内容 |
 |------|------|----------|
-| v2.2 | 2026-05-18 12:55 | 18项审核问题修复 + 4项人设讨论优化 + 3项执行调整：p2_clearing状态/iteration_count对齐/failed合并blocked/blocked恢复路径枚举/Writer-Reviewer检查区分/自检增第6项/AI评分分差阻断/ wrapper.py定义/Watcher竞态锁/Token中间预警/Profile权限边界/规则scope字段/部署脚本改托管配置/task_comments加iteration字段/跨文档版本兼容/日期表述统一/终审增否决权/Watcher项目隔离；3.1自检去掉5分钟限制+needs_revision修改规则+3.2审核覆盖范围不限于8项+全量审核；9.1新增API Key配置与并发；9.3预算管控改为待实测；7.2/7.3 token检测标注待启用；7.4 Watcher并入Phase 1；实现计划重排 |
+| v2.4 | 2026-05-19 08:53 | Dashboard 4项交互优化：停止按钮覆盖stale提示、已封版不报错、过渡消息+5秒倒计时、审查结果展示 |
+| v2.3 | 2026-05-18 14:30 | 同步所有实现变更：状态机重排、fswatch守护进程、Dashboard自动化控制状态、NOTIFY机制、auto-repair、human_feedback闭环 |
+| v2.2 | 2026-05-18 12:55 | 18项审核问题修复 + 4项人设讨论优化 + 3项执行调整 |
 | v2.0 | 2026-05-18 12:43 | 第一完整版 PRD：Writer/Reviewer 人设标准、质量评分体系、自我进化机制、商业化开源策略、三层愿景展望 |
 | v1.2 | 2026-05-18 10:08 | Writer/Reviewer 人设定义、质量评分体系、自我进化机制、独立项目目录 |
 | v1.1 | 2026-05-18 10:08 | liufeng PRD 评审修复 10 项问题 |
@@ -725,9 +727,42 @@ watcher 发现异常 -> 暂停该项目的 writer/reviewer 的 cron job -> 写 a
 
 本系统的正确位置是：文档质量的最后一道关，开发流程的第一道输入。
 
+## 14. Dashboard 交互规范
+
+### 14.1 自动化控制对卡片的覆盖规则
+
+用户点击"停止"按钮后，automation_state.json 的 running 字段设为 false。Dashboard 检测到 running=false 时，对所有非 finalized/non-blocked/non-backlog 的卡片执行 stale 覆盖：stale_reason 统一显示为"修改已停止，如果想要继续修改，请点击「开始」按钮"（替换原有的超时/中断提示）。
+
+### 14.2 已封版不报错
+
+状态为 finalized 的卡片，calc_elapsed 直接返回 stale=False，跳过所有超时和中断检测逻辑。
+
+### 14.3 过渡消息与倒计时
+
+当任务发生状态转换时（kanban_ops.py 的 update_task_extra 自动记录 previous_status），Dashboard 在卡片上显示过渡消息（10秒内有效）：
+
+| 状态转换（previous→current） | 过渡消息 |
+|------------------------------|---------|
+| revision → re_review | Writer修改已经完成，5秒后进入复审环节 |
+| drafting → awaiting_review | 撰写完毕，5秒后进入审查环节 |
+| reviewing → revision | 审查不通过，5秒钟后进入修改环节 |
+| reviewing → waiting_human_review | 审查通过，5秒钟后进入评审结果 |
+| re_reviewing → revision | 复审不通过，5秒钟后进入修改环节 |
+| re_reviewing → waiting_human_review | 复审通过，5秒钟后进入评审结果 |
+| waiting_human_review → finalized | 评审通过，5秒钟后封版 |
+| waiting_human_review → revision | 评审不通过，5秒钟后进入修改环节 |
+
+过渡消息显示在卡片中间，蓝色背景。同时启动5秒倒计时（蓝色圆形数字动画），倒计时结束后自动消失。
+
+### 14.4 审查/复审结果展示
+
+审查模块（reviewing）和复审模块（re_reviewing）的文档在工作完成后，卡片上直接显示结果：
+- 审查通过 / 复审通过 → 绿色提示 + 5秒倒计时
+- 审查不通过 / 复审不通过 → 红色提示 + 5秒倒计时
+
 ---
 
-## 14. 附录
+## 15. 附录
 
 ### A. 文件位置
 
