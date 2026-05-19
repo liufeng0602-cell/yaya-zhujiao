@@ -1,6 +1,6 @@
-# 自动化文档生产-审核循环工作流 开发者指南 v1.9
+# 自动化文档生产-审核循环工作流 开发者指南 v1.10
 
-基于 PRD v2.10 实现。本文档提供每个模块的实现细节：文件路径、接口签名、数据模型 DDL、配置文件模板、命令行参数。目标是：照着本文档就能写代码。
+基于 PRD v2.11 实现。本文档提供每个模块的实现细节：文件路径、接口签名、数据模型 DDL、配置文件模板、命令行参数。目标是：照着本文档就能写代码。
 
 ---
 
@@ -8,7 +8,8 @@
 
 | 版本 | 日期 | 变更内容 |
 |------|------|----------|
-|| v1.9 | 2026-05-19 12:48 | 修复复审不通过列跳转bug：复审不通过后卡片停留复审+修改区，提示改为「5秒钟之后继续修改」；同步PRD v2.10 |
+||| v1.10 | 2026-05-19 13:04 | 并行架构改造 v3.0: fswatch异步spawn(Popen)+并发上限(目标3/架构5)、writer.py批量处理+原子CAS claim+git commit --<file>隔离、NOTIFY按task_id独立文件、kanban_ops加try_claim_task+busy_timeout；同步PRD v2.11 |
+||| v1.9 | 2026-05-19 12:48 | 修复复审不通过列跳转bug：复审不通过后卡片停留复审+修改区，提示改为「5秒钟之后继续修改」；同步PRD v2.10 |
 ||| v1.8 | 2026-05-19 12:37 | 修复过渡中卡片列位置bug：所有状态切换时卡片停留在原列展示5秒倒计时，再跳转至新列；同步PRD v2.9 |
 || v1.7 | 2026-05-19 12:25 | 修复复审超时：人审不通过→revision直入修改区（不再卡re_review）；同步PRD v2.8 |
 || v1.6 | 2026-05-19 10:54 | 对话框改为默认模式、VV2.0修复、停止状态stale前端抑制、卡滞任务三按钮按状态规则、版本传递修复；同步PRD v2.7 |
@@ -559,14 +560,17 @@ CSS 改动（dashboard.py `<style>` 区域）：
 
 ### 3.1 Writer 触发机制（NOTIFY 文件驱动）
 
-Writer 不由 cron job 触发，而是由 fswatch 守护进程在检测到 NOTIFY 文件（`.kanban/.notify/writer-<project>`）后调用 `hermes chat` 启动。
+Writer 不由 cron job 触发，而是由 fswatch 守护进程在检测到 NOTIFY 文件（`.kanban/.notify/writer-<project>-{task_id}`，按 task 独立文件）后调用 `hermes chat` 异步启动（Popen，不阻塞主循环）。
 
 fswatch 守护进程中的 prompt_builder 会检查 kanban 中的 human_feedback，如果有则生成包含分析步骤的详细提示词，否则生成标准提示词。
 
-Writer 主脚本（`scripts/writer.py`）扫描 kanban，按优先级处理 backlog → revision → re_review → drafting（auto-repair）。每次只处理 1 个任务。
+Writer 主脚本（`scripts/writer.py`）扫描 kanban，按优先级处理 backlog → revision → re_review → drafting。**每次最多处理 `MAX_CONCURRENCY` 个任务**（默认 3，架构最高 5），使用原子 CAS（`try_claim_task`）防止并行冲突。
+
+关键并发机制：
 
 扫描优先级定义在 `SCAN_ORDER`：
 ```python
+MAX_CONCURRENCY = 3  # 目标=3，架构最高=5，扩量只改此常量
 SCAN_ORDER = ['backlog', 'revision', 're_review', 'drafting']
 ```
 
@@ -817,7 +821,10 @@ KANBAN_DB = "/Users/liufeng/Documents/DocProductionReview/.kanban/yaya-zhujiao.d
 | 函数 | 职责 |
 |------|------|
 | `get_automation_state()` | 读取自动化控制状态（running/paused/stopped） |
-| `handle_notify(filepath)` | 处理单个 NOTIFY 文件：检查状态→按前缀路由→触发 Writer/Reviewer→清除 |
+| `handle_notify(filepath)` | 处理单个 NOTIFY 文件：检查状态→按前缀路由→Popen 异步 spawn Writer/Reviewer→清除（不阻塞主循环） |
+|| `wait_for_slot()` | 阻塞直到活跃进程 < MAX_CONCURRENCY（默认 3） |
+|| `count_active()` | 统计当前活跃的 hermes chat 进程数（轮询清理僵尸） |
+|| `monitor_process()` | 后台线程监控子进程，退出时清理 PID 记录 |
 | `bootstrap()` | 定时自愈：扫描 kanban→发现待处理任务→写 NOTIFY→处理 stale re_review→补发 |
 | `build_writer_prompt()` | 构建 Writer agent 提示词（含 human_feedback 分析步骤） |
 | `build_reviewer_prompt()` | 构建 Reviewer agent 提示词（含 scope 自查步骤） |
@@ -856,13 +863,12 @@ Dashboard 控制按钮写入 `.kanban/.control/automation_state.json`。fswatch 
 | running=true, paused=true | 跳过处理，保留 NOTIFY | 跳过 bootstrap |
 | running=false, paused=false | 跳过处理，清理 NOTIFY | 跳过 bootstrap |
 
-### 5.4 定时 Bootstrap（60 秒自愈）
+### 5.4 定时 Bootstrap（60 秒自愈，v3.0 按 task 独立 NOTIFY）
 
 `bootstrap()` 每 60 秒执行一次，自动检测：
-- `awaiting_review` → 写 reviewer NOTIFY
-- `reviewing` → 写 reviewer NOTIFY（补触发）
-- `revision` → 写 writer NOTIFY（补触发）
-- `re_review` → 先检查 stale 卡片（>5min + re_review_result='fail'）→ 自动迁移到 revision → 写 writer NOTIFY。非 stale → 正常写 reviewer NOTIFY
+- `awaiting_review` / `reviewing` → 写通用 reviewer NOTIFY（`review-yaya-zhujiao`，不带 task_id）
+- `revision` → 遍历所有 revision 任务，**每任务写独立 NOTIFY**（`writer-yaya-zhujiao-{tid}`），支持并行触发 Writer
+- `re_review` → 先检查 stale 卡片（>5min + re_review_result='fail'）→ 自动迁移到 revision → 写独立 writer NOTIFY。非 stale → 写通用 reviewer NOTIFY
 
 ### 5.5 human_feedback 截断
 
@@ -906,33 +912,40 @@ pkill -f 'fswatch -0'
 
 Writer/Reviewer 完成工作后写 NOTIFY 文件到 `.kanban/.notify/` 目录。fswatch 二进制检测文件创建事件后触发守护进程执行 `handle_notify()`。
 
+**文件名规则**（v3.0 并行版）：
+- Writer → Reviewer：`review-{project}-{task_id}`（按 task 独立，支持并行触发）
+- Reviewer → Writer：`writer-{project}-{task_id}`（按 task 独立，支持并行触发）
+- 通用唤醒（bootstrap 无指定 task）：`review-{project}`（不带 task_id）
+
 ```python
-# Writer → Reviewer 通知
-def trigger_reviewer():
+# Writer → Reviewer 通知（按 task 独立文件）
+def trigger_reviewer(task_id: str = ''):
     notify_dir = os.path.join(KANBAN_DIR, '.notify')
     os.makedirs(notify_dir, exist_ok=True)
-    notify_path = os.path.join(notify_dir, f'review-{PROJECT}')
+    suffix = f'-{task_id}' if task_id else ''
+    notify_path = os.path.join(notify_dir, f'review-{PROJECT}{suffix}')
     with open(notify_path, 'w') as f:
         f.write(f'NOTIFY by writer at {datetime.now().isoformat()}')
 
-# Reviewer → Writer 通知
-def trigger_writer():
+# Reviewer → Writer 通知（按 task 独立文件）
+def trigger_writer(task_id: str):
     notify_dir = os.path.join(KANBAN_DIR, '.notify')
-    os.makedirs(notify_dir, exist_ok=True)
-    notify_path = os.path.join(notify_dir, f'writer-{PROJECT}')
+    notify_path = os.path.join(notify_dir, f'writer-{PROJECT}-{task_id}')
     with open(notify_path, 'w') as f:
         f.write(f'NOTIFY by reviewer at {datetime.now().isoformat()}')
 ```
 
-### 6.2 fswatch 守护进程路由
+### 6.2 fswatch 守护进程路由（v3.0 异步版）
 
 ```python
-# fswatch_daemon.py handle_notify()
+# fswatch_daemon.py handle_notify() — 异步 Popen，不阻塞
 if filename.startswith("review-"):
-    # 触发 Reviewer
-    prompt = build_reviewer_prompt()
-    subprocess.run([HERMES, "chat", "-q", prompt, "--profile", "yaya-reviewer"],
-                   cwd=PROJECT_DIR, timeout=600)
+    # 等待并发槽位 → Popen reviewer
+    wait_for_slot()
+    proc = subprocess.Popen([HERMES, "chat", "-q", prompt, "--profile", "yaya-reviewer"],
+                            cwd=PROJECT_DIR, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    _active_pids.append(proc.pid)
+    threading.Thread(target=monitor_process, args=(proc, "reviewer"), daemon=True).start()
 elif filename.startswith("writer-"):
     # 触发 Writer
     prompt = build_writer_prompt()
