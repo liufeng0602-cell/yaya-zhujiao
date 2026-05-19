@@ -117,7 +117,6 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
 /* 看板 */
 .board{display:flex;gap:12px;overflow-x:auto;padding-bottom:12px;margin-bottom:16px}
 .column{min-width:200px;max-width:280px;flex-shrink:0;background:var(--card);border:1px solid var(--border);border-radius:8px;padding:12px}
-.column.combined{min-width:280px;max-width:360px}
 .column-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;font-size:12px;color:var(--dim);text-transform:uppercase;letter-spacing:0.5px}
 .column-header .help-icon{display:inline-flex;align-items:center;justify-content:center;width:16px;height:16px;border-radius:50%;background:var(--border);color:var(--dim);font-size:10px;font-weight:700;cursor:pointer;margin-left:4px;flex-shrink:0;line-height:16px}
 .column-header .help-icon:hover{background:var(--blue);color:#fff}
@@ -125,10 +124,8 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
 /* 组合列上下分区 */
 .combined-section{margin-bottom:8px}
 .combined-section:last-child{margin-bottom:0}
-.combined-section .sub-header{font-size:11px;color:var(--dim);margin-bottom:6px;padding:2px 6px;border-radius:4px;background:var(--bg);display:inline-block}
 /* 卡片 */
 .card{background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:10px;margin-bottom:8px;cursor:pointer;transition:border-color .2s;position:relative}
-.card:hover{border-color:var(--blue)}
 .card-title{font-size:13px;font-weight:500;margin-bottom:6px}
 .file-path{display:inline-block;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;vertical-align:bottom}
 .card-meta{font-size:11px;color:var(--dim);display:flex;gap:8px;flex-wrap:wrap;word-break:break-all;overflow-wrap:break-word;min-width:0;max-width:100%}
@@ -136,6 +133,7 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
 .tag-writer{background:#1f6feb33;color:#58a6ff}
 .tag-reviewer{background:#bc8cff33;color:#bc8cff}
 .tag-liufeng{background:#f778ba33;color:#f778ba}
+.tag-dim{background:#30363d33;color:#8b949e;opacity:0.6}
 .badges{margin-top:4px;display:flex;gap:4px;flex-wrap:wrap}
 .iteration-badge{display:inline-block;padding:1px 6px;border-radius:4px;font-size:10px;background:var(--orange);color:#fff}
 .level-row{display:flex;gap:12px;margin-top:6px;font-size:11px;flex-wrap:wrap}
@@ -494,10 +492,6 @@ function renderCard(t, status) {
   } else {
     scores = `<div class="score-row"><span class="score-item" style="color:var(--dim)">暂无评分</span></div>`;
   }
-  // re_review result badge
-  let rrBadge = '';
-  if (t.re_review_result === 'fail') rrBadge = '<span class="tag" style="background:#f8514933;color:#f85149">复审不通过 — 等待修改</span>';
-  else if (t.re_review_result === 'pass') rrBadge = '<span class="tag" style="background:#3fb95033;color:#3fb950">复审通过 → 等待人工审核</span>';
   // Auto-repair badge
   let repairBadge = '';
   if (t.auto_repair_attempts && t.auto_repair_attempts > 0) {
@@ -506,20 +500,22 @@ function renderCard(t, status) {
     repairBadge = `<span class="tag" style="background:${bg};color:${color}">🔧 自动修复 ${t.auto_repair_attempts}/3</span>`;
   }
   return `<div class="card" onclick="openDoc('${t.id}','${status}' )">
-    ${t.workflow_status === 'stopped' ? '<div class="card-workflow-status card-stopped">⏹ 已停止</div>' : '<div class="card-workflow-status card-running">▶ 进行中</div>'}
     <div class="card-title">${t.title}</div>
     <div class="card-meta">
       <span class="file-path">${t.file_path||'—'}</span>
       ${t.version ? '<span>v'+t.version+'</span>' : ''}
-      ${t.assigned_to ? '<span class="tag tag-'+t.assigned_to+'">'+t.assigned_to+'</span>' : ''}
+      ${['reviewing','awaiting_review','revision','re_reviewing','re_review'].includes(status)
+        ? ('<span class="tag ' + (['awaiting_review','revision','re_review'].includes(status) ? 'tag-writer' : 'tag-dim') + '">writer</span>' +
+           '<span class="tag ' + (['reviewing','re_reviewing'].includes(status) ? 'tag-reviewer' : 'tag-dim') + '">reviewer</span>')
+        : (t.assigned_to ? '<span class="tag tag-'+t.assigned_to+'">'+t.assigned_to+'</span>' : '')}
     </div>
     <div class="badges">
       ${t.iteration>0 ? '<span class="iteration-badge">迭代'+t.iteration+'</span>' : ''}
       ${t.commit_sha ? '<span class="tag" style="background:#1f6feb33;color:#58a6ff">'+t.commit_sha.slice(0,7)+'</span>' : ''}
       ${repairBadge}
-      ${rrBadge}
     </div>
     ${pdots}
+    ${t.workflow_status === 'stopped' ? '<div class="card-workflow-status card-stopped">⏹ 已停止</div>' : '<div class="card-workflow-status card-running">▶ 进行中</div>'}
     ${scores}
     <div class="timer ${t.timer_stale?'timer-stale':'timer-ok'}">
       <div class="timer-row"><span>${t.elapsed ? '\u23f1 '+t.elapsed : ''}</span></div>
@@ -1128,6 +1124,10 @@ async def api_board(project: str = default_project):
                         stale_reason = reas.get(status, "未知状态超时")
                     # 工作流状态（不设卡住原因，由外部展示）
                     workflow_status = "stopped" if (auto_stopped and status not in ('finalized', 'blocked', 'backlog')) else "running"
+                    # 停止时不报 timer 错误（已在卡片顶部显示"已停止"状态）
+                    if workflow_status == "stopped":
+                        stale = False
+                        stale_reason = ""
                     # 计算过渡提示（状态进入 < 10 秒时显示）
                     transition_message = ""
                     if d.get("status_entered_at"):
@@ -1216,6 +1216,10 @@ async def api_board(project: str = default_project):
                         stale_reason = reas.get(status, "未知状态超时")
                     # 工作流状态（不设卡住原因，由外部展示）
                     workflow_status = "stopped" if (auto_stopped and status not in ('finalized', 'blocked', 'backlog')) else "running"
+                    # 停止时不报 timer 错误（已在卡片顶部显示"已停止"状态）
+                    if workflow_status == "stopped":
+                        stale = False
+                        stale_reason = ""
                     # 计算过渡提示（状态进入 < 10 秒时显示）
                     transition_message = ""
                     if d.get("status_entered_at"):
