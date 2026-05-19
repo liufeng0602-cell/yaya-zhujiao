@@ -1,9 +1,10 @@
-# 自动化文档生产-审核循环工作流 PRD v2.4
+# 自动化文档生产-审核循环工作流 PRD v2.5
 
 ## 变更记录
 
 | 版本 | 日期 | 变更内容 |
 |------|------|----------|
+| v2.5 | 2026-05-19 09:53 | 看板7列分组、过渡消息更新、人审不通过退回复审+修改、人审对话框模块 |
 | v2.4 | 2026-05-19 08:53 | Dashboard 4项交互优化：停止按钮覆盖stale提示、已封版不报错、过渡消息+5秒倒计时、审查结果展示 |
 | v2.3 | 2026-05-18 14:30 | 同步所有实现变更：状态机重排、fswatch守护进程、Dashboard自动化控制状态、NOTIFY机制、auto-repair、human_feedback闭环 |
 | v2.2 | 2026-05-18 12:55 | 18项审核问题修复 + 4项人设讨论优化 + 3项执行调整 |
@@ -12,8 +13,6 @@
 | v1.1 | 2026-05-18 10:08 | liufeng PRD 评审修复 10 项问题 |
 
 ---
-
-## 0. 核心概念
 
 ### 0.1 这个项目是什么
 
@@ -743,14 +742,13 @@ watcher 发现异常 -> 暂停该项目的 writer/reviewer 的 cron job -> 写 a
 
 | 状态转换（previous→current） | 过渡消息 |
 |------------------------------|---------|
-| revision → re_review | Writer修改已经完成，5秒后进入复审环节 |
-| drafting → awaiting_review | 撰写完毕，5秒后进入审查环节 |
-| reviewing → revision | 审查不通过，5秒钟后进入修改环节 |
-| reviewing → waiting_human_review | 审查通过，5秒钟后进入评审结果 |
-| re_reviewing → revision | 复审不通过，5秒钟后进入修改环节 |
-| re_reviewing → waiting_human_review | 复审通过，5秒钟后进入评审结果 |
-| waiting_human_review → finalized | 评审通过，5秒钟后封版 |
-| waiting_human_review → revision | 评审不通过，5秒钟后进入修改环节 |
+| drafting → awaiting_review | 撰写已完成，5秒后进入审查+修改环节 |
+| reviewing → revision | 审查不通过，5秒钟后进入修改阶段 |
+| reviewing → waiting_human_review | 审查通过，5秒钟后进入人工审核环节 |
+| re_reviewing → revision | 复审不通过，5秒钟后进入修改阶段 |
+| re_reviewing → waiting_human_review | 复审通过，5秒钟后进入人工审核环节 |
+| waiting_human_review → finalized | 人工审核通过，5秒钟后封版 |
+| waiting_human_review → re_review | 人工审核不通过，5秒钟后进入复审+修改环节 |
 
 过渡消息显示在卡片中间，蓝色背景。同时启动5秒倒计时（蓝色圆形数字动画），倒计时结束后自动消失。
 
@@ -759,6 +757,32 @@ watcher 发现异常 -> 暂停该项目的 writer/reviewer 的 cron job -> 写 a
 审查模块（reviewing）和复审模块（re_reviewing）的文档在工作完成后，卡片上直接显示结果：
 - 审查通过 / 复审通过 → 绿色提示 + 5秒倒计时
 - 审查不通过 / 复审不通过 → 红色提示 + 5秒倒计时
+
+### 14.5 看板 7 列布局
+
+DB 状态（9个状态）不动，Dashboard 层做列分组映射，显示为 7 列看板：
+
+| 看板列名 | 包含的 DB 状态 | 类型 | 说明 |
+|----------|---------------|------|------|
+| 已封版 | finalized | 单列 | 人工确认通过 |
+| 文档目录 | backlog | 单列 | 未分配任务 |
+| 文档撰写 | drafting | 单列 | Writer 正在撰写 |
+| 审查+修改 | reviewing + awaiting_review + revision | 组合列 | 上栏=审查中，下栏=待审查/修改中 |
+| 复审+修改 | re_reviewing + re_review | 组合列 | 上栏=复审中，下栏=复审不通过 |
+| 人工审核 | waiting_human_review | 单列 | 等待 liufeng 确认 |
+| 阻塞 | blocked | 单列 | 需手动处理 |
+
+### 14.6 人工审核对话框模块
+
+当 liufeng 对 waiting_human_review 文档有意见需要与 Reviewer 达成共识时，通过轻量对话完成：
+
+**流程：**
+1. liufeng 点击「评审对话框」按钮
+2. 输入意见，Dashboard 调用 Hermes Chat API (`hermes chat -q "prompt" --profile yaya`)
+3. Reviewer 回复展示，可多轮对话
+4. 达成共识后点击「达成共识」，系统写 NOTIFY 触发 Writer
+
+**技术方案：** 方案1（已选）—— Hermes Chat API 直接调用，不改 Reviewer Profile 架构。2 秒响应，不加 `--accept-hooks`。
 
 ---
 

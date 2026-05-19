@@ -26,22 +26,20 @@ default_project = "yaya-zhujiao"
 KANBAN_LAYOUT = [
     ("finalized",        "已封版",    False, ("finalized",),
      "人工确认通过，文档已完成并封版。"),
-    ("backlog",          "待领取",    False, ("backlog",),
+    ("backlog",          "文档目录",  False, ("backlog",),
      "尚未分配的文档任务，等待 Writer 认领后开始撰写。"),
-    ("drafting",         "撰写中",    False, ("drafting",),
-     "Writer 正在撰写或修改文档，完成后自动转入待审查。"),
-    ("awaiting_review",  "待审查",    False, ("awaiting_review",),
-     "Writer 已完成并提交，等待 Reviewer 审查。"),
-    ("reviewing",        "审查中",    False, ("reviewing",),
-     "Reviewer 正在执行审查，检查文档合规性、术语一致性等。"),
-    ("revision",         "修改中",    False, ("revision",),
-     "Reviewer 发现问题（P0/P1/P2），Writer 需修复后送复审。"),
-    ("re_reviewing",     "复审中",    False, ("re_reviewing",),
-     "Reviewer 正在复审 Writer 修改后的文档。"),
-    ("review_outcome",   "评审结果",  True,  ("waiting_human_review", "re_review"),
-     "上栏：复审通过，等待人工确认。下栏：复审不通过，等待 Writer 接收。"),
-    ("blocked",          "已阻塞",    False, ("blocked",),
-     "环境问题导致流程无法继续（如工具缺失、git 失败、超过最大迭代次数）。需要你（liufeng）手动处理恢复。解决方法：修复环境后点击文档查看详情，使用「恢复」按钮将任务重置到合适的状态。"),
+    ("drafting",         "文档撰写",  False, ("drafting",),
+     "Writer 正在撰写文档中。"),
+    # 审查+修改（组合列）：上栏=审查中，下栏=待审查+修改中
+    ("review_modify",    "审查+修改", True,  ("reviewing", "awaiting_review", "revision"),
+     "上栏：Reviewer 正在审查文档。下栏：待审查或 Writer 正在修改中。"),
+    # 复审+修改（组合列）：上栏=复审中，下栏=复审不通过等待修改
+    ("re_review_modify", "复审+修改", True,  ("re_reviewing", "re_review"),
+     "上栏：Reviewer 正在复审。下栏：复审不通过，需要 Writer 修改后再次提交。"),
+    ("waiting_human_review", "人工审核", False, ("waiting_human_review",),
+     "复审通过，等待您（liufeng）人工审核确认。"),
+    ("blocked",          "阻塞",      False, ("blocked",),
+     "环境问题导致流程无法继续（如工具缺失、git 失败、超过最大迭代次数）。需要您手动处理恢复。"),
 ]
 
 ALERT_SECONDS = {
@@ -273,10 +271,45 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
       </div>
     </div>
     <div id="modalActions" class="human-actions" style="display:none">
-      <button class="btn-pass" onclick="humanReview('pass')">✔ 通过</button>
-      <button class="btn-fail" onclick="humanReview('fail')">✘ 不通过</button>
-      <div class="human-input">
-        <textarea id="reviewComment" placeholder="不通过请输入理由或修改意见..."></textarea>
+      <div id="humanReviewSimple" style="width:100%">
+        <div style="margin-bottom:10px;font-size:13px;font-weight:600;color:var(--blue)">人工审核</div>
+        <div style="display:flex;gap:12px;align-items:flex-start;flex-wrap:wrap;margin-bottom:10px">
+          <div class="human-input" style="flex:1">
+            <textarea id="reviewComment" placeholder="输入您的评审意见或修改要求..." style="width:100%;min-height:60px"></textarea>
+          </div>
+        </div>
+        <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+          <button class="btn-pass" onclick="humanReview('pass')">✔ 通过</button>
+          <button class="btn-fail" onclick="humanReview('fail')">✘ 不通过</button>
+          <button class="ctrl-btn" onclick="startHumanDialog()" style="color:var(--blue);border-color:var(--blue)">💬 对话评审</button>
+        </div>
+      </div>
+      <div id="humanReviewDialog" style="width:100%;display:none">
+        <div style="margin-bottom:10px;font-size:13px;font-weight:600;color:var(--purple)">💬 对话评审 — 评审P会分析您的意见并生成修改说明</div>
+        <!-- 对话历史 -->
+        <div id="dialogHistory" style="margin-bottom:10px;max-height:300px;overflow-y:auto;background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:8px">
+          <div style="color:var(--dim);font-size:12px;padding:4px">输入评审意见后，点击「发送」，评审P会分析并给出修改建议。</div>
+        </div>
+        <div style="display:flex;gap:8px;align-items:flex-start;flex-wrap:wrap">
+          <div class="human-input" style="flex:1">
+            <textarea id="dialogInput" placeholder="输入您的评审意见..." style="width:100%;min-height:40px"></textarea>
+          </div>
+        </div>
+        <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:6px">
+          <button class="ctrl-btn" onclick="sendDialogMessage()" style="background:var(--purple);color:#fff;border-color:var(--purple)">发送</button>
+          <button class="ctrl-btn" onclick="closeHumanDialog()" style="color:var(--dim)">返回简单模式</button>
+          <span id="dialogStatus" style="font-size:12px;color:var(--dim);display:none"></span>
+        </div>
+        <!-- 达成共识后显示 -->
+        <div id="consensusSection" style="display:none;margin-top:10px;padding-top:10px;border-top:1px solid var(--border)">
+          <div style="font-size:13px;font-weight:600;color:var(--green);margin-bottom:8px">✅ 达成共识 — 确认修改意见并触发 Writer</div>
+          <div class="human-input">
+            <textarea id="consensusInstructions" placeholder="最终修改说明（可编辑修改）..." style="width:100%;min-height:60px"></textarea>
+          </div>
+          <div style="margin-top:6px">
+            <button class="btn-pass" onclick="confirmConsensus()">确认并触发 Writer</button>
+          </div>
+        </div>
       </div>
     </div>
     <div id="blockedActions" class="blocked-actions" style="display:none">
@@ -413,9 +446,9 @@ function render() {
       if (col.type === 'combined') {
         return `<div class="column combined">
           <div class="column-header"><span>${col.label}<span class="help-icon" onclick="showHelp('${col.label}','${col.tooltip}')">?</span></span><span class="column-count">${col.total_count}</span></div>
-          ${col.upper_count>0 ? '<div class="combined-section"><div class="sub-header">↑ 复审通过，等待人工审核 (${col.upper_count})</div>' +
-            col.upper_tasks.map(t => renderCard(t, col.upper_status)).join('') + '</div>' : '<div class="empty">等待人工审核: 0</div>'}
-          ${col.lower_count>0 ? '<div class="combined-section"><div class="sub-header">↓ 复审不通过，等待修改 (${col.lower_count})</div>' +
+          ${col.upper_count>0 ? '<div class="combined-section"><div class="sub-header">↑ ' + col.upper_label + ' (' + col.upper_count + ')</div>' +
+            col.upper_tasks.map(t => renderCard(t, col.upper_status)).join('') + '</div>' : '<div class="empty">' + col.upper_label + ': 0</div>'}
+          ${col.lower_count>0 ? '<div class="combined-section"><div class="sub-header">↓ ' + col.lower_label + ' (' + col.lower_count + ')</div>' +
             col.lower_tasks.map(t => renderCard(t, col.lower_status)).join('') + '</div>' : ''}
         </div>`;
       }
@@ -508,7 +541,7 @@ function openDoc(taskId, status) {
     // Show human review actions only for waiting_human_review
     const actionsEl = document.getElementById('modalActions');
     const blockedEl = document.getElementById('blockedActions');
-    if (status === 'waiting_human_review' || status === 'review_outcome') {
+    if (status === 'waiting_human_review') {
       actionsEl.style.display = 'flex';
       document.getElementById('reviewComment').value = '';
     } else {
@@ -1036,13 +1069,28 @@ async def api_board(project: str = default_project):
 
         for key, label, combined, statuses, tooltip in KANBAN_LAYOUT:
             if combined:
-                upper_status, lower_status = statuses[0], statuses[1] if len(statuses) > 1 else None
-                upper_rows = conn.execute(
-                    "SELECT * FROM tasks WHERE status=? ORDER BY updated_at ASC", (upper_status,)
-                ).fetchall() if upper_status else []
-                lower_rows = conn.execute(
-                    "SELECT * FROM tasks WHERE status=? ORDER BY updated_at ASC", (lower_status,)
-                ).fetchall() if lower_status else []
+                upper_statuses = [statuses[0]]
+                lower_statuses = list(statuses[1:]) if len(statuses) > 1 else []
+                # Section labels per column
+                section_labels = {
+                    "review_modify": ("审查中", "待审查 / 修改中"),
+                    "re_review_modify": ("复审中", "复审不通过，等待修改"),
+                }
+                upper_label, lower_label = section_labels.get(key, ("上栏", "下栏"))
+
+                # Upper section: fetch tasks for each upper status
+                upper_rows = []
+                for s in upper_statuses:
+                    upper_rows.extend(conn.execute(
+                        "SELECT * FROM tasks WHERE status=? ORDER BY updated_at ASC", (s,)
+                    ).fetchall())
+
+                # Lower section: fetch tasks for each lower status
+                lower_rows = []
+                for s in lower_statuses:
+                    lower_rows.extend(conn.execute(
+                        "SELECT * FROM tasks WHERE status=? ORDER BY updated_at ASC", (s,)
+                    ).fetchall())
 
                 def build_task(r, status):
                     d = dict(r)
@@ -1086,14 +1134,14 @@ async def api_board(project: str = default_project):
                                 prev = d.get("previous_status", "")
                                 if prev:
                                     tmap = {
-                                        ("revision", "re_review"): "Writer 修改已完成，5秒后进入复审环节",
-                                        ("drafting", "awaiting_review"): "Writer 撰写已完成，5秒后进入审查环节",
-                                        ("reviewing", "revision"): "审查不通过，5秒钟后进入修改环节",
-                                        ("reviewing", "waiting_human_review"): "审查通过，5秒钟后进入评审结果",
-                                        ("re_reviewing", "revision"): "复审不通过，5秒钟后进入修改环节",
-                                        ("re_reviewing", "waiting_human_review"): "复审通过，5秒钟后进入评审结果",
+                                        ("revision", "re_review"): "修改已完成，5秒后进入复审+修改环节",
+                                        ("drafting", "awaiting_review"): "撰写已完成，5秒后进入审查+修改环节",
+                                        ("reviewing", "revision"): "审查不通过，5秒钟后进入修改阶段",
+                                        ("reviewing", "waiting_human_review"): "审查通过，5秒钟后进入人工审核环节",
+                                        ("re_reviewing", "revision"): "复审不通过，5秒钟后进入修改阶段",
+                                        ("re_reviewing", "waiting_human_review"): "复审通过，5秒钟后进入人工审核环节",
                                         ("waiting_human_review", "finalized"): "人工审核通过，5秒钟后封版",
-                                        ("waiting_human_review", "revision"): "人工审核不通过，5秒钟后进入修改环节",
+                                        ("waiting_human_review", "re_review"): "人工审核不通过，5秒钟后进入复审+修改环节",
                                     }
                                     transition_message = tmap.get((prev, status), "")
                         except:
@@ -1117,14 +1165,16 @@ async def api_board(project: str = default_project):
                         "auto_repair_failure": auto_repair_failure,
                     }
 
-                upper_tasks = [build_task(r, upper_status) for r in upper_rows]
-                lower_tasks = [build_task(r, lower_status) for r in lower_rows]
+                upper_tasks = [build_task(r, r["status"]) for r in upper_rows]
+                lower_tasks = [build_task(r, r["status"]) for r in lower_rows]
                 columns.append({
                     "status": key, "label": label, "tooltip": tooltip,
                     "type": "combined", "total_count": len(upper_tasks) + len(lower_tasks),
-                    "upper_count": len(upper_tasks), "upper_status": upper_status,
+                    "upper_count": len(upper_tasks), "upper_status": upper_statuses[0] if upper_statuses else None,
+                    "upper_label": upper_label,
                     "upper_tasks": upper_tasks,
-                    "lower_count": len(lower_tasks), "lower_status": lower_status,
+                    "lower_count": len(lower_tasks), "lower_status": lower_statuses[0] if lower_statuses else None,
+                    "lower_label": lower_label,
                     "lower_tasks": lower_tasks,
                 })
             else:
@@ -1173,14 +1223,14 @@ async def api_board(project: str = default_project):
                                 prev = d.get("previous_status", "")
                                 if prev:
                                     tmap = {
-                                        ("revision", "re_review"): "Writer 修改已完成，5秒后进入复审环节",
-                                        ("drafting", "awaiting_review"): "Writer 撰写已完成，5秒后进入审查环节",
-                                        ("reviewing", "revision"): "审查不通过，5秒钟后进入修改环节",
-                                        ("reviewing", "waiting_human_review"): "审查通过，5秒钟后进入评审结果",
-                                        ("re_reviewing", "revision"): "复审不通过，5秒钟后进入修改环节",
-                                        ("re_reviewing", "waiting_human_review"): "复审通过，5秒钟后进入评审结果",
+                                        ("revision", "re_review"): "修改已完成，5秒后进入复审+修改环节",
+                                        ("drafting", "awaiting_review"): "撰写已完成，5秒后进入审查+修改环节",
+                                        ("reviewing", "revision"): "审查不通过，5秒钟后进入修改阶段",
+                                        ("reviewing", "waiting_human_review"): "审查通过，5秒钟后进入人工审核环节",
+                                        ("re_reviewing", "revision"): "复审不通过，5秒钟后进入修改阶段",
+                                        ("re_reviewing", "waiting_human_review"): "复审通过，5秒钟后进入人工审核环节",
                                         ("waiting_human_review", "finalized"): "人工审核通过，5秒钟后封版",
-                                        ("waiting_human_review", "revision"): "人工审核不通过，5秒钟后进入修改环节",
+                                        ("waiting_human_review", "re_review"): "人工审核不通过，5秒钟后进入复审+修改环节",
                                     }
                                     transition_message = tmap.get((prev, status), "")
                         except:
@@ -1205,7 +1255,7 @@ async def api_board(project: str = default_project):
                 columns.append({
                     "status": status, "label": label, "tooltip": tooltip,
                     "type": "single", "count": len(tasks), "tasks": tasks,
-                    "extra_css": " combined" if status in ("waiting_human_review","re_review") else "",
+                    "extra_css": "",
                 })
     finally:
         conn.close()
@@ -1297,7 +1347,7 @@ async def api_human_review(task_id: str, request: Request):
         elif action == "fail":
             if not comment.strip():
                 return JSONResponse({"success": False, "error": "不通过时必须输入理由"})
-            update_task_status(project, task_id, "revision",
+            update_task_status(project, task_id, "re_review",
                                revision_data=json.dumps({"human_feedback": [comment]}))
             add_comment(project, task_id, "liufeng", f"人工审核不通过，意见：{comment}")
         else:
@@ -1520,6 +1570,112 @@ async def api_reports():
                     "size": f.stat().st_size,
                 })
     return JSONResponse(reports)
+
+@app.post("/api/human-review-dialog/{task_id}")
+async def api_human_review_dialog(task_id: str, request: Request):
+    """人审对话框：接收用户意见，调用 Hermes chat API 生成修改建议"""
+    import subprocess, json
+    data = await request.json()
+    opinion = data.get("opinion", "")
+    project = data.get("project", default_project)
+    try:
+        task = get_task(project, task_id)
+        if not task:
+            return JSONResponse({"success": False, "error": "任务不存在"})
+        doc = get_document_content(task_id, project)
+        doc_text = doc.get("content", "")
+        if len(doc_text) > 6000:
+            doc_text = doc_text[:6000] + "\n[文档截断]"
+
+        # 构造 prompt：评审判定用户意见 + 生成修改说明
+        prompt = f"""你是一位文档评审专家。以下是待评审的文档内容以及用户的评审意见。
+
+文档标题：{task.get('title','')}
+文档内容：
+{doc_text}
+
+用户评审意见：
+{opinion}
+
+请完成以下任务：
+1. 分析用户的评审意见是否合理，与文档中的问题是否一致。
+2. 如果合理，生成详细的修改说明（包含具体位置、修改内容、参考规范）。
+3. 如果不完全合理，给出解释并与用户达成共识。
+4. 输出格式：用「评审分析：」开头说明你的判断，然后「修改说明：」开头列出具体的修改步骤。
+
+请保持专业、客观和建设性。"""
+
+        result = subprocess.run(
+            ["/Users/liufeng/.hermes/hermes-agent/venv/bin/hermes",
+             "chat", "-q", prompt, "--profile", "yaya"],
+            capture_output=True, text=True, timeout=60
+        )
+        output = result.stdout.strip()
+        # 清理 Hermes 输出框装饰
+        if output:
+            lines = output.split("\n")
+            clean_lines = []
+            in_response = False
+            for line in lines:
+                if "╭─" in line and "Hermes" in line:
+                    in_response = True
+                    continue
+                if in_response:
+                    if "╰" in line:
+                        break
+                    stripped = line.strip()
+                    if stripped:
+                        clean_lines.append(stripped.lstrip("│ "))
+            if clean_lines:
+                output = "\n".join(clean_lines)
+            else:
+                output = "\n".join(l for l in lines if "Initializing" not in l
+                    and "━━" not in l and not l.startswith("┌─") and not l.startswith("└")
+                    and not l.startswith("│") and "Query:" not in l).strip()
+
+        if not output:
+            output = result.stderr.strip() or "生成失败"
+
+        return JSONResponse({"success": True, "content": output})
+    except subprocess.TimeoutExpired:
+        return JSONResponse({"success": False, "error": "生成超时"})
+    except Exception as e:
+        return JSONResponse({"success": False, "error": str(e)})
+
+
+@app.post("/api/human-review-consensus/{task_id}")
+async def api_human_review_consensus(task_id: str, request: Request):
+    """人审达成共识：保存最终修改意见 → 触发 Writer（生产P）"""
+    data = await request.json()
+    instructions = data.get("instructions", "")
+    project = data.get("project", default_project)
+    try:
+        task = get_task(project, task_id)
+        if not task:
+            return JSONResponse({"success": False, "error": "任务不存在"})
+        if task["status"] != "waiting_human_review":
+            return JSONResponse({"success": False, "error": f"当前状态为 {task['status']}，无法确认"})
+
+        # 保存修改意见到 extra，将任务切换为 re_review（进入复审+修改）
+        add_comment(project, task_id, "liufeng", f"人审达成共识，修改意见：{instructions}")
+        update_task_status(project, task_id, "re_review",
+                           revision_data=json.dumps({
+                               "human_feedback": [instructions],
+                               "human_consensus": instructions,
+                           }))
+
+        # 触发 Writer
+        from pathlib import Path as _Path
+        notify_path = _Path(str(KANBAN_DIR)) / ".notify" / f"writer-{project}"
+        notify_path.parent.mkdir(parents=True, exist_ok=True)
+        notify_path.write_text(f"human-review consensus {task_id} at {datetime.now().isoformat()}")
+
+        return JSONResponse({"success": True})
+    except Exception as e:
+        return JSONResponse({"success": False, "error": str(e)})
+
+
+"""End of human review dialog endpoints"""
 
 if __name__ == "__main__":
     print("DocProductionReview Dashboard v3.0 → http://127.0.0.1:9119")

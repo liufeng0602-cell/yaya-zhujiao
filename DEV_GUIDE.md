@@ -1,6 +1,6 @@
-# 自动化文档生产-审核循环工作流 开发者指南 v1.3
+# 自动化文档生产-审核循环工作流 开发者指南 v1.4
 
-基于 PRD v2.4 实现。本文档提供每个模块的实现细节：文件路径、接口签名、数据模型 DDL、配置文件模板、命令行参数。目标是：照着本文档就能写代码。
+基于 PRD v2.5 实现。本文档提供每个模块的实现细节：文件路径、接口签名、数据模型 DDL、配置文件模板、命令行参数。目标是：照着本文档就能写代码。
 
 ---
 
@@ -8,7 +8,7 @@
 
 | 版本 | 日期 | 变更内容 |
 |------|------|----------|
-| v1.3 | 2026-05-19 08:53 | Dashboard 4项交互优化实现细节：auto_stopped stale覆盖、finalized跳过超时检测、transition_message 8对映射、5秒JS倒计时 |
+| v1.4 | 2026-05-19 09:53 | Dashboard 看板7列分组: 已封版/文档目录/文档撰写/审查+修改/复审+修改/人工审核/阻塞、过渡消息更新、人审不通过退回复审+修改、人审对话框Hermes Chat API模块 |
 | v1.2 | 2026-05-18 14:30 | 同步PRD v2.3实现：状态机重排、fswatch守护进程、Dashboard自动化控制、NOTIFY机制、auto-repair、human_feedback闭环、Profile三态显示 |
 | v1.1 | 2026-05-18 14:09 | 审核 v1.0 全量修复：P0-1 p2_clearing->needs_revision 状态机修正；P0-2 Reviewer 直接设 p2_clearing 不再等 watcher；P0-3 增加 p2_cleared 中间状态+Writer P2_FIXED 标记；P1-1 get_tasks_by_status status 参数改为可选；P1-2 blocked 恢复 fallback 修复；P1-3 心跳/启动标记文件按项目区分；P1-4 质量评分触发改到 signed_off 后；P1-5 fromisoformat 改 strptime；P1-6 移除 no_agent watch.py 改为 Writer agent cron 直接扫描 kanban；P1-7 needs_revision->drafting 遗漏（writer_revision_workflow 跳过 claim，与状态机矛盾）；P2-1 3.2 注释残留修复；P2-2 6.2 通知+暂停cron 函数修复；P2-2 git 仓库路径统一；P2-3 部署步骤修复；P2-4 Writer 新增 3.4 p2_clearing 处理流程；P3-3 check_stuck_tasks 增加 p2_clearing 超时；P3-1 PRD 质量评分触发时机同步 signed_off；补充建议：previous_status 字段/git diff 守卫/wrapper.py 强制自检/prompt 单任务锁定/PRD 同步； |
 
@@ -347,14 +347,13 @@ def recover_blocked_task(project: str, task_id: str, action: str):
 
 | previous_status | current_status | 过渡消息 |
 |-----------------|---------------|---------|
-| revision | re_review | Writer修改已经完成，5秒后进入复审环节 |
-| drafting | awaiting_review | 撰写完毕，5秒后进入审查环节 |
-| reviewing | revision | 审查不通过，5秒钟后进入修改环节 |
-| reviewing | waiting_human_review | 审查通过，5秒钟后进入评审结果 |
-| re_reviewing | revision | 复审不通过，5秒钟后进入修改环节 |
-| re_reviewing | waiting_human_review | 复审通过，5秒钟后进入评审结果 |
-| waiting_human_review | finalized | 评审通过，5秒钟后封版 |
-| waiting_human_review | revision | 评审不通过，5秒钟后进入修改环节 |
+| drafting | awaiting_review | 撰写已完成，5秒后进入审查+修改环节 |
+| reviewing | revision | 审查不通过，5秒钟后进入修改阶段 |
+| reviewing | waiting_human_review | 审查通过，5秒钟后进入人工审核环节 |
+| re_reviewing | revision | 复审不通过，5秒钟后进入修改阶段 |
+| re_reviewing | waiting_human_review | 复审通过，5秒钟后进入人工审核环节 |
+| waiting_human_review | finalized | 人工审核通过，5秒钟后封版 |
+| waiting_human_review | re_review | 人工审核不通过，5秒钟后进入复审+修改环节 |
 
 **倒计时实现（前端 JS）：**
 - `startTransitionCountdowns()` 在每次 `render()` 后调用
@@ -368,6 +367,60 @@ def recover_blocked_task(project: str, task_id: str, action: str):
 **已封版不报错（calc_elapsed）：**
 - 接收到 `finalized` 状态的任务直接返回 `stale=False`，跳过所有超时和中断检测逻辑。
 - stale_reason 为空字符串。
+
+### 2.7 Dashboard 看板 7 列布局
+
+从 v1.4 起，Dashboard 看板从 10 列合并为 7 列。**DB 状态不动，只改 dashboard 层列分组映射。**
+
+KANBAN_LAYOUT 定义（dashboard.py 第 26 行）：
+```python
+KANBAN_LAYOUT = [
+    ("finalized",        "已封版",    False, ("finalized",), ...),
+    ("backlog",          "文档目录",  False, ("backlog",), ...),
+    ("drafting",         "文档撰写",  False, ("drafting",), ...),
+    # 审查+修改（组合列）：上栏=审查中，下栏=待审查+修改中
+    ("review_modify",    "审查+修改", True,  ("reviewing", "awaiting_review", "revision"), ...),
+    # 复审+修改（组合列）：上栏=复审中，下栏=复审不通过，等待修改
+    ("re_review_modify", "复审+修改", True,  ("re_reviewing", "re_review"), ...),
+    ("human_review",     "人工审核",  False, ("waiting_human_review",), ...),
+    ("blocked",          "阻塞",      False, ("blocked",), ...),
+]
+```
+
+组合列（combined）在 HTML 中渲染为上下两个分区，各带独立 sub-header 标签。Section labels 通过 `section_labels` 字典映射：
+- review_modify: 上栏="审查中"，下栏="待审查 / 修改中"
+- re_review_modify: 上栏="复审中"，下栏="复审不通过，等待修改"
+
+### 2.8 人工审核对话框模块（Hermes Chat API）
+
+当 liufeng 对等待人工审核的文档需要和 Reviewer 对话达成共识时，使用轻量 Hermes Chat API 方案。
+
+**后端 API（dashboard.py）：**
+
+| 端点 | 方法 | 功能 |
+|------|------|------|
+| /api/human-review-dialog/{task_id} | POST | liufeng 输入意见，Dashboard 调 Hermes Chat API 模拟 Reviewer 回复 |
+| /api/human-review-consensus/{task_id} | POST | 双方达成共识后，生成修改指令并写 NOTIFY 触发 Writer |
+
+**对话流程：**
+1. liufeng 点击文档详情中的「评审对话框」按钮
+2. 弹出对话框，liufeng 输入对文档的意见
+3. Dashboard 调用 `hermes chat -q "作为 Reviewer，请审阅此文档的需求。用户意见：{opinion}。请评估这些意见是否合理，给出你的分析和修改建议。" --profile yaya` 
+4. Reviewer 回复展示在对话框中
+5. 可多轮对话，直到达成共识
+6. liufeng 点击「达成共识」，系统生成修改指令文件，写 NOTIFY writer-{project}
+7. 对话框关闭，Writer 收到任务开始修改
+
+**API 调用方式：** 使用 subprocess 调用 Hermes Chat CLI（2 秒响应）
+- CLI: `/Users/liufeng/.hermes/hermes-agent/venv/bin/hermes chat -q "prompt" --profile yaya`
+- 注意：不加 `--accept-hooks`（会导致挂起）
+- 输出解析：取最后一条 `╭─ Hermes` 框内的正文
+
+**共识达成后：**
+- 生成修改指令 JSON 文件写到 `.kanban/.notify/instructions-{project}/{task_id}.json`
+- 写 NOTIFY 文件触发 Writer（`writer-{project}`）
+- 更新任务状态为 revision（退回复审+修改流程）
+- human_feedback 截断：max 500 chars × 3 items
 
 ---
 
