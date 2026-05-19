@@ -503,7 +503,7 @@ function renderCard(t, status) {
     <div class="card-title">${t.title}</div>
     <div class="card-meta">
       <span class="file-path">${t.file_path||'—'}</span>
-      ${t.version ? '<span>'+t.version+'</span>' : ''}
+      ${(t.doc_version || t.version) ? '<span>'+(t.doc_version || t.version)+'</span>' : ''}
       ${['reviewing','awaiting_review','revision','re_reviewing','re_review'].includes(status)
         ? ('<span class="tag ' + (['awaiting_review','revision','re_review'].includes(status) ? 'tag-writer' : 'tag-dim') + '">writer</span>' +
            '<span class="tag ' + (['reviewing','re_reviewing'].includes(status) ? 'tag-reviewer' : 'tag-dim') + '">reviewer</span>')
@@ -526,6 +526,93 @@ function renderCard(t, status) {
   </div>`;
 }
 
+// human review dialog functions (top-level, called from openDoc)
+function startHumanDialog() {
+  document.getElementById('humanReviewSimple').style.display = 'none';
+  document.getElementById('humanReviewDialog').style.display = 'block';
+  document.getElementById('dialogHistory').innerHTML = '';
+  document.getElementById('consensusSection').style.display = 'none';
+  document.getElementById('dialogInput').value = '';
+  addDialogMessage('system', 'Describe your review opinion, reviewer-P will analyze.', 'var(--dim)');
+}
+
+function closeHumanDialog() {
+  document.getElementById('humanReviewSimple').style.display = 'block';
+  document.getElementById('humanReviewDialog').style.display = 'none';
+}
+
+function addDialogMessage(sender, text, color) {
+  const history = document.getElementById('dialogHistory');
+  const msgDiv = document.createElement('div');
+  msgDiv.style.cssText = 'padding:6px 8px;margin-bottom:6px;background:var(--card);border:1px solid var(--border);border-radius:6px;font-size:12px;line-height:1.5';
+  const label = document.createElement('div');
+  label.style.cssText = 'font-weight:600;color:' + (color || 'var(--text)') + ';margin-bottom:3px';
+  label.textContent = sender;
+  msgDiv.appendChild(label);
+  const contentDiv = document.createElement('div');
+  contentDiv.style.cssText = 'color:var(--text);white-space:pre-wrap';
+  contentDiv.textContent = text;
+  msgDiv.appendChild(contentDiv);
+  history.appendChild(msgDiv);
+  history.scrollTop = history.scrollHeight;
+}
+
+async function sendDialogMessage() {
+  if (!currentTaskId) return;
+  const input = document.getElementById('dialogInput');
+  const opinion = input.value.trim();
+  if (!opinion) return;
+
+  addDialogMessage('You (liufeng)', opinion, 'var(--blue)');
+  input.value = '';
+
+  const statusEl = document.getElementById('dialogStatus');
+  statusEl.style.display = 'inline';
+  statusEl.textContent = '\u23f3 reviewer-P analyzing...';
+
+  try {
+    const r = await fetch('/api/human-review-dialog/' + currentTaskId, {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({opinion: opinion, project: currentProject})
+    });
+    const data = await r.json();
+    statusEl.style.display = 'none';
+
+    if (data.success && data.content) {
+      addDialogMessage('reviewer-P', data.content, 'var(--purple)');
+      document.getElementById('consensusSection').style.display = 'block';
+      document.getElementById('consensusInstructions').value = data.content;
+    } else {
+      addDialogMessage('system', 'Analysis failed: ' + (data.error || 'unknown'), 'var(--red)');
+    }
+  } catch(e) {
+    statusEl.style.display = 'none';
+    addDialogMessage('system', 'Request failed: ' + e.message, 'var(--red)');
+  }
+}
+
+async function confirmConsensus() {
+  if (!currentTaskId) return;
+  const instructions = document.getElementById('consensusInstructions').value.trim();
+  if (!instructions) { alert('Fill in modification instructions'); return; }
+
+  const r = await fetch('/api/human-review-consensus/' + currentTaskId, {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({instructions: instructions, project: currentProject})
+  });
+  const data = await r.json();
+  if (data.success) {
+    closeDocModal();
+    render();
+  } else {
+    alert('Confirmation failed: ' + (data.error || 'unknown'));
+  }
+}
+
+
+
 function openDoc(taskId, status) {
   currentTaskId = taskId;
   fetchJSON('/api/document/'+taskId+'?project='+currentProject).then(d => {
@@ -545,6 +632,7 @@ function openDoc(taskId, status) {
     const blockedEl = document.getElementById('blockedActions');
     if (status === 'waiting_human_review') {
       // direct dialog mode
+      actionsEl.style.display = '';
       document.getElementById('humanReviewSimple').style.display = 'none';
       document.getElementById('humanReviewDialog').style.display = 'block';
       document.getElementById('dialogHistory').innerHTML = '';
@@ -821,91 +909,6 @@ async function humanReview(action) {
   });
   const data = await r.json();
   closeDocModal();
-
-  // human review dialog functions
-  function startHumanDialog() {
-    document.getElementById('humanReviewSimple').style.display = 'none';
-    document.getElementById('humanReviewDialog').style.display = 'block';
-    document.getElementById('dialogHistory').innerHTML = '';
-    document.getElementById('consensusSection').style.display = 'none';
-    document.getElementById('dialogInput').value = '';
-    addDialogMessage('system', 'Describe your review opinion, reviewer-P will analyze.', 'var(--dim)');
-  }
-
-  function closeHumanDialog() {
-    document.getElementById('humanReviewSimple').style.display = 'block';
-    document.getElementById('humanReviewDialog').style.display = 'none';
-  }
-
-  function addDialogMessage(sender, text, color) {
-    const history = document.getElementById('dialogHistory');
-    const msgDiv = document.createElement('div');
-    msgDiv.style.cssText = 'padding:6px 8px;margin-bottom:6px;background:var(--card);border:1px solid var(--border);border-radius:6px;font-size:12px;line-height:1.5';
-    const label = document.createElement('div');
-    label.style.cssText = 'font-weight:600;color:' + (color || 'var(--text)') + ';margin-bottom:3px';
-    label.textContent = sender;
-    msgDiv.appendChild(label);
-    const contentDiv = document.createElement('div');
-    contentDiv.style.cssText = 'color:var(--text);white-space:pre-wrap';
-    contentDiv.textContent = text;
-    msgDiv.appendChild(contentDiv);
-    history.appendChild(msgDiv);
-    history.scrollTop = history.scrollHeight;
-  }
-
-  async function sendDialogMessage() {
-    if (!currentTaskId) return;
-    const input = document.getElementById('dialogInput');
-    const opinion = input.value.trim();
-    if (!opinion) return;
-
-    addDialogMessage('You (liufeng)', opinion, 'var(--blue)');
-    input.value = '';
-
-    const statusEl = document.getElementById('dialogStatus');
-    statusEl.style.display = 'inline';
-    statusEl.textContent = '⏳ reviewer-P analyzing...';
-
-    try {
-      const r = await fetch('/api/human-review-dialog/' + currentTaskId, {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({opinion: opinion, project: currentProject})
-      });
-      const data = await r.json();
-      statusEl.style.display = 'none';
-
-      if (data.success && data.content) {
-        addDialogMessage('reviewer-P', data.content, 'var(--purple)');
-        document.getElementById('consensusSection').style.display = 'block';
-        document.getElementById('consensusInstructions').value = data.content;
-      } else {
-        addDialogMessage('system', 'Analysis failed: ' + (data.error || 'unknown'), 'var(--red)');
-      }
-    } catch(e) {
-      statusEl.style.display = 'none';
-      addDialogMessage('system', 'Request failed: ' + e.message, 'var(--red)');
-    }
-  }
-
-  async function confirmConsensus() {
-    if (!currentTaskId) return;
-    const instructions = document.getElementById('consensusInstructions').value.trim();
-    if (!instructions) { alert('Fill in modification instructions'); return; }
-
-    const r = await fetch('/api/human-review-consensus/' + currentTaskId, {
-      method: 'POST',
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({instructions: instructions, project: currentProject})
-    });
-    const data = await r.json();
-    if (data.success) {
-      closeDocModal();
-      render();
-    } else {
-      alert('Confirmation failed: ' + (data.error || 'unknown'));
-    }
-  }
   render();
   if (!data.success) alert('操作失败: '+data.error);
 }
@@ -1262,7 +1265,7 @@ async def api_board(project: str = default_project):
                             pass
                     return {
                         "id": d["id"], "title": d["title"], "file_path": d.get("file_path",""),
-                        "version": d.get("version"), "assigned_to": d.get("assigned_to",""),
+                        "version": d.get("version"), "doc_version": parse_doc_version_from_file(d.get("file_path","")), "assigned_to": d.get("assigned_to",""),
                         "commit_sha": d.get("commit_sha",""),
                         "iteration": d.get("iteration_count",0) or 0,
                         "elapsed": elapsed, "timer_stale": timer_stale,
@@ -1354,7 +1357,7 @@ async def api_board(project: str = default_project):
                             pass
                     tasks.append({
                         "id": d["id"], "title": d["title"], "file_path": d.get("file_path",""),
-                        "version": d.get("version"), "assigned_to": d.get("assigned_to",""),
+                        "version": d.get("version"), "doc_version": parse_doc_version_from_file(d.get("file_path","")), "assigned_to": d.get("assigned_to",""),
                         "commit_sha": d.get("commit_sha",""),
                         "iteration": d.get("iteration_count",0) or 0,
                         "elapsed": elapsed, "timer_stale": timer_stale,
@@ -1430,6 +1433,50 @@ def calc_pdots(d, status):
             p0_dot, p1_dot, p2_dot = "working", "working", "working"
     return p0_dot, p1_dot, p2_dot
 
+
+def parse_doc_version_from_file(file_path):
+    """Read the latest version from a document's changelog section."""
+    if not file_path or not os.path.isfile(file_path):
+        return None
+    try:
+        with open(file_path, "r", encoding="utf-8") as f:
+            lines = f.readlines()
+        # Step 1: find the changelog header
+        in_changelog = False
+        found_separator = False
+        for i, line in enumerate(lines):
+            stripped = line.rstrip()
+            if stripped.startswith("## 变更记录"):
+                in_changelog = True
+                continue
+            if not in_changelog:
+                continue
+            # Step 2: skip the table header row (|版本|日期|...|)
+            if stripped.startswith("|") and not stripped.startswith("|--") and not found_separator:
+                continue
+            # Step 3: find the separator row (|---|---|---|)
+            if stripped.startswith("|--"):
+                found_separator = True
+                continue
+            # Step 4: first data row after separator
+            if found_separator and stripped.startswith("|"):
+                # Extract the first cell (|vX.Y|...|)
+                parts = stripped.split("|")
+                if len(parts) >= 2:
+                    version = parts[1].strip()
+                    if version.startswith("v"):
+                        return version
+                break
+        # Fallback: parse from title "# Sxx xxx vX.X"
+        first_line = lines[0].strip() if lines else ""
+        m2 = re.search(r"v[\d.]+", first_line)
+        if m2:
+            return m2.group(0)
+        return None
+    except Exception:
+        return None
+
+
 @app.get("/api/document/{task_id}")
 async def api_document(task_id: str, project: str = default_project):
     sys.path.insert(0, str(PROJECT_ROOT))
@@ -1449,6 +1496,8 @@ async def api_document(task_id: str, project: str = default_project):
         auto_state = get_automation_state()
         status_val = task.get("status", "")
         result["workflow_status"] = "stopped" if (not auto_state.get("running", True) and status_val not in ("finalized", "blocked", "backlog")) else "running"
+        # Parse version from document file changelog (source of truth)
+        result["doc_version"] = parse_doc_version_from_file(task.get("file_path", ""))
     return JSONResponse(result)
 
 @app.post("/api/human-review/{task_id}")
