@@ -1,10 +1,13 @@
 """
 Tests for Writer commit gate — self_check_commit_gate in writer.py
 
-Three scenarios:
+Five scenarios:
 1. Doc without <self_check_report> block → commit blocked
 2. Doc with valid self-check report → commit passes
 3. Doc with P2 warnings → commit passes with warning
+4. Doc with P1 type errors → auto-repair → commit passes
+5. Doc with missing keys → repair + full gate verification
+6. Doc with unfixable P1 → block after max retries
 """
 
 import sys
@@ -110,6 +113,27 @@ def _make_missing_keys_doc() -> str:
 <self_check_report>
 version: '1.0'
 checks: {}
+</self_check_report>
+"""
+
+
+def _make_unfixable_p1_doc() -> str:
+    """Doc with a P1 issue that auto-repair cannot fix: param entry missing 'value'."""
+    return """# Test Document
+
+## Content
+
+Some content with [PARAM:timeout=30].
+
+<self_check_report>
+version: '1.0'
+checks:
+  value_audit:
+    result: true
+reported_params:
+  - name: timeout
+    location: '## Content'
+reported_configs: []
 </self_check_report>
 """
 
@@ -275,12 +299,47 @@ def test_gate_auto_repairs_type_errors():
         os.unlink(tmp_path)
 
 
+# ── Test: gate blocks after max repair attempts ─────────────────────
+
+def test_gate_blocks_unfixable_p1():
+    """
+    Scenario: Writer submits a doc with P1 issues that auto-repair cannot fix
+    (param entry missing 'value' key). Gate should retry MAX_REPAIR_ATTEMPTS
+    times then fall back to drafting.
+    """
+    with tempfile.NamedTemporaryFile(mode='w', suffix='.md', delete=False) as f:
+        f.write(_make_unfixable_p1_doc())
+        tmp_path = f.name
+
+    try:
+        tid = create_task(TEST_PROJECT, 'test_gate_blocks_unfixable_p1',
+                          file_path=tmp_path, version='v1.0')
+        update_task_status(TEST_PROJECT, tid, 'drafting', assigned_to='writer')
+
+        result = self_check_commit_gate(tmp_path, tid,
+                                        'test_gate_blocks_unfixable_p1')
+
+        assert result is False, f"Expected False (blocked after retries), got {result}"
+
+        # Task should be back in drafting
+        task = get_task(TEST_PROJECT, tid)
+        assert task['status'] == 'drafting', (
+            f"Expected status 'drafting' after gate block, got '{task['status']}'"
+        )
+
+        print(f'  PASS gate blocks unfixable P1 after max retries')
+
+    finally:
+        os.unlink(tmp_path)
+
+
 # ── Test: auto_repair_self_check handles missing keys ───────────────
 
 def test_auto_repair_missing_keys():
     """
     Given a doc with missing required keys in self-check report,
-    _auto_repair_self_check should insert defaults.
+    _auto_repair_self_check should insert defaults AND the
+    repaired doc must pass the full commit gate.
     """
     doc = _make_missing_keys_doc()
     issues = [
@@ -300,7 +359,25 @@ def test_auto_repair_missing_keys():
     # Original content preserved
     assert "Test Document" in repaired
 
-    print(f'  PASS auto_repair adds missing required keys')
+    # --- Verify repaired doc passes the full gate ---
+    with tempfile.NamedTemporaryFile(mode='w', suffix='.md', delete=False) as f:
+        f.write(repaired)
+        tmp_path = f.name
+
+    try:
+        tid = create_task(TEST_PROJECT, 'test_auto_repair_missing_keys_gate',
+                          file_path=tmp_path, version='v1.0')
+        update_task_status(TEST_PROJECT, tid, 'drafting', assigned_to='writer')
+
+        result = self_check_commit_gate(tmp_path, tid,
+                                        'test_auto_repair_missing_keys_gate')
+        assert result is True, (
+            f"Expected True (repaired doc passes gate), got {result}"
+        )
+    finally:
+        os.unlink(tmp_path)
+
+    print(f'  PASS auto_repair adds missing required keys + gate verified')
 
 
 # ── Run all ─────────────────────────────────────────────────────────
@@ -312,6 +389,7 @@ if __name__ == '__main__':
     test_gate_passes_valid_report()
     test_gate_passes_with_p2_warnings()
     test_gate_auto_repairs_type_errors()
+    test_gate_blocks_unfixable_p1()
     test_auto_repair_missing_keys()
 
     print('\nAll writer commit gate tests PASSED')

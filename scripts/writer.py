@@ -165,45 +165,59 @@ def self_check_commit_gate(file_path: str, task_id: str, task_title: str) -> boo
         _fallback_to_drafting(task_id, f"自检门禁阻断：P0 级问题 {len(p0)} 个，需人工处理")
         return False
 
-    # ---- P1: 自动修复 ----
+    # ---- P1: 自动修复（最多 MAX_REPAIR_ATTEMPTS 轮）----
     if p1:
-        print(f"[WRITER-GATE] P1 问题 {len(p1)} 个，尝试自动修复")
-        repaired = _auto_repair_self_check(doc_text, issues)
+        MAX_REPAIR_ATTEMPTS = 3
+        current_text = doc_text
+        all_p1_fixed = False
 
-        if repaired is None or repaired == doc_text:
-            print(f"[WRITER-GATE] 自动修复失败或无效，回退到 drafting")
-            _log_gate_failure(task_id, f"P1 自动修复失败: {[i['msg'] for i in p1]}")
-            _fallback_to_drafting(task_id, f"自检门禁自动修复失败：P1 {len(p1)} 个问题，需人工处理")
+        for attempt in range(1, MAX_REPAIR_ATTEMPTS + 1):
+            print(f"[WRITER-GATE] P1 修复尝试 #{attempt}/{MAX_REPAIR_ATTEMPTS}")
+            repaired = _auto_repair_self_check(current_text, issues)
+
+            if repaired is None or repaired == current_text:
+                print(f"[WRITER-GATE] 第 #{attempt} 轮自动修复无变化")
+                break
+
+            # 写回修复后的文档（覆盖同一文件）
+            with open(file_path, 'w') as f:
+                f.write(repaired)
+
+            # 重新验证
+            tracker_out2 = tracker_scan(repaired)
+            report2, issues2 = SelfCheckReportValidator.validate(repaired, tracker_out2)
+            p1_remaining = [i for i in issues2 if i['severity'] == 'P1']
+            p0_new = [i for i in issues2 if i['severity'] == 'P0']
+
+            if not p0_new and not p1_remaining:
+                all_p1_fixed = True
+                issues = issues2  # 供后续 P2 提取
+                print(f"[WRITER-GATE] P1 自动修复成功（第 #{attempt} 轮）")
+                break
+            else:
+                print(f"[WRITER-GATE] 第 #{attempt} 轮后仍剩 {len(p0_new)} P0 + {len(p1_remaining)} P1")
+                current_text = repaired
+                issues = issues2  # 供下一轮使用最新 issues
+
+        if not all_p1_fixed:
+            print(f"[WRITER-GATE] 自动修复已达上限，回退到 drafting")
+            _log_gate_failure(task_id,
+                f"P1 自动修复 {MAX_REPAIR_ATTEMPTS} 轮后仍有问题: "
+                f"{[i['msg'] for i in issues if i['severity'] in ('P0','P1')]}")
+            _fallback_to_drafting(task_id,
+                f"自检门禁自动修复 {MAX_REPAIR_ATTEMPTS} 轮后仍有 P0/P1 问题，需人工处理")
             return False
 
-        # 写回修复后的文档
-        with open(file_path, 'w') as f:
-            f.write(repaired)
-
-        # 重新验证
-        tracker_out2 = tracker_scan(repaired)
-        report2, issues2 = SelfCheckReportValidator.validate(repaired, tracker_out2)
-        p1_remaining = [i for i in issues2 if i['severity'] == 'P1']
-        p0_new = [i for i in issues2 if i['severity'] == 'P0']
-        p2_new = [i for i in issues2 if i['severity'] == 'P2']
-
-        if p0_new or p1_remaining:
-            print(f"[WRITER-GATE] 自动修复后仍有 P0/P1 问题，回退到 drafting")
-            remaining = p0_new + p1_remaining
-            _log_gate_failure(task_id, f"修复后仍有 P0/P1: {[i['msg'] for i in remaining]}")
-            _fallback_to_drafting(task_id, f"自检门禁修复后仍有 {len(remaining)} 个 P0/P1 问题，需人工处理")
-            return False
-
-        print(f"[WRITER-GATE] P1 自动修复成功")
-
-        # P2 警告（修复后可能还有新的 P2）
-        if p2_new:
-            print(f"[WRITER-GATE]  P2 警告 {len(p2_new)} 个（不阻断）:")
-            for i in p2_new:
+        # P2 警告（最终验证后的）
+        p2_final = [i for i in issues if i['severity'] == 'P2']
+        if p2_final:
+            print(f"[WRITER-GATE]  P2 警告 {len(p2_final)} 个（不阻断）:")
+            for i in p2_final:
                 print(f"    {i['msg']}")
 
+        p1_count = len(p1)
         add_comment(PROJECT, task_id, 'writer',
-                    f'自检门禁：自动修复 {len(p1)} 个 P1 问题通过')
+                    f'自检门禁：自动修复 {p1_count} 个 P1 问题通过')
         return True
 
     # ---- P2 仅警告 ----
