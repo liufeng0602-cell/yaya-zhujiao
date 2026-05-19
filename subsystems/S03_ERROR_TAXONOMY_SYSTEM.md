@@ -260,7 +260,7 @@ S03 的 L2 错因与 G5-G6 知识点同步构建，G5-G6 是 MVP 首发范围（
 |------|---------|---------|---------|-------|---------|---------|
 | errorCode 全集 | S07诊断引擎 | Step2 错因匹配，枚举值对照 | 崩溃 | P0 | 单元测试：枚举全覆盖+CI每次commit检查 | 同步 |
 | errorCode 全集 | S04策略包体系 | 策略包→错因映射（SP_G/SP_M） | 静默失败 | P1 | 策略包映射覆盖检查（CI自动执行） | 同步 |
-|| parentExplanation | S12家长摘要系统【S12 尚未创建，S03 本地回退：parentExplanation 由教研审核后存入本地 error_explanation 表（errorCode→parentExplanation 文本+模板变量名列表），最低要求=纯文本+1个模板变量。出口：S03 永久提供 GET /explanation?errorCode=xxx 接口返回父解释文本，S12 创建后作为客户端消费（不迁移所有权）】 | 诊断结果→家长端文本。最小契约：入参 errorCode+studentId，出参 parentExplanation 纯文本 | 静默失败 | P2 | 文本模板完整性检查（CI）+本地 error_explanation 表记录校验 | 异步 |
+|| parentExplanation | S12家长摘要系统（引用已闭合：v1.10.5）【S12 尚未创建，S03 本地回退：parentExplanation 由教研审核后存入本地 error_explanation 表（errorCode→parentExplanation 文本+模板变量名列表），最低要求=纯文本+1个模板变量。出口：S03 永久提供 GET /explanation?errorCode=xxx 接口返回父解释文本，S12 创建后作为客户端消费（不迁移所有权），此方案在 v1.10.5 完成并闭合引用】 | 诊断结果→家长端文本。最小契约：入参 errorCode+studentId，出参 parentExplanation 纯文本 | 静默失败 | P2 | 文本模板完整性检查（CI）+本地 error_explanation 表记录校验 | 异步 |
 | L1 通用错因 | 全学科诊断引擎（当前仅 S07，语文/英语等未来学科诊断引擎待定，Phase 3+） | 复用已有 L1 errorCode 和 parentExplanation，不重复定义 | 静默失败 | P2 | 跨学科枚举一致性检查 | 异步 |
 | error_kp_bindings | S05（门禁/质量关卡，执行 R4/R7 规则） | R4 全引用检查，R7 A级绑定≥3 | 数据错误 | P2 | CI自动执行 data_quality_gate.py | 同步 |
 | 错因→策略映射 | S08策略引擎（S08 v1.8已定义策略选择逻辑，此映射的物理定义位于 S04 策略包 JSON 中；S03 仅产出 errorCode） | 诊断结果→策略选择。最小契约：入参 errorCode+curriculumLevel，出参 strategyPackCode（注：此映射的物理定义位于 S04 策略包 JSON 中，S03 仅产出 errorCode；此处列出为跨文档消费链路追踪） | 崩溃 | P0 | 集成测试：映射覆盖率+CI每次commit检查 | 同步 |
