@@ -18,7 +18,7 @@ NOTIFY_DIR = KANBAN_DIR / ".notify"
 HERMES_HOME = Path.home() / ".hermes" / "profiles"
 SUBSYSTEMS_DIR = PROJECT_ROOT / "subsystems"
 sys.path.insert(0, str(PROJECT_ROOT))
-from kanban_ops import get_document_content, get_task, update_task_status, add_comment
+from kanban_ops import get_document_content, get_task, update_task_status, add_comment, increment_iteration
 
 default_project = "yaya-zhujiao"
 
@@ -154,6 +154,7 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
 .timer-stale{color:var(--yellow);font-weight:600}
 .card-workflow-status{font-size:10px;font-weight:600;margin-bottom:4px;padding:1px 6px;border-radius:4px;display:inline-block}
 .card-running{color:var(--green);background:#3fb95022}
+.card-queued{color:var(--yellow);background:#d2992233}
 .card-stopped{color:var(--red);background:#f8514933}
 .transition-banner{background:#1f6feb33;border:1px solid #1f6feb66;border-radius:4px;color:#58a6ff;font-size:11px;padding:4px 8px;margin-top:6px;text-align:center;animation:pulse-blue 1s ease-in-out infinite}
 .transition-banner .transition-countdown{display:inline-block;background:#1f6feb;color:#fff;border-radius:50%;width:18px;height:18px;line-height:18px;text-align:center;font-size:11px;font-weight:700;margin-left:4px}
@@ -516,7 +517,7 @@ function renderCard(t, status) {
       ${repairBadge}
     </div>
     ${pdots}
-    ${t.workflow_status === 'stopped' ? '<div class="card-workflow-status card-stopped">⏹ 已停止</div>' : '<div class="card-workflow-status card-running">▶ 进行中</div>'}
+    ${t.card_activity === 'active' ? '<div class="card-workflow-status card-running">▶ 运行中</div>' : t.card_activity === 'queued' ? '<div class="card-workflow-status card-queued">⏳ 排队中</div>' : t.card_activity === 'stopped' ? '<div class="card-workflow-status card-stopped">⏹ 已停止</div>' : ''}
     ${scores}
     <div class="timer ${t.timer_stale?'timer-stale':'timer-ok'}">
       <div class="timer-row"><span>${t.elapsed ? '\u23f1 '+t.elapsed : ''}</span></div>
@@ -824,7 +825,7 @@ function openDoc(taskId, status) {
     const stuckEl = document.getElementById('stuckActions');
     const stuckReasonEl = document.getElementById('stuckReasonText');
     const statusList = ['drafting','awaiting_review','reviewing','revision','re_review','re_reviewing','waiting_human_review'];
-    if (d.timer_stale && statusList.includes(status) && d.workflow_status !== 'stopped') {
+    if (d.timer_stale && statusList.includes(status) && d.card_activity !== 'stopped') {
           stuckEl.style.display = 'block';
           const reasonMap = {
             'drafting': 'Writer not completed for a long time. Retrigger or reset to backlog.',
@@ -1337,10 +1338,17 @@ async def api_board(project: str = default_project):
                             "blocked": "任务已阻塞，需手动处理",
                         }
                         stale_reason = reas.get(status, "未知状态超时")
-                    # 工作流状态（不设卡住原因，由外部展示）
-                    workflow_status = "stopped" if (auto_stopped and status not in ('finalized', 'blocked', 'backlog')) else "running"
-                    # 停止时不报 timer 错误（已在卡片顶部显示"已停止"状态）
-                    if workflow_status == "stopped":
+                    # 卡片活动状态：运行中 / 排队中 / 已停止（三状态机）
+                    if auto_stopped and status not in ('finalized', 'blocked'):
+                        card_activity = "stopped"
+                    elif status in ('drafting', 'reviewing', 'revision', 're_reviewing'):
+                        card_activity = "active"
+                    elif status in ('backlog', 'awaiting_review', 're_review', 'waiting_human_review'):
+                        card_activity = "queued"
+                    else:
+                        card_activity = ""
+                    # 停止时不报 timer 错误（已在卡片顶部显示状态）
+                    if card_activity == "stopped":
                         stale = False
                         stale_reason = ""
                     # 计算过渡提示（状态进入 < 10 秒时显示）
@@ -1384,7 +1392,7 @@ async def api_board(project: str = default_project):
                         "transition_message": transition_message,
                         "auto_repair_attempts": auto_repair_attempts,
                         "auto_repair_failure": auto_repair_failure,
-                        "workflow_status": workflow_status,
+                        "card_activity": card_activity,
                     }
 
                 upper_tasks = [build_task(r, r["status"]) for r in upper_rows]
@@ -1431,10 +1439,17 @@ async def api_board(project: str = default_project):
                             "blocked": "任务已阻塞，需手动处理",
                         }
                         stale_reason = reas.get(status, "未知状态超时")
-                    # 工作流状态（不设卡住原因，由外部展示）
-                    workflow_status = "stopped" if (auto_stopped and status not in ('finalized', 'blocked', 'backlog')) else "running"
-                    # 停止时不报 timer 错误（已在卡片顶部显示"已停止"状态）
-                    if workflow_status == "stopped":
+                    # 卡片活动状态：运行中 / 排队中 / 已停止（三状态机）
+                    if auto_stopped and status not in ('finalized', 'blocked'):
+                        card_activity = "stopped"
+                    elif status in ('drafting', 'reviewing', 'revision', 're_reviewing'):
+                        card_activity = "active"
+                    elif status in ('backlog', 'awaiting_review', 're_review', 'waiting_human_review'):
+                        card_activity = "queued"
+                    else:
+                        card_activity = ""
+                    # 停止时不报 timer 错误（已在卡片顶部显示状态）
+                    if card_activity == "stopped":
                         stale = False
                         stale_reason = ""
                     # 计算过渡提示（状态进入 < 10 秒时显示）
@@ -1477,7 +1492,7 @@ async def api_board(project: str = default_project):
                         "transition_message": transition_message,
                         "auto_repair_attempts": auto_repair_attempts,
                         "auto_repair_failure": auto_repair_failure,
-                        "workflow_status": workflow_status,
+                        "card_activity": card_activity,
                     })
                 columns.append({
                     "status": status, "label": label, "tooltip": tooltip,
@@ -1647,10 +1662,17 @@ async def api_document(task_id: str, project: str = default_project):
         now_iso = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
         _, timer_stale = calc_elapsed(entered, now_iso, status)
         result["timer_stale"] = timer_stale
-        # pass workflow_status for frontend stopped check
+        # pass card_activity for frontend stopped/queued check
         auto_state = get_automation_state()
         status_val = task.get("status", "")
-        result["workflow_status"] = "stopped" if (not auto_state.get("running", True) and status_val not in ("finalized", "blocked", "backlog")) else "running"
+        if not auto_state.get("running", True) and status_val not in ("finalized", "blocked"):
+            result["card_activity"] = "stopped"
+        elif status_val in ("drafting", "reviewing", "revision", "re_reviewing"):
+            result["card_activity"] = "active"
+        elif status_val in ("backlog", "awaiting_review", "re_review", "waiting_human_review"):
+            result["card_activity"] = "queued"
+        else:
+            result["card_activity"] = ""
         # Parse version from document file changelog (source of truth)
         result["doc_version"] = parse_doc_version_from_file(task.get("file_path", ""))
     return JSONResponse(result)
@@ -1673,6 +1695,7 @@ async def api_human_review(task_id: str, request: Request):
         elif action == "fail":
             if not comment.strip():
                 return JSONResponse({"success": False, "error": "不通过时必须输入理由"})
+            increment_iteration(project, task_id)
             update_task_status(project, task_id, "revision",
                                revision_data=json.dumps({"human_feedback": [comment]}))
             add_comment(project, task_id, "liufeng", f"人工审核不通过，意见：{comment}")
@@ -2057,6 +2080,7 @@ async def api_human_review_consensus(task_id: str, request: Request):
 
         # 保存修改意见到 extra，将任务切换为 re_review（进入复审+修改）
         add_comment(project, task_id, "liufeng", f"人审达成共识，修改意见：{instructions}")
+        increment_iteration(project, task_id)
         update_task_status(project, task_id, "re_review",
                            revision_data=json.dumps({
                                "human_feedback": [instructions],
