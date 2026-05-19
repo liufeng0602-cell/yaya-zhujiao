@@ -1,6 +1,6 @@
-# 自动化文档生产-审核循环工作流 开发者指南 v1.4
+# 自动化文档生产-审核循环工作流 开发者指南 v1.5
 
-基于 PRD v2.5 实现。本文档提供每个模块的实现细节：文件路径、接口签名、数据模型 DDL、配置文件模板、命令行参数。目标是：照着本文档就能写代码。
+基于 PRD v2.6 实现。本文档提供每个模块的实现细节：文件路径、接口签名、数据模型 DDL、配置文件模板、命令行参数。目标是：照着本文档就能写代码。
 
 ---
 
@@ -8,6 +8,7 @@
 
 | 版本 | 日期 | 变更内容 |
 |------|------|----------|
+| v1.5 | 2026-05-19 10:02 | Dashboard 6项UI优化：卡片workflow_status字段、停止提示stopHint div、移除暂停按钮、file-path CSS截断、空状态/组合列子标全部移除；同步PRD v2.6 |
 | v1.4 | 2026-05-19 09:53 | Dashboard 看板7列分组: 已封版/文档目录/文档撰写/审查+修改/复审+修改/人工审核/阻塞、过渡消息更新、人审不通过退回复审+修改、人审对话框Hermes Chat API模块 |
 | v1.2 | 2026-05-18 14:30 | 同步PRD v2.3实现：状态机重排、fswatch守护进程、Dashboard自动化控制、NOTIFY机制、auto-repair、human_feedback闭环、Profile三态显示 |
 | v1.1 | 2026-05-18 14:09 | 审核 v1.0 全量修复：P0-1 p2_clearing->needs_revision 状态机修正；P0-2 Reviewer 直接设 p2_clearing 不再等 watcher；P0-3 增加 p2_cleared 中间状态+Writer P2_FIXED 标记；P1-1 get_tasks_by_status status 参数改为可选；P1-2 blocked 恢复 fallback 修复；P1-3 心跳/启动标记文件按项目区分；P1-4 质量评分触发改到 signed_off 后；P1-5 fromisoformat 改 strptime；P1-6 移除 no_agent watch.py 改为 Writer agent cron 直接扫描 kanban；P1-7 needs_revision->drafting 遗漏（writer_revision_workflow 跳过 claim，与状态机矛盾）；P2-1 3.2 注释残留修复；P2-2 6.2 通知+暂停cron 函数修复；P2-2 git 仓库路径统一；P2-3 部署步骤修复；P2-4 Writer 新增 3.4 p2_clearing 处理流程；P3-3 check_stuck_tasks 增加 p2_clearing 超时；P3-1 PRD 质量评分触发时机同步 signed_off；补充建议：previous_status 字段/git diff 守卫/wrapper.py 强制自检/prompt 单任务锁定/PRD 同步； |
@@ -421,6 +422,75 @@ KANBAN_LAYOUT = [
 - 写 NOTIFY 文件触发 Writer（`writer-{project}`）
 - 更新任务状态为 revision（退回复审+修改流程）
 - human_feedback 截断：max 500 chars × 3 items
+
+### 2.9 Dashboard UI 交互细节
+
+基于 PRD v2.6 的 14.7-14.10 实现。
+
+**卡片状态徽标：**
+
+API 返回的 `workflow_status` 字段控制每张卡片的顶部徽标。字段值：
+- `"running"` — 显示 ▶ 进行中（绿色 `#3fb950`，背景 `#3fb95022`）
+- `"stopped"` — 显示 ⏹ 已停止（红色 `#f85149`，背景 `#f8514933`）
+
+设置逻辑（dashboard.py `build_task` 两处，line 1124-1126 和 1213-1215）：
+```python
+workflow_status = "stopped" if (auto_stopped and status not in ('finalized', 'blocked', 'backlog')) else "running"
+```
+仅当 `automation_state.running=False` 且状态不为 finalized/blocked/backlog 时设为 "stopped"。不修改 stale 或 stale_reason，不干扰原有的 timer 超时机制。
+
+卡片徽标 CSS：
+```css
+.card-workflow-status{font-size:10px;font-weight:600;margin-bottom:4px;padding:1px 6px;border-radius:4px;display:inline-block}
+.card-running{color:var(--green);background:#3fb95022}
+.card-stopped{color:var(--red);background:#f8514933}
+```
+
+**停止提示 stopHint：**
+
+HTML 结构（section-title 内，停止按钮下方）：
+```html
+<div id="stopHint" style="display:none;margin-top:4px;font-size:12px;color:var(--yellow)">
+  修改已停止，如果想继续修改，请点击「开始」按钮
+</div>
+```
+
+JS 控制（render() 内，控制按钮样式更新时）：
+```javascript
+const stopHint = document.getElementById('stopHint');
+if (stopHint) stopHint.style.display = (!d.running) ? 'block' : 'none';
+```
+
+自动化运行中 hidden（display:none），停止时 block。
+
+**暂停按钮移除：**
+
+- HTML 中删除 `<button id="ctrlPause">` 元素
+- JS 中删除 `document.getElementById('ctrlPause').className = ...` 行
+- 后端 API `/api/automation/control?action=pause` 保留不动（向后兼容）
+
+**空状态与组合列子标移除：**
+
+dashboard.py JS render() 中的三段改动：
+
+1. 单列空状态：`'<div class="empty">空</div>'` → `''`（line 458）
+2. 组合列上栏空状态：`'<div class="empty">' + col.upper_label + ': 0</div>'` → `''`（line 450）
+3. 组合列上栏 sub-header：`'<div class="sub-header">↑ ' + col.upper_label + ' (' + col.upper_count + ')</div>'` → `''`（line 449）
+4. 组合列下栏 sub-header：`'<div class="sub-header">↓ ' + col.lower_label + ' (' + col.lower_count + ')</div>'` → `''`（line 451）
+
+组合列保留上下分区结构（`.combined-section` div 容器），只去掉标签文本。上栏空时整个分组不渲染。下栏空时也不渲染任何内容。
+
+**卡片宽度与文件路径截断：**
+
+CSS 改动（dashboard.py `<style>` 区域）：
+
+```css
+/* 防 flex 溢出 */
+.card-meta{...;min-width:0;max-width:100%}
+
+/* 文件路径用省略号截断 */
+.file-path{display:inline-block;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;vertical-align:bottom}
+```
 
 ---
 

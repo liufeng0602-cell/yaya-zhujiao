@@ -1,9 +1,10 @@
-# 自动化文档生产-审核循环工作流 PRD v2.5
+# 自动化文档生产-审核循环工作流 PRD v2.6
 
 ## 变更记录
 
 | 版本 | 日期 | 变更内容 |
 |------|------|----------|
+| v2.6 | 2026-05-19 10:02 | Dashboard 6项UI优化：卡片状态徽标（进行中/已停止）、停止提示移至按钮下方、移除暂停按钮、卡片CSS截断防列宽撑开、空状态/组合列子标全部移除 |
 | v2.5 | 2026-05-19 09:53 | 看板7列分组、过渡消息更新、人审不通过退回复审+修改、人审对话框模块 |
 | v2.4 | 2026-05-19 08:53 | Dashboard 4项交互优化：停止按钮覆盖stale提示、已封版不报错、过渡消息+5秒倒计时、审查结果展示 |
 | v2.3 | 2026-05-18 14:30 | 同步所有实现变更：状态机重排、fswatch守护进程、Dashboard自动化控制状态、NOTIFY机制、auto-repair、human_feedback闭环 |
@@ -730,7 +731,9 @@ watcher 发现异常 -> 暂停该项目的 writer/reviewer 的 cron job -> 写 a
 
 ### 14.1 自动化控制对卡片的覆盖规则
 
-用户点击"停止"按钮后，automation_state.json 的 running 字段设为 false。Dashboard 检测到 running=false 时，对所有非 finalized/non-blocked/non-backlog 的卡片执行 stale 覆盖：stale_reason 统一显示为"修改已停止，如果想要继续修改，请点击「开始」按钮"（替换原有的超时/中断提示）。
+用户点击"停止"按钮后，automation_state.json 的 running 字段设为 false。Dashboard 检测到 running=false 时，对所有非 finalized/non-blocked/non-backlog 的卡片设置 workflow_status="stopped"（否则为 "running"）。卡片顶部显示状态徽标：▶ 进行中（绿色）或 ⏹ 已停止（红色）。
+
+停止时不生成 stale_reason 覆盖原来的超时提示——任务如果本已超时（timer_stale=True）仍然显示对应超时原因（如"复审超时"），不会被停止状态覆盖。停止状态是独立的 workflow 开关，不与其他状态冲突。
 
 ### 14.2 已封版不报错
 
@@ -783,6 +786,32 @@ DB 状态（9个状态）不动，Dashboard 层做列分组映射，显示为 7 
 4. 达成共识后点击「达成共识」，系统写 NOTIFY 触发 Writer
 
 **技术方案：** 方案1（已选）—— Hermes Chat API 直接调用，不改 Reviewer Profile 架构。2 秒响应，不加 `--accept-hooks`。
+
+### 14.7 卡片状态徽标
+
+每个卡片顶部显示 workflow 状态徽标：
+- **▶ 进行中**（绿色背景）：自动化运行中，该卡片处于正常流转状态
+- **⏹ 已停止**（红色背景）：自动化已停止，该卡片处于暂停状态
+
+徽标由 API 返回的 `workflow_status` 字段控制，JS renderCard() 渲染。CSS 类名：`.card-workflow-status .card-running` / `.card-stopped`。
+
+### 14.8 停止按钮与提示
+
+- 暂停按钮（ctrlPause）已移除。控制按钮仅保留：▶ 开始、⏹ 停止。
+- 自动化停止时，停止按钮下方显示黄色提示：**"修改已停止，如果想继续修改，请点击「开始」按钮"**
+- 提示通过 JS 控制 stopHint div 的 display 属性实现（运行中隐藏，停止时显示）
+
+### 14.9 空状态与组合列子标移除
+
+- 所有单列和组合列的空状态（"空"、"审查中: 0"、"复审中: 0"）已移除
+- 组合列的上栏/下栏 sub-header（"↑ 审查中"、"↓ 复审不通过，等待修改"）已移除
+- 组合列仅显示卡片本身，无额外标签和计数
+
+### 14.10 卡片宽度与文件路径截断
+
+为避免长文件路径撑宽列宽，卡片 meta 区域做了 CSS 限制：
+- `.card-meta` 增加 `min-width: 0; max-width: 100%` 防止 flex 溢出
+- `.file-path` 设置为 `display: inline-block; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap`，超出部分以省略号截断
 
 ---
 
