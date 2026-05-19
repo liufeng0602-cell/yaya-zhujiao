@@ -57,10 +57,11 @@ rules:
     layer: 0
     severity: P1
     status: active
-    trigger: always
+    trigger: on_doc_flag
     check_type: section_presence
     description: "每个 PRD 模块必须包含 7 项必备交付物章节"
     params:
+      flag: "prd"
       required:
         - "核心概念定义"
         - "系统冷启动默认值"

@@ -24,11 +24,11 @@ rules:
     layer: 0
     severity: P1
     status: active
-    trigger: on_pattern
+    trigger: on_doc_flag
     check_type: section_presence
     description: "每个 API 端点定义必须包含 5 项必备信息块"
     params:
-      pattern: "(?i)接口|API |endpoint"
+      flag: "tech_doc"
       required:
         - "请求路径"
         - "请求方法"
@@ -42,11 +42,11 @@ rules:
     layer: 0
     severity: P1
     status: active
-    trigger: on_pattern
+    trigger: on_doc_flag
     check_type: section_presence
     description: "每个数据流定义必须包含输入/处理/输出三个环节的描述"
     params:
-      pattern: "(?i)数据流|data flow|流程"
+      flag: "tech_doc"
       required:
         - "输入说明"
         - "处理逻辑"

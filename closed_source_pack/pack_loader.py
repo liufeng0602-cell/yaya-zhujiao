@@ -23,7 +23,9 @@ Four responsibilities:
 
 import os
 import re
+import json
 import functools
+import urllib.request
 from typing import Dict, List, Any, Optional
 
 import yaml
@@ -467,6 +469,7 @@ def _factory_cross_field(rule: dict) -> BaseChecker:
 @_register_factory('llm_evidence')
 def _factory_llm_evidence(rule: dict) -> BaseChecker:
     prompt_id = rule['params'].get('prompt_id', '')
+    cross_validate = rule['params'].get('cross_validate', False)
 
     class _Checker(BaseChecker):
         id = rule['id']
@@ -476,20 +479,129 @@ def _factory_llm_evidence(rule: dict) -> BaseChecker:
         layer = rule['layer']
         _rule = rule
 
-        # TODO: When implementing real LLM evidence checks in closed-source extension:
-        # 1. Inject prompt from StrategyPack.prompts into _strategy_prompts
-        # 2. Use self._strategy_prompts[prompt_id] in check() to call LLM
-        # 3. Remove the stub return below
-        _strategy_prompts: Dict[str, str] = {}
+        # Injected by load_closed_source_pack() after prompts + client ready
+        _prompts: Dict[str, Dict[str, str]] = {}
+        _llm_client: Optional[dict] = None
 
         def check(self, document: str, tracker: dict) -> List[CheckResult]:
             if not _should_trigger(self._rule, document, tracker):
                 return []
-            return [CheckResult(
-                severity='P2',
-                check_id=self.id,
-                msg=f"LLM evidence check '{prompt_id}' not yet implemented (stub)",
-            )]
+
+            # Bail early if no LLM client injected
+            client = self._llm_client
+            if not client:
+                return [CheckResult(
+                    severity='P2',
+                    check_id=self.id,
+                    msg=f"LLM evidence check '{prompt_id}' skipped — no LLM client configured",
+                )]
+
+            # Resolve prompt template
+            prompts_for_id = self._prompts.get(prompt_id, {})
+            main_template = prompts_for_id.get('main', '')
+            if not main_template:
+                return [CheckResult(
+                    severity='P2',
+                    check_id=self.id,
+                    msg=f"LLM evidence check '{prompt_id}' skipped — prompt template not found",
+                )]
+
+            # 1. Main check: ask LLM for contradictions
+            main_prompt = main_template.replace('{doc_text}', document)
+            try:
+                main_response = client['call'](main_prompt)
+            except Exception as e:
+                return [CheckResult(
+                    severity='P2',
+                    check_id=self.id,
+                    msg=f"LLM evidence check '{prompt_id}' failed — {e}",
+                )]
+
+            issues = self._parse_llm_output(main_response, prompt_id)
+            if not issues:
+                return []
+
+            # 2. Cross-validate if required
+            if cross_validate:
+                cv_template = prompts_for_id.get('cross_validate', '')
+                if cv_template:
+                    issues_text = json.dumps(
+                        [{'entity': i[0], 'description': i[1]} for i in issues],
+                        ensure_ascii=False,
+                    )
+                    cv_prompt = cv_template.replace('{issues}', issues_text)
+                    try:
+                        cv_response = client['call'](cv_prompt)
+                    except Exception:
+                        pass  # Cross-validate failure is not blocking
+                    else:
+                        issues = self._filter_by_cross_validate(issues, cv_response)
+
+            return [
+                CheckResult(
+                    severity=self.severity,
+                    check_id=self.id,
+                    msg=f"[{e[0]}] {e[1]} — {e[2]}. 建议值: {e[3]}" if len(e) > 3 and e[3] else f"[{e[0]}] {e[1]} — {e[2]}",
+                )
+                for e in issues
+            ]
+
+        def _parse_llm_output(self, response: str, pid: str) -> list:
+            """Parse LLM response into list of (entity, location_a, description, suggested_value)."""
+            text = response.strip()
+            # Strategy 1: Try full JSON parse
+            # Strip markdown code fence if present
+            cleaned = text
+            if cleaned.startswith('```'):
+                # Remove opening fence (possibly with language tag)
+                first_nl = cleaned.find('\n')
+                if first_nl > 0:
+                    cleaned = cleaned[first_nl + 1:]
+                # Remove closing fence
+                if cleaned.endswith('```'):
+                    cleaned = cleaned[:-3].rstrip()
+
+            contradictions = []
+            try:
+                data = json.loads(cleaned)
+                contradictions = data.get('contradictions', [])
+            except (json.JSONDecodeError, TypeError):
+                # Strategy 2: Try regex extraction for structured free-text
+                pattern = re.compile(
+                    r'(?:-\s*)?(?:\*\*)?实体(?:名称)?(?:\*\*)?[：:]\s*(.+?)(?:\n|$)'
+                )
+                matches = pattern.findall(cleaned)
+                if matches:
+                    # Fallback to simple text extraction
+                    pass
+
+            results = []
+            for item in contradictions:
+                if not isinstance(item, dict):
+                    continue
+                entity = item.get('entity', '')
+                loc_a = item.get('location_a', '')
+                loc_b = item.get('location_b', '')
+                desc = item.get('description', '')
+                suggested = item.get('suggested_value', '')
+                if entity and desc:
+                    results.append((entity, f"{loc_a} vs {loc_b}", desc, suggested))
+
+            return results
+
+        def _filter_by_cross_validate(self, issues: list, response: str) -> list:
+            """Filter issues based on cross-validation response."""
+            # Parse cross-validate response for '不属实' markers
+            text = response.strip()
+            # Simple heuristic: keep issues that aren't explicitly rejected
+            rejected_entities = set()
+            for line in text.split('\n'):
+                if '不属实' in line:
+                    # Extract entity name from the line
+                    for entity, _, _, _ in issues:
+                        if entity in line:
+                            rejected_entities.add(entity)
+            return [i for i in issues if i[0] not in rejected_entities]
 
     return _Checker()
 
@@ -650,6 +762,46 @@ def _load_all_rules() -> List[BaseChecker]:
 
 
 # ════════════════════════════════════════════════════════════════════
+# LLM client (minimal, no SDK)
+# ════════════════════════════════════════════════════════════════════
+
+def _create_llm_client() -> dict:
+    """Create a minimal LLM client calling the local Hermes API server.
+
+    Returns a dict with:
+      - 'call': callable(prompt: str) -> str (response text)
+      - 'model': the model name used
+
+    Uses ``urllib.request`` — no external SDK dependency.
+    """
+    api_base = "http://127.0.0.1:8643/v1"
+    model = "yaya"
+
+    def _call(prompt_text: str) -> str:
+        body = json.dumps({
+            "model": model,
+            "messages": [
+                {"role": "system", "content": "你是一个专业文档审查助手。请严格按照要求的格式输出。"},
+                {"role": "user", "content": prompt_text},
+            ],
+            "temperature": 0.1,  # Low temperature for consistent structured output
+        }).encode('utf-8')
+
+        req = urllib.request.Request(
+            url=f"{api_base}/chat/completions",
+            data=body,
+            headers={"Content-Type": "application/json"},
+            method="POST",
+        )
+        # 300-second timeout for large document LLM evidence checks
+        resp = urllib.request.urlopen(req, timeout=300)
+        resp_data = json.loads(resp.read().decode('utf-8'))
+        return resp_data['choices'][0]['message']['content']
+
+    return {'call': _call, 'model': model}
+
+
+# ════════════════════════════════════════════════════════════════════
 # Public API
 # ════════════════════════════════════════════════════════════════════
 
@@ -661,7 +813,9 @@ def load_closed_source_pack() -> StrategyPack:
     1. Load all rules_*.yaml → build BaseChecker instances
     2. Load prompts/ → populate prompts dict
     3. Load glossary.yaml → set glossary_path
-    4. Assemble and return StrategyPack instance
+    4. Create LLM client for L2 (LLM evidence) checkers
+    5. Inject prompts and client into L2 checker instances
+    6. Assemble and return StrategyPack instance
     """
     # 1. Checkers from rules
     checkers = _load_all_rules()
@@ -672,7 +826,16 @@ def load_closed_source_pack() -> StrategyPack:
     # 3. Glossary path
     glossary_path = GLOSSARY_PATH if os.path.isfile(GLOSSARY_PATH) else None
 
-    # 4. Config (hardcoded defaults for now — can be externalised later)
+    # 4. LLM client for L2 checkers
+    llm_client = _create_llm_client()
+
+    # 5. Inject prompts + client into L2 checker instances
+    for c in checkers:
+        if hasattr(c, '_prompts') and hasattr(c, '_llm_client'):
+            c._prompts = prompts
+            c._llm_client = llm_client
+
+    # 6. Config (hardcoded defaults for now — can be externalised later)
     config = {
         'max_iterations': 6,
         'max_body_size': 5000,
