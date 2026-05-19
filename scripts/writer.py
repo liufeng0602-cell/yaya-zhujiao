@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
-"""Writer 主脚本 — 由 fswatch 触发，扫描 kanban 处理任务 (v3.0 并发版)"""
+"""Writer 主脚本 — 由 fswatch 触发，扫描 kanban 处理任务 (v3.1 自检门禁版)"""
 
 import os
 import sys
 import json
 import subprocess
+import re
 from datetime import datetime
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -13,6 +14,8 @@ from kanban_ops import (
     update_task_status, add_comment, try_claim_task,
     PROJECT_ROOT, KANBAN_DIR, AUDIT_REPORTS_DIR
 )
+from reusable_review_rules.hardcoded_tracker import scan as tracker_scan
+from reusable_review_rules.self_check_validator import SelfCheckReportValidator
 
 PROJECT = 'yaya-zhujiao'
 
@@ -24,6 +27,211 @@ MAX_CONCURRENCY = 2
 # revision 包含旧 needs_revision（P0/P1 修复）和旧 p2_clearing（P2 清零）
 # re_review 是复审不通过的任务（等待进入修改区）
 SCAN_ORDER = ['backlog', 'revision', 're_review', 'drafting']
+
+# ── 自检门禁 ────────────────────────────────────────────────────────
+
+_REPORT_CLOSE_RE = re.compile(r'</self_check_report>\s*$', re.MULTILINE)
+
+
+def _auto_repair_self_check(doc_text: str, issues: list) -> str | None:
+    """尝试自动修复 P1 类格式问题（缺键、类型错误）。返回修复后的文档，失败返回 None。"""
+    repaired = doc_text
+
+    # 提取 YAML 块区域
+    start_m = re.search(r'<self_check_report>', repaired)
+    end_m = re.search(r'</self_check_report>', repaired)
+    if not start_m or not end_m:
+        return None  # 无块，无法修复
+
+    block_start = start_m.end()
+    block_end = end_m.start()
+    yaml_block = repaired[block_start:block_end].strip()
+
+    # --- 修复类型错误 ---
+    # version: int -> version: 'int'
+    ver_fix = re.search(r'^version\s*:\s*(\d+)\s*$', yaml_block, re.MULTILINE)
+    if ver_fix:
+        old = ver_fix.group(0)
+        new = f"version: '{ver_fix.group(1)}'"
+        repaired = repaired.replace(old, new, 1)
+        # 重新定位块
+        start_m = re.search(r'<self_check_report>', repaired)
+        end_m = re.search(r'</self_check_report>', repaired)
+        block_start = start_m.end()
+        block_end = end_m.start()
+        yaml_block = repaired[block_start:block_end].strip()
+
+    # checks 条目中 result 不是 bool -> 尝试转
+    # "result: yes" -> "result: true"
+    for iss in issues:
+        msg = iss.get('msg', '')
+        if 'result' in msg and 'bool' in msg:
+            # 找到具体 check 名和 result 行
+            # msg 格式: "check 'value_audit'.result must be bool, got str"
+            m = re.match(r"check '(\w[\w_]*)'\.result must be bool", msg)
+            if m:
+                check_name = m.group(1)
+                # 在 yaml 块中找该 check 下的 result 行
+                # 格式:  check_name:\n    result: <value>
+                pat = re.compile(
+                    rf'({re.escape(check_name)}:\s*\n(?:[ \t]+\w[\w_]*:[^\n]*\n)*?[ \t]+result\s*:\s*)(\S+)',
+                    re.MULTILINE
+                )
+                def _bool_fix(m2):
+                    prefix = m2.group(1)
+                    val = m2.group(2).strip().lower()
+                    if val in ('true', 'false'):
+                        return prefix + val  # 保持原值
+                    elif val in ('yes', 'y', '1', '"yes"', "'yes'"):
+                        return prefix + 'true'
+                    elif val in ('no', 'n', '0', '"no"', "'no'"):
+                        return prefix + 'false'
+                    else:
+                        return prefix + 'true'  # 兜底
+                repaired = pat.sub(_bool_fix, repaired)
+
+    # --- 修复缺失的必需键 ---
+    insertions = []
+    for iss in issues:
+        msg = iss.get('msg', '')
+        m = re.match(r"Missing required key '(\w+)'", msg)
+        if m:
+            key = m.group(1)
+            defaults = {
+                'version': "version: '1.0'",
+                'checks': 'checks: {}',
+                'reported_params': 'reported_params: []',
+                'reported_configs': 'reported_configs: []',
+            }
+            if key in defaults:
+                insertions.append(defaults[key])
+
+    if insertions:
+        # 在 </self_check_report> 前插入缺失的键
+        close_tag = '</self_check_report>'
+        idx = repaired.rfind(close_tag)
+        if idx != -1:
+            insert_text = '\n' + '\n'.join(insertions) + '\n'
+            repaired = repaired[:idx] + insert_text + repaired[idx:]
+
+    return repaired if repaired != doc_text else doc_text
+
+
+def self_check_commit_gate(file_path: str, task_id: str, task_title: str) -> bool:
+    """
+    在 git commit 前强制执行 SelfCheckReportValidator 门禁。
+
+    Returns:
+        True  — 门禁通过，可以 commit
+        False — 门禁未通过，Writer 已回退到 drafting 等待人工处理
+
+    行为:
+        - P0（缺自检报告块）→ 直接阻断，回退到 drafting
+        - P1（格式/类型错误）→ 自动修复，修复后再验证
+            - 修复成功 → 通过（P2 警告仅日志）
+            - 修复失败 → 回退到 drafting
+        - P2 仅警告 → 通过
+    """
+    try:
+        with open(file_path, 'r') as f:
+            doc_text = f.read()
+    except FileNotFoundError:
+        print(f"[WRITER-GATE] 文件不存在: {file_path}，跳过门禁")
+        return True
+    except Exception as e:
+        print(f"[WRITER-GATE] 读取文件失败: {e}，跳过门禁")
+        return True
+
+    # 运行 tracker scan + validator
+    tracker_out = tracker_scan(doc_text)
+    report, issues = SelfCheckReportValidator.validate(doc_text, tracker_out)
+
+    if not issues:
+        print(f"[WRITER-GATE] 自检报告验证通过 (0 问题)")
+        return True
+
+    p0 = [i for i in issues if i['severity'] == 'P0']
+    p1 = [i for i in issues if i['severity'] == 'P1']
+    p2 = [i for i in issues if i['severity'] == 'P2']
+
+    # 打印所有问题
+    for iss in issues:
+        print(f"[WRITER-GATE]  {iss['severity']}: {iss['msg']}")
+
+    # ---- P0: 阻断 ----
+    if p0:
+        print(f"[WRITER-GATE] P0 问题 {len(p0)} 个，阻断 commit")
+        _log_gate_failure(task_id, f"P0 门禁阻断: {[i['msg'] for i in p0]}")
+        _fallback_to_drafting(task_id, f"自检门禁阻断：P0 级问题 {len(p0)} 个，需人工处理")
+        return False
+
+    # ---- P1: 自动修复 ----
+    if p1:
+        print(f"[WRITER-GATE] P1 问题 {len(p1)} 个，尝试自动修复")
+        repaired = _auto_repair_self_check(doc_text, issues)
+
+        if repaired is None or repaired == doc_text:
+            print(f"[WRITER-GATE] 自动修复失败或无效，回退到 drafting")
+            _log_gate_failure(task_id, f"P1 自动修复失败: {[i['msg'] for i in p1]}")
+            _fallback_to_drafting(task_id, f"自检门禁自动修复失败：P1 {len(p1)} 个问题，需人工处理")
+            return False
+
+        # 写回修复后的文档
+        with open(file_path, 'w') as f:
+            f.write(repaired)
+
+        # 重新验证
+        tracker_out2 = tracker_scan(repaired)
+        report2, issues2 = SelfCheckReportValidator.validate(repaired, tracker_out2)
+        p1_remaining = [i for i in issues2 if i['severity'] == 'P1']
+        p0_new = [i for i in issues2 if i['severity'] == 'P0']
+        p2_new = [i for i in issues2 if i['severity'] == 'P2']
+
+        if p0_new or p1_remaining:
+            print(f"[WRITER-GATE] 自动修复后仍有 P0/P1 问题，回退到 drafting")
+            remaining = p0_new + p1_remaining
+            _log_gate_failure(task_id, f"修复后仍有 P0/P1: {[i['msg'] for i in remaining]}")
+            _fallback_to_drafting(task_id, f"自检门禁修复后仍有 {len(remaining)} 个 P0/P1 问题，需人工处理")
+            return False
+
+        print(f"[WRITER-GATE] P1 自动修复成功")
+
+        # P2 警告（修复后可能还有新的 P2）
+        if p2_new:
+            print(f"[WRITER-GATE]  P2 警告 {len(p2_new)} 个（不阻断）:")
+            for i in p2_new:
+                print(f"    {i['msg']}")
+
+        add_comment(PROJECT, task_id, 'writer',
+                    f'自检门禁：自动修复 {len(p1)} 个 P1 问题通过')
+        return True
+
+    # ---- P2 仅警告 ----
+    if p2:
+        print(f"[WRITER-GATE] P2 警告 {len(p2)} 个（不阻断）:")
+        for i in p2:
+            print(f"    {i['msg']}")
+
+    return True
+
+
+def _log_gate_failure(task_id: str, reason: str):
+    """记录门禁失败到日志文件。"""
+    log_dir = os.path.join(KANBAN_DIR, '.gate-logs')
+    os.makedirs(log_dir, exist_ok=True)
+    log_path = os.path.join(log_dir, f'{PROJECT}-{task_id}.log')
+    with open(log_path, 'a') as f:
+        f.write(f'[{datetime.now().isoformat()}] GATE BLOCKED: {reason}\n')
+
+
+def _fallback_to_drafting(task_id: str, reason: str):
+    """回退任务到 drafting，附加失败报告。"""
+    add_comment(PROJECT, task_id, 'writer', f'【自检门禁阻断】{reason}')
+    update_task_status(PROJECT, task_id, 'drafting',
+                       blocked_reason=reason, validate=False)
+
+
+# ── 原有函数 ────────────────────────────────────────────────────────
 
 
 def run_self_check(file_path: str) -> bool:
@@ -116,6 +324,11 @@ def process_backlog(task: dict):
                 task_title=title, task_version=task.get('version', ''))
             return
 
+        # 自检门禁 — 在 git commit 前强制执行
+        if not self_check_commit_gate(file_path, task_id, title):
+            print(f"[WRITER] 自检门禁阻断 {title}，已回退至 drafting")
+            return
+
     # commit
     msg = f'[Writer] {title} v{task.get("version", "0.1")}'
     if file_path:
@@ -136,7 +349,7 @@ def process_backlog(task: dict):
     # 自检声明
     add_comment(PROJECT, task_id, 'writer', f'''自检声明：
 - 本轮写作完成
-- 自检通过项：wrapper.py 语法检查
+- 自检通过项：wrapper.py 语法检查 + SelfCheckReportValidator 门禁
 - 文件路径：{file_path}
 - 提交 SHA：{sha if file_path else "N/A"}''')
 
@@ -175,6 +388,11 @@ def process_revision(task: dict):
                 task_title=task['title'], task_version=task.get('version', ''))
             return
 
+        # 自检门禁 — 在 git commit 前强制执行
+        if not self_check_commit_gate(file_path, task_id, task['title']):
+            print(f"[WRITER] 自检门禁阻断 {task['title']}，已回退至 drafting")
+            return
+
     # commit
     msg = f'[Writer] fix: {task["title"]} v{task.get("version", "0.1")} round {task.get("iteration_count", 0)+1}'
     if file_path:
@@ -194,6 +412,7 @@ def process_revision(task: dict):
 
     add_comment(PROJECT, task_id, 'writer', f'''自检声明：
 - 本轮修改完成（来自 revision, 第 {task.get("iteration_count", 0)+1} 轮，送复审）
+- 自检通过项：wrapper.py 语法检查 + SelfCheckReportValidator 门禁
 - 文件路径：{file_path}
 - 提交 SHA：{sha if file_path else "N/A"}''')
 
